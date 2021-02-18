@@ -1,7 +1,7 @@
 # RogueLikeTERD
 
-BEAUCHET Quentin (Quentin Beauchet) \\n
-CARLENS Jean-Philippe (Coruscant11) \n  
+BEAUCHET Quentin (Quentin Beauchet) <br>
+CARLENS Jean-Philippe (Coruscant11) <br>
 FORNER Yann (Yann-Forner) \n
 MASSE Gillian (GillianMASSE)
 
