@@ -1,3 +1,4 @@
+import Exceptions.CollisionRoom;
 import Model.*;
 import java.util.Random;
 
@@ -8,8 +9,6 @@ public class Procedure {
         int SIZEX = rand.nextInt(Room.MaxSize - Room.MinSize + 1) + Room.MinSize;
         int SIZEY = rand.nextInt(Room.MaxSize - Room.MinSize + 1) + Room.MinSize;
         Room r = new Room(SIZEX,SIZEY);
-        System.out.println(SIZEX);
-        System.out.println(SIZEY);
         return getRandomPorte(4,r);
     }
 
@@ -23,7 +22,7 @@ public class Procedure {
         return getRandomPosition(width-r.getSIZEX(),width-r.getSIZEY());
     }
 
-    public static Room getRandomPorte(Room r){
+    private static Room getRandomPorte(Room r){
         Position pos = getRandomPosition(r.getSIZEX(),r.getSIZEY());
         Cell currentCell = r.get(pos.getX(),pos.getY());
         while (currentCell.getType()!=Cell.CellType.BORDER){
@@ -41,6 +40,22 @@ public class Procedure {
             room = getRandomPorte(room);
         }
         return room;
+    }
+
+    public static Map getRamdomRooms(Map map){
+        int nbrRooms=0;
+        while(nbrRooms<5){
+            Room r = getRandomRoom();
+            Position pos = getRandomPosition(map.getSIZEX(),map.getSIZEY(),r);
+            try {
+                map.addRoom(r, pos);
+                nbrRooms=nbrRooms+1;
+            }
+            catch (CollisionRoom e){
+                continue;
+            }
+        }
+        return map;
     }
 
 }

@@ -1,11 +1,12 @@
-import Model.Map;
-import Model.Position;
-import Model.Room;
+import Model.*;
 
 public class Main {
     public static void main(String[] args) {
-        Map myMap = new Map(40,40);
-        myMap.addRoom(new Room(4, 10),new Position(10,15));
-        System.out.println(myMap);
+        int MapWidth = 40;
+        int MapHeigth = 40;
+        Map myMap = new Map(MapWidth,MapHeigth);
+        Room r=Procedure.getRandomRoom();
+        Procedure.getRamdomRooms(myMap);
+        new Affichage(myMap);
     }
 }

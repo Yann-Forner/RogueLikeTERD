@@ -7,7 +7,7 @@ public class Cell{
     private final boolean isAccesible;
     private final CellType type;
 
-    Cell(boolean isAccesible, CellType type) {
+    public Cell(boolean isAccesible, CellType type) {
         this.isAccesible = isAccesible;
         this.type = type;
     }
@@ -30,7 +30,7 @@ public class Cell{
                 return "\u001B[31m*";
             }
             case DOOR -> {
-                return "\u001B[31m=";
+                return "\u001B[35m=";
             }
             default -> {
                 return "\u001B[31m ";

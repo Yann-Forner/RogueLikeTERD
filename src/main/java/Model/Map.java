@@ -42,16 +42,16 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
     }
 
     public void addRoom(Room r , Position p){
-        Rooms.add(r);
         if(!isCollision(r,p)){
-        for (int y = 0; y < r.getSIZEY() ; y++) {
-            for (int x = 0; x < r.getSIZEX() ; x++) {
-                this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
+            Rooms.add(r);
+            for (int y = 0; y < r.getSIZEY() ; y++) {
+                for (int x = 0; x < r.getSIZEX() ; x++) {
+                    this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
+                }
             }
         }
-        }else{
-//            throw new CollisionRoom(r);
-            System.out.println("COLLISION ROOM");
+        else{
+            throw new CollisionRoom(r);
         }
     }
     public boolean isCollision(Room r, Position p){

@@ -4,6 +4,9 @@ import Model.Cell;
 import Model.Map;
 
 public class Room extends Map {
+    public static final int MinSize=5;
+    public static final int MaxSize=20;
+
     public Room(int SIZEX, int SIZEY) {
         super(SIZEX, SIZEY);
         setBorders();
@@ -21,4 +24,6 @@ public class Room extends Map {
             }
         }
     }
+
+
 }

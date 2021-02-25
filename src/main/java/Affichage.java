@@ -1,3 +1,5 @@
+import Model.*;
+
 public class Affichage {
 
     public Affichage(Map map){
