@@ -1,11 +1,11 @@
 package Model;
 
-import Model.Cell;
-import Model.Map;
+import java.util.ArrayList;
 
 public class Room extends Map {
     public static final int MinSize=5;
     public static final int MaxSize=20;
+    private ArrayList<Position> Doors = new ArrayList();
 
     public Room(int SIZEX, int SIZEY) {
         super(SIZEX, SIZEY);
@@ -25,5 +25,16 @@ public class Room extends Map {
         }
     }
 
+    public void addDoors(Position pos){
+        Doors.add(pos);
+    }
+
+    public ArrayList<Position> getDoors(){
+        return Doors;
+    }
+
+    public void setDoors(ArrayList<Position> d){
+        Doors = d;
+    }
 
 }

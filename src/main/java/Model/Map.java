@@ -4,14 +4,16 @@ package Model;
 import Exceptions.CollisionRoom;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Map {
 
-protected int SIZEX;
-protected int SIZEY;
-protected ArrayList<ArrayList<Cell>> Cells;
-protected ArrayList<Room> Rooms = new ArrayList<>();
-protected ArrayList<Entity> Entitys = new ArrayList<>();
+    public final static int nbrMaxRooms=5;
+    protected int SIZEX;
+    protected int SIZEY;
+    protected ArrayList<ArrayList<Cell>> Cells;
+    protected ArrayList<Room> Rooms = new ArrayList<>();
+    protected ArrayList<Entity> Entitys = new ArrayList<>();
 
     public Map(int SIZEX, int SIZEY) {
         this.SIZEX=SIZEX;
@@ -44,12 +46,18 @@ protected ArrayList<Entity> Entitys = new ArrayList<>();
 
     public void addRoom(Room r , Position p){
         if(!isCollision(r,p)){
-            Rooms.add(r);
             for (int y = 0; y < r.getSIZEY() ; y++) {
                 for (int x = 0; x < r.getSIZEX() ; x++) {
                     this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
                 }
             }
+            //TODO a modifier
+            ArrayList<Position> Doors=new ArrayList<>();
+            for (Position pos : r.getDoors()){
+                Doors.add(pos.somme(p));
+            }
+            r.setDoors(Doors);
+            Rooms.add(r);
         }
         else{
             throw new CollisionRoom(r);
@@ -76,9 +84,101 @@ protected ArrayList<Entity> Entitys = new ArrayList<>();
         return false;
     }
 
+    public boolean suppX (int x, int y)
+    {
+        if (Math.abs(x) > Math.abs(y)) return true;
+        return false;
+    }
+
+    public boolean sameRoom (Position Init, Position Dest)
+    {
+        return false;
+    }
+
+    public ArrayList cheminFind (Position posInit, Position posDest) {
+
+        int deltaX;
+        int deltaY;
+        Position pos = posInit;
+        int size;
+        size = 5;
+        ArrayList<Position> positionList = new ArrayList<>();
+
+        while (pos.getX() != posDest.getX() && pos.getY() != pos.getY()) {
+
+            if (sameRoom(pos, posDest)) {
+
+                deltaX = posDest.getX() - posInit.getX();
+                deltaY = posDest.getY() - posInit.getY();
+
+                while (deltaX != 0 && deltaY != 0) {
+                    if (deltaX > 0 && deltaY > 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX - size;
+                            pos = new Position(pos.getX() + size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY - size;
+                            pos = new Position(pos.getX(), pos.getY() + size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX > 0 && deltaY < 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX - size;
+                            pos = new Position(pos.getX() + size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY + size;
+                            pos = new Position(pos.getX(), pos.getY() - size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX < 0 && deltaY > 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX + size;
+                            pos = new Position(pos.getX() - size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY - size;
+                            pos = new Position(pos.getX(), pos.getY() + size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX < 0 && deltaY > 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX + size;
+                            pos = new Position(pos.getX() - size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY - size;
+                            pos = new Position(pos.getX(), pos.getY() + size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX < 0 && deltaY < 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX + size;
+                            pos = new Position(pos.getX() - size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY + size;
+                            pos = new Position(pos.getX(), pos.getY() - size);
+                            positionList.add(pos);
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+        return positionList;
+    }
+
+
+
+
     public Cell get(int x , int y){
         return Cells.get(y).get(x);
     }
+
     public void set(int x , int y, Cell c){
         Cells.get(y).set(x,c);
     }

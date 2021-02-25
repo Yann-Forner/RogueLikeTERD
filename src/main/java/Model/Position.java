@@ -9,11 +9,22 @@ public class Position {
         this.y = y;
     }
 
+    public Position somme(Position p){
+        x=x+p.getX();
+        y=y+p.getY();
+        return this;
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    @Override
+    public String toString() {
+        return "Position{x:"+x+" ; y:"+y+"}";
     }
 }

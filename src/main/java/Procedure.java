@@ -30,6 +30,7 @@ public class Procedure {
             currentCell = r.get(pos.getX(),pos.getY());
         }
         r.set(pos.getX(),pos.getY(),new Cell(true, Cell.CellType.DOOR));
+        r.addDoors(pos);
         return r;
     }
 
@@ -42,9 +43,9 @@ public class Procedure {
         return room;
     }
 
-    public static Map getRamdomRooms(Map map){
+    public static void setRamdomRooms(Map map){
         int nbrRooms=0;
-        while(nbrRooms<5){
+        while(nbrRooms<Map.nbrMaxRooms){
             Room r = getRandomRoom();
             Position pos = getRandomPosition(map.getSIZEX(),map.getSIZEY(),r);
             try {
@@ -55,7 +56,6 @@ public class Procedure {
                 continue;
             }
         }
-        return map;
     }
 
 }
