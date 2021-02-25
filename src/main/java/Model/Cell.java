@@ -2,7 +2,7 @@ package Model;
 
 public class Cell{
     public enum CellType {
-        BORDER, NORMAL, DOOR, VOID;
+        BORDER, NORMAL, DOOR, PATH, VOID ;
     }
     private final boolean isAccesible;
     private final CellType type;
@@ -33,8 +33,14 @@ public class Cell{
     public String toString() {
         if(this.Entity == null) {
             switch (type){
-                case VOID, NORMAL -> {
+                case NORMAL -> {
                     return "\u001B[37m.";
+                }
+                case VOID -> {
+                    return "\u001B[30m.";
+                }
+                case PATH -> {
+                    return "\u001B[34m*";
                 }
                 case BORDER -> {
                     return "\u001B[31m*";

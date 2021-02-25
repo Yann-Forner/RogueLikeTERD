@@ -3,8 +3,8 @@ package Model;
 
 import Exceptions.CollisionRoom;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Map {
 
@@ -18,15 +18,15 @@ public class Map {
     public Map(int SIZEX, int SIZEY) {
         this.SIZEX=SIZEX;
         this.SIZEY=SIZEY;
-        fillMap();
+        fillMap(Cell.CellType.VOID);
     }
 
-    public void fillMap(){
+    public void fillMap(Cell.CellType type){
         Cells = new ArrayList<>();
         for (int i = 0; i < SIZEY; i++) {
             ArrayList<Cell> line = new ArrayList<>();
             for (int j = 0; j < SIZEX; j++) {
-                line.add(j, new Cell(false, Cell.CellType.VOID));
+                line.add(j, new Cell(false, type));
             }
             Cells.add(i, line);
         }
@@ -35,7 +35,24 @@ public class Map {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("    ");
+        for (int x = 0; x < this.SIZEX ; x++) {
+            sb.append("\u001B[0m").append(x);
+            if(x<10){
+                sb.append("  ");
+            }
+            else{
+                sb.append(" ");
+            }
+        }
+        sb.append("\n");
         for (int y = 0; y < this.SIZEY ; y++) {
+            if(y<10){
+                sb.append("\u001B[0m").append(" ").append(y).append("  ");
+            }
+            else{
+                sb.append("\u001B[0m").append(y).append("  ");
+            }
             for (int x = 0; x < this.SIZEX ; x++) {
                 sb.append(this.get(x,y)).append("  ");
             }
@@ -48,9 +65,9 @@ public class Map {
         if(!isCollision(r,p)){
             for (int y = 0; y < r.getSIZEY() ; y++) {
                 for (int x = 0; x < r.getSIZEX() ; x++) {
-                    this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
+                    this.set(p.getX() + x, p.getY() + y, r.get(x, y));
+                    }
                 }
-            }
             //TODO a modifier
             ArrayList<Position> Doors=new ArrayList<>();
             for (Position pos : r.getDoors()){
@@ -172,9 +189,6 @@ public class Map {
         return positionList;
     }
 
-
-
-
     public Cell get(int x , int y){
         return Cells.get(y).get(x);
     }
@@ -194,4 +208,5 @@ public class Map {
     public ArrayList<Room> getRooms(){
         return Rooms;
     }
+
 }
