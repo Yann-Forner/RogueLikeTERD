@@ -7,6 +7,7 @@ public class Main {
         Map myMap = new Map(MapWidth,MapHeigth);
         Room r=Procedure.getRandomRoom();
         Procedure.getRamdomRooms(myMap);
+        myMap.addEntity(new BasicPlayer(new Position(11, 16), myMap));
         new Affichage(myMap);
     }
 }

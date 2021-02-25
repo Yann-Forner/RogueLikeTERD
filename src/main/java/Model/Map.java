@@ -11,6 +11,7 @@ protected int SIZEX;
 protected int SIZEY;
 protected ArrayList<ArrayList<Cell>> Cells;
 protected ArrayList<Room> Rooms = new ArrayList<>();
+protected ArrayList<Entity> Entitys = new ArrayList<>();
 
     public Map(int SIZEX, int SIZEY) {
         this.SIZEX=SIZEX;
@@ -54,6 +55,17 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
             throw new CollisionRoom(r);
         }
     }
+
+    public void addEntity(Entity e) {
+        Entitys.add(e);
+    }
+
+    private void upgradeCellsWithEntitys() {
+        for(Entity e : Entitys) {
+            Cells.get(e.getPositionY()).get(e.getPositionX()).setEntity(e);
+        }
+    }
+
     public boolean isCollision(Room r, Position p){
         for (int y = 0; y < r.getSIZEY() ; y++) {
             for (int x = 0; x < r.getSIZEX() ; x++) {
