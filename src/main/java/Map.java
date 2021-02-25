@@ -17,7 +17,7 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
     public void fillMap(){
         Cells = new ArrayList<>();
         for (int i = 0; i < SIZEY; i++) {
-            ArrayList line = new ArrayList<>();
+            ArrayList<Cell> line = new ArrayList<>();
             for (int j = 0; j < SIZEX; j++) {
                 line.add(j, new Cell(true, Cell.CellType.NORMAL));
             }
@@ -46,7 +46,6 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
             }
         }
     }
-
     public Cell get(int x , int y){
         return Cells.get(y).get(x);
     }
