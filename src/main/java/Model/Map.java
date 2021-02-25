@@ -60,7 +60,7 @@ protected ArrayList<Entity> Entitys = new ArrayList<>();
         Entitys.add(e);
     }
 
-    private void upgradeCellsWithEntitys() {
+    public void upgradeCellsWithEntitys() {
         for(Entity e : Entitys) {
             Cells.get(e.getPositionY()).get(e.getPositionX()).setEntity(e);
         }
