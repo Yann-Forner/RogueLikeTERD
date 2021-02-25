@@ -43,12 +43,25 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
 
     public void addRoom(Room r , Position p){
         Rooms.add(r);
+        if(!isCollision(r,p)){
         for (int y = 0; y < r.getSIZEY() ; y++) {
             for (int x = 0; x < r.getSIZEX() ; x++) {
-                if(this.get(x,y).getType() == Cell.CellType.VOID )throw new CollisionRoom(r);
                 this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
             }
         }
+        }else{
+//            throw new CollisionRoom(r);
+            System.out.println("COLLISION ROOM");
+        }
+    }
+    public boolean isCollision(Room r, Position p){
+        for (int y = 0; y < r.getSIZEY() ; y++) {
+            for (int x = 0; x < r.getSIZEX() ; x++) {
+                if(this.get(p.getX()+x,p.getY()+y).getType() !=  Cell.CellType.VOID
+                )return true;
+            }
+        }
+        return false;
     }
 
     public Cell get(int x , int y){
