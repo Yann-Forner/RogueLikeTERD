@@ -3,22 +3,16 @@ import java.util.Collections;
 
 public class Map {
 
-protected final int SIZEX;
-protected final int SIZEY;
+protected final int SIZEX = 200;
+protected final int SIZEY = 100;
 protected ArrayList<ArrayList<Cell>> myMap;
 
-    public Map(int SIZEX, int SIZEY) {
-        this.SIZEX = SIZEX;
-        this.SIZEY = SIZEY;
-        fillCases();
+    public Map() {
+        fillMap();
     }
 
-    public void fillCases(){
-
-        myMap = new ArrayList<>(this.SIZEY);
-        for (int i = 0; i < this.SIZEY ; i++) {
-            myMap.add(new ArrayList<>(Collections.nCopies(this.SIZEX,Cell.VOID)));
-        }
+    public void fillMap(){
+        myMap = new ArrayList<>(Collections.nCopies(this.SIZEY,new ArrayList<>(Collections.nCopies(this.SIZEX,new Cell(true, Cell.CellType.NORMAL)))));
     }
 
     @Override

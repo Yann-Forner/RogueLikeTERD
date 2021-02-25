@@ -3,21 +3,15 @@ public class Cell{
         BORDER, NORMAL, DOOR;
     }
     private final boolean isAccesible;
-    private final Position pos;
     private final CellType type;
 
-    Cell(int x, int y, boolean isAccesible, CellType type) {
-        this.pos = new Position(x,y);
+    Cell(boolean isAccesible, CellType type) {
         this.isAccesible = isAccesible;
         this.type = type;
     }
 
     public boolean isAccesible() {
         return isAccesible;
-    }
-
-    public Position getPos() {
-        return pos;
     }
 
     public CellType getType() {
