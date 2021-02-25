@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Room extends Map {
-    public Room(int SIZEX, int SIZEY) {
-        super(SIZEX, SIZEY);
+    public static final int MinSize=5;
+    public static final int MaxSize=20;
+
+    public Room(int SIZEX, int SIZEY){
+        super(SIZEX,SIZEY);
         setBorders();
     }
 

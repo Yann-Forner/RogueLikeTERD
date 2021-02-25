@@ -39,7 +39,9 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
     }
 
     public void addRoom(Room r , Position p){
+        System.out.println(r);
         Rooms.add(r);
+        System.out.println(Rooms);
         for (int y = 0; y < r.getSIZEY() ; y++) {
             for (int x = 0; x < r.getSIZEX() ; x++) {
                 this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
