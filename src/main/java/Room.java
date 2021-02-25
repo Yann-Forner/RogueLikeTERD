@@ -4,9 +4,10 @@ import java.util.Collections;
 public class Room extends Map {
     public Room(int SIZEX, int SIZEY) {
         super(SIZEX, SIZEY);
-        super.fillMap();
-        //setBorders();
+        setBorders();
     }
+
+
 
     private void setBorders(){
         for (int i = 0; i < this.SIZEX ; i++) {
