@@ -9,15 +9,14 @@ public class Room extends Map {
 
     private void setBorders(){
         for (int i = 0; i < SIZEX; i++) {
-            this.set(0,i,new Cell(false, Cell.CellType.BORDER));
-            this.set(SIZEX-1,i,new Cell(false, Cell.CellType.BORDER));
+            this.set(i,0,new Cell(false, Cell.CellType.BORDER));
+            this.set(i,SIZEY-1,new Cell(false, Cell.CellType.BORDER));
             if (i==0 || i==(SIZEX-1)){
-                for (int j = 1; j < SIZEY-1; j++) {
-                    this.set(j,i,new Cell(false, Cell.CellType.BORDER));
-                    this.set(j,i,new Cell(false, Cell.CellType.BORDER));
+                for (int j = 1; j < SIZEY; j++) {
+                    this.set(i,j,new Cell(false, Cell.CellType.BORDER));
+                    this.set(i,j,new Cell(false, Cell.CellType.BORDER));
                 }
             }
         }
     }
-
 }

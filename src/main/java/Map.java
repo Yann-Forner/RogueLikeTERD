@@ -6,6 +6,7 @@ public class Map {
 protected int SIZEX;
 protected int SIZEY;
 protected ArrayList<ArrayList<Cell>> Cells;
+protected ArrayList<Room> Rooms = new ArrayList<>();
 
     public Map(int SIZEX, int SIZEY) {
         this.SIZEX=SIZEX;
@@ -27,11 +28,10 @@ protected ArrayList<ArrayList<Cell>> Cells;
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (ArrayList<Cell> a : Cells
-             ) {
-            for ( Cell c : a
-                 ) {
-                sb.append(c).append("  ");
+        for (int y = 0; y < this.SIZEY ; y++) {
+            for (int x = 0; x < this.SIZEX ; x++) {
+                sb.append(this.get(x,y)).append(" ");
+
             }
             sb.append("\n");
         }
@@ -39,12 +39,14 @@ protected ArrayList<ArrayList<Cell>> Cells;
     }
 
     public void addRoom(Room r , Position p){
+        Rooms.add(r);
         for (int y = 0; y < r.getSIZEY() ; y++) {
             for (int x = 0; x < r.getSIZEX() ; x++) {
                 this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
             }
         }
     }
+
     public Cell get(int x , int y){
         return Cells.get(y).get(x);
     }
@@ -58,5 +60,9 @@ protected ArrayList<ArrayList<Cell>> Cells;
 
     public int getSIZEY() {
         return SIZEY;
+    }
+
+    public ArrayList<Room> getRooms(){
+        return Rooms;
     }
 }

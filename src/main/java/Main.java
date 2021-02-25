@@ -2,8 +2,8 @@
 
 public class Main {
     public static void main(String[] args) {
-        Map myMap = new Map(10,10);
-        System.out.println(myMap);
-        System.out.println(new Room(5,5));
+        Map myMap = new Map(40,40);
+        myMap.addRoom(new Room(4, 10),new Position(10,15));
+        new Affichage(myMap);
     }
 }
