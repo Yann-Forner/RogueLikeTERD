@@ -14,7 +14,14 @@ protected ArrayList<ArrayList<Cell>> Cells;
     }
 
     public void fillMap(){
-        Cells = new ArrayList<>(Collections.nCopies(this.SIZEY,new ArrayList<>(Collections.nCopies(this.SIZEX,new Cell(true, Cell.CellType.NORMAL)))));
+        Cells = new ArrayList<>();
+        for (int i = 0; i < SIZEY; i++) {
+            ArrayList line = new ArrayList<>();
+            for (int j = 0; j < SIZEX; j++) {
+                line.add(j, new Cell(true, Cell.CellType.NORMAL));
+            }
+            Cells.add(i, line);
+        }
     }
 
     @Override

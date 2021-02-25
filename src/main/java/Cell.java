@@ -25,7 +25,7 @@ public class Cell{
                 return "\u001B[31m*";
             }
             case NORMAL -> {
-                return "\u001B[31m.";
+                return "\u001B[37m.";
             }
             case DOOR -> {
                 return "\u001B[31m=";
