@@ -1,5 +1,9 @@
+package Model;
+
+
+import Exceptions.CollisionRoom;
+
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Map {
 
@@ -17,9 +21,9 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
     public void fillMap(){
         Cells = new ArrayList<>();
         for (int i = 0; i < SIZEY; i++) {
-            ArrayList line = new ArrayList<>();
+            ArrayList<Cell> line = new ArrayList<>();
             for (int j = 0; j < SIZEX; j++) {
-                line.add(j, new Cell(true, Cell.CellType.NORMAL));
+                line.add(j, new Cell(false, Cell.CellType.VOID));
             }
             Cells.add(i, line);
         }
@@ -30,8 +34,7 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         for (int y = 0; y < this.SIZEY ; y++) {
             for (int x = 0; x < this.SIZEX ; x++) {
-                sb.append(this.get(x,y)).append(" ");
-
+                sb.append(this.get(x,y)).append("  ");
             }
             sb.append("\n");
         }
@@ -44,6 +47,7 @@ protected ArrayList<Room> Rooms = new ArrayList<>();
         System.out.println(Rooms);
         for (int y = 0; y < r.getSIZEY() ; y++) {
             for (int x = 0; x < r.getSIZEX() ; x++) {
+                if(this.get(x,y).getType() != Cell.CellType.VOID )throw new CollisionRoom(r);
                 this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
             }
         }
