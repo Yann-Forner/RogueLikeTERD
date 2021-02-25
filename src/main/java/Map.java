@@ -31,6 +31,13 @@ protected ArrayList<ArrayList<Cell>> Cells;
         return sb.toString();
     }
 
+    public void addRoom(Room r , Position p){
+        for (int y = 0; y < r.getSIZEY() ; y++) {
+            for (int x = 0; x < r.getSIZEX() ; x++) {
+                this.set(p.getX()+x, p.getY()+y ,r.get(x,y) );
+            }
+        }
+    }
     public Cell get(int x , int y){
         return Cells.get(y).get(x);
     }
