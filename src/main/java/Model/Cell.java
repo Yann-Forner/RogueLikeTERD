@@ -1,6 +1,8 @@
+package Model;
+
 public class Cell{
     public enum CellType {
-        BORDER, NORMAL, DOOR;
+        BORDER, NORMAL, DOOR, VOID;
     }
     private final boolean isAccesible;
     private final CellType type;
@@ -21,11 +23,11 @@ public class Cell{
     @Override
     public String toString() {
         switch (type){
+            case VOID, NORMAL -> {
+                return "\u001B[37m.";
+            }
             case BORDER -> {
                 return "\u001B[31m*";
-            }
-            case NORMAL -> {
-                return "\u001B[37m.";
             }
             case DOOR -> {
                 return "\u001B[31m=";
@@ -35,4 +37,5 @@ public class Cell{
             }
         }
     }
+
 }

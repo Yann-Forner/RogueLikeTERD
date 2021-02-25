@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.Collections;
+package Model;
+
+import Model.Cell;
+import Model.Map;
 
 public class Room extends Map {
     public Room(int SIZEX, int SIZEY) {
