@@ -4,7 +4,6 @@ import java.util.Collections;
 public class Room extends Map {
     public Room(int SIZEX, int SIZEY) {
         super(SIZEX, SIZEY);
-        fillCases();
     }
 
     @Override
