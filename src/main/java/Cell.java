@@ -17,4 +17,22 @@ public class Cell{
     public CellType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        switch (type){
+            case BORDER -> {
+                return "\u001B[31m*";
+            }
+            case NORMAL -> {
+                return "\u001B[31m.";
+            }
+            case DOOR -> {
+                return "\u001B[31m=";
+            }
+            default -> {
+                return "\u001B[31m ";
+            }
+        }
+    }
 }

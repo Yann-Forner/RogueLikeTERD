@@ -3,22 +3,24 @@ import java.util.Collections;
 
 public class Map {
 
-protected final int SIZEX = 200;
-protected final int SIZEY = 100;
-protected ArrayList<ArrayList<Cell>> myMap;
+protected int SIZEX;
+protected int SIZEY;
+protected ArrayList<ArrayList<Cell>> Cells;
 
-    public Map() {
+    public Map(int SIZEX, int SIZEY) {
+        this.SIZEX=SIZEX;
+        this.SIZEY=SIZEY;
         fillMap();
     }
 
     public void fillMap(){
-        myMap = new ArrayList<>(Collections.nCopies(this.SIZEY,new ArrayList<>(Collections.nCopies(this.SIZEX,new Cell(true, Cell.CellType.NORMAL)))));
+        Cells = new ArrayList<>(Collections.nCopies(this.SIZEY,new ArrayList<>(Collections.nCopies(this.SIZEX,new Cell(true, Cell.CellType.NORMAL)))));
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (ArrayList<Cell> a : this.myMap
+        for (ArrayList<Cell> a : Cells
              ) {
             for ( Cell c : a
                  ) {
@@ -30,10 +32,10 @@ protected ArrayList<ArrayList<Cell>> myMap;
     }
 
     public Cell get(int x , int y){
-        return this.myMap.get(y).get(x);
+        return Cells.get(y).get(x);
     }
     public void set(int x , int y, Cell c){
-        this.myMap.get(y).set(x,c);
+        Cells.get(y).set(x,c);
     }
 
     public int getSIZEX() {

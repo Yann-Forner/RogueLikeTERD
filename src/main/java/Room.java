@@ -4,25 +4,18 @@ import java.util.Collections;
 public class Room extends Map {
     public Room(int SIZEX, int SIZEY) {
         super(SIZEX, SIZEY);
-    }
-
-    @Override
-    public void fillCases(){
-        this.myMap = new ArrayList<>(this.SIZEY);
-        for (int i = 0; i < this.SIZEY ; i++) {
-            this.myMap.add(new ArrayList<>(Collections.nCopies(this.SIZEX,Cell.SPACE)));
-        }
-        setBorders();
+        super.fillMap();
+        //setBorders();
     }
 
     private void setBorders(){
         for (int i = 0; i < this.SIZEX ; i++) {
-            this.set(i,0,Cell.BORDER);
-            this.set(i, this.SIZEY-1,Cell.BORDER);
+            this.set(i,0,new Cell(false, Cell.CellType.BORDER));
+            this.set(i, this.SIZEY-1,new Cell(false, Cell.CellType.BORDER));
         }
         for (int i = 0; i < this.SIZEY ; i++) {
-            this.set(0,i,Cell.BORDER);
-            this.set( this.SIZEX-1,i,Cell.BORDER);
+            this.set(0,i,new Cell(false, Cell.CellType.BORDER));
+            this.set( this.SIZEX-1,i,new Cell(false, Cell.CellType.BORDER));
         }
     }
 
