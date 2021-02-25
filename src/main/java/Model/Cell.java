@@ -6,6 +6,7 @@ public class Cell{
     }
     private final boolean isAccesible;
     private final CellType type;
+    private Entity Entity;
 
     Cell(boolean isAccesible, CellType type) {
         this.isAccesible = isAccesible;
@@ -20,22 +21,34 @@ public class Cell{
         return type;
     }
 
-    @Override
-    public String toString() {
-        switch (type){
-            case VOID, NORMAL -> {
-                return "\u001B[37m.";
-            }
-            case BORDER -> {
-                return "\u001B[31m*";
-            }
-            case DOOR -> {
-                return "\u001B[31m=";
-            }
-            default -> {
-                return "\u001B[31m ";
-            }
-        }
+    public Model.Entity getEntity() {
+        return Entity;
     }
 
+    public void setEntity(Model.Entity entity) {
+        Entity = entity;
+    }
+
+    @Override
+    public String toString() {
+        if(this.Entity == null) {
+            switch (type){
+                case VOID, NORMAL -> {
+                    return "\u001B[37m.";
+                }
+                case BORDER -> {
+                    return "\u001B[31m*";
+                }
+                case DOOR -> {
+                    return "\u001B[31m=";
+                }
+                default -> {
+                    return "\u001B[31m ";
+                }
+            }
+        }
+        else {
+            return this.Entity.toString();
+        }
+    }
 }

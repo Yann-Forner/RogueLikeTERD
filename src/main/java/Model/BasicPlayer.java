@@ -2,13 +2,11 @@ package Model;
 
 public class BasicPlayer extends Entity {
 
-    private Map currentMap;
+    private Map CurrentMap;
 
-    public BasicPlayer(Position position, String drawable, Map map) {
-        super(position, drawable);
-        this.currentMap = map;
-
-        this.setDrawable("\u001B[32m@");
+    public BasicPlayer(Position position, Map map) {
+        super(position, map);
+        this.CurrentMap = map;
     }
 
     private boolean checkIfNewPositionAccessible(Position targetPosition) {
@@ -17,10 +15,13 @@ public class BasicPlayer extends Entity {
 
     public void move(Position newPosition) {
         if(checkIfNewPositionAccessible(newPosition))
-            setPositionY(getPositionY() + 1);
+            setPosition(newPosition);
     }
 
-
+    @Override
+    public String toString() {
+        return "\u001B[32m@";
+    }
 
     public void move(int targetX, int targetY) {
         move(new Position(targetX, targetY));
@@ -43,6 +44,6 @@ public class BasicPlayer extends Entity {
     }
 
     public Map getCurrentMap() {
-        return currentMap;
+        return CurrentMap;
     }
 }

@@ -2,40 +2,31 @@ package Model;
 
 public abstract class Entity {
 
-    protected Position position;
-    protected String drawable;
+    protected Position Position;
+    protected Map CurrentMap;
 
-    public Entity(Position position, String drawable) {
-        this.position = position;
-        this.drawable = drawable;
-    }
-
-    public String drawEntity() {
-        return drawable;
-    }
-
-
-    protected void setDrawable(String drawable) {
-        this.drawable = drawable;
+    public Entity(Position position, Map currentMap) {
+        this.Position = position;
+        this.CurrentMap = currentMap;
     }
 
     public Position getPosition() {
-        return position;
+        return Position;
     }
 
     protected void setPosition(Position position) {
-        this.position = position;
+        this.Position = position;
     }
 
 
 
     /* Pour que ce soit moins chiant */
     public int getPositionX() {
-        return position.getX();
+        return Position.getX();
     }
 
     public int getPositionY() {
-        return position.getY();
+        return Position.getY();
     }
 
     protected void setPositionX(int x) {
