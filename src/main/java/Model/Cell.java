@@ -11,6 +11,7 @@ public class Cell{
     public Cell(boolean isAccesible, CellType type) {
         this.isAccesible = isAccesible;
         this.type = type;
+        this.Entity = null;
     }
 
     public boolean isAccesible() {

@@ -201,6 +201,10 @@ public class Map {
         Cells.get(y).set(x,c);
     }
 
+    public void set(Position pos, Cell c){
+        set(Cells,pos,c);
+    }
+
     public void set(ArrayList<ArrayList<Cell>> map, Position pos, Cell c){
         map.get(pos.getX()).set(pos.getY(),c);
     }
@@ -302,5 +306,5 @@ public class Map {
         }
         return nbrMursVoisins > 4;
     }
-
 }
+

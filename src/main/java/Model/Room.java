@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Room extends Map {
     public static final int MinSize=5;
     public static final int MaxSize=20;
+    public final static int nbrMaxMobPerRoom=5;
+    public Position AbsolutePos=null;
     private ArrayList<Position> Doors = new ArrayList();
 
     public Room(int SIZEX, int SIZEY) {
@@ -44,4 +46,11 @@ public class Room extends Map {
         Doors = d;
     }
 
+    public void setAbsolutePos(Position pos){
+        AbsolutePos=pos;
+    }
+
+    public Position getAbsolutePos() {
+        return AbsolutePos;
+    }
 }

@@ -17,6 +17,14 @@ public class Position {
         return somme(new Position(x,y));
     }
 
+    public static Position copyOf(Position pos){
+        return new Position(pos.getX(), pos.getY());
+    }
+
+    public static int Distance(Position p1, Position p2){
+        return (int)Math.sqrt(Math.pow((p2.getX()- p1.getX()),2)+Math.pow((p2.getY()- p1.getY()),2));
+    }
+
     public int getX() {
         return x;
     }
