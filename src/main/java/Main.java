@@ -17,6 +17,7 @@ public class Main {
             System.out.println(rm.getDoors());
         }
         System.out.println(myMap.cheminFind(myMap.getRooms().get(0).getDoors().get(0),myMap.getRooms().get(1).getDoors().get(0)));
+        myMap.setPath();
         new Affichage(myMap);
     }
 }

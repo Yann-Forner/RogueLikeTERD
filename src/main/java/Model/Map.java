@@ -68,7 +68,7 @@ public class Map {
                     this.set(p.getX() + x, p.getY() + y, r.get(x, y));
                     }
                 }
-            //TODO a modifier
+            //TODO a modifier / partie ArrayList Doors
             ArrayList<Position> Doors=new ArrayList<>();
             for (Position pos : r.getDoors()){
                 Doors.add(pos.somme(p));
@@ -193,8 +193,16 @@ public class Map {
         return Cells.get(y).get(x);
     }
 
+    public Cell get(Position pos){
+        return get(pos.getX(), pos.getY());
+    }
+
     public void set(int x , int y, Cell c){
         Cells.get(y).set(x,c);
+    }
+
+    public void set(ArrayList<ArrayList<Cell>> map, Position pos, Cell c){
+        map.get(pos.getX()).set(pos.getY(),c);
     }
 
     public int getSIZEX() {
@@ -207,6 +215,92 @@ public class Map {
 
     public ArrayList<Room> getRooms(){
         return Rooms;
+    }
+
+    //TODO c'est moche tkt (les angles marchent pas encore parfaitement
+    public void setPath(){
+        ArrayList<ArrayList<Cell>> arrayListCell = new ArrayList<>();
+        for (int i = 0; i < SIZEY; i++) {
+            ArrayList<Cell> line= new ArrayList<>();
+            for (int j = 0; j < SIZEX; j++) {
+                line.add(get(j,i));
+            }
+            arrayListCell.add(line);
+        }
+
+        for (int y = 0; y < SIZEY; y++) {
+            for (int x = 0; x < SIZEX; x++) {
+                Position THIS = new Position(x,y);
+                Position UP = THIS.somme(0,-1);
+                Position DOWN = THIS.somme(0,1);
+                Position RIGHT = THIS.somme(1,0);
+                Position LEFT = THIS.somme(-1,0);
+                Position DOWNofLEFT = THIS.somme(-1,1);
+                Position DOWNofRIGHT = THIS.somme(1,1);
+                Position UPofRIGHT = THIS.somme(1,-1);
+                Position UPofLEFT = THIS.somme(-1,-1);
+
+                if(x==0){
+                    LEFT = THIS.somme(0,0);
+                    DOWNofLEFT = THIS.somme(1,1);
+                    UPofLEFT = LEFT.somme(1,-1);
+                }
+                if(x==(SIZEX-1)){
+                    RIGHT = THIS.somme(0,0);
+                    DOWNofRIGHT = THIS.somme(-1,1);
+                    UPofRIGHT = RIGHT.somme(-1,-1);
+                }
+                if(y==0){
+                    UP = THIS.somme(0,0);
+                    if(x==0){
+                        UPofLEFT = LEFT.somme(1,0);
+                        UPofRIGHT = RIGHT.somme(2,0);
+                    }
+                    else if(x==(SIZEX-1)){
+                        UPofRIGHT = RIGHT.somme(-1,0);
+                        UPofLEFT = LEFT.somme(-2,0);
+                    }
+                    else{
+                        UPofLEFT = LEFT.somme(-1,0);
+                        UPofRIGHT = RIGHT.somme(1,0);
+                    }
+                }
+                if(y==(SIZEY-1)){
+                    DOWN = THIS.somme(0,0);
+                    if(x==0){
+                        DOWNofLEFT = THIS.somme(1,0);
+                        DOWNofRIGHT = THIS.somme(2,0);
+                    }
+                    else if(x==(SIZEX-1)){
+                        DOWNofLEFT = THIS.somme(-1,0);
+                        DOWNofRIGHT = THIS.somme(-2,1);
+                    }
+                    else{
+                        DOWNofLEFT = THIS.somme(-1,0);
+                        DOWNofRIGHT = THIS.somme(1,0);
+                    }
+                }
+
+                if(isWall(THIS) && (canPath(THIS,UP,DOWN,LEFT,RIGHT,UPofLEFT,UPofRIGHT,DOWNofLEFT,DOWNofRIGHT))){
+                    set(arrayListCell,new Position(THIS.getY(), THIS.getX()),new Cell(true, Cell.CellType.NORMAL));
+                }
+            }
+        }
+        Cells=arrayListCell;
+    }
+
+    private boolean isWall(Position pos){
+        return (this.get(pos).getType().equals(Cell.CellType.BORDER) || this.get(pos).getType().equals(Cell.CellType.DOOR) || this.get(pos).getType().equals(Cell.CellType.ANGLE));
+    }
+
+    private boolean canPath(Position THIS, Position... pos){
+        int nbrMursVoisins=0;
+        for (Position p : pos){
+            if((isWall(p)) && (get(THIS).getType() != Cell.CellType.ANGLE)){
+                nbrMursVoisins=nbrMursVoisins+1;
+            }
+        }
+        return nbrMursVoisins > 4;
     }
 
 }

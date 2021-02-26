@@ -10,9 +10,11 @@ public class Position {
     }
 
     public Position somme(Position p){
-        x=x+p.getX();
-        y=y+p.getY();
-        return this;
+        return new Position(x+p.getX(),y+p.getY());
+    }
+
+    public Position somme(int x, int y) {
+        return somme(new Position(x,y));
     }
 
     public int getX() {
@@ -27,4 +29,5 @@ public class Position {
     public String toString() {
         return "Position{x:"+x+" ; y:"+y+"}";
     }
+
 }

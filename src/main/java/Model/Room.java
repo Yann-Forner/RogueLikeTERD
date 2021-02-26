@@ -18,9 +18,15 @@ public class Room extends Map {
             this.set(i,0,new Cell(false, Cell.CellType.BORDER));
             this.set(i,SIZEY-1,new Cell(false, Cell.CellType.BORDER));
             if (i==0 || i==(SIZEX-1)){
-                for (int j = 1; j < SIZEY; j++) {
-                    this.set(i,j,new Cell(false, Cell.CellType.BORDER));
-                    this.set(i,j,new Cell(false, Cell.CellType.BORDER));
+                for (int j = 0; j < SIZEY; j++) {
+                    if(j==0 || j==(SIZEY-1)){
+                        this.set(i,j,new Cell(false, Cell.CellType.ANGLE));
+                        this.set(i,j,new Cell(false, Cell.CellType.ANGLE));
+                    }
+                    else{
+                        this.set(i,j,new Cell(false, Cell.CellType.BORDER));
+                        this.set(i,j,new Cell(false, Cell.CellType.BORDER));
+                    }
                 }
             }
         }
