@@ -16,7 +16,7 @@ public class Procedure {
         int SIZEX = rand.nextInt(Room.MaxSize - Room.MinSize + 1) + Room.MinSize;
         int SIZEY = rand.nextInt(Room.MaxSize - Room.MinSize + 1) + Room.MinSize;
         Room r = new Room(SIZEX, SIZEY);
-        setRandomPorte(4, r);
+        //setRandomPorte(4, r);
         return r;
     }
 
@@ -38,7 +38,7 @@ public class Procedure {
     //TODO optimiser ça pas ouf le while
     public static Position getRandomPosition(Room r) {
         Position pos = getRandomPosition(r.getSIZEX(), r.getSIZEY());
-        while ((r.get(pos).getType().equals(Cell.CellType.BORDER)) || (r.get(pos).getType().equals(Cell.CellType.ANGLE)) || (r.get(pos).getType().equals(Cell.CellType.DOOR))) {
+        while ((r.get(pos).getType().equals(Cell.CellType.BORDER)) || (r.get(pos).getType().equals(Cell.CellType.DOOR))) {
             pos = getRandomPosition(r.getSIZEX(), r.getSIZEY());
         }
         return pos.somme(r.getAbsolutePos());
@@ -78,7 +78,7 @@ public class Procedure {
      *
      * @param map Map
      */
-    public static void setRamdomRooms(Map map) {
+    public static void setRandomRooms(Map map) {
         int nbrRooms = 0;
         long startTime = System.currentTimeMillis();
         long elapsedTime = 0;
@@ -103,7 +103,9 @@ public class Procedure {
     private static void setRandomMob(Room r, Map map) {
         Position pos = getRandomPosition(r);
         Cell cell = map.get(pos);
-        cell.setEntity(new BasicPlayer(pos, r));
+        Entity e=new BasicPlayer(pos);
+        cell.setEntity(e);
+        map.addEntity(e);
     }
 
     /**
@@ -111,7 +113,7 @@ public class Procedure {
      *
      * @param map Map
      */
-    public static void setRamdomMob(Map map) {
+    public static void setRandomMob(Map map) {
         for (Room r : map.getRooms()) {
             int nbrMobs = rand.nextInt(Room.nbrMaxMobPerRoom)+1;
             for (int i = 0; i < nbrMobs; i++) {

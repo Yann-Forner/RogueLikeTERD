@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Map {
 
-    public final static int nbrMaxRooms=5;
+    public final static int nbrMaxRooms = 8;
     protected int SIZEX;
     protected int SIZEY;
     protected ArrayList<ArrayList<Cell>> Cells;
@@ -16,12 +16,12 @@ public class Map {
     protected ArrayList<Entity> Entitys = new ArrayList<>();
 
     public Map(int SIZEX, int SIZEY) {
-        this.SIZEX=SIZEX;
-        this.SIZEY=SIZEY;
+        this.SIZEX = SIZEX;
+        this.SIZEY = SIZEY;
         fillMap(Cell.CellType.VOID);
     }
 
-    public void fillMap(Cell.CellType type){
+    public void fillMap(Cell.CellType type) {
         Cells = new ArrayList<>();
         for (int i = 0; i < SIZEY; i++) {
             ArrayList<Cell> line = new ArrayList<>();
@@ -36,47 +36,44 @@ public class Map {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("    ");
-        for (int x = 0; x < this.SIZEX ; x++) {
+        for (int x = 0; x < this.SIZEX; x++) {
             sb.append("\u001B[0m").append(x);
-            if(x<10){
+            if (x < 10) {
                 sb.append("  ");
-            }
-            else{
+            } else {
                 sb.append(" ");
             }
         }
         sb.append("\n");
-        for (int y = 0; y < this.SIZEY ; y++) {
-            if(y<10){
+        for (int y = 0; y < this.SIZEY; y++) {
+            if (y < 10) {
                 sb.append("\u001B[0m").append(" ").append(y).append("  ");
-            }
-            else{
+            } else {
                 sb.append("\u001B[0m").append(y).append("  ");
             }
-            for (int x = 0; x < this.SIZEX ; x++) {
-                sb.append(this.get(x,y)).append("  ");
+            for (int x = 0; x < this.SIZEX; x++) {
+                sb.append(this.get(x, y)).append("  ");
             }
             sb.append("\n");
         }
         return sb.toString();
     }
 
-    public void addRoom(Room r , Position p){
-        if(!isCollision(r,p)){
-            for (int y = 0; y < r.getSIZEY() ; y++) {
-                for (int x = 0; x < r.getSIZEX() ; x++) {
+    public void addRoom(Room r, Position p) {
+        if (!isCollision(r, p)) {
+            for (int y = 0; y < r.getSIZEY(); y++) {
+                for (int x = 0; x < r.getSIZEX(); x++) {
                     this.set(p.getX() + x, p.getY() + y, r.get(x, y));
-                    }
                 }
+            }
             //TODO a modifier / partie ArrayList Doors
-            ArrayList<Position> Doors=new ArrayList<>();
-            for (Position pos : r.getDoors()){
+            ArrayList<Position> Doors = new ArrayList<>();
+            for (Position pos : r.getDoors()) {
                 Doors.add(pos.somme(p));
             }
             r.addDoors(Doors);
             Rooms.add(r);
-        }
-        else{
+        } else {
             throw new CollisionRoom(r);
         }
     }
@@ -86,33 +83,31 @@ public class Map {
     }
 
     public void upgradeCellsWithEntitys() {
-        for(Entity e : Entitys) {
+        for (Entity e : Entitys) {
             Cells.get(e.getPositionY()).get(e.getPositionX()).setEntity(e);
         }
     }
 
-    public boolean isCollision(Room r, Position p){
-        for (int y = 0; y < r.getSIZEY() ; y++) {
-            for (int x = 0; x < r.getSIZEX() ; x++) {
-                if(this.get(p.getX()+x,p.getY()+y).getType() !=  Cell.CellType.VOID
-                )return true;
+    public boolean isCollision(Room r, Position p) {
+        for (int y = 0; y < r.getSIZEY(); y++) {
+            for (int x = 0; x < r.getSIZEX(); x++) {
+                if (this.get(p.getX() + x, p.getY() + y).getType() != Cell.CellType.VOID
+                ) return true;
             }
         }
         return false;
     }
 
-    public boolean suppX (int x, int y)
-    {
+    public boolean suppX(int x, int y) {
         if (Math.abs(x) > Math.abs(y)) return true;
         return false;
     }
 
-    public boolean sameRoom (Position Init, Position Dest)
-    {
+    public boolean sameRoom(Position Init, Position Dest) {
         return false;
     }
 
-    public ArrayList cheminFind (Position posInit, Position posDest) {
+    public ArrayList cheminFind(Position posInit, Position posDest) {
 
         int deltaX;
         int deltaY;
@@ -189,24 +184,24 @@ public class Map {
         return positionList;
     }
 
-    public Cell get(int x , int y){
+    public Cell get(int x, int y) {
         return Cells.get(y).get(x);
     }
 
-    public Cell get(Position pos){
+    public Cell get(Position pos) {
         return get(pos.getX(), pos.getY());
     }
 
-    public void set(int x , int y, Cell c){
-        Cells.get(y).set(x,c);
+    public void set(int x, int y, Cell c) {
+        Cells.get(y).set(x, c);
     }
 
-    public void set(Position pos, Cell c){
-        set(Cells,pos,c);
+    public void set(Position pos, Cell c) {
+        set(Cells, pos, c);
     }
 
-    public void set(ArrayList<ArrayList<Cell>> map, Position pos, Cell c){
-        map.get(pos.getX()).set(pos.getY(),c);
+    public void set(ArrayList<ArrayList<Cell>> map, Position pos, Cell c) {
+        map.get(pos.getX()).set(pos.getY(), c);
     }
 
     public int getSIZEX() {
@@ -217,98 +212,116 @@ public class Map {
         return SIZEY;
     }
 
-    public ArrayList<Room> getRooms(){
+    public ArrayList<Room> getRooms() {
         return Rooms;
     }
 
-    //TODO c'est moche tkt (les angles marchent pas encore parfaitement
-    public void FustionRoom(){
-        ArrayList<ArrayList<Cell>> arrayListCell = new ArrayList<>();
-        for (int i = 0; i < SIZEY; i++) {
-            ArrayList<Cell> line= new ArrayList<>();
-            for (int j = 0; j < SIZEX; j++) {
-                line.add(get(j,i));
+    public void ligne(Position pos1, Position pos2) {
+        //TODO svp quelqu'un peut me dire pourquoi il faut inverser ?
+        Position p1 = new Position(pos1.getY(), pos1.getX());
+        Position p2 = new Position(pos2.getY(), pos2.getX());
+        ArrayList<Position> chemin = new ArrayList<>();
+        chemin.add(p1);
+        Position lastPos = chemin.get(chemin.size() - 1);
+        while (lastPos.getX() != p2.getX()) {
+            if (lastPos.getX() > p2.getX()) {
+                chemin.add(new Position(lastPos.getX() - 1, lastPos.getY()));
+            } else if (lastPos.getX() < p2.getX()) {
+                chemin.add(new Position(lastPos.getX() + 1, lastPos.getY()));
             }
-            arrayListCell.add(line);
+            lastPos = chemin.get(chemin.size() - 1);
+        }
+        while (lastPos.getY() != p2.getY()) {
+            lastPos = chemin.get(chemin.size() - 1);
+            if (lastPos.getY() > p2.getY()) {
+                chemin.add(new Position(lastPos.getX(), lastPos.getY() - 1));
+            } else if (lastPos.getY() < p2.getY()) {
+                chemin.add(new Position(lastPos.getX(), lastPos.getY() + 1));
+            }
+        }
+        for (Position p : chemin) {
+            set(p, new Cell(true, Cell.CellType.PATH));
+        }
+    }
+
+    public void ligneV2(Position pos1, Position pos2) {
+        Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
+        ligne(pos1, milieu);
+        ligne(milieu, pos2);
+    }
+
+    //TODO a optimiser c'est affreux
+    public void RoomFusion(){
+        for (int i = 0; i < getRooms().size(); i=i+2) {
+            ligneV2(Procedure.getRandomPosition(getRooms().get(i)),Procedure.getRandomPosition(getRooms().get(i+1)));
+        }
+        for (int i = 0; i < getRooms().size(); i=i+4) {
+            ligneV2(Procedure.getRandomPosition(getRooms().get(i)),Procedure.getRandomPosition(getRooms().get(i+3)));
         }
 
-        for (int y = 0; y < SIZEY; y++) {
-            for (int x = 0; x < SIZEX; x++) {
-                Position THIS = new Position(x,y);
-                Position UP = THIS.somme(0,-1);
-                Position DOWN = THIS.somme(0,1);
-                Position RIGHT = THIS.somme(1,0);
-                Position LEFT = THIS.somme(-1,0);
-                Position DOWNofLEFT = THIS.somme(-1,1);
-                Position DOWNofRIGHT = THIS.somme(1,1);
-                Position UPofRIGHT = THIS.somme(1,-1);
-                Position UPofLEFT = THIS.somme(-1,-1);
-
-                if(x==0){
-                    LEFT = THIS.somme(0,0);
-                    DOWNofLEFT = THIS.somme(1,1);
-                    UPofLEFT = LEFT.somme(1,-1);
-                }
-                if(x==(SIZEX-1)){
-                    RIGHT = THIS.somme(0,0);
-                    DOWNofRIGHT = THIS.somme(-1,1);
-                    UPofRIGHT = RIGHT.somme(-1,-1);
-                }
-                if(y==0){
-                    UP = THIS.somme(0,0);
-                    if(x==0){
-                        UPofLEFT = LEFT.somme(1,0);
-                        UPofRIGHT = RIGHT.somme(2,0);
-                    }
-                    else if(x==(SIZEX-1)){
-                        UPofRIGHT = RIGHT.somme(-1,0);
-                        UPofLEFT = LEFT.somme(-2,0);
-                    }
-                    else{
-                        UPofLEFT = LEFT.somme(-1,0);
-                        UPofRIGHT = RIGHT.somme(1,0);
-                    }
-                }
-                if(y==(SIZEY-1)){
-                    DOWN = THIS.somme(0,0);
-                    if(x==0){
-                        DOWNofLEFT = THIS.somme(1,0);
-                        DOWNofRIGHT = THIS.somme(2,0);
-                    }
-                    else if(x==(SIZEX-1)){
-                        DOWNofLEFT = THIS.somme(-1,0);
-                        DOWNofRIGHT = THIS.somme(-2,1);
-                    }
-                    else{
-                        DOWNofLEFT = THIS.somme(-1,0);
-                        DOWNofRIGHT = THIS.somme(1,0);
-                    }
-                }
-
-                if(isWall(THIS) && (canPath(THIS,UP,DOWN,LEFT,RIGHT,UPofLEFT,UPofRIGHT,DOWNofLEFT,DOWNofRIGHT))){
-                    set(arrayListCell,new Position(THIS.getY(), THIS.getX()),new Cell(true, Cell.CellType.NORMAL));
+        for (int y = 0; y < getSIZEY(); y++) {
+            for (int x = 0; x < getSIZEX(); x++) {
+                if(get(x,y).getType().equals(Cell.CellType.PATH)){
+                    set(x,y,new Cell(true, Cell.CellType.NORMAL));
                 }
             }
         }
-        Cells=arrayListCell;
-    }
 
-    private boolean isWall(Position pos){
-        return (this.get(pos).getType().equals(Cell.CellType.BORDER) || this.get(pos).getType().equals(Cell.CellType.DOOR) || this.get(pos).getType().equals(Cell.CellType.ANGLE));
-    }
-
-    private boolean canPath(Position THIS, Position... pos){
-        int nbrMursVoisins=0;
-        int nbrMursVoisinsAngle=0;
-        for (Position p : pos){
-            if(isWall(p) && get(THIS).getType() != Cell.CellType.ANGLE && p.getX()>0 && p.getX()<SIZEX && p.getY()>0 && p.getY()<SIZEY) {
-                nbrMursVoisins++;
-            }
-            if(get(p).getType().equals(Cell.CellType.ANGLE)){
-                nbrMursVoisinsAngle++;
+        for (int y = 0; y < getSIZEY(); y++) {
+            for (int x = 0; x < getSIZEX(); x++) {
+                if (get(x, y).getType().equals(Cell.CellType.VOID)) {
+                    Position THIS = new Position(x, y);
+                    ArrayList<Position> voisins = new ArrayList<>();
+                    voisins.add(THIS.somme(0, -1));
+                    voisins.add(THIS.somme(0, 1));
+                    voisins.add(THIS.somme(1, 0));
+                    voisins.add(THIS.somme(-1, 0));
+                    voisins.add(THIS.somme(-1, 1));
+                    voisins.add(THIS.somme(1, 1));
+                    voisins.add(THIS.somme(1, -1));
+                    voisins.add(THIS.somme(-1, -1));
+                    for (Position p : voisins) {
+                        if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < getSIZEX() && p.getY() < getSIZEY()) {
+                            if (get(p).getType().equals(Cell.CellType.NORMAL)) {
+                                set(x, y, new Cell(true, Cell.CellType.BORDER));
+                            }
+                        }
+                    }
+                }
             }
         }
-        return nbrMursVoisinsAngle < 2 && nbrMursVoisins > 4;
+
+        for (int y = 0; y < getSIZEY(); y++) {
+            for (int x = 0; x < getSIZEX(); x++) {
+                if(get(x,y).getType().equals(Cell.CellType.BORDER)){
+                    Position THIS = new Position(x,y);
+                    ArrayList<Position> voisins = new ArrayList<>();
+                    voisins.add(THIS.somme(0,-1));
+                    voisins.add(THIS.somme(0,1));
+                    voisins.add(THIS.somme(1,0));
+                    voisins.add(THIS.somme(-1,0));
+                    voisins.add(THIS.somme(-1,1));
+                    voisins.add(THIS.somme(1,1));
+                    voisins.add(THIS.somme(1,-1));
+                    voisins.add(THIS.somme(-1,-1));
+                    int nbrVoidVoisins=0;
+                    for(Position p : voisins){
+                        if(p.getX()>=0 && p.getY()>=0 && p.getX()<getSIZEX() && p.getY()<getSIZEY()){
+                            if(get(p).getType().equals(Cell.CellType.VOID)){
+                                nbrVoidVoisins++;
+                            }
+                        }
+                        else{
+                            nbrVoidVoisins++;
+                        }
+                    }
+                    if(nbrVoidVoisins==0){
+                        set(x,y,new Cell(true, Cell.CellType.NORMAL));
+                    }
+                }
+            }
+        }
     }
+
+
 }
-

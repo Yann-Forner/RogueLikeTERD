@@ -2,7 +2,7 @@ package Model;
 
 public class Cell{
     public enum CellType {
-        BORDER, NORMAL, DOOR, PATH, VOID, ANGLE, ;
+        BORDER, NORMAL, DOOR, PATH, VOID, ;
     }
     private final boolean isAccesible;
     private final CellType type;
@@ -43,7 +43,7 @@ public class Cell{
                 case PATH -> {
                     return "\u001B[34m*";
                 }
-                case ANGLE, BORDER -> {
+                case BORDER -> {
                     return "\u001B[31m*";
                 }
                 case DOOR -> {

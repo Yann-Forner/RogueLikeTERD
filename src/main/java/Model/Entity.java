@@ -3,11 +3,9 @@ package Model;
 public abstract class Entity {
 
     protected Position Position;
-    protected Map CurrentMap;
 
-    public Entity(Position position, Map currentMap) {
+    public Entity(Position position) {
         this.Position = position;
-        this.CurrentMap = currentMap;
     }
 
     public Position getPosition() {
@@ -17,8 +15,6 @@ public abstract class Entity {
     protected void setPosition(Position position) {
         this.Position = position;
     }
-
-
 
     /* Pour que ce soit moins chiant */
     public int getPositionX() {
@@ -35,5 +31,25 @@ public abstract class Entity {
 
     protected void setPositionY(int y) {
         setPosition(new Position(getPosition().getX(), y));
+    }
+
+    public void move(Position pos) {
+        move(new Position(pos.getX(), pos.getY()));
+    }
+
+    public void moveLeft() {
+        move(new Position(getPositionX() - 1, getPositionY()));
+    }
+
+    public void moveRight() {
+        move(new Position(getPositionX() + 1, getPositionY()));
+    }
+
+    public void moveUp() {
+        move(new Position(getPositionX(), getPositionY() - 1));
+    }
+
+    public void moveDown() {
+        move(new Position(getPositionX(), getPositionY() + 1));
     }
 }

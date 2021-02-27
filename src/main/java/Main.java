@@ -14,11 +14,14 @@ public class Main {
         //myMap.upgradeCellsWithEntitys();
         //System.out.println(myMap.cheminFind(myMap.getRooms().get(0).getDoors().get(0),myMap.getRooms().get(1).getDoors().get(0)));
         //myMap.setPath();
-        Procedure.setRamdomRooms(myMap);
-        Model.Procedure.setRamdomMob(myMap);
+        Procedure.setRandomRooms(myMap);
+        Model.Procedure.setRandomMob(myMap);
 
-        //System.out.println(Procedure.getRandomRoom());
-        myMap.FustionRoom();
+        //myMap.ligne(new Position(10,5),new Position(30,30));
+        //myMap.ligneV2(new Position(10,5),new Position(30,30));
+
+        new Affichage(myMap);
+        myMap.RoomFusion();
         new Affichage(myMap);
     }
 }
