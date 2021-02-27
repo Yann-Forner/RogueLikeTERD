@@ -240,7 +240,7 @@ public class Map {
             }
         }
         for (Position p : chemin) {
-            set(p, new Cell(true, Cell.CellType.PATH));
+            set(p, new Cell(true, Cell.CellType.NORMAL));
         }
     }
 
@@ -257,14 +257,6 @@ public class Map {
         }
         for (int i = 0; i < getRooms().size(); i=i+4) {
             ligneV2(Procedure.getRandomPosition(getRooms().get(i)),Procedure.getRandomPosition(getRooms().get(i+3)));
-        }
-
-        for (int y = 0; y < getSIZEY(); y++) {
-            for (int x = 0; x < getSIZEX(); x++) {
-                if(get(x,y).getType().equals(Cell.CellType.PATH)){
-                    set(x,y,new Cell(true, Cell.CellType.NORMAL));
-                }
-            }
         }
 
         for (int y = 0; y < getSIZEY(); y++) {
