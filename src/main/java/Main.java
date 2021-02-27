@@ -9,13 +9,13 @@ public class Main {
 
     public static void main(String[] args) {
         Map myMap = new Map(MapWidth,MapHeigth);
-        Room r=Procedure.getRandomRoom();
-        Procedure.setRamdomRooms(myMap);
+        //Model.Procedure.setRamdomRooms(myMap);
         //myMap.addEntity(new BasicPlayer(new Position(11, 16), myMap));
         //myMap.upgradeCellsWithEntitys();
         //System.out.println(myMap.cheminFind(myMap.getRooms().get(0).getDoors().get(0),myMap.getRooms().get(1).getDoors().get(0)));
         //myMap.setPath();
-        Procedure.setRamdomMob(myMap);
+        Procedure.setRamdomRooms(myMap);
+        Model.Procedure.setRamdomMob(myMap);
         new Affichage(myMap);
     }
 }

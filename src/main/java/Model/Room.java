@@ -5,15 +5,18 @@ import java.util.ArrayList;
 public class Room extends Map {
     public static final int MinSize=5;
     public static final int MaxSize=20;
-    public final static int nbrMaxMobPerRoom=5;
-    public Position AbsolutePos=null;
-    private ArrayList<Position> Doors = new ArrayList();
+    public static final int nbrMaxMobPerRoom=5;
+    private Position AbsolutePos=null;
+    private ArrayList<Position> Doors = new ArrayList<>();
 
     public Room(int SIZEX, int SIZEY) {
         super(SIZEX, SIZEY);
         setBorders();
     }
 
+    /**
+     * Bordure de la Room;
+     */
     private void setBorders(){
         fillMap(Cell.CellType.NORMAL);
         for (int i = 0; i < SIZEX; i++) {
@@ -38,16 +41,16 @@ public class Room extends Map {
         Doors.add(pos);
     }
 
+    public void addDoors(ArrayList<Position> pos){
+        Doors=pos;
+    }
+
     public ArrayList<Position> getDoors(){
         return Doors;
     }
 
-    public void setDoors(ArrayList<Position> d){
-        Doors = d;
-    }
-
     public void setAbsolutePos(Position pos){
-        AbsolutePos=pos;
+        AbsolutePos=Position.copyOf(pos);
     }
 
     public Position getAbsolutePos() {

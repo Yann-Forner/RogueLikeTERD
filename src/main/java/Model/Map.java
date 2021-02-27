@@ -73,7 +73,7 @@ public class Map {
             for (Position pos : r.getDoors()){
                 Doors.add(pos.somme(p));
             }
-            r.setDoors(Doors);
+            r.addDoors(Doors);
             Rooms.add(r);
         }
         else{
