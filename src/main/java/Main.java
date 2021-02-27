@@ -16,6 +16,9 @@ public class Main {
         //myMap.setPath();
         Procedure.setRamdomRooms(myMap);
         Model.Procedure.setRamdomMob(myMap);
+
+        //System.out.println(Procedure.getRandomRoom());
+        myMap.FustionRoom();
         new Affichage(myMap);
     }
 }

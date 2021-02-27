@@ -222,7 +222,7 @@ public class Map {
     }
 
     //TODO c'est moche tkt (les angles marchent pas encore parfaitement
-    public void setPath(){
+    public void FustionRoom(){
         ArrayList<ArrayList<Cell>> arrayListCell = new ArrayList<>();
         for (int i = 0; i < SIZEY; i++) {
             ArrayList<Cell> line= new ArrayList<>();
@@ -299,12 +299,16 @@ public class Map {
 
     private boolean canPath(Position THIS, Position... pos){
         int nbrMursVoisins=0;
+        int nbrMursVoisinsAngle=0;
         for (Position p : pos){
-            if((isWall(p)) && (get(THIS).getType() != Cell.CellType.ANGLE)){
-                nbrMursVoisins=nbrMursVoisins+1;
+            if(isWall(p) && get(THIS).getType() != Cell.CellType.ANGLE && p.getX()>0 && p.getX()<SIZEX && p.getY()>0 && p.getY()<SIZEY) {
+                nbrMursVoisins++;
+            }
+            if(get(p).getType().equals(Cell.CellType.ANGLE)){
+                nbrMursVoisinsAngle++;
             }
         }
-        return nbrMursVoisins > 4;
+        return nbrMursVoisinsAngle < 2 && nbrMursVoisins > 4;
     }
 }
 
