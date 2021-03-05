@@ -3,8 +3,12 @@ package Model;
 
 import Exceptions.CollisionRoom;
 
+import javax.sql.RowSet;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Map {
 
@@ -18,15 +22,15 @@ public class Map {
     public Map(int SIZEX, int SIZEY) {
         this.SIZEX = SIZEX;
         this.SIZEY = SIZEY;
-        fillMap(Cell.CellType.VOID);
+        fillMap(new Cell(false,Cell.CellType.VOID));
     }
 
-    public void fillMap(Cell.CellType type) {
+    public void fillMap(Cell c) {
         Cells = new ArrayList<>();
         for (int i = 0; i < SIZEY; i++) {
             ArrayList<Cell> line = new ArrayList<>();
             for (int j = 0; j < SIZEX; j++) {
-                line.add(j, new Cell(false, type));
+                line.add(j, new Cell(c.isAccesible(), c.getType()));
             }
             Cells.add(i, line);
         }
@@ -275,7 +279,7 @@ public class Map {
                     for (Position p : voisins) {
                         if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < getSIZEX() && p.getY() < getSIZEY()) {
                             if (get(p).getType().equals(Cell.CellType.NORMAL)) {
-                                set(x, y, new Cell(true, Cell.CellType.BORDER));
+                                set(x, y, new Cell(false, Cell.CellType.BORDER));
                             }
                         }
                     }
@@ -314,6 +318,4 @@ public class Map {
             }
         }
     }
-
-
 }

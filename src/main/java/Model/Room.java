@@ -18,7 +18,7 @@ public class Room extends Map {
      * Bordure de la Room;
      */
     private void setBorders(){
-        fillMap(Cell.CellType.NORMAL);
+        fillMap(new Cell(true, Cell.CellType.NORMAL));
         for (int i = 0; i < SIZEX; i++) {
             this.set(i,0,new Cell(false, Cell.CellType.BORDER));
             this.set(i,SIZEY-1,new Cell(false, Cell.CellType.BORDER));

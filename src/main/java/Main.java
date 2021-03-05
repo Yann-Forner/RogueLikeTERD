@@ -20,8 +20,8 @@ public class Main {
         //myMap.ligne(new Position(10,5),new Position(30,30));
         //myMap.ligneV2(new Position(10,5),new Position(30,30));
 
-        new Affichage(myMap);
+        Affichage.map(myMap);
         myMap.RoomFusion();
-        new Affichage(myMap);
+        Affichage.map(myMap);
     }
 }
