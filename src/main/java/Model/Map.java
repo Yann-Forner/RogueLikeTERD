@@ -3,11 +3,8 @@ package Model;
 
 import Exceptions.CollisionRoom;
 
-import javax.sql.RowSet;
-import java.lang.reflect.Array;
-import java.sql.SQLException;
+import java.io.File;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Map {
@@ -102,92 +99,6 @@ public class Map {
         return false;
     }
 
-    public boolean suppX(int x, int y) {
-        if (Math.abs(x) > Math.abs(y)) return true;
-        return false;
-    }
-
-    public boolean sameRoom(Position Init, Position Dest) {
-        return false;
-    }
-
-    public ArrayList cheminFind(Position posInit, Position posDest) {
-
-        int deltaX;
-        int deltaY;
-        Position pos = posInit;
-        int size;
-        size = 5;
-        ArrayList<Position> positionList = new ArrayList<>();
-
-        while (pos.getX() != posDest.getX() && pos.getY() != pos.getY()) {
-
-            if (sameRoom(pos, posDest)) {
-
-                deltaX = posDest.getX() - posInit.getX();
-                deltaY = posDest.getY() - posInit.getY();
-
-                while (deltaX != 0 && deltaY != 0) {
-                    if (deltaX > 0 && deltaY > 0) {
-                        if (suppX(deltaX, deltaY)) {
-                            deltaX = deltaX - size;
-                            pos = new Position(pos.getX() + size, pos.getY());
-                            positionList.add(pos);
-                        } else {
-                            deltaY = deltaY - size;
-                            pos = new Position(pos.getX(), pos.getY() + size);
-                            positionList.add(pos);
-                        }
-                    } else if (deltaX > 0 && deltaY < 0) {
-                        if (suppX(deltaX, deltaY)) {
-                            deltaX = deltaX - size;
-                            pos = new Position(pos.getX() + size, pos.getY());
-                            positionList.add(pos);
-                        } else {
-                            deltaY = deltaY + size;
-                            pos = new Position(pos.getX(), pos.getY() - size);
-                            positionList.add(pos);
-                        }
-                    } else if (deltaX < 0 && deltaY > 0) {
-                        if (suppX(deltaX, deltaY)) {
-                            deltaX = deltaX + size;
-                            pos = new Position(pos.getX() - size, pos.getY());
-                            positionList.add(pos);
-                        } else {
-                            deltaY = deltaY - size;
-                            pos = new Position(pos.getX(), pos.getY() + size);
-                            positionList.add(pos);
-                        }
-                    } else if (deltaX < 0 && deltaY > 0) {
-                        if (suppX(deltaX, deltaY)) {
-                            deltaX = deltaX + size;
-                            pos = new Position(pos.getX() - size, pos.getY());
-                            positionList.add(pos);
-                        } else {
-                            deltaY = deltaY - size;
-                            pos = new Position(pos.getX(), pos.getY() + size);
-                            positionList.add(pos);
-                        }
-                    } else if (deltaX < 0 && deltaY < 0) {
-                        if (suppX(deltaX, deltaY)) {
-                            deltaX = deltaX + size;
-                            pos = new Position(pos.getX() - size, pos.getY());
-                            positionList.add(pos);
-                        } else {
-                            deltaY = deltaY + size;
-                            pos = new Position(pos.getX(), pos.getY() - size);
-                            positionList.add(pos);
-                        }
-
-                    }
-
-
-                }
-            }
-        }
-        return positionList;
-    }
-
     public Cell get(int x, int y) {
         return Cells.get(y).get(x);
     }
@@ -220,6 +131,19 @@ public class Map {
         return Rooms;
     }
 
+    public ArrayList<Position> voisins(Position pos){
+        ArrayList<Position> voisins = new ArrayList<>();
+        voisins.add(pos.somme(0, -1));
+        voisins.add(pos.somme(0, 1));
+        voisins.add(pos.somme(1, 0));
+        voisins.add(pos.somme(-1, 0));
+        voisins.add(pos.somme(-1, 1));
+        voisins.add(pos.somme(1, 1));
+        voisins.add(pos.somme(1, -1));
+        voisins.add(pos.somme(-1, -1));
+        return voisins.stream().filter(p -> (p.getX() >= 0 && p.getY() >= 0 && p.getX() < getSIZEX() && p.getY() < getSIZEY())).collect(Collectors.toCollection(ArrayList::new));
+    }
+
     public void ligne(Position pos1, Position pos2) {
         //TODO svp quelqu'un peut me dire pourquoi il faut inverser ?
         Position p1 = new Position(pos1.getY(), pos1.getX());
@@ -248,39 +172,23 @@ public class Map {
         }
     }
 
-    public void ligneV2(Position pos1, Position pos2) {
-        Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
-        ligne(pos1, milieu);
-        ligne(milieu, pos2);
-    }
-
     //TODO a optimiser c'est affreux
     public void RoomFusion(){
-        for (int i = 0; i < getRooms().size(); i=i+2) {
-            ligneV2(Procedure.getRandomPosition(getRooms().get(i)),Procedure.getRandomPosition(getRooms().get(i+1)));
-        }
-        for (int i = 0; i < getRooms().size(); i=i+4) {
-            ligneV2(Procedure.getRandomPosition(getRooms().get(i)),Procedure.getRandomPosition(getRooms().get(i+3)));
+        for (int i = 0; i < getRooms().size()-1; i++) {
+            Position pos1=Procedure.getRandomPosition(getRooms().get(i));
+            Position pos2=Procedure.getRandomPosition(getRooms().get(i+1));
+            Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
+            ligne(pos1, milieu);
+            ligne(milieu, pos2);
         }
 
         for (int y = 0; y < getSIZEY(); y++) {
             for (int x = 0; x < getSIZEX(); x++) {
                 if (get(x, y).getType().equals(Cell.CellType.VOID)) {
-                    Position THIS = new Position(x, y);
-                    ArrayList<Position> voisins = new ArrayList<>();
-                    voisins.add(THIS.somme(0, -1));
-                    voisins.add(THIS.somme(0, 1));
-                    voisins.add(THIS.somme(1, 0));
-                    voisins.add(THIS.somme(-1, 0));
-                    voisins.add(THIS.somme(-1, 1));
-                    voisins.add(THIS.somme(1, 1));
-                    voisins.add(THIS.somme(1, -1));
-                    voisins.add(THIS.somme(-1, -1));
+                    ArrayList<Position> voisins = voisins(new Position(x, y));
                     for (Position p : voisins) {
-                        if (p.getX() >= 0 && p.getY() >= 0 && p.getX() < getSIZEX() && p.getY() < getSIZEY()) {
-                            if (get(p).getType().equals(Cell.CellType.NORMAL)) {
-                                set(x, y, new Cell(false, Cell.CellType.BORDER));
-                            }
+                        if (get(p).getType().equals(Cell.CellType.NORMAL)) {
+                            set(x, y, new Cell(false, Cell.CellType.BORDER));
                         }
                     }
                 }
@@ -290,27 +198,14 @@ public class Map {
         for (int y = 0; y < getSIZEY(); y++) {
             for (int x = 0; x < getSIZEX(); x++) {
                 if(get(x,y).getType().equals(Cell.CellType.BORDER)){
-                    Position THIS = new Position(x,y);
-                    ArrayList<Position> voisins = new ArrayList<>();
-                    voisins.add(THIS.somme(0,-1));
-                    voisins.add(THIS.somme(0,1));
-                    voisins.add(THIS.somme(1,0));
-                    voisins.add(THIS.somme(-1,0));
-                    voisins.add(THIS.somme(-1,1));
-                    voisins.add(THIS.somme(1,1));
-                    voisins.add(THIS.somme(1,-1));
-                    voisins.add(THIS.somme(-1,-1));
+                    ArrayList<Position> voisins = voisins(new Position(x, y));
                     int nbrVoidVoisins=0;
                     for(Position p : voisins){
-                        if(p.getX()>=0 && p.getY()>=0 && p.getX()<getSIZEX() && p.getY()<getSIZEY()){
-                            if(get(p).getType().equals(Cell.CellType.VOID)){
-                                nbrVoidVoisins++;
-                            }
-                        }
-                        else{
+                        if(get(p).getType().equals(Cell.CellType.VOID)){
                             nbrVoidVoisins++;
                         }
                     }
+                    nbrVoidVoisins=nbrVoidVoisins+(8-voisins.size());
                     if(nbrVoidVoisins==0){
                         set(x,y,new Cell(true, Cell.CellType.NORMAL));
                     }
@@ -318,4 +213,118 @@ public class Map {
             }
         }
     }
+
+    public ArrayList<Position> Astar(Position depart, Position arrive){
+        class Noeud extends Position{
+            public int heuristique=0;
+            public int cout=0;
+
+            public Noeud(int x, int y) {
+                super(x, y);
+            }
+
+            @Override
+            public String toString() {
+                return "Noeud{" +
+                        "heuristique=" + heuristique +
+                        ", cout=" + cout +
+                        ", " + super.toString() +
+                        '}';
+            }
+
+            @Override
+            public int Distance(Position pos) {
+                double d = Math.sqrt(Math.pow((pos.getX() - getX()), 2) + Math.pow((pos.getY() - getY()), 2));
+                return (int)d*10;
+            }
+
+            private int getScore(){
+                return cout+heuristique;
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                return super.equals(obj);
+            }
+        }
+
+        ArrayList<ArrayList<Noeud>> map = new ArrayList<>();
+        for (int i = 0; i < SIZEY; i++) {
+            ArrayList<Noeud> noeudArrayList = new ArrayList<>();
+            for (int j = 0; j < SIZEX; j++) {
+                noeudArrayList.add(new Noeud(j,i));
+            }
+            map.add(noeudArrayList);
+        }
+
+        HashMap<Noeud,Noeud> cameFrom = new HashMap<>();
+        ArrayList<Noeud> closedList = new ArrayList<>();
+        PriorityQueue<Noeud> openList = new PriorityQueue((o1, o2) -> {
+            Noeud n1 = (Noeud)o1;
+            Noeud n2= (Noeud)o2;
+            if(n1.getScore() < n2.getScore()){
+                return -1;
+            }
+            else if(n1.getScore() == n2.getScore()){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        });
+
+        openList.add(map.get(depart.getY()).get(depart.getX()));
+
+        while(openList.size()>0){
+            System.out.println(openList.size());
+            Noeud u = openList.poll();
+            if(u.getX()==arrive.getX() && u.getY()==arrive.getY()) {
+                ArrayList<Position> chemin = new ArrayList<>();
+                chemin.add(new Position(u.getX(),u.getY()));
+                Noeud current = u;
+                while (cameFrom.containsKey(current)){
+                    current = cameFrom.get(current);
+                    chemin.add(new Position(current.getX(),current.getY()));
+                }
+                return chemin;
+            }
+
+            ArrayList<Noeud> voisins = new ArrayList<>();
+            if(u.getX()>0){
+                if(get(u.getX()-1,u.getY()).isAccesible()){
+                    voisins.add(map.get(u.getY()).get(u.getX()-1));
+                }
+            }
+            if(u.getX()<SIZEX-1){
+                if(get(u.getX()+1,u.getY()).isAccesible()) {
+                    voisins.add(map.get(u.getY()).get(u.getX() + 1));
+                }
+            }
+            if(u.getY()>0){
+                if(get(u.getX(),u.getY()-1).isAccesible()) {
+                    voisins.add(map.get(u.getY() - 1).get(u.getX()));
+                }
+            }
+            if(u.getY()<SIZEY-1){
+                if(get(u.getX(),u.getY()+1).isAccesible()) {
+                    voisins.add(map.get(u.getY() + 1).get(u.getX()));
+                }
+            }
+
+
+            for(Noeud n : voisins){
+                if (!(closedList.contains(n) || (openList.contains(n) && n.cout<u.cout))){
+                    cameFrom.put(n,u);
+                    openList.remove(n);
+                    n.cout = u.cout + 1;
+                    n.heuristique = n.cout + n.Distance(arrive);
+                    openList.add(n);
+                }
+            }
+            closedList.add(u);
+        }
+        System.out.println("Aucun chemin entre: "+depart + " et " + arrive);
+        return new ArrayList<>();
+    }
+
 }

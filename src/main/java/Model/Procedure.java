@@ -29,6 +29,14 @@ public class Procedure {
         return new Position(posX, posY);
     }
 
+    public static Position getAccesibleRandomPosition(Map m) {
+        Position pos = getRandomPosition(m.SIZEX,m.SIZEY);
+        while(!m.get(pos.getX(),pos.getY()).isAccesible()){
+            pos = getRandomPosition(m.SIZEX,m.SIZEY);
+        }
+        return pos;
+    }
+
     /**
      * Renvoit une Position aleatoire dans la Room r.
      *

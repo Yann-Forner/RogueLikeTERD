@@ -1,6 +1,7 @@
 import Model.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Main {
 
@@ -17,11 +18,15 @@ public class Main {
         Procedure.setRandomRooms(myMap);
         Model.Procedure.setRandomMob(myMap);
 
-        //myMap.ligne(new Position(10,5),new Position(30,30));
-        //myMap.ligneV2(new Position(10,5),new Position(30,30));
-
         Affichage.map(myMap);
         myMap.RoomFusion();
         Affichage.map(myMap);
+        //Affichage.Rooms(myMap);
+
+        Position pos1=Procedure.getAccesibleRandomPosition(myMap);
+        Position pos2=Procedure.getAccesibleRandomPosition(myMap);
+
+        ArrayList<Position> astar = myMap.Astar(pos1,pos2);
+        Affichage.Path(myMap,astar);
     }
 }

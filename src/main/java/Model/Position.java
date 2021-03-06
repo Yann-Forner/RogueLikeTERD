@@ -1,8 +1,8 @@
 package Model;
 
 public class Position {
-    private int x ;
-    private int y;
+    private final int x ;
+    private final int y;
 
     public Position(int x, int y) {
         this.x = x;
@@ -21,8 +21,8 @@ public class Position {
         return new Position(pos.getX(), pos.getY());
     }
 
-    public static int Distance(Position p1, Position p2){
-        return (int)Math.sqrt(Math.pow((p2.getX()- p1.getX()),2)+Math.pow((p2.getY()- p1.getY()),2));
+    public int Distance(Position pos){
+        return (int)Math.sqrt(Math.pow((pos.getX()- x),2)+Math.pow((pos.getY()- y),2));
     }
 
     public int getX() {
@@ -31,6 +31,15 @@ public class Position {
 
     public int getY() {
         return y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Position){
+            Position pos= (Position) obj;
+            return (x==pos.getX() && y==pos.getY());
+        }
+        return false;
     }
 
     @Override
