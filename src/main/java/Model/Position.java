@@ -9,20 +9,31 @@ public class Position {
         this.y = y;
     }
 
-    public Position somme(Position p){
-        return new Position(x+p.getX(),y+p.getY());
+    /**
+     * Renvoit la Position egale a ma somme de this et de la Position pos.
+     * @param pos Position
+     * @return Position
+     */
+    public Position somme(Position pos){
+        return new Position(x+pos.getX(),y+pos.getY());
     }
 
+    /**
+     * Renvoit la Position egale a ma somme de this.x + x et this.y + y.
+     * @param x int
+     * @param y int
+     * @return Position
+     */
     public Position somme(int x, int y) {
         return somme(new Position(x,y));
     }
 
-    public static Position copyOf(Position pos){
-        return new Position(pos.getX(), pos.getY());
-    }
-
-    public int Distance(Position pos){
-        return (int)Math.sqrt(Math.pow((pos.getX()- x),2)+Math.pow((pos.getY()- y),2));
+    /**
+     * Renvoit une copie de this.
+     * @return Position
+     */
+    public Position copyOf(){
+        return new Position(x,y);
     }
 
     public int getX() {

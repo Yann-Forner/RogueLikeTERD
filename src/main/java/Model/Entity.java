@@ -1,55 +1,40 @@
 package Model;
 
 public abstract class Entity {
+    protected Position position;
+    protected final Map map;
 
-    protected Position Position;
-
-    public Entity(Position position) {
-        this.Position = position;
+    public Entity(Map m,Position pos) {
+        position=pos;
+        map=m;
     }
 
     public Position getPosition() {
-        return Position;
-    }
-
-    protected void setPosition(Position position) {
-        this.Position = position;
-    }
-
-    /* Pour que ce soit moins chiant */
-    public int getPositionX() {
-        return Position.getX();
-    }
-
-    public int getPositionY() {
-        return Position.getY();
-    }
-
-    protected void setPositionX(int x) {
-        setPosition(new Position(x, getPosition().getY()));
-    }
-
-    protected void setPositionY(int y) {
-        setPosition(new Position(getPosition().getX(), y));
+        return position.copyOf();
     }
 
     public void move(Position pos) {
-        move(new Position(pos.getX(), pos.getY()));
+        Cell cell = map.get(pos);
+        if(cell.isAccesible()){
+            cell.setEntity(this);
+            map.get(position).setEntity(null);
+            position=pos;
+        }
     }
 
     public void moveLeft() {
-        move(new Position(getPositionX() - 1, getPositionY()));
+        move(position.somme(-1,0));
     }
 
     public void moveRight() {
-        move(new Position(getPositionX() + 1, getPositionY()));
+        move(position.somme(1,0));
     }
 
     public void moveUp() {
-        move(new Position(getPositionX(), getPositionY() - 1));
+        move(position.somme(0,-1));
     }
 
     public void moveDown() {
-        move(new Position(getPositionX(), getPositionY() + 1));
+        move(position.somme(0,1));
     }
 }

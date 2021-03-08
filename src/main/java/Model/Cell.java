@@ -2,10 +2,10 @@ package Model;
 
 public class Cell{
     public enum CellType {
-        BORDER, NORMAL, DOOR, PATH, VOID, ;
+        BORDER, NORMAL, PATH, VOID, CHEST, ;
     }
-    private final boolean isAccesible;
-    private final CellType type;
+    private boolean isAccesible;
+    private CellType type;
     private Entity Entity;
 
     public Cell(boolean isAccesible, CellType type) {
@@ -22,11 +22,16 @@ public class Cell{
         return type;
     }
 
-    public Model.Entity getEntity() {
+    public void updateCell(boolean isAccesible, CellType type){
+        this.isAccesible=isAccesible;
+        this.type=type;
+    }
+
+    public Entity getEntity() {
         return Entity;
     }
 
-    public void setEntity(Model.Entity entity) {
+    public void setEntity(Entity entity) {
         Entity = entity;
     }
 
@@ -46,8 +51,8 @@ public class Cell{
                 case BORDER -> {
                     return "\u001B[31m*";
                 }
-                case DOOR -> {
-                    return "\u001B[35m=";
+                case CHEST -> {
+                    return "\u001B[33m$";
                 }
                 default -> {
                     return "\u001B[31m ";
