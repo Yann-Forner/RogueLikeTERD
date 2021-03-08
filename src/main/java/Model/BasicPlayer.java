@@ -8,6 +8,6 @@ public class BasicPlayer extends Entity {
 
     @Override
     public String toString() {
-        return "\u001B[32m@";
+        return Affichage.GREEN+'@';
     }
 }

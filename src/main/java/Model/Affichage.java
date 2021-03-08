@@ -5,12 +5,51 @@ import Model.*;
 import java.util.ArrayList;
 
 public class Affichage {
+    public static final String RESET = "\u001B[0m";
+    public static final String BOLD = "\u001B[1m";
+    public static final String FAINT = "\u001B[2m";
+    public static final String ITALIC = "\u001B[3m";
+    public static final String UNDERLINE = "\u001B[4m";
+    public static final String BLINK = "\u001B[6m";
+    public static final String REVERSE = "\u001B[7m";
+    public static final String CROSSED = "\u001B[9m";
+    public static final String DOUBLE_UNDERLINE = "\u001B[21m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String GREY = "\u001B[37m";
+    public static final String BLACK_BACKGROUND = "\u001B[40m";
+    public static final String RED_BACKGROUND = "\u001B[41m";
+    public static final String GREEN_BACKGROUND = "\u001B[42m";
+    public static final String YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String BLUE_BACKGROUND = "\u001B[44m";
+    public static final String PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String CYAN_BACKGROUND = "\u001B[46m";
+    public static final String GREY_BACKGROUND = "\u001B[47m";
+    public static final String FRAMED = "\u001B[51m";
+    public static final String BRIGTH_BLACK = "\u001B[90m";
+    public static final String BRIGTH_RED = "\u001B[91m";
+    public static final String BRIGTH_GREEN = "\u001B[92m";
+    public static final String BRIGTH_YELLOW = "\u001B[93m";
+    public static final String BRIGTH_BLUE = "\u001B[94m";
+    public static final String BRIGTH_PURPLE = "\u001B[95m";
+    public static final String BRIGTH_CYAN = "\u001B[96m";
+    public static final String BRIGTH_GREY = "\u001B[97m";
+    public static final String BRIGTH_BLACK_BACKGROUND = "\u001B[100m";
+    public static final String BRIGTH_RED_BACKGROUND = "\u001B[101m";
+    public static final String BRIGTH_GREEN_BACKGROUND = "\u001B[102m";
+    public static final String BRIGTH_YELLOW_BACKGROUND = "\u001B[103m";
+    public static final String BRIGTH_BLUE_BACKGROUND = "\u001B[104m";
+    public static final String BRIGTH_PURPLE_BACKGROUND = "\u001B[105m";
+    public static final String BRIGTH_CYAN_BACKGROUND = "\u001B[106m";
+    public static final String BRIGTH_GREY_BACKGROUND = "\u001B[107m";
 
     public static void map(Map map){
         System.out.println(map);
-        for (Room r: map.getRooms()) {
-            //System.out.println(r);
-        }
     }
 
     public static void voisins(Position p, Map map){
@@ -60,7 +99,7 @@ public class Affichage {
                 map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
-                        return "\u001B[0mD";
+                        return RESET+'D';
                     }
                 });
             }
@@ -68,7 +107,7 @@ public class Affichage {
                 map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
-                        return "\u001B[0mA";
+                        return RESET+'A';
                     }
                 });
             }
@@ -76,7 +115,7 @@ public class Affichage {
                 map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
-                        return "\u001B[0m°";
+                        return RESET+'°';
                     }
                 });
             }

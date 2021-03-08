@@ -40,22 +40,22 @@ public class Cell{
         if(this.Entity == null) {
             switch (type){
                 case NORMAL -> {
-                    return "\u001B[37m.";
+                    return Affichage.GREY+'.';
                 }
                 case VOID -> {
-                    return "\u001B[30m.";
+                    return Affichage.BLACK+'.';
                 }
                 case PATH -> {
-                    return "\u001B[34m*";
+                    return Affichage.BLUE+'*';
                 }
                 case BORDER -> {
-                    return "\u001B[31m*";
+                    return Affichage.RESET+Affichage.GREY_BACKGROUND+Affichage.CROSSED+" |";
                 }
                 case CHEST -> {
-                    return "\u001B[33m$";
+                    return Affichage.YELLOW+'$';
                 }
                 default -> {
-                    return "\u001B[31m ";
+                    return Affichage.RED+'.';
                 }
             }
         }

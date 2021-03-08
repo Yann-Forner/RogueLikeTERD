@@ -37,7 +37,7 @@ public class Map {
         StringBuilder sb = new StringBuilder();
         sb.append("    ");
         for (int x = 0; x < this.SIZEX; x++) {
-            sb.append("\u001B[0m").append(x);
+            sb.append(Affichage.RESET).append(x);
             if (x < 10) {
                 sb.append("  ");
             } else {
@@ -45,14 +45,20 @@ public class Map {
             }
         }
         sb.append("\n");
-        for (int y = 0; y < this.SIZEY; y++) {
+        for (int y = 0; y < SIZEY; y++) {
             if (y < 10) {
-                sb.append("\u001B[0m").append(" ").append(y).append("  ");
+                sb.append(Affichage.RESET).append(" ").append(y).append(" ");
             } else {
-                sb.append("\u001B[0m").append(y).append("  ");
+                sb.append(Affichage.RESET).append(y).append(" ");
             }
-            for (int x = 0; x < this.SIZEX; x++) {
-                sb.append(this.get(x, y)).append("  ");
+            for (int x = 0; x < SIZEX; x++) {
+                Cell cell = get(x, y);
+                if(cell.getType().equals(Cell.CellType.BORDER)){
+                    sb.append(get(x, y)).append(" ");
+                }
+                else{
+                    sb.append(Affichage.RESET).append(" ").append(get(x, y)).append(" ");
+                }
             }
             sb.append("\n");
         }
