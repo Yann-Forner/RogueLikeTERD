@@ -123,5 +123,32 @@ public class Affichage {
         Affichage.map(map);
     }
 
+    public static void Palette(){
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                int code = i * 16 + j;
+                String space="";
+                for (int k = 0; k < 3-String.valueOf(code).length(); k++) {
+                    space=space+' ';
+                }
+                System.out.print("\u001b[38;5;" + code + "m " + space + code);
+            }
+            System.out.println(Affichage.RESET+"\n");
+        }
+        System.out.println("\n");
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                int code = i * 16 + j;
+                String space="";
+                for (int k = 0; k < 3-String.valueOf(code).length(); k++) {
+                    space=space+' ';
+                }
+                System.out.print("\u001b[48;5;" + code + "m " + space + code);
+            }
+            System.out.println(Affichage.RESET+"\n");
+        }
+        System.out.println(Affichage.RESET+"\n");
+    }
+
 }
 

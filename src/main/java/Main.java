@@ -44,7 +44,7 @@ public class Main {
         BasicPlayer player = new BasicPlayer(myMap,Procedure.getAccesibleRandomPosition(myMap));
         myMap.addEntity(player);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        boolean Game = false;
+        boolean Game = true;
         while(Game){
             Affichage.map(myMap);
             System.out.print("Enter your key: ");
@@ -67,6 +67,5 @@ public class Main {
                     System.out.println("Wrong key");
             }
         }
-
     }
 }
