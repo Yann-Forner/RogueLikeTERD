@@ -5,6 +5,7 @@ import Model.*;
 import java.util.ArrayList;
 
 public class Affichage {
+    public static final String CLEAR = "\033[2J";
     public static final String RESET = "\u001B[0m";
     public static final String BOLD = "\u001B[1m";
     public static final String FAINT = "\u001B[2m";
@@ -48,30 +49,35 @@ public class Affichage {
     public static final String BRIGTH_CYAN_BACKGROUND = "\u001B[106m";
     public static final String BRIGTH_GREY_BACKGROUND = "\u001B[107m";
 
-    public static void map(Map map){
-        System.out.println(map);
-    }
-
-    public static void voisins(Position p, Map map){
-        Map m = new Map(3,3);
-        ArrayList<Position> voisins=new ArrayList<>();
-        voisins.add(p.somme(-1,-1));
-        voisins.add(p.somme(0,-1));
-        voisins.add(p.somme(1,-1));
-        voisins.add(p.somme(-1,0));
-        voisins.add(p);
-        voisins.add(p.somme(1,0));
-        voisins.add(p.somme(-1,1));
-        voisins.add(p.somme(0,1));
-        voisins.add(p.somme(1,1));
-        for (int i = 0; i < voisins.size(); i++) {
-            m.set(i%3,i/3,map.get(voisins.get(i)));
+    public static String map(Map map){
+        StringBuilder sb = new StringBuilder();
+        sb.append("    ").append(Affichage.RESET);
+        for (int x = 0; x < map.SIZEX; x++) {
+            sb.append(x);
+            if (x < 10) {
+                sb.append("  ");
+            } else {
+                sb.append(" ");
+            }
         }
-        System.out.println(p);
-        System.out.println(m);
+        sb.append("\n");
+        for (int y = 0; y < map.SIZEY; y++) {
+            sb.append(Affichage.RESET);
+            if (y < 10) {
+                sb.append(" ").append(y).append(" ");
+            } else {
+                sb.append(y).append(" ");
+            }
+            //MAP
+            for (int x = 0; x < map.SIZEX; x++) {
+                sb.append(" ").append(map.get(x, y)).append(" ");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
-    public static void Rooms(Map map){
+    public static void Rooms_Color(Map map){
         int acc=0;
         for (int k = 0; k < map.getRooms().size(); k++) {
             Room r = map.getRooms().get(k);
@@ -99,7 +105,7 @@ public class Affichage {
                 map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
-                        return RESET+'D';
+                        return Affichage.BRIGTH_YELLOW+"A";
                     }
                 });
             }
@@ -107,7 +113,7 @@ public class Affichage {
                 map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
-                        return RESET+'A';
+                        return Affichage.BRIGTH_YELLOW+"D";
                     }
                 });
             }
@@ -115,7 +121,7 @@ public class Affichage {
                 map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
-                        return RESET+'°';
+                        return Affichage.BRIGTH_PURPLE+"X";
                     }
                 });
             }

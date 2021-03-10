@@ -40,19 +40,19 @@ public class Cell{
         if(this.Entity == null) {
             switch (type){
                 case NORMAL -> {
-                    return Affichage.GREY+'.';
+                    return Affichage.GREY+".";
                 }
                 case VOID -> {
-                    return Affichage.BLACK+'.';
+                    return Affichage.BLACK+".";
                 }
                 case PATH -> {
-                    return Affichage.BLUE+'*';
+                    return Affichage.BOLD+Affichage.BLUE+"*"+Affichage.RESET;
                 }
                 case BORDER -> {
-                    return Affichage.RESET+Affichage.GREY_BACKGROUND+Affichage.CROSSED+" |";
+                    return Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET;
                 }
                 case CHEST -> {
-                    return Affichage.YELLOW+'$';
+                    return "\u001b[38;5;220m"+'$';
                 }
                 default -> {
                     return Affichage.RED+'.';

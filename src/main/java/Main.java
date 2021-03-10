@@ -21,11 +21,11 @@ public class Main {
         //myMap.setPath();
 
         Procedure.setRandomRooms(myMap);
-        Affichage.map(myMap);
+        System.out.println(myMap);
         myMap.RoomFusion();
         Procedure.setRandomMob(myMap);
         Procedure.setRandomChest(myMap,3);
-        Affichage.map(myMap);
+        System.out.println(myMap);
 
         //Affichage.Rooms(myMap);
 
@@ -46,8 +46,10 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean Game = true;
         while(Game){
-            Affichage.map(myMap);
-            System.out.print("Enter your key: ");
+            System.out.print(Affichage.CLEAR);
+            System.out.println(myMap);
+            System.out.println("\n\n\n\n\n\n\n\n\n\n");
+            System.out.print(Affichage.RESET+"Enter your key: ");
             switch (reader.readLine()){
                 case "z" :
                     player.moveUp();

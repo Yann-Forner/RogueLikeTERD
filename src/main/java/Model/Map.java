@@ -34,35 +34,7 @@ public class Map {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("    ");
-        for (int x = 0; x < this.SIZEX; x++) {
-            sb.append(Affichage.RESET).append(x);
-            if (x < 10) {
-                sb.append("  ");
-            } else {
-                sb.append(" ");
-            }
-        }
-        sb.append("\n");
-        for (int y = 0; y < SIZEY; y++) {
-            if (y < 10) {
-                sb.append(Affichage.RESET).append(" ").append(y).append(" ");
-            } else {
-                sb.append(Affichage.RESET).append(y).append(" ");
-            }
-            for (int x = 0; x < SIZEX; x++) {
-                Cell cell = get(x, y);
-                if(cell.getType().equals(Cell.CellType.BORDER)){
-                    sb.append(get(x, y)).append(" ");
-                }
-                else{
-                    sb.append(Affichage.RESET).append(" ").append(get(x, y)).append(" ");
-                }
-            }
-            sb.append("\n");
-        }
-        return sb.toString();
+        return Affichage.map(this);
     }
 
     public void addRoom(Room r, Position p) {
@@ -240,6 +212,24 @@ public class Map {
                     current=current.cameFrom;
                     chemin.add(current.copyOf());
                 }
+
+                for(Noeud n : closedList){
+                    set(n.getX(),n.getY(),new Cell(true, Cell.CellType.PATH){
+                        @Override
+                        public String toString() {
+                            return Affichage.BRIGTH_BLUE+"X";
+                        }
+                    });
+                }
+                for(Noeud n : openList){
+                    set(n.getX(),n.getY(),new Cell(true, Cell.CellType.PATH){
+                        @Override
+                        public String toString() {
+                            return Affichage.BRIGTH_GREEN+"X";
+                        }
+                    });
+                }
+
                 return chemin;
             }
 
