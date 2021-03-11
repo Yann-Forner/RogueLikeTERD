@@ -8,6 +8,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Etage {
+
+    public final static int nbrMaxRooms = 8;
     protected int SIZEX;
     protected int SIZEY;
     protected ArrayList<ArrayList<Cell>> Cells;
@@ -112,8 +114,6 @@ public class Etage {
             get(p).updateCell(true, Cell.CellType.NORMAL);
         }
     }
-
-    //TODO a optimiser c'est affreux
     public void RoomFusion(){
         //Trace du chemin
         for (int i = 0; i < getRooms().size()-1; i++) {
@@ -139,26 +139,21 @@ public class Etage {
                 }
             }
         }
-
         //Suppression des murs inutiles
         for (int y = 0; y < getSIZEY(); y++) {
             for (int x = 0; x < getSIZEX(); x++) {
                 Position pos=new Position(x, y);
-                if(get(pos).getType().equals(Cell.CellType.BORDER)){
-                    ArrayList<Position> voisins = pos.voisins(this);
-                    int nbrVoidVoisins=0;
-                    for(Position p : voisins){
-                        if(get(p).getType().equals(Cell.CellType.VOID)){
-                            nbrVoidVoisins++;
-                        }
-                    }
-                    nbrVoidVoisins=nbrVoidVoisins+(8-voisins.size());
-                    if(nbrVoidVoisins==0){
-                        get(x,y).updateCell(true, Cell.CellType.NORMAL);
-                    }
-                }
+                ArrayList<Position> voisins = pos.voisins(this);
+                if ( voisins.size() > 6 && isBarrer(voisins) )get(pos).updateCell(true, Cell.CellType.NORMAL);
             }
         }
+    }
+    public boolean isBarrer(ArrayList<Position> voisins){
+        for (Position p: voisins
+             ) {
+            if (this.get(p).getType() == Cell.CellType.VOID)return false;
+        }
+        return true;
     }
 
     public ArrayList<Position> Astar(Position depart, Position arrive){
@@ -222,4 +217,5 @@ public class Etage {
         }
         return new ArrayList<>();
     }
+
 }

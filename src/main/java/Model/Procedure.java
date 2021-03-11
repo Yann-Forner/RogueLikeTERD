@@ -75,12 +75,12 @@ public class Procedure {
             Position pos = getRandomPosition(etage.getSIZEX()-1 - r.getSIZEX(), etage.getSIZEY()-1 - r.getSIZEY());
             pos=new Position(pos.getX()+1, pos.getY()+1);
             try {
-                Collections.sort(etage.getRooms());
                 etage.addRoom(r, pos);
                 r.setAbsolutePos(pos);
                 nbrRooms++;
             } catch (CollisionRoom e) {}
         }
+        Collections.sort(etage.getRooms());
     }
 
     /**
