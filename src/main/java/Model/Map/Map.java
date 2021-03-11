@@ -6,6 +6,6 @@ public class Map {
     ArrayList<Etage> etages = new ArrayList<>();
 
     public Map(){
-
+        //djkjzognoz
     }
 }
