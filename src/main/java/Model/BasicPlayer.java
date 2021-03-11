@@ -1,8 +1,10 @@
 package Model;
 
+import Model.Map.Map;
+
 public class BasicPlayer extends Entity {
 
-    public BasicPlayer(Map map,Position position) {
+    public BasicPlayer(Map map, Position position) {
         super(map,position);
     }
 

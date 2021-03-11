@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Map.Map;
+
 public abstract class Entity {
     protected Position position;
     protected final Map map;

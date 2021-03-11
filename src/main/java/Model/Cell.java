@@ -11,7 +11,7 @@ public class Cell{
     public Cell(boolean isAccesible, CellType type) {
         this.isAccesible = isAccesible;
         this.type = type;
-        this.Entity = null;
+        Entity = null;
     }
 
     public boolean isAccesible() {
@@ -37,7 +37,7 @@ public class Cell{
 
     @Override
     public String toString() {
-        if(this.Entity == null) {
+        if(Entity == null) {
             switch (type){
                 case NORMAL -> {
                     return Affichage.GREY+".";
@@ -60,7 +60,7 @@ public class Cell{
             }
         }
         else {
-            return this.Entity.toString();
+            return Entity.toString();
         }
     }
 }

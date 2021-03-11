@@ -1,6 +1,6 @@
 package Exceptions;
 
-import Model.Room;
+import Model.Map.Room;
 
 public class CollisionRoom extends RuntimeException{
     Room r;

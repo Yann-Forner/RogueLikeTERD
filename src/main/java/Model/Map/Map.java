@@ -1,7 +1,8 @@
-package Model;
+package Model.Map;
 
 
 import Exceptions.CollisionRoom;
+import Model.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -168,7 +169,6 @@ public class Map {
                     }
                     nbrVoidVoisins=nbrVoidVoisins+(8-voisins.size());
                     if(nbrVoidVoisins==0){
-                        //set(x,y,new Cell(true, Cell.CellType.NORMAL));
                         get(x,y).updateCell(true, Cell.CellType.NORMAL);
                     }
                 }

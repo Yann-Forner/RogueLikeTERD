@@ -1,6 +1,8 @@
 package Model;
 
 import Exceptions.CollisionRoom;
+import Model.Map.Map;
+import Model.Map.Room;
 
 import java.util.Collections;
 import java.util.Random;
@@ -36,10 +38,10 @@ public class Procedure {
      * @return Position
      */
     public static Position getAccesibleRandomPosition(Map m) {
-        Position pos = getRandomPosition(m.SIZEX,m.SIZEY);
+        Position pos = getRandomPosition(m.getSIZEX(),m.getSIZEY());
         Cell c = m.get(pos.getX(),pos.getY());
         while(!c.isAccesible() && c.getEntity()==null){
-            pos = getRandomPosition(m.SIZEX,m.SIZEY);
+            pos = getRandomPosition(m.getSIZEX(),m.getSIZEY());
             c = m.get(pos.getX(),pos.getY());
         }
         return pos;
@@ -70,7 +72,8 @@ public class Procedure {
         while (elapsedTime < 2000 && nbrRooms < Map.nbrMaxRooms) {
             elapsedTime = System.currentTimeMillis() - startTime;
             Room r = getRandomRoom();
-            Position pos = getRandomPosition(map.getSIZEX() - r.getSIZEX(), map.getSIZEY() - r.getSIZEY());
+            Position pos = getRandomPosition(map.getSIZEX()-1 - r.getSIZEX(), map.getSIZEY()-1 - r.getSIZEY());
+            pos=new Position(pos.getX()+1, pos.getY()+1);
             try {
                 Collections.sort(map.getRooms());
                 map.addRoom(r, pos);
@@ -118,7 +121,7 @@ public class Procedure {
      */
     public static void setRandomChest(Map map,int nbr){
         for (int i = 0; i < nbr; i++) {
-            map.get(getAccesibleRandomPosition(map)).updateCell(true, Cell.CellType.CHEST);
+            map.get(getAccesibleRandomPosition(map)).updateCell(false, Cell.CellType.CHEST);
         }
     }
 
