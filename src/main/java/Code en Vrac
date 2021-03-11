@@ -1,0 +1,402 @@
+//TODO c'est moche tkt (les angles marchent pas encore parfaitement
+    public void FustionRoom(){
+        ArrayList<ArrayList<Cell>> arrayListCell = new ArrayList<>();
+        for (int i = 0; i < SIZEY; i++) {
+            ArrayList<Cell> line= new ArrayList<>();
+            for (int j = 0; j < SIZEX; j++) {
+                line.add(get(j,i));
+            }
+            arrayListCell.add(line);
+        }
+
+        for (int y = 0; y < SIZEY; y++) {
+            for (int x = 0; x < SIZEX; x++) {
+                Position THIS = new Position(x,y);
+                Position UP = THIS.somme(0,-1);
+                Position DOWN = THIS.somme(0,1);
+                Position RIGHT = THIS.somme(1,0);
+                Position LEFT = THIS.somme(-1,0);
+                Position DOWNofLEFT = THIS.somme(-1,1);
+                Position DOWNofRIGHT = THIS.somme(1,1);
+                Position UPofRIGHT = THIS.somme(1,-1);
+                Position UPofLEFT = THIS.somme(-1,-1);
+
+                if(x==0){
+                    LEFT = THIS.somme(0,0);
+                    DOWNofLEFT = THIS.somme(1,1);
+                    UPofLEFT = LEFT.somme(1,-1);
+                }
+                if(x==(SIZEX-1)){
+                    RIGHT = THIS.somme(0,0);
+                    DOWNofRIGHT = THIS.somme(-1,1);
+                    UPofRIGHT = RIGHT.somme(-1,-1);
+                }
+                if(y==0){
+                    UP = THIS.somme(0,0);
+                    if(x==0){
+                        UPofLEFT = LEFT.somme(1,0);
+                        UPofRIGHT = RIGHT.somme(2,0);
+                    }
+                    else if(x==(SIZEX-1)){
+                        UPofRIGHT = RIGHT.somme(-1,0);
+                        UPofLEFT = LEFT.somme(-2,0);
+                    }
+                    else{
+                        UPofLEFT = LEFT.somme(-1,0);
+                        UPofRIGHT = RIGHT.somme(1,0);
+                    }
+                }
+                if(y==(SIZEY-1)){
+                    DOWN = THIS.somme(0,0);
+                    if(x==0){
+                        DOWNofLEFT = THIS.somme(1,0);
+                        DOWNofRIGHT = THIS.somme(2,0);
+                    }
+                    else if(x==(SIZEX-1)){
+                        DOWNofLEFT = THIS.somme(-1,0);
+                        DOWNofRIGHT = THIS.somme(-2,1);
+                    }
+                    else{
+                        DOWNofLEFT = THIS.somme(-1,0);
+                        DOWNofRIGHT = THIS.somme(1,0);
+                    }
+                }
+
+                if(isWall(THIS) && (canPath(THIS,UP,DOWN,LEFT,RIGHT,UPofLEFT,UPofRIGHT,DOWNofLEFT,DOWNofRIGHT))){
+                    set(arrayListCell,new Position(THIS.getY(), THIS.getX()),new Cell(true, Cell.CellType.NORMAL));
+                }
+            }
+        }
+        Cells=arrayListCell;
+    }
+
+    private boolean isWall(Position pos){
+        return (this.get(pos).getType().equals(Cell.CellType.BORDER) || this.get(pos).getType().equals(Cell.CellType.DOOR) || this.get(pos).getType().equals(Cell.CellType.ANGLE));
+    }
+
+    private boolean canPath(Position THIS, Position... pos){
+        int nbrMursVoisins=0;
+        int nbrMursVoisinsAngle=0;
+        for (Position p : pos){
+            if(isWall(p) && get(THIS).getType() != Cell.CellType.ANGLE && p.getX()>0 && p.getX()<SIZEX && p.getY()>0 && p.getY()<SIZEY) {
+                nbrMursVoisins++;
+            }
+            if(get(p).getType().equals(Cell.CellType.ANGLE)){
+                nbrMursVoisinsAngle++;
+            }
+        }
+        return nbrMursVoisinsAngle < 2 && nbrMursVoisins > 4;
+    }
+
+    public static Room Carte(Room map){
+        System.out.println("ok");
+        if(map.getSIZEX()>5){
+            Position absA=Position.copyOf(map.getAbsolutePos());
+            Position absB=new Position(absA.getX()+map.getSIZEX()/2,absA.getY());
+            Position absC=new Position(absA.getX(),absA.getY()+map.getSIZEY()/2);
+            Position absD=new Position(absA.getX()+map.getSIZEX()/2,absA.getY()+map.getSIZEY()/2);
+
+            Room A = new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            A.setAbsolutePos(absA);
+
+            Room B=new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            B.setAbsolutePos(absB);
+
+            Room C=new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            C.setAbsolutePos(absC);
+
+            Room D=new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            D.setAbsolutePos(absD);
+
+            Room childA=Carte(A);
+            Room childB=Carte(B);
+            Room childC=Carte(C);
+            Room childD=Carte(D);
+            map.Rooms.add(childA);
+            map.Rooms.addAll(childA.Rooms);
+            map.Rooms.add(childB);
+            map.Rooms.addAll(childB.Rooms);
+            map.Rooms.add(childC);
+            map.Rooms.addAll(childC.Rooms);
+            map.Rooms.add(childD);
+            map.Rooms.addAll(childD.Rooms);
+        }
+        return map;
+    }
+
+    public void PathMaker(){
+        for (int i = 0; i < Rooms.size(); i++) {
+            Path(i);
+        }
+    }
+
+    public void Path(int indexFrom){
+        Position PointMin = null;
+        int RoomPointMin = 0;
+        int DistanceMin=Integer.MAX_VALUE;
+        Position RoomFrom = Rooms.get(indexFrom).getDoors().get(0);
+        for (int i = 0; i < Rooms.size(); i++) {
+            if(i!= indexFrom){
+                ArrayList<Position> Doors = Rooms.get(i).getDoors();
+                for (int j = 0; j < Doors.size(); j++) {
+                    int Distance = Position.Distance(RoomFrom, Doors.get(j));
+                    if(Distance<DistanceMin){
+                        DistanceMin=Distance;
+                        PointMin=Doors.get(j);
+                        RoomPointMin=i;
+                    }
+                }
+            }
+        }
+        Position From= RoomFrom;
+        Position To = PointMin;
+        Rooms.get(RoomPointMin).getDoors().remove(PointMin);
+        Rooms.get(indexFrom).getDoors().remove(0);
+        ligne(From,To);
+    }
+
+    public void ligne(Position pos1, Position pos2) {
+            //TODO svp quelqu'un peut me dire pourquoi il faut inverser ?
+            Position p1 = new Position(pos1.getY(), pos1.getX());
+            Position p2 = new Position(pos2.getY(), pos2.getX());
+            ArrayList<Position> chemin = new ArrayList<>();
+            chemin.add(p1);
+            Position lastPos = chemin.get(chemin.size() - 1);
+            while (lastPos.getX() != p2.getX()) {
+                if (lastPos.getX() > p2.getX()) {
+                    chemin.add(new Position(lastPos.getX() - 1, lastPos.getY()));
+                }
+                else if (lastPos.getX() < p2.getX()) {
+                    chemin.add(new Position(lastPos.getX() + 1, lastPos.getY()));
+                }
+                lastPos = chemin.get(chemin.size() - 1);
+            }
+            while (lastPos.getY() != p2.getY()) {
+                lastPos = chemin.get(chemin.size() - 1);
+                if (lastPos.getY() > p2.getY()) {
+                    chemin.add(new Position(lastPos.getX(), lastPos.getY() - 1));
+                }
+                else if (lastPos.getY() < p2.getY()) {
+                    chemin.add(new Position(lastPos.getX(), lastPos.getY() + 1));
+                }
+            }
+            for (Position p : chemin) {
+                set(p, new Cell(true, Cell.CellType.PATH));
+            }
+        }
+
+    private void murLigne(Position pos){
+        Position THIS = new Position(pos.getX(),pos.getY());
+        ArrayList<Position> murs = new ArrayList<>();
+        murs.add(THIS.somme(0,-1));
+        murs.add(THIS.somme(0,1));
+        murs.add(THIS.somme(1,0));
+        murs.add(THIS.somme(-1,0));
+        murs.add(THIS.somme(-1,1));
+        murs.add(THIS.somme(1,1));
+        murs.add(THIS.somme(1,-1));
+        murs.add(THIS.somme(-1,-1));
+        System.out.println(murs);
+        for(Position p : murs){
+            if(get(p).getType().equals(Cell.CellType.VOID)){
+                set(p, new Cell(false, Cell.CellType.BORDER));
+            }
+            else{
+                System.out.println(get(p).getType());
+            }
+        }
+        set(THIS, new Cell(true, Cell.CellType.NORMAL));
+    }
+
+}
+
+
+    public ArrayList<ArrayList<Position>> adjacents(){
+        ArrayList<ArrayList<Position>> adj=new ArrayList<>();
+        for (int y = 0; y < getSIZEY(); y++) {
+            for (int x = 0; x < getSIZEX(); x++) {
+                ArrayList<Position> voisins=new ArrayList<>();
+                Position THIS = new Position(x,y);
+                if(get(THIS).isAccesible()){
+                    voisins.add(THIS.somme(0,-1));
+                    voisins.add(THIS.somme(0,1));
+                    voisins.add(THIS.somme(1,0));
+                    voisins.add(THIS.somme(-1,0));
+                    voisins.add(THIS.somme(-1,1));
+                    voisins.add(THIS.somme(1,1));
+                    voisins.add(THIS.somme(1,-1));
+                    voisins.add(THIS.somme(-1,-1));
+                    voisins=new ArrayList<>(voisins.stream().filter(p -> (p.getX()>=0 && p.getY()>=0 && p.getX()<getSIZEX() && p.getY()<getSIZEY() && get(p).isAccesible())).collect(Collectors.toList()));
+                }
+                adj.add(voisins);
+            }
+        }
+        return adj;
+    }
+
+            /*
+            for(Room r : myMap.getRooms()){
+                for (int i = r.getAbsolutePos().getY(); i < r.getAbsolutePos().getY()+r.getSIZEY(); i++) {
+                    for (int j = r.getAbsolutePos().getX(); j < r.getAbsolutePos().getX()+r.getSIZEX(); j++) {
+                        myMap.set(i,j,new Cell(true, Cell.CellType.PATH));
+                    }
+                }
+            }
+            new Model.Affichage(myMap);*/
+
+
+public boolean suppX(int x, int y) {
+        if (Math.abs(x) > Math.abs(y)) return true;
+        return false;
+    }
+
+    public boolean sameRoom(Position Init, Position Dest) {
+        return false;
+    }
+
+    public ArrayList cheminFind(Position posInit, Position posDest) {
+
+        int deltaX;
+        int deltaY;
+        Position pos = posInit;
+        int size;
+        size = 5;
+        ArrayList<Position> positionList = new ArrayList<>();
+
+        while (pos.getX() != posDest.getX() && pos.getY() != pos.getY()) {
+
+            if (sameRoom(pos, posDest)) {
+
+                deltaX = posDest.getX() - posInit.getX();
+                deltaY = posDest.getY() - posInit.getY();
+
+                while (deltaX != 0 && deltaY != 0) {
+                    if (deltaX > 0 && deltaY > 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX - size;
+                            pos = new Position(pos.getX() + size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY - size;
+                            pos = new Position(pos.getX(), pos.getY() + size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX > 0 && deltaY < 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX - size;
+                            pos = new Position(pos.getX() + size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY + size;
+                            pos = new Position(pos.getX(), pos.getY() - size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX < 0 && deltaY > 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX + size;
+                            pos = new Position(pos.getX() - size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY - size;
+                            pos = new Position(pos.getX(), pos.getY() + size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX < 0 && deltaY > 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX + size;
+                            pos = new Position(pos.getX() - size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY - size;
+                            pos = new Position(pos.getX(), pos.getY() + size);
+                            positionList.add(pos);
+                        }
+                    } else if (deltaX < 0 && deltaY < 0) {
+                        if (suppX(deltaX, deltaY)) {
+                            deltaX = deltaX + size;
+                            pos = new Position(pos.getX() - size, pos.getY());
+                            positionList.add(pos);
+                        } else {
+                            deltaY = deltaY + size;
+                            pos = new Position(pos.getX(), pos.getY() - size);
+                            positionList.add(pos);
+                        }
+
+                    }
+
+
+                }
+            }
+        }
+        return positionList;
+    }
+
+    public Map copyOf(){
+        Map map = new Map(SIZEX, SIZEY);
+        map.Cells=new ArrayList<>(Cells);
+        map.Rooms=new ArrayList<>(Rooms);
+        map.Entitys=new ArrayList<>(Entitys);
+        return map;
+    }
+
+
+        /*
+        private static void setRandomPorte(Room r) {
+            Position pos = getRandomPosition(r.getSIZEX(), r.getSIZEY());
+            Cell currentCell = r.get(pos.getX(), pos.getY());
+            while (currentCell.getType() != Cell.CellType.BORDER) {
+                pos = getRandomPosition(r.getSIZEX(), r.getSIZEY());
+                currentCell = r.get(pos.getX(), pos.getY());
+            }
+            r.set(pos.getX(), pos.getY(), new Cell(true, Cell.CellType.DOOR));
+            r.addDoors(pos);
+        }*/
+
+
+        /*
+        public static void setRandomPorte(int NbrPorteMax, Room r) {
+            int nbrPorte = rand.nextInt(NbrPorteMax - 1 + 1) + 1;
+            for (int i = 0; i < nbrPorte; i++) {
+                setRandomPorte(r);
+            }
+        }*/
+
+    public static void voisins(Position p, Map map){
+        Map m = new Map(3,3);
+        ArrayList<Position> voisins=new ArrayList<>();
+        voisins.add(p.somme(-1,-1));
+        voisins.add(p.somme(0,-1));
+        voisins.add(p.somme(1,-1));
+        voisins.add(p.somme(-1,0));
+        voisins.add(p);
+        voisins.add(p.somme(1,0));
+        voisins.add(p.somme(-1,1));
+        voisins.add(p.somme(0,1));
+        voisins.add(p.somme(1,1));
+        for (int i = 0; i < voisins.size(); i++) {
+            m.set(i%3,i/3,map.get(voisins.get(i)));
+        }
+        System.out.println(p);
+        System.out.println(m);
+    }
+
+
+
+                /*
+                for(Noeud n : closedList){
+                    set(n.getX(),n.getY(),new Cell(true, Cell.CellType.PATH){
+                        @Override
+                        public String toString() {
+                            return Affichage.BRIGTH_BLUE+"X";
+                        }
+                    });
+                }
+                for(Noeud n : openList){
+                    set(n.getX(),n.getY(),new Cell(true, Cell.CellType.PATH){
+                        @Override
+                        public String toString() {
+                            return Affichage.BRIGTH_GREEN+"X";
+                        }
+                    });
+                }*/
+
