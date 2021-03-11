@@ -2,7 +2,7 @@ package Model;
 
 public class Cell{
     public enum CellType {
-        BORDER, NORMAL, PATH, VOID, CHEST, ;
+        BORDER, NORMAL, PATH, VOID, CHEST, UP, DOWN, ;
     }
     private boolean isAccesible;
     private CellType type;
@@ -53,6 +53,12 @@ public class Cell{
                 }
                 case CHEST -> {
                     return "\u001b[38;5;220m"+'$';
+                }
+                case UP -> {
+                    return Affichage.BLUE+'^';
+                }
+                case DOWN -> {
+                    return Affichage.BLUE+'v';
                 }
                 default -> {
                     return Affichage.RED+'.';

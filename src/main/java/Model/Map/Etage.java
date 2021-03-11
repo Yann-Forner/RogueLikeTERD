@@ -8,8 +8,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Etage {
-
-    public final static int nbrMaxRooms = 8;
     protected int SIZEX;
     protected int SIZEY;
     protected ArrayList<ArrayList<Cell>> Cells;
@@ -141,7 +139,6 @@ public class Etage {
                 }
             }
         }
-        System.out.println(this);
 
         //Suppression des murs inutiles
         for (int y = 0; y < getSIZEY(); y++) {
@@ -225,5 +222,4 @@ public class Etage {
         }
         return new ArrayList<>();
     }
-
 }

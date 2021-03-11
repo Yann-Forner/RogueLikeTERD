@@ -4,7 +4,7 @@ import Model.Map.Etage;
 
 public abstract class Entity {
     protected Position position;
-    protected final Etage etage;
+    protected Etage etage;
 
     public Entity(Etage m, Position pos) {
         position=pos;
@@ -15,6 +15,10 @@ public abstract class Entity {
         return position.copyOf();
     }
 
+    public void setPosition(Position pos) {
+        position=pos;
+    }
+
     public void move(Position pos) {
         Cell cell = etage.get(pos);
         if(cell.isAccesible()){
@@ -22,6 +26,10 @@ public abstract class Entity {
             etage.get(position).setEntity(null);
             position=pos;
         }
+    }
+
+    public Etage getEtage(){
+        return etage;
     }
 
     public void moveLeft() {

@@ -65,11 +65,11 @@ public class Procedure {
      * Genere puis ajoute les Rooms generée proceduralement dans la Etage.
      * @param etage Etage
      */
-    public static void setRandomRooms(Etage etage) {
+    public static void setRandomRooms(Etage etage, int nbrMaxRooms) {
         int nbrRooms = 0;
         long startTime = System.currentTimeMillis();
         long elapsedTime = 0;
-        while (elapsedTime < 2000 && nbrRooms < Etage.nbrMaxRooms) {
+        while (elapsedTime < 2000 && nbrRooms < nbrMaxRooms) {
             elapsedTime = System.currentTimeMillis() - startTime;
             Room r = getRandomRoom();
             Position pos = getRandomPosition(etage.getSIZEX()-1 - r.getSIZEX(), etage.getSIZEY()-1 - r.getSIZEY());
@@ -125,4 +125,22 @@ public class Procedure {
         }
     }
 
+    /**
+     * Genere les escaliers aleatoirement dans un etage.
+     * @param etage Etage
+     */
+    public static void setRandomUPnDOWN(Etage etage) {
+        Position p1 = getAccesibleRandomPosition(etage);
+        Position p2 = getAccesibleRandomPosition(etage);
+        etage.get(p1).updateCell(true, Cell.CellType.UP);
+        etage.get(p2).updateCell(true, Cell.CellType.DOWN);
+    }
+
+    public static void BasicEtage(Etage etage){
+        Procedure.setRandomRooms(etage,8);
+        etage.RoomFusion();
+        Procedure.setRandomChest(etage,3);
+        Procedure.setRandomMob(etage);
+        Procedure.setRandomUPnDOWN(etage);
+    }
 }
