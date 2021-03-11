@@ -8,7 +8,13 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Procedure {
-    private final static Random rand = new Random();
+    private static final Random rand=new Random();
+
+    public static void setSeed(int... seed){
+        if(seed.length==1){
+            rand.setSeed(seed[0]);
+        }
+    }
 
     /**
      * Renvoit une Room generée proceduralement.

@@ -416,3 +416,23 @@ public boolean suppX(int x, int y) {
             get(randomPosition.getX(),randomPosition.getY()).updateCell(false, Cell.CellType.BORDER);
         }
     }
+
+        public static String Marchant(){
+            StringBuilder sb = new StringBuilder();
+            sb.append("                __-----_________________{]").append(Affichage.UNDERLINE).append("                                                  ").append(Affichage.RESET).append("\n");
+            sb.append("               {&&&&&&&#%%&#%&%&%&%&%#%&|]").append(Affichage.UNDERLINE).append(Affichage.BOLD).append("         MARCHANT                                 \\").append(Affichage.RESET).append("\n");
+            sb.append("                                        {]\n");
+            sb.append("                                       ╔═══════════════════════════════╗\n");
+            sb.append("                                       ║                               ║\n");
+            sb.append("                                       ║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("     \\/|").append(Affichage.RESET).append("                               ║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("    /").append(Affichage.RED).append("\"\"").append(Affichage.RESET).append(" ;,_").append(Affichage.RESET).append("               _____________║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("   oo _. ").append(Affichage.RESET).append("//").append("\u001b[38;5;94m").append("..___.._").append(Affichage.RESET).append("      |,------------║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("   `-' `").append(Affichage.RESET).append("//=============================║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("       `'\\          |").append(Affichage.RESET).append("    ||            ║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("         |//-----'\\ (").append(Affichage.RESET).append("    || ,d88b,     ║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("         //       |||").append(Affichage.RESET).append("    `|_888888     ║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("         \\\\_      |||").append(Affichage.RESET).append("       888888     ║                               ║\n");
+            sb.append("\u001b[38;5;94m").append("        '-\\/     '/_(").append(Affichage.RESET).append("       `Y88P'     ╚═══════════════════════════════╝\n");
+            return sb.toString();
+        }

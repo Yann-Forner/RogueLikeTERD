@@ -115,7 +115,6 @@ public class Affichage {
         System.out.println(Affichage.RESET+"\n");
     }
 
-
     public static final String CLEAR = "\033[2J";
     public static final String RESET = "\u001B[0m";
     public static final String BOLD = "\u001B[1m";
@@ -161,4 +160,5 @@ public class Affichage {
     public static final String BRIGTH_GREY_BACKGROUND = "\u001B[107m";
 
 }
+
 
