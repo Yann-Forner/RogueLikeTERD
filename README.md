@@ -5,3 +5,4 @@
 <b>FORNER Yann</b>  (Yann-Forner)  <br>
 <b>MASSE Gillian</b>  (GillianMASSE)
 
+<b>Attention : le jdk est en version 15 !</b>
