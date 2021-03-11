@@ -36,6 +36,10 @@ public class Position {
         return new Position(x,y);
     }
 
+    public double Distance(Position pos){
+        return Math.sqrt(Math.pow((pos.getX() - getX()), 2) + Math.pow((pos.getY() - getY()), 2));
+    }
+
     public int getX() {
         return x;
     }

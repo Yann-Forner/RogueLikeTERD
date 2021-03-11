@@ -154,6 +154,7 @@ public class Map {
             }
         }
 
+
         //Suppression des murs inutiles
         for (int y = 0; y < getSIZEY(); y++) {
             for (int x = 0; x < getSIZEX(); x++) {
@@ -177,26 +178,26 @@ public class Map {
 
     public ArrayList<Position> Astar(Position depart, Position arrive){
         class Noeud extends Position{
-            public int heuristique=0;
-            public int cout=0;
+            public double heuristique=0;
+            public double cout=0;
             public Noeud cameFrom=null;
 
             public Noeud(int x, int y) {
                 super(x, y);
             }
 
-            public int Distance(Position pos) {
-                double d = Math.sqrt(Math.pow((pos.getX() - getX()), 2) + Math.pow((pos.getY() - getY()), 2));
-                return (int)(d*10);
+            @Override
+            public double Distance(Position pos) {
+                return (int)(Distance(pos)*10);
             }
 
-            private int getScore(){
+            private double getScore(){
                 return cout+heuristique;
             }
         }
 
         ArrayList<Noeud> closedList = new ArrayList<>();
-        PriorityQueue<Noeud> openList = new PriorityQueue<>(Comparator.comparingInt(Noeud::getScore));
+        PriorityQueue<Noeud> openList = new PriorityQueue<>(Comparator.comparingDouble(Noeud::getScore));
 
         openList.add(new Noeud(depart.getX(),depart.getY()));
 
@@ -212,24 +213,6 @@ public class Map {
                     current=current.cameFrom;
                     chemin.add(current.copyOf());
                 }
-
-                for(Noeud n : closedList){
-                    set(n.getX(),n.getY(),new Cell(true, Cell.CellType.PATH){
-                        @Override
-                        public String toString() {
-                            return Affichage.BRIGTH_BLUE+"X";
-                        }
-                    });
-                }
-                for(Noeud n : openList){
-                    set(n.getX(),n.getY(),new Cell(true, Cell.CellType.PATH){
-                        @Override
-                        public String toString() {
-                            return Affichage.BRIGTH_GREEN+"X";
-                        }
-                    });
-                }
-
                 return chemin;
             }
 
