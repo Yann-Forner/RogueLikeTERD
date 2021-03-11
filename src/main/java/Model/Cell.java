@@ -52,13 +52,13 @@ public class Cell{
                     return Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET;
                 }
                 case CHEST -> {
-                    return "\u001b[38;5;220m"+'$';
+                    return Affichage.BOLD+Affichage.BRIGTH_YELLOW+'$';
                 }
                 case UP -> {
-                    return Affichage.BLUE+'^';
+                    return Affichage.BOLD+Affichage.BRIGTH_BLUE+'^';
                 }
                 case DOWN -> {
-                    return Affichage.BLUE+'v';
+                    return Affichage.BOLD+Affichage.BRIGTH_BLUE+'v';
                 }
                 default -> {
                     return Affichage.RED+'.';

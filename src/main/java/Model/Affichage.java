@@ -28,6 +28,7 @@ public class Affichage {
             }
             //MAP
             for (int x = 0; x < etage.getSIZEX(); x++) {
+                sb.append(Affichage.RESET);
                 sb.append(" ").append(etage.get(x, y)).append(" ");
             }
             sb.append("\n");

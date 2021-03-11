@@ -8,18 +8,19 @@ public class Map {
     public ArrayList<Etage> etages = new ArrayList<>();
     public static final int MapWidth = 40;
     public static final int MapHeigth = 40;
-    private final BasicPlayer player1;
+    private final BasicPlayer player;
 
     public Map(){
-        Etage e1=new Etage(MapWidth,MapHeigth);
-        Procedure.BasicEtage(e1);
-        etages.add(e1);
-        Position p1 = Procedure.getAccesibleRandomPosition(e1);
-        player1=new BasicPlayer(e1,p1);
+        Etage etage=new Etage(MapWidth,MapHeigth);
+        Procedure.BasicEtage(etage);
+        etages.add(etage);
+        Position pos = Procedure.getAccesibleRandomPosition(etage);
+        player=new BasicPlayer(etage,pos);
+        etage.get(pos).setEntity(player);
     }
 
     public Etage getCurrent(){
-        return player1.getEtage();
+        return player.getEtage();
     }
 
     public int getIndexCurrent(){
@@ -27,7 +28,7 @@ public class Map {
     }
 
     public BasicPlayer getPlayer(){
-        return player1;
+        return player;
     }
 
     public void DOWN(){
@@ -41,22 +42,17 @@ public class Map {
         else{
             etage = etages.get(currentIndex + 1);
         }
-        Position p = Procedure.getAccesibleRandomPosition(etage);
-        getCurrent().get(player1.getPosition()).setEntity(null);
-        player1.updateEtage(etage);
-        player1.setPosition(p);
+        Position pos = Procedure.getAccesibleRandomPosition(etage);
+        getPlayer().update(etage,pos);
     }
 
     public void UP(){
-        int currentIndex = etages.indexOf(getCurrent());
+        int currentIndex = getIndexCurrent();
         if(currentIndex!=0){
             Etage etage=etages.get(currentIndex-1);
-            Position p = Procedure.getAccesibleRandomPosition(etage);
-            getCurrent().get(player1.getPosition()).setEntity(null);
-            player1.updateEtage(etage);
-            player1.setPosition(p);
+            Position pos = Procedure.getAccesibleRandomPosition(etage);
+            getPlayer().update(etage,pos);
         }
     }
-
 
 }

@@ -6,15 +6,19 @@ public class BasicPlayer extends Entity {
 
     public BasicPlayer(Etage etage, Position position) {
         super(etage,position);
+        etage.get(position).setEntity(this);
     }
 
-    public void updateEtage(Etage etage){
-        super.etage=etage;
+    public void update(Etage etage,Position position){
+        getEtage().get(getPosition()).setEntity(null);
+        setEtage(etage);
+        setPosition(position);
+        etage.get(getPosition()).setEntity(this);
     }
 
     @Override
     public String toString() {
-        return Affichage.BOLD + "\u001b[38;5;22m" + '@' + Affichage.RESET;
+        return Affichage.BOLD + Affichage.BRIGTH_GREEN + '@';
     }
 
 }

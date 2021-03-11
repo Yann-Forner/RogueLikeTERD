@@ -34,15 +34,15 @@ public class Procedure {
 
     /**
      * Renvoit une position aleatoire dans la etage qui est accesible.
-     * @param m Etage
+     * @param e Etage
      * @return Position
      */
-    public static Position getAccesibleRandomPosition(Etage m) {
-        Position pos = getRandomPosition(m.getSIZEX(),m.getSIZEY());
-        Cell c = m.get(pos.getX(),pos.getY());
-        while(!c.isAccesible() && c.getEntity()==null){
-            pos = getRandomPosition(m.getSIZEX(),m.getSIZEY());
-            c = m.get(pos.getX(),pos.getY());
+    public static Position getAccesibleRandomPosition(Etage e) {
+        Position pos = getRandomPosition(e.getSIZEX(),e.getSIZEY());
+        Cell c = e.get(pos);
+        while(!c.isAccesible() && c.getEntity()==null && !e.isReserved(c)){
+            pos = getRandomPosition(e.getSIZEX(),e.getSIZEY());
+            c = e.get(pos);
         }
         return pos;
     }
@@ -85,7 +85,7 @@ public class Procedure {
 
     /**
      * Entity aleatoire dans la Room r.
-     * @param r   Room
+     * @param r Room
      * @param etage Etage
      */
     private static void setRandomMob(Room r, Etage etage) {
@@ -121,7 +121,7 @@ public class Procedure {
      */
     public static void setRandomChest(Etage etage, int nbr){
         for (int i = 0; i < nbr; i++) {
-            etage.get(getAccesibleRandomPosition(etage)).updateCell(false, Cell.CellType.CHEST);
+            etage.get(getAccesibleRandomPosition(etage)).updateCell(true, Cell.CellType.CHEST);
         }
     }
 
@@ -136,11 +136,15 @@ public class Procedure {
         etage.get(p2).updateCell(true, Cell.CellType.DOWN);
     }
 
+    /**
+     * Genere un Etage de base #TYPE1
+     * @param etage Etage
+     */
     public static void BasicEtage(Etage etage){
         Procedure.setRandomRooms(etage,8);
         etage.RoomFusion();
         Procedure.setRandomChest(etage,3);
-        Procedure.setRandomMob(etage);
         Procedure.setRandomUPnDOWN(etage);
+        Procedure.setRandomMob(etage);
     }
 }

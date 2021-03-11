@@ -88,6 +88,10 @@ public class Etage {
         return Rooms;
     }
 
+    public boolean isReserved(Cell c){
+        return c.getType().equals(Cell.CellType.UP) || c.getType().equals(Cell.CellType.DOWN) || c.getType().equals(Cell.CellType.CHEST);
+    }
+
     public void ligne(Position p1, Position p2) {
         ArrayList<Position> chemin = new ArrayList<>();
         chemin.add(p1);
@@ -112,6 +116,7 @@ public class Etage {
             get(p).updateCell(true, Cell.CellType.NORMAL);
         }
     }
+
     public void RoomFusion(){
         //Trace du chemin
         for (int i = 0; i < getRooms().size()-1; i++) {
@@ -142,16 +147,21 @@ public class Etage {
             for (int x = 0; x < getSIZEX(); x++) {
                 Position pos=new Position(x, y);
                 ArrayList<Position> voisins = pos.voisins(this);
-                if ( voisins.size() > 6 && isBarrer(voisins) )get(pos).updateCell(true, Cell.CellType.NORMAL);
+                if(voisins.size()>6){
+                    boolean isUseless=true;
+                    for(Position p : voisins){
+                        if(get(p).getType().equals(Cell.CellType.VOID)){
+                            isUseless=false;
+                            break;
+                        }
+                    }
+                    if(isUseless){
+                        get(pos).updateCell(true, Cell.CellType.NORMAL);
+                    }
+                }
             }
         }
-    }
-    public boolean isBarrer(ArrayList<Position> voisins){
-        for (Position p: voisins
-             ) {
-            if (this.get(p).getType() == Cell.CellType.VOID)return false;
-        }
-        return true;
+
     }
 
     public ArrayList<Position> Astar(Position depart, Position arrive){
