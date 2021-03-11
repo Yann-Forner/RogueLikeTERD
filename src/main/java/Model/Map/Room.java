@@ -1,10 +1,9 @@
 package Model.Map;
 
 import Model.Cell;
-import Model.Map.Map;
 import Model.Position;
 
-public class Room extends Map implements Comparable<Room> {
+public class Room extends Etage implements Comparable<Room> {
     public static final int MinSize=5;
     public static final int MaxSize=20;
     public static final int nbrMaxMobPerRoom=5;

@@ -1,14 +1,14 @@
 package Model;
 
-import Model.Map.Map;
+import Model.Map.Etage;
 
 public abstract class Entity {
     protected Position position;
-    protected final Map map;
+    protected final Etage etage;
 
-    public Entity(Map m,Position pos) {
+    public Entity(Etage m, Position pos) {
         position=pos;
-        map=m;
+        etage =m;
     }
 
     public Position getPosition() {
@@ -16,10 +16,10 @@ public abstract class Entity {
     }
 
     public void move(Position pos) {
-        Cell cell = map.get(pos);
+        Cell cell = etage.get(pos);
         if(cell.isAccesible()){
             cell.setEntity(this);
-            map.get(position).setEntity(null);
+            etage.get(position).setEntity(null);
             position=pos;
         }
     }

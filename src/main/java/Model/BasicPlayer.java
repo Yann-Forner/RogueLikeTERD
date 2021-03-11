@@ -1,11 +1,11 @@
 package Model;
 
-import Model.Map.Map;
+import Model.Map.Etage;
 
 public class BasicPlayer extends Entity {
 
-    public BasicPlayer(Map map, Position position) {
-        super(map,position);
+    public BasicPlayer(Etage etage, Position position) {
+        super(etage,position);
     }
 
     @Override

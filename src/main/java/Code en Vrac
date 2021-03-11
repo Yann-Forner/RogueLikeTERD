@@ -88,40 +88,40 @@
         return nbrMursVoisinsAngle < 2 && nbrMursVoisins > 4;
     }
 
-    public static Room Carte(Room map){
+    public static Room Carte(Room etage){
         System.out.println("ok");
-        if(map.getSIZEX()>5){
-            Position absA=Position.copyOf(map.getAbsolutePos());
-            Position absB=new Position(absA.getX()+map.getSIZEX()/2,absA.getY());
-            Position absC=new Position(absA.getX(),absA.getY()+map.getSIZEY()/2);
-            Position absD=new Position(absA.getX()+map.getSIZEX()/2,absA.getY()+map.getSIZEY()/2);
+        if(etage.getSIZEX()>5){
+            Position absA=Position.copyOf(etage.getAbsolutePos());
+            Position absB=new Position(absA.getX()+etage.getSIZEX()/2,absA.getY());
+            Position absC=new Position(absA.getX(),absA.getY()+etage.getSIZEY()/2);
+            Position absD=new Position(absA.getX()+etage.getSIZEX()/2,absA.getY()+etage.getSIZEY()/2);
 
-            Room A = new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            Room A = new Room(etage.getSIZEX()/2,etage.getSIZEY()/2);
             A.setAbsolutePos(absA);
 
-            Room B=new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            Room B=new Room(etage.getSIZEX()/2,etage.getSIZEY()/2);
             B.setAbsolutePos(absB);
 
-            Room C=new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            Room C=new Room(etage.getSIZEX()/2,etage.getSIZEY()/2);
             C.setAbsolutePos(absC);
 
-            Room D=new Room(map.getSIZEX()/2,map.getSIZEY()/2);
+            Room D=new Room(etage.getSIZEX()/2,etage.getSIZEY()/2);
             D.setAbsolutePos(absD);
 
             Room childA=Carte(A);
             Room childB=Carte(B);
             Room childC=Carte(C);
             Room childD=Carte(D);
-            map.Rooms.add(childA);
-            map.Rooms.addAll(childA.Rooms);
-            map.Rooms.add(childB);
-            map.Rooms.addAll(childB.Rooms);
-            map.Rooms.add(childC);
-            map.Rooms.addAll(childC.Rooms);
-            map.Rooms.add(childD);
-            map.Rooms.addAll(childD.Rooms);
+            etage.Rooms.add(childA);
+            etage.Rooms.addAll(childA.Rooms);
+            etage.Rooms.add(childB);
+            etage.Rooms.addAll(childB.Rooms);
+            etage.Rooms.add(childC);
+            etage.Rooms.addAll(childC.Rooms);
+            etage.Rooms.add(childD);
+            etage.Rooms.addAll(childD.Rooms);
         }
-        return map;
+        return etage;
     }
 
     public void PathMaker(){
@@ -235,14 +235,14 @@
     }
 
             /*
-            for(Room r : myMap.getRooms()){
+            for(Room r : myEtage.getRooms()){
                 for (int i = r.getAbsolutePos().getY(); i < r.getAbsolutePos().getY()+r.getSIZEY(); i++) {
                     for (int j = r.getAbsolutePos().getX(); j < r.getAbsolutePos().getX()+r.getSIZEX(); j++) {
-                        myMap.set(i,j,new Cell(true, Cell.CellType.PATH));
+                        myEtage.set(i,j,new Cell(true, Cell.CellType.PATH));
                     }
                 }
             }
-            new Model.Affichage(myMap);*/
+            new Model.Affichage(myEtage);*/
 
 
 public boolean suppX(int x, int y) {
@@ -332,11 +332,11 @@ public boolean suppX(int x, int y) {
     }
 
     public Map copyOf(){
-        Map map = new Map(SIZEX, SIZEY);
-        map.Cells=new ArrayList<>(Cells);
-        map.Rooms=new ArrayList<>(Rooms);
-        map.Entitys=new ArrayList<>(Entitys);
-        return map;
+        Map etage = new Map(SIZEX, SIZEY);
+        etage.Cells=new ArrayList<>(Cells);
+        etage.Rooms=new ArrayList<>(Rooms);
+        etage.Entitys=new ArrayList<>(Entitys);
+        return etage;
     }
 
 
@@ -361,7 +361,7 @@ public boolean suppX(int x, int y) {
             }
         }*/
 
-    public static void voisins(Position p, Map map){
+    public static void voisins(Position p, Map etage){
         Map m = new Map(3,3);
         ArrayList<Position> voisins=new ArrayList<>();
         voisins.add(p.somme(-1,-1));
@@ -374,7 +374,7 @@ public boolean suppX(int x, int y) {
         voisins.add(p.somme(0,1));
         voisins.add(p.somme(1,1));
         for (int i = 0; i < voisins.size(); i++) {
-            m.set(i%3,i/3,map.get(voisins.get(i)));
+            m.set(i%3,i/3,etage.get(voisins.get(i)));
         }
         System.out.println(p);
         System.out.println(m);
@@ -400,3 +400,19 @@ public boolean suppX(int x, int y) {
                     });
                 }*/
 
+    public Etage copyOf(){
+        Etage etage = new Etage(SIZEX, SIZEY);
+        etage.Cells=new ArrayList<>(Cells);
+        etage.Rooms=new ArrayList<>(Rooms);
+        etage.Entitys=new ArrayList<>(Entitys);
+        return etage;
+    }
+
+
+    public void ObstaclesAleatoires(int nbr){
+        fillMap(new Cell(true, Cell.CellType.NORMAL));
+        for (int i = 0; i < nbr; i++) {
+            Position randomPosition = Procedure.getAccesibleRandomPosition(this);
+            get(randomPosition.getX(),randomPosition.getY()).updateCell(false, Cell.CellType.BORDER);
+        }
+    }

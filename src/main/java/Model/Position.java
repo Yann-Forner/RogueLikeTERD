@@ -1,5 +1,10 @@
 package Model;
 
+import Model.Map.Etage;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 public class Position {
     private final int x ;
     private final int y;
@@ -38,6 +43,19 @@ public class Position {
 
     public double Distance(Position pos){
         return Math.sqrt(Math.pow((pos.getX() - getX()), 2) + Math.pow((pos.getY() - getY()), 2));
+    }
+
+    public ArrayList<Position> voisins(Etage e){
+        ArrayList<Position> voisins = new ArrayList<>();
+        voisins.add(somme(0, -1));
+        voisins.add(somme(0, 1));
+        voisins.add(somme(1, 0));
+        voisins.add(somme(-1, 0));
+        voisins.add(somme(-1, 1));
+        voisins.add(somme(1, 1));
+        voisins.add(somme(1, -1));
+        voisins.add(somme(-1, -1));
+        return voisins.stream().filter(p -> (p.getX() >= 0 && p.getY() >= 0 && p.getX() < e.getSIZEX() && p.getY() < e.getSIZEY())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public int getX() {

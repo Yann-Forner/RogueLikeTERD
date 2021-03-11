@@ -1,16 +1,16 @@
 package Model;
 
-import Model.Map.Map;
+import Model.Map.Etage;
 import Model.Map.Room;
 
 import java.util.ArrayList;
 
 public class Affichage {
 
-    public static String map(Map map){
+    public static String map(Etage etage){
         StringBuilder sb = new StringBuilder();
         sb.append("    ").append(Affichage.RESET);
-        for (int x = 0; x < map.getSIZEX(); x++) {
+        for (int x = 0; x < etage.getSIZEX(); x++) {
             sb.append(x);
             if (x < 10) {
                 sb.append("  ");
@@ -19,7 +19,7 @@ public class Affichage {
             }
         }
         sb.append("\n");
-        for (int y = 0; y < map.getSIZEY(); y++) {
+        for (int y = 0; y < etage.getSIZEY(); y++) {
             sb.append(Affichage.RESET);
             if (y < 10) {
                 sb.append(" ").append(y).append(" ");
@@ -27,23 +27,23 @@ public class Affichage {
                 sb.append(y).append(" ");
             }
             //MAP
-            for (int x = 0; x < map.getSIZEX(); x++) {
-                sb.append(" ").append(map.get(x, y)).append(" ");
+            for (int x = 0; x < etage.getSIZEX(); x++) {
+                sb.append(" ").append(etage.get(x, y)).append(" ");
             }
             sb.append("\n");
         }
         return sb.toString();
     }
 
-    public static void Rooms_Color(Map map){
+    public static void Rooms_Color(Etage etage){
         int acc=0;
-        for (int k = 0; k < map.getRooms().size(); k++) {
-            Room r = map.getRooms().get(k);
+        for (int k = 0; k < etage.getRooms().size(); k++) {
+            Room r = etage.getRooms().get(k);
             for (int i = 1; i < r.getSIZEY()-1; i++) {
                 for (int j = 1; j < r.getSIZEX()-1; j++) {
                     int finalAcc = acc;
                     int finalK = k;
-                    map.set(r.getAbsolutePos().getX()+j,r.getAbsolutePos().getY()+i,new Cell(true, Cell.CellType.PATH){
+                    etage.set(r.getAbsolutePos().getX()+j,r.getAbsolutePos().getY()+i,new Cell(true, Cell.CellType.PATH){
                         @Override
                         public String toString() {
                             return "\u001B[3"+ finalAcc +"m"+ finalK;
@@ -53,14 +53,14 @@ public class Affichage {
             }
             acc++;
         }
-        Affichage.map(map);
+        Affichage.map(etage);
     }
 
-    public static void Path(Map map,ArrayList<Position> path){
+    public static void Path(Etage etage, ArrayList<Position> path){
         for (int i = 0; i < path.size(); i++) {
             Position p = path.get(i);
             if(i==0){
-                map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
+                etage.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
                         return Affichage.BRIGTH_YELLOW+"A";
@@ -68,7 +68,7 @@ public class Affichage {
                 });
             }
             else if(i==path.size()-1){
-                map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
+                etage.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
                         return Affichage.BRIGTH_YELLOW+"D";
@@ -76,7 +76,7 @@ public class Affichage {
                 });
             }
             else{
-                map.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
+                etage.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
                     @Override
                     public String toString() {
                         return Affichage.BRIGTH_PURPLE+"X";
@@ -84,7 +84,7 @@ public class Affichage {
                 });
             }
         }
-        Affichage.map(map);
+        Affichage.map(etage);
     }
 
     public static void Palette(){

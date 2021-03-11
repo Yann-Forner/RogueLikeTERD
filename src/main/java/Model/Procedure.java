@@ -1,7 +1,7 @@
 package Model;
 
 import Exceptions.CollisionRoom;
-import Model.Map.Map;
+import Model.Map.Etage;
 import Model.Map.Room;
 
 import java.util.Collections;
@@ -33,11 +33,11 @@ public class Procedure {
     }
 
     /**
-     * Renvoit une position aleatoire dans la map qui est accesible.
-     * @param m Map
+     * Renvoit une position aleatoire dans la etage qui est accesible.
+     * @param m Etage
      * @return Position
      */
-    public static Position getAccesibleRandomPosition(Map m) {
+    public static Position getAccesibleRandomPosition(Etage m) {
         Position pos = getRandomPosition(m.getSIZEX(),m.getSIZEY());
         Cell c = m.get(pos.getX(),pos.getY());
         while(!c.isAccesible() && c.getEntity()==null){
@@ -62,21 +62,21 @@ public class Procedure {
     }
 
     /**
-     * Genere puis ajoute les Rooms generée proceduralement dans la Map.
-     * @param map Map
+     * Genere puis ajoute les Rooms generée proceduralement dans la Etage.
+     * @param etage Etage
      */
-    public static void setRandomRooms(Map map) {
+    public static void setRandomRooms(Etage etage) {
         int nbrRooms = 0;
         long startTime = System.currentTimeMillis();
         long elapsedTime = 0;
-        while (elapsedTime < 2000 && nbrRooms < Map.nbrMaxRooms) {
+        while (elapsedTime < 2000 && nbrRooms < Etage.nbrMaxRooms) {
             elapsedTime = System.currentTimeMillis() - startTime;
             Room r = getRandomRoom();
-            Position pos = getRandomPosition(map.getSIZEX()-1 - r.getSIZEX(), map.getSIZEY()-1 - r.getSIZEY());
+            Position pos = getRandomPosition(etage.getSIZEX()-1 - r.getSIZEX(), etage.getSIZEY()-1 - r.getSIZEY());
             pos=new Position(pos.getX()+1, pos.getY()+1);
             try {
-                Collections.sort(map.getRooms());
-                map.addRoom(r, pos);
+                Collections.sort(etage.getRooms());
+                etage.addRoom(r, pos);
                 r.setAbsolutePos(pos);
                 nbrRooms++;
             } catch (CollisionRoom e) {}
@@ -86,42 +86,42 @@ public class Procedure {
     /**
      * Entity aleatoire dans la Room r.
      * @param r   Room
-     * @param map Map
+     * @param etage Etage
      */
-    private static void setRandomMob(Room r, Map map) {
+    private static void setRandomMob(Room r, Etage etage) {
         Position pos = getRandomPosition(r);
-        Cell cell = map.get(pos);
-        Entity e=new BasicPlayer(map,pos){
+        Cell cell = etage.get(pos);
+        Entity e=new BasicPlayer(etage,pos){
             @Override
             public String toString() {
                 return "\u001B[36mM";
             }
         };
         cell.setEntity(e);
-        map.addEntity(e);
+        etage.addEntity(e);
     }
 
     /**
-     * Generation aleatoire des Entity dans toutes les Rooms de la Map.
-     * @param map Map
+     * Generation aleatoire des Entity dans toutes les Rooms de la Etage.
+     * @param etage Etage
      */
-    public static void setRandomMob(Map map) {
-        for (Room r : map.getRooms()) {
+    public static void setRandomMob(Etage etage) {
+        for (Room r : etage.getRooms()) {
             int nbrMobs = rand.nextInt(Room.nbrMaxMobPerRoom)+1;
             for (int i = 0; i < nbrMobs; i++) {
-                setRandomMob(r, map);
+                setRandomMob(r, etage);
             }
         }
     }
 
     /**
-     * Genere nbr Coffres sur la map a des positions aleatoires.
-     * @param map Map
+     * Genere nbr Coffres sur la etage a des positions aleatoires.
+     * @param etage Etage
      * @param nbr int
      */
-    public static void setRandomChest(Map map,int nbr){
+    public static void setRandomChest(Etage etage, int nbr){
         for (int i = 0; i < nbr; i++) {
-            map.get(getAccesibleRandomPosition(map)).updateCell(false, Cell.CellType.CHEST);
+            etage.get(getAccesibleRandomPosition(etage)).updateCell(false, Cell.CellType.CHEST);
         }
     }
 
