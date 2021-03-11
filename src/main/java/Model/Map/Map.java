@@ -138,6 +138,7 @@ public class Map {
             Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
             ligne(pos1, milieu);
             ligne(milieu, pos2);
+            System.out.println(this);
         }
 
         //Ajout des murs aux chemins

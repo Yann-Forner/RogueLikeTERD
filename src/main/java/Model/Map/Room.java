@@ -64,6 +64,6 @@ public class Room extends Map implements Comparable<Room> {
      */
     @Override
     public int compareTo(Room o) {
-        return (int) o.getAbsolutePos().Distance(this.getAbsolutePos());
+        return (int) this.getAbsolutePos().Distance(new Position(0,0));
     }
 }
