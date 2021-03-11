@@ -2,6 +2,7 @@ package Model;
 
 import Exceptions.CollisionRoom;
 
+import java.util.Collections;
 import java.util.Random;
 
 public class Procedure {
@@ -71,6 +72,7 @@ public class Procedure {
             Room r = getRandomRoom();
             Position pos = getRandomPosition(map.getSIZEX() - r.getSIZEX(), map.getSIZEY() - r.getSIZEY());
             try {
+                Collections.sort(map.getRooms());
                 map.addRoom(r, pos);
                 r.setAbsolutePos(pos);
                 nbrRooms++;
