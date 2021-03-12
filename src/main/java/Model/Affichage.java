@@ -2,12 +2,13 @@ package Model;
 
 import Model.Map.Etage;
 import Model.Map.Room;
+import com.sun.tools.javac.Main;
 
 import java.util.ArrayList;
 
 public class Affichage {
 
-    public static String map(Etage etage){
+    public static String etage(Etage etage){
         StringBuilder sb = new StringBuilder();
         sb.append("    ").append(Affichage.RESET);
         for (int x = 0; x < etage.getSIZEX(); x++) {
@@ -54,7 +55,7 @@ public class Affichage {
             }
             acc++;
         }
-        Affichage.map(etage);
+        Affichage.etage(etage);
     }
 
     public static void Path(Etage etage, ArrayList<Position> path){
@@ -85,7 +86,7 @@ public class Affichage {
                 });
             }
         }
-        Affichage.map(etage);
+        Affichage.etage(etage);
     }
 
     public static void Palette(){
@@ -115,7 +116,8 @@ public class Affichage {
         System.out.println(Affichage.RESET+"\n");
     }
 
-    public static final String CLEAR = "\033[2J";
+
+    public static final String CLEAR = "\033\143";
     public static final String RESET = "\u001B[0m";
     public static final String BOLD = "\u001B[1m";
     public static final String FAINT = "\u001B[2m";

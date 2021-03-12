@@ -33,7 +33,7 @@ public class Etage {
 
     @Override
     public String toString() {
-        return Affichage.map(this);
+        return Affichage.etage(this);
     }
 
     public void addRoom(Room r, Position p) {
