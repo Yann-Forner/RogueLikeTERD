@@ -10,10 +10,8 @@ import java.util.Random;
 public class Procedure {
     private static final Random rand=new Random();
 
-    public static void setSeed(int... seed){
-        if(seed.length==1){
-            rand.setSeed(seed[0]);
-        }
+    public static void setSeed(long seed){
+        rand.setSeed(seed);
     }
 
     /**
