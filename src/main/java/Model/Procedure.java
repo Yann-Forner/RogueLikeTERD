@@ -4,8 +4,6 @@ import Exceptions.CollisionRoom;
 import Model.Map.Etage;
 import Model.Map.Room;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
@@ -55,14 +53,15 @@ public class Procedure {
 
     /**
      * Appele getRandomPosition(Room) ou getRandomPosition(Etage)
-     * @param e
-     * @param r
-     * @return
+     * @param e Etage
+     * @param r Room
+     * @return Position
      */
     private static Position getRandomPosition(Etage e,Room... r){
-        switch (r.length) {
-            case 1 -> { return getRandomPosition(r[0]); }
-            default -> { return getRandomPosition(e); }
+        if (r.length == 1) {
+            return getRandomPosition(r[0]);
+        } else {
+            return getRandomPosition(e);
         }
     }
 
@@ -74,7 +73,7 @@ public class Procedure {
      * @param r Room
      * @return Position
      */
-    //TODO comment faire ça sans le switch ?
+    //TODO comment faire ça sans le getRandomPosition(Etage e, Room... r) ?
     public static Position getAccesibleRandomPosition(boolean isEntityGeneration,Etage e,Room... r){
         Position pos = getRandomPosition(e,r);
         if(isEntityGeneration){
