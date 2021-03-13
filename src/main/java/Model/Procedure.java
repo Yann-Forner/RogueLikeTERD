@@ -4,80 +4,116 @@ import Exceptions.CollisionRoom;
 import Model.Map.Etage;
 import Model.Map.Room;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class Procedure {
     private static final Random rand=new Random();
 
+    /**
+     * Seed de la Map.
+     * @param seed long
+     */
     public static void setSeed(long seed){
         rand.setSeed(seed);
     }
 
     /**
-     * Renvoit une Room generée proceduralement.
-     * @return Room
-     */
-    public static Room getRandomRoom() {
-        int SIZEX = rand.nextInt(Room.MaxSize - Room.MinSize + 1) + Room.MinSize;
-        int SIZEY = rand.nextInt(Room.MaxSize - Room.MinSize + 1) + Room.MinSize;
-        return new Room(SIZEX, SIZEY);
-    }
-
-    /**
-     * Renvoit une Position aleatoire entre width et heigth.
-     * @param width int
-     * @param heigth int
+     * Renvoit une Position random : new Position( MaxWidth & MinWidth , MaxHeigtth & MinHeigth).
+     * @param MaxWidth int
+     * @param MaxHeigth int
+     * @param MinWidth int
+     * @param MinHeigth int
      * @return Position
      */
-    private static Position getRandomPosition(int width, int heigth) {
-        int posX = rand.nextInt((width - 1) + 1);
-        int posY = rand.nextInt((heigth - 1) + 1);
+    private static Position getRandomPosition(int MaxWidth, int MaxHeigth,int MinWidth, int MinHeigth) {
+        int posX = rand.nextInt((MaxWidth - MinWidth)) + MinWidth;
+        int posY = rand.nextInt((MaxHeigth - MinHeigth)) + MinHeigth;
         return new Position(posX, posY);
     }
 
     /**
-     * Renvoit une position aleatoire dans la etage qui est accesible.
+     * Renvoit une position random dans l'Etage e.
      * @param e Etage
      * @return Position
      */
-    public static Position getAccesibleRandomPosition(Etage e) {
-        Position pos = getRandomPosition(e.getSIZEX(),e.getSIZEY());
-        Cell c = e.get(pos);
-        while(!c.isAccesible() && c.getEntity()==null && !e.isReserved(c)){
-            pos = getRandomPosition(e.getSIZEX(),e.getSIZEY());
-            c = e.get(pos);
+    public static Position getRandomPosition(Etage e){
+        return getRandomPosition(e.getWidth(),e.getHeigth(),1,1);
+    }
+
+    /**
+     * Renvoit une position random dans la Room r.
+     * @param r Room
+     * @return Position
+     */
+    public static Position getRandomPosition(Room r){
+        Position abs = r.getAbsolutePos();
+        return getRandomPosition(r.getWidth()+abs.getX(),r.getHeigth()+abs.getY(),abs.getX(), abs.getY());
+    }
+
+    /**
+     * Appele getRandomPosition(Room) ou getRandomPosition(Etage)
+     * @param e
+     * @param r
+     * @return
+     */
+    private static Position getRandomPosition(Etage e,Room... r){
+        switch (r.length) {
+            case 1 -> { return getRandomPosition(r[0]); }
+            default -> { return getRandomPosition(e); }
+        }
+    }
+
+    /**
+     * Renvoit une Position aleatoire dans l'Etage/Room accesible, si isEntityGeneration est vrai
+     * alors la position est aussi sans Entity et non Reservé.
+     * @param isEntityGeneration boolean
+     * @param e Etage
+     * @param r Room
+     * @return Position
+     */
+    //TODO comment faire ça sans le switch ?
+    public static Position getAccesibleRandomPosition(boolean isEntityGeneration,Etage e,Room... r){
+        Position pos = getRandomPosition(e,r);
+        if(isEntityGeneration){
+            Cell c = e.get(pos);
+            while(!c.isAccesible() || c.getEntity()!=null || c.isReserved()){
+                pos = getRandomPosition(e,r);
+                c = e.get(pos);
+            }
+        }
+        else{
+            while(!e.get(pos).isAccesible()){
+                pos = getRandomPosition(e,r);
+            }
         }
         return pos;
     }
 
     /**
-     * Renvoit une Position aleatoire dans la Room r.
-     * @param r Room
-     * @return Position
+     * Renvoit une Room generé aleatoirement.
+     * @param MinSize int
+     * @param MaxSize int
+     * @param nbrMaxMobPerRoom int
+     * @return Room
      */
-    //TODO optimiser ça pas ouf le while
-    public static Position getRandomPosition(Room r) {
-        Position pos = getRandomPosition(r.getSIZEX(), r.getSIZEY());
-        while (!r.get(pos).isAccesible()) {
-            pos = getRandomPosition(r.getSIZEX(), r.getSIZEY());
-        }
-        return pos.somme(r.getAbsolutePos());
+    public static Room getRandomRoom(int MinSize, int MaxSize, int nbrMaxMobPerRoom) {
+        Position pos = getRandomPosition(MaxSize, MaxSize, MinSize, MinSize);
+        return new Room(pos.getX(),pos.getY(),nbrMaxMobPerRoom);
     }
 
     /**
-     * Genere puis ajoute les Rooms generée proceduralement dans la Etage.
+     * Genere nbrMaxRooms dans l'Etage.
      * @param etage Etage
+     * @param nbrMaxRooms int
      */
     public static void setRandomRooms(Etage etage, int nbrMaxRooms) {
         int nbrRooms = 0;
-        long startTime = System.currentTimeMillis();
-        long elapsedTime = 0;
-        while (elapsedTime < 2000 && nbrRooms < nbrMaxRooms) {
-            elapsedTime = System.currentTimeMillis() - startTime;
-            Room r = getRandomRoom();
-            Position pos = getRandomPosition(etage.getSIZEX()-1 - r.getSIZEX(), etage.getSIZEY()-1 - r.getSIZEY());
-            pos=new Position(pos.getX()+1, pos.getY()+1);
+        while (nbrRooms < nbrMaxRooms) {
+            Room r = getRandomRoom(5,20,5);
+            Position pos = getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
             try {
                 etage.addRoom(r, pos);
                 r.setAbsolutePos(pos);
@@ -88,17 +124,17 @@ public class Procedure {
     }
 
     /**
-     * Entity aleatoire dans la Room r.
+     * Genere un mob dans une Position aleatoire dans la Room.
      * @param r Room
      * @param etage Etage
      */
     private static void setRandomMob(Room r, Etage etage) {
-        Position pos = getRandomPosition(r);
+        Position pos = getAccesibleRandomPosition(true,etage,r);
         Cell cell = etage.get(pos);
         Entity e=new BasicPlayer(etage,pos){
             @Override
             public String toString() {
-                return "\u001B[36mM";
+                return "\uD83D\uDC7B";
             }
         };
         cell.setEntity(e);
@@ -106,12 +142,12 @@ public class Procedure {
     }
 
     /**
-     * Generation aleatoire des Entity dans toutes les Rooms de la Etage.
+     * Genere tous les mobs de l'etage.
      * @param etage Etage
      */
     public static void setRandomMob(Etage etage) {
         for (Room r : etage.getRooms()) {
-            int nbrMobs = rand.nextInt(Room.nbrMaxMobPerRoom)+1;
+            int nbrMobs = rand.nextInt(r.getNbrMaxMobPerRoom())+1;
             for (int i = 0; i < nbrMobs; i++) {
                 setRandomMob(r, etage);
             }
@@ -119,13 +155,13 @@ public class Procedure {
     }
 
     /**
-     * Genere nbr Coffres sur la etage a des positions aleatoires.
+     * Genere nbr coffres dans l'etage.
      * @param etage Etage
      * @param nbr int
      */
     public static void setRandomChest(Etage etage, int nbr){
         for (int i = 0; i < nbr; i++) {
-            etage.get(getAccesibleRandomPosition(etage)).updateCell(true, Cell.CellType.CHEST);
+            etage.get(getAccesibleRandomPosition(false,etage)).updateCell(true, Cell.CellType.CHEST);
         }
     }
 
@@ -134,14 +170,30 @@ public class Procedure {
      * @param etage Etage
      */
     public static void setRandomUPnDOWN(Etage etage) {
-        Position p1 = getAccesibleRandomPosition(etage);
-        Position p2 = getAccesibleRandomPosition(etage);
+        setRandomUP(etage);
+        setRandomDOWN(etage);
+    }
+
+    /**
+     * Escalier vers l'etage du dessus.
+     * @param etage Etage
+     */
+    private static void setRandomUP(Etage etage){
+        Position p1 = getAccesibleRandomPosition(false, etage);
         etage.get(p1).updateCell(true, Cell.CellType.UP);
+    }
+
+    /**
+     * Escalier vers l'etage du dessous.
+     * @param etage Etage
+     */
+    private static void setRandomDOWN(Etage etage){
+        Position p2 = getAccesibleRandomPosition(false, etage);
         etage.get(p2).updateCell(true, Cell.CellType.DOWN);
     }
 
     /**
-     * Genere un Etage de base #TYPE1
+     * Genere un Etage de base.
      * @param etage Etage
      */
     public static void BasicEtage(Etage etage){
@@ -149,6 +201,22 @@ public class Procedure {
         etage.RoomFusion();
         Procedure.setRandomChest(etage,3);
         Procedure.setRandomUPnDOWN(etage);
+        Position accesibleRandomPosition = getAccesibleRandomPosition(false, etage);
+        etage.get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
         Procedure.setRandomMob(etage);
     }
+
+    /**
+     * Genere un Etage piege.
+     * @param etage Etage
+     */
+    public static void TrapEtage(Etage etage){
+        Procedure.setRandomRooms(etage,3);
+        etage.RoomFusion();
+        Procedure.setRandomUP(etage);
+        Procedure.setRandomMob(etage);
+    }
+
+
+
 }

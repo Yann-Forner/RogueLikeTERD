@@ -2,7 +2,7 @@ package Model;
 
 public class Cell{
     public enum CellType {
-        BORDER, NORMAL, PATH, VOID, CHEST, UP, DOWN, ;
+        BORDER, NORMAL, PATH, VOID, CHEST, UP, DOWN, TRAP_ROOM, ;
     }
     private boolean isAccesible;
     private CellType type;
@@ -16,6 +16,17 @@ public class Cell{
 
     public boolean isAccesible() {
         return isAccesible;
+    }
+
+    /**
+     * Les cellules reservé ne permetent pas aux entitées de se generer dessus.
+     * @return boolean
+     */
+    public boolean isReserved(){
+        return type.equals(CellType.UP)
+                || type.equals(CellType.DOWN)
+                || type.equals(CellType.CHEST)
+                || type.equals(CellType.TRAP_ROOM);
     }
 
     public CellType getType() {
@@ -52,13 +63,16 @@ public class Cell{
                     return Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET;
                 }
                 case CHEST -> {
-                    return Affichage.BOLD+Affichage.BRIGTH_YELLOW+'$';
+                    return "\uD83D\uDCB0";
                 }
                 case UP -> {
-                    return Affichage.BOLD+Affichage.BRIGTH_BLUE+'^';
+                    return "\uD83D\uDC4D";
                 }
                 case DOWN -> {
-                    return Affichage.BOLD+Affichage.BRIGTH_BLUE+'v';
+                    return 	"\uD83D\uDC4E";
+                }
+                case TRAP_ROOM -> {
+                    return 	Affichage.BLUE+"X";
                 }
                 default -> {
                     return Affichage.RED+'.';

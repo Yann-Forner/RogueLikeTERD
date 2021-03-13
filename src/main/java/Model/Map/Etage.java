@@ -8,23 +8,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Etage {
-    protected int SIZEX;
-    protected int SIZEY;
-    protected ArrayList<ArrayList<Cell>> Cells;
+    protected int Width;
+    protected int Heigth;
+    public ArrayList<ArrayList<Cell>> Cells;
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<Entity> Entitys = new ArrayList<>();
 
-    public Etage(int SIZEX, int SIZEY) {
-        this.SIZEX = SIZEX;
-        this.SIZEY = SIZEY;
+    public Etage(int Width, int Heigth) {
+        this.Width = Width;
+        this.Heigth = Heigth;
         fillMap(new Cell(false,Cell.CellType.VOID));
     }
 
     public void fillMap(Cell c) {
         Cells = new ArrayList<>();
-        for (int i = 0; i < SIZEY; i++) {
+        for (int i = 0; i < getHeigth(); i++) {
             ArrayList<Cell> line = new ArrayList<>();
-            for (int j = 0; j < SIZEX; j++) {
+            for (int j = 0; j < getWidth(); j++) {
                 line.add(j, new Cell(c.isAccesible(), c.getType()));
             }
             Cells.add(i, line);
@@ -38,8 +38,8 @@ public class Etage {
 
     public void addRoom(Room r, Position p) {
         if (!isCollision(r, p)) {
-            for (int y = 0; y < r.getSIZEY(); y++) {
-                for (int x = 0; x < r.getSIZEX(); x++) {
+            for (int y = 0; y < r.getHeigth(); y++) {
+                for (int x = 0; x < r.getWidth(); x++) {
                     this.set(p.getX() + x, p.getY() + y, r.get(x, y));
                 }
             }
@@ -55,8 +55,8 @@ public class Etage {
     }
 
     public boolean isCollision(Room r, Position p) {
-        for (int y = 0; y < r.getSIZEY(); y++) {
-            for (int x = 0; x < r.getSIZEX(); x++) {
+        for (int y = 0; y < r.getHeigth(); y++) {
+            for (int x = 0; x < r.getWidth(); x++) {
                 if (this.get(p.getX() + x, p.getY() + y).getType() != Cell.CellType.VOID
                 ) return true;
             }
@@ -76,20 +76,16 @@ public class Etage {
         Cells.get(y).set(x, c);
     }
 
-    public int getSIZEX() {
-        return SIZEX;
+    public int getWidth() {
+        return Width;
     }
 
-    public int getSIZEY() {
-        return SIZEY;
+    public int getHeigth() {
+        return Heigth;
     }
 
     public ArrayList<Room> getRooms() {
         return Rooms;
-    }
-
-    public boolean isReserved(Cell c){
-        return c.getType().equals(Cell.CellType.UP) || c.getType().equals(Cell.CellType.DOWN) || c.getType().equals(Cell.CellType.CHEST);
     }
 
     public void ligne(Position p1, Position p2) {
@@ -127,10 +123,9 @@ public class Etage {
             ligne(milieu, pos2);
         }
 
-
         //Ajout des murs aux chemins
-        for (int y = 0; y < getSIZEY(); y++) {
-            for (int x = 0; x < getSIZEX(); x++) {
+        for (int y = 0; y < getHeigth(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
                 Position pos=new Position(x, y);
                 if (get(pos).getType().equals(Cell.CellType.VOID)) {
                     ArrayList<Position> voisins = pos.voisins(this);
@@ -143,8 +138,8 @@ public class Etage {
             }
         }
         //Suppression des murs inutiles
-        for (int y = 0; y < getSIZEY(); y++) {
-            for (int x = 0; x < getSIZEX(); x++) {
+        for (int y = 0; y < getHeigth(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
                 Position pos=new Position(x, y);
                 ArrayList<Position> voisins = pos.voisins(this);
                 if(voisins.size()>6){
@@ -210,7 +205,7 @@ public class Etage {
             voisins.add(new Noeud(u.getX()+1,u.getY()));
             voisins.add(new Noeud(u.getX(),u.getY()-1));
             voisins.add(new Noeud(u.getX(),u.getY()+1));
-            voisins = voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < getSIZEX() && p.getY() < getSIZEY()) && get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+            voisins = voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < getWidth() && p.getY() < getHeigth()) && get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
 
             //Parcous voisins
             for(Noeud n : voisins){

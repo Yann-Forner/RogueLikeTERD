@@ -55,7 +55,7 @@ public class Position {
         voisins.add(somme(1, 1));
         voisins.add(somme(1, -1));
         voisins.add(somme(-1, -1));
-        return voisins.stream().filter(p -> (p.getX() >= 0 && p.getY() >= 0 && p.getX() < e.getSIZEX() && p.getY() < e.getSIZEY())).collect(Collectors.toCollection(ArrayList::new));
+        return voisins.stream().filter(p -> (p.getX() >= 0 && p.getY() >= 0 && p.getX() < e.getWidth() && p.getY() < e.getHeigth())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public int getX() {

@@ -18,7 +18,7 @@ public class BasicPlayer extends Entity {
 
     @Override
     public String toString() {
-        return Affichage.BOLD + Affichage.BRIGTH_GREEN + '@';
+        return "\uD83E\uDD13";
     }
 
 }

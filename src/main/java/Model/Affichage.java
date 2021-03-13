@@ -11,7 +11,7 @@ public class Affichage {
     public static String etage(Etage etage){
         StringBuilder sb = new StringBuilder();
         sb.append("    ").append(Affichage.RESET);
-        for (int x = 0; x < etage.getSIZEX(); x++) {
+        for (int x = 0; x < etage.getWidth(); x++) {
             sb.append(x);
             if (x < 10) {
                 sb.append("  ");
@@ -20,7 +20,7 @@ public class Affichage {
             }
         }
         sb.append("\n");
-        for (int y = 0; y < etage.getSIZEY(); y++) {
+        for (int y = 0; y < etage.getHeigth(); y++) {
             sb.append(Affichage.RESET);
             if (y < 10) {
                 sb.append(" ").append(y).append(" ");
@@ -28,9 +28,15 @@ public class Affichage {
                 sb.append(y).append(" ");
             }
             //MAP
-            for (int x = 0; x < etage.getSIZEX(); x++) {
+            for (int x = 0; x < etage.getWidth(); x++) {
                 sb.append(Affichage.RESET);
-                sb.append(" ").append(etage.get(x, y)).append(" ");
+                Cell cell = etage.get(x, y);
+                if(cell.toString().length()>2){
+                    sb.append(" ").append(cell).append(" ");
+                }
+                else{
+                    sb.append(" ").append(cell);
+                }
             }
             sb.append("\n");
         }
@@ -41,8 +47,8 @@ public class Affichage {
         int acc=0;
         for (int k = 0; k < etage.getRooms().size(); k++) {
             Room r = etage.getRooms().get(k);
-            for (int i = 1; i < r.getSIZEY()-1; i++) {
-                for (int j = 1; j < r.getSIZEX()-1; j++) {
+            for (int i = 0; i < r.getHeigth(); i++) {
+                for (int j = 0; j < r.getWidth(); j++) {
                     int finalAcc = acc;
                     int finalK = k;
                     etage.set(r.getAbsolutePos().getX()+j,r.getAbsolutePos().getY()+i,new Cell(true, Cell.CellType.PATH){

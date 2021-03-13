@@ -8,13 +8,14 @@ public class Map {
     public ArrayList<Etage> etages = new ArrayList<>();
     public static final int MapWidth = 40;
     public static final int MapHeigth = 40;
+    private boolean inTemporaryEtage=false;
     private final BasicPlayer player;
 
     public Map(){
         Etage etage=new Etage(MapWidth,MapHeigth);
         Procedure.BasicEtage(etage);
         etages.add(etage);
-        Position pos = Procedure.getAccesibleRandomPosition(etage);
+        Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos);
         etage.get(pos).setEntity(player);
     }
@@ -42,17 +43,33 @@ public class Map {
         else{
             etage = etages.get(currentIndex + 1);
         }
-        Position pos = Procedure.getAccesibleRandomPosition(etage);
+        Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         getPlayer().update(etage,pos);
     }
 
     public void UP(){
-        int currentIndex = getIndexCurrent();
-        if(currentIndex!=0){
-            Etage etage=etages.get(currentIndex-1);
-            Position pos = Procedure.getAccesibleRandomPosition(etage);
+        if(inTemporaryEtage){
+            Etage etage=etages.get(etages.size()-1);
+            Position pos = Procedure.getAccesibleRandomPosition(true,etage);
             getPlayer().update(etage,pos);
+            inTemporaryEtage=false;
         }
+        else{
+            int currentIndex = getIndexCurrent();
+            if(currentIndex!=0){
+                Etage etage=etages.get(currentIndex-1);
+                Position pos = Procedure.getAccesibleRandomPosition(true,etage);
+                getPlayer().update(etage,pos);
+            }
+        }
+    }
+
+    public void TRAP_ROOM(){
+        Etage etage = new Etage(MapWidth,MapHeigth);
+        Procedure.TrapEtage(etage);
+        Position pos = Procedure.getAccesibleRandomPosition(true,etage);
+        getPlayer().update(etage,pos);
+        inTemporaryEtage=true;
     }
 
 }

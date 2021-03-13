@@ -4,13 +4,12 @@ import Model.Cell;
 import Model.Position;
 
 public class Room extends Etage implements Comparable<Room> {
-    public static final int MinSize=5;
-    public static final int MaxSize=20;
-    public static final int nbrMaxMobPerRoom=5;
+    private final int nbrMaxMobPerRoom;
     private Position AbsolutePos=null;
 
-    public Room(int SIZEX, int SIZEY) {
-        super(SIZEX, SIZEY);
+    public Room(int Width, int Height, int nbrMaxMobPerRoom) {
+        super(Width,Height);
+        this.nbrMaxMobPerRoom=nbrMaxMobPerRoom;
         fillMap(new Cell(true, Cell.CellType.NORMAL));
     }
 
@@ -20,6 +19,10 @@ public class Room extends Etage implements Comparable<Room> {
 
     public Position getAbsolutePos() {
         return AbsolutePos.copyOf();
+    }
+
+    public int getNbrMaxMobPerRoom() {
+        return nbrMaxMobPerRoom;
     }
 
     /**
