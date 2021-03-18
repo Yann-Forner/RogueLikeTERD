@@ -9,8 +9,8 @@ public abstract class Entity {
     private Etage etage;
 
     public Entity(Etage m, Position pos) {
-        position=pos;
-        etage =m;
+        position = pos;
+        etage = m;
     }
 
     public Position getPosition() {

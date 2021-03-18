@@ -135,19 +135,16 @@ public class Etage {
         for (int y = 0; y < getHeigth(); y++) {
             for (int x = 0; x < getWidth(); x++) {
                 Position pos=new Position(x, y);
-                System.out.println(get(pos).getType());
                 if (get(pos).getType().equals(Cell.CellType.VOID)) {
                     ArrayList<Position> voisins = pos.voisins(this);
                     for (Position p : voisins) {
                         if (get(p).getType().equals(Cell.CellType.NORMAL)) {
-                            System.out.println("---------------------------------------");
                             get(x,y).updateCell(false, Cell.CellType.BORDER);
                         }
                     }
                 }
             }
         }
-        System.out.println(this);
         //Suppression des murs inutiles
         for (int y = 0; y < getHeigth(); y++) {
             for (int x = 0; x < getWidth(); x++) {
