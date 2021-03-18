@@ -1,10 +1,11 @@
 package Model.Map.Strategy;
 
 import Model.Cell;
+import Model.Map.Room;
 
 import java.util.ArrayList;
 
 public interface RoomStrategy {
-    ArrayList<ArrayList<Cell>> composeRoom (ArrayList<ArrayList<Cell>> oldRoom);
+    void composeRoom (Room r);
 
 }
