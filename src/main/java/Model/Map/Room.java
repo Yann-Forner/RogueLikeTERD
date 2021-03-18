@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.Cell;
 import Model.Position;
+import Model.Strategy.RoomStrategy;
 
 public class Room extends Etage implements Comparable<Room> {
     private final int nbrMaxMobPerRoom;
@@ -9,8 +10,14 @@ public class Room extends Etage implements Comparable<Room> {
 
     public Room(int Width, int Height, int nbrMaxMobPerRoom) {
         super(Width,Height);
+
         this.nbrMaxMobPerRoom=nbrMaxMobPerRoom;
         fillMap(new Cell(true, Cell.CellType.NORMAL));
+
+    }
+    public Room(int width, int height,int nbrMaxMobPerRoom,  RoomStrategy r){
+        this(width,height,nbrMaxMobPerRoom);
+        r.composeRoom(this.Cells);
     }
 
     public void setAbsolutePos(Position pos){
