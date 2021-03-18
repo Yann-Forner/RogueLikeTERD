@@ -13,7 +13,8 @@ public class Map {
 
     public Map(){
         Etage etage=new Etage(MapWidth,MapHeigth);
-        Procedure.BasicEtage(etage);
+        //Procedure.BasicEtage(etage);
+        etage.addRoom(Procedure.RandomRoomType(new RoomFactory()),new Position(etage.getWidth()/2,etage.getHeigth()/2));
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos);
@@ -37,7 +38,8 @@ public class Map {
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
             etage=new Etage(MapWidth,MapHeigth);
-            Procedure.BasicEtage(etage);
+            //Procedure.BasicEtage(etage);
+            etage.addRoom(Procedure.RandomRoomType(new RoomFactory()),new Position(etage.getWidth()/2,etage.getHeigth()/2));
             etages.add(etage);
         }
         else{

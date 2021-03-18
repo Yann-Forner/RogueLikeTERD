@@ -217,7 +217,7 @@ public class Procedure {
         Procedure.setRandomMob(etage);
     }
 
-    public static void RandomRoomType(RoomFactory factory){
+    public static Room RandomRoomType(RoomFactory factory){
         RoomFactory.roomType type=null;
         RoomFactory.roomType[] values = RoomFactory.roomType.values();
         int index = rand.nextInt(values.length);
@@ -229,7 +229,7 @@ public class Procedure {
             }
             acc++;
         }
-        factory.getNewRoom(type,rand.nextInt((20 - 5))+5,rand.nextInt((20 - 5))+5,5);
+        return factory.getNewRoom(type, rand.nextInt((20 - 5)) + 5, rand.nextInt((20 - 5)) + 5, 5);
     }
 
 
