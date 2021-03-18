@@ -5,9 +5,10 @@ import Model.Map.Room;
 
 import java.util.ArrayList;
 
-public class TresorRoomStrategy implements RoomStrategy{
+public class TresorRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
+        super.composeRoom(r);
         int x = (r.getWidth()-1)/2;
         int y = (r.getHeigth()-1)/2;
         r.set(x,y,new Cell( true,Cell.CellType.CHEST));

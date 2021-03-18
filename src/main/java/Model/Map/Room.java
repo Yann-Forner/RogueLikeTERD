@@ -10,12 +10,9 @@ public class Room extends Etage implements Comparable<Room> {
 
     public Room(int Width, int Height, int nbrMaxMobPerRoom) {
         super(Width,Height);
-
         this.nbrMaxMobPerRoom=nbrMaxMobPerRoom;
-        fillMap(new Cell(true, Cell.CellType.NORMAL));
-
     }
-    public Room(int width, int height,int nbrMaxMobPerRoom,  RoomStrategy r){
+    public Room(int width, int height,int nbrMaxMobPerRoom,RoomStrategy r){
         this(width,height,nbrMaxMobPerRoom);
         r.composeRoom(this);
     }
