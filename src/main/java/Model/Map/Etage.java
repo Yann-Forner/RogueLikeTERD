@@ -2,8 +2,10 @@ package Model.Map;
 
 
 import Exceptions.CollisionRoom;
-import Model.*;
-import Model.Map.Entitys.Entity;
+import Model.Entitys.Entity;
+import Model.Utils.Affichage;
+import Model.Utils.Position;
+import Model.Utils.Procedure;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -122,7 +124,7 @@ public class Etage {
     public void RoomFusion(){
         //Trace du chemin
         for (int i = 0; i < getRooms().size()-1; i++) {
-            Position pos1=Procedure.getRandomPosition(getRooms().get(i));
+            Position pos1= Procedure.getRandomPosition(getRooms().get(i));
             Position pos2=Procedure.getRandomPosition(getRooms().get(i+1));
             Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
             ligne(pos1, milieu);

@@ -1,8 +1,8 @@
-package Model.Map.Entitys;
+package Model.Entitys;
 
-import Model.Cell;
+import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Position;
+import Model.Utils.Position;
 
 public abstract class Entity {
     private Position position;

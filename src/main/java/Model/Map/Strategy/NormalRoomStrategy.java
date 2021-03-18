@@ -1,8 +1,8 @@
 package Model.Map.Strategy;
 
 
-import Model.Affichage;
-import Model.Cell;
+import Model.Utils.Affichage;
+import Model.Map.Cell;
 import Model.Map.Room;
 
 public class NormalRoomStrategy extends RoomStrategy{

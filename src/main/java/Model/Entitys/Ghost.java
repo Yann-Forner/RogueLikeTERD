@@ -1,7 +1,7 @@
-package Model.Map.Entitys;
+package Model.Entitys;
 
 import Model.Map.Etage;
-import Model.Position;
+import Model.Utils.Position;
 
 public class Ghost extends Entity {
     public Ghost(Etage m, Position pos) {

@@ -1,5 +1,6 @@
-package Model;
+package Model.Utils;
 
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 
