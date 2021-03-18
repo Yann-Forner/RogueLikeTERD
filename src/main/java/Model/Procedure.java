@@ -3,6 +3,7 @@ package Model;
 import Exceptions.CollisionRoom;
 import Model.Map.Etage;
 import Model.Map.Room;
+import Model.Map.RoomFactory;
 
 import java.util.Collections;
 import java.util.Random;
@@ -214,6 +215,21 @@ public class Procedure {
         etage.RoomFusion();
         Procedure.setRandomUP(etage);
         Procedure.setRandomMob(etage);
+    }
+
+    public static void RandomRoomType(RoomFactory factory){
+        RoomFactory.roomType type=null;
+        RoomFactory.roomType[] values = RoomFactory.roomType.values();
+        int index = rand.nextInt(values.length);
+        int acc = 0;
+        for (RoomFactory.roomType t : values) {
+            if(acc == index){
+                type=t;
+                break;
+            }
+            acc++;
+        }
+        factory.getNewRoom(type,rand.nextInt((20 - 5))+5,rand.nextInt((20 - 5))+5,5);
     }
 
 
