@@ -1,6 +1,8 @@
-package Model;
+package Model.Map.Entitys;
 
+import Model.Cell;
 import Model.Map.Etage;
+import Model.Position;
 
 public abstract class Entity {
     private Position position;
@@ -51,4 +53,6 @@ public abstract class Entity {
     public void moveDown() {
         move(position.somme(0,1));
     }
+
+    public abstract String toString();
 }

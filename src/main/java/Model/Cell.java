@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Map.Entitys.Entity;
+
 public class Cell{
     public enum CellType {
         BORDER( Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET),
@@ -28,7 +30,7 @@ public class Cell{
     }
     private boolean isAccesible;
     private CellType type;
-    private Entity Entity;
+    private Model.Map.Entitys.Entity Entity;
 
     public Cell(boolean isAccesible, CellType type) {
         this.isAccesible = isAccesible;

@@ -3,6 +3,7 @@ package Model.Map;
 
 import Exceptions.CollisionRoom;
 import Model.*;
+import Model.Map.Entitys.Entity;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -198,12 +199,11 @@ public class Etage {
 
             //Parcous voisins
             for(Noeud n : voisins){
-                Noeud ancienVer = n.copyOf();
                 n.cameFrom=u;
                 n.cout = u.cout + n.Distance(u);
                 n.heuristique = n.Distance(arrive);
 
-                if (!(closedList.contains(n)) || n.getScore() < ancienVer.getScore()){
+                if (!(closedList.contains(n)) || n.getScore() < u.getScore()){
                     if(openList.contains(n)){
                         openList.remove(n);
                     }
