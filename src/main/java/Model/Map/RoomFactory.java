@@ -1,4 +1,4 @@
-package Model;
+package Model.Map;
 
 import Model.Map.Room;
 import Model.Map.Strategy.NormalRoomStrategy;
