@@ -1,7 +1,7 @@
 package Model;
 
 import Model.Map.Room;
-import Model.Strategy.NormalRoomStrategy;
+import Model.Map.Strategy.NormalRoomStrategy;
 
 public class RoomFactory {
     public enum roomType {

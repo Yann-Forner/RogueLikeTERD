@@ -1,4 +1,4 @@
-package Model.Strategy;
+package Model.Map.Strategy;
 
 import Model.Cell;
 

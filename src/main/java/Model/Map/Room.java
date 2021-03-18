@@ -2,7 +2,7 @@ package Model.Map;
 
 import Model.Cell;
 import Model.Position;
-import Model.Strategy.RoomStrategy;
+import Model.Map.Strategy.RoomStrategy;
 
 public class Room extends Etage implements Comparable<Room> {
     private final int nbrMaxMobPerRoom;
