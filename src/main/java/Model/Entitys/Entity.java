@@ -13,7 +13,7 @@ public abstract class Entity {
         etage = m;
     }
 
-    public abstract void update();
+   // public abstract void update();
 
     public Position getPosition() {
         return position.copyOf();

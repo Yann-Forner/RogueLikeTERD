@@ -207,7 +207,9 @@ public class Etage {
                         openList.remove(n);
                         openList.add(n);
                     }
-                    openList.add(n);
+                    else {
+                        openList.add(n);
+                    }
                 }
             }
             closedList.add(u);
