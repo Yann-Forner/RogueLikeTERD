@@ -1,9 +1,7 @@
 package Model.Map.Strategy;
 
-import Model.Cell;
+import Model.Map.Cell;
 import Model.Map.Room;
-
-import java.util.ArrayList;
 
 public class TresorRoomStrategy extends RoomStrategy{
     @Override

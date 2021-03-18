@@ -1,6 +1,7 @@
-package Model;
+package Model.Utils;
 
 import Exceptions.CollisionRoom;
+import Model.Map.Cell;
 import Model.Entitys.BasicPlayer;
 import Model.Entitys.Entity;
 import Model.Map.Etage;
@@ -30,7 +31,7 @@ public class Procedure {
      * @param MinHeigth int
      * @return Position
      */
-    private static Position getRandomPosition(int MaxWidth, int MaxHeigth,int MinWidth, int MinHeigth) {
+    private static Position getRandomPosition(int MaxWidth, int MaxHeigth, int MinWidth, int MinHeigth) {
         int posX = rand.nextInt((MaxWidth - MinWidth)) + MinWidth;
         int posY = rand.nextInt((MaxHeigth - MinHeigth)) + MinHeigth;
         return new Position(posX, posY);

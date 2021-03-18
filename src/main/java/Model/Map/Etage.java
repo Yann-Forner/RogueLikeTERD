@@ -2,8 +2,10 @@ package Model.Map;
 
 
 import Exceptions.CollisionRoom;
-import Model.*;
 import Model.Entitys.Entity;
+import Model.Utils.Affichage;
+import Model.Utils.Position;
+import Model.Utils.Procedure;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -122,7 +124,7 @@ public class Etage {
     public void RoomFusion(){
         //Trace du chemin
         for (int i = 0; i < getRooms().size()-1; i++) {
-            Position pos1=Procedure.getRandomPosition(getRooms().get(i));
+            Position pos1= Procedure.getRandomPosition(getRooms().get(i));
             Position pos2=Procedure.getRandomPosition(getRooms().get(i+1));
             Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
             ligne(pos1, milieu);
@@ -133,19 +135,16 @@ public class Etage {
         for (int y = 0; y < getHeigth(); y++) {
             for (int x = 0; x < getWidth(); x++) {
                 Position pos=new Position(x, y);
-                System.out.println(get(pos).getType());
                 if (get(pos).getType().equals(Cell.CellType.VOID)) {
                     ArrayList<Position> voisins = pos.voisins(this);
                     for (Position p : voisins) {
                         if (get(p).getType().equals(Cell.CellType.NORMAL)) {
-                            System.out.println("---------------------------------------");
                             get(x,y).updateCell(false, Cell.CellType.BORDER);
                         }
                     }
                 }
             }
         }
-        System.out.println(this);
         //Suppression des murs inutiles
         for (int y = 0; y < getHeigth(); y++) {
             for (int x = 0; x < getWidth(); x++) {

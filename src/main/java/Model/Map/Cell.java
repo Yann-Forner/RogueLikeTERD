@@ -1,5 +1,6 @@
-package Model;
+package Model.Map;
 
+import Model.Utils.Affichage;
 import Model.Entitys.Entity;
 
 public class Cell{

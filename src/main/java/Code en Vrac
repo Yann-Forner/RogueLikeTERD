@@ -242,7 +242,7 @@
                     }
                 }
             }
-            new Model.Affichage(myEtage);*/
+            new Model.Utils.Affichage(myEtage);*/
 
 
 public boolean suppX(int x, int y) {

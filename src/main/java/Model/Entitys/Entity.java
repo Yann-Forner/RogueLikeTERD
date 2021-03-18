@@ -1,16 +1,16 @@
 package Model.Entitys;
 
-import Model.Cell;
+import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Position;
+import Model.Utils.Position;
 
 public abstract class Entity {
     private Position position;
     private Etage etage;
 
     public Entity(Etage m, Position pos) {
-        position=pos;
-        etage =m;
+        position = pos;
+        etage = m;
     }
 
     public abstract void update();

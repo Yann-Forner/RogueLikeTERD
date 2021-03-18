@@ -1,7 +1,7 @@
 package Model.Entitys;
 
 import Model.Map.Etage;
-import Model.Position;
+import Model.Utils.Position;
 
 public class BasicPlayer extends Entity {
 

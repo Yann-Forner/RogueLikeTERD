@@ -1,7 +1,6 @@
 package Model.Map;
 
-import Model.Cell;
-import Model.Position;
+import Model.Utils.Position;
 import Model.Map.Strategy.RoomStrategy;
 
 public class Room extends Etage implements Comparable<Room> {

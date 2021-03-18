@@ -1,11 +1,9 @@
 package Model.Map.Strategy;
 
-import Model.Cell;
+import Model.Map.Cell;
 import Model.Map.Room;
-import Model.Position;
-import Model.Procedure;
-
-import javax.swing.*;
+import Model.Utils.Position;
+import Model.Utils.Procedure;
 
 public class MarchandRoomStrategy extends RoomStrategy{
     @Override
