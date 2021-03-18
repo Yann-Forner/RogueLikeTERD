@@ -20,6 +20,10 @@ public class Etage {
         fillMap(new Cell(false,Cell.CellType.VOID));
     }
 
+    public void setCells(ArrayList<ArrayList<Cell>> cells) {
+        Cells = cells;
+    }
+
     public void fillMap(Cell c) {
         Cells = new ArrayList<>();
         for (int i = 0; i < getHeigth(); i++) {
@@ -75,6 +79,7 @@ public class Etage {
     public void set(int x, int y, Cell c) {
         Cells.get(y).set(x, c);
     }
+
 
     public int getWidth() {
         return Width;

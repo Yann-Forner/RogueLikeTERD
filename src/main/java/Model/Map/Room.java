@@ -17,7 +17,7 @@ public class Room extends Etage implements Comparable<Room> {
     }
     public Room(int width, int height,int nbrMaxMobPerRoom,  RoomStrategy r){
         this(width,height,nbrMaxMobPerRoom);
-        r.composeRoom(this.Cells);
+        r.composeRoom(this);
     }
 
     public void setAbsolutePos(Position pos){
