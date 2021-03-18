@@ -14,12 +14,10 @@ public class Map {
     public Map(){
         Etage etage=new Etage(MapWidth,MapHeigth);
         Procedure.BasicEtage(etage);
-        System.out.println("ok");
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos);
         etage.get(pos).setEntity(player);
-        System.out.println("ok");
     }
 
     public Etage getCurrent(){

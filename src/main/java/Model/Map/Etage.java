@@ -29,7 +29,7 @@ public class Etage {
         for (int i = 0; i < getHeigth(); i++) {
             ArrayList<Cell> line = new ArrayList<>();
             for (int j = 0; j < getWidth(); j++) {
-                line.add(j, new Cell(c.isAccesible(), c.getType()));
+                line.add(j, c.copyOf());
             }
             Cells.add(i, line);
         }
@@ -132,10 +132,12 @@ public class Etage {
         for (int y = 0; y < getHeigth(); y++) {
             for (int x = 0; x < getWidth(); x++) {
                 Position pos=new Position(x, y);
+                System.out.println(get(pos).getType());
                 if (get(pos).getType().equals(Cell.CellType.VOID)) {
                     ArrayList<Position> voisins = pos.voisins(this);
                     for (Position p : voisins) {
                         if (get(p).getType().equals(Cell.CellType.NORMAL)) {
+                            System.out.println("BORDER");
                             get(x,y).updateCell(false, Cell.CellType.BORDER);
                         }
                     }
@@ -196,11 +198,15 @@ public class Etage {
 
             //Parcous voisins
             for(Noeud n : voisins){
+                Noeud ancienVer = n.copyOf();
                 n.cameFrom=u;
                 n.cout = u.cout + n.Distance(u);
                 n.heuristique = n.Distance(arrive);
 
-                if (!(closedList.contains(n) || (openList.contains(n) && n.getScore() < u.getScore()))){
+                if (!(closedList.contains(n)) || n.getScore() < ancienVer.getScore()){
+                    if(openList.contains(n)){
+                        openList.remove(n);
+                    }
                     openList.add(n);
                 }
             }
@@ -243,6 +249,14 @@ public class Etage {
 
         private double getScore(){
             return cout+heuristique;
+        }
+
+        public Noeud copyOf(){
+            Noeud noeud = new Noeud(this.getX(), this.getY());
+            noeud.cout=this.cout;
+            noeud.cameFrom=this.cameFrom;
+            noeud.heuristique=this.heuristique;
+            return noeud;
         }
     }
 

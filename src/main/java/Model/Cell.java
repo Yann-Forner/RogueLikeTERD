@@ -46,41 +46,54 @@ public class Cell{
         Entity = entity;
     }
 
+    public Cell copyOf(){
+        return new Cell(isAccesible, type){
+            @Override
+            public String toString() {
+                return getTypeString();
+            }
+        };
+    }
+
     @Override
     public String toString() {
         if(Entity == null) {
-            switch (type){
-                case NORMAL -> {
-                    return Affichage.GREY+".";
-                }
-                case VOID -> {
-                    return Affichage.BLACK+".";
-                }
-                case PATH -> {
-                    return Affichage.BOLD+Affichage.BLUE+"*"+Affichage.RESET;
-                }
-                case BORDER -> {
-                    return Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET;
-                }
-                case CHEST -> {
-                    return "\uD83D\uDCB0";
-                }
-                case UP -> {
-                    return "\uD83D\uDC4D";
-                }
-                case DOWN -> {
-                    return 	"\uD83D\uDC4E";
-                }
-                case TRAP_ROOM -> {
-                    return 	Affichage.BLUE+"X";
-                }
-                default -> {
-                    return Affichage.RED+'.';
-                }
-            }
+            return getTypeString();
         }
         else {
             return Entity.toString();
+        }
+    }
+
+    private String getTypeString(){
+        switch (type){
+            case NORMAL -> {
+                return Affichage.GREY+".";
+            }
+            case VOID -> {
+                return Affichage.BLACK+".";
+            }
+            case PATH -> {
+                return Affichage.BOLD+Affichage.BLUE+"*"+Affichage.RESET;
+            }
+            case BORDER -> {
+                return Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET;
+            }
+            case CHEST -> {
+                return "\uD83D\uDCB0";
+            }
+            case UP -> {
+                return "\uD83D\uDC4D";
+            }
+            case DOWN -> {
+                return 	"\uD83D\uDC4E";
+            }
+            case TRAP_ROOM -> {
+                return 	Affichage.BLUE+"X";
+            }
+            default -> {
+                return Affichage.RED+'.';
+            }
         }
     }
 }
