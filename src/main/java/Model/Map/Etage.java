@@ -80,6 +80,7 @@ public class Etage {
         Cells.get(y).set(x, c);
     }
 
+
     public int getWidth() {
         return Width;
     }
