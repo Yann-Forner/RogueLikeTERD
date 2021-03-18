@@ -8,10 +8,11 @@ public class Room extends Etage implements Comparable<Room> {
     private final int nbrMaxMobPerRoom;
     private Position AbsolutePos=null;
 
-    public Room(int Width, int Height, int nbrMaxMobPerRoom) {
+    private Room(int Width, int Height, int nbrMaxMobPerRoom) {
         super(Width,Height);
         this.nbrMaxMobPerRoom=nbrMaxMobPerRoom;
     }
+
     public Room(int width, int height,int nbrMaxMobPerRoom,RoomStrategy r){
         this(width,height,nbrMaxMobPerRoom);
         r.composeRoom(this);

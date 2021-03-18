@@ -9,6 +9,7 @@ public class RoomFactory {
     public enum roomType {
         TRESOR,NORMAL,BOSS,MARCHAND,REPOS,TRAP
     }
+
     public Room getNewMarchandRoom(){
         return new  Room(5,5,0,new MarchandRoomStrategy());
     }

@@ -4,6 +4,7 @@ import Exceptions.CollisionRoom;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Map.RoomFactory;
+import Model.Map.Strategy.NormalRoomStrategy;
 
 import java.util.Collections;
 import java.util.Random;
@@ -101,7 +102,7 @@ public class Procedure {
      */
     public static Room getRandomRoom(int MinSize, int MaxSize, int nbrMaxMobPerRoom) {
         Position pos = getRandomPosition(MaxSize, MaxSize, MinSize, MinSize);
-        return new Room(pos.getX(),pos.getY(),nbrMaxMobPerRoom);
+        return new Room(pos.getX(),pos.getY(),nbrMaxMobPerRoom,new NormalRoomStrategy());
     }
 
     /**
@@ -216,6 +217,7 @@ public class Procedure {
         Procedure.setRandomUP(etage);
         Procedure.setRandomMob(etage);
     }
+
 
     public static Room RandomRoomType(RoomFactory factory){
         RoomFactory.roomType type=null;
