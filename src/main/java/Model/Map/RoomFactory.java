@@ -5,7 +5,7 @@ import Model.Map.Strategy.NormalRoomStrategy;
 
 public class RoomFactory {
     public enum roomType {
-        TREASOR,NORMAL,BOSS,MARCHAND,REPOS,TRAP
+        TRESOR,NORMAL,BOSS,MARCHAND,REPOS,TRAP
     }
     public Room getRoom(roomType r, int width , int height, int nbrMaxMob){
         switch (r){
