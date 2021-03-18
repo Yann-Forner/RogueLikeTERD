@@ -43,12 +43,6 @@ public class Affichage {
         return sb.toString();
     }
 
-    public static void SysRooms(Etage etage){
-        for (Room r : etage.getRooms()){
-            System.out.println(r);
-        }
-    }
-
     public static void Rooms_Color(Etage etage){
         int acc=0;
         for (int k = 0; k < etage.getRooms().size(); k++) {

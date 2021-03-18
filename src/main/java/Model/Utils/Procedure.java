@@ -142,7 +142,7 @@ public class Procedure {
                     return "\uD83D\uDC7B";
                 }
                 else{
-                    return Affichage.GREEN+Affichage.BOLD+"W";
+                    return Affichage.PURPLE+Affichage.BOLD+"W";
                 }
             }
         };
