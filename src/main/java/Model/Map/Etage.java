@@ -159,25 +159,7 @@ public class Etage {
 
     }
 
-    public ArrayList<Position> Astar(Position depart, Position arrive){
-        class Noeud extends Position{
-            public double heuristique=0;
-            public double cout=0;
-            public Noeud cameFrom=null;
-
-            public Noeud(int x, int y) {
-                super(x, y);
-            }
-
-            @Override
-            public double Distance(Position pos) {
-                return (int)(super.Distance(pos)*10);
-            }
-
-            private double getScore(){
-                return cout+heuristique;
-            }
-        }
+    public ArrayList<Position> Astar(Position depart, Position arrive, PathType pathType){
 
         ArrayList<Noeud> closedList = new ArrayList<>();
         PriorityQueue<Noeud> openList = new PriorityQueue<>(Comparator.comparingDouble(Noeud::getScore));
@@ -199,26 +181,64 @@ public class Etage {
                 return chemin;
             }
 
-            //Voisins
+            // Génération des voisins
             ArrayList<Noeud> voisins = new ArrayList<>();
-            voisins.add(new Noeud(u.getX()-1,u.getY()));
-            voisins.add(new Noeud(u.getX()+1,u.getY()));
-            voisins.add(new Noeud(u.getX(),u.getY()-1));
-            voisins.add(new Noeud(u.getX(),u.getY()+1));
+            if (pathType.equals(PathType.CROSS)) addStandardNeighboors(voisins, u);
+            else if (pathType.equals(PathType.DIAGONAL)) addDiagoNeighboors(voisins, u);
+
+            /* Filtrage pour obtenir un voisin valide (dans la map, accessible...) */
             voisins = voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < getWidth() && p.getY() < getHeigth()) && get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
 
             //Parcous voisins
             for(Noeud n : voisins){
-                if (!(closedList.contains(n) || (openList.contains(n) && n.cout<u.cout))){
-                    n.cameFrom=u;
-                    n.cout = u.cout + n.Distance(u);
-                    n.heuristique = n.cout + n.Distance(arrive);
+                n.cameFrom=u;
+                n.cout = u.cout + n.Distance(u);
+                n.heuristique = n.Distance(arrive);
+
+                if (!(closedList.contains(n) || (openList.contains(n) && n.getScore() < u.getScore()))){
                     openList.add(n);
                 }
             }
             closedList.add(u);
         }
         return new ArrayList<>();
+    }
+
+    private void addStandardNeighboors(ArrayList<Noeud> voisins, Noeud u) {
+        voisins.add(new Noeud(u.getX() - 1,u.getY()));
+        voisins.add(new Noeud(u.getX() + 1,u.getY()));
+        voisins.add(new Noeud(u.getX(),u.getY() - 1));
+        voisins.add(new Noeud(u.getX(),u.getY() + 1));
+    }
+
+    private void addDiagoNeighboors(ArrayList<Noeud> voisins, Noeud u) {
+        voisins.add(new Noeud(u.getX() - 1,u.getY() - 1));
+        voisins.add(new Noeud(u.getX() - 1,u.getY() + 1));
+        voisins.add(new Noeud(u.getX() + 1,u.getY() + 1));
+        voisins.add(new Noeud(u.getX() + 1,u.getY() - 1));
+    }
+
+    public enum PathType {
+        CROSS, DIAGONAL;
+    }
+
+    class Noeud extends Position{
+        public double heuristique=0;
+        public double cout=0;
+        public Noeud cameFrom=null;
+
+        public Noeud(int x, int y) {
+            super(x, y);
+        }
+
+        @Override
+        public double Distance(Position pos) {
+            return (int)(super.Distance(pos)*10);
+        }
+
+        private double getScore(){
+            return cout+heuristique;
+        }
     }
 
 }
