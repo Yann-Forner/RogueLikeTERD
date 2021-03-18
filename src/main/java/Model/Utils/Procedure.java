@@ -138,7 +138,12 @@ public class Procedure {
         Entity e=new BasicPlayer(etage,pos){
             @Override
             public String toString() {
-                return "\uD83D\uDC7B";
+                if(System.getProperty("os.name").equals("Linux")){
+                    return "\uD83D\uDC7B";
+                }
+                else{
+                    return Affichage.GREEN+Affichage.BOLD+"W";
+                }
             }
         };
         cell.setEntity(e);

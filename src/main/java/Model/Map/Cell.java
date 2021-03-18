@@ -9,15 +9,24 @@ public class Cell{
         NORMAL(Affichage.GREY+"."),
         PATH(Affichage.BOLD+Affichage.BLUE+"*"+Affichage.RESET),
         VOID(Affichage.BLACK+"."),
-        CHEST("\uD83D\uDCB0"),
-        UP("\uD83D\uDC4D"),
-        DOWN("\uD83D\uDC4E"),
+        CHEST("\uD83D\uDCB0",Affichage.YELLOW+Affichage.BOLD+"$"),
+        UP("\uD83D\uDC4D",Affichage.BLUE+Affichage.BOLD+"^"),
+        DOWN("\uD83D\uDC4E",Affichage.BLUE+Affichage.BOLD+"v"),
         TRAP_ROOM(Affichage.BLUE+"X"), ;
 
         private String string;
 
         CellType(String s) {
             string=s;
+        }
+
+        CellType(String s1, String s2) {
+            if(System.getProperty("os.name").equals("Linux")){
+                string=s1;
+            }
+            else{
+                string=s2;
+            }
         }
 
         public String getString(){

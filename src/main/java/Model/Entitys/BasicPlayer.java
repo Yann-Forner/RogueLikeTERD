@@ -1,6 +1,7 @@
 package Model.Entitys;
 
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 public class BasicPlayer extends Entity {
@@ -19,7 +20,12 @@ public class BasicPlayer extends Entity {
 
     @Override
     public String toString() {
-        return "\uD83E\uDD13";
+        if(System.getProperty("os.name").equals("Linux")){
+            return "\uD83E\uDD13";
+        }
+        else{
+            return Affichage.GREEN+Affichage.BOLD+"@";
+        }
     }
 
 }
