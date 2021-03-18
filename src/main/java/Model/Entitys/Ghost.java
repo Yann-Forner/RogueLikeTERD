@@ -9,6 +9,11 @@ public class Ghost extends Entity {
     }
 
     @Override
+    public void update() {
+
+    }
+
+    @Override
     public String toString() {
         return null;
     }

@@ -206,6 +206,7 @@ public class Etage {
                 if (!(closedList.contains(n)) || n.getScore() < u.getScore()){
                     if(openList.contains(n)){
                         openList.remove(n);
+                        openList.add(n);
                     }
                     openList.add(n);
                 }
