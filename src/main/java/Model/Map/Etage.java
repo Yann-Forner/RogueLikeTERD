@@ -3,7 +3,7 @@ package Model.Map;
 
 import Exceptions.CollisionRoom;
 import Model.*;
-import Model.Map.Entitys.Entity;
+import Model.Entitys.Entity;
 
 import java.util.*;
 import java.util.stream.Collectors;

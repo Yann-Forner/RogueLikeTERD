@@ -1,4 +1,4 @@
-package Model.Map.Entitys;
+package Model.Entitys;
 
 import Model.Cell;
 import Model.Map.Etage;

@@ -1,8 +1,8 @@
 package Model;
 
 import Exceptions.CollisionRoom;
-import Model.Map.Entitys.BasicPlayer;
-import Model.Map.Entitys.Entity;
+import Model.Entitys.BasicPlayer;
+import Model.Entitys.Entity;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Map.RoomFactory;

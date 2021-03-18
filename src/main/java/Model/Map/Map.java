@@ -1,7 +1,7 @@
 package Model.Map;
 
 import Model.*;
-import Model.Map.Entitys.BasicPlayer;
+import Model.Entitys.BasicPlayer;
 
 import java.util.ArrayList;
 

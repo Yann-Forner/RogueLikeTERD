@@ -1,6 +1,6 @@
 package Model;
 
-import Model.Map.Entitys.Entity;
+import Model.Entitys.Entity;
 
 public class Cell{
     public enum CellType {
@@ -30,7 +30,7 @@ public class Cell{
     }
     private boolean isAccesible;
     private CellType type;
-    private Model.Map.Entitys.Entity Entity;
+    private Model.Entitys.Entity Entity;
 
     public Cell(boolean isAccesible, CellType type) {
         this.isAccesible = isAccesible;
