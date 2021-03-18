@@ -2,7 +2,29 @@ package Model;
 
 public class Cell{
     public enum CellType {
-        BORDER, NORMAL, PATH, VOID, CHEST, UP, DOWN, TRAP_ROOM, ;
+        BORDER( Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET),
+        NORMAL(Affichage.GREY+"."),
+        PATH(Affichage.BOLD+Affichage.BLUE+"*"+Affichage.RESET),
+        VOID(Affichage.BLACK+"."),
+        CHEST("\uD83D\uDCB0"),
+        UP("\uD83D\uDC4D"),
+        DOWN("\uD83D\uDC4E"),
+        TRAP_ROOM(Affichage.BLUE+"X"), ;
+
+        private String string;
+
+        CellType(String s) {
+            string=s;
+        }
+
+        public String getString(){
+            return string;
+        }
+
+        public void setString(String s){
+            this.string=s;
+        }
+
     }
     private boolean isAccesible;
     private CellType type;
@@ -47,53 +69,16 @@ public class Cell{
     }
 
     public Cell copyOf(){
-        return new Cell(isAccesible, type){
-            @Override
-            public String toString() {
-                return getTypeString();
-            }
-        };
+        return new Cell(isAccesible, type);
     }
 
     @Override
     public String toString() {
         if(Entity == null) {
-            return getTypeString();
+            return type.getString();
         }
         else {
             return Entity.toString();
-        }
-    }
-
-    private String getTypeString(){
-        switch (type){
-            case NORMAL -> {
-                return Affichage.GREY+".";
-            }
-            case VOID -> {
-                return Affichage.BLACK+".";
-            }
-            case PATH -> {
-                return Affichage.BOLD+Affichage.BLUE+"*"+Affichage.RESET;
-            }
-            case BORDER -> {
-                return Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET;
-            }
-            case CHEST -> {
-                return "\uD83D\uDCB0";
-            }
-            case UP -> {
-                return "\uD83D\uDC4D";
-            }
-            case DOWN -> {
-                return 	"\uD83D\uDC4E";
-            }
-            case TRAP_ROOM -> {
-                return 	Affichage.BLUE+"X";
-            }
-            default -> {
-                return Affichage.RED+'.';
-            }
         }
     }
 }

@@ -137,13 +137,14 @@ public class Etage {
                     ArrayList<Position> voisins = pos.voisins(this);
                     for (Position p : voisins) {
                         if (get(p).getType().equals(Cell.CellType.NORMAL)) {
-                            System.out.println("BORDER");
+                            System.out.println("---------------------------------------");
                             get(x,y).updateCell(false, Cell.CellType.BORDER);
                         }
                     }
                 }
             }
         }
+        System.out.println(this);
         //Suppression des murs inutiles
         for (int y = 0; y < getHeigth(); y++) {
             for (int x = 0; x < getWidth(); x++) {
@@ -163,7 +164,6 @@ public class Etage {
                 }
             }
         }
-
     }
 
     public ArrayList<Position> Astar(Position depart, Position arrive, PathType pathType){
