@@ -12,7 +12,8 @@ public class Cell{
         CHEST("\uD83D\uDCB0",Affichage.YELLOW+Affichage.BOLD+"$"),
         UP("\uD83D\uDC4D",Affichage.BLUE+Affichage.BOLD+"^"),
         DOWN("\uD83D\uDC4E",Affichage.BLUE+Affichage.BOLD+"v"),
-        TRAP_ROOM(Affichage.BLUE+"X"), ;
+        TRAP_ROOM(Affichage.BLUE+"X"),
+        SPECIAL(Affichage.YELLOW+"X");
 
         private String string;
 
@@ -60,7 +61,8 @@ public class Cell{
         return type.equals(CellType.UP)
                 || type.equals(CellType.DOWN)
                 || type.equals(CellType.CHEST)
-                || type.equals(CellType.TRAP_ROOM);
+                || type.equals(CellType.TRAP_ROOM)
+                || type.equals(CellType.SPECIAL);
     }
 
     public CellType getType() {
@@ -81,7 +83,9 @@ public class Cell{
     }
 
     public Cell copyOf(){
-        return new Cell(isAccesible, type);
+        Cell cell = new Cell(isAccesible, type);
+        cell.Entity=Entity;
+        return cell;
     }
 
     @Override

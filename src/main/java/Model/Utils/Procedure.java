@@ -8,6 +8,7 @@ import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Map.RoomFactory;
 import Model.Map.Strategy.NormalRoomStrategy;
+import Model.Map.Strategy.RoomStrategy;
 
 import java.util.Collections;
 import java.util.Random;
@@ -21,6 +22,10 @@ public class Procedure {
      */
     public static void setSeed(long seed){
         rand.setSeed(seed);
+    }
+
+    public static int getRandomInt(int Max, int Min){
+        return rand.nextInt(Max-Min)+Min;
     }
 
     /**
@@ -57,40 +62,26 @@ public class Procedure {
     }
 
     /**
-     * Appele getRandomPosition(Room) ou getRandomPosition(Etage)
-     * @param e Etage
-     * @param r Room
-     * @return Position
-     */
-    private static Position getRandomPosition(Etage e,Room... r){
-        if (r.length == 1) {
-            return getRandomPosition(r[0]);
-        } else {
-            return getRandomPosition(e);
-        }
-    }
-
-    /**
      * Renvoit une Position aleatoire dans l'Etage/Room accesible, si isEntityGeneration est vrai
      * alors la position est aussi sans Entity et non Reservé.
      * @param isEntityGeneration boolean
      * @param e Etage
-     * @param r Room
+     * @param r Room ...
      * @return Position
      */
     //TODO comment faire ça sans le getRandomPosition(Etage e, Room... r) ?
-    public static Position getAccesibleRandomPosition(boolean isEntityGeneration,Etage e,Room... r){
-        Position pos = getRandomPosition(e,r);
+    public static Position getAccesibleRandomPosition(boolean isEntityGeneration,Etage e,Room ... r){
+        Position pos = r.length==1 ? getRandomPosition(r[0]) : getRandomPosition(e);
         if(isEntityGeneration){
             Cell c = e.get(pos);
             while(!c.isAccesible() || c.getEntity()!=null || c.isReserved()){
-                pos = getRandomPosition(e,r);
+                pos = r.length==1 ? getRandomPosition(r[0]) : getRandomPosition(e);
                 c = e.get(pos);
             }
         }
         else{
             while(!e.get(pos).isAccesible()){
-                pos = getRandomPosition(e,r);
+                pos = r.length==1 ? getRandomPosition(r[0]) : getRandomPosition(e);
             }
         }
         return pos;
@@ -103,26 +94,28 @@ public class Procedure {
      * @param nbrMaxMobPerRoom int
      * @return Room
      */
-    public static Room getRandomRoom(int MinSize, int MaxSize, int nbrMaxMobPerRoom) {
+    public static Room getRandomRoom(int MinSize, int MaxSize,int nbrMaxMobPerRoom, RoomStrategy strategy) {
         Position pos = getRandomPosition(MaxSize, MaxSize, MinSize, MinSize);
-        return new Room(pos.getX(),pos.getY(),nbrMaxMobPerRoom,new NormalRoomStrategy());
+        return new Room(pos.getX(),pos.getY(),nbrMaxMobPerRoom,strategy);
     }
 
     /**
      * Genere nbrMaxRooms dans l'Etage.
      * @param etage Etage
-     * @param nbrMaxRooms int
+     * @param type RoomFactory.roomType
      */
-    public static void setRandomRooms(Etage etage, int nbrMaxRooms) {
+    public static void setRandomRooms(Etage etage,RoomFactory.roomType type) {
         int nbrRooms = 0;
-        while (nbrRooms < nbrMaxRooms) {
-            Room r = getRandomRoom(5,20,5);
+        long t1 = System.currentTimeMillis();
+        Room r = RoomFactory.getNewRoom(type);
+        while (nbrRooms < r.getNbrMaxRoom() && (System.currentTimeMillis()-t1<500)) {
             Position pos = getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
             try {
                 etage.addRoom(r, pos);
                 r.setAbsolutePos(pos);
                 nbrRooms++;
             } catch (CollisionRoom e) {}
+            r = RoomFactory.getNewRoom(type);
         }
         Collections.sort(etage.getRooms());
     }
@@ -206,7 +199,7 @@ public class Procedure {
      * @param etage Etage
      */
     public static void BasicEtage(Etage etage){
-        Procedure.setRandomRooms(etage,8);
+        Procedure.setRandomRooms(etage, RoomFactory.roomType.NORMAL);
         etage.RoomFusion();
         Procedure.setRandomChest(etage,3);
         Procedure.setRandomUPnDOWN(etage);
@@ -220,7 +213,7 @@ public class Procedure {
      * @param etage Etage
      */
     public static void TrapEtage(Etage etage){
-        Procedure.setRandomRooms(etage,3);
+        Procedure.setRandomRooms(etage, RoomFactory.roomType.TRAP);
         etage.RoomFusion();
         Procedure.setRandomUP(etage);
         Procedure.setRandomMob(etage);

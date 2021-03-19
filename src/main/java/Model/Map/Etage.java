@@ -44,7 +44,7 @@ public class Etage {
     }
 
     public void addRoom(Room r, Position p) {
-        if (!isCollision(r, p)) {
+        if (!r.isCollision(this,p)) {
             for (int y = 0; y < r.getHeigth(); y++) {
                 for (int x = 0; x < r.getWidth(); x++) {
                     this.set(p.getX() + x, p.getY() + y, r.get(x, y));
@@ -61,16 +61,6 @@ public class Etage {
         Entitys.add(e);
     }
 
-    public boolean isCollision(Room r, Position p) {
-        for (int y = 0; y < r.getHeigth(); y++) {
-            for (int x = 0; x < r.getWidth(); x++) {
-                if (this.get(p.getX() + x, p.getY() + y).getType() != Cell.CellType.VOID
-                ) return true;
-            }
-        }
-        return false;
-    }
-
     public Cell get(int x, int y) {
         return Cells.get(y).get(x);
     }
@@ -83,6 +73,17 @@ public class Etage {
         Cells.get(y).set(x, c);
     }
 
+    public Etage copyOf(){
+        Etage etage = new Etage(getWidth(), getHeigth());
+        for (int y = 0; y < etage.getHeigth(); y++) {
+            for (int x = 0; x < etage.getWidth(); x++) {
+                etage.Cells.get(y).set(x,get(x,y).copyOf());
+            }
+        }
+        etage.Rooms=Rooms;
+        etage.Entitys=Entitys;
+        return etage;
+    }
 
     public int getWidth() {
         return Width;
@@ -163,102 +164,6 @@ public class Etage {
                     }
                 }
             }
-        }
-    }
-
-    public ArrayList<Position> Astar(Position depart, Position arrive, PathType pathType){
-
-        ArrayList<Noeud> closedList = new ArrayList<>();
-        PriorityQueue<Noeud> openList = new PriorityQueue<>(Comparator.comparingDouble(Noeud::getScore));
-
-        openList.add(new Noeud(depart.getX(),depart.getY()));
-
-        while(openList.size()>0){
-            Noeud u = openList.poll();
-
-            //Current == arrive
-            if(u.equals(arrive)) {
-                ArrayList<Position> chemin = new ArrayList<>();
-                chemin.add(u.copyOf());
-                Noeud current = u;
-                while(current.cameFrom!=null){
-                    current=current.cameFrom;
-                    chemin.add(current.copyOf());
-                }
-                return chemin;
-            }
-
-            // Génération des voisins
-            ArrayList<Noeud> voisins = new ArrayList<>();
-            if (pathType.equals(PathType.CROSS)) addStandardNeighboors(voisins, u);
-            else if (pathType.equals(PathType.DIAGONAL)) addDiagoNeighboors(voisins, u);
-
-            /* Filtrage pour obtenir un voisin valide (dans la map, accessible...) */
-            voisins = voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < getWidth() && p.getY() < getHeigth()) && get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
-
-            //Parcous voisins
-            for(Noeud n : voisins){
-                n.cameFrom=u;
-                n.cout = u.cout + n.Distance(u);
-                n.heuristique = n.Distance(arrive);
-
-                if (!(closedList.contains(n)) || n.getScore() < u.getScore()){
-                    if(openList.contains(n)){
-                        openList.remove(n);
-                        openList.add(n);
-                    }
-                    else {
-                        openList.add(n);
-                    }
-                }
-            }
-            closedList.add(u);
-        }
-        return new ArrayList<>();
-    }
-
-    private void addStandardNeighboors(ArrayList<Noeud> voisins, Noeud u) {
-        voisins.add(new Noeud(u.getX() - 1,u.getY()));
-        voisins.add(new Noeud(u.getX() + 1,u.getY()));
-        voisins.add(new Noeud(u.getX(),u.getY() - 1));
-        voisins.add(new Noeud(u.getX(),u.getY() + 1));
-    }
-
-    private void addDiagoNeighboors(ArrayList<Noeud> voisins, Noeud u) {
-        voisins.add(new Noeud(u.getX() - 1,u.getY() - 1));
-        voisins.add(new Noeud(u.getX() - 1,u.getY() + 1));
-        voisins.add(new Noeud(u.getX() + 1,u.getY() + 1));
-        voisins.add(new Noeud(u.getX() + 1,u.getY() - 1));
-    }
-
-    public enum PathType {
-        CROSS, DIAGONAL;
-    }
-
-    class Noeud extends Position{
-        public double heuristique=0;
-        public double cout=0;
-        public Noeud cameFrom=null;
-
-        public Noeud(int x, int y) {
-            super(x, y);
-        }
-
-        @Override
-        public double Distance(Position pos) {
-            return (int)(super.Distance(pos)*10);
-        }
-
-        private double getScore(){
-            return cout+heuristique;
-        }
-
-        public Noeud copyOf(){
-            Noeud noeud = new Noeud(this.getX(), this.getY());
-            noeud.cout=this.cout;
-            noeud.cameFrom=this.cameFrom;
-            noeud.heuristique=this.heuristique;
-            return noeud;
         }
     }
 
