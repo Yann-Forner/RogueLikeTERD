@@ -1,6 +1,5 @@
 package Model.Map;
 
-import Model.Map.Room;
 import Model.Map.Strategy.MarchandRoomStrategy;
 import Model.Map.Strategy.NormalRoomStrategy;
 import Model.Map.Strategy.TresorRoomStrategy;
@@ -12,20 +11,20 @@ public class RoomFactory {
     }
 
     private static Room getNewMarchandRoom(){
-        return new Room(5,5,0,new MarchandRoomStrategy());
+        return new Room(5,5,new MarchandRoomStrategy());
     }
 
     private static Room getNewNormalRoom(){
-        return Procedure.getRandomRoom(5,15,5,new NormalRoomStrategy());
+        return Procedure.getRandomRoom(5,15,new NormalRoomStrategy());
     }
 
-    public Room getNewRoom(roomType r, int width , int height, int nbrMaxMob){
+    public Room getNewRoom(roomType r, int width , int height){
         switch (r) {
             case TRESOR -> {
-                return new Room(width,height,nbrMaxMob,new TresorRoomStrategy());
+                return new Room(width,height,new TresorRoomStrategy());
             }
             default -> {
-                return new Room(width,height,nbrMaxMob,new NormalRoomStrategy());
+                return new Room(width,height,new NormalRoomStrategy());
             }
         }
     }

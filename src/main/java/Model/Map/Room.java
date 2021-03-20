@@ -4,23 +4,25 @@ import Model.Utils.Position;
 import Model.Map.Strategy.RoomStrategy;
 
 public class Room extends Etage implements Comparable<Room> {
-    private final int nbrMaxMobPerRoom;
     private Position AbsolutePos=null;
-    private RoomStrategy strategy;
+    private final RoomStrategy strategy;
 
-    public Room(int width, int height,int nbrMaxMobPerRoom,RoomStrategy strategy){
+    public Room(int width, int height,RoomStrategy strategy){
         super(width,height);
-        this.nbrMaxMobPerRoom=nbrMaxMobPerRoom;
         this.strategy=strategy;
         strategy.composeRoom(this);
     }
 
-    public boolean isCollision(Etage etage,Position pos){
-        return strategy.isCollision(etage,this,pos);
+    public boolean noCollision(Etage etage,Position pos){
+        return strategy.noCollision(etage,this,pos);
     }
 
     public int getNbrMaxRoom() {
         return strategy.getNbrMaxRoom();
+    }
+
+    public int getNbrMaxMobPerRoom() {
+        return strategy.getNbrMaxMobPerRoom();
     }
 
     public void setAbsolutePos(Position pos){
@@ -31,12 +33,8 @@ public class Room extends Etage implements Comparable<Room> {
         return AbsolutePos.copyOf();
     }
 
-    public int getNbrMaxMobPerRoom() {
-        return nbrMaxMobPerRoom;
-    }
-
     @Override
     public int compareTo(Room o) {
-        return (int) (this.getAbsolutePos().Distance(new Position(0,0)) - o.getAbsolutePos().Distance(new Position(0,0)));
+        return (int) (getAbsolutePos().Distance(new Position(0,0)) - o.getAbsolutePos().Distance(new Position(0,0)));
     }
 }

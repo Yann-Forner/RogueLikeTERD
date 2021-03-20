@@ -91,12 +91,11 @@ public class Procedure {
      * Renvoit une Room generé aleatoirement.
      * @param MinSize int
      * @param MaxSize int
-     * @param nbrMaxMobPerRoom int
      * @return Room
      */
-    public static Room getRandomRoom(int MinSize, int MaxSize,int nbrMaxMobPerRoom, RoomStrategy strategy) {
+    public static Room getRandomRoom(int MinSize, int MaxSize, RoomStrategy strategy) {
         Position pos = getRandomPosition(MaxSize, MaxSize, MinSize, MinSize);
-        return new Room(pos.getX(),pos.getY(),nbrMaxMobPerRoom,strategy);
+        return new Room(pos.getX(),pos.getY(),strategy);
     }
 
     /**
@@ -232,7 +231,7 @@ public class Procedure {
             }
             acc++;
         }
-        return factory.getNewRoom(type, rand.nextInt((20 - 5)) + 5, rand.nextInt((20 - 5)) + 5, 5);
+        return factory.getNewRoom(type, rand.nextInt((20 - 5)) + 5, rand.nextInt((20 - 5)) + 5);
     }
 
 

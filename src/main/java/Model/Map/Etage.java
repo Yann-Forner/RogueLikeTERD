@@ -6,6 +6,7 @@ import Model.Entitys.Entity;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.Tools;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public class Etage {
     }
 
     public void addRoom(Room r, Position p) {
-        if (!r.isCollision(this,p)) {
+        if (r.noCollision(this,p)) {
             for (int y = 0; y < r.getHeigth(); y++) {
                 for (int x = 0; x < r.getWidth(); x++) {
                     this.set(p.getX() + x, p.getY() + y, r.get(x, y));
@@ -97,39 +98,16 @@ public class Etage {
         return Rooms;
     }
 
-    public void ligne(Position p1, Position p2) {
-        ArrayList<Position> chemin = new ArrayList<>();
-        chemin.add(p1);
-        Position lastPos = chemin.get(chemin.size() - 1);
-        while (lastPos.getX() != p2.getX()) {
-            if (lastPos.getX() > p2.getX()) {
-                chemin.add(new Position(lastPos.getX() - 1, lastPos.getY()));
-            } else if (lastPos.getX() < p2.getX()) {
-                chemin.add(new Position(lastPos.getX() + 1, lastPos.getY()));
-            }
-            lastPos = chemin.get(chemin.size() - 1);
-        }
-        while (lastPos.getY() != p2.getY()) {
-            lastPos = chemin.get(chemin.size() - 1);
-            if (lastPos.getY() > p2.getY()) {
-                chemin.add(new Position(lastPos.getX(), lastPos.getY() - 1));
-            } else if (lastPos.getY() < p2.getY()) {
-                chemin.add(new Position(lastPos.getX(), lastPos.getY() + 1));
-            }
-        }
-        for (Position p : chemin) {
-            get(p).updateCell(true, Cell.CellType.NORMAL);
-        }
-    }
-
     public void RoomFusion(){
         //Trace du chemin
         for (int i = 0; i < getRooms().size()-1; i++) {
             Position pos1= Procedure.getRandomPosition(getRooms().get(i));
             Position pos2=Procedure.getRandomPosition(getRooms().get(i+1));
             Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
-            ligne(pos1, milieu);
-            ligne(milieu, pos2);
+            //ligne(pos1, milieu, Cell.CellType.NORMAL);
+            //ligne(milieu, pos2, Cell.CellType.NORMAL);
+            Tools.ligne(this, pos1, pos2, Cell.CellType.NORMAL,Procedure.getRandomInt(6,0));
+            System.out.println(this);
         }
 
         //Ajout des murs aux chemins

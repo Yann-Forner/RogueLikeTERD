@@ -15,8 +15,18 @@ public class TresorRoomStrategy extends RoomStrategy{
     }
 
     @Override
-    public boolean isCollision(Etage etage, Room room, Position pos) {
-        return super.isCollision(etage,room,pos,0);
+    public boolean noCollision(Etage etage, Room room, Position pos) {
+        return super.noCollision(etage,room,pos,0);
+    }
+
+    @Override
+    public int getNbrMaxMobPerRoom() {
+        return 0;
+    }
+
+    @Override
+    public int getNbrMaxRoom() {
+        return 1;
     }
 
 }
