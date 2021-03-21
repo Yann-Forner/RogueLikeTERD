@@ -1,4 +1,4 @@
-package Model.Map.Strategy;
+package Model.Map.Room_Strategy;
 
 import Model.Map.Cell;
 import Model.Map.Etage;

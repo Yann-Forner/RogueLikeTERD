@@ -1,8 +1,8 @@
 package Model.Map;
 
-import Model.Map.Strategy.MarchandRoomStrategy;
-import Model.Map.Strategy.NormalRoomStrategy;
-import Model.Map.Strategy.TresorRoomStrategy;
+import Model.Map.Room_Strategy.MarchandRoomStrategy;
+import Model.Map.Room_Strategy.NormalRoomStrategy;
+import Model.Map.Room_Strategy.TresorRoomStrategy;
 import Model.Utils.Procedure;
 
 public class RoomFactory {

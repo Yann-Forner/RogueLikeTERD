@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.Utils.Affichage;
 import Model.Entitys.Entity;
+import Model.Utils.Procedure;
 
 public class Cell{
     public enum CellType {

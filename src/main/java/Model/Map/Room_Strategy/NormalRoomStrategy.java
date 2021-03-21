@@ -1,4 +1,4 @@
-package Model.Map.Strategy;
+package Model.Map.Room_Strategy;
 
 
 import Model.Map.Etage;
@@ -18,12 +18,12 @@ public class NormalRoomStrategy extends RoomStrategy{
 
     @Override
     public boolean noCollision(Etage etage, Room room, Position pos) {
-        return super.noCollision(etage, room, pos,0);
+        return super.noCollision(etage, room, pos,7);
     }
 
     @Override
     public int getNbrMaxRoom() {
-        return 8;
+        return 4;
     }
 
     @Override

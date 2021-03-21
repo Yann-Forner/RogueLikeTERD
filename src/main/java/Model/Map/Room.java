@@ -1,7 +1,7 @@
 package Model.Map;
 
 import Model.Utils.Position;
-import Model.Map.Strategy.RoomStrategy;
+import Model.Map.Room_Strategy.RoomStrategy;
 
 public class Room extends Etage implements Comparable<Room> {
     private Position AbsolutePos=null;

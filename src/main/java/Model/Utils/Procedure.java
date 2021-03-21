@@ -5,10 +5,10 @@ import Model.Map.Cell;
 import Model.Entitys.BasicPlayer;
 import Model.Entitys.Entity;
 import Model.Map.Etage;
+import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Room;
 import Model.Map.RoomFactory;
-import Model.Map.Strategy.NormalRoomStrategy;
-import Model.Map.Strategy.RoomStrategy;
+import Model.Map.Room_Strategy.RoomStrategy;
 
 import java.util.Collections;
 import java.util.Random;
@@ -103,11 +103,11 @@ public class Procedure {
      * @param etage Etage
      * @param type RoomFactory.roomType
      */
-    public static void setRandomRooms(Etage etage,RoomFactory.roomType type) {
+    public static void setRandomRooms(Etage etage, EtageStrategy etageStrategy, RoomFactory.roomType type) {
         int nbrRooms = 0;
         long t1 = System.currentTimeMillis();
         Room r = RoomFactory.getNewRoom(type);
-        while (nbrRooms < r.getNbrMaxRoom() && (System.currentTimeMillis()-t1<500)) {
+        while (nbrRooms < etageStrategy.getNbrMaxRoom() && (System.currentTimeMillis()-t1<500)) {
             Position pos = getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
             try {
                 etage.addRoom(r, pos);
@@ -179,7 +179,7 @@ public class Procedure {
      * Escalier vers l'etage du dessus.
      * @param etage Etage
      */
-    private static void setRandomUP(Etage etage){
+    public static void setRandomUP(Etage etage){
         Position p1 = getAccesibleRandomPosition(false, etage);
         etage.get(p1).updateCell(true, Cell.CellType.UP);
     }
@@ -192,32 +192,6 @@ public class Procedure {
         Position p2 = getAccesibleRandomPosition(false, etage);
         etage.get(p2).updateCell(true, Cell.CellType.DOWN);
     }
-
-    /**
-     * Genere un Etage de base.
-     * @param etage Etage
-     */
-    public static void BasicEtage(Etage etage){
-        Procedure.setRandomRooms(etage, RoomFactory.roomType.NORMAL);
-        etage.RoomFusion();
-        Procedure.setRandomChest(etage,3);
-        Procedure.setRandomUPnDOWN(etage);
-        Position accesibleRandomPosition = getAccesibleRandomPosition(false, etage);
-        etage.get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
-        Procedure.setRandomMob(etage);
-    }
-
-    /**
-     * Genere un Etage piege.
-     * @param etage Etage
-     */
-    public static void TrapEtage(Etage etage){
-        Procedure.setRandomRooms(etage, RoomFactory.roomType.TRAP);
-        etage.RoomFusion();
-        Procedure.setRandomUP(etage);
-        Procedure.setRandomMob(etage);
-    }
-
 
     public static Room RandomRoomType(RoomFactory factory){
         RoomFactory.roomType type=null;

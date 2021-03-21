@@ -1,14 +1,17 @@
-package Model.Map.Strategy;
+package Model.Map.Room_Strategy;
 
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Position;
 
-public class LabyRoomStrategy extends RoomStrategy {
-
+public class TresorRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
-
+        super.composeRoom(r);
+        int x = (r.getWidth()-1)/2;
+        int y = (r.getHeigth()-1)/2;
+        r.set(x,y,new Cell( true,Cell.CellType.CHEST));
     }
 
     @Override
@@ -18,12 +21,12 @@ public class LabyRoomStrategy extends RoomStrategy {
 
     @Override
     public int getNbrMaxMobPerRoom() {
-        return 5;
+        return 0;
     }
 
     @Override
     public int getNbrMaxRoom() {
-        return 10;
+        return 1;
     }
 
 }

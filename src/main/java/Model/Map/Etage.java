@@ -3,6 +3,7 @@ package Model.Map;
 
 import Exceptions.CollisionRoom;
 import Model.Entitys.Entity;
+import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
@@ -17,11 +18,18 @@ public class Etage {
     public ArrayList<ArrayList<Cell>> Cells;
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<Entity> Entitys = new ArrayList<>();
+    private EtageStrategy strategy;
 
-    public Etage(int Width, int Heigth) {
+    protected Etage(int Width, int Heigth) {
         this.Width = Width;
         this.Heigth = Heigth;
         fillMap(new Cell(false,Cell.CellType.VOID));
+    }
+
+    public Etage(int Width, int Heigth, EtageStrategy strategy) {
+        this(Width,Heigth);
+        this.strategy=strategy;
+        strategy.composeEtage(this);
     }
 
     public void setCells(ArrayList<ArrayList<Cell>> cells) {
@@ -75,7 +83,7 @@ public class Etage {
     }
 
     public Etage copyOf(){
-        Etage etage = new Etage(getWidth(), getHeigth());
+        Etage etage = new Etage(getWidth(), getHeigth(),getStrategy());
         for (int y = 0; y < etage.getHeigth(); y++) {
             for (int x = 0; x < etage.getWidth(); x++) {
                 etage.Cells.get(y).set(x,get(x,y).copyOf());
@@ -94,55 +102,12 @@ public class Etage {
         return Heigth;
     }
 
-    public ArrayList<Room> getRooms() {
-        return Rooms;
+    public EtageStrategy getStrategy(){
+        return strategy;
     }
 
-    public void RoomFusion(){
-        //Trace du chemin
-        for (int i = 0; i < getRooms().size()-1; i++) {
-            Position pos1= Procedure.getRandomPosition(getRooms().get(i));
-            Position pos2=Procedure.getRandomPosition(getRooms().get(i+1));
-            Position milieu = new Position((pos1.getX() + pos2.getX()) / 2, (pos1.getY() + pos2.getY()) / 2);
-            //ligne(pos1, milieu, Cell.CellType.NORMAL);
-            //ligne(milieu, pos2, Cell.CellType.NORMAL);
-            Tools.ligne(this, pos1, pos2, Cell.CellType.NORMAL,Procedure.getRandomInt(6,0));
-            System.out.println(this);
-        }
-
-        //Ajout des murs aux chemins
-        for (int y = 0; y < getHeigth(); y++) {
-            for (int x = 0; x < getWidth(); x++) {
-                Position pos=new Position(x, y);
-                if (get(pos).getType().equals(Cell.CellType.VOID)) {
-                    ArrayList<Position> voisins = pos.voisins(this);
-                    for (Position p : voisins) {
-                        if (get(p).getType().equals(Cell.CellType.NORMAL)) {
-                            get(x,y).updateCell(false, Cell.CellType.BORDER);
-                        }
-                    }
-                }
-            }
-        }
-        //Suppression des murs inutiles
-        for (int y = 0; y < getHeigth(); y++) {
-            for (int x = 0; x < getWidth(); x++) {
-                Position pos=new Position(x, y);
-                ArrayList<Position> voisins = pos.voisins(this);
-                if(voisins.size()>6){
-                    boolean isUseless=true;
-                    for(Position p : voisins){
-                        if(get(p).getType().equals(Cell.CellType.VOID)){
-                            isUseless=false;
-                            break;
-                        }
-                    }
-                    if(isUseless){
-                        get(pos).updateCell(true, Cell.CellType.NORMAL);
-                    }
-                }
-            }
-        }
+    public ArrayList<Room> getRooms() {
+        return Rooms;
     }
 
 }

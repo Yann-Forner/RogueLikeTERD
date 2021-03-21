@@ -1,6 +1,8 @@
 package Model.Map;
 
 import Model.Entitys.BasicPlayer;
+import Model.Map.Etage_Strategy.NormalEtageStrategy;
+import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 
@@ -14,8 +16,7 @@ public class Map {
     private final BasicPlayer player;
 
     public Map(){
-        Etage etage=new Etage(MapWidth,MapHeigth);
-        Procedure.BasicEtage(etage);
+        Etage etage=new Etage(MapWidth,MapHeigth, new NormalEtageStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos);
@@ -38,8 +39,7 @@ public class Map {
         Etage etage;
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
-            etage=new Etage(MapWidth,MapHeigth);
-            Procedure.BasicEtage(etage);
+            etage=new Etage(MapWidth,MapHeigth, new NormalEtageStrategy());
             //etage.addRoom(Procedure.RandomRoomType(new RoomFactory()),new Position(etage.getWidth()/2,etage.getHeigth()/2));
             etages.add(etage);
         }
@@ -68,8 +68,7 @@ public class Map {
     }
 
     public void TRAP_ROOM(){
-        Etage etage = new Etage(MapWidth,MapHeigth);
-        Procedure.TrapEtage(etage);
+        Etage etage = new Etage(MapWidth,MapHeigth, new TrapEtageStrategy());
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         getPlayer().update(etage,pos);
         inTemporaryEtage=true;
