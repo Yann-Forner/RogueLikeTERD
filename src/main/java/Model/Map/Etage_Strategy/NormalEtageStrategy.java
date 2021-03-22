@@ -15,17 +15,14 @@ public class NormalEtageStrategy extends EtageStrategy{
     @Override
     public void composeEtage(Etage etage) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.NORMAL);
-        RoomFusion(etage);
-        Procedure.setRandomChest(etage,3);
-        Procedure.setRandomUPnDOWN(etage);
-        Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, etage);
-        etage.get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
-        Procedure.setRandomMob(etage);
+        EtageFusion(etage);
+        setSpecialCell(etage);
+        setMobs(etage);
     }
 
     @Override
-    public void RoomFusion(Etage etage) {
-        super.RoomFusion(etage);
+    public void EtageFusion(Etage etage) {
+        super.EtageFusion(etage);
     }
 
     @Override
@@ -33,4 +30,13 @@ public class NormalEtageStrategy extends EtageStrategy{
         return 8;
     }
 
+    @Override
+    public void setSpecialCell(Etage etage) {
+        super.setSpecialCell(etage);
+    }
+
+    @Override
+    public void setMobs(Etage etage) {
+        super.setMobs(etage);
+    }
 }

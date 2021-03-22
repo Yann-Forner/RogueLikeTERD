@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.Map.Room_Strategy.MarchandRoomStrategy;
 import Model.Map.Room_Strategy.NormalRoomStrategy;
+import Model.Map.Room_Strategy.TrapRoomStrategy;
 import Model.Map.Room_Strategy.TresorRoomStrategy;
 import Model.Utils.Procedure;
 
@@ -16,6 +17,10 @@ public class RoomFactory {
 
     private static Room getNewNormalRoom(){
         return Procedure.getRandomRoom(5,15,new NormalRoomStrategy());
+    }
+
+    private static Room getNewTrapRoom(){
+        return Procedure.getRandomRoom(5,10,new TrapRoomStrategy());
     }
 
     public Room getNewRoom(roomType r, int width , int height){
@@ -33,6 +38,9 @@ public class RoomFactory {
         switch (r){
             case MARCHAND -> {
                 return getNewMarchandRoom();
+            }
+            case TRAP -> {
+                return getNewTrapRoom();
             }
             default -> {
                 return getNewNormalRoom();

@@ -45,13 +45,28 @@ public class Tools {
                 return noeud;
             }
 
+            private double CoutPerType(Cell.CellType type){
+                if(pathType==-1){
+                    switch (type){
+                        case BORDER :
+                            return 1000;
+                        case VOID :
+                            return 100;
+                        default :
+                            return 0;
+                    }
+                }
+                return 0;
+            }
+
             private ArrayList<Noeud> getStandardNeighboors(){
                 ArrayList<Noeud> voisins = new ArrayList<>();
                 voisins.add(new Noeud(getX() - 1,getY()));
                 voisins.add(new Noeud(getX() + 1,getY()));
                 voisins.add(new Noeud(getX(),getY() - 1));
                 voisins.add(new Noeud(getX(),getY() + 1));
-                return voisins;
+                // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
+                return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
             }
 
             private ArrayList<Noeud> getDiagonalNeighboors(){
@@ -60,7 +75,18 @@ public class Tools {
                 voisins.add(new Noeud(getX() - 1,getY() + 1));
                 voisins.add(new Noeud(getX() + 1,getY() + 1));
                 voisins.add(new Noeud(getX() + 1,getY() - 1));
-                return voisins;
+                // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
+                return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+            }
+
+            private ArrayList<Noeud> getNoClipStandardNeighboors(){
+                ArrayList<Noeud> voisins = new ArrayList<>();
+                voisins.add(new Noeud(getX() - 1,getY()));
+                voisins.add(new Noeud(getX() + 1,getY()));
+                voisins.add(new Noeud(getX(),getY() - 1));
+                voisins.add(new Noeud(getX(),getY() + 1));
+                // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
+                return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()))).collect(Collectors.toCollection(ArrayList::new));
             }
         }
 
@@ -86,16 +112,15 @@ public class Tools {
 
             // Génération des voisins
             ArrayList<Noeud> voisins = switch (pathType) {
+                case -1 -> u.getNoClipStandardNeighboors();
                 case 0 -> u.getStandardNeighboors();
                 default -> u.getDiagonalNeighboors();
             };
-            // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-            voisins = voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
 
             //Parcous voisins
             for(Noeud n : voisins){
                 n.cameFrom=u;
-                n.cout = u.cout + n.Distance(u);
+                n.cout = u.cout + n.Distance(u) + n.CoutPerType(etage.get(n).getType());
                 n.heuristique = n.Distance(arrive);
 
                 if (!(closedList.contains(n)) || n.getScore() < u.getScore()){

@@ -40,7 +40,6 @@ public class Map {
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
             etage=new Etage(MapWidth,MapHeigth, new NormalEtageStrategy());
-            //etage.addRoom(Procedure.RandomRoomType(new RoomFactory()),new Position(etage.getWidth()/2,etage.getHeigth()/2));
             etages.add(etage);
         }
         else{
@@ -68,7 +67,7 @@ public class Map {
     }
 
     public void TRAP_ROOM(){
-        Etage etage = new Etage(MapWidth,MapHeigth, new TrapEtageStrategy());
+        Etage etage = new Etage(MapWidth,MapHeigth,new TrapEtageStrategy());
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         getPlayer().update(etage,pos);
         inTemporaryEtage=true;

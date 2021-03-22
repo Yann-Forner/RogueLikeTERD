@@ -13,12 +13,8 @@ public class Room extends Etage implements Comparable<Room> {
         strategy.composeRoom(this);
     }
 
-    public boolean noCollision(Etage etage,Position pos){
-        return strategy.noCollision(etage,this,pos);
-    }
-
-    public int getNbrMaxRoom() {
-        return strategy.getNbrMaxRoom();
+    public boolean noCollision(Etage etage){
+        return strategy.noCollision(etage,this);
     }
 
     public int getNbrMaxMobPerRoom() {

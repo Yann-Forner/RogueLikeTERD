@@ -32,10 +32,6 @@ public class Etage {
         strategy.composeEtage(this);
     }
 
-    public void setCells(ArrayList<ArrayList<Cell>> cells) {
-        Cells = cells;
-    }
-
     public void fillMap(Cell c) {
         Cells = new ArrayList<>();
         for (int i = 0; i < getHeigth(); i++) {
@@ -52,11 +48,11 @@ public class Etage {
         return Affichage.etage(this);
     }
 
-    public void addRoom(Room r, Position p) {
-        if (r.noCollision(this,p)) {
+    public void addRoom(Room r) {
+        if (r.noCollision(this)) {
             for (int y = 0; y < r.getHeigth(); y++) {
                 for (int x = 0; x < r.getWidth(); x++) {
-                    this.set(p.getX() + x, p.getY() + y, r.get(x, y));
+                    this.set(r.getAbsolutePos().getX() + x, r.getAbsolutePos().getY() + y, r.get(x, y));
                 }
             }
             Rooms.add(r);

@@ -16,6 +16,7 @@ public class Cell{
         TRAP_ROOM(Affichage.BLUE+"X"),
         SPECIAL(Affichage.YELLOW+"X");
 
+        //TODO sa change pour tout les types en même temps
         private String string;
 
         CellType(String s) {

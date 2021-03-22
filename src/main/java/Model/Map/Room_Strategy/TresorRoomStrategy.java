@@ -15,18 +15,13 @@ public class TresorRoomStrategy extends RoomStrategy{
     }
 
     @Override
-    public boolean noCollision(Etage etage, Room room, Position pos) {
-        return super.noCollision(etage,room,pos,0);
+    public boolean noCollision(Etage etage, Room room) {
+        return super.noCollision(etage,room,0);
     }
 
     @Override
     public int getNbrMaxMobPerRoom() {
         return 0;
-    }
-
-    @Override
-    public int getNbrMaxRoom() {
-        return 1;
     }
 
 }

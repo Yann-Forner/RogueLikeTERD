@@ -10,6 +10,7 @@ import Model.Map.Room;
 import Model.Map.RoomFactory;
 import Model.Map.Room_Strategy.RoomStrategy;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
@@ -52,13 +53,42 @@ public class Procedure {
     }
 
     /**
-     * Renvoit une position random dans la Room r.
+     * Renvoit une position random absolue dans la Room r.
      * @param r Room
      * @return Position
      */
     public static Position getRandomPosition(Room r){
         Position abs = r.getAbsolutePos();
         return getRandomPosition(r.getWidth()+abs.getX(),r.getHeigth()+abs.getY(),abs.getX(), abs.getY());
+    }
+
+    /**
+     * Renvoit une position random dans la Room r.
+     * @param r Room
+     * @return Position
+     */
+    public static Position getRelativeRandomPosition(Room r){
+        return getRandomPosition(r.getWidth(),r.getHeigth(),0,0);
+    }
+
+    /**
+     * Renvoit un mur Random dans la Room r.
+     * @param r Room
+     * @return Position
+     */
+    public static Position getRandomWall(Room r){
+        Position pos = Procedure.getRelativeRandomPosition(r);
+        while((pos.getX()!=0
+                && pos.getX()!= r.getWidth()
+                && pos.getY()!=0
+                && pos.getY()!=r.getHeigth())
+                || pos.equals(new Position(0,0))
+                || pos.equals(new Position(r.getWidth()-1,0))
+                || pos.equals(new Position(0,r.getHeigth()-1))
+                || pos.equals(new Position(r.getWidth()-1,+r.getHeigth()-1))){
+            pos =  Procedure.getRelativeRandomPosition(r);
+        }
+        return pos;
     }
 
     /**
@@ -106,15 +136,14 @@ public class Procedure {
     public static void setRandomRooms(Etage etage, EtageStrategy etageStrategy, RoomFactory.roomType type) {
         int nbrRooms = 0;
         long t1 = System.currentTimeMillis();
-        Room r = RoomFactory.getNewRoom(type);
         while (nbrRooms < etageStrategy.getNbrMaxRoom() && (System.currentTimeMillis()-t1<500)) {
+            Room r = RoomFactory.getNewRoom(type);
             Position pos = getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
             try {
-                etage.addRoom(r, pos);
                 r.setAbsolutePos(pos);
+                etage.addRoom(r);
                 nbrRooms++;
             } catch (CollisionRoom e) {}
-            r = RoomFactory.getNewRoom(type);
         }
         Collections.sort(etage.getRooms());
     }
@@ -192,22 +221,5 @@ public class Procedure {
         Position p2 = getAccesibleRandomPosition(false, etage);
         etage.get(p2).updateCell(true, Cell.CellType.DOWN);
     }
-
-    public static Room RandomRoomType(RoomFactory factory){
-        RoomFactory.roomType type=null;
-        RoomFactory.roomType[] values = RoomFactory.roomType.values();
-        int index = rand.nextInt(values.length);
-        int acc = 0;
-        for (RoomFactory.roomType t : values) {
-            if(acc == index){
-                type=t;
-                break;
-            }
-            acc++;
-        }
-        return factory.getNewRoom(type, rand.nextInt((20 - 5)) + 5, rand.nextInt((20 - 5)) + 5);
-    }
-
-
 
 }

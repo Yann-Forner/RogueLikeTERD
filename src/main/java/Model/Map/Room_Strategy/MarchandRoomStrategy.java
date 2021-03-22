@@ -18,8 +18,8 @@ public class MarchandRoomStrategy extends RoomStrategy{
     }
 
     @Override
-    public boolean noCollision(Etage etage, Room room, Position pos) {
-        return super.noCollision(etage,room,pos,0);
+    public boolean noCollision(Etage etage, Room room) {
+        return super.noCollision(etage,room,0);
     }
 
     @Override
@@ -27,8 +27,4 @@ public class MarchandRoomStrategy extends RoomStrategy{
         return 0;
     }
 
-    @Override
-    public int getNbrMaxRoom() {
-        return 1;
-    }
 }
