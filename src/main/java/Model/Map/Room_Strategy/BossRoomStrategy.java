@@ -42,7 +42,6 @@ public abstract class BossRoomStrategy extends RoomStrategy {
     }
 
     protected void fillInteriorCircle(Room r){
-        System.out.println(r.getWidth() + " "+ r.getHeigth());
         for (int y = 1; y < r.getHeigth()-1; y++) {
             boolean fstBorder = false;
             boolean sndBorder = false;
