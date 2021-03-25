@@ -17,7 +17,7 @@ public class NormalEtageStrategy extends EtageStrategy{
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.NORMAL);
         EtageFusion(etage);
         setSpecialCell(etage);
-        setMobs(etage);
+        //setMobs(etage);
     }
 
     @Override

@@ -8,7 +8,6 @@ public class BasicPlayer extends Entity {
 
     public BasicPlayer(Etage etage, Position position) {
         super(etage,position);
-        etage.get(position).setEntity(this);
     }
 
     @Override

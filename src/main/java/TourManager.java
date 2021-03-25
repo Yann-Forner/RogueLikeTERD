@@ -2,32 +2,39 @@ import Model.Entitys.BasicPlayer;
 import Model.Entitys.Entity;
 import Model.Map.Etage;
 import Model.Map.Map;
+import Model.Utils.Affichage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 
 public class TourManager {
 
-    private String input;
+    private BufferedReader reader;
     private BasicPlayer player;
     private Map map;
     private Etage etage;
 
-    public TourManager(String input, BasicPlayer player, Map map, Etage etage) {
-        this.input = input;
+    public TourManager(BufferedReader reader, BasicPlayer player, Map map, Etage etage) {
+        this.reader = reader;
         this.player = player;
         this.map = map;
         this.etage = etage;
     }
 
     public void playTour() {
-        processInput();
+        try{
+            processInput(reader.readLine());
+        }
+        catch (Exception e){}
         processEtage();
         processEntitys();
-
         etage = map.getCurrent();
+        Main.affichage();
     }
 
-    private void processInput() {
+    private void processInput(String input){
         switch (input) {
             case "z" , "\u001B[A" -> player.moveUp();
             case "q" , "\u001B[D" -> player.moveLeft();

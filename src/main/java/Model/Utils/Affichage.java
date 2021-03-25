@@ -32,10 +32,10 @@ public class Affichage {
                 sb.append(Affichage.RESET);
                 Cell cell = etage.get(x, y);
                 if(cell.toString().length()>2){
-                    sb.append(Affichage.RED_BACKGROUND).append(" ").append(Affichage.RESET).append(cell).append(Affichage.RED_BACKGROUND).append(" ").append(Affichage.RESET);
+                    sb.append(" ").append(cell).append(" ");
                 }
                 else{
-                    sb.append(Affichage.RED_BACKGROUND).append(" ").append(Affichage.RESET).append(cell);
+                    sb.append(" ").append(cell);
                 }
             }
             sb.append("\n");
@@ -168,4 +168,3 @@ public class Affichage {
     public static final String BRIGTH_GREY_BACKGROUND = "\u001B[107m";
 
 }
-

@@ -17,6 +17,8 @@ public abstract class Entity {
     protected Entity(Etage m, Position pos) {
         position = pos;
         etage = m;
+        etage.get(position).setEntity(this);
+        System.out.println(this.getPosition());
     }
 
     public Entity(Etage m, Position pos, int pv, int deplacement, int force){
