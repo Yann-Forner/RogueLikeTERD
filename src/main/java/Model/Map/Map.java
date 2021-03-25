@@ -2,6 +2,7 @@ package Model.Map;
 
 import Model.Entitys.BasicPlayer;
 import Model.Entitys.Ghost;
+import Model.Entitys.MonsterFactory;
 import Model.Map.Etage_Strategy.NormalEtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
@@ -23,8 +24,7 @@ public class Map {
         player=new BasicPlayer(etage,pos);
         etage.get(pos).setEntity(player);
 
-        Position p2 = Procedure.getAccesibleRandomPosition(true, etage);
-        Ghost g = new Ghost(etage, p2);
+        Ghost g = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
         etage.addEntity(g);
     }
 
