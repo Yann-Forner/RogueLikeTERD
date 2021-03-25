@@ -75,18 +75,6 @@ public class Etage {
         Cells.get(y).set(x, c);
     }
 
-    public Etage copyOf(){
-        Etage etage = new Etage(getWidth(), getHeigth(),getStrategy());
-        for (int y = 0; y < etage.getHeigth(); y++) {
-            for (int x = 0; x < etage.getWidth(); x++) {
-                etage.Cells.get(y).set(x,get(x,y).copyOf());
-            }
-        }
-        etage.Rooms=Rooms;
-        etage.Entitys=Entitys;
-        return etage;
-    }
-
     public int getWidth() {
         return Width;
     }

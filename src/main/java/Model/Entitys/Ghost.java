@@ -6,8 +6,6 @@ import Model.Utils.Position;
 import Model.Utils.Tools;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class Ghost extends Entity {
     public Ghost(Etage m, Position pos, int deplacementCooldown) {
@@ -24,7 +22,7 @@ public class Ghost extends Entity {
             ArrayList<Position> pathToPlayer = Tools.Astar(etage, getPosition(), mainPlayer.getPosition(), Tools.PATH_CROSS);
             Position nextPosition;
 
-            if(pathToPlayer != null && pathToPlayer.size() > 0)
+            if(pathToPlayer.size() > 1)
                 nextPosition = pathToPlayer.get(pathToPlayer.size()-2);
             else
                 nextPosition = getPosition();

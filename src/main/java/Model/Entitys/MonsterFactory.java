@@ -6,7 +6,7 @@ import Model.Utils.Procedure;
 
 public class MonsterFactory {
     public enum MonsterType {
-        GHOST
+        GHOST,
     }
 
     private static Ghost getNewGhost(Etage etage, Position pos){

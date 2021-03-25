@@ -3,7 +3,7 @@ package Model.Map;
 import Model.Entitys.BasicPlayer;
 import Model.Entitys.Ghost;
 import Model.Entitys.MonsterFactory;
-import Model.Map.Etage_Strategy.NormalEtageStrategy;
+import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
@@ -18,7 +18,7 @@ public class Map {
     private final BasicPlayer player;
 
     public Map(){
-        Etage etage=new Etage(MapWidth,MapHeigth, new NormalEtageStrategy());
+        Etage etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos);
@@ -44,7 +44,8 @@ public class Map {
         Etage etage;
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
-            etage=new Etage(MapWidth,MapHeigth, new NormalEtageStrategy());
+            etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
+            System.out.println(etage.getStrategy());
             etages.add(etage);
         }
         else{

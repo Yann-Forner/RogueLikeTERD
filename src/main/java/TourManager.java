@@ -2,18 +2,15 @@ import Model.Entitys.BasicPlayer;
 import Model.Entitys.Entity;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Utils.Affichage;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 
 public class TourManager {
 
-    private BufferedReader reader;
-    private BasicPlayer player;
-    private Map map;
+    private final BufferedReader reader;
+    private final BasicPlayer player;
+    private final Map map;
     private Etage etage;
 
     public TourManager(BufferedReader reader, BasicPlayer player, Map map, Etage etage) {
@@ -21,6 +18,7 @@ public class TourManager {
         this.player = player;
         this.map = map;
         this.etage = etage;
+        Main.affichage(etage);
     }
 
     public void playTour() {
@@ -31,7 +29,7 @@ public class TourManager {
         processEtage();
         processEntitys();
         etage = map.getCurrent();
-        Main.affichage();
+        Main.affichage(etage);
     }
 
     private void processInput(String input){
