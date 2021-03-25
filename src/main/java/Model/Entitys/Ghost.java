@@ -15,8 +15,13 @@ public class Ghost extends Entity {
 
     @Override
     public void updateEntity(Etage etage, BasicPlayer mainPlayer) {
+        getEtage().get(getPosition()).setEntity(null);
+
         ArrayList<Position> pathToPlayer = Tools.Astar(etage, getPosition(), mainPlayer.getPosition(), Tools.PATH_CROSS);
         Position nextPosition = pathToPlayer.get(1);
+        setPosition(nextPosition);
+
+        etage.get(getPosition()).setEntity(this);
     }
 
     @Override

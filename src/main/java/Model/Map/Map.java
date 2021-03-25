@@ -1,6 +1,7 @@
 package Model.Map;
 
 import Model.Entitys.BasicPlayer;
+import Model.Entitys.Ghost;
 import Model.Map.Etage_Strategy.NormalEtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
@@ -21,6 +22,9 @@ public class Map {
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos);
         etage.get(pos).setEntity(player);
+
+        Ghost g = new Ghost(etage, Procedure.getAccesibleRandomPosition(true, etage));
+        etage.get(pos).setEntity(g);
     }
 
     public Etage getCurrent(){

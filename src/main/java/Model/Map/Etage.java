@@ -6,11 +6,8 @@ import Model.Entitys.Entity;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import Model.Utils.Procedure;
-import Model.Utils.Tools;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Etage {
     protected int Width;
