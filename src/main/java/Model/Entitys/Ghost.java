@@ -8,10 +8,6 @@ public class Ghost extends Entity {
         super(m, pos);
     }
 
-    @Override
-    public void updateEntity() {
-
-    }
 
     @Override
     public String toString() {

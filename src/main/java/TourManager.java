@@ -58,7 +58,7 @@ public class TourManager {
         ArrayList<Entity> entitys = etage.getEntitys();
 
         for (Entity e : entitys) {
-            e.updateEntity();
+            e.updateEntity(etage);
         }
     }
 }
