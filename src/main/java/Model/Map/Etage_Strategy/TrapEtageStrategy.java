@@ -75,6 +75,6 @@ public class TrapEtageStrategy extends EtageStrategy{
 
     @Override
     public int getNbrMaxRoom() {
-        return 15;
+        return 20;
     }
 }

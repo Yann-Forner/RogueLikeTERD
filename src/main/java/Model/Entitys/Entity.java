@@ -7,6 +7,11 @@ import Model.Utils.Position;
 public abstract class Entity {
     private Position position;
     private Etage etage;
+    //STATS
+    private int pv;
+    private int deplacement;
+    private int force;
+    private final Inventory inventory = new Inventory();
 
     public Entity(Etage m, Position pos) {
         position = pos;
