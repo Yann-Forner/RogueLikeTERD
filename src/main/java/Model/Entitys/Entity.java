@@ -13,9 +13,33 @@ public abstract class Entity {
     private int force;
     private final Inventory inventory = new Inventory();
 
-    public Entity(Etage m, Position pos) {
+    protected Entity(Etage m, Position pos) {
         position = pos;
         etage = m;
+    }
+
+    public Entity(Etage m, Position pos, int pv, int deplacement, int force){
+        this(m,pos);
+        this.pv=pv;
+        this.deplacement=deplacement;
+        this.force=force;
+    }
+
+    public boolean updatePV(int pv){
+        this.pv = this.pv + pv;
+        return this.pv>0;
+    }
+
+    public int getPv(){
+        return pv;
+    }
+
+    public int getDeplacement(){
+        return deplacement;
+    }
+
+    public int getForce(){
+        return force;
     }
 
    // public abstract void update();
