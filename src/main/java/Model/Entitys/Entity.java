@@ -1,5 +1,6 @@
 package Model.Entitys;
 
+import Model.Entitys.Inventaires.Inventory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
