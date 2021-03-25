@@ -1,4 +1,4 @@
-package Model.Entitys;
+package Model.Entitys.Inventaires;
 
 import java.util.ArrayList;
 

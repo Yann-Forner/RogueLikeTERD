@@ -19,7 +19,6 @@ public class Ghost extends Entity {
         Position nextPosition = pathToPlayer.get(1);
     }
 
-
     @Override
     public String toString() {
         return null;
