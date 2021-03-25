@@ -46,14 +46,14 @@ public class Map {
             etage = etages.get(currentIndex + 1);
         }
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        getPlayer().update(etage,pos);
+        getPlayer().updateEtage(etage,pos);
     }
 
     public void UP(){
         if(inTemporaryEtage){
             Etage etage=etages.get(etages.size()-1);
             Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-            getPlayer().update(etage,pos);
+            getPlayer().updateEtage(etage,pos);
             inTemporaryEtage=false;
         }
         else{
@@ -61,7 +61,7 @@ public class Map {
             if(currentIndex!=0){
                 Etage etage=etages.get(currentIndex-1);
                 Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-                getPlayer().update(etage,pos);
+                getPlayer().updateEtage(etage,pos);
             }
         }
     }
@@ -69,7 +69,7 @@ public class Map {
     public void TRAP_ROOM(){
         Etage etage = new Etage(MapWidth,MapHeigth,new TrapEtageStrategy());
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        getPlayer().update(etage,pos);
+        getPlayer().updateEtage(etage,pos);
         inTemporaryEtage=true;
     }
 

@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 public class Tools {
 
+
+    public static final int PATH_CROSS = 0;
+    public static final int PATH_DIAG = 1;
+
     /**
      * Algoritme A* qui permet de trouver le plus court chemin entre la Position de depart et celle d'arrivé.
      * @param etage Etage

@@ -12,7 +12,7 @@ public class BasicPlayer extends Entity {
     }
 
     @Override
-    public void updateEntity(Etage etage) {
+    public void updateEntity(Etage etage, BasicPlayer player) {
 
     }
 
