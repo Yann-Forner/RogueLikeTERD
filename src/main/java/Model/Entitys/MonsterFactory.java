@@ -10,7 +10,7 @@ public class MonsterFactory {
     }
 
     private static Ghost getNewGhost(Etage etage, Position pos){
-        return new Ghost(etage,pos);
+        return new Ghost(etage,pos, 2);
     }
 
     public static Ghost getNewMonster(Etage etage, MonsterType m){
