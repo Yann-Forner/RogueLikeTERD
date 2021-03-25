@@ -32,10 +32,10 @@ public class Affichage {
                 sb.append(Affichage.RESET);
                 Cell cell = etage.get(x, y);
                 if(cell.toString().length()>2){
-                    sb.append(" ").append(cell).append(" ");
+                    sb.append(Affichage.RED_BACKGROUND).append(" ").append(Affichage.RESET).append(cell).append(Affichage.RED_BACKGROUND).append(" ").append(Affichage.RESET);
                 }
                 else{
-                    sb.append(" ").append(cell);
+                    sb.append(Affichage.RED_BACKGROUND).append(" ").append(Affichage.RESET).append(cell);
                 }
             }
             sb.append("\n");

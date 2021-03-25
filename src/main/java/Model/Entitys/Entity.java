@@ -25,6 +25,8 @@ public abstract class Entity {
         this.force=force;
     }
 
+    public abstract void updateEntity();
+
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;
         return this.pv>0;

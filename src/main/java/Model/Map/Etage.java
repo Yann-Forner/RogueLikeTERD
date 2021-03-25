@@ -102,6 +102,10 @@ public class Etage {
         return strategy;
     }
 
+    public ArrayList<Entity> getEntitys() {
+        return Entitys;
+    }
+
     public ArrayList<Room> getRooms() {
         return Rooms;
     }
