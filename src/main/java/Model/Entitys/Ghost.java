@@ -10,17 +10,31 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class Ghost extends Entity {
-    public Ghost(Etage m, Position pos) {
+    public Ghost(Etage m, Position pos, int deplacementCooldown) {
         super(m, pos);
+        setDeplacement(deplacementCooldown - 1);
+        setDeplacementCooldown(getDeplacement());
     }
 
     @Override
     public void updateEntity(Etage etage, BasicPlayer mainPlayer) {
         getEtage().get(getPosition()).setEntity(null);
 
-        ArrayList<Position> pathToPlayer = Tools.Astar(etage, getPosition(), mainPlayer.getPosition(), Tools.PATH_DIAG);
-        Position nextPosition = pathToPlayer.get(pathToPlayer.size()-2);
-        setPosition(nextPosition);
+        if(getDeplacementCooldown() == 0) {
+            ArrayList<Position> pathToPlayer = Tools.Astar(etage, getPosition(), mainPlayer.getPosition(), Tools.PATH_CROSS);
+            Position nextPosition;
+
+            if(pathToPlayer != null && pathToPlayer.size() > 0)
+                nextPosition = pathToPlayer.get(pathToPlayer.size()-2);
+            else
+                nextPosition = getPosition();
+
+            setPosition(nextPosition);
+            setDeplacementCooldown(getDeplacement());
+        }
+        else{
+            setDeplacementCooldown(getDeplacementCooldown() - 1);
+        }
 
         etage.get(getPosition()).setEntity(this);
     }

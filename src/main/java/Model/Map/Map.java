@@ -24,7 +24,7 @@ public class Map {
         etage.get(pos).setEntity(player);
 
         Position p2 = Procedure.getAccesibleRandomPosition(true, etage);
-        Ghost g = new Ghost(etage, p2);
+        Ghost g = new Ghost(etage, p2, 2);
         etage.addEntity(g);
     }
 

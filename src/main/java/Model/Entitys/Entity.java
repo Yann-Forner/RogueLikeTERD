@@ -11,6 +11,7 @@ public abstract class Entity {
     //STATS
     private int pv;
     private int deplacement;
+    private int deplacementCooldown;
     private int force;
     private final Inventory inventory = new Inventory();
 
@@ -25,6 +26,7 @@ public abstract class Entity {
         this(m,pos);
         this.pv=pv;
         this.deplacement=deplacement;
+        this.deplacementCooldown = deplacement;
         this.force=force;
     }
 
@@ -41,6 +43,18 @@ public abstract class Entity {
 
     public int getDeplacement(){
         return deplacement;
+    }
+
+    public int getDeplacementCooldown() {
+        return deplacementCooldown;
+    }
+
+    public void setDeplacement(int deplacement) {
+        this.deplacement = deplacement;
+    }
+
+    public void setDeplacementCooldown(int deplacementCooldown) {
+        this.deplacementCooldown = deplacementCooldown;
     }
 
     public int getForce(){
