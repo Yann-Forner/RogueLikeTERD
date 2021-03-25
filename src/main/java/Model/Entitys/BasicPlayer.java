@@ -12,11 +12,11 @@ public class BasicPlayer extends Entity {
     }
 
     @Override
-    public void updateEntity() {
+    public void updateEntity(Etage etage) {
 
     }
 
-    public void update(Etage etage, Position position){
+    public void updateEtage(Etage etage, Position position){
         getEtage().get(getPosition()).setEntity(null);
         setEtage(etage);
         setPosition(position);
