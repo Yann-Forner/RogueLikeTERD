@@ -127,6 +127,17 @@ public class Procedure {
         Position pos = getRandomPosition(MaxSize, MaxSize, MinSize, MinSize);
         return new Room(pos.getX(),pos.getY(),strategy);
     }
+    /**
+     * Renvoit une Room generé aleatoirement avec une taille impaire pour avoir un centre.
+     * @param MinSize int
+     * @param MaxSize int
+     * @return Room
+     */
+    public static Room getRandomImpairSizeRoom(int MinSize, int MaxSize, RoomStrategy strategy) {
+        int size = rand.nextInt((MaxSize - MinSize)) + MinSize;
+        if(size%2==0)++size;
+        return new Room(size,size,strategy);
+    }
 
     /**
      * Genere nbrMaxRooms dans l'Etage.

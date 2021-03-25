@@ -9,7 +9,7 @@ public class Inventory {
     private ArrayList<Utilitaires> utilitaires;
 
     private Weapon currentWeapon=null;
-    private Weapon currentArmure=null;
+    private Armures currentArmure=null;
 
     public Inventory(){
         armes = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Inventory {
         return currentWeapon;
     }
 
-    public Weapon getCurrentArmure() {
+    public Armures getCurrentArmure() {
         return currentArmure;
     }
 
@@ -32,6 +32,13 @@ public class Inventory {
         return conso;
     }
 
+    public int getWeaponDamages(){
+        return currentWeapon.getDegats();
+    }
+
+    public int getArmureProtection(){
+        return currentArmure.getProtection();
+    }
 
     public ArrayList<Weapon> getArmes() {
         return armes;
