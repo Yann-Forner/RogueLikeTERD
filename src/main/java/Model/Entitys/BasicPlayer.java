@@ -8,10 +8,14 @@ public class BasicPlayer extends Entity {
 
     public BasicPlayer(Etage etage, Position position) {
         super(etage,position);
-        etage.get(position).setEntity(this);
     }
 
-    public void update(Etage etage,Position position){
+    @Override
+    public void updateEntity(Etage etage, BasicPlayer player) {
+
+    }
+
+    public void updateEtage(Etage etage, Position position){
         getEtage().get(getPosition()).setEntity(null);
         setEtage(etage);
         setPosition(position);

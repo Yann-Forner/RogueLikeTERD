@@ -1,5 +1,6 @@
 package Model.Entitys;
 
+import Model.Entitys.Inventaires.Inventory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
@@ -16,6 +17,8 @@ public abstract class Entity {
     protected Entity(Etage m, Position pos) {
         position = pos;
         etage = m;
+        etage.get(position).setEntity(this);
+        System.out.println(this.getPosition());
     }
 
     public Entity(Etage m, Position pos, int pv, int deplacement, int force){
@@ -24,6 +27,8 @@ public abstract class Entity {
         this.deplacement=deplacement;
         this.force=force;
     }
+
+    public abstract void updateEntity(Etage etage, BasicPlayer mainPLayer);
 
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;

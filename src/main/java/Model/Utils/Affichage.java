@@ -168,5 +168,3 @@ public class Affichage {
     public static final String BRIGTH_GREY_BACKGROUND = "\u001B[107m";
 
 }
-
-

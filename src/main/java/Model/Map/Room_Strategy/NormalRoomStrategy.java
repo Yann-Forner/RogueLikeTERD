@@ -2,10 +2,9 @@ package Model.Map.Room_Strategy;
 
 
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Map.Cell;
 import Model.Map.Room;
-import Model.Utils.Position;
+import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
 public class NormalRoomStrategy extends RoomStrategy{

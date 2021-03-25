@@ -1,6 +1,7 @@
 package Model.Map;
 
 import Model.Entitys.BasicPlayer;
+import Model.Entitys.Ghost;
 import Model.Map.Etage_Strategy.NormalEtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
@@ -21,6 +22,10 @@ public class Map {
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos);
         etage.get(pos).setEntity(player);
+
+        Position p2 = Procedure.getAccesibleRandomPosition(true, etage);
+        Ghost g = new Ghost(etage, p2);
+        etage.addEntity(g);
     }
 
     public Etage getCurrent(){
@@ -46,14 +51,14 @@ public class Map {
             etage = etages.get(currentIndex + 1);
         }
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        getPlayer().update(etage,pos);
+        getPlayer().updateEtage(etage,pos);
     }
 
     public void UP(){
         if(inTemporaryEtage){
             Etage etage=etages.get(etages.size()-1);
             Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-            getPlayer().update(etage,pos);
+            getPlayer().updateEtage(etage,pos);
             inTemporaryEtage=false;
         }
         else{
@@ -61,7 +66,7 @@ public class Map {
             if(currentIndex!=0){
                 Etage etage=etages.get(currentIndex-1);
                 Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-                getPlayer().update(etage,pos);
+                getPlayer().updateEtage(etage,pos);
             }
         }
     }
@@ -69,7 +74,7 @@ public class Map {
     public void TRAP_ROOM(){
         Etage etage = new Etage(MapWidth,MapHeigth,new TrapEtageStrategy());
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        getPlayer().update(etage,pos);
+        getPlayer().updateEtage(etage,pos);
         inTemporaryEtage=true;
     }
 
