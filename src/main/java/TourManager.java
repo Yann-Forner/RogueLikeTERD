@@ -5,8 +5,11 @@ import Model.Map.Map;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class TourManager {
+public class TourManager{
 
     private final BufferedReader reader;
     private final BasicPlayer player;
@@ -18,7 +21,7 @@ public class TourManager {
         this.player = player;
         this.map = map;
         this.etage = etage;
-        Main.affichage(etage);
+        schedule();
     }
 
     public void playTour() {
@@ -27,7 +30,6 @@ public class TourManager {
         }
         catch (Exception e){}
         processEtage();
-        processEntitys();
         etage = map.getCurrent();
         Main.affichage(etage);
     }
@@ -65,5 +67,11 @@ public class TourManager {
         for (Entity e : entitys) {
             e.updateEntity(etage, player);
         }
+    }
+
+    public void schedule() {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        //executor.scheduleAtFixedRate(this::Main.affichage(etage), 0, 200, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(this::processEntitys,0,1,TimeUnit.SECONDS);
     }
 }
