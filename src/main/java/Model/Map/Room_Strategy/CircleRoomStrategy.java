@@ -7,7 +7,7 @@ import Model.Utils.Position;
 
 import java.util.ArrayList;
 
-public abstract class BossRoomStrategy extends RoomStrategy {
+public abstract class CircleRoomStrategy extends RoomStrategy {
 
 
     protected void BresenhamCircle(Room room){

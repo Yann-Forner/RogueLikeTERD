@@ -3,7 +3,7 @@ package Model.Map.Room_Strategy;
 import Model.Map.Etage;
 import Model.Map.Room;
 
-public class MiniBossRoomStrategy extends BossRoomStrategy{
+public class MiniBossRoomStrategy extends CircleRoomStrategy {
     @Override
     public void composeRoom(Room r) {
         super.BresenhamCircle(r);
