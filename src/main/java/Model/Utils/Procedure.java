@@ -139,6 +139,26 @@ public class Procedure {
         return new Room(size,size,strategy);
     }
 
+
+    public static void setRandomRooms(Etage etage,EtageStrategy etageStrategy ,ArrayList<RoomFactory.roomType> roomTypes ){
+        int nbrRooms = 0;
+        long t1 = System.currentTimeMillis();
+        while (nbrRooms < etageStrategy.getNbrMaxRoom() && nbrRooms < roomTypes.size()  &&  (System.currentTimeMillis()-t1<500) ){
+            Room r = RoomFactory.getNewRoom(roomTypes.get(nbrRooms));
+            Position pos =  getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
+            try {
+                r.setAbsolutePos(pos);
+                etage.addRoom(r);
+                nbrRooms++;
+            }catch (CollisionRoom e){
+
+            }
+        }
+        System.out.println(etage.getRooms());
+        Collections.sort(etage.getRooms());
+    }
+
+
     /**
      * Genere nbrMaxRooms dans l'Etage.
      * @param etage Etage
@@ -149,13 +169,19 @@ public class Procedure {
         long t1 = System.currentTimeMillis();
         while (nbrRooms < etageStrategy.getNbrMaxRoom() && (System.currentTimeMillis()-t1<500)) {
             Room r = RoomFactory.getNewRoom(type);
-            Position pos = getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
+           Position pos;
+            if (etageStrategy.getNbrMaxRoom() == 1) {
+                 pos = new Position(((etage.getWidth()-1)/2)- r.getWidth()/2,(etage.getHeigth())/2- r.getHeigth()/2);
+            }else {
+                 pos = getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
+            }
             try {
                 r.setAbsolutePos(pos);
                 etage.addRoom(r);
                 nbrRooms++;
             } catch (CollisionRoom e) {}
         }
+        System.out.println(etageStrategy);
         Collections.sort(etage.getRooms());
     }
 
@@ -188,11 +214,11 @@ public class Procedure {
      */
     public static void setRandomMob(Etage etage) {
         for (Room r : etage.getRooms()) {
-            int nbrMobs = rand.nextInt(r.getNbrMaxMobPerRoom())+1;
-            for (int i = 0; i < nbrMobs; i++) {
-                setRandomMob(r, etage);
+            int nbrMobs = r.getNbrMaxMobPerRoom()==0 ? 0 : rand.nextInt(r.getNbrMaxMobPerRoom())+1;
+                for (int i = 0; i < nbrMobs; i++) {
+                    setRandomMob(r, etage);
+                }
             }
-        }
     }
 
     /**

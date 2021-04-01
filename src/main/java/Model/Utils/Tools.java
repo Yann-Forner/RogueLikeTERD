@@ -164,6 +164,7 @@ public class Tools {
     }
 
     private static void ligne(Etage etage, Position p1, Position p2, Cell.CellType type) {
+        type.setString(Affichage.BLUE+".");
         ArrayList<Position> chemin = new ArrayList<>();
         chemin.add(p1);
         Position lastPos = chemin.get(chemin.size() - 1);
@@ -186,6 +187,7 @@ public class Tools {
         for (Position p : chemin) {
             etage.get(p).updateCell(true, type);
         }
+        type.setString(Affichage.GREEN+".");
     }
 
 

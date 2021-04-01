@@ -12,9 +12,16 @@ public abstract class EtageStrategy {
 
     public static EtageStrategy getRandomStrategy(){
         ArrayList<EtageStrategy> strategies = new ArrayList<>();
-        strategies.add(new NormalEtageStrategy());
-        //strategies.add(new TrapEtageStrategy());
-        strategies.add(new CircleEtageStrategy());
+        strategies.add(new NormalEtageStrategy());// 1/10
+        strategies.add(new DonjonStrategy());// 4/10
+        strategies.add(new DonjonStrategy());
+        strategies.add(new DonjonStrategy());
+        strategies.add(new DonjonStrategy());
+        strategies.add(new ReposEtageStrategy());// 2/10
+        strategies.add(new ReposEtageStrategy());
+        strategies.add(new BossEtageStategy()); // 2/10
+        strategies.add(new BossEtageStategy());
+        strategies.add(new CircleEtageStrategy());// 1/10
         return strategies.get(Procedure.getRandomInt(strategies.size(), 0));
     }
 
@@ -28,6 +35,7 @@ public abstract class EtageStrategy {
             Position pos2= Procedure.getRandomPosition(etage.getRooms().get(i+1));
             Tools.ligne(etage, pos1, pos2, Cell.CellType.NORMAL,Procedure.getRandomInt(6,0));
         }
+        System.out.println(etage);
         //Ajout des murs aux chemins
         for (int y = 0; y < etage.getHeigth(); y++) {
             for (int x = 0; x < etage.getWidth(); x++) {

@@ -8,7 +8,7 @@ public class CircleEtageStrategy extends  EtageStrategy{
 
     @Override
     public void composeEtage(Etage etage) {
-        Procedure.setRandomRooms(etage, this, RoomFactory.roomType.MINIBOSS);
+        Procedure.setRandomRooms(etage, this, RoomFactory.roomType.CIRCLENORMAL);
         EtageFusion(etage);
         setSpecialCell(etage);
         //setMobs(etage);
