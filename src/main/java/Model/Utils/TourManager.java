@@ -1,7 +1,10 @@
+package Model.Utils;
+
+import Model.Entitys.AbstractMonster;
 import Model.Entitys.BasicPlayer;
-import Model.Entitys.Entity;
 import Model.Map.Etage;
 import Model.Map.Map;
+import Model.Utils.Main;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -63,16 +66,16 @@ public class TourManager{
     }
 
     private void processEntitys() {
-        ArrayList<Entity> entitys = etage.getEntitys();
-
-        for (Entity e : entitys) {
-            e.updateEntity(etage, player);
+        ArrayList<AbstractMonster> monsters = etage.getMonsters();
+        for (AbstractMonster m : monsters) {
+            m.updateMonster(etage,player);
         }
+        //Model.Utils.Main.affichage(etage);
     }
 
     public void schedule() {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        //executor.scheduleAtFixedRate(this::Main.affichage(etage), 0, 200, TimeUnit.MILLISECONDS);
-        executor.scheduleAtFixedRate(this::processEntitys,0,1,TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(this::processEntitys,0,700,TimeUnit.MILLISECONDS);
     }
 }

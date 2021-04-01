@@ -42,6 +42,7 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
     }
 
     protected void fillInteriorCircle(Room r){
+
         for (int y = 1; y < r.getHeigth()-1; y++) {
             boolean fstBorder = false;
             boolean sndBorder = false;

@@ -9,7 +9,7 @@ public class RoomFactory {
     }
     private static Room getNewMiniBossRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new MiniBossRoomStrategy());}
 
-    private static Room getNewBigBossRoom(){return Procedure.getRandomImpairSizeRoom(19,39,new BigBossRoomStrategy());}
+    private static Room getNewBigBossRoom(){return Procedure.getRandomImpairSizeRoom(19,36,new BigBossRoomStrategy());}
 
     private static Room getNewMarchandRoom(){
         return new Room(5,5,new MarchandRoomStrategy());
@@ -27,7 +27,7 @@ public class RoomFactory {
 
     private static Room getNewReposRoom(){return new Room(10,10,new ReposRoomStrategy());}
 
-    private static Room getNewCircleRoom(){return Procedure.getRandomRoom(5,15,new NormalCircleRoom());}
+    private static Room getNewCircleRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new NormalCircleRoom());}
 
     public static Room getNewRoom(roomType r){
         switch (r){

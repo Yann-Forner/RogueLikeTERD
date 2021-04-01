@@ -2,11 +2,11 @@ package Model.Map;
 
 
 import Exceptions.CollisionRoom;
+import Model.Entitys.AbstractMonster;
 import Model.Entitys.Entity;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import Model.Utils.Procedure;
 
 import java.util.*;
 
@@ -15,9 +15,8 @@ public class Etage {
     protected int Heigth;
     public ArrayList<ArrayList<Cell>> Cells;
     protected ArrayList<Room> Rooms = new ArrayList<>();
-    protected ArrayList<Entity> Entitys = new ArrayList<>();
+    protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
     private EtageStrategy strategy;
-    private Position trapRoomPosition;
 
     protected Etage(int Width, int Heigth) {
         this.Width = Width;
@@ -60,15 +59,9 @@ public class Etage {
         }
     }
 
-    public void setTrapCell() {
-        Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
-        get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
-        trapRoomPosition = accesibleRandomPosition;
-    }
-
-    public void addEntity(Entity e) {
-        get(e.getPosition()).setEntity(e);
-        Entitys.add(e);
+    public void addMonster(AbstractMonster m) {
+        get(m.getPosition()).setEntity(m);
+        Monsters.add(m);
     }
 
     public Cell get(int x, int y) {
@@ -77,10 +70,6 @@ public class Etage {
 
     public Cell get(Position pos) {
         return get(pos.getX(), pos.getY());
-    }
-
-    public Position getTrapRoomPosition() {
-        return trapRoomPosition;
     }
 
     public void set(int x, int y, Cell c) {
@@ -99,8 +88,8 @@ public class Etage {
         return strategy;
     }
 
-    public ArrayList<Entity> getEntitys() {
-        return Entitys;
+    public ArrayList<AbstractMonster> getMonsters() {
+        return Monsters;
     }
 
     public ArrayList<Room> getRooms() {
