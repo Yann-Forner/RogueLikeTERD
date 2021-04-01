@@ -7,6 +7,7 @@ import Model.Entitys.Entity;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Procedure;
 
 import java.util.*;
 
@@ -17,6 +18,7 @@ public class Etage {
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
     private EtageStrategy strategy;
+    private Position trapRoomPosition;
 
     protected Etage(int Width, int Heigth) {
         this.Width = Width;
@@ -64,6 +66,11 @@ public class Etage {
         Monsters.add(m);
     }
 
+    public void setTrapCell() {
+        Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
+        get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
+    }
+
     public Cell get(int x, int y) {
         return Cells.get(y).get(x);
     }
@@ -74,6 +81,10 @@ public class Etage {
 
     public void set(int x, int y, Cell c) {
         Cells.get(y).set(x, c);
+    }
+
+    public Position getTrapRoomPosition() {
+        return trapRoomPosition;
     }
 
     public int getWidth() {
