@@ -21,13 +21,13 @@ public abstract class EtageStrategy {
     public abstract void composeEtage(Etage etage);
 
     protected void EtageFusion(Etage etage){
+
         //Trace du chemin
         for (int i = 0; i < etage.getRooms().size()-1; i++) {
             Position pos1= Procedure.getRandomPosition(etage.getRooms().get(i));
             Position pos2= Procedure.getRandomPosition(etage.getRooms().get(i+1));
             Tools.ligne(etage, pos1, pos2, Cell.CellType.NORMAL,Procedure.getRandomInt(6,0));
         }
-
         //Ajout des murs aux chemins
         for (int y = 0; y < etage.getHeigth(); y++) {
             for (int x = 0; x < etage.getWidth(); x++) {

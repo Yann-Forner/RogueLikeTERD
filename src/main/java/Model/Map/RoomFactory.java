@@ -5,7 +5,7 @@ import Model.Utils.Procedure;
 
 public class RoomFactory {
     public enum roomType {
-        TRESOR,NORMAL,MINIBOSS,BOSS,MARCHAND,REPOS,TRAP
+        TRESOR,NORMAL,CIRCLENORMAL,MINIBOSS,BOSS,MARCHAND,REPOS,TRAP
     }
     private static Room getNewMiniBossRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new MiniBossRoomStrategy());}
 
@@ -27,6 +27,8 @@ public class RoomFactory {
 
     private static Room getNewReposRoom(){return new Room(10,10,new ReposRoomStrategy());}
 
+    private static Room getNewCircleRoom(){return Procedure.getRandomRoom(5,15,new NormalCircleRoom());}
+
     public static Room getNewRoom(roomType r){
         switch (r){
             case MINIBOSS -> {
@@ -43,6 +45,9 @@ public class RoomFactory {
             }
             case MARCHAND -> {
                 return getNewMarchandRoom();
+            }
+            case CIRCLENORMAL -> {
+                return getNewCircleRoom();
             }
             case TRAP -> {
                 return getNewTrapRoom();
