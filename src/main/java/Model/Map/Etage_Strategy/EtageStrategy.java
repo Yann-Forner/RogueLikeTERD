@@ -11,11 +11,7 @@ import java.util.ArrayList;
 public abstract class EtageStrategy {
 
     public static EtageStrategy getRandomStrategy(){
-        ArrayList<EtageStrategy> strategies = new ArrayList<>();
-        strategies.add(new NormalEtageStrategy());
-        //strategies.add(new TrapEtageStrategy());
-        strategies.add(new CircleEtageStrategy());
-        return strategies.get(Procedure.getRandomInt(strategies.size(), 0));
+        return new NormalEtageStrategy();
     }
 
     public abstract void composeEtage(Etage etage);

@@ -1,6 +1,8 @@
 package Model.Utils;
 
 import Exceptions.CollisionRoom;
+import Model.Entitys.AbstractMonster;
+import Model.Entitys.MonsterFactory;
 import Model.Map.Cell;
 import Model.Entitys.BasicPlayer;
 import Model.Entitys.Entity;
@@ -167,19 +169,10 @@ public class Procedure {
     private static void setRandomMob(Room r, Etage etage) {
         Position pos = getAccesibleRandomPosition(true,etage,r);
         Cell cell = etage.get(pos);
-        Entity e=new BasicPlayer(etage,pos){
-            @Override
-            public String toString() {
-                if(System.getProperty("os.name").equals("Linux")){
-                    return "\uD83D\uDC7B";
-                }
-                else{
-                    return Affichage.PURPLE+Affichage.BOLD+"W";
-                }
-            }
-        };
-        cell.setEntity(e);
-        etage.addEntity(e);
+        //TODO passer le montre en parametre
+        AbstractMonster m = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
+        cell.setEntity(m);
+        etage.addMonster(m);
     }
 
     /**

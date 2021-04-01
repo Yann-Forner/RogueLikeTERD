@@ -25,7 +25,7 @@ public class Map {
         etage.get(pos).setEntity(player);
 
         Ghost g = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
-        etage.addEntity(g);
+        etage.addMonster(g);
     }
 
     public Etage getCurrent(){

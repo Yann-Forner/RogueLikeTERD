@@ -8,10 +8,10 @@ import Model.Utils.Position;
 public abstract class Entity {
     private Position position;
     private Etage etage;
+    private int vision_radius;
     //STATS
     private int pv;
     private int deplacement;
-    private int deplacementCooldown;
     private int force;
     private final Inventory inventory = new Inventory();
 
@@ -25,11 +25,8 @@ public abstract class Entity {
         this(m,pos);
         this.pv=pv;
         this.deplacement=deplacement;
-        this.deplacementCooldown = deplacement;
         this.force=force;
     }
-
-    public abstract void updateEntity(Etage etage, BasicPlayer mainPLayer);
 
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;
@@ -44,23 +41,13 @@ public abstract class Entity {
         return deplacement;
     }
 
-    public int getDeplacementCooldown() {
-        return deplacementCooldown;
-    }
-
     public void setDeplacement(int deplacement) {
         this.deplacement = deplacement;
-    }
-
-    public void setDeplacementCooldown(int deplacementCooldown) {
-        this.deplacementCooldown = deplacementCooldown;
     }
 
     public int getForce(){
         return force;
     }
-
-   // public abstract void update();
 
     public Position getPosition() {
         return position.copyOf();
@@ -101,6 +88,14 @@ public abstract class Entity {
 
     public void moveDown() {
         move(position.somme(0,1));
+    }
+
+    public void setVision_radius(int v){
+        vision_radius=v;
+    }
+
+    public int getVision_radius() {
+        return vision_radius;
     }
 
     public abstract String toString();
