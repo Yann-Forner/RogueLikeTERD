@@ -22,6 +22,7 @@ public class TourManager{
         this.map = map;
         this.etage = etage;
         schedule();
+        Main.affichage(etage);
     }
 
     public void playTour() {
