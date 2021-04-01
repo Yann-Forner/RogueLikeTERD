@@ -17,13 +17,13 @@ public class DonjonStrategy extends EtageStrategy {
         add(RoomFactory.roomType.TRESOR);
         add(RoomFactory.roomType.CIRCLENORMAL);
     }};
+
     @Override
     public void composeEtage(Etage etage) {
         ArrayList<RoomFactory.roomType> roomsOfEtage = new ArrayList<>();
         for (int i = 0; i < getNbrMaxRoom() ; i++) {
             roomsOfEtage.add(myRooms.get(new Random().nextInt((myRooms.size()))));
         }
-        System.out.println(myRooms);
         Procedure.setRandomRooms(etage,this,roomsOfEtage);
         EtageFusion(etage);
         setSpecialCell(etage);

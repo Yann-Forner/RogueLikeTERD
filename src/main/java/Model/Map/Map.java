@@ -45,7 +45,6 @@ public class Map {
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
             etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
-            System.out.println(etage.getStrategy());
             etages.add(etage);
         }
         else{

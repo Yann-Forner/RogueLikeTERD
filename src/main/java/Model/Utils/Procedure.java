@@ -156,7 +156,6 @@ public class Procedure {
 
             }
         }
-        System.out.println(etage.getRooms());
         Collections.sort(etage.getRooms());
     }
 
@@ -183,7 +182,6 @@ public class Procedure {
                 nbrRooms++;
             } catch (CollisionRoom e) {}
         }
-        System.out.println(etageStrategy);
         Collections.sort(etage.getRooms());
     }
 
