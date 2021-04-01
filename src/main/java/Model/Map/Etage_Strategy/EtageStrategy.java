@@ -35,7 +35,6 @@ public abstract class EtageStrategy {
             Position pos2= Procedure.getRandomPosition(etage.getRooms().get(i+1));
             Tools.ligne(etage, pos1, pos2, Cell.CellType.NORMAL,Procedure.getRandomInt(6,0));
         }
-        System.out.println(etage);
         //Ajout des murs aux chemins
         for (int y = 0; y < etage.getHeigth(); y++) {
             for (int x = 0; x < etage.getWidth(); x++) {

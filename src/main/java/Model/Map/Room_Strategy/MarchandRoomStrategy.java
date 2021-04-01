@@ -11,10 +11,6 @@ public class MarchandRoomStrategy extends RoomStrategy{
     public void composeRoom(Room r) {
         super.composeRoom(r);
         //TODO rajouter le marchand quand il sera implémentés
-        Position p1 = Procedure.getAccesibleRandomPosition(false, r);
-        r.get(p1).updateCell(true, Cell.CellType.UP);
-        Position p2 = Procedure.getAccesibleRandomPosition(false, r);
-        r.get(p2).updateCell(true, Cell.CellType.DOWN);
     }
 
     @Override
