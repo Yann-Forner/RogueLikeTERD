@@ -18,7 +18,7 @@ public class Etage {
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
     private EtageStrategy strategy;
-    private Position trapRoomPosition;
+    private Position trapCellPosition;
 
     protected Etage(int Width, int Heigth) {
         this.Width = Width;
@@ -68,6 +68,7 @@ public class Etage {
 
     public void setTrapCell() {
         Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
+        this.trapCellPosition = accesibleRandomPosition;
         get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
     }
 
@@ -83,8 +84,8 @@ public class Etage {
         Cells.get(y).set(x, c);
     }
 
-    public Position getTrapRoomPosition() {
-        return trapRoomPosition;
+    public Position getTrapCellPosition() {
+        return trapCellPosition;
     }
 
     public int getWidth() {

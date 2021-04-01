@@ -20,7 +20,7 @@ public class TestAstar extends TestCase {
         Etage etage = map.getCurrent();
         BasicPlayer player = map.getPlayer();
 
-        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), etage.getTrapRoomPosition(), Tools.PATH_CROSS);
+        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), etage.getTrapCellPosition(), Tools.PATH_CROSS);
         System.out.println("[EFFICIENCY] Taille chemin : " + cheminTrapRoom.size());
     }
 
@@ -31,8 +31,8 @@ public class TestAstar extends TestCase {
         BasicPlayer player = map.getPlayer();
 
         ArrayList<Position> cheminRandom = Tools.Astar(etage, player.getPosition(), Procedure.getAccesibleRandomPosition(false, etage), Tools.PATH_CROSS);
-        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), etage.getTrapRoomPosition(), Tools.PATH_CROSS);
-        ArrayList<Position> reversedCheminTrapRoom = Tools.Astar(etage, etage.getTrapRoomPosition(), player.getPosition(), Tools.PATH_CROSS);
+        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), etage.getTrapCellPosition(), Tools.PATH_CROSS);
+        ArrayList<Position> reversedCheminTrapRoom = Tools.Astar(etage, etage.getTrapCellPosition(), player.getPosition(), Tools.PATH_CROSS);
 
         Position outsidePos = new Position(0, 0);
         while(etage.Cells.get(outsidePos.getY()).get(outsidePos.getX()).getType() != Cell.CellType.VOID) {
