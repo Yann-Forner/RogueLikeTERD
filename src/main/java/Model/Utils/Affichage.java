@@ -1,5 +1,6 @@
 package Model.Utils;
 
+import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -30,7 +31,7 @@ public class Affichage {
             //MAP
             for (int x = 0; x < etage.getWidth(); x++) {
                 sb.append(Affichage.RESET);
-                Cell cell = etage.get(x, y);
+                Cell cell = Main.getPlayer().getPosition().Distance(new Position(x,y)) > Main.getPlayer().getVision_radius() ? new Cell(true, Cell.CellType.VOID) : etage.get(x, y);
                 if(cell.toString().length()>2){
                     sb.append(" ").append(cell).append(" ");
                 }

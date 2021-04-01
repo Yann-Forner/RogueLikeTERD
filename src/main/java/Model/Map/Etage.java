@@ -2,8 +2,7 @@ package Model.Map;
 
 
 import Exceptions.CollisionRoom;
-import Model.Entitys.AbstractMonster;
-import Model.Entitys.Entity;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -17,7 +16,6 @@ public class Etage {
     public ArrayList<ArrayList<Cell>> Cells;
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
-    private EtageStrategy strategy;
     private Position trapCellPosition;
 
     protected Etage(int Width, int Heigth) {
@@ -28,7 +26,6 @@ public class Etage {
 
     public Etage(int Width, int Heigth, EtageStrategy strategy) {
         this(Width,Heigth);
-        this.strategy=strategy;
         strategy.composeEtage(this);
     }
 
@@ -94,10 +91,6 @@ public class Etage {
 
     public int getHeigth() {
         return Heigth;
-    }
-
-    public EtageStrategy getStrategy(){
-        return strategy;
     }
 
     public ArrayList<AbstractMonster> getMonsters() {

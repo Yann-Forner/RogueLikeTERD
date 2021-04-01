@@ -1,11 +1,9 @@
 package Model.Utils;
 
 import Exceptions.CollisionRoom;
-import Model.Entitys.AbstractMonster;
-import Model.Entitys.MonsterFactory;
+import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
-import Model.Entitys.BasicPlayer;
-import Model.Entitys.Entity;
 import Model.Map.Etage;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Room;

@@ -1,6 +1,5 @@
 package Model.Map.Etage_Strategy;
 
-import Model.Entitys.MonsterFactory;
 import Model.Map.Etage;
 import Model.Map.RoomFactory;
 import Model.Utils.Procedure;

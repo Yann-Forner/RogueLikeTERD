@@ -1,10 +1,7 @@
 package Model.Map.Room_Strategy;
 
-import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Position;
-import Model.Utils.Procedure;
 
 public class MarchandRoomStrategy extends RoomStrategy{
     @Override

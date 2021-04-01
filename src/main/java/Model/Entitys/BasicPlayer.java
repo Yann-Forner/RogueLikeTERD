@@ -6,8 +6,8 @@ import Model.Utils.Position;
 
 public class BasicPlayer extends Entity {
 
-    public BasicPlayer(Etage etage, Position position) {
-        super(etage,position);
+    public BasicPlayer(Etage etage, Position position, int vision_radius) {
+        super(etage,position,vision_radius);
     }
 
     public void updateEtage(Etage etage, Position position){

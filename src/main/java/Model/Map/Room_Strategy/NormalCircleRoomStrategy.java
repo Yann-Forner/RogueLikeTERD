@@ -1,9 +1,7 @@
 package Model.Map.Room_Strategy;
 
-import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
 public class NormalCircleRoomStrategy extends CircleRoomStrategy{

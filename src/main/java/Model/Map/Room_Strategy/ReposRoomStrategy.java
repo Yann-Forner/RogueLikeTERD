@@ -2,7 +2,6 @@ package Model.Map.Room_Strategy;
 
 import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Procedure;
 
 public class ReposRoomStrategy extends RoomStrategy {
 

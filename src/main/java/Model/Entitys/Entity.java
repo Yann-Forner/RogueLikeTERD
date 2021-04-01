@@ -8,21 +8,22 @@ import Model.Utils.Position;
 public abstract class Entity {
     private Position position;
     private Etage etage;
-    private int vision_radius;
+    private final int vision_radius;
     //STATS
     private int pv;
     private int deplacement;
     private int force;
     private final Inventory inventory = new Inventory();
 
-    protected Entity(Etage m, Position pos) {
+    protected Entity(Etage m, Position pos, int vr) {
         position = pos;
         etage = m;
+        vision_radius = vr;
         etage.get(position).setEntity(this);
     }
 
-    public Entity(Etage m, Position pos, int pv, int deplacement, int force){
-        this(m,pos);
+    public Entity(Etage m, Position pos, int vr, int pv, int deplacement, int force){
+        this(m,pos,vr);
         this.pv=pv;
         this.deplacement=deplacement;
         this.force=force;
@@ -88,10 +89,6 @@ public abstract class Entity {
 
     public void moveDown() {
         move(position.somme(0,1));
-    }
-
-    public void setVision_radius(int v){
-        vision_radius=v;
     }
 
     public int getVision_radius() {

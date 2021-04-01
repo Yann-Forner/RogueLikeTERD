@@ -1,19 +1,20 @@
 package Model.Utils;
 
-import Model.Entitys.AbstractMonster;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.BasicPlayer;
+import Model.Main;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Utils.Main;
 
 import java.io.BufferedReader;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TourManager{
-
+    private static final ArrayDeque<String> messages = new ArrayDeque<>();
+    private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private final BufferedReader reader;
     private final BasicPlayer player;
     private final Map map;
@@ -65,17 +66,19 @@ public class TourManager{
         }
     }
 
-    private void processEntitys() {
-        ArrayList<AbstractMonster> monsters = etage.getMonsters();
-        for (AbstractMonster m : monsters) {
-            m.updateMonster(etage,player);
+    public void schedule() {
+        executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(messages::pollFirst, 0, 8, TimeUnit.SECONDS);
+        for (AbstractMonster m : etage.getMonsters()) {
+            executor.scheduleAtFixedRate(() -> m.updateMonster(etage,player),0,m.getUpdate_rate_ms(),TimeUnit.MILLISECONDS);
         }
-        //Model.Utils.Main.affichage(etage);
     }
 
-    public void schedule() {
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
-        executor.scheduleAtFixedRate(this::processEntitys,0,700,TimeUnit.MILLISECONDS);
+    public static void AddMessage(String message){
+        messages.add(message);
+    }
+
+    public static ArrayDeque<String> getMessages(){
+        return messages;
     }
 }

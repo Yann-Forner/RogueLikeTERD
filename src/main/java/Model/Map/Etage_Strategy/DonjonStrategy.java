@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class DonjonStrategy extends EtageStrategy {
 
-    private ArrayList<RoomFactory.roomType> myRooms = new ArrayList() {{
+    private final ArrayList<RoomFactory.roomType> myRooms = new ArrayList<>() {{
         add(RoomFactory.roomType.MINIBOSS);
         add(RoomFactory.roomType.NORMAL);
         add(RoomFactory.roomType.NORMAL);

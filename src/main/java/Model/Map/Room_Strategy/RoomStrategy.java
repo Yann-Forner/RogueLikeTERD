@@ -3,7 +3,6 @@ package Model.Map.Room_Strategy;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Position;
 
 public abstract class RoomStrategy{
 

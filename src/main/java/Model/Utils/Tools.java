@@ -51,14 +51,11 @@ public class Tools {
 
             private double CoutPerType(Cell.CellType type){
                 if(pathType==-1){
-                    switch (type){
-                        case BORDER :
-                            return 1000;
-                        case VOID :
-                            return 100;
-                        default :
-                            return 0;
-                    }
+                    return switch (type) {
+                        case BORDER -> 1000;
+                        case VOID -> 100;
+                        default -> 0;
+                    };
                 }
                 return 0;
             }

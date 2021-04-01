@@ -1,8 +1,8 @@
 package Model.Map;
 
-import Model.Entitys.BasicPlayer;
-import Model.Entitys.Ghost;
-import Model.Entitys.MonsterFactory;
+import Model.Entitys.*;
+import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
@@ -21,11 +21,17 @@ public class Map {
         Etage etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        player=new BasicPlayer(etage,pos);
+        player=new BasicPlayer(etage,pos,100);
         etage.get(pos).setEntity(player);
 
-        Ghost g = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
-        etage.addMonster(g);
+        AbstractMonster ghost = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
+        etage.addMonster(ghost);
+
+        AbstractMonster zombie = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE);
+        etage.addMonster(zombie);
+
+        AbstractMonster rat = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SPIDER);
+        etage.addMonster(rat);
     }
 
     public Etage getCurrent(){
