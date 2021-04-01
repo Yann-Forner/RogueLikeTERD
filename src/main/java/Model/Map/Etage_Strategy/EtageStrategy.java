@@ -70,8 +70,7 @@ public abstract class EtageStrategy {
     public void setSpecialCell(Etage etage){
         Procedure.setRandomChest(etage,3);
         Procedure.setRandomUPnDOWN(etage);
-        Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, etage);
-        etage.get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
+        etage.setTrapCell();
     }
 
     public void setMobs(Etage etage){
