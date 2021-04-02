@@ -25,17 +25,11 @@ public class Map {
         player=new BasicPlayer(etage,pos,100, "Quentin");
         etage.get(pos).setEntity(player);
 
-        AbstractMonster ghost = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
-        etage.addMonster(ghost);
-
-        AbstractMonster zombie = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE);
-        etage.addMonster(zombie);
-
-        AbstractMonster rat = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT);
-        etage.addMonster(rat);
-
-        AbstractMonster bee = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE);
-        etage.addMonster(bee);
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ALIEN));
 
     }
 

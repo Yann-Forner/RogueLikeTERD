@@ -35,9 +35,10 @@ public abstract class Entity {
         this.pv = this.pv + pv;
         if(this.pv<=0){
             TourManager.AddMessage(nom+" est mort.");
-            if ((this instanceof AbstractMonster)) {
+            if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
             } else {
+                System.out.println("Fin de la partie.");
                 System.exit(0);
             }
         }

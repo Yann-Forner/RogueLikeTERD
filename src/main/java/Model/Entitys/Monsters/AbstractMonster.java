@@ -8,10 +8,10 @@ import Model.Utils.*;
 import java.util.ArrayList;
 
 public abstract class AbstractMonster extends Entity {
-    protected int Alert=0;
-    protected final int Agro;
-    protected int pathtype;
-    protected int update_rate_ms;
+    private int Alert=0;
+    private final int Agro;
+    private final int pathtype;
+    private final int update_rate_ms;
 
     protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, int vision_radius, int agro, int update_rate_ms, int path_type) {
         super(m, pos, vision_radius, nom, pv, force);
@@ -36,12 +36,12 @@ public abstract class AbstractMonster extends Entity {
         }
     }
 
+    public int getUpdate_rate_ms() {
+        return update_rate_ms;
+    }
+
     @Override
     public String toString() {
         return Affichage.RED+'N';
-    }
-
-    public int getUpdate_rate_ms() {
-        return update_rate_ms;
     }
 }
