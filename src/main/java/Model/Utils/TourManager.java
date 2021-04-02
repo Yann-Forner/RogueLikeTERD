@@ -17,15 +17,15 @@ public class TourManager{
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private final BufferedReader reader;
-    private final BasicPlayer player;
+    private static BasicPlayer player;
     private final Map map;
-    private Etage etage;
+    private static Etage etage;
 
     public TourManager(BufferedReader reader, BasicPlayer player, Map map, Etage etage) {
         this.reader = reader;
-        this.player = player;
+        TourManager.player = player;
         this.map = map;
-        this.etage = etage;
+        TourManager.etage = etage;
         schedule();
         Main.affichage(etage);
     }
@@ -69,13 +69,13 @@ public class TourManager{
 
     public void schedule() {
         executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
-        executor.scheduleAtFixedRate(messages::pollFirst, 0, 8, TimeUnit.SECONDS);
-        for (AbstractMonster m : etage.getMonsters()) {
-            //TODO cancel le schedule plutot
-            executor.scheduleAtFixedRate(() -> {
-                if(running && m.getPv()>0) m.updateMonster(etage, player);
-            },0,m.getUpdate_rate_ms(),TimeUnit.MILLISECONDS);
-        }
+        executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
+    }
+
+    public static void addMonsterSchedule(AbstractMonster m){
+        executor.scheduleAtFixedRate(() -> {
+            if(running && m.getPv()>0) m.updateMonster(etage, player);
+        },0,m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
     }
 
     public static void pause(){
@@ -83,6 +83,9 @@ public class TourManager{
     }
 
     public static void AddMessage(String message){
+        if(messages.size()>=10){
+            messages.pollFirst();
+        }
         messages.add(message);
     }
 

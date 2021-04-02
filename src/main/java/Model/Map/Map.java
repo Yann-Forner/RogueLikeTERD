@@ -7,6 +7,7 @@ import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.Tools;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class Map {
         Etage etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        player=new BasicPlayer(etage,pos,100);
+        player=new BasicPlayer(etage,pos,100, "Quentin");
         etage.get(pos).setEntity(player);
 
         AbstractMonster ghost = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
@@ -32,6 +33,10 @@ public class Map {
 
         AbstractMonster rat = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT);
         etage.addMonster(rat);
+
+        AbstractMonster bee = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE);
+        etage.addMonster(bee);
+
     }
 
     public Etage getCurrent(){

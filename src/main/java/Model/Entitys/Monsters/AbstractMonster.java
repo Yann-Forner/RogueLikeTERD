@@ -8,13 +8,13 @@ import Model.Utils.*;
 import java.util.ArrayList;
 
 public abstract class AbstractMonster extends Entity {
-    private int Alert=0;
+    protected int Alert=0;
     protected final int Agro;
     protected int pathtype;
     protected int update_rate_ms;
 
-    protected AbstractMonster(Etage m, Position pos, int pv, int force, int vision_radius, int agro, int update_rate_ms, int path_type) {
-        super(m, pos, vision_radius, pv, force);
+    protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, int vision_radius, int agro, int update_rate_ms, int path_type) {
+        super(m, pos, vision_radius, nom, pv, force);
         this.update_rate_ms=update_rate_ms;
         this.Agro=agro;
         this.pathtype=path_type;
@@ -24,7 +24,7 @@ public abstract class AbstractMonster extends Entity {
         int vision_radius = Alert>0 ? Agro : getVision_radius();
         if(mainPlayer.getPosition().Distance(getPosition())<=vision_radius){
             if(Alert==0){
-                TourManager.AddMessage("Un monstre vous a reperé!!!");
+                TourManager.AddMessage(getNom()+" vous a reperé!!!");
             }
             Alert=Agro;
             ArrayList<Position> pathToPlayer = Tools.Astar(etage, getPosition(), mainPlayer.getPosition(), pathtype);

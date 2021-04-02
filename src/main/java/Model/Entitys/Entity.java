@@ -14,17 +14,19 @@ public abstract class Entity {
     //STATS
     private int pv;
     private int force;
+    private final String nom;
     private final Inventory inventory = new Inventory();
 
-    private Entity(Etage m, Position pos, int vr) {
+    private Entity(Etage m, Position pos, int vr, String nom) {
         position = pos;
         etage = m;
         vision_radius = vr;
+        this.nom=nom;
         etage.get(position).setEntity(this);
     }
 
-    public Entity(Etage m, Position pos, int vr, int pv, int force){
-        this(m,pos,vr);
+    public Entity(Etage m, Position pos, int vr, String nom, int pv, int force){
+        this(m,pos,vr,nom);
         this.pv=pv;
         this.force=force;
     }
@@ -32,13 +34,14 @@ public abstract class Entity {
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;
         if(this.pv<=0){
-            TourManager.AddMessage("L'entité est morte.");
+            TourManager.AddMessage(nom+" est mort.");
             if ((this instanceof AbstractMonster)) {
                 etage.removeMonster((AbstractMonster) this);
             } else {
                 System.exit(0);
             }
         }
+        TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" a perdu "+Math.abs(pv)+"pv.");
         return this.pv>0;
     }
 
@@ -75,7 +78,7 @@ public abstract class Entity {
                 position=pos;
             }
             else{
-                TourManager.AddMessage("COMBAT");
+                cell.getEntity().updatePV(-1);
                 //TourManager.pause();
             }
         }
@@ -83,6 +86,10 @@ public abstract class Entity {
 
     public int getVision_radius() {
         return vision_radius;
+    }
+
+    public String getNom(){
+        return nom;
     }
 
     public abstract String toString();

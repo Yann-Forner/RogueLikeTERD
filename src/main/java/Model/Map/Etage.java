@@ -7,8 +7,10 @@ import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.TourManager;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Etage {
     protected int Width;
@@ -61,6 +63,7 @@ public class Etage {
     public void addMonster(AbstractMonster m) {
         get(m.getPosition()).setEntity(m);
         Monsters.add(m);
+        TourManager.addMonsterSchedule(m);
     }
 
     public void removeMonster(AbstractMonster m) {
