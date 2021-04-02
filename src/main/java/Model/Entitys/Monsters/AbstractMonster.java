@@ -13,8 +13,8 @@ public abstract class AbstractMonster extends Entity {
     protected int pathtype;
     protected int update_rate_ms;
 
-    protected AbstractMonster(Etage m, Position pos, int vision_radius, int agro, int update_rate_ms, int path_type) {
-        super(m, pos, vision_radius);
+    protected AbstractMonster(Etage m, Position pos, int pv, int force, int vision_radius, int agro, int update_rate_ms, int path_type) {
+        super(m, pos, vision_radius, pv, force);
         this.update_rate_ms=update_rate_ms;
         this.Agro=agro;
         this.pathtype=path_type;
@@ -27,10 +27,8 @@ public abstract class AbstractMonster extends Entity {
                 TourManager.AddMessage("Un monstre vous a reperé!!!");
             }
             Alert=Agro;
-            etage.get(getPosition()).setEntity(null);
             ArrayList<Position> pathToPlayer = Tools.Astar(etage, getPosition(), mainPlayer.getPosition(), pathtype);
-            if(pathToPlayer.size()!=0) setPosition(pathToPlayer.get(pathToPlayer.size() - 2));
-            etage.get(getPosition()).setEntity(this);
+            if(pathToPlayer.size()!=0) move(pathToPlayer.get(pathToPlayer.size() - 2));
             Alert--;
         }
         else{

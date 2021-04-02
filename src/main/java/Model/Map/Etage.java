@@ -63,6 +63,11 @@ public class Etage {
         Monsters.add(m);
     }
 
+    public void removeMonster(AbstractMonster m) {
+        get(m.getPosition()).setEntity(null);
+        Monsters.remove(m);
+    }
+
     public void setTrapCell() {
         Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
         this.trapCellPosition = accesibleRandomPosition;

@@ -30,7 +30,7 @@ public class Map {
         AbstractMonster zombie = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE);
         etage.addMonster(zombie);
 
-        AbstractMonster rat = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SPIDER);
+        AbstractMonster rat = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT);
         etage.addMonster(rat);
     }
 

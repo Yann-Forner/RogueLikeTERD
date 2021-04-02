@@ -1,9 +1,11 @@
 package Model.Entitys;
 
 import Model.Entitys.Inventaires.Inventory;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.TourManager;
 
 public abstract class Entity {
     private Position position;
@@ -11,39 +13,37 @@ public abstract class Entity {
     private final int vision_radius;
     //STATS
     private int pv;
-    private int deplacement;
     private int force;
     private final Inventory inventory = new Inventory();
 
-    protected Entity(Etage m, Position pos, int vr) {
+    private Entity(Etage m, Position pos, int vr) {
         position = pos;
         etage = m;
         vision_radius = vr;
         etage.get(position).setEntity(this);
     }
 
-    public Entity(Etage m, Position pos, int vr, int pv, int deplacement, int force){
+    public Entity(Etage m, Position pos, int vr, int pv, int force){
         this(m,pos,vr);
         this.pv=pv;
-        this.deplacement=deplacement;
         this.force=force;
     }
 
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;
+        if(this.pv<=0){
+            TourManager.AddMessage("L'entité est morte.");
+            if ((this instanceof AbstractMonster)) {
+                etage.removeMonster((AbstractMonster) this);
+            } else {
+                System.exit(0);
+            }
+        }
         return this.pv>0;
     }
 
     public int getPv(){
         return pv;
-    }
-
-    public int getDeplacement(){
-        return deplacement;
-    }
-
-    public void setDeplacement(int deplacement) {
-        this.deplacement = deplacement;
     }
 
     public int getForce(){
@@ -68,27 +68,17 @@ public abstract class Entity {
 
     public void move(Position pos) {
         Cell cell = etage.get(pos);
-        if(cell.isAccesible()){
-            cell.setEntity(this);
-            etage.get(position).setEntity(null);
-            position=pos;
+        if(cell.isAccesible() || this instanceof AbstractMonster){
+            if(cell.getEntity()==null){
+                cell.setEntity(this);
+                etage.get(position).setEntity(null);
+                position=pos;
+            }
+            else{
+                TourManager.AddMessage("COMBAT");
+                //TourManager.pause();
+            }
         }
-    }
-
-    public void moveLeft() {
-        move(position.somme(-1,0));
-    }
-
-    public void moveRight() {
-        move(position.somme(1,0));
-    }
-
-    public void moveUp() {
-        move(position.somme(0,-1));
-    }
-
-    public void moveDown() {
-        move(position.somme(0,1));
     }
 
     public int getVision_radius() {

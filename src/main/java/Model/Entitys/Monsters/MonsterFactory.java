@@ -7,34 +7,34 @@ import Model.Utils.Tools;
 
 public class MonsterFactory {
     public enum MonsterType {
-        GHOST, ZOMBIE, SPIDER
+        GHOST, ZOMBIE, RAT
     }
 
-    private static Ghost getNewGhost(Etage etage, Position pos, int vision_radius, int Agro, int update_rate_ms, int path_type){
-        return new Ghost(etage,pos,vision_radius,Agro,update_rate_ms,path_type);
+    private static Ghost getNewGhost(Etage etage, Position pos, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Ghost(etage,pos,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Zombie getNewZombie(Etage etage, Position pos, int vision_radius, int Agro, int update_rate_ms, int path_type){
-        return new Zombie(etage,pos,vision_radius,Agro,update_rate_ms,path_type);
+    private static Zombie getNewZombie(Etage etage, Position pos, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Zombie(etage,pos,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Rat getNewSpider(Etage etage, Position pos, int vision_radius, int Agro, int update_rate_ms, int path_type){
-        return new Rat(etage,pos,vision_radius,Agro,update_rate_ms,path_type);
+    private static Rat getNewRat(Etage etage, Position pos, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Rat(etage,pos,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
-                return getNewGhost(etage, Procedure.getAccesibleRandomPosition(true,etage),10,10,700, Tools.PATH_CROSS);
+                return getNewGhost(etage, Procedure.getAccesibleRandomPosition(true,etage),10,3,10,10,700, Tools.PATH_GHOST);
             }
             case ZOMBIE -> {
-                return getNewZombie(etage, Procedure.getAccesibleRandomPosition(true,etage),5,30,1500, Tools.PATH_CROSS);
+                return getNewZombie(etage, Procedure.getAccesibleRandomPosition(true,etage),25,5,5,30,1500, Tools.PATH_CROSS);
             }
-            case SPIDER -> {
-                return getNewSpider(etage, Procedure.getAccesibleRandomPosition(true,etage),15,15,600, Tools.PATH_DIAG);
+            case RAT -> {
+                return getNewRat(etage, Procedure.getAccesibleRandomPosition(true,etage),1,1,15,15,600, Tools.PATH_DIAG);
             }
             default -> {
-                return getNewGhost(etage, Procedure.getAccesibleRandomPosition(true,etage),5,5,700,Tools.PATH_CROSS);
+                return getNewGhost(etage, Procedure.getAccesibleRandomPosition(true,etage),10,3,5,5,700,Tools.PATH_CROSS);
             }
         }
     }

@@ -9,10 +9,9 @@ import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 public class Tools {
-
-
     public static final int PATH_CROSS = 0;
     public static final int PATH_DIAG = 1;
+    public static final int PATH_GHOST = 2;
 
     /**
      * Algoritme A* qui permet de trouver le plus court chemin entre la Position de depart et celle d'arrivé.
@@ -113,9 +112,9 @@ public class Tools {
 
             // Génération des voisins
             ArrayList<Noeud> voisins = switch (pathType) {
-                case -1 -> u.getNoClipStandardNeighboors();
                 case 0 -> u.getStandardNeighboors();
-                default -> u.getDiagonalNeighboors();
+                case 1 -> u.getDiagonalNeighboors();
+                default -> u.getNoClipStandardNeighboors();
             };
 
             //Parcous voisins

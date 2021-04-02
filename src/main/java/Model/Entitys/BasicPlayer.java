@@ -7,7 +7,7 @@ import Model.Utils.Position;
 public class BasicPlayer extends Entity {
 
     public BasicPlayer(Etage etage, Position position, int vision_radius) {
-        super(etage,position,vision_radius);
+        super(etage,position,vision_radius,100,10);
     }
 
     public void updateEtage(Etage etage, Position position){
@@ -15,6 +15,22 @@ public class BasicPlayer extends Entity {
         setEtage(etage);
         setPosition(position);
         etage.get(getPosition()).setEntity(this);
+    }
+
+    public void moveLeft() {
+        move(getPosition().somme(-1,0));
+    }
+
+    public void moveRight() {
+        move(getPosition().somme(1,0));
+    }
+
+    public void moveUp() {
+        move(getPosition().somme(0,-1));
+    }
+
+    public void moveDown() {
+        move(getPosition().somme(0,1));
     }
 
     @Override

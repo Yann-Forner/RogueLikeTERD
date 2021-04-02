@@ -13,6 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TourManager{
+    private static boolean running = true;
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private final BufferedReader reader;
@@ -70,8 +71,15 @@ public class TourManager{
         executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 0, 8, TimeUnit.SECONDS);
         for (AbstractMonster m : etage.getMonsters()) {
-            executor.scheduleAtFixedRate(() -> m.updateMonster(etage,player),0,m.getUpdate_rate_ms(),TimeUnit.MILLISECONDS);
+            //TODO cancel le schedule plutot
+            executor.scheduleAtFixedRate(() -> {
+                if(running && m.getPv()>0) m.updateMonster(etage, player);
+            },0,m.getUpdate_rate_ms(),TimeUnit.MILLISECONDS);
         }
+    }
+
+    public static void pause(){
+        running=!running;
     }
 
     public static void AddMessage(String message){
