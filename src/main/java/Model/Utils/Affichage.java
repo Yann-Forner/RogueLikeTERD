@@ -6,6 +6,8 @@ import Model.Map.Etage;
 import Model.Map.Room;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 
 public class Affichage {
 
@@ -21,6 +23,13 @@ public class Affichage {
             }
         }
         sb.append("\n");
+
+        //Champs de vision
+        HashSet<Position> visibles = new HashSet<>();
+        for(Position p : Tools.getBorder(etage)){
+            visibles.addAll(Tools.getVisibles(etage,Main.getPlayer().getPosition(), p));
+        }
+
         for (int y = 0; y < etage.getHeigth(); y++) {
             sb.append(Affichage.RESET);
             if (y < 10) {
@@ -31,7 +40,10 @@ public class Affichage {
             //MAP
             for (int x = 0; x < etage.getWidth(); x++) {
                 sb.append(Affichage.RESET);
-                Cell cell = Main.getPlayer().getPosition().Distance(new Position(x,y)) > Main.getPlayer().getVision_radius() ? new Cell(true, Cell.CellType.VOID) : etage.get(x, y);
+
+                Position pos = new Position(x,y);
+                Cell cell = visibles.contains(pos) ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), Cell.CellType.VOID);
+
                 if(cell.toString().length()>2){
                     sb.append(" ").append(cell).append(" ");
                 }

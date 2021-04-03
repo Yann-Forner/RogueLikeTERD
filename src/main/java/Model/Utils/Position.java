@@ -3,6 +3,7 @@ package Model.Utils;
 import Model.Map.Etage;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Position {
@@ -73,6 +74,11 @@ public class Position {
             return (x==pos.getX() && y==pos.getY());
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x,y);
     }
 
     @Override

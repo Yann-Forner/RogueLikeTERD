@@ -480,3 +480,15 @@ public boolean suppX(int x, int y) {
                         etage.Entitys=Entitys;
                         return etage;
                     }
+
+         ArrayList<Position> visibles = new ArrayList<>();
+         for (int i = 0; i < chemin.size(); i++) {
+             Position position = chemin.get(i);
+             visibles.add(position);
+             if(etage.get(position).getType().equals(Cell.CellType.BORDER)){
+                 if(i+1 < chemin.size() && etage.get(chemin.get(i+1)).getType() != Cell.CellType.BORDER){
+                     break;
+                 }
+             }
+         }
+         return visibles;
