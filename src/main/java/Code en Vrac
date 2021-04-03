@@ -492,3 +492,62 @@ public boolean suppX(int x, int y) {
              }
          }
          return visibles;
+
+         double distance = Main.getPlayer().getPosition().Distance(pos);
+                         if(distance<5){
+                             switch (type){
+                                 case BORDER :
+                                     type.setString(RED+'*');
+                                     break;
+                                 case NORMAL :
+                                     type.setString("\u001B[38;5;255m"+'.');
+                                     break;
+                                 default :
+                                     type.setString(BLACK+'.');
+                             }
+                         }
+                         else if(distance>=5 && distance<15){
+                             switch (type){
+                                 case BORDER :
+                                     type.setString("\u001B[38;5;124m"+'*');
+                                     break;
+                                 case NORMAL :
+                                     type.setString("\u001B[38;5;253m"+'.');
+                                     break;
+                                 default :
+                                     type.setString(BLACK+'.');
+                             }
+                         }
+                         else if(distance>=15 && distance<25){
+                             switch (type){
+                                 case BORDER :
+                                     type.setString("\u001B[38;5;88m"+'*');
+                                     break;
+                                 case NORMAL :
+                                     type.setString("\u001B[38;5;250m"+'.');
+                                     break;
+                                 default :
+                                     type.setString(BLACK+'.');
+                             }
+                         }
+                         else if(distance>=25 && distance<35){
+                             switch (type){
+                                 case BORDER :
+                                     type.setString("\u001B[38;5;52m"+'*');
+                                     break;
+                                 case NORMAL :
+                                     type.setString("\u001B[38;5;240m"+'.');
+                                     break;
+                                 default :
+                                     type.setString(BLACK+'.');
+                             }
+                         }
+                         else{
+                             switch (type){
+                                 case BORDER :
+                                     type.setString("\u001B[38;5;240m"+'*');
+                                     break;
+                                 default :
+                                     type.setString(BLACK+'.');
+                             }
+                         }

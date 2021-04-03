@@ -217,7 +217,7 @@ public class Procedure {
      */
     public static void setRandomChest(Etage etage, int nbr){
         for (int i = 0; i < nbr; i++) {
-            etage.get(getAccesibleRandomPosition(false,etage)).updateCell(true, Cell.CellType.CHEST);
+            etage.get(getAccesibleRandomPosition(false,etage)).updateCell(true, new Cell.Style(Cell.Style.CellType.CHEST));
         }
     }
 
@@ -236,7 +236,7 @@ public class Procedure {
      */
     public static void setRandomUP(Etage etage){
         Position p1 = getAccesibleRandomPosition(false, etage);
-        etage.get(p1).updateCell(true, Cell.CellType.UP);
+        etage.get(p1).updateCell(true, new Cell.Style(Cell.Style.CellType.UP));
     }
 
     /**
@@ -245,7 +245,7 @@ public class Procedure {
      */
     private static void setRandomDOWN(Etage etage){
         Position p2 = getAccesibleRandomPosition(false, etage);
-        etage.get(p2).updateCell(true, Cell.CellType.DOWN);
+        etage.get(p2).updateCell(true, new Cell.Style(Cell.Style.CellType.DOWN));
     }
 
 }

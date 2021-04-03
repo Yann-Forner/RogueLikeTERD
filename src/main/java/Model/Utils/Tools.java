@@ -49,7 +49,7 @@ public class Tools {
                 return noeud;
             }
 
-            private double CoutPerType(Cell.CellType type){
+            private double CoutPerType(Cell.Style.CellType type){
                 if(pathType==-1){
                     return switch (type) {
                         case BORDER -> 1000;
@@ -154,10 +154,10 @@ public class Tools {
      * @param etage Etage
      * @param p1 Position
      * @param p2 Posiiton
-     * @param type Cell.CellType
+     * @param type Cell.Style.CellType
      * @param degree int
      */
-    public static void ligne(Etage etage, Position p1, Position p2, Cell.CellType type, int degree){
+    public static void ligne(Etage etage, Position p1, Position p2, Cell.Style.CellType type, int degree){
         if(degree==0){
             ligne(etage, p1, p2, type);
         }
@@ -174,8 +174,8 @@ public class Tools {
         }
     }
 
-    private static void ligne(Etage etage, Position p1, Position p2, Cell.CellType type) {
-        type.setString(Affichage.BLUE+".");
+    private static void ligne(Etage etage, Position p1, Position p2, Cell.Style.CellType type) {
+        Cell.Style style = new Cell.Style(type);
         ArrayList<Position> chemin = new ArrayList<>();
         chemin.add(p1);
         Position lastPos = chemin.get(chemin.size() - 1);
@@ -196,9 +196,8 @@ public class Tools {
             }
         }
         for (Position p : chemin) {
-            etage.get(p).updateCell(true, type);
+            etage.get(p).updateCell(true, style);
         }
-        type.setString(Affichage.GREEN+".");
     }
 
     public static ArrayList<Position> getVisibles(Etage etage,Position p1, Position p2){
@@ -273,7 +272,7 @@ public class Tools {
         ArrayList<Position> visibles = new ArrayList<>();
         for(Position position : chemin) {
             visibles.add(position);
-            if (etage.get(position).getType().equals(Cell.CellType.BORDER)) {
+            if (etage.get(position).getType().equals(Cell.Style.CellType.BORDER)) {
                 break;
             }
         }

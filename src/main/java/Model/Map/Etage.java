@@ -10,7 +10,6 @@ import Model.Utils.Procedure;
 import Model.Utils.TourManager;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class Etage {
     protected int Width;
@@ -23,7 +22,7 @@ public class Etage {
     protected Etage(int Width, int Heigth) {
         this.Width = Width;
         this.Heigth = Heigth;
-        fillMap(new Cell(false,Cell.CellType.VOID));
+        fillMap(new Cell(false,new Cell.Style(Cell.Style.CellType.VOID)));
     }
 
     public Etage(int Width, int Heigth, EtageStrategy strategy) {
@@ -74,7 +73,7 @@ public class Etage {
     public void setTrapCell() {
         Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
         this.trapCellPosition = accesibleRandomPosition;
-        get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
+        get(accesibleRandomPosition).updateCell(true, new Cell.Style(Cell.Style.CellType.TRAP_ROOM));
     }
 
     public Cell get(int x, int y) {

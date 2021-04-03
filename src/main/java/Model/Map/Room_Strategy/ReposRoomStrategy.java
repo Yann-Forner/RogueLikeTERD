@@ -8,7 +8,6 @@ public class ReposRoomStrategy extends RoomStrategy {
     @Override
     public void composeRoom(Room r) {
         super.composeRoom(r);
-
     }
 
     @Override

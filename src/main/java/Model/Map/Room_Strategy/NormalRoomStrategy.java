@@ -10,10 +10,7 @@ import Model.Utils.Procedure;
 public class NormalRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
-        //super.composeRoom(r);
-        Cell.CellType type = Cell.CellType.NORMAL;
-        type.setString(Affichage.GREEN+'.');
-        r.fillMap(new Cell(true, type));
+        r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL)));
     }
 
     @Override

@@ -11,13 +11,12 @@ public class TrapRoomStrategy extends RoomStrategy {
 
     @Override
     public void composeRoom(Room r) {
-        Cell.CellType type = Cell.CellType.BORDER;
-        type.setString(Affichage.RED+'*');
-        r.fillMap(new Cell(false, type));
+        Cell.Style style = new Cell.Style(Cell.Style.CellType.BORDER,Affichage.RED);
+        r.fillMap(new Cell(false, style));
         for (int i = 0; i < Procedure.getRandomInt(4,1); i++) {
             Position pos = Procedure.getRandomWall(r);
-            //TODO empecher le tomber sur le même mur deux fois
-            r.get(pos).updateCell(true, Cell.CellType.NORMAL);
+            //TODO empecher de tomber sur le même mur deux fois
+            r.get(pos).updateCell(true, style);
         }
     }
 

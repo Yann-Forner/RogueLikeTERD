@@ -22,22 +22,21 @@ public class TrapEtageStrategy extends EtageStrategy{
 
     @Override
     public void EtageFusion(Etage etage) {
-        Cell.CellType typeNormal = Cell.CellType.NORMAL;
-        typeNormal.setString(Affichage.GREY+'.');
+        Cell.Style style = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY);
         ArrayList<Position> doors = new ArrayList<>();
         for(Room r : etage.getRooms()) {
             for (int i = 0; i < r.getHeigth(); i++) {
                 if(i==0 || i==r.getHeigth()-1){
                     for (int j = 0; j < r.getWidth(); j++) {
-                        if(r.get(j,i).getType().equals(Cell.CellType.NORMAL)){
+                        if(r.get(j,i).getType().equals(Cell.Style.CellType.NORMAL)){
                             doors.add(new Position(j,i).somme(r.getAbsolutePos()));
                         }
                     }
                 }
-                if(r.get(0,i).getType().equals(Cell.CellType.NORMAL)){
+                if(r.get(0,i).getType().equals(Cell.Style.CellType.NORMAL)){
                     doors.add(new Position(0,i).somme(r.getAbsolutePos()));
                 }
-                if(r.get(r.getWidth()-1,i).getType().equals(Cell.CellType.NORMAL)){
+                if(r.get(r.getWidth()-1,i).getType().equals(Cell.Style.CellType.NORMAL)){
                     doors.add(new Position(r.getWidth()-1,i).somme(r.getAbsolutePos()));
                 }
             }
@@ -47,25 +46,25 @@ public class TrapEtageStrategy extends EtageStrategy{
         for (int i = 1; i < doors.size(); i++) {
             ArrayList<Position> astar = Tools.Astar(etage, doors.get(i), visited.get(visited.size() - 1), -1);
             for (Position p : astar){
-                etage.get(p).updateCell(true, typeNormal);
+                etage.get(p).updateCell(true, style);
             }
         }
         for(Room r : etage.getRooms()) {
             for (int i = 1; i < r.getHeigth()-1; i++) {
                 for (int j = 1; j < r.getWidth()-1; j++) {
                     Position pos = new Position(j,i).somme(r.getAbsolutePos());
-                    etage.get(pos).updateCell(true, typeNormal);
+                    etage.get(pos).updateCell(true, style);
                 }
             }
         }
         for (int y = 0; y < etage.getHeigth(); y++) {
             for (int x = 0; x < etage.getWidth(); x++) {
                 Position pos=new Position(x, y);
-                if (etage.get(pos).getType().equals(Cell.CellType.VOID)) {
+                if (etage.get(pos).getType().equals(Cell.Style.CellType.VOID)) {
                     ArrayList<Position> voisins = pos.voisins(etage);
                     for (Position p : voisins) {
-                        if (!etage.get(p).getType().equals(Cell.CellType.BORDER) && !etage.get(p).getType().equals(Cell.CellType.VOID)){
-                            etage.get(x,y).updateCell(false, Cell.CellType.BORDER);
+                        if (!etage.get(p).getType().equals(Cell.Style.CellType.BORDER) && !etage.get(p).getType().equals(Cell.Style.CellType.VOID)){
+                            etage.get(x,y).updateCell(false, style);
                         }
                     }
                 }

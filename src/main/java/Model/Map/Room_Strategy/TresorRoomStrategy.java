@@ -10,7 +10,7 @@ public class TresorRoomStrategy extends RoomStrategy{
         super.composeRoom(r);
         int x = (r.getWidth()-1)/2;
         int y = (r.getHeigth()-1)/2;
-        r.set(x,y,new Cell( true,Cell.CellType.CHEST));
+        r.set(x,y,new Cell( true,new Cell.Style(Cell.Style.CellType.CHEST)));
     }
 
     @Override
