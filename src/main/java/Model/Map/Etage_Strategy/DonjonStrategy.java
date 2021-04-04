@@ -1,7 +1,9 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.RoomFactory;
+import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public class DonjonStrategy extends EtageStrategy {
             roomsOfEtage.add(myRooms.get(new Random().nextInt((myRooms.size()))));
         }
         Procedure.setRandomRooms(etage,this,roomsOfEtage);
-        EtageFusion(etage);
+        EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,";"));
         setSpecialCell(etage);
     }
 

@@ -15,14 +15,13 @@ public class TrapEtageStrategy extends EtageStrategy{
     @Override
     public void composeEtage(Etage etage) {
         Procedure.setRandomRooms(etage,this, RoomFactory.roomType.TRAP);
-        EtageFusion(etage);
+        EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY));
         Procedure.setRandomUP(etage);
         Procedure.setRandomMob(etage);
     }
 
     @Override
-    public void EtageFusion(Etage etage) {
-        Cell.Style style = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY);
+    public void EtageFusion(Etage etage, Cell.Style style_fusion) {
         ArrayList<Position> doors = new ArrayList<>();
         for(Room r : etage.getRooms()) {
             for (int i = 0; i < r.getHeigth(); i++) {
@@ -31,13 +30,22 @@ public class TrapEtageStrategy extends EtageStrategy{
                         if(r.get(j,i).getType().equals(Cell.Style.CellType.NORMAL)){
                             doors.add(new Position(j,i).somme(r.getAbsolutePos()));
                         }
+                        else{
+                            System.out.println(r.get(j,i).getType());
+                        }
                     }
                 }
                 if(r.get(0,i).getType().equals(Cell.Style.CellType.NORMAL)){
                     doors.add(new Position(0,i).somme(r.getAbsolutePos()));
                 }
+                else{
+                    System.out.println(r.get(0,i).getType());
+                }
                 if(r.get(r.getWidth()-1,i).getType().equals(Cell.Style.CellType.NORMAL)){
                     doors.add(new Position(r.getWidth()-1,i).somme(r.getAbsolutePos()));
+                }
+                else{
+                    System.out.println(r.get(r.getWidth()-1,i).getType());
                 }
             }
         }
@@ -46,14 +54,14 @@ public class TrapEtageStrategy extends EtageStrategy{
         for (int i = 1; i < doors.size(); i++) {
             ArrayList<Position> astar = Tools.Astar(etage, doors.get(i), visited.get(visited.size() - 1), -1);
             for (Position p : astar){
-                etage.get(p).updateCell(true, style);
+                etage.get(p).updateCell(true, style_fusion);
             }
         }
         for(Room r : etage.getRooms()) {
             for (int i = 1; i < r.getHeigth()-1; i++) {
                 for (int j = 1; j < r.getWidth()-1; j++) {
                     Position pos = new Position(j,i).somme(r.getAbsolutePos());
-                    etage.get(pos).updateCell(true, style);
+                    etage.get(pos).updateCell(true, style_fusion);
                 }
             }
         }
@@ -64,12 +72,13 @@ public class TrapEtageStrategy extends EtageStrategy{
                     ArrayList<Position> voisins = pos.voisins(etage);
                     for (Position p : voisins) {
                         if (!etage.get(p).getType().equals(Cell.Style.CellType.BORDER) && !etage.get(p).getType().equals(Cell.Style.CellType.VOID)){
-                            etage.get(x,y).updateCell(false, style);
+                            etage.get(x,y).updateCell(false, new Cell.Style(Cell.Style.CellType.BORDER));
                         }
                     }
                 }
             }
         }
+        System.out.println("4");
     }
 
     @Override

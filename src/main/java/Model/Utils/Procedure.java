@@ -192,7 +192,7 @@ public class Procedure {
         Position pos = getAccesibleRandomPosition(true,etage,r);
         Cell cell = etage.get(pos);
         //TODO passer le montre en parametre
-        AbstractMonster m = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
+        AbstractMonster m = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE);
         cell.setEntity(m);
         etage.addMonster(m);
     }

@@ -31,6 +31,7 @@ public class Cell{
         }
         private final CellType type;
         private String custom_color;
+        private String custom_forme;
 
         public Style(CellType type){
             this.type=type;
@@ -41,9 +42,15 @@ public class Cell{
             this.custom_color=color;
         }
 
+        public Style(CellType type,String color,String forme){
+            this(type,color);
+            this.custom_forme=forme;
+        }
+
         @Override
         public String toString() {
-            return type.forme.length() > 1 ? type.forme : custom_color == null ? type.base_color + type.forme : custom_color + type.forme;
+            String forme= custom_forme==null ? type.forme : custom_forme;
+            return forme.length() > 1 ? forme : custom_color == null ? type.base_color + forme : custom_color + forme;
         }
     }
 

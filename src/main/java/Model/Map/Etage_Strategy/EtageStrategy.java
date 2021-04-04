@@ -2,6 +2,7 @@ package Model.Map.Etage_Strategy;
 
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 import Model.Utils.Tools;
@@ -27,13 +28,12 @@ public abstract class EtageStrategy {
 
     public abstract void composeEtage(Etage etage);
 
-    protected void EtageFusion(Etage etage){
-
+    protected void EtageFusion(Etage etage, Cell.Style style_fusion){
         //Trace du chemin
         for (int i = 0; i < etage.getRooms().size()-1; i++) {
             Position pos1= Procedure.getRandomPosition(etage.getRooms().get(i));
             Position pos2= Procedure.getRandomPosition(etage.getRooms().get(i+1));
-            Tools.ligne(etage, pos1, pos2, Cell.Style.CellType.NORMAL, Procedure.getRandomInt(6,0));
+            Tools.ligne(etage, pos1, pos2, style_fusion, Procedure.getRandomInt(6,0));
         }
         //Ajout des murs aux chemins
         for (int y = 0; y < etage.getHeigth(); y++) {
@@ -64,7 +64,7 @@ public abstract class EtageStrategy {
                             }
                         }
                         if(novoidVoisins){
-                            etage.get(pos).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL));
+                            etage.get(pos).updateCell(true, style_fusion);
                         }
                     }
                 }

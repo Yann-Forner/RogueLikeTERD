@@ -154,28 +154,26 @@ public class Tools {
      * @param etage Etage
      * @param p1 Position
      * @param p2 Posiiton
-     * @param type Cell.Style.CellType
      * @param degree int
      */
-    public static void ligne(Etage etage, Position p1, Position p2, Cell.Style.CellType type, int degree){
+    public static void ligne(Etage etage, Position p1, Position p2, Cell.Style style_ligne, int degree){
         if(degree==0){
-            ligne(etage, p1, p2, type);
+            ligne(etage, p1, p2, style_ligne);
         }
         else{
             Position milieu = new Position((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
             if(degree>1){
-                ligne(etage, p1, milieu, type,degree-1);
-                ligne(etage, milieu, p2, type,degree-1);
+                ligne(etage, p1, milieu, style_ligne,degree-1);
+                ligne(etage, milieu, p2, style_ligne,degree-1);
             }
             else{
-                ligne(etage, p1, milieu, type);
-                ligne(etage, milieu, p2, type);
+                ligne(etage, p1, milieu, style_ligne);
+                ligne(etage, milieu, p2, style_ligne);
             }
         }
     }
 
-    private static void ligne(Etage etage, Position p1, Position p2, Cell.Style.CellType type) {
-        Cell.Style style = new Cell.Style(type);
+    private static void ligne(Etage etage, Position p1, Position p2, Cell.Style style_ligne) {
         ArrayList<Position> chemin = new ArrayList<>();
         chemin.add(p1);
         Position lastPos = chemin.get(chemin.size() - 1);
@@ -196,7 +194,9 @@ public class Tools {
             }
         }
         for (Position p : chemin) {
-            etage.get(p).updateCell(true, style);
+            if(etage.get(p).getType() != Cell.Style.CellType.NORMAL){
+                etage.get(p).updateCell(true, style_ligne);
+            }
         }
     }
 
