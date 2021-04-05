@@ -27,7 +27,7 @@ public class DonjonStrategy extends EtageStrategy {
             roomsOfEtage.add(myRooms.get(new Random().nextInt((myRooms.size()))));
         }
         Procedure.setRandomRooms(etage,this,roomsOfEtage);
-        EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,";"));
+        EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"#"));
         setSpecialCell(etage);
     }
 

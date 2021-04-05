@@ -194,7 +194,7 @@ public class Tools {
             }
         }
         for (Position p : chemin) {
-            if(etage.get(p).getType() != Cell.Style.CellType.NORMAL){
+            if(etage.get(p).getType().equals(Cell.Style.CellType.BORDER) || etage.get(p).getType().equals(Cell.Style.CellType.VOID)){
                 etage.get(p).updateCell(true, style_ligne);
             }
         }
