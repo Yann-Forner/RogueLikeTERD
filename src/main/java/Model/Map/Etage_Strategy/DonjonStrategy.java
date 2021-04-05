@@ -23,11 +23,26 @@ public class DonjonStrategy extends EtageStrategy {
     @Override
     public void composeEtage(Etage etage) {
         ArrayList<RoomFactory.roomType> roomsOfEtage = new ArrayList<>();
+        int CircleRooms, NormalRooms;
+        CircleRooms = NormalRooms = 0;
         for (int i = 0; i < getNbrMaxRoom() ; i++) {
-            roomsOfEtage.add(myRooms.get(new Random().nextInt((myRooms.size()))));
+            RoomFactory.roomType roomType = myRooms.get(new Random().nextInt((myRooms.size())));
+            roomsOfEtage.add(roomType);
+            switch (roomType){
+                case NORMAL -> NormalRooms++;
+                case CIRCLENORMAL -> CircleRooms++;
+            }
         }
+        Cell.Style fusion_style = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"#");
+        if(NormalRooms==getNbrMaxRoom()){
+            fusion_style = new Cell.Style(Cell.Style.CellType.NORMAL);
+        }
+        else if(CircleRooms==getNbrMaxRoom()){
+            fusion_style = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLUE);
+        }
+
         Procedure.setRandomRooms(etage,this,roomsOfEtage);
-        EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"#"));
+        EtageFusion(etage,fusion_style);
         setSpecialCell(etage);
     }
 

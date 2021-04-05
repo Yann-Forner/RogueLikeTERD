@@ -12,7 +12,7 @@ public class NormalEtageStrategy extends EtageStrategy{
     @Override
     public void composeEtage(Etage etage) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.NORMAL);
-        EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY));
+        EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL));
         setSpecialCell(etage);
         //setMobs(etage);
     }

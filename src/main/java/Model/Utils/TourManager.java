@@ -46,6 +46,7 @@ public class TourManager{
             case "q" , "\u001B[D" -> player.moveLeft();
             case "s" , "\u001B[B" -> player.moveDown();
             case "d" , "\u001B[C" -> player.moveRight();
+            case "p" -> pause();
             case "exit" -> System.exit(0);
             default -> System.out.println("Wrong key:"+input);
         }
@@ -79,6 +80,7 @@ public class TourManager{
     }
 
     public static void pause(){
+        TourManager.AddMessage("Le jeu est en pause");
         running=!running;
     }
 

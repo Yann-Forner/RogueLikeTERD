@@ -29,8 +29,10 @@ public class Affichage {
 
         //Champs de vision
         HashSet<Position> visibles = new HashSet<>();
-        for(Position p : Tools.getBorder(etage)){
-            visibles.addAll(Tools.getVisibles(etage,Main.getPlayer().getPosition(), p));
+        if(Main.getPlayer()!=null){
+            for(Position p : Tools.getBorder(etage)){
+                visibles.addAll(Tools.getVisibles(etage,Main.getPlayer().getPosition(), p));
+            }
         }
 
         for (int y = 0; y < etage.getHeigth(); y++) {

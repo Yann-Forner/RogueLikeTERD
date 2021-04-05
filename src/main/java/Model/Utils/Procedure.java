@@ -8,6 +8,7 @@ import Model.Map.Etage;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Room;
 import Model.Map.RoomFactory;
+import Model.Map.Room_Strategy.CircleRoomStrategy;
 import Model.Map.Room_Strategy.RoomStrategy;
 
 import java.util.ArrayList;

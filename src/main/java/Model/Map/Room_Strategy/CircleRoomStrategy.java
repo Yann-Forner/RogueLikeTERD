@@ -5,8 +5,6 @@ import Model.Map.Room;
 import Model.Utils.Affichage;
 
 public abstract class CircleRoomStrategy extends RoomStrategy {
-
-
     protected void BresenhamCircle(Room room){
         int r = (room.getWidth()/2);
         int xc = (room.getWidth()-1)/2;
@@ -15,8 +13,8 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
         x=0;
         y=r;
         p=3-(2*r);
-        Cell.Style style = new Cell.Style(Cell.Style.CellType.BORDER);
-        room.set(x,y, new Cell(false, style));
+        Cell.Style style = new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BLUE);
+        room.set(x,y, new Cell(true, style));
 
         for (x = 0; x <= y ; x++) {
             if(p<0)p=(p+(4*x)+6);
@@ -24,18 +22,15 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
                 y-=1;
                 p+=((4*(x-y)+10));
             }
-            room.set(xc+x,yc-y,new Cell(false, style));
-            room.set(xc-x,yc-y,new Cell(false, style));
-            room.set(xc+x,yc+y,new Cell(false, style));
-            room.set(xc-x,yc+y,new Cell(false, style));
-            room.set(xc+y,yc-x,new Cell(false, style));
-            room.set(xc-y,yc-x,new Cell(false, style));
-            room.set(xc+y,yc+x,new Cell(false, style));
-            room.set(xc-y,yc+x,new Cell(false, style));
+            room.set(xc+x,yc-y,new Cell(true, style));
+            room.set(xc-x,yc-y,new Cell(true, style));
+            room.set(xc+x,yc+y,new Cell(true, style));
+            room.set(xc-x,yc+y,new Cell(true, style));
+            room.set(xc+y,yc-x,new Cell(true, style));
+            room.set(xc-y,yc-x,new Cell(true, style));
+            room.set(xc+y,yc+x,new Cell(true, style));
+            room.set(xc-y,yc+x,new Cell(true, style));
         }
-
-
-
     }
 
     protected void fillInteriorCircle(Room r){
@@ -45,10 +40,10 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
             for (int x = 0; x < r.getWidth() ; x++) {
                 if(sndBorder)break;
                 if(fstBorder){
-                    if(r.get(x,y).getType() == Cell.Style.CellType.BORDER)sndBorder=true;
+                    if(r.get(x,y).getType() == Cell.Style.CellType.NORMAL)sndBorder=true;
                     else r.set(x,y,new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLUE)));
                 }
-                if(!fstBorder && r.get(x,y).getType() == Cell.Style.CellType.BORDER &&  r.get(x+1,y).getType() == Cell.Style.CellType.VOID )fstBorder = true;
+                if(!fstBorder && r.get(x,y).getType() == Cell.Style.CellType.NORMAL &&  r.get(x+1,y).getType() == Cell.Style.CellType.VOID )fstBorder = true;
             }
 
         }
