@@ -1,15 +1,8 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.BasicPlayer;
-import Model.Main;
-import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import Model.Utils.Tools;
-import Model.Utils.TourManager;
-
-import java.util.ArrayList;
 
 public class Snail extends AbstractMonster{
     private boolean toleft = true;

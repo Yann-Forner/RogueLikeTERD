@@ -1,6 +1,5 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.BasicPlayer;
 import Model.Entitys.Entity;
 import Model.Main;
 import Model.Map.Etage;
