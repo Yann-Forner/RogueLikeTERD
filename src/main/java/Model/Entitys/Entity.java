@@ -46,6 +46,23 @@ public abstract class Entity {
         return this.pv>0;
     }
 
+    public void move(Position pos) {
+        if(pos!=null){
+            Cell cell = etage.get(pos);
+            if(cell.isAccesible() || this instanceof AbstractMonster){
+                if(cell.getEntity()==null){
+                    cell.setEntity(this);
+                    etage.get(position).setEntity(null);
+                    position=pos;
+                }
+                else{
+                    cell.getEntity().updatePV(-1);
+                    //TourManager.pause();
+                }
+            }
+        }
+    }
+
     public int getPv(){
         return pv;
     }
@@ -68,21 +85,6 @@ public abstract class Entity {
 
     public void setEtage(Etage etage){
         this.etage=etage;
-    }
-
-    public void move(Position pos) {
-        Cell cell = etage.get(pos);
-        if(cell.isAccesible() || this instanceof AbstractMonster){
-            if(cell.getEntity()==null){
-                cell.setEntity(this);
-                etage.get(position).setEntity(null);
-                position=pos;
-            }
-            else{
-                cell.getEntity().updatePV(-1);
-                //TourManager.pause();
-            }
-        }
     }
 
     public int getVision_radius() {
