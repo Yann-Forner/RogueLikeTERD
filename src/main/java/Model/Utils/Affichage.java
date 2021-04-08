@@ -25,7 +25,6 @@ public class Affichage {
                 sb.append(" ");
             }
         }
-        sb.append("\n");
 
         //Champs de vision
         HashSet<Position> visibles = new HashSet<>();
@@ -34,7 +33,16 @@ public class Affichage {
                 visibles.addAll(Tools.getVisibles(etage,Main.getPlayer().getPosition(), p));
             }
         }
+        //Titre Menu
+        sb.append("    ");
+        sb.append("                                      ");
+        sb.append(Affichage.BRIGTH_YELLOW).append(Affichage.BOLD);
+        sb.append("[MENU]");
+        sb.append(Affichage.RESET);
+        sb.append("                                      ");
+        sb.append("\n");
 
+        //Numero cases Map
         for (int y = 0; y < etage.getHeigth(); y++) {
             sb.append(Affichage.RESET);
             if (y < 10) {
@@ -57,6 +65,17 @@ public class Affichage {
                 if(cell.toString().length()>2){
                     sb.append(" ");
                 }
+            }
+            //Menu
+            sb.append(Affichage.BOLD).append(Affichage.BLUE).append("     ");
+            if(y==0){
+                sb.append("╔═════════════════════════════════════════════════════════════════════════════════╗");
+            }
+            else if(y==etage.getHeigth()-1){
+                sb.append("╚═════════════════════════════════════════════════════════════════════════════════╝");
+            }
+            else{
+                sb.append("║                                                                                 ║");
             }
             sb.append("\n");
         }

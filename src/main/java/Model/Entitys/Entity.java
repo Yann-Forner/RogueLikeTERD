@@ -42,15 +42,14 @@ public abstract class Entity {
                 System.exit(0);
             }
         }
-        TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" a perdu "+Math.abs(pv)+"pv.");
+        TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
         return this.pv>0;
     }
 
     public void move(Position pos) {
         if(pos!=null){
             Cell cell = etage.get(pos);
-            if(cell.isAccesible() ){
-
+            if(cell.isAccesible()){
                 if(cell.getEntity()==null){
                     cell.setEntity(this);
                     etage.get(position).setEntity(null);

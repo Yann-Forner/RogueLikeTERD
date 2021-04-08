@@ -3,11 +3,25 @@ package Model.Map.Room_Strategy;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
+import Model.Utils.Affichage;
+import Model.Utils.Procedure;
 
 public abstract class RoomStrategy{
 
     public void composeRoom(Room r){
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL)));
+        setStyleCell(r);
+    }
+
+    protected void setStyleCell(Room r){
+        Cell.Style palmier = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,"\uD83C\uDF34", "T");
+        Cell.Style barierre = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83D\uDEA7", "Ø");
+        for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
+            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, palmier);
+        }
+        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
+            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(false, barierre);
+        }
     }
 
     protected boolean noCollision(Etage etage,Room room,int DistanceMin){

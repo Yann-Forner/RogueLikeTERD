@@ -9,6 +9,7 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
     @Override
     public void composeRoom(Room r) {
         super.fillTriangle(r);
+        setStyleCell(r);
     }
 
     @Override

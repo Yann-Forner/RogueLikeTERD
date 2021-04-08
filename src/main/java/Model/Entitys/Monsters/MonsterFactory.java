@@ -7,7 +7,7 @@ import Model.Utils.Tools;
 
 public class MonsterFactory {
     public enum MonsterType {
-        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER
+        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER ,BIRD, VOLCANO, SKULL
     }
 
     private static Ghost getNewGhost(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
@@ -37,6 +37,18 @@ public class MonsterFactory {
         return new BigMonster(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
+    private static Bird getNewBird(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Bird(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
+    }
+
+    private static Volcano getNewVolcano(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Volcano(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
+    }
+
+    private static Skull getNewSkull(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Skull(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
+    }
+
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
@@ -56,6 +68,15 @@ public class MonsterFactory {
             }
             case SNAIL -> {
                 return getNewSnail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,15,60,60,600, Tools.PATH_CROSS);
+            }
+            case BIRD -> {
+                return getNewBird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,15,60,60,600, Tools.PATH_DIAG);
+            }
+            case VOLCANO -> {
+                return getNewVolcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",100000,10,2,0,1000, Tools.PATH_CROSS);
+            }
+            case SKULL -> {
+                return getNewSkull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,5,10,750, Tools.PATH_CROSS);
             }
             case BIGMONSTER -> {
                 return getNewBigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900,Tools.PATH_CROSS);

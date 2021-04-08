@@ -6,14 +6,13 @@ import Model.Map.Cell;
 import Model.Map.Room;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
+import Model.Utils.TourManager;
 
 public class NormalRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL)));
-        r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN, "\uD83C\uDF34", "T"));
-        r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN, "\uD83C\uDF34", "T"));
-        r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN, "\uD83C\uDF34", "T"));
+        setStyleCell(r);
     }
 
     @Override
