@@ -7,7 +7,7 @@ import Model.Utils.Tools;
 
 public class MonsterFactory {
     public enum MonsterType {
-        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL
+        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL, BIRD, VOLCANO
     }
 
     private static Ghost getNewGhost(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
@@ -34,6 +34,14 @@ public class MonsterFactory {
         return new Snail(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
+    private static Bird getNewBird(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Bird(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
+    }
+
+    private static Volcano getNewVolcano(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new Volcano(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
+    }
+
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
@@ -53,6 +61,12 @@ public class MonsterFactory {
             }
             case SNAIL -> {
                 return getNewSnail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,15,60,60,600, Tools.PATH_CROSS);
+            }
+            case BIRD -> {
+                return getNewBird(etage, Procedure.getAccesibleRandomPosition(true,etage),"Bird",10,15,60,60,600, Tools.PATH_CROSS);
+            }
+            case VOLCANO -> {
+                return getNewVolcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"Volcano",100000,10,3,0,600, Tools.PATH_CROSS);
             }
             default -> {
                 return null;
