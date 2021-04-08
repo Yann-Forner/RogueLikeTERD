@@ -23,7 +23,9 @@ public class Volcano extends AbstractMonster {
         BasicPlayer player = Main.getPlayer();
 
         if (getPosition().Distance(player.getPosition()) < 4)
+        {
             player.updatePV(- getForce());
+        }
 
         return super.updatePV(pv);
     }
