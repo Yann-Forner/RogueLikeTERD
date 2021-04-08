@@ -42,7 +42,7 @@ public abstract class Entity {
                 System.exit(0);
             }
         }
-        TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" a perdu "+Math.abs(pv)+"pv.");
+        TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
         return this.pv>0;
     }
 

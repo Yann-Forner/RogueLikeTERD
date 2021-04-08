@@ -14,8 +14,8 @@ public class Bird extends AbstractMonster {
 
     @Override
     protected Position nextPosition() {
-        Position haut = getPosition().somme(0,-1);
-        Position bas = getPosition().somme(0,+1);
+        Position haut = getPosition().somme(-1,-1);
+        Position bas = getPosition().somme(+1,+1);
         if(totop) {
             if(getEtage().get(haut).isAccesible()){
                 return haut;

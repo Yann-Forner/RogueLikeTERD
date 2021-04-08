@@ -33,6 +33,7 @@ public class Map {
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SNAIL));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BIRD));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.VOLCANO));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SKULL));
     }
 
     public Etage getCurrent(){
