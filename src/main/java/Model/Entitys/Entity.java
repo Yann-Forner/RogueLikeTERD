@@ -2,8 +2,10 @@ package Model.Entitys;
 
 import Model.Entitys.Inventaires.Inventory;
 import Model.Entitys.Monsters.AbstractMonster;
+import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
@@ -38,11 +40,14 @@ public abstract class Entity {
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
             } else {
+                Main.affichage(etage);
                 System.out.println("Fin de la partie.");
                 System.exit(0);
             }
         }
-        TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
+        if(this instanceof AbstractMonster){
+            TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
+        }
         return this.pv>0;
     }
 

@@ -1,13 +1,11 @@
 package Model.Map;
 
 import Model.Entitys.*;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
-import Model.Utils.Tools;
 
 import java.util.ArrayList;
 
@@ -22,17 +20,17 @@ public class Map {
         Etage etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        player=new BasicPlayer(etage,pos,100, "Quentin");
+        player=new BasicPlayer(etage,pos,20, "Quentin");
         etage.get(pos).setEntity(player);
 
-
+        /*
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ALIEN));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SNAIL));
-        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BIRD));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BIRD));*/
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.VOLCANO));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SKULL));

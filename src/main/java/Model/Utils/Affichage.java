@@ -82,6 +82,33 @@ public class Affichage {
         return sb.toString();
     }
 
+    public static void getPv(){
+        int pv = Main.getPlayer().getPv();
+        StringBuilder sb = new StringBuilder();
+        sb.append(Affichage.GREEN);
+        sb.append("PV : ");
+        sb.append(Affichage.GREY);
+        sb.append(Affichage.GREEN_BACKGROUND);
+        for (int i = 0; i < 100; i++) {
+            if(i>=pv){
+                sb.append(Affichage.RED_BACKGROUND);
+            }
+            switch (i){
+                case 45 -> sb.append(pv == 100 ? "[" : " ");
+                case 46 -> sb.append(pv == 100 ? "1" : pv < 10 ? " " : "[");
+                case 47 -> sb.append(pv >= 10 ? (pv%100)/10 : "[");
+                case 48 -> sb.append(pv%10);
+                case 49 -> sb.append("/");
+                case 50 -> sb.append("1");
+                case 51, 52 -> sb.append("0");
+                case 53 -> sb.append("]");
+                default -> sb.append(" ");
+            }
+        }
+        sb.append(Affichage.RESET);
+        System.out.println(sb);
+    }
+
     public static void Rooms_Color(Etage etage){
         int acc=0;
         for (int k = 0; k < etage.getRooms().size(); k++) {

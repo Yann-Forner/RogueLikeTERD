@@ -1,8 +1,6 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.BasicPlayer;
 import Model.Entitys.Entity;
-import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -17,17 +15,18 @@ public class Volcano extends AbstractMonster {
 
     @Override
     public void updateMonster() {
-        BasicPlayer player = Main.getPlayer();
-        int radius = getVision_radius();
         int posX = getPosition().getX();
         int posY = getPosition().getY();
-
-        for(int x = posX - radius; x < posX + radius; x++) {
-            for (int y = posY - radius; y < posY + radius; y++) {
-                Entity e = getEtage().get(x, y).getEntity();
-
-                if(e != null && x != posX && y != posY)
+        for(int x = posX - getVision_radius(); x < posX + getVision_radius()*2 -1; x++) {
+            for (int y = posY - getVision_radius(); y < posY + getVision_radius()*2 -1; y++) {
+                Cell c = getEtage().get(x, y);
+                if(c.getType().equals(Cell.Style.CellType.NORMAL)){
+                    c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BRIGTH_RED,"~"));
+                }
+                Entity e = c.getEntity();
+                if(e != null && e!=this) {
                     e.updatePV(- getForce());
+                }
             }
         }
     }
