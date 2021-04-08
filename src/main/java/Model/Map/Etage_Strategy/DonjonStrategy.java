@@ -18,6 +18,7 @@ public class DonjonStrategy extends EtageStrategy {
         add(RoomFactory.roomType.MARCHAND);
         add(RoomFactory.roomType.TRESOR);
         add(RoomFactory.roomType.CIRCLENORMAL);
+        add(RoomFactory.roomType.TRIANGLENORMAL);
     }};
 
     @Override
