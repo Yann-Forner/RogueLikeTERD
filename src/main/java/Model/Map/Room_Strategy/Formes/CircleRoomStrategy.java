@@ -1,12 +1,13 @@
-package Model.Map.Room_Strategy;
+package Model.Map.Room_Strategy.Formes;
 
 import Model.Map.Cell;
 import Model.Map.Room;
+import Model.Map.Room_Strategy.RoomStrategy;
 import Model.Utils.Affichage;
 
 public abstract class CircleRoomStrategy extends RoomStrategy {
-    protected void BresenhamCircle(Room room){
-        int r = (room.getWidth()/2);
+
+    protected void drawCircle(Room room , int r ){
         int xc = (room.getWidth()-1)/2;
         int yc = (room.getHeigth()-1)/2;
         int x,y,p;
@@ -31,6 +32,10 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
             room.set(xc+y,yc+x,new Cell(true, style));
             room.set(xc-y,yc+x,new Cell(true, style));
         }
+    }
+    protected void BresenhamCircle(Room room){
+        int r = (room.getWidth()/2);
+       drawCircle(room,r);
     }
 
     protected void fillInteriorCircle(Room r){

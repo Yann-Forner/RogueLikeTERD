@@ -4,11 +4,10 @@ import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 import Model.Utils.Tools;
-import com.github.javafaker.Faker;
 
 public class MonsterFactory {
     public enum MonsterType {
-        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL, BIRD, VOLCANO, SKULL
+        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER ,BIRD, VOLCANO, SKULL
     }
 
     private static Ghost getNewGhost(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
@@ -34,6 +33,9 @@ public class MonsterFactory {
     private static Snail getNewSnail(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Snail(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
+    private static BigMonster getNewBigMonster(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new BigMonster(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
+    }
 
     private static Bird getNewBird(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Bird(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
@@ -50,31 +52,34 @@ public class MonsterFactory {
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
-                return getNewGhost(etage, Procedure.getAccesibleRandomPosition(true,etage),"GHOST " + new Faker().pokemon(), 10,3,10,10,700, Tools.PATH_GHOST);
+                return getNewGhost(etage, Procedure.getAccesibleRandomPosition(true,etage),"GHOST", 10,3,10,10,700, Tools.PATH_GHOST);
             }
             case ZOMBIE -> {
-                return getNewZombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE " + new Faker().pokemon(),25,5,5,30,1500, Tools.PATH_CROSS);
+                return getNewZombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE",25,5,5,30,1500, Tools.PATH_CROSS);
             }
             case RAT -> {
-                return getNewRat(etage, Procedure.getAccesibleRandomPosition(true,etage),"RAT " + new Faker().pokemon(),5,1,15,15,300, Tools.PATH_DIAG);
+                return getNewRat(etage, Procedure.getAccesibleRandomPosition(true,etage),"RAT",5,1,15,15,300, Tools.PATH_DIAG);
             }
             case BEE -> {
-                return getNewBee(etage, Procedure.getAccesibleRandomPosition(true,etage),"BEE " + new Faker().pokemon(),5,5,15,20,900, Tools.PATH_CROSS);
+                return getNewBee(etage, Procedure.getAccesibleRandomPosition(true,etage),"BEE",20,5,15,20,900, Tools.PATH_CROSS);
             }
             case ALIEN -> {
-                return getNewAlien(etage, Procedure.getAccesibleRandomPosition(true,etage),"ALIEN " + new Faker().starTrek().villain(),15,10,20,60,300, Tools.PATH_CROSS);
+                return getNewAlien(etage, Procedure.getAccesibleRandomPosition(true,etage),"ALIEN",15,10,20,60,300, Tools.PATH_CROSS);
             }
             case SNAIL -> {
-                return getNewSnail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL " + new Faker().pokemon(),10,15,60,60,600, Tools.PATH_CROSS);
+                return getNewSnail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,15,60,60,600, Tools.PATH_CROSS);
             }
             case BIRD -> {
-                return getNewBird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD " + new Faker().pokemon(),10,15,60,60,600, Tools.PATH_DIAG);
+                return getNewBird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,15,60,60,600, Tools.PATH_DIAG);
             }
             case VOLCANO -> {
-                return getNewVolcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO " + new Faker().gameOfThrones().dragon(),100000,10,2,0,1000, Tools.PATH_CROSS);
+                return getNewVolcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",100000,10,2,0,1000, Tools.PATH_CROSS);
             }
             case SKULL -> {
-                return getNewSkull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL " + new Faker().witcher().character(),10,3,5,10,750, Tools.PATH_CROSS);
+                return getNewSkull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,5,10,750, Tools.PATH_CROSS);
+            }
+            case BIGMONSTER -> {
+                return getNewBigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900,Tools.PATH_CROSS);
             }
             default -> {
                 return null;

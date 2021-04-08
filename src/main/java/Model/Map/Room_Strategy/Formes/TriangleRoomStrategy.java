@@ -1,10 +1,11 @@
-package Model.Map.Room_Strategy;
+package Model.Map.Room_Strategy.Formes;
 
 import Model.Map.Cell;
 import Model.Map.Room;
+import Model.Map.Room_Strategy.RoomStrategy;
 import Model.Utils.Position;
 
-public abstract class TriangleRoomStrategy extends  RoomStrategy{
+public abstract class TriangleRoomStrategy extends RoomStrategy {
 
     public void fillTriangle(Room r){
 
