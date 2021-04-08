@@ -7,7 +7,7 @@ import Model.Utils.Tools;
 
 public class MonsterFactory {
     public enum MonsterType {
-        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL
+        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER
     }
 
     private static Ghost getNewGhost(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
@@ -33,6 +33,9 @@ public class MonsterFactory {
     private static Snail getNewSnail(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Snail(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
+    private static BigMonster getNewBigMonster(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+        return new BigMonster(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
+    }
 
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
@@ -53,6 +56,9 @@ public class MonsterFactory {
             }
             case SNAIL -> {
                 return getNewSnail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,15,60,60,600, Tools.PATH_CROSS);
+            }
+            case BIGMONSTER -> {
+                return getNewBigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900,Tools.PATH_CROSS);
             }
             default -> {
                 return null;

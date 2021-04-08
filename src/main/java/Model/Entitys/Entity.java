@@ -49,7 +49,8 @@ public abstract class Entity {
     public void move(Position pos) {
         if(pos!=null){
             Cell cell = etage.get(pos);
-            if(cell.isAccesible() || this instanceof AbstractMonster){
+            if(cell.isAccesible() ){
+
                 if(cell.getEntity()==null){
                     cell.setEntity(this);
                     etage.get(position).setEntity(null);
