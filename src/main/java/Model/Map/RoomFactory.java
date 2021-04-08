@@ -5,11 +5,13 @@ import Model.Utils.Procedure;
 
 public class RoomFactory {
     public enum roomType {
-        TRESOR,NORMAL,CIRCLENORMAL,MINIBOSS,BOSS,MARCHAND,REPOS,TRAP
+        TRESOR,NORMAL,CIRCLENORMAL,MINIBOSS,BOSS,MARCHAND,REPOS,TRAP,TRIANGLENORMAL
     }
     private static Room getNewMiniBossRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new MiniBossRoomStrategy());}
 
     private static Room getNewBigBossRoom(){return Procedure.getRandomImpairSizeRoom(19,36,new BigBossRoomStrategy());}
+
+    private static Room getNewNormalTriangleRoom(){ return Procedure.getRandomRoom(10,20,new NormalTriangleStrategy());}
 
     private static Room getNewMarchandRoom(){
         return new Room(5,5,new MarchandRoomStrategy());
@@ -51,6 +53,9 @@ public class RoomFactory {
             }
             case TRAP -> {
                 return getNewTrapRoom();
+            }
+            case TRIANGLENORMAL -> {
+                return getNewNormalTriangleRoom();
             }
             default -> {
                 return getNewNormalRoom();
