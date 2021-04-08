@@ -1,6 +1,7 @@
 package Model.Entitys.Monsters;
 
 import Model.Entitys.BasicPlayer;
+import Model.Entitys.Entity;
 import Model.Main;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -14,20 +15,11 @@ public class Volcano extends AbstractMonster {
     }
 
     @Override
-    protected Position nextPosition() {
-        return getPosition();
-    }
-
-    @Override
-    public boolean updatePV(int pv) {
+    public void updateMonster() {
         BasicPlayer player = Main.getPlayer();
-
-        if (getPosition().Distance(player.getPosition()) < 2)
-        {
+        if (getPosition().Distance(player.getPosition()) < getVision_radius()) {
             player.updatePV(- getForce());
         }
-
-        return super.updatePV(pv);
     }
 
     @Override

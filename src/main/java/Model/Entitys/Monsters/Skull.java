@@ -13,17 +13,11 @@ public class Skull extends AbstractMonster {
     }
 
     @Override
-    public boolean updatePV(int pv) {
+    public void updateMonster() {
         BasicPlayer player = Main.getPlayer();
-
-        double distance = getPosition().Distance(player.getPosition());
-
-        if (distance < 4 && distance > 1)
-        {
+        if (getPosition().Distance(player.getPosition()) < getVision_radius()) {
             player.updatePV(- getForce());
         }
-
-        return super.updatePV(pv);
     }
 
     @Override

@@ -67,13 +67,13 @@ public class MonsterFactory {
                 return getNewSnail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,15,60,60,600, Tools.PATH_CROSS);
             }
             case BIRD -> {
-                return getNewBird(etage, Procedure.getAccesibleRandomPosition(true,etage),"Bird",10,15,60,60,600, Tools.PATH_DIAG);
+                return getNewBird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,15,60,60,600, Tools.PATH_DIAG);
             }
             case VOLCANO -> {
-                return getNewVolcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"Volcano",100000,1,2,0,600, Tools.PATH_CROSS);
+                return getNewVolcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",100000,10,2,0,1000, Tools.PATH_CROSS);
             }
             case SKULL -> {
-                return getNewSkull(etage, Procedure.getAccesibleRandomPosition(true,etage),"Skull",1,3,5,10,600, Tools.PATH_CROSS);
+                return getNewSkull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,5,10,750, Tools.PATH_CROSS);
             }
             default -> {
                 return null;
