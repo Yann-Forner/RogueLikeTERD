@@ -25,7 +25,8 @@ public class Volcano extends AbstractMonster {
         for(int x = posX - radius; x < posX + radius; x++) {
             for (int y = posY - radius; y < posY + radius; y++) {
                 Entity e = getEtage().get(x, y).getEntity();
-                if(e != null)
+
+                if(e != null && x != posX && y != posY)
                     e.updatePV(- getForce());
             }
         }
