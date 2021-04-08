@@ -1,12 +1,13 @@
 package Model.Map;
 
-import Model.Entitys.BasicPlayer;
-import Model.Entitys.Ghost;
-import Model.Entitys.MonsterFactory;
+import Model.Entitys.*;
+import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.Tools;
 
 import java.util.ArrayList;
 
@@ -21,11 +22,16 @@ public class Map {
         Etage etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        player=new BasicPlayer(etage,pos);
+        player=new BasicPlayer(etage,pos,100, "Quentin");
         etage.get(pos).setEntity(player);
 
-        Ghost g = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
-        etage.addMonster(g);
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ALIEN));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SNAIL));
+
     }
 
     public Etage getCurrent(){
@@ -45,7 +51,6 @@ public class Map {
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
             etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
-            System.out.println(etage.getStrategy());
             etages.add(etage);
         }
         else{

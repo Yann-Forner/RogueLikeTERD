@@ -1,15 +1,10 @@
 package Model.Map.Room_Strategy;
 
 import Model.Map.Cell;
-import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Position;
-
-import java.util.ArrayList;
+import Model.Utils.Affichage;
 
 public abstract class CircleRoomStrategy extends RoomStrategy {
-
-
     protected void BresenhamCircle(Room room){
         int r = (room.getWidth()/2);
         int xc = (room.getWidth()-1)/2;
@@ -18,8 +13,8 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
         x=0;
         y=r;
         p=3-(2*r);
-
-        room.set(x,y, new Cell(false, Cell.CellType.BORDER));
+        Cell.Style style = new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BLUE);
+        room.set(x,y, new Cell(true, style));
 
         for (x = 0; x <= y ; x++) {
             if(p<0)p=(p+(4*x)+6);
@@ -27,32 +22,28 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
                 y-=1;
                 p+=((4*(x-y)+10));
             }
-            room.set(xc+x,yc-y,new Cell(false, Cell.CellType.BORDER));
-            room.set(xc-x,yc-y,new Cell(false, Cell.CellType.BORDER));
-            room.set(xc+x,yc+y,new Cell(false, Cell.CellType.BORDER));
-            room.set(xc-x,yc+y,new Cell(false, Cell.CellType.BORDER));
-            room.set(xc+y,yc-x,new Cell(false, Cell.CellType.BORDER));
-            room.set(xc-y,yc-x,new Cell(false, Cell.CellType.BORDER));
-            room.set(xc+y,yc+x,new Cell(false, Cell.CellType.BORDER));
-            room.set(xc-y,yc+x,new Cell(false, Cell.CellType.BORDER));
+            room.set(xc+x,yc-y,new Cell(true, style));
+            room.set(xc-x,yc-y,new Cell(true, style));
+            room.set(xc+x,yc+y,new Cell(true, style));
+            room.set(xc-x,yc+y,new Cell(true, style));
+            room.set(xc+y,yc-x,new Cell(true, style));
+            room.set(xc-y,yc-x,new Cell(true, style));
+            room.set(xc+y,yc+x,new Cell(true, style));
+            room.set(xc-y,yc+x,new Cell(true, style));
         }
-
-
-
     }
 
     protected void fillInteriorCircle(Room r){
-
         for (int y = 1; y < r.getHeigth()-1; y++) {
             boolean fstBorder = false;
             boolean sndBorder = false;
             for (int x = 0; x < r.getWidth() ; x++) {
                 if(sndBorder)break;
                 if(fstBorder){
-                    if(r.get(x,y).getType() == Cell.CellType.BORDER)sndBorder=true;
-                    else r.set(x,y,new Cell(true, Cell.CellType.NORMAL));
+                    if(r.get(x,y).getType() == Cell.Style.CellType.NORMAL)sndBorder=true;
+                    else r.set(x,y,new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLUE)));
                 }
-                if(!fstBorder && r.get(x,y).getType() == Cell.CellType.BORDER &&  r.get(x+1,y).getType() == Cell.CellType.VOID )fstBorder = true;
+                if(!fstBorder && r.get(x,y).getType() == Cell.Style.CellType.NORMAL &&  r.get(x+1,y).getType() == Cell.Style.CellType.VOID )fstBorder = true;
             }
 
         }

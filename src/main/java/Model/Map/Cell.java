@@ -4,49 +4,63 @@ import Model.Entitys.Entity;
 import Model.Utils.Affichage;
 
 public class Cell{
-    public enum CellType {
-        BORDER( Affichage.BOLD+Affichage.RED+"*"+Affichage.RESET),
-        NORMAL(Affichage.GREY+"."),
-        PATH(Affichage.BOLD+Affichage.BLUE+"*"+Affichage.RESET),
-        VOID(Affichage.BLACK+"."),
-        CHEST("\uD83D\uDCB0",Affichage.YELLOW+Affichage.BOLD+"$"),
-        UP("\uD83D\uDC4D",Affichage.BLUE+Affichage.BOLD+"^"),
-        DOWN("\uD83D\uDC4E",Affichage.BLUE+Affichage.BOLD+"v"),
-        TRAP_ROOM(Affichage.BLUE+"X"),
-        SPECIAL(Affichage.YELLOW+"X");
 
-        //TODO sa change pour tout les types en même temps
-        private String string;
+    public static class Style{
+        public enum CellType {
+            BORDER(Affichage.BOLD+Affichage.RED,"*"),
+            NORMAL(Affichage.GREEN,"."),
+            PATH(Affichage.BOLD+Affichage.BLUE,"*"),
+            VOID(Affichage.BLACK,"."),
+            CHEST(Affichage.YELLOW+Affichage.BOLD,"\uD83D\uDCB0","$"),
+            UP(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4D","^"),
+            DOWN(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4E","v"),
+            TRAP_ROOM(Affichage.BLUE,"X"),
+            SPECIAL(Affichage.YELLOW,"X");
 
-        CellType(String s) {
-            string=s;
-        }
+            private final String base_color;
+            private final String forme;
 
-        CellType(String s1, String s2) {
-            if(System.getProperty("os.name").equals("Linux")){
-                string=s1;
+            CellType(String c, String s) {
+                base_color=c;
+                forme=s;
             }
-            else{
-                string=s2;
+
+            CellType(String c, String s1, String s2) {
+                this(c,System.getProperty("os.name").equals("Linux") ? s1 : s2);
             }
         }
+        private final CellType type;
+        private String custom_color;
+        private String custom_forme;
 
-        public String getString(){
-            return string;
+        public Style(CellType type){
+            this.type=type;
         }
 
-        public void setString(String s){
-            this.string=s;
+        public Style(CellType type,String color){
+            this(type);
+            this.custom_color=color;
         }
 
+        public Style(CellType type,String color,String forme){
+            this(type,color);
+            this.custom_forme=forme;
+        }
+
+        @Override
+        public String toString() {
+            String forme= custom_forme==null ? type.forme : custom_forme;
+            return forme.length() > 1 ? forme : custom_color == null ? type.base_color + forme : custom_color + forme;
+        }
     }
+
+    private Style style;
     private boolean isAccesible;
-    private CellType type;
     private Model.Entitys.Entity Entity;
 
-    public Cell(boolean isAccesible, CellType type) {
+    public Cell(boolean isAccesible, Style style) {
         this.isAccesible = isAccesible;
-        this.type = type;
+        this.style = style;
         Entity = null;
     }
 
@@ -59,20 +73,24 @@ public class Cell{
      * @return boolean
      */
     public boolean isReserved(){
-        return type.equals(CellType.UP)
-                || type.equals(CellType.DOWN)
-                || type.equals(CellType.CHEST)
-                || type.equals(CellType.TRAP_ROOM)
-                || type.equals(CellType.SPECIAL);
+        return getType().equals(Style.CellType.UP)
+                || getType().equals(Style.CellType.DOWN)
+                || getType().equals(Style.CellType.CHEST)
+                || getType().equals(Style.CellType.TRAP_ROOM)
+                || getType().equals(Style.CellType.SPECIAL);
     }
 
-    public CellType getType() {
-        return type;
+    public Style getStyle() {
+        return style;
     }
 
-    public void updateCell(boolean isAccesible, CellType type){
-        this.isAccesible=isAccesible;
-        this.type=type;
+    public Style.CellType getType() {
+        return style.type;
+    }
+
+    public void updateCell(boolean isAccesible, Style style){
+        this.isAccesible = isAccesible;
+        this.style = style;
     }
 
     public Entity getEntity() {
@@ -84,7 +102,7 @@ public class Cell{
     }
 
     public Cell copyOf(){
-        Cell cell = new Cell(isAccesible, type);
+        Cell cell = new Cell(isAccesible, style);
         cell.Entity=Entity;
         return cell;
     }
@@ -92,7 +110,7 @@ public class Cell{
     @Override
     public String toString() {
         if(Entity == null) {
-            return type.getString();
+            return style.toString();
         }
         else {
             return Entity.toString();

@@ -1,15 +1,14 @@
 package Model.Utils;
 
 import Exceptions.CollisionRoom;
-import Model.Entitys.AbstractMonster;
-import Model.Entitys.MonsterFactory;
+import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
-import Model.Entitys.BasicPlayer;
-import Model.Entitys.Entity;
 import Model.Map.Etage;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Room;
 import Model.Map.RoomFactory;
+import Model.Map.Room_Strategy.CircleRoomStrategy;
 import Model.Map.Room_Strategy.RoomStrategy;
 
 import java.util.ArrayList;
@@ -156,7 +155,6 @@ public class Procedure {
 
             }
         }
-        System.out.println(etage.getRooms());
         Collections.sort(etage.getRooms());
     }
 
@@ -183,7 +181,6 @@ public class Procedure {
                 nbrRooms++;
             } catch (CollisionRoom e) {}
         }
-        System.out.println(etageStrategy);
         Collections.sort(etage.getRooms());
     }
 
@@ -196,7 +193,7 @@ public class Procedure {
         Position pos = getAccesibleRandomPosition(true,etage,r);
         Cell cell = etage.get(pos);
         //TODO passer le montre en parametre
-        AbstractMonster m = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST);
+        AbstractMonster m = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE);
         cell.setEntity(m);
         etage.addMonster(m);
     }
@@ -221,7 +218,7 @@ public class Procedure {
      */
     public static void setRandomChest(Etage etage, int nbr){
         for (int i = 0; i < nbr; i++) {
-            etage.get(getAccesibleRandomPosition(false,etage)).updateCell(true, Cell.CellType.CHEST);
+            etage.get(getAccesibleRandomPosition(false,etage)).updateCell(true, new Cell.Style(Cell.Style.CellType.CHEST));
         }
     }
 
@@ -240,7 +237,7 @@ public class Procedure {
      */
     public static void setRandomUP(Etage etage){
         Position p1 = getAccesibleRandomPosition(false, etage);
-        etage.get(p1).updateCell(true, Cell.CellType.UP);
+        etage.get(p1).updateCell(true, new Cell.Style(Cell.Style.CellType.UP));
     }
 
     /**
@@ -249,7 +246,7 @@ public class Procedure {
      */
     private static void setRandomDOWN(Etage etage){
         Position p2 = getAccesibleRandomPosition(false, etage);
-        etage.get(p2).updateCell(true, Cell.CellType.DOWN);
+        etage.get(p2).updateCell(true, new Cell.Style(Cell.Style.CellType.DOWN));
     }
 
 }

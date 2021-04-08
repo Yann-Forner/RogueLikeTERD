@@ -1,12 +1,18 @@
 package Model.Utils;
 
+import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Affichage {
+    public enum Shadow{
+        CIRCLE,RAY,NONE;
+    }
+    private static final Shadow ombre = Shadow.NONE;
 
     public static String etage(Etage etage){
         StringBuilder sb = new StringBuilder();
@@ -20,6 +26,15 @@ public class Affichage {
             }
         }
         sb.append("\n");
+
+        //Champs de vision
+        HashSet<Position> visibles = new HashSet<>();
+        if(Main.getPlayer()!=null){
+            for(Position p : Tools.getBorder(etage)){
+                visibles.addAll(Tools.getVisibles(etage,Main.getPlayer().getPosition(), p));
+            }
+        }
+
         for (int y = 0; y < etage.getHeigth(); y++) {
             sb.append(Affichage.RESET);
             if (y < 10) {
@@ -30,12 +45,17 @@ public class Affichage {
             //MAP
             for (int x = 0; x < etage.getWidth(); x++) {
                 sb.append(Affichage.RESET);
-                Cell cell = etage.get(x, y);
-                if(cell.toString().length()>2){
-                    sb.append(" ").append(cell).append(" ");
+                Position pos = new Position(x,y);
+                Cell cell;
+                switch (ombre){
+                    case CIRCLE -> cell = Main.getPlayer().getPosition().Distance(pos) <= 15 ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
+                    case RAY -> cell = visibles.contains(pos) ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
+                    case NONE -> cell = etage.get(pos);
+                    default -> throw new IllegalStateException("Unexpected value: " + ombre);
                 }
-                else{
-                    sb.append(" ").append(cell);
+                sb.append(" ").append(cell);
+                if(cell.toString().length()>2){
+                    sb.append(" ");
                 }
             }
             sb.append("\n");
@@ -51,7 +71,7 @@ public class Affichage {
                 for (int j = 0; j < r.getWidth(); j++) {
                     int finalAcc = acc;
                     int finalK = k;
-                    etage.set(r.getAbsolutePos().getX()+j,r.getAbsolutePos().getY()+i,new Cell(true, Cell.CellType.PATH){
+                    etage.set(r.getAbsolutePos().getX()+j,r.getAbsolutePos().getY()+i,new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
                         @Override
                         public String toString() {
                             return "\u001B[3"+ finalAcc +"m"+ finalK;
@@ -68,7 +88,7 @@ public class Affichage {
         for (int i = 0; i < path.size(); i++) {
             Position p = path.get(i);
             if(i==0){
-                etage.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
+                etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
                     @Override
                     public String toString() {
                         return Affichage.BRIGTH_YELLOW+"A";
@@ -76,7 +96,7 @@ public class Affichage {
                 });
             }
             else if(i==path.size()-1){
-                etage.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
+                etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
                     @Override
                     public String toString() {
                         return Affichage.BRIGTH_YELLOW+"D";
@@ -84,7 +104,7 @@ public class Affichage {
                 });
             }
             else{
-                etage.set(p.getX(),p.getY(),new Cell(true, Cell.CellType.PATH){
+                etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
                     @Override
                     public String toString() {
                         return Affichage.BRIGTH_PURPLE+"X";

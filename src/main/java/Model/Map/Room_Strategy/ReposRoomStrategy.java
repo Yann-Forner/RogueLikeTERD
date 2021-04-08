@@ -2,14 +2,12 @@ package Model.Map.Room_Strategy;
 
 import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Procedure;
 
 public class ReposRoomStrategy extends RoomStrategy {
 
     @Override
     public void composeRoom(Room r) {
         super.composeRoom(r);
-
     }
 
     @Override

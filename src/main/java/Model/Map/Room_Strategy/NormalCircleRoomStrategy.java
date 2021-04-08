@@ -1,12 +1,10 @@
 package Model.Map.Room_Strategy;
 
-import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
-public class NormalCircleRoom extends CircleRoomStrategy{
+public class NormalCircleRoomStrategy extends CircleRoomStrategy{
     @Override
     public void composeRoom(Room r) {
         super.BresenhamCircle(r);

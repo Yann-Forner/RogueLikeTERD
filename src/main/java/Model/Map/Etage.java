@@ -2,12 +2,12 @@ package Model.Map;
 
 
 import Exceptions.CollisionRoom;
-import Model.Entitys.AbstractMonster;
-import Model.Entitys.Entity;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.TourManager;
 
 import java.util.*;
 
@@ -17,18 +17,16 @@ public class Etage {
     public ArrayList<ArrayList<Cell>> Cells;
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
-    private EtageStrategy strategy;
     private Position trapCellPosition;
 
     protected Etage(int Width, int Heigth) {
         this.Width = Width;
         this.Heigth = Heigth;
-        fillMap(new Cell(false,Cell.CellType.VOID));
+        fillMap(new Cell(false,new Cell.Style(Cell.Style.CellType.VOID)));
     }
 
     public Etage(int Width, int Heigth, EtageStrategy strategy) {
         this(Width,Heigth);
-        this.strategy=strategy;
         strategy.composeEtage(this);
     }
 
@@ -64,12 +62,18 @@ public class Etage {
     public void addMonster(AbstractMonster m) {
         get(m.getPosition()).setEntity(m);
         Monsters.add(m);
+        TourManager.addMonsterSchedule(m);
+    }
+
+    public void removeMonster(AbstractMonster m) {
+        get(m.getPosition()).setEntity(null);
+        Monsters.remove(m);
     }
 
     public void setTrapCell() {
         Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
         this.trapCellPosition = accesibleRandomPosition;
-        get(accesibleRandomPosition).updateCell(true, Cell.CellType.TRAP_ROOM);
+        get(accesibleRandomPosition).updateCell(true, new Cell.Style(Cell.Style.CellType.TRAP_ROOM));
     }
 
     public Cell get(int x, int y) {
@@ -94,10 +98,6 @@ public class Etage {
 
     public int getHeigth() {
         return Heigth;
-    }
-
-    public EtageStrategy getStrategy(){
-        return strategy;
     }
 
     public ArrayList<AbstractMonster> getMonsters() {

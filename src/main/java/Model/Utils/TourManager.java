@@ -1,29 +1,31 @@
 package Model.Utils;
 
-import Model.Entitys.AbstractMonster;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.BasicPlayer;
+import Model.Main;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Utils.Main;
 
 import java.io.BufferedReader;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TourManager{
-
+    private static boolean running = true;
+    private static final ArrayDeque<String> messages = new ArrayDeque<>();
+    private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private final BufferedReader reader;
-    private final BasicPlayer player;
+    private static BasicPlayer player;
     private final Map map;
-    private Etage etage;
+    private static Etage etage;
 
     public TourManager(BufferedReader reader, BasicPlayer player, Map map, Etage etage) {
         this.reader = reader;
-        this.player = player;
+        TourManager.player = player;
         this.map = map;
-        this.etage = etage;
+        TourManager.etage = etage;
         schedule();
         Main.affichage(etage);
     }
@@ -44,6 +46,7 @@ public class TourManager{
             case "q" , "\u001B[D" -> player.moveLeft();
             case "s" , "\u001B[B" -> player.moveDown();
             case "d" , "\u001B[C" -> player.moveRight();
+            case "p" -> pause();
             case "exit" -> System.exit(0);
             default -> System.out.println("Wrong key:"+input);
         }
@@ -65,17 +68,30 @@ public class TourManager{
         }
     }
 
-    private void processEntitys() {
-        ArrayList<AbstractMonster> monsters = etage.getMonsters();
-        for (AbstractMonster m : monsters) {
-            m.updateMonster(etage,player);
-        }
-        //Model.Utils.Main.affichage(etage);
+    public void schedule() {
+        executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 
-    public void schedule() {
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
-        executor.scheduleAtFixedRate(this::processEntitys,0,700,TimeUnit.MILLISECONDS);
+    public static void addMonsterSchedule(AbstractMonster m){
+        executor.scheduleAtFixedRate(() -> {
+            if(running && m.getPv()>0 && m.getEtage().equals(player.getEtage())) m.updateMonster();
+        },0,m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
+    }
+
+    public static void pause(){
+        TourManager.AddMessage("Le jeu est en pause");
+        running=!running;
+    }
+
+    public static void AddMessage(String message){
+        if(messages.size()>=10){
+            messages.pollFirst();
+        }
+        messages.add(message);
+    }
+
+    public static ArrayDeque<String> getMessages(){
+        return messages;
     }
 }

@@ -36,7 +36,7 @@ public class TestAstar extends TestCase {
         ArrayList<Position> reversedCheminTrapRoom = Tools.Astar(etage, etage.getTrapCellPosition(), player.getPosition(), Tools.PATH_CROSS);
 
         Position outsidePos = new Position(0, 0);
-        while(etage.Cells.get(outsidePos.getY()).get(outsidePos.getX()).getType() != Cell.CellType.VOID) {
+        while(etage.Cells.get(outsidePos.getY()).get(outsidePos.getX()).getType() != Cell.Style.CellType.VOID) {
             if(outsidePos.getX() == 39)
             {
                 outsidePos = new Position(0, outsidePos.getY() + 1);
@@ -44,7 +44,7 @@ public class TestAstar extends TestCase {
             outsidePos = new Position(outsidePos.getX() + 1, outsidePos.getY());
         }
         Position wallPos = new Position(0, 0);
-        while(etage.Cells.get(wallPos.getY()).get(wallPos.getX()).getType() != Cell.CellType.BORDER) {
+        while(etage.Cells.get(wallPos.getY()).get(wallPos.getX()).getType() != Cell.Style.CellType.BORDER) {
             if(wallPos.getX() == 39)
             {
                 wallPos = new Position(0, wallPos.getY() + 1);

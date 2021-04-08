@@ -27,7 +27,7 @@ public class RoomFactory {
 
     private static Room getNewReposRoom(){return new Room(10,10,new ReposRoomStrategy());}
 
-    private static Room getNewCircleRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new NormalCircleRoom());}
+    private static Room getNewCircleRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new NormalCircleRoomStrategy());}
 
     public static Room getNewRoom(roomType r){
         switch (r){
