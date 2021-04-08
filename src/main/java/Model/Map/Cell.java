@@ -31,7 +31,8 @@ public class Cell{
         }
         private final CellType type;
         private String custom_color;
-        private String custom_forme;
+        private String custom_forme_linux;
+        private String custom_forme_windows;
 
         public Style(CellType type){
             this.type=type;
@@ -44,12 +45,17 @@ public class Cell{
 
         public Style(CellType type,String color,String forme){
             this(type,color);
-            this.custom_forme=forme;
+            this.custom_forme_linux=forme;
+        }
+
+        public Style(CellType type,String color,String forme_linux, String forme_windows){
+            this(type,color,forme_linux);
+            this.custom_forme_windows=forme_windows;
         }
 
         @Override
         public String toString() {
-            String forme= custom_forme==null ? type.forme : custom_forme;
+            String forme= System.getProperty("os.name").equals("Linux") ? custom_forme_linux==null ? type.forme : custom_forme_linux : custom_forme_windows==null ? type.forme : custom_forme_windows;
             return forme.length() > 1 ? forme : custom_color == null ? type.base_color + forme : custom_color + forme;
         }
     }

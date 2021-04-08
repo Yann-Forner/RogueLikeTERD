@@ -11,9 +11,9 @@ public class NormalRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL)));
-        r.get(Procedure.getAccesibleRandomPosition(false,r)).updateCell(true,new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.GREEN,"\uD83C\uDF34"));
-        r.get(Procedure.getAccesibleRandomPosition(false,r)).updateCell(true,new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.GREEN,"\uD83C\uDF34"));
-        r.get(Procedure.getAccesibleRandomPosition(false,r)).updateCell(true,new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.GREEN,"\uD83C\uDF34"));
+        r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN, "\uD83C\uDF34", "T"));
+        r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN, "\uD83C\uDF34", "T"));
+        r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN, "\uD83C\uDF34", "T"));
     }
 
     @Override

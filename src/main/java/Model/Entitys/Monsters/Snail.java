@@ -26,7 +26,6 @@ public class Snail extends AbstractMonster{
         }
         toleft=true;
         return gauche;
-
     }
 
     @Override
