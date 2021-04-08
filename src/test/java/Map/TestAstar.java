@@ -14,14 +14,15 @@ import java.util.ArrayList;
 
 public class TestAstar extends TestCase {
 
-    @Test(timeout=50)
+    @Test(timeout=100)
     public void testEfficiencyAstarPlayerToTrapRoom() {
         Map map = new Map();
         Etage etage = map.getCurrent();
         BasicPlayer player = map.getPlayer();
 
-        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), etage.getTrapCellPosition(), Tools.PATH_CROSS);
-        System.out.println("[EFFICIENCY] Taille chemin : " + cheminTrapRoom.size());
+        Position trapPosition = etage.getTrapCellPosition();
+        System.out.println("Trap-Position : " + trapPosition);
+        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), trapPosition, Tools.PATH_CROSS);
     }
 
     @Test
