@@ -1,16 +1,14 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.Entity;
-import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 
 public class BigMonster  extends AbstractMonster{
-    private HandOfMonster leftHand;
-    private HandOfMonster rightHand;
-    protected BigMonster(Etage m, Position pos, String nom, int pv, int force, int vision_radius, int agro, int update_rate_ms, int path_type) {
+    private final HandOfMonster leftHand;
+    private final HandOfMonster rightHand;
+    protected BigMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type);
         leftHand = new HandOfMonster(m, new Position(pos.getX()-1,pos.getY()-1), nom, pv/2, force, vision_radius, agro, update_rate_ms, path_type);
         rightHand = new HandOfMonster(m, new Position(pos.getX()+1,pos.getY()-1), nom, pv/2, force, vision_radius, agro, update_rate_ms, path_type);

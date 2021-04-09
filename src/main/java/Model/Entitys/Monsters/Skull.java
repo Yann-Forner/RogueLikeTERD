@@ -9,7 +9,7 @@ import Model.Utils.TourManager;
 
 public class Skull extends AbstractMonster {
 
-    public Skull(Etage m, Position pos, String nom, int pv, int force, int vision_radius , int agro, int update_rate, int pathCross) {
+    public Skull(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross);
     }
 
@@ -31,10 +31,10 @@ public class Skull extends AbstractMonster {
             }
             move(plus_loin);
         }
-        else if(distance>=getVision_radius()/4 && distance<getVision_radius()/2){
+        else if(distance>=getVision_radius()/4 && distance<getVision_radius()/3){
             player.updatePV(- getForce());
         }
-        else if(distance>=getVision_radius()/2 && distance < (Alert==0 ? getVision_radius() : Agro)){
+        else if(distance>=getVision_radius()/3 && distance < (Alert==0 ? getVision_radius() : Agro)){
             move(nextPosition());
         }
         else if(Alert==1 && distance<getVision_radius()){

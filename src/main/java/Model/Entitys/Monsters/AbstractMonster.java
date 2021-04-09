@@ -13,7 +13,7 @@ public abstract class AbstractMonster extends Entity {
     private final int pathtype;
     private final int update_rate_ms;
 
-    protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, int vision_radius, int agro, int update_rate_ms, int path_type) {
+    protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type) {
         super(m, pos, vision_radius, nom, pv, force);
         this.update_rate_ms=update_rate_ms;
         this.Agro=agro;
@@ -21,7 +21,7 @@ public abstract class AbstractMonster extends Entity {
     }
 
     public void updateMonster(){
-        int vision_radius = Alert>0 ? Agro : getVision_radius();
+        double vision_radius = Alert>0 ? Agro : getVision_radius();
         if(Main.getPlayer().getPosition().Distance(getPosition())<=vision_radius){
             if(Alert==0){
                 TourManager.AddMessage(getNom()+" vous a reperé!!!");

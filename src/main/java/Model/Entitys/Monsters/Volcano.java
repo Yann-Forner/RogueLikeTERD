@@ -9,7 +9,7 @@ import Model.Utils.Position;
 
 public class Volcano extends AbstractMonster {
 
-    public Volcano(Etage m, Position pos,String nom, int pv, int force, int vision_radius , int agro, int update_rate, int path_type) {
+    public Volcano(Etage m, Position pos,String nom, int pv, int force, double vision_radius , int agro, int update_rate, int path_type) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, path_type);
     }
 
@@ -17,8 +17,8 @@ public class Volcano extends AbstractMonster {
     public void updateMonster() {
         int posX = getPosition().getX();
         int posY = getPosition().getY();
-        for(int x = posX - getVision_radius(); x < posX + getVision_radius()*2 -1; x++) {
-            for (int y = posY - getVision_radius(); y < posY + getVision_radius()*2 -1; y++) {
+        for(int x = posX - (int)getVision_radius(); x < posX + getVision_radius()*2 -1; x++) {
+            for (int y = posY - (int)getVision_radius(); y < posY + getVision_radius()*2 -1; y++) {
                 Cell c = getEtage().get(x, y);
                 if(c.getType().equals(Cell.Style.CellType.NORMAL)){
                     c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BRIGTH_RED,"~"));

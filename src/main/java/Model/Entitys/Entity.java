@@ -5,21 +5,20 @@ import Model.Entitys.Monsters.AbstractMonster;
 import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
 public abstract class Entity {
     private Position position;
     private Etage etage;
-    private final int vision_radius;
+    private final double vision_radius;
     //STATS
     private int pv;
     private int force;
     private final String nom;
     private final Inventory inventory = new Inventory();
 
-    private Entity(Etage m, Position pos, int vr, String nom) {
+    private Entity(Etage m, Position pos, double vr, String nom) {
         position = pos;
         etage = m;
         vision_radius = vr;
@@ -27,7 +26,7 @@ public abstract class Entity {
         etage.get(position).setEntity(this);
     }
 
-    public Entity(Etage m, Position pos, int vr, String nom, int pv, int force){
+    public Entity(Etage m, Position pos, double vr, String nom, int pv, int force){
         this(m,pos,vr,nom);
         this.pv=pv;
         this.force=force;
@@ -92,7 +91,7 @@ public abstract class Entity {
         this.etage=etage;
     }
 
-    public int getVision_radius() {
+    public double getVision_radius() {
         return vision_radius;
     }
 

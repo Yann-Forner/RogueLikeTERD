@@ -11,42 +11,42 @@ public class MonsterFactory {
         GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER ,BIRD, VOLCANO, SKULL
     }
 
-    private static Ghost getNewGhost(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Ghost getNewGhost(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Ghost(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Zombie getNewZombie(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Zombie getNewZombie(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Zombie(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Rat getNewRat(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Rat getNewRat(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Rat(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Bee getNewBee(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Bee getNewBee(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Bee(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Alien getNewAlien(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Alien getNewAlien(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Alien(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Snail getNewSnail(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Snail getNewSnail(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Snail(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
-    private static BigMonster getNewBigMonster(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static BigMonster getNewBigMonster(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new BigMonster(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Bird getNewBird(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Bird getNewBird(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Bird(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Volcano getNewVolcano(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Volcano getNewVolcano(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Volcano(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
-    private static Skull getNewSkull(Etage etage, Position pos, String nom, int pv, int force, int vision_radius, int Agro, int update_rate_ms, int path_type){
+    private static Skull getNewSkull(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
         return new Skull(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
