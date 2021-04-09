@@ -8,8 +8,8 @@ import Model.Utils.*;
 import java.util.ArrayList;
 
 public abstract class AbstractMonster extends Entity {
-    private int Alert=0;
-    private final int Agro;
+    protected int Alert=0;
+    protected final int Agro;
     private final int pathtype;
     private final int update_rate_ms;
 

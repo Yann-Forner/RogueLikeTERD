@@ -77,7 +77,7 @@ public class MonsterFactory {
                 return getNewVolcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",100000,10,2,0,1000, Tools.PATH_CROSS);
             }
             case SKULL -> {
-                return getNewSkull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,20,20,750, Tools.PATH_CROSS);
+                return getNewSkull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,15,20,750, Tools.PATH_CROSS);
             }
             case BIGMONSTER -> {
                 return getNewBigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900,Tools.PATH_CROSS);

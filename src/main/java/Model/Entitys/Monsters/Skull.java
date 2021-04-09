@@ -5,6 +5,7 @@ import Model.Main;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.TourManager;
 
 public class Skull extends AbstractMonster {
 
@@ -16,23 +17,31 @@ public class Skull extends AbstractMonster {
     public void updateMonster() {
         BasicPlayer player = Main.getPlayer();
         double distance = player.getPosition().Distance(getPosition());
-        if(distance<5){
-            Position[] positions = getPosition().voisins(getEtage()).stream().filter(x -> getEtage().get(x).isAccesible()).toArray(Position[]::new);
-            if(positions.length>0){
-                Position plus_loin = positions[0];
-                for (Position p : positions){
-                    if(player.getPosition().Distance(p)>player.getPosition().Distance(plus_loin)){
-                        plus_loin=p;
-                    }
-                }
-                move(plus_loin);
-            }
+        if(Alert==0 && distance<getVision_radius()){
+            Alert=1;
+            TourManager.AddMessage(getNom()+" vous a reperé!!!");
         }
-        else if(distance>=5 && distance<10){
+        if(distance<getVision_radius()/4){
+            Position[] positions = getPosition().voisins(getEtage()).stream().filter(x -> getEtage().get(x).isAccesible()).toArray(Position[]::new);
+            Position plus_loin = positions.length>0 ? positions[0] : null;
+            for (Position p : positions){
+                if(player.getPosition().Distance(p)>player.getPosition().Distance(plus_loin)){
+                    plus_loin=p;
+                }
+            }
+            move(plus_loin);
+        }
+        else if(distance>=getVision_radius()/4 && distance<getVision_radius()/2){
             player.updatePV(- getForce());
         }
-        else if(distance>=10 && distance<20){
+        else if(distance>=getVision_radius()/2 && distance < (Alert==0 ? getVision_radius() : Agro)){
             move(nextPosition());
+        }
+        else if(Alert==1 && distance<getVision_radius()){
+            Alert=0;
+        }
+        else{
+            Alert=0;
         }
     }
 
