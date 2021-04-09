@@ -8,6 +8,7 @@ import Model.Map.Map;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -93,5 +94,9 @@ public class TourManager{
 
     public static ArrayDeque<String> getMessages(){
         return messages;
+    }
+
+    public static ScheduledExecutorService getExecutor(){
+        return executor;
     }
 }

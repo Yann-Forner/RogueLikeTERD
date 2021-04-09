@@ -201,6 +201,18 @@ public class Tools {
     }
 
     public static ArrayList<Position> getVisibles(Etage etage,Position p1, Position p2){
+        ArrayList<Position> chemin = getLigne(p1,p2);
+        ArrayList<Position> visibles = new ArrayList<>();
+        for(Position position : chemin) {
+            visibles.add(position);
+            if (etage.get(position).getType().equals(Cell.Style.CellType.BORDER)) {
+                break;
+            }
+        }
+        return visibles;
+    }
+
+    public static ArrayList<Position> getLigne(Position p1, Position p2){
         ArrayList<Position> chemin = new ArrayList<>();
         int x,y,xe,ye;
         int dx = p2.getX()-p1.getX();
@@ -269,14 +281,7 @@ public class Tools {
             Position pos = Main.getPlayer().getPosition();
             return Double.compare(o1.Distance(pos), o2.Distance(pos));
         });
-        ArrayList<Position> visibles = new ArrayList<>();
-        for(Position position : chemin) {
-            visibles.add(position);
-            if (etage.get(position).getType().equals(Cell.Style.CellType.BORDER)) {
-                break;
-            }
-        }
-        return visibles;
+        return chemin;
     }
 
 }

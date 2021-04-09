@@ -7,6 +7,7 @@ import Model.Map.Room;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
 public class Affichage {
     public enum Shadow{
@@ -107,6 +108,18 @@ public class Affichage {
         }
         sb.append(Affichage.RESET);
         System.out.println(sb);
+    }
+
+    public static void Projectile(Etage etage,Position p1, Position p2, Cell.Style style){
+        int delay = 1;
+        ArrayList<Position> ligne = Tools.getLigne(p1, p2);
+        for (int i = 0; i < ligne.size(); i++) {
+            Cell cell = etage.get(ligne.get(ligne.size()-(i+1)));
+            Cell.Style base_style = cell.getStyle();
+            cell.updateCell(cell.isAccesible(), style);
+            TourManager.getExecutor().schedule(() -> cell.updateCell(cell.isAccesible(), base_style), 50*delay, TimeUnit.MILLISECONDS);
+            delay++;
+        }
     }
 
     public static void Rooms_Color(Etage etage){
