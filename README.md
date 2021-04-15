@@ -112,11 +112,11 @@ Ce sont les bordures de l'etage, aucune entité ne peut les traverser (sauf exce
 Ce sont des cellules vide.
 <img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/>
 <h4>3.1.4. Cellules Monter</h4>
-Elle permet de remonter a l'etage precedent.
+Elle permet de remonter a l'etage precedent.</br>
 Linux: 👍</br>
 Windows: <b>^</b></br>
 <h4>3.1.5. Cellules Descendre</h4>
-Elle permet de descendre a l'etage precedent.
+Elle permet de descendre a l'etage precedent.</br>
 Linux: 👎</br>
 Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
