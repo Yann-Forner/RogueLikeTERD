@@ -1,5 +1,6 @@
 package Model.Map;
 
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Utils.Position;
 import Model.Map.Room_Strategy.RoomStrategy;
 
@@ -11,6 +12,10 @@ public class Room extends Etage implements Comparable<Room> {
         super(width,height);
         this.strategy=strategy;
         strategy.composeRoom(this);
+    }
+
+    public void addMonster(Etage e) {
+        strategy.setRoomMonsters(e);
     }
 
     public boolean noCollision(Etage etage){

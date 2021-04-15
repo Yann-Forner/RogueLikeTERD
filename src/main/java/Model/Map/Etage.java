@@ -8,6 +8,7 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 import Model.Utils.TourManager;
+import org.yaml.snakeyaml.scanner.ScannerException;
 
 import java.util.*;
 
@@ -53,10 +54,14 @@ public class Etage {
                     this.set(r.getAbsolutePos().getX() + x, r.getAbsolutePos().getY() + y, r.get(x, y));
                 }
             }
+
+
             Rooms.add(r);
+            System.out.println(getMonsters().toString());
         } else {
             throw new CollisionRoom(r);
         }
+
     }
 
     public void addMonster(AbstractMonster m) {

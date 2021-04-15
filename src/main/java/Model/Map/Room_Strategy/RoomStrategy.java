@@ -6,7 +6,7 @@ import Model.Map.Room;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
-public abstract class RoomStrategy{
+public abstract class RoomStrategy {
 
     public void composeRoom(Room r){
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_YELLOW, ".")));
@@ -23,6 +23,8 @@ public abstract class RoomStrategy{
             r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(false, barierre);
         }
     }
+
+    public abstract void setRoomMonsters(Etage e);
 
     protected boolean noCollision(Etage etage,Room room,int DistanceMin){
         for (int y = 0; y < room.getHeigth()+DistanceMin*2; y++) {

@@ -145,6 +145,7 @@ public class Procedure {
         long t1 = System.currentTimeMillis();
         while (nbrRooms < etageStrategy.getNbrMaxRoom() && nbrRooms < roomTypes.size()  &&  (System.currentTimeMillis()-t1<500) ){
             Room r = RoomFactory.getNewRoom(roomTypes.get(nbrRooms));
+
             Position pos =  getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
             try {
                 r.setAbsolutePos(pos);

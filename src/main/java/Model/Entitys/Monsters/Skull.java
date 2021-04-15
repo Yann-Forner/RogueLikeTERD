@@ -8,9 +8,6 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class Skull extends AbstractMonster {
 
     public Skull(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross) {
@@ -23,7 +20,7 @@ public class Skull extends AbstractMonster {
         double distance = player.getPosition().Distance(getPosition());
         if(Alert==0 && distance<getVision_radius()){
             Alert=1;
-            TourManager.AddMessage(getNom()+" vous a reperé!!!");
+            TourManager.addMessage(getNom()+" vous a reperé!!!");
         }
         if(distance<getVision_radius()/4){
             Position[] positions = getPosition().voisins(getEtage()).stream().filter(x -> getEtage().get(x).isAccesible()).toArray(Position[]::new);

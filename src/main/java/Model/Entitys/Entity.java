@@ -35,7 +35,7 @@ public abstract class Entity {
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;
         if(this.pv<=0){
-            TourManager.AddMessage(nom+" est mort.");
+            TourManager.addMessage(nom+" est mort.");
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
             } else {
@@ -45,7 +45,7 @@ public abstract class Entity {
             }
         }
         if(this instanceof AbstractMonster){
-            TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
+            TourManager.addMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
         }
         return this.pv>0;
     }

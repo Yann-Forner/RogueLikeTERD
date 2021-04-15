@@ -1,18 +1,23 @@
 package Model.Map.Room_Strategy;
 
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage;
 import Model.Map.Cell;
 import Model.Map.Room;
-import Model.Utils.Affichage;
 import Model.Utils.Procedure;
-import Model.Utils.TourManager;
 
 public class NormalRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL)));
         setStyleCell(r);
+    }
+
+    @Override
+    public void setRoomMonsters(Etage e) {
+        e.addMonster(MonsterFactory.getNewMonster(e, MonsterFactory.MonsterType.ZOMBIE));
+        e.addMonster(MonsterFactory.getNewMonster(e, MonsterFactory.MonsterType.SKULL));
     }
 
     @Override
