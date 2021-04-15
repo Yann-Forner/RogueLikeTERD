@@ -93,6 +93,10 @@ Il cause des degats a toutes les entités s'approchant dans son champs d'activat
 Linux: 🧟</br>
 Windows: <b>Z</b></br>
 Il se deplace tres lentement et a beaucoup de points de vie.
+<h2>2.3 Boss</h2>
+<b><i>Non implementé</b></i>
+<h2>2.4 Loot</h2>
+<b><i>Non implementé</b></i>
 
 <h2>3 Cases</h2>
 Les cases du jeu se divisent en deux categories, les fonctionelles et les cosmetiques: les premieres ont une fonction que se soit dans le jeu ou la programmation alors que les deuxiemes ne sont qu'un changement d'affichage des premieres.
@@ -107,18 +111,21 @@ Ce sont les bordures de l'etage, aucune entité ne peut les traverser (sauf exce
 <h4>3.1.2 Cellules Vide</h4>
 Ce sont des cellules vide.
 <img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/>
-<h4>3.1.2 Cellules Vide</h4>
-Ce sont des cellules vide.
-<img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/>
 <h4>3.1.2 Cellules Monter</h4>
 Elle permet de remonter a l'etage precedent.
 Linux: 👍</br>
-Windows: ^</br>
+Windows: <b>^</b></br>
 <h4>3.1.2 Cellules Descendre</h4>
 Elle permet de descendre a l'etage precedent.
 Linux: 👎</br>
-Windows: v</br>
+Windows: <b>v</b></br>
+<h4>3.1.2 Cellules Piege</h4>
+Ce sont des cellules invisible qui teleporte le joueur dans un etape piégé.
+<h4>3.1.2 Cellules Chest</h4>
+<b><i>Non implementé</b></i>
 
+<h2>3 Inventaire</h2>
+<b><i>Non implementé</b></i>
 
-
-
+<h2>3 Sauvegarde</h2>
+<b><i>Non implementé</b></i>
