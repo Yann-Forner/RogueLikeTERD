@@ -58,39 +58,39 @@ Le joueur est representé par cet emoji 🤓 sur Linux et <b>@</b> sur Windows.
 <h3>2.2 Monstres</h3>
 Les monstres ont les mêmes stats que le joueur mais avec une vitesse et un champ de vision en plus ce qui leurs permet de le detecter s'il s'approche trop et d'arreter s'il s'eloigne trop loin.
 <h4>2.2.1 Alien</h4>
-Linux: 👽
-Windows: <b>&</b>
+Linux: 👽</br>
+Windows: <b>&</b></br>
 Il se deplace extrement vite et detecte le joueur de tres loin de plus des qu'il reçoit un coup il se teleporte a l'autre bout de l'etage.
 <h4>2.2.2 Abeille</h4>
-Linux: 🐝
-Windows: <b>B</b>
+Linux: 🐝</br>
+Windows: <b>B</b></br>
 L'abeille n'est pas si dangereuse en revanche des qu'elle meurt deux nouvelles abeilles deux fois moins puissantes apparaissent.
 <h4>2.2.3 Oiseau</h4>
-Linux: 🐦
-Windows: <b>ù</b>
+Linux: 🐦</br>
+Windows: <b>ù</b></br>
 Il suit un chemin periodique en diagonale et n'attaque pas le joueur a moins que celui lui bloque le passage.
 <h4>2.2.4 Fantome</h4>
-Linux: 👻
-Windows: <b>H</b>
+Linux: 👻</br>
+Windows: <b>H</b></br>
 Il peut traverser les murs pour venir attaquer le joueur.
 <h4>2.2.5 Rat</h4>
-Linux: 🐀
-Windows: <b>M</b>
+Linux: 🐀</br>
+Windows: <b>M</b></br>
 Il est rapide et se deplace en diagonale mais a tres peu de point de vie.
 <h4>2.2.6 Squelette</h4>
-Linux: 	💀
-Windows: <b>S</b>
+Linux: 	💀</br>
+Windows: <b>S</b></br>
 Il peut attaquer le joueur a distance et recule des qu'il s'approche de lui pour garder une certaine distance de securité.
 <h4>2.2.7 Esacargot</h4>
-Linux: 🐌
+Linux: 🐌</br>
 Windows: <b>G</b>
 Il se deplace en ligne droite et des qu'il est façe a un obstacle fait demi tour. 
 <h4>2.2.8 Volcan</h4>
-Linux: 🌋
-Windows: <b>V</b>
+Linux: 🌋</br>
+Windows: <b>V</b></br>
 Il cause des degats a toutes les entités s'approchant dans son champs d'activation.
 <h4>2.2.9 Zombie</h4>
-Linux: 🧟
-Windows: <b>Z</b>
+Linux: 🧟</br>
+Windows: <b>Z</b></br>
 Il se deplace tres lentement et a beaucoup de points de vie.
 
