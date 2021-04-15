@@ -19,13 +19,15 @@ public class Volcano extends AbstractMonster {
         int posY = getPosition().getY();
         for(int x = posX - (int)getVision_radius(); x < posX + getVision_radius()*2 -1; x++) {
             for (int y = posY - (int)getVision_radius(); y < posY + getVision_radius()*2 -1; y++) {
-                Cell c = getEtage().get(x, y);
-                if(c.getType().equals(Cell.Style.CellType.NORMAL)){
-                    c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BRIGTH_RED,"~"));
-                }
-                Entity e = c.getEntity();
-                if(e != null && e!=this) {
-                    e.updatePV(- getForce());
+                if(getPosition().Distance(new Position(x,y))<=getVision_radius()){
+                    Cell c = getEtage().get(x, y);
+                    if(c.getType().equals(Cell.Style.CellType.NORMAL)){
+                        c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BRIGTH_RED,"~"));
+                    }
+                    Entity e = c.getEntity();
+                    if(e != null && e!=this) {
+                        e.updatePV(- getForce());
+                    }
                 }
             }
         }
