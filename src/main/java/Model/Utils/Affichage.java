@@ -154,6 +154,7 @@ public class Affichage {
         sb.append("2. CHARGER UNE PARTIE\n");
         sb.append(BRIGTH_RED);
         sb.append("3. QUITTER\n");
+        sb.append(RESET);
         System.out.println(sb);
     }
 
