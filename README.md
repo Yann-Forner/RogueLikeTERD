@@ -11,6 +11,11 @@
 
 Le but du jeu est d'avancer le plus loin dans un labyrinthe composé de plusieurs etages eux même composés de plusieurs pieces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face a de nombreux monstres dont des boss et a d'autres pieges tout aussi mortels, heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
 
+<h1>Touches</h1>
+Deplacement : <b>ZQSD</b></br>
+
+<h1>Composants du jeu</h1>
+
 <h2>1. Generation de la carte</h2>
 <h3>1.1. Types d'etages<h3>
 La carte se compose en plusieurs types d'etages:
