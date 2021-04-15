@@ -54,4 +54,4 @@ Le joueur peut choisir sa classe au debut du jeu ce qui lui permet d'influencer 
 Ses statistiques sont:
 -Points de vie (PV)
 -Puissance d'Attaque(PA)
-Le joueur est representé par cet emoji 🤓 sur Linux et <span style="color: green">\uD83E\uDD13</span> sur Windows.
+Le joueur est representé par cet emoji 🤓 sur Linux et <span style="color: green">@</span> sur Windows.
