@@ -1,7 +1,7 @@
 package Model.Entitys.Monsters;
 
 import Model.Entitys.Entity;
-import Model.Main;
+import Model.Utils.Start;
 import Model.Map.Etage;
 import Model.Utils.*;
 
@@ -22,7 +22,7 @@ public abstract class AbstractMonster extends Entity {
 
     public void updateMonster(){
         double vision_radius = Alert>0 ? Agro : getVision_radius();
-        if(Main.getPlayer().getPosition().Distance(getPosition())<=vision_radius){
+        if(Start.getPlayer().getPosition().Distance(getPosition())<=vision_radius){
             if(Alert==0){
                 TourManager.AddMessage(getNom()+" vous a reperé!!!");
             }
@@ -36,7 +36,7 @@ public abstract class AbstractMonster extends Entity {
     }
 
     protected Position nextPosition(){
-        ArrayList<Position> pathToPlayer = Tools.Astar(getEtage(), getPosition(), Main.getPlayer().getPosition(), pathtype);
+        ArrayList<Position> pathToPlayer = Tools.Astar(getEtage(), getPosition(), Start.getPlayer().getPosition(), pathtype);
         return pathToPlayer.size()==0 ? null : pathToPlayer.get(pathToPlayer.size() - 2);
     }
 

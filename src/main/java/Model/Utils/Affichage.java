@@ -1,6 +1,5 @@
 package Model.Utils;
 
-import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -29,9 +28,9 @@ public class Affichage {
 
         //Champs de vision
         HashSet<Position> visibles = new HashSet<>();
-        if(Main.getPlayer()!=null){
+        if(Start.getPlayer()!=null){
             for(Position p : Tools.getBorder(etage)){
-                visibles.addAll(Tools.getVisibles(etage,Main.getPlayer().getPosition(), p));
+                visibles.addAll(Tools.getVisibles(etage, Start.getPlayer().getPosition(), p));
             }
         }
         //Titre Menu
@@ -57,7 +56,7 @@ public class Affichage {
                 Position pos = new Position(x,y);
                 Cell cell;
                 switch (ombre){
-                    case CIRCLE -> cell = Main.getPlayer().getPosition().Distance(pos) <= 15 ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
+                    case CIRCLE -> cell = Start.getPlayer().getPosition().Distance(pos) <= 15 ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
                     case RAY -> cell = visibles.contains(pos) ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
                     case NONE -> cell = etage.get(pos);
                     default -> throw new IllegalStateException("Unexpected value: " + ombre);
@@ -84,7 +83,7 @@ public class Affichage {
     }
 
     public static void getPv(){
-        int pv = Main.getPlayer().getPv();
+        int pv = Start.getPlayer().getPv();
         StringBuilder sb = new StringBuilder();
         sb.append(Affichage.GREEN);
         sb.append("PV : ");
@@ -122,83 +121,40 @@ public class Affichage {
         }
     }
 
-    public static void Rooms_Color(Etage etage){
-        int acc=0;
-        for (int k = 0; k < etage.getRooms().size(); k++) {
-            Room r = etage.getRooms().get(k);
-            for (int i = 0; i < r.getHeigth(); i++) {
-                for (int j = 0; j < r.getWidth(); j++) {
-                    int finalAcc = acc;
-                    int finalK = k;
-                    etage.set(r.getAbsolutePos().getX()+j,r.getAbsolutePos().getY()+i,new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
-                        @Override
-                        public String toString() {
-                            return "\u001B[3"+ finalAcc +"m"+ finalK;
-                        }
-                    });
-                }
-            }
-            acc++;
-        }
-        Affichage.etage(etage);
-    }
-
-    public static void Path(Etage etage, ArrayList<Position> path){
-        for (int i = 0; i < path.size(); i++) {
-            Position p = path.get(i);
-            if(i==0){
-                etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
-                    @Override
-                    public String toString() {
-                        return Affichage.BRIGTH_YELLOW+"A";
-                    }
-                });
-            }
-            else if(i==path.size()-1){
-                etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
-                    @Override
-                    public String toString() {
-                        return Affichage.BRIGTH_YELLOW+"D";
-                    }
-                });
-            }
-            else{
-                etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
-                    @Override
-                    public String toString() {
-                        return Affichage.BRIGTH_PURPLE+"X";
-                    }
-                });
-            }
-        }
-        Affichage.etage(etage);
-    }
-
-    public static void Palette(){
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                int code = i * 16 + j;
-                String space="";
-                for (int k = 0; k < 3-String.valueOf(code).length(); k++) {
-                    space=space+' ';
-                }
-                System.out.print("\u001b[38;5;" + code + "m " + space + code);
-            }
-            System.out.println(Affichage.RESET+"\n");
-        }
-        System.out.println("\n");
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                int code = i * 16 + j;
-                String space="";
-                for (int k = 0; k < 3-String.valueOf(code).length(); k++) {
-                    space=space+' ';
-                }
-                System.out.print("\u001b[48;5;" + code + "m " + space + code);
-            }
-            System.out.println(Affichage.RESET+"\n");
-        }
-        System.out.println(Affichage.RESET+"\n");
+    public static void start(){
+        StringBuilder sb = new StringBuilder();
+        String marge="                        ";
+        sb.append(CLEAR);
+        sb.append("\n\n\n");
+        sb.append(BRIGTH_BLUE);
+        sb.append(marge).append("            $$$$$$$\\  $$\\                                                                                                                                         ").append("\n");
+        sb.append(marge).append("            $$  __$$\\ \\__|                                                                                                                                        ").append("\n");
+        sb.append(marge).append("            $$ |  $$ |$$\\  $$$$$$\\  $$$$$$$\\  $$\\    $$\\  $$$$$$\\  $$$$$$$\\  $$\\   $$\\  $$$$$$\\         $$$$$$$\\ $$\\   $$\\  $$$$$$\\                               ").append("\n");
+        sb.append(marge).append("            $$$$$$$\\ |$$ |$$  __$$\\ $$  __$$\\ \\$$\\  $$  |$$  __$$\\ $$  __$$\\ $$ |  $$ |$$  __$$\\       $$  _____|$$ |  $$ |$$  __$$\\                              ").append("\n");
+        sb.append(marge).append("            $$  __$$\\ $$ |$$$$$$$$ |$$ |  $$ | \\$$\\$$  / $$$$$$$$ |$$ |  $$ |$$ |  $$ |$$$$$$$$ |      \\$$$$$$\\  $$ |  $$ |$$ |  \\__|                             ").append("\n");
+        sb.append(marge).append("            $$  __$$\\ $$ |$$$$$$$$ |$$ |  $$ | \\$$\\$$  / $$$$$$$$ |$$ |  $$ |$$ |  $$ |$$$$$$$$ |      \\$$$$$$\\  $$ |  $$ |$$ |  \\__|                             ").append("\n");
+        sb.append(marge).append("            $$ |  $$ |$$ |$$   ____|$$ |  $$ |  \\$$$  /  $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|       \\____$$\\ $$ |  $$ |$$ |                                   ").append("\n");
+        sb.append(marge).append("            $$$$$$$  |$$ |\\$$$$$$$\\ $$ |  $$ |   \\$  /   \\$$$$$$$\\ $$ |  $$ |\\$$$$$$  |\\$$$$$$$\\       $$$$$$$  |\\$$$$$$  |$$ |                                   ").append("\n");
+        sb.append(marge).append("            \\_______/ \\__| \\_______|\\__|  \\__|    \\_/     \\_______|\\__|  \\__| \\______/  \\_______|      \\_______/  \\______/ \\__|                                   ").append("\n");
+        sb.append(marge).append("                      $$\\                                                                                   $$\\           $$$$$$$$\\ $$$$$$$$\\ $$$$$$$\\  $$$$$$$\\  ").append("\n");
+        sb.append(marge).append("                      $$ |                                                                                  $$ |          \\__$$  __|$$  _____|$$  __$$\\ $$  __$$\\ ").append("\n");
+        sb.append(marge).append("$$$$$$$\\   $$$$$$\\  $$$$$$\\    $$$$$$\\   $$$$$$\\         $$$$$$\\   $$$$$$\\   $$$$$$\\        $$\\  $$$$$$\\  $$$$$$\\            $$ |   $$ |      $$ |  $$ |$$ |  $$ |").append("\n");
+        sb.append(marge).append("$$  __$$\\ $$  __$$\\ \\_$$  _|  $$  __$$\\ $$  __$$\\       $$  __$$\\ $$  __$$\\ $$  __$$\\       \\__|$$  __$$\\ \\_$$  _|           $$ |   $$$$$\\    $$$$$$$  |$$ |  $$ |").append("\n");
+        sb.append(marge).append("$$ |  $$ |$$ /  $$ |  $$ |    $$ |  \\__|$$$$$$$$ |      $$ /  $$ |$$ |  \\__|$$ /  $$ |      $$\\ $$$$$$$$ |  $$ |             $$ |   $$  __|   $$  __$$< $$ |  $$ |").append("\n");
+        sb.append(marge).append("$$ |  $$ |$$ |  $$ |  $$ |$$\\ $$ |      $$   ____|      $$ |  $$ |$$ |      $$ |  $$ |      $$ |$$   ____|  $$ |$$\\          $$ |   $$ |      $$ |  $$ |$$ |  $$ |").append("\n");
+        sb.append(marge).append("$$ |  $$ |\\$$$$$$  |  \\$$$$  |$$ |      \\$$$$$$$\\       $$$$$$$  |$$ |      \\$$$$$$  |      $$ |\\$$$$$$$\\   \\$$$$  |         $$ |   $$$$$$$$\\ $$ |  $$ |$$$$$$$  |").append("\n");
+        sb.append(marge).append("\\__|  \\__| \\______/    \\____/ \\__|       \\_______|      $$  ____/ \\__|       \\______/       $$ | \\_______|   \\____/          \\__|   \\________|\\__|  \\__|\\_______/ ").append("\n");
+        sb.append(marge).append("                                                        $$ |                          $$\\   $$ |                                                                  ").append("\n");
+        sb.append(marge).append("                                                        $$ |                          \\$$$$$$  |                                                                  ").append("\n");
+        sb.append(marge).append("                                                        \\__|                           \\______/                                                                   ").append("\n");
+        sb.append("\n\n\n\n\n");
+        sb.append(BRIGTH_GREEN);
+        sb.append("1. NOUVELLE PARTIE\n");
+        sb.append(BRIGTH_YELLOW);
+        sb.append("2. CHARGER UNE PARTIE\n");
+        sb.append(BRIGTH_RED);
+        sb.append("3. QUITTER\n");
+        System.out.println(sb);
     }
 
 

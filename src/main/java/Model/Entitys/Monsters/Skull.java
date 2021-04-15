@@ -1,15 +1,12 @@
 package Model.Entitys.Monsters;
 
 import Model.Entitys.BasicPlayer;
-import Model.Main;
+import Model.Utils.Start;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
-
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Skull extends AbstractMonster {
 
@@ -19,7 +16,7 @@ public class Skull extends AbstractMonster {
 
     @Override
     public void updateMonster() {
-        BasicPlayer player = Main.getPlayer();
+        BasicPlayer player = Start.getPlayer();
         double distance = player.getPosition().Distance(getPosition());
         if(Alert==0 && distance<getVision_radius()){
             Alert=1;

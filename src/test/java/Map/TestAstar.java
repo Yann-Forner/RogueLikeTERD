@@ -4,6 +4,7 @@ import Model.Entitys.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
+import Model.Utils.Start;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 import Model.Utils.Tools;
@@ -18,7 +19,7 @@ public class TestAstar extends TestCase {
     public void testEfficiencyAstarPlayerToTrapRoom() {
         Map map = new Map();
         Etage etage = map.getCurrent();
-        BasicPlayer player = map.getPlayer();
+        BasicPlayer player = Start.getPlayer();
 
         Position trapPosition = etage.getTrapCellPosition();
         System.out.println("Trap-Position : " + trapPosition);
@@ -29,7 +30,7 @@ public class TestAstar extends TestCase {
     public void testAstarPlayer() {
         Map map = new Map();
         Etage etage = map.getCurrent();
-        BasicPlayer player = map.getPlayer();
+        BasicPlayer player = Start.getPlayer();
 
         ArrayList<Position> cheminRandom = Tools.Astar(etage, player.getPosition(), Procedure.getAccesibleRandomPosition(false, etage), Tools.PATH_CROSS);
         ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), etage.getTrapCellPosition(), Tools.PATH_CROSS);
@@ -65,7 +66,6 @@ public class TestAstar extends TestCase {
     public void testMapTrapRoom() {
         Map map = new Map();
         Etage etage = map.getCurrent();
-        BasicPlayer player = map.getPlayer();
 
         ArrayList<ArrayList<Cell>> oldCells = etage.Cells;
         map.TRAP_ROOM();

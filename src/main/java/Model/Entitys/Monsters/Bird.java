@@ -37,7 +37,7 @@ public class Bird extends AbstractMonster {
             return "\uD83D\uDC26";
         }
         else{
-            return Affichage.BLUE+Affichage.BOLD+"B";
+            return Affichage.BLUE+Affichage.BOLD+"ù";
         }
     }
 }
