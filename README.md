@@ -94,3 +94,31 @@ Linux: 🧟</br>
 Windows: <b>Z</b></br>
 Il se deplace tres lentement et a beaucoup de points de vie.
 
+<h2>3 Cases</h2>
+Les cases du jeu se divisent en deux categories, les fonctionelles et les cosmetiques: les premieres ont une fonction que se soit dans le jeu ou la programmation alors que les deuxiemes ne sont qu'un changement d'affichage des premieres.
+<h3>3.1 Fonctionelles</h3>
+<h4>3.1.1 Cellules Normales</h4>
+C'est les cellules de base.
+<img src="https://user-images.githubusercontent.com/74865653/114877044-3832b280-9dff-11eb-99d6-fc169290f972.png"/>
+<img src="https://user-images.githubusercontent.com/74865653/114878669-c5c2d200-9e00-11eb-9ec1-3fae828f3b9c.png"/>
+<h4>3.1.2 Cellules Bordure</h4>
+Ce sont les bordures de l'etage, aucune entité ne peut les traverser (sauf exceptions).
+<img src="https://user-images.githubusercontent.com/74865653/114880411-551cb500-9e02-11eb-954f-7a3ce2ac38cd.png"/>
+<h4>3.1.2 Cellules Vide</h4>
+Ce sont des cellules vide.
+<img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/>
+<h4>3.1.2 Cellules Vide</h4>
+Ce sont des cellules vide.
+<img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/>
+<h4>3.1.2 Cellules Monter</h4>
+Elle permet de remonter a l'etage precedent.
+Linux: 👍</br>
+Windows: ^</br>
+<h4>3.1.2 Cellules Descendre</h4>
+Elle permet de descendre a l'etage precedent.
+Linux: 👎</br>
+Windows: v</br>
+
+
+
+
