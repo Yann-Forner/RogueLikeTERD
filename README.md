@@ -14,5 +14,16 @@ Le but du jeu est d'avancer le plus loin dans un labyrinthe composé de plusieur
 <h2>1.1 Generation de la carte</h2>
 
 La carte se compose de plusieurs types d'etages:
-<h3>1.1.2 Circle strategy</h3>
-![image](https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png)
+<h3>1.1.1 Circle strategy</h3>
+![Circle_strategy](https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png)
+Toutes les pieces de cet etage sont des cercles.
+<h3>1.1.2 Normal strategy</h3>
+![Normal strategy](https://user-images.githubusercontent.com/74865653/114860563-75417980-9dec-11eb-81eb-381586e9517f.png)
+Toutes les pieces de cet etage sont des rectangles.
+<h3>1.1.3 Dongeon strategy</h3>
+![Dongeon strategy](https://user-images.githubusercontent.com/74865653/114860765-b6398e00-9dec-11eb-9a1e-1cccf06809d1.png)
+Les pieces de cet etage sont un mix de tout les types commun de pieces
+<h3>1.1.4 Piege strategy</h3>
+![Piege strategy](https://user-images.githubusercontent.com/74865653/114860960-eda83a80-9dec-11eb-8935-82dfc54d8d7d.png)
+
+
