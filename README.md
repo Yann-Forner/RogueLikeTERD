@@ -17,8 +17,8 @@ Deplacement : <b>ZQSD</b></br>
 <h1>Composants du jeu</h1>
 
 <h2>1. Generation de la carte</h2>
-<h3>1.1. Types d'etages<h3>
-La carte se compose en plusieurs types d'etages:
+<h3>1.1. Types d'etages</h3>
+<b>La carte se compose en plusieurs types d'etages:</b>
 <h4>1.1.1. Etage cercle</h4>
 Toutes les pieces de cet etage sont des cercles.
 <img src="https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png"/>
