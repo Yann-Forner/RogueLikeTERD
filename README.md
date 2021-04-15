@@ -55,10 +55,10 @@ C'est la salle ou apparaissent les boss, elle est beaucoup plus grande que les a
   
 <h2>2. Entités</h2>
 <h3>2.1. Joueur</h3>
-Le joueur peut choisir sa classe au debut du jeu ce qui lui permet d'influencer sur ses statistiques au debut de la partie.
-Ses statistiques sont:
--Points de vie (PV)
--Puissance d'Attaque (PA)
+Le joueur peut choisir sa classe au debut du jeu ce qui lui permet d'influencer sur ses statistiques au debut de la partie.</br>
+Ses statistiques sont:</br>
+-Points de vie (PV)</br>
+-Puissance d'Attaque (PA)</br>
 Le joueur est representé par cet emoji 🤓 sur Linux et <b>@</b> sur Windows.
 <h3>2.2. Monstres</h3>
 Les monstres ont les mêmes stats que le joueur mais avec une vitesse et un champ de vision en plus ce qui leurs permet de le detecter s'il s'approche trop et d'arreter s'il s'eloigne trop loin.
