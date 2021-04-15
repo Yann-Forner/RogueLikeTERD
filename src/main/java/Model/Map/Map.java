@@ -6,6 +6,7 @@ import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.TourManager;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,9 @@ public class Map {
     private final BasicPlayer player;
 
     public Map(){
-        Etage etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
+        EtageStrategy randomStrategy = EtageStrategy.getRandomStrategy();
+        TourManager.AddMessage(String.valueOf(randomStrategy));
+        Etage etage=new Etage(MapWidth,MapHeigth, randomStrategy);
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         player=new BasicPlayer(etage,pos,20, "Quentin");
@@ -30,10 +33,10 @@ public class Map {
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ALIEN));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SNAIL));
-        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BIRD));*/
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BIRD));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
         etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.VOLCANO));
-        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SKULL));
+        etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SKULL));*/
     }
 
     public Etage getCurrent(){
