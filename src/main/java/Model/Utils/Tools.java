@@ -32,8 +32,7 @@ public class Tools {
                 super(x, y);
             }
 
-            @Override
-            public double Distance(Position pos) {
+            public double distance10(Position pos) {
                 return (int)(super.Distance(pos)*10);
             }
 
@@ -121,8 +120,8 @@ public class Tools {
             //Parcous voisins
             for(Noeud n : voisins){
                 n.cameFrom=u;
-                n.cout = u.cout + n.Distance(u) + n.CoutPerType(etage.get(n).getType());
-                n.heuristique = n.Distance(arrive);
+                n.cout = u.cout + n.distance10(u) + n.CoutPerType(etage.get(n).getType());
+                n.heuristique = n.distance10(arrive);
 
                 if (!(closedList.contains(n)) || n.getScore() < u.getScore()){
                     openList.remove(n);

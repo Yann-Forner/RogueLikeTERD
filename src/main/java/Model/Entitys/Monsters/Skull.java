@@ -8,6 +8,9 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Skull extends AbstractMonster {
 
     public Skull(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross) {
