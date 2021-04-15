@@ -119,7 +119,7 @@ Windows: <b>^</b></br>
 Elle permet de descendre a l'etage precedent.
 Linux: 👎</br>
 Windows: <b>v</b></br>
-<h4>3.1.8. Cellules Piege</h4>
+<h4>3.1.6. Cellules Piege</h4>
 Ce sont des cellules invisible qui teleporte le joueur dans un etape piégé.
 <h4>3.1.7. Cellules Chest</h4>
 <b><i>Non implementé</b></i>
