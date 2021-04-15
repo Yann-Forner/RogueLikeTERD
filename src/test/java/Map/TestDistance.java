@@ -28,5 +28,4 @@ public class TestDistance extends TestCase {
         System.out.println("Position Player : " + posP.toString());
         System.out.println("Distance entre les deux : " + posZ.Distance(posP));
     }
-
 }

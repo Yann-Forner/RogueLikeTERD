@@ -18,12 +18,10 @@ public class Map {
     private final BasicPlayer player;
 
     public Map(){
-        EtageStrategy randomStrategy = EtageStrategy.getRandomStrategy();
-        TourManager.AddMessage(String.valueOf(randomStrategy));
-        Etage etage=new Etage(MapWidth,MapHeigth, randomStrategy);
+        Etage etage=new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        player=new BasicPlayer(etage,pos,20, "Quentin");
+        player=new BasicPlayer(etage,pos,20, "Yann");
         etage.get(pos).setEntity(player);
     }
 

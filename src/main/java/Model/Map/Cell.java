@@ -17,6 +17,8 @@ public class Cell{
             TRAP_ROOM(Affichage.BLUE,"X"),
             SPECIAL(Affichage.YELLOW,"X");
 
+
+
             private final String base_color;
             private final String forme;
 
