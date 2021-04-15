@@ -9,7 +9,7 @@ import Model.Utils.Position;
 import Model.Utils.TourManager;
 
 public abstract class Entity {
-    private Position position;
+    private  Position position;
     private Etage etage;
     private final double vision_radius;
     //STATS

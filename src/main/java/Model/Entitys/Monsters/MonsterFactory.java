@@ -8,7 +8,7 @@ import com.github.javafaker.Faker;
 
 public class MonsterFactory {
     public enum MonsterType {
-        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER ,BIRD, VOLCANO, SKULL
+        GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER ,BIRD, VOLCANO, SKULL, SNAKE
     }
 
     private static Ghost getNewGhost(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type){
@@ -50,6 +50,10 @@ public class MonsterFactory {
         return new Skull(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type);
     }
 
+    private static Snake getNewSnake(Etage etage, Position pos, String nom, int pv, int force, double vision_radius, int Agro, int update_rate_ms, int path_type,int size_of_tail){
+        return new Snake(etage,pos,nom,pv,force,vision_radius,Agro,update_rate_ms,path_type,size_of_tail);
+    }
+
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
@@ -81,6 +85,9 @@ public class MonsterFactory {
             }
             case BIGMONSTER -> {
                 return getNewBigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900,Tools.PATH_CROSS);
+            }
+            case SNAKE -> {
+                return getNewSnake(etage,Procedure.getAccesibleRandomPosition(true,etage),"Snake",10,18,15,20,900,Tools.PATH_CROSS,10);
             }
             default -> {
                 return null;
