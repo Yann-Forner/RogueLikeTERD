@@ -120,7 +120,7 @@ Elle permet de descendre a l'etage precedent.</br>
 Linux: 👎</br>
 Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
-Ce sont des cellules invisible qui teleporte le joueur dans un etape piégé.
+Ce sont des cellules invisible qui teleporte le joueur dans un etage piégé.
 <h4>3.1.7. Cellules Chest</h4>
 <b><i>Non implementé</b></i>
 <h3>3.2. Cosmetiques</h3>
