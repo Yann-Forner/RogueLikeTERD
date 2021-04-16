@@ -2,6 +2,7 @@ package Model.Utils;
 
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Map.Map;
 import Model.Map.Room;
 
 import java.util.ArrayList;
@@ -13,6 +14,17 @@ public class Affichage {
         CIRCLE,RAY,NONE;
     }
     private static final Shadow ombre = Shadow.NONE;
+
+    public static void getMap(Map map){
+        System.out.print(Affichage.CLEAR);
+        System.out.println(map.getCurrent());
+        int index = map.getIndexCurrent()+1;
+        //TODO ça va pas marcher du coup #YANN
+        Affichage.print_txt_in_menu(index == 0 ? "Salle secrete" : "Etage n°" + index+"\n");
+        Affichage.getPv();
+        Affichage.getTouches();
+        Affichage.getMessages();
+    }
 
     public static String etage(Etage etage){
         StringBuilder sb = new StringBuilder();
@@ -81,7 +93,6 @@ public class Affichage {
                     else equipement+="X/";
                     if (Start.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Start.getPlayer().getInventory().getCurrentArmure().getNom();
                     else equipement+="X";
-                    System.out.println(equipement);
                     sb.append(print_txt_in_menu(equipement));
                 }else {
                     sb.append("║                                                                                 ║");
@@ -91,6 +102,7 @@ public class Affichage {
         }
         return sb.toString();
     }
+
     public static String print_txt_in_menu(String message){//81
         StringBuilder sb = new StringBuilder();
         if(message.length()<81){
@@ -114,13 +126,13 @@ public class Affichage {
     public static void getPv(){
         int pv = Start.getPlayer().getPv();
         StringBuilder sb = new StringBuilder();
-        sb.append(Affichage.GREEN);
+        sb.append(GREEN);
         sb.append("PV : ");
-        sb.append(Affichage.GREY);
-        sb.append(Affichage.GREEN_BACKGROUND);
+        sb.append(GREY);
+        sb.append(GREEN_BACKGROUND);
         for (int i = 0; i < 100; i++) {
             if(i>=pv){
-                sb.append(Affichage.RED_BACKGROUND);
+                sb.append(RED_BACKGROUND);
             }
             switch (i){
                 case 45 -> sb.append(pv == 100 ? "[" : " ");
@@ -134,8 +146,45 @@ public class Affichage {
                 default -> sb.append(" ");
             }
         }
-        sb.append(Affichage.RESET);
+        sb.append(RESET);
+        System.out.print(sb);
+    }
+
+    public static void getTouches(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(YELLOW).append(BOLD);
+        sb.append("                        ");
+        sb.append("Deplacement: ");
+        sb.append(BRIGTH_GREEN).append("ZQSD");
+        sb.append(YELLOW);
+        sb.append("  |  ");
+        sb.append("Pause: ");
+        sb.append(BRIGTH_GREEN).append("P");
+        sb.append(YELLOW);
+        sb.append("  |  ");
+        sb.append("Inventaire: ");
+        sb.append(BRIGTH_GREEN).append("I");
+        sb.append(YELLOW);
+        sb.append("  |  ");
+        sb.append("Attaque à distance: ");
+        sb.append(BRIGTH_GREEN).append("A");
+        sb.append("\n                                                                                                                                 ");
+        sb.append(YELLOW);
+        sb.append("Objets: ");
+        sb.append(BRIGTH_GREEN  ).append("123456789");
+        sb.append(RESET);
         System.out.println(sb);
+    }
+
+    public static void getMessages(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(PURPLE).append(BOLD).append("-----> ").append(UNDERLINE).append("Evenements:");
+        sb.append(RESET);
+        sb.append(BRIGTH_PURPLE);
+        for (String s :TourManager.getMessages()){
+            sb.append("\n").append(s);
+        }
+        System.out.print(sb);
     }
 
     public static void Projectile(Etage etage,Position p1, Position p2, Cell.Style style){

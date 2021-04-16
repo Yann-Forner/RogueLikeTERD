@@ -4,14 +4,12 @@ import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.BasicPlayer;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Map.Room;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class TourManager{
@@ -29,7 +27,7 @@ public class TourManager{
         this.map = map;
         TourManager.etage = etage;
         schedule();
-        Start.affichage(etage);
+        Affichage.getMap(map);
     }
 
     public void playTour() {
@@ -40,16 +38,19 @@ public class TourManager{
         }
         processEtage();
         etage = map.getCurrent();
-        Start.affichage(etage);
+        Affichage.getMap(map);
     }
 
     private void processInput(String input){
         switch (input) {
-            case "z" , "\u001B[A" -> player.moveUp();
-            case "q" , "\u001B[D" -> player.moveLeft();
-            case "s" , "\u001B[B" -> player.moveDown();
-            case "d" , "\u001B[C" -> player.moveRight();
-            case "p" -> pause();
+            case "z" , "Z" , "\u001B[A" -> player.moveUp();
+            case "q" , "Q" , "\u001B[D" -> player.moveLeft();
+            case "s" , "S" , "\u001B[B" -> player.moveDown();
+            case "d" , "D" , "\u001B[C" -> player.moveRight();
+            case "p" , "P" -> pause();
+            case "i" , "I" -> System.out.println("I"); //Inventaire
+            case "a" , "A" -> System.out.println("A"); //Attaque distance
+            case "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"  -> System.out.println("Nombre"); //Objets
             case "exit" -> System.exit(0);
             default -> System.out.println("Wrong key:"+input);
         }
@@ -72,7 +73,7 @@ public class TourManager{
     }
 
     public void schedule() {
-        executor.scheduleAtFixedRate(() -> Start.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(() -> Affichage.getMap(map), 0, 100, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 
@@ -88,7 +89,7 @@ public class TourManager{
     }
 
     public static void addMessage(String message){
-        if(messages.size()>=10){
+        if(messages.size()>8){
             messages.pollFirst();
         }
         messages.add(message);

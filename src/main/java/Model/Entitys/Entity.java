@@ -2,6 +2,7 @@ package Model.Entitys;
 
 import Model.Entitys.Inventaires.Inventory;
 import Model.Entitys.Monsters.AbstractMonster;
+import Model.Utils.Affichage;
 import Model.Utils.Start;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -38,7 +39,7 @@ public abstract class Entity {
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
             } else {
-                Start.affichage(etage);
+                Affichage.getMap(Start.getMap());
                 System.out.println("Fin de la partie.");
                 System.exit(0);
             }
