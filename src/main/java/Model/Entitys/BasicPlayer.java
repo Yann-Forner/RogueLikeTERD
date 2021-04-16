@@ -8,6 +8,7 @@ public class BasicPlayer extends Entity {
 
     public BasicPlayer(int vision_radius, String nom,int pv,int force) {
         super(null,null,vision_radius, nom,pv,force);
+        //TODO rework les nulls
     }
 
     public void updateEtage(Etage etage, Position position){

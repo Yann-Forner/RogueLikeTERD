@@ -158,7 +158,6 @@ public class Affichage {
         System.out.println(sb);
     }
 
-
     public static final String CLEAR = "\033\143";
     public static final String RESET = "\u001B[0m";
     public static final String BOLD = "\u001B[1m";

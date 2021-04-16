@@ -15,6 +15,7 @@ public class Cell{
             UP(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4D","^"),
             DOWN(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4E","v"),
             TRAP_ROOM(Affichage.BLUE,"X"),
+            OBJET(Affichage.BLUE,"K"),
             SPECIAL(Affichage.YELLOW,"X");
 
             private final String base_color;
@@ -62,7 +63,7 @@ public class Cell{
 
     private Style style;
     private boolean isAccesible;
-    private Model.Entitys.Entity Entity;
+    private Entity Entity;
 
     public Cell(boolean isAccesible, Style style) {
         this.isAccesible = isAccesible;

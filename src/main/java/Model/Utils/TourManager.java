@@ -75,6 +75,7 @@ public class TourManager{
     }
 
     public static void addMonsterSchedule(AbstractMonster m){
+        //TODO enlever quand meurt
         executor.scheduleAtFixedRate(() -> {
             if(running && m.getPv()>0 && m.getEtage().equals(player.getEtage())) m.updateMonster();
         },0,m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);

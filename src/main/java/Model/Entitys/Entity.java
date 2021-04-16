@@ -52,6 +52,7 @@ public abstract class Entity {
     public void move(Position pos) {
         if(pos!=null){
             Cell cell = etage.get(pos);
+            //TODO enlever isAccesible ?
             if(cell.isAccesible()){
                 if(cell.getEntity()==null){
                     cell.setEntity(this);

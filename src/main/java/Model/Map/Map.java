@@ -63,6 +63,7 @@ public class Map {
     }
 
     public void TRAP_ROOM(){
+        //TODO revenir a l'etage de depart en remontant et non le dernier index de l'arraylist
         Etage etage = new Etage(MapWidth,MapHeigth,new TrapEtageStrategy());
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         Start.getPlayer().updateEtage(etage,pos);

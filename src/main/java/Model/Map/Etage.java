@@ -15,8 +15,10 @@ public class Etage {
     protected int Width;
     protected int Heigth;
     public ArrayList<ArrayList<Cell>> Cells;
+    //TODO supprimer arraylist rooms
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
+    //TODO supprimer le champs trapcell
     private Position trapCellPosition;
 
     protected Etage(int Width, int Heigth) {

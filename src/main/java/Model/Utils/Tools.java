@@ -18,7 +18,7 @@ public class Tools {
      * @param etage Etage
      * @param depart Position
      * @param arrive Position
-     * @param pathType int : 0->Normal 1->Diagonales
+     * @param pathType int : 0->Normal 1->Diagonales 2->Fantome
      * @return ArrayList<Position>
      */
     public static ArrayList<Position> Astar(Etage etage, Position depart, Position arrive, int pathType){
