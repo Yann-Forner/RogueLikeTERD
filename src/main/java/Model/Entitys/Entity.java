@@ -102,5 +102,9 @@ public abstract class Entity {
         return nom;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     public abstract String toString();
 }
