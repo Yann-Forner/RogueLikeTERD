@@ -75,11 +75,11 @@ public class Affichage {
                 sb.append("╚═════════════════════════════════════════════════════════════════════════════════╝");
             }
             else{
-                if (y==7 && Main.getPlayer()!= null){
+                if (y==7 && Start.getPlayer()!= null){
                     String equipement = "Equipement : ";
-                    if (Main.getPlayer().getInventory().getCurrentWeapon()!=null)equipement+=Main.getPlayer().getInventory().getCurrentWeapon().getNom()+"/";
+                    if (Start.getPlayer().getInventory().getCurrentWeapon()!=null)equipement+=Start.getPlayer().getInventory().getCurrentWeapon().getNom()+"/";
                     else equipement+="X/";
-                    if (Main.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Main.getPlayer().getInventory().getCurrentArmure().getNom();
+                    if (Start.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Start.getPlayer().getInventory().getCurrentArmure().getNom();
                     else equipement+="X";
                     System.out.println(equipement);
                     sb.append(print_txt_in_menu(equipement));
