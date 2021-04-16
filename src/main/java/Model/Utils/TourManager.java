@@ -82,11 +82,11 @@ public class TourManager{
     }
 
     public static void pause(){
-        TourManager.AddMessage("Le jeu est en pause");
+        TourManager.addMessage("Le jeu est en pause");
         running=!running;
     }
 
-    public static void AddMessage(String message){
+    public static void addMessage(String message){
         if(messages.size()>=10){
             messages.pollFirst();
         }

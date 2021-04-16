@@ -5,6 +5,8 @@ import Model.Utils.Start;
 import Model.Map.Etage;
 import Model.Utils.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class AbstractMonster extends Entity {
@@ -20,11 +22,11 @@ public abstract class AbstractMonster extends Entity {
         this.pathtype=path_type;
     }
 
-    public void updateMonster(){
+    public void updateMonster() {
         double vision_radius = Alert>0 ? Agro : getVision_radius();
         if(Start.getPlayer().getPosition().Distance(getPosition())<=vision_radius){
             if(Alert==0){
-                TourManager.AddMessage(getNom()+" vous a reperé!!!");
+                TourManager.addMessage(getNom()+" vous a reperé!!!");
             }
             Alert=Agro;
             move(nextPosition());
@@ -33,6 +35,18 @@ public abstract class AbstractMonster extends Entity {
         else{
             Alert=0;
         }
+
+        /*try {
+            System.out.println("Ecriture Fichier");
+            FileWriter fw = new FileWriter("test.txt");
+            fw.write("Position de " + getNom() + " : [x : " + getPosition().getX() + "; y : " + getPosition().getY() + "]\n");
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+
     }
 
     protected Position nextPosition(){

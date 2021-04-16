@@ -20,7 +20,7 @@ public class Skull extends AbstractMonster {
         double distance = player.getPosition().Distance(getPosition());
         if(Alert==0 && distance<getVision_radius()){
             Alert=1;
-            TourManager.AddMessage(getNom()+" vous a reperé!!!");
+            TourManager.addMessage(getNom()+" vous a reperé!!!");
         }
         if(distance<getVision_radius()/4){
             Position[] positions = getPosition().voisins(getEtage()).stream().filter(x -> getEtage().get(x).isAccesible()).toArray(Position[]::new);

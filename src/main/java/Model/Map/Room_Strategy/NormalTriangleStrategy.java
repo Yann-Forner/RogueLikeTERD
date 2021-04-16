@@ -25,6 +25,11 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
     }
 
     @Override
+    public void setRoomMonsters(Etage e) {
+
+    }
+
+    @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,1);
     }

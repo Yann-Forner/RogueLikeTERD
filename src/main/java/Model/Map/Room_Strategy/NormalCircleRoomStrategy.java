@@ -29,6 +29,11 @@ public class NormalCircleRoomStrategy extends CircleRoomStrategy {
     }
 
     @Override
+    public void setRoomMonsters(Etage e) {
+
+    }
+
+    @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage, room, Procedure.getRandomInt(7,0));
     }
