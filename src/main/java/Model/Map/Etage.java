@@ -7,8 +7,6 @@ import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
-import Model.Utils.TourManager;
-import org.yaml.snakeyaml.scanner.ScannerException;
 
 import java.util.*;
 
@@ -53,13 +51,10 @@ public class Etage {
         if (r.noCollision(this)) {
             for (int y = 0; y < r.getHeigth(); y++) {
                 for (int x = 0; x < r.getWidth(); x++) {
-                    this.set(r.getAbsolutePos().getX() + x, r.getAbsolutePos().getY() + y, r.get(x, y));
+                    set(r.getAbsolutePos().getX() + x, r.getAbsolutePos().getY() + y, r.get(x, y));
                 }
             }
-
-
             Rooms.add(r);
-            System.out.println(getMonsters().toString());
         } else {
             throw new CollisionRoom(r);
         }
@@ -69,7 +64,6 @@ public class Etage {
     public void addMonster(AbstractMonster m) {
         get(m.getPosition()).setEntity(m);
         Monsters.add(m);
-        TourManager.addMonsterSchedule(m);
     }
 
     public void removeMonster(AbstractMonster m) {

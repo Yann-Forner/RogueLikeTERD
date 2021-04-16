@@ -11,7 +11,7 @@ public class ReposRoomStrategy extends RoomStrategy {
     }
 
     @Override
-    public void setRoomMonsters(Etage e) {
+    public void setMonsters(Room r) {
 
     }
 

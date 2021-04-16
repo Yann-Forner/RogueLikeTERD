@@ -64,7 +64,7 @@ public class MonsterFactory {
                 return getNewGhost(etage, Procedure.getAccesibleRandomPosition(true,etage),"GHOST", 10,3,10,10,700, Tools.PATH_GHOST);
             }
             case ZOMBIE -> {
-                return getNewZombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"",25,5,5,30,1500, Tools.PATH_CROSS);
+                return getNewZombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE",25,5,5,30,1500, Tools.PATH_CROSS);
             }
             case RAT -> {
                 return getNewRat(etage, Procedure.getAccesibleRandomPosition(true,etage),"RAT",5,1,15,15,300, Tools.PATH_DIAG);

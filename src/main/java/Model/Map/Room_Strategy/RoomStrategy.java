@@ -1,5 +1,6 @@
 package Model.Map.Room_Strategy;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -24,8 +25,6 @@ public abstract class RoomStrategy {
         }
     }
 
-    public abstract void setRoomMonsters(Etage e);
-
     protected boolean noCollision(Etage etage,Room room,int DistanceMin){
         for (int y = 0; y < room.getHeigth()+DistanceMin*2; y++) {
             for (int x = 0; x < room.getWidth()+DistanceMin*2; x++) {
@@ -37,6 +36,7 @@ public abstract class RoomStrategy {
         return true;
     }
 
+    public abstract void setMonsters(Room r);
     public abstract boolean noCollision(Etage etage,Room room);
     public abstract int getNbrMaxMobPerRoom();
 }

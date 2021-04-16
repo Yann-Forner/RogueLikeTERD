@@ -1,12 +1,13 @@
 package Model.Map;
 
 import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Utils.Position;
 import Model.Map.Room_Strategy.RoomStrategy;
 
 public class Room extends Etage implements Comparable<Room> {
     private Position AbsolutePos=null;
-    private final RoomStrategy strategy;
+    public final RoomStrategy strategy;
 
     public Room(int width, int height,RoomStrategy strategy){
         super(width,height);
@@ -14,8 +15,14 @@ public class Room extends Etage implements Comparable<Room> {
         strategy.composeRoom(this);
     }
 
-    public void addMonster(Etage e) {
-        strategy.setRoomMonsters(e);
+    public void setMonsters(Etage etage){
+        strategy.setMonsters(this);
+        for(AbstractMonster a : Monsters){
+            a.setEtage(etage);
+            a.setPosition(a.getPosition().somme(getAbsolutePos()));
+            etage.addMonster(a);
+        }
+        Monsters.clear();
     }
 
     public boolean noCollision(Etage etage){

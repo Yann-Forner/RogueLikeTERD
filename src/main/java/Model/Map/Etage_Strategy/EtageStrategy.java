@@ -1,5 +1,6 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -10,6 +11,9 @@ import Model.Utils.Tools;
 import java.util.ArrayList;
 
 public abstract class EtageStrategy {
+
+    public abstract void composeEtage(Etage etage);
+    public abstract int getNbrMaxRoom();
 
     public static EtageStrategy getRandomStrategy(){
         ArrayList<EtageStrategy> strategies = new ArrayList<>();
@@ -25,8 +29,6 @@ public abstract class EtageStrategy {
         strategies.add(new CircleEtageStrategy());
         return strategies.get(Procedure.getRandomInt(strategies.size(), 0));
     }
-
-    public abstract void composeEtage(Etage etage);
 
     protected void EtageFusion(Etage etage, Cell.Style style_fusion){
         //Trace du chemin
@@ -73,16 +75,16 @@ public abstract class EtageStrategy {
         }
     }
 
-    public abstract int getNbrMaxRoom();
-
     public void setSpecialCell(Etage etage){
         Procedure.setRandomChest(etage,3);
         Procedure.setRandomUPnDOWN(etage);
         etage.setTrapCell();
     }
 
-    public void setMobs(Etage etage){
-        Procedure.setRandomMob(etage);
+    public void setMonsters(Etage etage){
+        for(Room r : etage.getRooms()){
+            r.setMonsters(etage);
+        }
     }
 
 }

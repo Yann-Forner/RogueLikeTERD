@@ -8,6 +8,7 @@ import Model.Utils.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ScheduledFuture;
 
 public abstract class AbstractMonster extends Entity {
     protected int Alert=0;
@@ -20,6 +21,7 @@ public abstract class AbstractMonster extends Entity {
         this.update_rate_ms=update_rate_ms;
         this.Agro=agro;
         this.pathtype=path_type;
+        TourManager.addMonsterSchedule(this);
     }
 
     public void updateMonster() {
@@ -35,18 +37,6 @@ public abstract class AbstractMonster extends Entity {
         else{
             Alert=0;
         }
-
-        /*try {
-            System.out.println("Ecriture Fichier");
-            FileWriter fw = new FileWriter("test.txt");
-            fw.write("Position de " + getNom() + " : [x : " + getPosition().getX() + "; y : " + getPosition().getY() + "]\n");
-            fw.flush();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
-
     }
 
     protected Position nextPosition(){

@@ -43,8 +43,10 @@ public abstract class Entity {
                 System.exit(0);
             }
         }
-        if(this instanceof AbstractMonster){
-            TourManager.addMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
+        else {
+            if (this instanceof AbstractMonster) {
+                TourManager.addMessage(pv > 0 ? nom + " s'est soigné de " + pv + "pv." : nom + " n'a plus que " + getPv() + "pv.");
+            }
         }
         return this.pv>0;
     }
@@ -52,7 +54,6 @@ public abstract class Entity {
     public void move(Position pos) {
         if(pos!=null){
             Cell cell = etage.get(pos);
-            //TODO enlever isAccesible ?
             if(cell.isAccesible()){
                 if(cell.getEntity()==null){
                     cell.setEntity(this);
@@ -61,8 +62,10 @@ public abstract class Entity {
                 }
                 else{
                     cell.getEntity().updatePV(-1);
-                    //TourManager.pause();
                 }
+            }
+            else{
+                //TODO faire un bruit de colision
             }
         }
     }

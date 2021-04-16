@@ -1,5 +1,6 @@
 package Model.Map.Room_Strategy;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -29,8 +30,10 @@ public class NormalCircleRoomStrategy extends CircleRoomStrategy {
     }
 
     @Override
-    public void setRoomMonsters(Etage e) {
-
+    public void setMonsters(Room r) {
+        for (int i = 0; i < Procedure.getRandomInt(4,1); i++) {
+            r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.BIRD));
+        }
     }
 
     @Override

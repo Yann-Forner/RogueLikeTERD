@@ -1,8 +1,6 @@
 package Model.Utils;
 
 import Exceptions.CollisionRoom;
-import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Etage_Strategy.EtageStrategy;
@@ -182,33 +180,6 @@ public class Procedure {
             } catch (CollisionRoom e) {}
         }
         Collections.sort(etage.getRooms());
-    }
-
-    /**
-     * Genere un mob dans une Position aleatoire dans la Room.
-     * @param r Room
-     * @param etage Etage
-     */
-    private static void setRandomMob(Room r, Etage etage) {
-        Position pos = getAccesibleRandomPosition(true,etage,r);
-        Cell cell = etage.get(pos);
-        //TODO passer le montre en parametre
-        AbstractMonster m = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE);
-        cell.setEntity(m);
-        etage.addMonster(m);
-    }
-
-    /**
-     * Genere tous les mobs de l'etage.
-     * @param etage Etage
-     */
-    public static void setRandomMob(Etage etage) {
-        for (Room r : etage.getRooms()) {
-            int nbrMobs = r.getNbrMaxMobPerRoom()==0 ? 0 : rand.nextInt(r.getNbrMaxMobPerRoom())+1;
-                for (int i = 0; i < nbrMobs; i++) {
-                    setRandomMob(r, etage);
-                }
-            }
     }
 
     /**

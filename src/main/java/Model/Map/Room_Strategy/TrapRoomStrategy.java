@@ -20,7 +20,7 @@ public class TrapRoomStrategy extends RoomStrategy {
     }
 
     @Override
-    public void setRoomMonsters(Etage e) {
+    public void setMonsters(Room r) {
 
     }
 

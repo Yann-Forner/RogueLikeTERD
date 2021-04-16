@@ -1,5 +1,6 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.RoomFactory;
@@ -14,7 +15,7 @@ public class NormalEtageStrategy extends EtageStrategy{
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.NORMAL);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL));
         setSpecialCell(etage);
-        //TODO mobs
+        setMonsters(etage);
     }
 
     @Override

@@ -13,7 +13,7 @@ public class BigBossRoomStrategy extends CircleRoomStrategy {
     }
 
     @Override
-    public void setRoomMonsters(Etage e) {
+    public void setMonsters(Room r) {
 
     }
 
