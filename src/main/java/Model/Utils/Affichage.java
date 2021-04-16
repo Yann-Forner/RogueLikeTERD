@@ -75,10 +75,39 @@ public class Affichage {
                 sb.append("╚═════════════════════════════════════════════════════════════════════════════════╝");
             }
             else{
-                sb.append("║                                                                                 ║");
+                if (y==7 && Start.getPlayer()!= null){
+                    String equipement = "Equipement : ";
+                    if (Start.getPlayer().getInventory().getCurrentWeapon()!=null)equipement+=Start.getPlayer().getInventory().getCurrentWeapon().getNom()+"/";
+                    else equipement+="X/";
+                    if (Start.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Start.getPlayer().getInventory().getCurrentArmure().getNom();
+                    else equipement+="X";
+                    System.out.println(equipement);
+                    sb.append(print_txt_in_menu(equipement));
+                }else {
+                    sb.append("║                                                                                 ║");
+                }
             }
             sb.append("\n");
         }
+        return sb.toString();
+    }
+    public static String print_txt_in_menu(String message){//81
+        StringBuilder sb = new StringBuilder();
+        if(message.length()<81){
+            sb.append("║");
+            int spacing = (81 - message.length())/2;
+            sb.append(" ".repeat(spacing));
+            sb.append(message);
+            if((message.length()%2==0))++spacing;
+            sb.append(" ".repeat(spacing));
+            sb.append("║");
+        }else if (message.length()>81){
+            sb.append("║                                                                                 ║");
+        }
+        else {
+            sb.append("║").append(message).append("║");
+        }
+
         return sb.toString();
     }
 

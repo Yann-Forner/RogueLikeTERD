@@ -9,6 +9,10 @@ public class Armures implements Objets{
         this.nom=nom;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
     public int getProtection() {
         return protection;
     }
