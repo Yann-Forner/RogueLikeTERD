@@ -4,11 +4,16 @@ import Model.Map.Etage;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.TourManager;
 
 public class BasicPlayer extends Entity {
+    private int MAX_EXP;
+    private int CURRENT_EXP;
 
     public BasicPlayer(int vision_radius, String nom,int pv,int force) {
         super(null,new Position(0,0),vision_radius, nom,pv,force);
+        MAX_EXP=10;
+        CURRENT_EXP=0;
         //TODO rework les nulls
     }
 
@@ -17,6 +22,24 @@ public class BasicPlayer extends Entity {
         setEtage(etage);
         setPosition(position);
         etage.get(getPosition()).setEntity(this);
+    }
+
+    public void addExp(int exp){
+        CURRENT_EXP += exp;
+        if(CURRENT_EXP>=MAX_EXP){
+            MAX_EXP *= 2;
+            CURRENT_EXP = 0;
+            lvl++;
+            TourManager.addMessage("Vous avez gagner un niveau");
+        }
+    }
+
+    public int getMAX_EXP() {
+        return MAX_EXP;
+    }
+
+    public int getCURRENT_EXP() {
+        return CURRENT_EXP;
     }
 
     public void moveLeft() {

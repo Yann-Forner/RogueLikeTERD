@@ -16,6 +16,7 @@ public abstract class Entity {
     //STATS
     private int pv;
     private int force;
+    protected int lvl;
     private final String nom;
     private final Inventory inventory = new Inventory();
 
@@ -30,6 +31,8 @@ public abstract class Entity {
         this(m,pos,vr,nom);
         this.pv=pv;
         this.force=force;
+        this.lvl=1;
+        //TODO init lvl
     }
 
     public boolean updatePV(int pv){
@@ -38,9 +41,10 @@ public abstract class Entity {
             TourManager.addMessage(nom+" est mort.");
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
+                Start.getPlayer().addExp(getExp());
             } else {
                 Affichage.getMap(Start.getMap());
-                System.out.println("Fin de la partie.");
+                System.out.println("\nFin de la partie.");
                 System.exit(0);
             }
         }
@@ -105,6 +109,14 @@ public abstract class Entity {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public int getExp(){
+        return lvl*5;
+    }
+
+    public int getLvl(){
+        return lvl;
     }
 
     public abstract String toString();

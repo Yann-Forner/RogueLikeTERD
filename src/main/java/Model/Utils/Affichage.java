@@ -1,5 +1,6 @@
 package Model.Utils;
 
+import Model.Entitys.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
@@ -124,7 +125,8 @@ public class Affichage {
     }
 
     public static void getPv(){
-        int pv = Start.getPlayer().getPv();
+        BasicPlayer player = Start.getPlayer();
+        int pv = player.getPv();
         StringBuilder sb = new StringBuilder();
         sb.append(GREEN);
         sb.append("PV : ");
@@ -147,13 +149,20 @@ public class Affichage {
             }
         }
         sb.append(RESET);
+
+        sb.append(BLUE).append("   LVL: ").append(player.getLvl());
+        sb.append(" -> ").append("[");
+        sb.append(BRIGTH_BLUE).append(player.getCURRENT_EXP());
+        sb.append(BLUE).append("/");
+        sb.append(BRIGTH_BLUE).append(player.getMAX_EXP());
+        sb.append(BLUE).append("]");
         System.out.print(sb);
     }
 
     public static void getTouches(){
         StringBuilder sb = new StringBuilder();
         sb.append(YELLOW).append(BOLD);
-        sb.append("                        ");
+        sb.append("     ");
         sb.append("Deplacement: ");
         sb.append(BRIGTH_GREEN).append("ZQSD");
         sb.append(YELLOW);
@@ -172,6 +181,10 @@ public class Affichage {
         sb.append(YELLOW);
         sb.append("Objets: ");
         sb.append(BRIGTH_GREEN  ).append("123456789");
+        sb.append(YELLOW);
+        sb.append("  |  ");
+        sb.append("Quitter: ");
+        sb.append(BRIGTH_GREEN).append("E");
         sb.append(RESET);
         System.out.println(sb);
     }
@@ -180,9 +193,8 @@ public class Affichage {
         StringBuilder sb = new StringBuilder();
         sb.append(PURPLE).append(BOLD).append("-----> ").append(UNDERLINE).append("Evenements:");
         sb.append(RESET);
-        sb.append(BRIGTH_PURPLE);
         for (String s :TourManager.getMessages()){
-            sb.append("\n").append(s);
+            sb.append("\n").append(BRIGTH_PURPLE).append(s);
         }
         System.out.print(sb);
     }

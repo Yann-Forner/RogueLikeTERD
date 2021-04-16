@@ -43,15 +43,43 @@ public class TourManager{
 
     private void processInput(String input){
         switch (input) {
-            case "z" , "Z" , "\u001B[A" -> player.moveUp();
-            case "q" , "Q" , "\u001B[D" -> player.moveLeft();
-            case "s" , "S" , "\u001B[B" -> player.moveDown();
-            case "d" , "D" , "\u001B[C" -> player.moveRight();
+            case "z" , "Z" , "\u001B[A" -> {
+                if(running) {
+                    player.moveUp();
+                }
+                else{
+                    addMessage(Affichage.RED+Affichage.BOLD+"[PAUSE]"+Affichage.RESET);
+                }
+            }
+            case "q" , "Q" , "\u001B[D" -> {
+                if(running) {
+                    player.moveLeft();
+                }
+                else{
+                    addMessage(Affichage.RED+Affichage.BOLD+"[PAUSE]"+Affichage.RESET);
+                }
+            }
+            case "s" , "S" , "\u001B[B" -> {
+                if(running) {
+                    player.moveDown();
+                }
+                else{
+                    addMessage(Affichage.RED+Affichage.BOLD+"[PAUSE]"+Affichage.RESET);
+                }
+            }
+            case "d" , "D" , "\u001B[C" -> {
+                if(running) {
+                    player.moveRight();
+                }
+                else{
+                    addMessage(Affichage.RED+Affichage.BOLD+"[PAUSE]"+Affichage.RESET);
+                }
+            }
             case "p" , "P" -> pause();
             case "i" , "I" -> System.out.println("I"); //Inventaire
             case "a" , "A" -> System.out.println("A"); //Attaque distance
             case "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"  -> System.out.println("Nombre"); //Objets
-            case "exit" -> System.exit(0);
+            case "e" , "E" -> System.exit(0);
             default -> System.out.println("Wrong key:"+input);
         }
     }
@@ -84,7 +112,7 @@ public class TourManager{
     }
 
     public static void pause(){
-        TourManager.addMessage("Le jeu est en pause");
+        TourManager.addMessage(running ? "Le jeu est en pause" : "Le jeu n'est plus en pause");
         running=!running;
     }
 
