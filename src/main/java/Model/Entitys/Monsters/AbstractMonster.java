@@ -5,7 +5,10 @@ import Model.Utils.Start;
 import Model.Map.Etage;
 import Model.Utils.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ScheduledFuture;
 
 public abstract class AbstractMonster extends Entity {
     protected int Alert=0;
@@ -18,13 +21,14 @@ public abstract class AbstractMonster extends Entity {
         this.update_rate_ms=update_rate_ms;
         this.Agro=agro;
         this.pathtype=path_type;
+        TourManager.addMonsterSchedule(this);
     }
 
-    public void updateMonster(){
+    public void updateMonster() {
         double vision_radius = Alert>0 ? Agro : getVision_radius();
         if(Start.getPlayer().getPosition().Distance(getPosition())<=vision_radius){
             if(Alert==0){
-                TourManager.AddMessage(getNom()+" vous a reperé!!!");
+                TourManager.addMessage(getNom()+" vous a reperé!!!");
             }
             Alert=Agro;
             move(nextPosition());

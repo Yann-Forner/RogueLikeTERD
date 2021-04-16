@@ -1,12 +1,13 @@
 package Model.Map.Room_Strategy;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
-public abstract class RoomStrategy{
+public abstract class RoomStrategy {
 
     public void composeRoom(Room r){
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_YELLOW, ".")));
@@ -35,6 +36,7 @@ public abstract class RoomStrategy{
         return true;
     }
 
+    public abstract void setMonsters(Room r);
     public abstract boolean noCollision(Etage etage,Room room);
     public abstract int getNbrMaxMobPerRoom();
 }

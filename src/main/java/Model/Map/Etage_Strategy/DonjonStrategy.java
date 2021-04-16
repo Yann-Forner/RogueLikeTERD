@@ -1,5 +1,6 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.RoomFactory;
@@ -45,6 +46,7 @@ public class DonjonStrategy extends EtageStrategy {
         Procedure.setRandomRooms(etage,this,roomsOfEtage);
         EtageFusion(etage,fusion_style);
         setSpecialCell(etage);
+        setMonsters(etage);
     }
 
     @Override

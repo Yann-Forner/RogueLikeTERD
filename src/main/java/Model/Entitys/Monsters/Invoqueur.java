@@ -1,13 +1,11 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.Entity;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Invoqueur extends AbstractMonster{
@@ -18,7 +16,7 @@ public class Invoqueur extends AbstractMonster{
     @Override
     public void updateMonster() {
         super.updateMonster();
-        TourManager.AddMessage("OK");
+        TourManager.addMessage("OK");
         ArrayList<ArrayList<Position>> waves = new ArrayList<>();
         for (int i = 0; i < getVision_radius()*2+20; i++) {
             waves.add(new ArrayList<>());
@@ -30,12 +28,12 @@ public class Invoqueur extends AbstractMonster{
             for (int y = posY - (int)getVision_radius(); y < posY + getVision_radius()*2 -1; y++) {
                 Position pos = new Position(x,y);
                 int distance = (int)pos.Distance(getPosition());
-                TourManager.AddMessage(String.valueOf(distance));
+                TourManager.addMessage(String.valueOf(distance));
                 waves.get(distance).add(pos);
             }
         }
 
-        TourManager.AddMessage("WAVES");
+        TourManager.addMessage("WAVES");
         for (ArrayList<Position> a : waves){
             for (Position p : a){
                 getEtage().get(p).updateCell(true,new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BLUE));

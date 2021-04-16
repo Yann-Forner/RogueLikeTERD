@@ -11,6 +11,7 @@ public class BossEtageStategy extends EtageStrategy{
     public void composeEtage(Etage etage) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.BOSS);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY));
+        setMonsters(etage);
     }
 
     @Override

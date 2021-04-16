@@ -1,7 +1,6 @@
 package Model.Entitys;
 
 import Model.Entitys.Inventaires.Inventory;
-import Model.Entitys.Inventaires.Weapon;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Utils.Start;
 import Model.Map.Cell;
@@ -24,7 +23,6 @@ public abstract class Entity {
         etage = m;
         vision_radius = vr;
         this.nom=nom;
-        etage.get(position).setEntity(this);
     }
 
     public Entity(Etage m, Position pos, double vr, String nom, int pv, int force){
@@ -36,7 +34,7 @@ public abstract class Entity {
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;
         if(this.pv<=0){
-            TourManager.AddMessage(nom+" est mort.");
+            TourManager.addMessage(nom+" est mort.");
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
             } else {
@@ -45,8 +43,10 @@ public abstract class Entity {
                 System.exit(0);
             }
         }
-        if(this instanceof AbstractMonster){
-            TourManager.AddMessage(pv>0 ? nom+" s'est soigné de "+pv+"pv." : nom+" n'a plus que " + getPv() + "pv.");
+        else {
+            if (this instanceof AbstractMonster) {
+                TourManager.addMessage(pv > 0 ? nom + " s'est soigné de " + pv + "pv." : nom + " n'a plus que " + getPv() + "pv.");
+            }
         }
         return this.pv>0;
     }
@@ -61,13 +61,11 @@ public abstract class Entity {
                     position=pos;
                 }
                 else{
-                    int damages = 1;
-                    if (inventory.getCurrentWeapon() != null){
-                        damages+= inventory.getCurrentWeapon().getDegats();
-                    }
-                    cell.getEntity().updatePV(-damages);
-                    //TourManager.pause();
+                    cell.getEntity().updatePV(-1);
                 }
+            }
+            else{
+                //TODO faire un bruit de colision
             }
         }
     }
@@ -102,10 +100,6 @@ public abstract class Entity {
 
     public String getNom(){
         return nom;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
     }
 
     public abstract String toString();

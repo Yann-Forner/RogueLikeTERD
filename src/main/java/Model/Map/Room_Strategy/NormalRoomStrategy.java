@@ -1,12 +1,12 @@
 package Model.Map.Room_Strategy;
 
 
+import Model.Entitys.Monsters.MonsterFactory;
+import Model.Entitys.Monsters.Zombie;
 import Model.Map.Etage;
 import Model.Map.Cell;
 import Model.Map.Room;
-import Model.Utils.Affichage;
 import Model.Utils.Procedure;
-import Model.Utils.TourManager;
 
 public class NormalRoomStrategy extends RoomStrategy{
     @Override
@@ -18,6 +18,13 @@ public class NormalRoomStrategy extends RoomStrategy{
     @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage, room, Procedure.getRandomInt(7,0));
+    }
+
+    @Override
+    public void setMonsters(Room r) {
+        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
+            r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.ZOMBIE));
+        }
     }
 
     @Override

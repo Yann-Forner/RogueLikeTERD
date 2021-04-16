@@ -31,6 +31,11 @@ public class MarchandRoomStrategy extends RoomStrategy{
     }
 
     @Override
+    public void setMonsters(Room r) {
+
+    }
+
+    @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,0);
     }

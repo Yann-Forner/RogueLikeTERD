@@ -13,7 +13,7 @@ public class CircleEtageStrategy extends  EtageStrategy{
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.CIRCLENORMAL);
         EtageFusion(etage, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLUE));
         setSpecialCell(etage);
-        //setMobs(etage);
+        setMonsters(etage);
     }
 
     @Override

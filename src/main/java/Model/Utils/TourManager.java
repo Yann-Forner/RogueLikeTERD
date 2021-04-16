@@ -4,12 +4,14 @@ import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.BasicPlayer;
 import Model.Map.Etage;
 import Model.Map.Map;
+import Model.Map.Room;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class TourManager{
@@ -75,18 +77,17 @@ public class TourManager{
     }
 
     public static void addMonsterSchedule(AbstractMonster m){
-        //TODO enlever quand meurt
         executor.scheduleAtFixedRate(() -> {
-            if(running && m.getPv()>0 && m.getEtage().equals(player.getEtage())) m.updateMonster();
-        },0,m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
+            if (running && m.getPv()>0 && m.getEtage().equals(player.getEtage())) m.updateMonster();
+        }, 0, m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
     }
 
     public static void pause(){
-        TourManager.AddMessage("Le jeu est en pause");
+        TourManager.addMessage("Le jeu est en pause");
         running=!running;
     }
 
-    public static void AddMessage(String message){
+    public static void addMessage(String message){
         if(messages.size()>=10){
             messages.pollFirst();
         }
