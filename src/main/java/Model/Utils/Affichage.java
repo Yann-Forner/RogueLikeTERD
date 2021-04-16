@@ -1,8 +1,11 @@
 package Model.Utils;
 
+import Model.Entitys.Inventaires.Armures;
+import Model.Entitys.Inventaires.Weapon;
 import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Map.Map;
 import Model.Map.Room;
 
 import java.util.ArrayList;
@@ -76,10 +79,39 @@ public class Affichage {
                 sb.append("╚═════════════════════════════════════════════════════════════════════════════════╝");
             }
             else{
-                sb.append("║                                                                                 ║");
+                if (y==7 && Main.getPlayer()!= null){
+                    String equipement = "Equipement : ";
+                    if (Main.getPlayer().getInventory().getCurrentWeapon()!=null)equipement+=Main.getPlayer().getInventory().getCurrentWeapon().getNom()+"/";
+                    else equipement+="X/";
+                    if (Main.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Main.getPlayer().getInventory().getCurrentArmure().getNom();
+                    else equipement+="X";
+                    System.out.println(equipement);
+                    sb.append(print_txt_in_menu(equipement));
+                }else {
+                    sb.append("║                                                                                 ║");
+                }
             }
             sb.append("\n");
         }
+        return sb.toString();
+    }
+    public static String print_txt_in_menu(String message){//81
+        StringBuilder sb = new StringBuilder();
+        if(message.length()<81){
+            sb.append("║");
+            int spacing = (81 - message.length())/2;
+            sb.append(" ".repeat(spacing));
+            sb.append(message);
+            if((message.length()%2==0))++spacing;
+            sb.append(" ".repeat(spacing));
+            sb.append("║");
+        }else if (message.length()>81){
+            sb.append("║                                                                                 ║");
+        }
+        else {
+            sb.append("║").append(message).append("║");
+        }
+
         return sb.toString();
     }
 

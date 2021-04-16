@@ -1,6 +1,7 @@
 package Model.Entitys;
 
 import Model.Entitys.Inventaires.Inventory;
+import Model.Entitys.Inventaires.Weapon;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Main;
 import Model.Map.Cell;
@@ -24,6 +25,7 @@ public abstract class Entity {
         vision_radius = vr;
         this.nom=nom;
         etage.get(position).setEntity(this);
+
     }
 
     public Entity(Etage m, Position pos, double vr, String nom, int pv, int force){
@@ -60,7 +62,11 @@ public abstract class Entity {
                     position=pos;
                 }
                 else{
-                    cell.getEntity().updatePV(-1);
+                    int damages = 1;
+                    if (inventory.getCurrentWeapon() != null){
+                        damages+= inventory.getCurrentWeapon().getDegats();
+                    }
+                    cell.getEntity().updatePV(-damages);
                     //TourManager.pause();
                 }
             }
@@ -97,6 +103,10 @@ public abstract class Entity {
 
     public String getNom(){
         return nom;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public abstract String toString();
