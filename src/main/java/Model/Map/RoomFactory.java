@@ -14,7 +14,7 @@ public class RoomFactory {
     private static Room getNewNormalTriangleRoom(){ return Procedure.getRandomRoom(10,20,new NormalTriangleStrategy());}
 
     private static Room getNewMarchandRoom(){
-        return new Room(5,5,new MarchandRoomStrategy());
+        return new Room(10,10,new MarchandRoomStrategy());
     }
 
     private static Room getNewNormalRoom(){

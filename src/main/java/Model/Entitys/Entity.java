@@ -3,7 +3,7 @@ package Model.Entitys;
 import Model.Entitys.Inventaires.Inventory;
 import Model.Entitys.Inventaires.Weapon;
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Main;
+import Model.Utils.Start;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
@@ -25,7 +25,6 @@ public abstract class Entity {
         vision_radius = vr;
         this.nom=nom;
         etage.get(position).setEntity(this);
-
     }
 
     public Entity(Etage m, Position pos, double vr, String nom, int pv, int force){
@@ -41,7 +40,7 @@ public abstract class Entity {
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
             } else {
-                Main.affichage(etage);
+                Start.affichage(etage);
                 System.out.println("Fin de la partie.");
                 System.exit(0);
             }

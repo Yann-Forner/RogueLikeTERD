@@ -1,12 +1,10 @@
 package Model.Map;
 
-import Model.Entitys.*;
-import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
+import Model.Utils.Start;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
-import Model.Utils.TourManager;
 
 import java.util.ArrayList;
 
@@ -15,28 +13,22 @@ public class Map {
     public static final int MapWidth = 40;
     public static final int MapHeigth = 40;
     private boolean inTemporaryEtage=false;
-    private final BasicPlayer player;
 
     public Map(){
-        EtageStrategy randomStrategy = EtageStrategy.getRandomStrategy();
-        TourManager.AddMessage(String.valueOf(randomStrategy));
-        Etage etage=new Etage(MapWidth,MapHeigth, randomStrategy);
+        Etage etage=new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        player=new BasicPlayer(etage,pos,20, "Quentin");
-        etage.get(pos).setEntity(player);
+        etage.get(pos).setEntity(Start.getPlayer());
+        Start.getPlayer().setEtage(etage);
+        Start.getPlayer().setPosition(pos);
     }
 
     public Etage getCurrent(){
-        return player.getEtage();
+        return Start.getPlayer().getEtage();
     }
 
     public int getIndexCurrent(){
         return etages.indexOf(getCurrent());
-    }
-
-    public BasicPlayer getPlayer(){
-        return player;
     }
 
     public void DOWN(){
@@ -50,14 +42,14 @@ public class Map {
             etage = etages.get(currentIndex + 1);
         }
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        getPlayer().updateEtage(etage,pos);
+        Start.getPlayer().updateEtage(etage,pos);
     }
 
     public void UP(){
         if(inTemporaryEtage){
             Etage etage=etages.get(etages.size()-1);
             Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-            getPlayer().updateEtage(etage,pos);
+            Start.getPlayer().updateEtage(etage,pos);
             inTemporaryEtage=false;
         }
         else{
@@ -65,15 +57,16 @@ public class Map {
             if(currentIndex!=0){
                 Etage etage=etages.get(currentIndex-1);
                 Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-                getPlayer().updateEtage(etage,pos);
+                Start.getPlayer().updateEtage(etage,pos);
             }
         }
     }
 
     public void TRAP_ROOM(){
+        //TODO revenir a l'etage de depart en remontant et non le dernier index de l'arraylist
         Etage etage = new Etage(MapWidth,MapHeigth,new TrapEtageStrategy());
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        getPlayer().updateEtage(etage,pos);
+        Start.getPlayer().updateEtage(etage,pos);
         inTemporaryEtage=true;
     }
 

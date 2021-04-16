@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: Model.Utils.Start
+Class-Path: commons-lang3-3.5.jar javafaker-1.0.2.jar generex-1.0.2.jar 
+ snakeyaml-1.23-android.jar automaton-1.11-8.jar
+

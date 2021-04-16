@@ -51,7 +51,6 @@ public class TestMap extends TestCase {
     public void testMapTrapRoom() {
         Map map = new Map();
         Etage etage = map.getCurrent();
-        BasicPlayer player = map.getPlayer();
 
         ArrayList<ArrayList<Cell>> oldCells = etage.Cells;
         map.TRAP_ROOM();

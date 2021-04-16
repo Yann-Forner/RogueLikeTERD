@@ -2,13 +2,12 @@ package Model.Utils;
 
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.BasicPlayer;
-import Model.Main;
 import Model.Map.Etage;
 import Model.Map.Map;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayDeque;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -28,17 +27,18 @@ public class TourManager{
         this.map = map;
         TourManager.etage = etage;
         schedule();
-        Main.affichage(etage);
+        Start.affichage(etage);
     }
 
     public void playTour() {
-        try{
+        try {
             processInput(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch (Exception e){}
         processEtage();
         etage = map.getCurrent();
-        Main.affichage(etage);
+        Start.affichage(etage);
     }
 
     private void processInput(String input){
@@ -54,7 +54,7 @@ public class TourManager{
     }
 
     private void processEtage() {
-        switch (etage.get(map.getPlayer().getPosition()).getType()) {
+        switch (etage.get(player.getPosition()).getType()) {
             case UP :
                 map.UP();
                 break;
@@ -70,11 +70,12 @@ public class TourManager{
     }
 
     public void schedule() {
-        //executor.scheduleAtFixedRate(() -> Main.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(() -> Start.affichage(etage), 0, 100, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 
     public static void addMonsterSchedule(AbstractMonster m){
+        //TODO enlever quand meurt
         executor.scheduleAtFixedRate(() -> {
             if(running && m.getPv()>0 && m.getEtage().equals(player.getEtage())) m.updateMonster();
         },0,m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);

@@ -78,7 +78,6 @@ public class TrapEtageStrategy extends EtageStrategy{
                 }
             }
         }
-        System.out.println("4");
     }
 
     @Override

@@ -1,6 +1,5 @@
 package Model.Utils;
 
-import Model.Main;
 import Model.Map.Cell;
 import Model.Map.Etage;
 
@@ -19,7 +18,7 @@ public class Tools {
      * @param etage Etage
      * @param depart Position
      * @param arrive Position
-     * @param pathType int : 0->Normal 1->Diagonales
+     * @param pathType int : 0->Normal 1->Diagonales 2->Fantome
      * @return ArrayList<Position>
      */
     public static ArrayList<Position> Astar(Etage etage, Position depart, Position arrive, int pathType){
@@ -277,7 +276,7 @@ public class Tools {
             }
         }
         chemin.sort((o1, o2) -> {
-            Position pos = Main.getPlayer().getPosition();
+            Position pos = Start.getPlayer().getPosition();
             return Double.compare(o1.Distance(pos), o2.Distance(pos));
         });
         return chemin;

@@ -551,3 +551,82 @@ public boolean suppX(int x, int y) {
                                      type.setString(BLACK+'.');
                              }
                          }
+
+                         public static void Rooms_Color(Etage etage){
+                                 int acc=0;
+                                 for (int k = 0; k < etage.getRooms().size(); k++) {
+                                     Room r = etage.getRooms().get(k);
+                                     for (int i = 0; i < r.getHeigth(); i++) {
+                                         for (int j = 0; j < r.getWidth(); j++) {
+                                             int finalAcc = acc;
+                                             int finalK = k;
+                                             etage.set(r.getAbsolutePos().getX()+j,r.getAbsolutePos().getY()+i,new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
+                                                 @Override
+                                                 public String toString() {
+                                                     return "\u001B[3"+ finalAcc +"m"+ finalK;
+                                                 }
+                                             });
+                                         }
+                                     }
+                                     acc++;
+                                 }
+                                 Affichage.etage(etage);
+                             }
+
+                             public static void Path(Etage etage, ArrayList<Position> path){
+                                 for (int i = 0; i < path.size(); i++) {
+                                     Position p = path.get(i);
+                                     if(i==0){
+                                         etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
+                                             @Override
+                                             public String toString() {
+                                                 return Affichage.BRIGTH_YELLOW+"A";
+                                             }
+                                         });
+                                     }
+                                     else if(i==path.size()-1){
+                                         etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
+                                             @Override
+                                             public String toString() {
+                                                 return Affichage.BRIGTH_YELLOW+"D";
+                                             }
+                                         });
+                                     }
+                                     else{
+                                         etage.set(p.getX(),p.getY(),new Cell(true, new Cell.Style(Cell.Style.CellType.PATH)){
+                                             @Override
+                                             public String toString() {
+                                                 return Affichage.BRIGTH_PURPLE+"X";
+                                             }
+                                         });
+                                     }
+                                 }
+                                 Affichage.etage(etage);
+                             }
+
+                             public static void Palette(){
+                                 for (int i = 0; i < 16; i++) {
+                                     for (int j = 0; j < 16; j++) {
+                                         int code = i * 16 + j;
+                                         String space="";
+                                         for (int k = 0; k < 3-String.valueOf(code).length(); k++) {
+                                             space=space+' ';
+                                         }
+                                         System.out.print("\u001b[38;5;" + code + "m " + space + code);
+                                     }
+                                     System.out.println(Affichage.RESET+"\n");
+                                 }
+                                 System.out.println("\n");
+                                 for (int i = 0; i < 16; i++) {
+                                     for (int j = 0; j < 16; j++) {
+                                         int code = i * 16 + j;
+                                         String space="";
+                                         for (int k = 0; k < 3-String.valueOf(code).length(); k++) {
+                                             space=space+' ';
+                                         }
+                                         System.out.print("\u001b[48;5;" + code + "m " + space + code);
+                                     }
+                                     System.out.println(Affichage.RESET+"\n");
+                                 }
+                                 System.out.println(Affichage.RESET+"\n");
+                             }

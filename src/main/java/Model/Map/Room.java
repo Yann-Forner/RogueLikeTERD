@@ -31,6 +31,7 @@ public class Room extends Etage implements Comparable<Room> {
 
     @Override
     public int compareTo(Room o) {
+        //TODO on a encore beosin du comparable? #YANN
         return (int) (getAbsolutePos().Distance(new Position(0,0)) - o.getAbsolutePos().Distance(new Position(0,0)));
     }
 }

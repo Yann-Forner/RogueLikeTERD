@@ -3,7 +3,7 @@ package Map;
 import Model.Entitys.BasicPlayer;
 import Model.Map.Etage;
 import Model.Map.Map;
-import junit.framework.TestCase;
+import Model.Utils.Start;
 
 public class TestGameplay /*extends TestCase*/ {
 
@@ -13,7 +13,7 @@ public class TestGameplay /*extends TestCase*/ {
 
     public TestGameplay() {
         map = new Map();
-        player = map.getPlayer();
+        player = Start.getPlayer();
         etage = map.getCurrent();
     }
 

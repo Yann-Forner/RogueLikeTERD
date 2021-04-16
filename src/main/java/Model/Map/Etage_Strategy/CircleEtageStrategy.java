@@ -17,22 +17,8 @@ public class CircleEtageStrategy extends  EtageStrategy{
     }
 
     @Override
-    protected void EtageFusion(Etage etage, Cell.Style style_fusion) {
-        super.EtageFusion(etage, style_fusion);
-    }
-
-    @Override
     public int getNbrMaxRoom() {
         return 8;
     }
 
-    @Override
-    public void setSpecialCell(Etage etage) {
-        super.setSpecialCell(etage);
-    }
-
-    @Override
-    public void setMobs(Etage etage) {
-        super.setMobs(etage);
-    }
 }

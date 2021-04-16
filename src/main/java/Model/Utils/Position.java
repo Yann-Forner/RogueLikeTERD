@@ -2,9 +2,6 @@ package Model.Utils;
 
 import Model.Map.Etage;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;

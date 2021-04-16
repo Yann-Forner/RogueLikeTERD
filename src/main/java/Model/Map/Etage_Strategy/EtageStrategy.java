@@ -3,7 +3,6 @@ package Model.Map.Etage_Strategy;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 import Model.Utils.Tools;
