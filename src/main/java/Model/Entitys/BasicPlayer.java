@@ -1,13 +1,14 @@
 package Model.Entitys;
 
 import Model.Map.Etage;
+import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 public class BasicPlayer extends Entity {
 
     public BasicPlayer(int vision_radius, String nom,int pv,int force) {
-        super(null,null,vision_radius, nom,pv,force);
+        super(null,new Position(0,0),vision_radius, nom,pv,force);
         //TODO rework les nulls
     }
 
