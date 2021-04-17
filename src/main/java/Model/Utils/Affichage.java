@@ -16,18 +16,20 @@ public class Affichage {
     }
     private static final Shadow ombre = Shadow.NONE;
 
+    private Menu menu;
+
     public static void getMap(Map map){
         System.out.print(Affichage.CLEAR);
         System.out.println(map.getCurrent());
         int index = map.getIndexCurrent()+1;
         //TODO ça va pas marcher du coup #YANN
-        Affichage.print_txt_in_menu(index == 0 ? "Salle secrete" : "Etage n°" + index+"\n");
         Affichage.getPv();
         Affichage.getTouches();
         Affichage.getMessages();
     }
 
     public static String etage(Etage etage){
+        Menu menu = new Menu(etage,Start.getMap());
         StringBuilder sb = new StringBuilder();
         sb.append("    ").append(Affichage.RESET);
         for (int x = 0; x < etage.getWidth(); x++) {
@@ -79,50 +81,12 @@ public class Affichage {
                     sb.append(" ");
                 }
             }
-            //Menu
-            sb.append(Affichage.BOLD).append(Affichage.BLUE).append("     ");
-            if(y==0){
-                sb.append("╔═════════════════════════════════════════════════════════════════════════════════╗");
-            }
-            else if(y==etage.getHeigth()-1){
-                sb.append("╚═════════════════════════════════════════════════════════════════════════════════╝");
-            }
-            else{
-                if (y==7 && Start.getPlayer()!= null){
-                    String equipement = "Equipement : ";
-                    if (Start.getPlayer().getInventory().getCurrentWeapon()!=null)equipement+=Start.getPlayer().getInventory().getCurrentWeapon().getNom()+"/";
-                    else equipement+="X/";
-                    if (Start.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Start.getPlayer().getInventory().getCurrentArmure().getNom();
-                    else equipement+="X";
-                    sb.append(print_txt_in_menu(equipement));
-                }else {
-                    sb.append("║                                                                                 ║");
-                }
-            }
-            sb.append("\n");
+            menu.toStringByLine(y,sb);
         }
         return sb.toString();
     }
 
-    public static String print_txt_in_menu(String message){//81
-        StringBuilder sb = new StringBuilder();
-        if(message.length()<81){
-            sb.append("║");
-            int spacing = (81 - message.length())/2;
-            sb.append(" ".repeat(spacing));
-            sb.append(message);
-            if((message.length()%2==0))++spacing;
-            sb.append(" ".repeat(spacing));
-            sb.append("║");
-        }else if (message.length()>81){
-            sb.append("║                                                                                 ║");
-        }
-        else {
-            sb.append("║").append(message).append("║");
-        }
 
-        return sb.toString();
-    }
 
     public static void getPv(){
         BasicPlayer player = Start.getPlayer();
