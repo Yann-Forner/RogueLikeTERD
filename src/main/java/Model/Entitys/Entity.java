@@ -36,8 +36,9 @@ public abstract class Entity {
 
     public boolean updatePV(int pv){
         this.pv = this.pv + pv;
+        String nom_lvl = nom+Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET;
         if(this.pv<=0){
-            TourManager.addMessage(nom+" est mort.");
+            TourManager.addMessage(Affichage.BRIGTH_RED + nom_lvl + Affichage.BRIGTH_RED + " est mort.");
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
                 Start.getPlayer().addExp(getExp());
@@ -49,8 +50,7 @@ public abstract class Entity {
         }
         else {
             if (this instanceof AbstractMonster) {
-                String nom = Affichage.YELLOW+this.nom+Affichage.BRIGTH_GREY+"["+lvl+"]"+Affichage.YELLOW;
-                TourManager.addMessage(pv > 0 ? nom + " s'est soigné de " + pv + "pv." : nom + " n'a plus que " + getPv() + "pv.");
+                TourManager.addMessage(pv > 0 ? Affichage.YELLOW + nom_lvl + Affichage.YELLOW + " s'est soigné de " + pv + "pv." : Affichage.YELLOW + nom_lvl + Affichage.YELLOW + " n'a plus que " + getPv() + "pv.");
             }
         }
         return this.pv>0;
