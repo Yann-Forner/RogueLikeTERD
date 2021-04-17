@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public class Snake extends AbstractMonster{
-    private static class Tail extends AbstractMonster{
+    private class Tail extends AbstractMonster{
         protected Tail(Etage m, Position pos, String nom, int pv, int path_type, int lvl) {
             super(m, pos, nom, pv, 0,0,0,60000, path_type, lvl);
         }
@@ -21,6 +21,15 @@ public class Snake extends AbstractMonster{
         }
 
         @Override
+        public boolean updatePV(int pv) {
+            boolean Alive = super.updatePV(pv);
+            if(!Alive){
+                snakeTail.remove(this);
+            }
+            return Alive;
+        }
+
+        @Override
         public void move(Position pos) {
             if(getEtage().get(pos).getEntity()==null){
                 super.move(pos);
@@ -28,7 +37,7 @@ public class Snake extends AbstractMonster{
         }
     }
 
-    private final ArrayList<Tail> snakeTail = new ArrayList<>();
+    protected final ArrayList<Tail> snakeTail = new ArrayList<>();
     private final int size_of_tail;
     protected Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl, int size_of_tail) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
@@ -64,8 +73,8 @@ public class Snake extends AbstractMonster{
     public boolean updatePV(int pv) {
         boolean Alive = super.updatePV(pv);
         if(!Alive){
-            for(Tail t : snakeTail){
-                t.updatePV(-Integer.MAX_VALUE);
+            while(snakeTail.size()>0){
+                snakeTail.get(0).updatePV(-Integer.MAX_VALUE);
             }
         }
         return Alive;
