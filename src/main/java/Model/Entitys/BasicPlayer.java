@@ -1,7 +1,6 @@
 package Model.Entitys;
 
 import Model.Map.Etage;
-import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
@@ -11,10 +10,9 @@ public class BasicPlayer extends Entity {
     private int CURRENT_EXP;
 
     public BasicPlayer(int vision_radius, String nom,int pv,int force) {
-        super(null,new Position(0,0),vision_radius, nom,pv,force);
+        super(null,null, vision_radius, nom, pv, force,1);
         MAX_EXP=10;
         CURRENT_EXP=0;
-        //TODO rework les nulls
     }
 
     public void updateEtage(Etage etage, Position position){
@@ -30,7 +28,7 @@ public class BasicPlayer extends Entity {
             MAX_EXP *= 2;
             CURRENT_EXP = 0;
             lvl++;
-            TourManager.addMessage("Vous avez gagner un niveau");
+            TourManager.addMessage(Affichage.BRIGTH_CYAN+"Vous avez gagné un niveau");
         }
     }
 

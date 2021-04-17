@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Snake extends AbstractMonster{
     private ArrayList<Tail> snakeTail = new ArrayList<>();
-    protected Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int size_of_tail) {
-        super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type);
+    protected Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl, int size_of_tail) {
+        super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
         int posX = pos.getX();
         int posY = pos.getY();
         for (int i = 0; i <size_of_tail ; i++) {
@@ -18,7 +18,7 @@ public class Snake extends AbstractMonster{
             else if (m.get(posX,posY-1).isAccesible() && m.get(posX,posY-1).getEntity() == null )posY-=1;
             else if (m.get(posX,posY+1).isAccesible() && m.get(posX,posY+1).getEntity() == null )posY+=1;
             else posX+=1;
-            snakeTail.add(new Tail(m, new Position(posX,posY), "Tail", pv, force, vision_radius, agro, update_rate_ms, path_type));
+            snakeTail.add(new Tail(m, new Position(posX,posY), "Tail", pv, force, vision_radius, agro, update_rate_ms, path_type, lvl));
         }
     }
 

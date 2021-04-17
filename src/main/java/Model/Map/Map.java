@@ -15,7 +15,7 @@ public class Map {
     private boolean inTemporaryEtage=false;
 
     public Map(){
-        Etage etage=new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy());
+        Etage etage = new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         etage.get(pos).setEntity(Start.getPlayer());

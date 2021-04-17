@@ -156,7 +156,6 @@ public class Procedure {
         Collections.sort(etage.getRooms());
     }
 
-
     /**
      * Genere nbrMaxRooms dans l'Etage.
      * @param etage Etage

@@ -6,8 +6,8 @@ import Model.Utils.Position;
 
 public class Snail extends AbstractMonster {
     private boolean toleft = true;
-    public Snail(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross) {
-        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross);
+    public Snail(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
+        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
     }
 
     @Override

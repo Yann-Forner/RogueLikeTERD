@@ -8,10 +8,10 @@ import Model.Utils.Procedure;
 public class BigMonster  extends AbstractMonster{
     private final HandOfMonster leftHand;
     private final HandOfMonster rightHand;
-    protected BigMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type) {
-        super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type);
-        leftHand = new HandOfMonster(m, new Position(pos.getX()-1,pos.getY()-1), nom, pv/2, force, vision_radius, agro, update_rate_ms, path_type);
-        rightHand = new HandOfMonster(m, new Position(pos.getX()+1,pos.getY()-1), nom, pv/2, force, vision_radius, agro, update_rate_ms, path_type);
+    protected BigMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
+        super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
+        leftHand = new HandOfMonster(m, new Position(pos.getX()-1,pos.getY()-1), nom, pv/2, force, vision_radius, agro, update_rate_ms, path_type, lvl);
+        rightHand = new HandOfMonster(m, new Position(pos.getX()+1,pos.getY()-1), nom, pv/2, force, vision_radius, agro, update_rate_ms, path_type, lvl);
         while(!leftHand.getEtage().get(pos.getX()-1,pos.getY()-1).isAccesible() && !rightHand.getEtage().get(pos.getX()+1,pos.getY()-1).isAccesible()){
             this.move(Procedure.getAccesibleRandomPosition(true,this.getEtage()));
         }

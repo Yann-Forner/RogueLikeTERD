@@ -6,8 +6,8 @@ import Model.Utils.Position;
 
 
 public class Ghost extends AbstractMonster {
-    public Ghost(Etage m, Position pos,String nom, int pv, int force, double vision_radius , int agro, int update_rate, int path_type) {
-        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, path_type);
+    public Ghost(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, int path_type, int lvl) {
+        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, path_type, lvl);
     }
 
     @Override

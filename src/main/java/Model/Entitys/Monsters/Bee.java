@@ -7,8 +7,8 @@ import Model.Utils.Position;
 public class Bee extends AbstractMonster{
     private final int BasePv;
 
-    public Bee(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross) {
-        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross);
+    public Bee(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
+        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
         this.BasePv=pv;
     }
 

@@ -27,12 +27,11 @@ public abstract class Entity {
         this.nom=nom;
     }
 
-    public Entity(Etage m, Position pos, double vr, String nom, int pv, int force){
+    public Entity(Etage m, Position pos, double vr, String nom, int pv, int force, int lvl){
         this(m,pos,vr,nom);
         this.pv=pv;
         this.force=force;
-        this.lvl=1;
-        //TODO init lvl
+        this.lvl=lvl;
     }
 
     public boolean updatePV(int pv){
@@ -50,6 +49,7 @@ public abstract class Entity {
         }
         else {
             if (this instanceof AbstractMonster) {
+                String nom = Affichage.YELLOW+this.nom+Affichage.BRIGTH_GREY+"["+lvl+"]"+Affichage.YELLOW;
                 TourManager.addMessage(pv > 0 ? nom + " s'est soigné de " + pv + "pv." : nom + " n'a plus que " + getPv() + "pv.");
             }
         }

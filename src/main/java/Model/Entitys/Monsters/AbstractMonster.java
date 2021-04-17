@@ -5,10 +5,7 @@ import Model.Utils.Start;
 import Model.Map.Etage;
 import Model.Utils.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ScheduledFuture;
 
 public abstract class AbstractMonster extends Entity {
     protected int Alert=0;
@@ -16,8 +13,8 @@ public abstract class AbstractMonster extends Entity {
     private final int pathtype;
     private final int update_rate_ms;
 
-    protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type) {
-        super(m, pos, vision_radius, nom, pv, force);
+    protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
+        super(m, pos, vision_radius, nom, pv, force, lvl);
         this.update_rate_ms=update_rate_ms;
         this.Agro=agro;
         this.pathtype=path_type;

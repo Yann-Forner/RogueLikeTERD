@@ -8,8 +8,8 @@ public class Bird extends AbstractMonster {
 
     private boolean totop = true;
 
-    public Bird(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross) {
-        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross);
+    public Bird(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
+        super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
     }
 
     @Override

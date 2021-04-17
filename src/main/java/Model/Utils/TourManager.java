@@ -23,8 +23,8 @@ public class TourManager{
 
     public TourManager(BufferedReader reader, BasicPlayer player, Map map, Etage etage) {
         this.reader = reader;
-        TourManager.player = player;
         this.map = map;
+        TourManager.player = player;
         TourManager.etage = etage;
         schedule();
         Affichage.getMap(map);
