@@ -1,5 +1,6 @@
 package Model.Map;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Start;

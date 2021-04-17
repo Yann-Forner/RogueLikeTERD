@@ -43,7 +43,7 @@ public class MonsterFactory {
                 return new BigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900,Tools.PATH_CROSS,getBaseLvl()+5);
             }
             case SNAKE -> {
-                return new Snake(etage,Procedure.getAccesibleRandomPosition(true,etage),"Snake",10,18,15,20,900,Tools.PATH_CROSS,getBaseLvl()+5,10);
+                return new Snake(etage,Procedure.getAccesibleRandomPosition(true,etage),"Snake",10,1,15,20,900,Tools.PATH_NOMOBS,getBaseLvl()+5,10);
             }
             case INVOQUEUR -> {
                 return new Invoqueur(etage,Procedure.getAccesibleRandomPosition(true,etage),"INVOQUEUR",10,18,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5);
