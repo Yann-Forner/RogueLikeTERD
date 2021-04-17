@@ -8,11 +8,13 @@ import Model.Utils.TourManager;
 public class BasicPlayer extends Entity {
     private int MAX_EXP;
     private int CURRENT_EXP;
+    private int MAX_PV;
 
     public BasicPlayer(int vision_radius, String nom,int pv,int force) {
         super(null,null, vision_radius, nom, pv, force,1);
         MAX_EXP=10;
         CURRENT_EXP=0;
+        MAX_PV=pv;
     }
 
     public void updateEtage(Etage etage, Position position){
@@ -27,6 +29,8 @@ public class BasicPlayer extends Entity {
         if(CURRENT_EXP>=MAX_EXP){
             MAX_EXP *= 2;
             CURRENT_EXP = 0;
+            updatePV(MAX_PV/2);
+            MAX_PV *= 1.5;
             lvl++;
             TourManager.addMessage(Affichage.BRIGTH_CYAN+"Vous avez gagné un niveau");
         }
@@ -54,6 +58,20 @@ public class BasicPlayer extends Entity {
 
     public void moveDown() {
         move(getPosition().somme(0,1));
+    }
+
+    @Override
+    public int getPv() {
+        return super.getPv();
+    }
+
+    public int getMAX_PV(){
+        return MAX_PV;
+    }
+
+    @Override
+    public int getForce() {
+        return super.getForce()*lvl;
     }
 
     @Override

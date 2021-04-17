@@ -4,15 +4,15 @@ import Model.Entitys.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Map.Room;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 public class Affichage {
     public enum Shadow{
-        CIRCLE,RAY,NONE;
+        CIRCLE,RAY,NONE
     }
     private static final Shadow ombre = Shadow.NONE;
 
@@ -90,30 +90,56 @@ public class Affichage {
 
     public static void getPv(){
         BasicPlayer player = Start.getPlayer();
-        int pv = player.getPv();
         StringBuilder sb = new StringBuilder();
         sb.append(GREEN);
         sb.append("PV : ");
         sb.append(GREY);
-        sb.append(GREEN_BACKGROUND);
+
+        int current_pv = player.getPv();
+        LinkedList liste_current_pv = new LinkedList();
+        while(current_pv >0){
+            liste_current_pv.add(current_pv %10);
+            current_pv = current_pv /10;
+        }
+        if(liste_current_pv.size()==0){
+            liste_current_pv.add(0);
+        }
+
+        int max_pv = player.getMAX_PV();
+        LinkedList liste_max_pv = new LinkedList();
+        while(max_pv >0){
+            liste_max_pv.add(max_pv %10);
+            max_pv = max_pv /10;
+        }
+
+        int middle = 49;
+        int start = middle-(liste_current_pv.size()+1);
+        int end = middle+(liste_max_pv.size()+1);
+
         for (int i = 0; i < 100; i++) {
-            if(i>=pv){
-                sb.append(RED_BACKGROUND);
+            sb.append(i >= ((double)player.getPv()/(double)player.getMAX_PV())*100 ? RED_BACKGROUND : GREEN_BACKGROUND);
+            if(i==start){
+                sb.append("[");
             }
-            switch (i){
-                case 45 -> sb.append(pv == 100 ? "[" : " ");
-                case 46 -> sb.append(pv == 100 ? "1" : pv < 10 ? " " : "[");
-                case 47 -> sb.append(pv >= 10 ? (pv%100)/10 : "[");
-                case 48 -> sb.append(pv%10);
-                case 49 -> sb.append("/");
-                case 50 -> sb.append("1");
-                case 51, 52 -> sb.append("0");
-                case 53 -> sb.append("]");
-                default -> sb.append(" ");
+            else if(i==end){
+                sb.append("]");
+            }
+            else if(i>start && liste_current_pv.size()>0){
+                sb.append(liste_current_pv.pollLast());
+            }
+            else if(i==middle){
+                sb.append("/");
+            }
+            else if(i>start && liste_max_pv.size()>0){
+                sb.append(liste_max_pv.pollLast());
+            }
+            else{
+                sb.append(" ");
             }
         }
         sb.append(RESET);
 
+        //LVL
         sb.append(BLUE).append("   LVL: ").append(player.getLvl());
         sb.append(" -> ").append("[");
         sb.append(BRIGTH_BLUE).append(player.getCURRENT_EXP());
@@ -131,18 +157,18 @@ public class Affichage {
         sb.append(BRIGTH_GREEN).append("ZQSD");
         sb.append(YELLOW);
         sb.append("  |  ");
-        sb.append("Pause: ");
-        sb.append(BRIGTH_GREEN).append("P");
+        sb.append("Mode Tour par tour: ");
+        sb.append(BRIGTH_GREEN).append("T");
         sb.append(YELLOW);
         sb.append("  |  ");
         sb.append("Inventaire: ");
         sb.append(BRIGTH_GREEN).append("I");
-        sb.append(YELLOW);
-        sb.append("  |  ");
-        sb.append("Attaque à distance: ");
-        sb.append(BRIGTH_GREEN).append("A");
         sb.append("\n                                                                                                                                 ");
         sb.append(YELLOW);
+        sb.append("Attaque à distance: ");
+        sb.append(BRIGTH_GREEN).append("A");
+        sb.append(YELLOW);
+        sb.append("  |  ");
         sb.append("Objets: ");
         sb.append(BRIGTH_GREEN  ).append("123456789");
         sb.append(YELLOW);

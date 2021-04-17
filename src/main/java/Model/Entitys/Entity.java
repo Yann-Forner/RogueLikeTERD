@@ -10,10 +10,9 @@ import Model.Utils.Position;
 import Model.Utils.TourManager;
 
 public abstract class Entity {
-    private  Position position;
+    private Position position;
     private Etage etage;
     private final double vision_radius;
-    //STATS
     private int pv;
     private int force;
     protected int lvl;
@@ -29,15 +28,15 @@ public abstract class Entity {
 
     public Entity(Etage m, Position pos, double vr, String nom, int pv, int force, int lvl){
         this(m,pos,vr,nom);
-        this.pv=pv;
-        this.force=force;
+        this.pv=pv*lvl;
+        this.force=force*lvl;
         this.lvl=lvl;
     }
 
     public boolean updatePV(int pv){
-        this.pv = this.pv + pv;
-        String nom_lvl = nom+Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET;
-        if(this.pv<=0){
+        this.pv = getPv() + pv;
+        String nom_lvl = nom + (this instanceof AbstractMonster? Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET : "");
+        if(getPv()<=0){
             TourManager.addMessage(Affichage.BRIGTH_RED + nom_lvl + Affichage.BRIGTH_RED + " est mort.");
             if (this instanceof AbstractMonster) {
                 etage.removeMonster((AbstractMonster) this);
@@ -53,7 +52,7 @@ public abstract class Entity {
                 TourManager.addMessage(pv > 0 ? Affichage.YELLOW + nom_lvl + Affichage.YELLOW + " s'est soigné de " + pv + "pv." : Affichage.YELLOW + nom_lvl + Affichage.YELLOW + " n'a plus que " + getPv() + "pv.");
             }
         }
-        return this.pv>0;
+        return getPv()>0;
     }
 
     public void move(Position pos) {
@@ -66,7 +65,7 @@ public abstract class Entity {
                     position=pos;
                 }
                 else{
-                    cell.getEntity().updatePV(-1);
+                    cell.getEntity().updatePV(-getForce());
                 }
             }
             else{

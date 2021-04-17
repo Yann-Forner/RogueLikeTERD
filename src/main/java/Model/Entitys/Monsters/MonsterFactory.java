@@ -25,13 +25,13 @@ public class MonsterFactory {
                 return new Bee(etage, Procedure.getAccesibleRandomPosition(true,etage),"BEE",20,5,15,20,900, Tools.PATH_CROSS,getBaseLvl());
             }
             case ALIEN -> {
-                return new Alien(etage, Procedure.getAccesibleRandomPosition(true,etage),"ALIEN",15,10,20,60,300, Tools.PATH_CROSS,getBaseLvl());
+                return new Alien(etage, Procedure.getAccesibleRandomPosition(true,etage),"ALIEN",15,2,20,60,300, Tools.PATH_CROSS,getBaseLvl());
             }
             case SNAIL -> {
-                return new Snail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,15,60,60,600, Tools.PATH_CROSS,getBaseLvl());
+                return new Snail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,5,60,60,600, Tools.PATH_CROSS,getBaseLvl());
             }
             case BIRD -> {
-                return new Bird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,15,60,60,600, Tools.PATH_DIAG,getBaseLvl());
+                return new Bird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,5,60,60,600, Tools.PATH_DIAG,getBaseLvl());
             }
             case VOLCANO -> {
                 return new Volcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",100000,10,2,0,1000, Tools.PATH_CROSS,getBaseLvl());
