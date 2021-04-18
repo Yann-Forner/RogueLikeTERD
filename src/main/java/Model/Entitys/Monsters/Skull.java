@@ -33,7 +33,7 @@ public class Skull extends AbstractMonster {
             move(plus_loin);
         }
         else if(distance>=getVision_radius()/4 && distance<getVision_radius()/3){
-            Affichage.Projectile(getEtage(),getPosition(),player.getPosition(),new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED, "+"));
+            Affichage.Projectile(getEtage(),getPosition(),player.getPosition(),new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED,"\uD83D\uDD25"));
             player.updatePV(- getForce());
         }
         else if(distance>=getVision_radius()/3 && distance < (Alert==0 ? getVision_radius() : Agro)){
