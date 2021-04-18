@@ -9,6 +9,8 @@ import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
+import java.io.IOException;
+
 public abstract class Entity {
     private Position position;
     private Etage etage;
@@ -44,7 +46,7 @@ public abstract class Entity {
             } else {
                 Affichage.getMap(Start.getMap());
                 System.out.println("\nFin de la partie.");
-                System.exit(0);
+                Start.end();
             }
         }
         else {

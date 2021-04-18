@@ -5,6 +5,7 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,6 +20,7 @@ public class Affichage {
     private Menu menu;
 
     public static void getMap(Map map){
+        Start.setConsoleMode(false);
         System.out.print(Affichage.CLEAR);
         System.out.println(map.getCurrent());
         int index = map.getIndexCurrent()+1;
@@ -26,6 +28,7 @@ public class Affichage {
         Affichage.getPv();
         Affichage.getTouches();
         Affichage.getMessages();
+        Start.setConsoleMode(true);
     }
 
     public static String etage(Etage etage){

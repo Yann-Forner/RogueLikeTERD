@@ -5,8 +5,7 @@ import Model.Entitys.BasicPlayer;
 import Model.Map.Etage;
 import Model.Map.Map;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.Console;
 import java.util.ArrayDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -16,13 +15,11 @@ public class TourManager{
     private static boolean running = true;
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    private final BufferedReader reader;
     private static BasicPlayer player;
     private final Map map;
     private static Etage etage;
 
-    public TourManager(BufferedReader reader, BasicPlayer player, Map map, Etage etage) {
-        this.reader = reader;
+    public TourManager(BasicPlayer player, Map map, Etage etage) {
         this.map = map;
         TourManager.player = player;
         TourManager.etage = etage;
@@ -31,11 +28,11 @@ public class TourManager{
     }
 
     public void playTour() {
-        try {
-            processInput(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
+        Console console = System.console();
+        if(console!=null){
+            processInput(console.readPassword());
         }
+
         processEtage();
         etage = map.getCurrent();
         if(!running){
@@ -46,18 +43,19 @@ public class TourManager{
         Affichage.getMap(map);
     }
 
-    private void processInput(String input){
-        switch (input) {
-            case "z" , "Z" , "\u001B[A" -> player.moveUp();
-            case "q" , "Q" , "\u001B[D" -> player.moveLeft();
-            case "s" , "S" , "\u001B[B" -> player.moveDown();
-            case "d" , "D" , "\u001B[C" -> player.moveRight();
-            case "t" , "T" -> TourParTour();
-            case "i" , "I" -> System.out.println("I"); //Inventaire
-            case "a" , "A" -> System.out.println("A"); //Attaque distance
-            case "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9"  -> System.out.println("Nombre"); //Objets
-            case "e" , "E" -> System.exit(0);
-            default -> System.out.println("Wrong key:"+input);
+    private void processInput(char[] input){
+        if(input.length>0){
+            switch (input[0]) {
+                case 'z' , 'Z' -> player.moveUp();
+                case 'q' , 'Q' -> player.moveLeft();
+                case 's' , 'S' -> player.moveDown();
+                case 'd' , 'D' -> player.moveRight();
+                case 't' , 'T' -> TourParTour();
+                case 'i' , 'I' -> System.out.println("I"); //Inventaire
+                case 'a' , 'A' -> System.out.println("A"); //Attaque distance
+                case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
+                case 'e' , 'E' , 3 -> Start.end();
+            }
         }
     }
 
@@ -78,13 +76,16 @@ public class TourManager{
     }
 
     public void schedule() {
-        executor.scheduleAtFixedRate(() -> Affichage.getMap(map), 0, 100, TimeUnit.MILLISECONDS);
+        //executor.scheduleAtFixedRate(() -> Affichage.getMap(map), 0, 200, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 
     public static void addMonsterSchedule(AbstractMonster m){
         executor.scheduleAtFixedRate(() -> {
-            if (running && m.getPv()>0 && m.getEtage().equals(player.getEtage())) m.updateMonster();
+            if (running && m.getPv()>0 && m.getEtage().equals(player.getEtage())){
+                m.updateMonster();
+                Affichage.getMap(Start.getMap());
+            }
         }, 0, m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
     }
 
