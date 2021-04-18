@@ -4,7 +4,7 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
-public class Bee extends AbstractMonster{
+public class Bee extends AbstractMonster {
     private final int BasePv;
 
     public Bee(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {

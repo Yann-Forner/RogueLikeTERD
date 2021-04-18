@@ -1,6 +1,6 @@
 package Model.Entitys.Inventaires;
 
-public class Weapon implements Objets{
+public class Weapon {
     private final int damages;
     private final String nom;
     private int range;

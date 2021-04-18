@@ -1,5 +1,6 @@
 package Model.Entitys.Items;
 
+import Model.Entitys.AbstractItem;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 

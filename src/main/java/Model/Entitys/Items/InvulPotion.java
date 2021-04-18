@@ -1,11 +1,10 @@
 package Model.Entitys.Items;
 
-import Model.Entitys.BasicPlayer;
+import Model.Entitys.AbstractItem;
+import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-
-import javax.swing.*;
 
 public class InvulPotion extends AbstractItem {
 

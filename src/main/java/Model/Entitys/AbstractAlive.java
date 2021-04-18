@@ -1,7 +1,7 @@
-package Model.Entitys.Monsters;
+package Model.Entitys;
 
-import Model.Entitys.AbstractEntity;
 import Model.Entitys.Inventaires.Inventory;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Utils.Affichage;
 import Model.Utils.Start;
 import Model.Map.Cell;
@@ -9,19 +9,19 @@ import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
-public abstract class Entity extends AbstractEntity {
+public abstract class AbstractAlive extends Entity {
     private final double vision_radius;
     private int pv;
     private int force;
     protected int lvl;
     private final Inventory inventory = new Inventory();
 
-    private Entity(Etage m, Position pos, double vr, String nom) {
+    private AbstractAlive(Etage m, Position pos, double vr, String nom) {
         super(m, pos, nom);
         vision_radius = vr;
     }
 
-    public Entity(Etage m, Position pos, double vr, String nom, int pv, int force, int lvl){
+    public AbstractAlive(Etage m, Position pos, double vr, String nom, int pv, int force, int lvl){
         this(m,pos,vr,nom);
         this.pv=pv*lvl;
         this.force=force*lvl;
@@ -30,7 +30,7 @@ public abstract class Entity extends AbstractEntity {
 
     public boolean updatePV(int pv){
         this.pv = getPv() + pv;
-        String nom_lvl = getNom() + (this instanceof AbstractMonster? Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET : "");
+        String nom_lvl = getNom() + (this instanceof AbstractMonster ? Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET : "");
         if(getPv()<=0){
             TourManager.addMessage(Affichage.BRIGTH_RED + nom_lvl + Affichage.BRIGTH_RED + " est mort.");
             if (this instanceof AbstractMonster) {
@@ -60,9 +60,13 @@ public abstract class Entity extends AbstractEntity {
                     setPosition(pos);
                 }
                 else{
-                    Object o = cell.getEntity();
-                    if(o instanceof Entity)
-                        ((Entity) o).updatePV(-getForce());
+                    Entity e = cell.getEntity();
+                    if(e instanceof AbstractAlive){
+                        ((AbstractAlive)e).updatePV(-getForce());
+                    }
+                    else if(e instanceof AbstractItem) {
+                        ((AbstractItem)e).pickupItem();
+                    }
                 }
             }
             else{

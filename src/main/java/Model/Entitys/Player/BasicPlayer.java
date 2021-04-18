@@ -1,12 +1,12 @@
-package Model.Entitys;
+package Model.Entitys.Player;
 
-import Model.Entitys.Monsters.Entity;
+import Model.Entitys.AbstractAlive;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
-public class BasicPlayer extends Entity {
+public class BasicPlayer extends AbstractAlive {
     private int MAX_EXP;
     private int CURRENT_EXP;
     private int MAX_PV;

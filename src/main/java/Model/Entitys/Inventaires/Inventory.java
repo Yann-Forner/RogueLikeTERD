@@ -1,5 +1,7 @@
 package Model.Entitys.Inventaires;
 
+import Model.Entitys.AbstractItem;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +10,7 @@ public class Inventory {
     private ArrayList<Weapon> armes;
     private ArrayList<Armures> armures;
     private ArrayList<Consomables> consomables;
-    private ArrayList<Utilitaires> utilitaires;
+    private ArrayList<AbstractItem> items;
 
     private Weapon currentWeapon=null;
     private Armures currentArmure=null;
@@ -17,7 +19,11 @@ public class Inventory {
         armes = new ArrayList<>();
         armures = new ArrayList<>();
         consomables = new ArrayList<>();
-        utilitaires = new ArrayList<>();
+        items = new ArrayList<>();
+    }
+
+    public void addItem(AbstractItem i){
+        items.add(i);
     }
 
     public Weapon getCurrentWeapon() {
@@ -54,10 +60,6 @@ public class Inventory {
         return consomables;
     }
 
-    public ArrayList<Utilitaires> getObjets_utilisables() {
-        return utilitaires;
-    }
-
     public void setCurrentWeapon(Weapon currentWeapon) {
         if(this.currentWeapon!=null){
             addArme(this.currentWeapon);
@@ -89,8 +91,5 @@ public class Inventory {
         this.getObjets_temporaires().add(c);
         return this;
     }
-    public Inventory addUtilitaires(Utilitaires u){
-        this.getObjets_utilisables().add(u);
-        return this;
-    }
+
 }

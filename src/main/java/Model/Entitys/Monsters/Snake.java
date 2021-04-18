@@ -6,8 +6,8 @@ import Model.Utils.*;
 import java.util.ArrayList;
 
 
-public class Snake extends AbstractMonster{
-    private class Tail extends AbstractMonster{
+public class Snake extends AbstractMonster {
+    private class Tail extends AbstractMonster {
         protected Tail(Etage m, Position pos, String nom, int pv, int path_type, int lvl) {
             super(m, pos, nom, pv, 0,0,0,60000, path_type, lvl);
         }

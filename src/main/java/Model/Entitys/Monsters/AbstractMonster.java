@@ -1,12 +1,13 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.AbstractAlive;
 import Model.Utils.Start;
 import Model.Map.Etage;
 import Model.Utils.*;
 
 import java.util.ArrayList;
 
-public abstract class AbstractMonster extends Entity {
+public abstract class AbstractMonster extends AbstractAlive {
     protected int Alert=0;
     protected final int Agro;
     private final int pathtype;

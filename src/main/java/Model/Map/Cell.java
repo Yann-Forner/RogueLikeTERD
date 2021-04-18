@@ -1,6 +1,5 @@
 package Model.Map;
 
-import Model.Entitys.AbstractEntity;
 import Model.Utils.Affichage;
 
 public class Cell{
@@ -63,7 +62,7 @@ public class Cell{
 
     private Style style;
     private boolean isAccesible;
-    private AbstractEntity Entity;
+    private Model.Entitys.Entity Entity;
 
     public Cell(boolean isAccesible, Style style) {
         this.isAccesible = isAccesible;
@@ -100,11 +99,11 @@ public class Cell{
         this.style = style;
     }
 
-    public AbstractEntity getEntity() {
+    public Model.Entitys.Entity getEntity() {
         return Entity;
     }
 
-    public void setEntity(AbstractEntity entity) {
+    public void setEntity(Model.Entitys.Entity entity) {
         Entity = entity;
     }
 

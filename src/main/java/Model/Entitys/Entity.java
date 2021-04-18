@@ -3,13 +3,13 @@ package Model.Entitys;
 import Model.Map.Etage;
 import Model.Utils.Position;
 
-public abstract class AbstractEntity {
+public abstract class Entity {
 
     private Position position;
     private Etage etage;
     private String nom;
 
-    public AbstractEntity( Etage etage, Position position, String nom) {
+    public Entity(Etage etage, Position position, String nom) {
         this.position = position;
         this.etage = etage;
         this.nom = nom;

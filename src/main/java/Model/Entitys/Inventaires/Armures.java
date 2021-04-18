@@ -1,6 +1,6 @@
 package Model.Entitys.Inventaires;
 
-public class Armures implements Objets{
+public class Armures {
     private int protection;
     private String nom;
 

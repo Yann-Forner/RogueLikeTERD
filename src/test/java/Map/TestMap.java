@@ -1,6 +1,5 @@
 package Map;
 
-import Model.Entitys.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
@@ -11,8 +10,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 
 public class TestMap extends TestCase {
 

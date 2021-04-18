@@ -1,7 +1,7 @@
 package Model.Utils;
 
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.BasicPlayer;
+import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Map.Map;
 

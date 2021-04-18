@@ -91,7 +91,7 @@ public class Procedure {
 
     /**
      * Renvoit une Position aleatoire dans l'Etage/Room accesible, si isEntityGeneration est vrai
-     * alors la position est aussi sans Entity et non Reservé.
+     * alors la position est aussi sans AbstractAlive et non Reservé.
      * @param isEntityGeneration boolean
      * @param e Etage
      * @param r Room ...

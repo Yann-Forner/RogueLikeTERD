@@ -1,6 +1,6 @@
 package Map;
 
-import Model.Entitys.BasicPlayer;
+import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
