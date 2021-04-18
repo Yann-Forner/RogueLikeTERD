@@ -5,7 +5,8 @@
 <b>FORNER Yann</b>  (Yann-Forner)  <br>
 <b>MASSE Gillian</b>  (GillianMASSE)
 
-<b>Attention : le jdk est en version 15 !</b>
+<b>Attention : le jdk est en version 15 !</b></br>
+<b>Attention : le jeu est pensé pour etre joué sur linux car la console windows n'affiche pas assez vite les characteres !</b>
 
 <h1>Presentation du jeu</h1>
 
