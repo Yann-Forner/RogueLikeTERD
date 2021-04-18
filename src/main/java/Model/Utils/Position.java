@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Position {
-    private final int x ;
+    private final int x;
     private final int y;
 
     public Position(int x, int y) {
