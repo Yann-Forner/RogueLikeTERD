@@ -18,6 +18,7 @@ public class TrapEtageStrategy extends EtageStrategy{
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY));
         Procedure.setRandomUP(etage);
         setMonsters(etage);
+        setItems(etage);
     }
 
     @Override

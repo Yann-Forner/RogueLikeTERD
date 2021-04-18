@@ -1,6 +1,7 @@
 package Model.Map.Room_Strategy;
 
 
+import Model.Entitys.Items.ItemFactory;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Entitys.Monsters.Zombie;
 import Model.Map.Etage;
@@ -22,8 +23,15 @@ public class NormalRoomStrategy extends RoomStrategy{
 
     @Override
     public void setMonsters(Room r) {
-        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
+        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
             r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.ZOMBIE));
+        }
+    }
+
+    @Override
+    public void setItems(Room r) {
+        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
+            r.addItem(ItemFactory.getNewItem(r, ItemFactory.ItemType.HEAL_POTION));
         }
     }
 

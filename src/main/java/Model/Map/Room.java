@@ -1,5 +1,6 @@
 package Model.Map;
 
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Utils.Position;
@@ -23,6 +24,15 @@ public class Room extends Etage implements Comparable<Room> {
             etage.addMonster(a);
         }
         Monsters.clear();
+    }
+
+    public void setItems(Etage etage) {
+        strategy.setItems(this);
+        for(AbstractItem a : Items) {
+            a.setEtage(etage);
+            a.setPosition(a.getPosition().somme(getAbsolutePos()));
+            etage.addItem(a);
+        }
     }
 
     public boolean noCollision(Etage etage){

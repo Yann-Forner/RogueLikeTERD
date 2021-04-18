@@ -87,4 +87,10 @@ public abstract class EtageStrategy {
         }
     }
 
+    public void setItems(Etage etage) {
+        for (Room r : etage.getRooms()) {
+            r.setItems(etage);
+        }
+    }
+
 }

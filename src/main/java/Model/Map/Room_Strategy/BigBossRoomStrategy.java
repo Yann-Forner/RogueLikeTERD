@@ -18,6 +18,11 @@ public class BigBossRoomStrategy extends CircleRoomStrategy {
     }
 
     @Override
+    public void setItems(Room r) {
+
+    }
+
+    @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,0);
     }

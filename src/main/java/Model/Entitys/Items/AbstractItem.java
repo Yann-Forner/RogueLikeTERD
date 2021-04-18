@@ -1,20 +1,17 @@
 package Model.Entitys.Items;
 
+import Model.Entitys.AbstractEntity;
 import Model.Entitys.BasicPlayer;
-import Model.Entitys.Entity;
 import Model.Map.Etage;
 import Model.Utils.Position;
 
-public abstract class AbstractItem {
+public abstract class AbstractItem extends AbstractEntity  {
 
-    private Position position;
-    private Etage etage;
     private boolean isOnInventory;
 
-    public AbstractItem(Etage e, Position pos, String nom, boolean isOnInventory) {
-        this.isOnInventory = false;
-        this.etage = e;
-        this.position = pos;
+    public AbstractItem(Etage etage, Position position, String nom, boolean isOnInventory) {
+        super(etage, position, nom);
+        this.isOnInventory = isOnInventory;
     }
 
     public abstract void useItem(BasicPlayer player);

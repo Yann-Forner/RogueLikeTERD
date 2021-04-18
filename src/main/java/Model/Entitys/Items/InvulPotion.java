@@ -2,6 +2,7 @@ package Model.Entitys.Items;
 
 import Model.Entitys.BasicPlayer;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 import javax.swing.*;
@@ -19,6 +20,11 @@ public class InvulPotion extends AbstractItem {
 
     @Override
     public String toString() {
-        return null;
+        if(System.getProperty("os.name").equals("Linux")){
+            return 	"\uD83D\uDC89";
+        }
+        else{
+            return Affichage.GREEN+Affichage.BOLD+"H";
+        }
     }
 }

@@ -16,6 +16,7 @@ public class NormalEtageStrategy extends EtageStrategy{
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL));
         setSpecialCell(etage);
         setMonsters(etage);
+        setItems(etage);
     }
 
     @Override

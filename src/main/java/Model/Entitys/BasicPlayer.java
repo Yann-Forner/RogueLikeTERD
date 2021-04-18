@@ -1,5 +1,6 @@
 package Model.Entitys;
 
+import Model.Entitys.Monsters.Entity;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;

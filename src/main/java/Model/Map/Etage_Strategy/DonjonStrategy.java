@@ -47,6 +47,7 @@ public class DonjonStrategy extends EtageStrategy {
         EtageFusion(etage,fusion_style);
         setSpecialCell(etage);
         setMonsters(etage);
+        setItems(etage);
     }
 
     @Override

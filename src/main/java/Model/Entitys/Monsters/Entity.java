@@ -1,7 +1,7 @@
-package Model.Entitys;
+package Model.Entitys.Monsters;
 
+import Model.Entitys.AbstractEntity;
 import Model.Entitys.Inventaires.Inventory;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Utils.Affichage;
 import Model.Utils.Start;
 import Model.Map.Cell;
@@ -9,23 +9,16 @@ import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
-import java.io.IOException;
-
-public abstract class Entity {
-    private Position position;
-    private Etage etage;
+public abstract class Entity extends AbstractEntity {
     private final double vision_radius;
     private int pv;
     private int force;
     protected int lvl;
-    private final String nom;
     private final Inventory inventory = new Inventory();
 
     private Entity(Etage m, Position pos, double vr, String nom) {
-        position = pos;
-        etage = m;
+        super(m, pos, nom);
         vision_radius = vr;
-        this.nom=nom;
     }
 
     public Entity(Etage m, Position pos, double vr, String nom, int pv, int force, int lvl){
@@ -37,11 +30,11 @@ public abstract class Entity {
 
     public boolean updatePV(int pv){
         this.pv = getPv() + pv;
-        String nom_lvl = nom + (this instanceof AbstractMonster? Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET : "");
+        String nom_lvl = getNom() + (this instanceof AbstractMonster? Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET : "");
         if(getPv()<=0){
             TourManager.addMessage(Affichage.BRIGTH_RED + nom_lvl + Affichage.BRIGTH_RED + " est mort.");
             if (this instanceof AbstractMonster) {
-                etage.removeMonster((AbstractMonster) this);
+                getEtage().removeMonster((AbstractMonster) this);
                 Start.getPlayer().addExp(getExp());
             } else {
                 Affichage.getMap(Start.getMap());
@@ -59,15 +52,17 @@ public abstract class Entity {
 
     public void move(Position pos) {
         if(pos!=null){
-            Cell cell = etage.get(pos);
+            Cell cell = getEtage().get(pos);
             if(cell.isAccesible()){
                 if(cell.getEntity()==null){
                     cell.setEntity(this);
-                    etage.get(position).setEntity(null);
-                    position=pos;
+                    getEtage().get(getPosition()).setEntity(null);
+                    setPosition(pos);
                 }
                 else{
-                    cell.getEntity().updatePV(-getForce());
+                    Object o = cell.getEntity();
+                    if(o instanceof Entity)
+                        ((Entity) o).updatePV(-getForce());
                 }
             }
             else{
@@ -88,28 +83,8 @@ public abstract class Entity {
         this.force = force;
     }
 
-    public Position getPosition() {
-        return position.copyOf();
-    }
-
-    public void setPosition(Position pos){
-        position=pos;
-    }
-
-    public Etage getEtage(){
-        return etage;
-    }
-
-    public void setEtage(Etage etage){
-        this.etage=etage;
-    }
-
     public double getVision_radius() {
         return vision_radius;
-    }
-
-    public String getNom(){
-        return nom;
     }
 
     public Inventory getInventory() {
@@ -124,5 +99,4 @@ public abstract class Entity {
         return lvl;
     }
 
-    public abstract String toString();
 }

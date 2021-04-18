@@ -2,6 +2,7 @@ package Model.Entitys.Items;
 
 import Model.Entitys.BasicPlayer;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 public class HealPotion extends AbstractItem {
@@ -20,6 +21,11 @@ public class HealPotion extends AbstractItem {
 
     @Override
     public String toString() {
-        return "H";
+        if(System.getProperty("os.name").equals("Linux")){
+            return 	"\uD83C\uDF7C";
+        }
+        else{
+            return Affichage.GREEN+Affichage.BOLD+"H";
+        }
     }
 }

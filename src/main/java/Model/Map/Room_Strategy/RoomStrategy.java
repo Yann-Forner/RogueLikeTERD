@@ -37,6 +37,7 @@ public abstract class RoomStrategy {
     }
 
     public abstract void setMonsters(Room r);
+    public abstract void setItems(Room r);
     public abstract boolean noCollision(Etage etage,Room room);
     public abstract int getNbrMaxMobPerRoom();
 }

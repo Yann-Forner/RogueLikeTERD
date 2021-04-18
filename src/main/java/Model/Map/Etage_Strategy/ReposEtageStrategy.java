@@ -13,6 +13,7 @@ public class ReposEtageStrategy extends EtageStrategy{
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,";"));
         Procedure.setRandomUPnDOWN(etage);
         setMonsters(etage);
+        setItems(etage);
     }
 
     @Override

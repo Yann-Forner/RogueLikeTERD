@@ -2,6 +2,7 @@ package Model.Map;
 
 
 import Exceptions.CollisionRoom;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
@@ -17,6 +18,7 @@ public class Etage {
     //TODO supprimer arraylist rooms
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
+    protected ArrayList<AbstractItem> Items = new ArrayList<>();
     //TODO supprimer le champs trapcell
     private Position trapCellPosition;
 
@@ -69,6 +71,16 @@ public class Etage {
     public void removeMonster(AbstractMonster m) {
         get(m.getPosition()).setEntity(null);
         Monsters.remove(m);
+    }
+
+    public void addItem(AbstractItem i) {
+        get(i.getPosition()).setEntity(i);
+        Items.add(i);
+    }
+
+    public void removeItem(AbstractItem i) {
+        get(i.getPosition()).setEntity(null);
+        Monsters.remove(i);
     }
 
     public void setTrapCell() {

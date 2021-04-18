@@ -14,6 +14,7 @@ public class CircleEtageStrategy extends  EtageStrategy{
         EtageFusion(etage, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLUE));
         setSpecialCell(etage);
         setMonsters(etage);
+        setItems(etage);
     }
 
     @Override
