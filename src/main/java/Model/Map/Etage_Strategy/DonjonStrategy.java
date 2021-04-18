@@ -50,6 +50,12 @@ public class DonjonStrategy extends EtageStrategy {
     }
 
     @Override
+    public void setMonsters(Etage etage) {
+        for(int i = 0; i < 3; i++)
+            etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.VOLCANO));
+    }
+
+    @Override
     public int getNbrMaxRoom() {
         return 8;
     }

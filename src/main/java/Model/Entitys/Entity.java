@@ -84,6 +84,10 @@ public abstract class Entity {
         return force;
     }
 
+    public void setForce(int force) {
+        this.force = force;
+    }
+
     public Position getPosition() {
         return position.copyOf();
     }
