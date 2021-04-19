@@ -30,8 +30,12 @@ public class NormalRoomStrategy extends RoomStrategy{
 
     @Override
     public void setItems(Room r) {
-        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
-            r.addItem(ItemFactory.getNewItem(r, ItemFactory.ItemType.HEAL_POTION));
+        for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
+            switch(i) {
+                case 0 -> r.addItem(ItemFactory.getNewItem(r, ItemFactory.ItemType.HEAL_POTION));
+                case 1 -> r.addItem(ItemFactory.getNewItem(r, ItemFactory.ItemType.STRENGTH_POTION));
+                case 2 -> r.addItem(ItemFactory.getNewItem(r, ItemFactory.ItemType.INVUL_POTION));
+            }
         }
     }
 

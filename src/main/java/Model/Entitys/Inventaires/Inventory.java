@@ -22,6 +22,16 @@ public class Inventory {
         items = new ArrayList<>();
     }
 
+    public void switchWeapons() {
+        var first = armes.remove(0);
+        armes.add(first);
+    }
+
+    public void switchPotions() {
+        var first = items.remove(0);
+        items.add(first);
+    }
+
     public void addItem(AbstractItem i){
         items.add(i);
     }
@@ -92,4 +102,7 @@ public class Inventory {
         return this;
     }
 
+    public ArrayList<AbstractItem> getItems() {
+        return items;
+    }
 }

@@ -49,7 +49,8 @@ public class TourManager{
                 case 's' , 'S' -> player.moveDown();
                 case 'd' , 'D' -> player.moveRight();
                 case 't' , 'T' -> TourParTour();
-                case 'i' , 'I' -> System.out.println("I"); //Inventaire
+                case 'i' , 'I' -> player.getInventory().switchWeapons(); //Inventaire
+                case 'p' , 'P' -> player.getInventory().switchPotions(); // Potions
                 case 'a' , 'A' -> System.out.println("A"); //Attaque distance
                 case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
                 case 'e' , 'E' , 3 -> Start.end();

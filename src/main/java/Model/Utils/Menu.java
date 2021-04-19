@@ -1,5 +1,7 @@
 package Model.Utils;
 
+import Model.Entitys.AbstractItem;
+import Model.Entitys.Inventaires.Inventory;
 import Model.Map.Etage;
 import Model.Map.Map;
 
@@ -19,6 +21,9 @@ public class Menu {
     }
 
     public StringBuilder toStringByLine(int line ,StringBuilder sb ) {
+        Inventory inv = Start.getPlayer().getInventory();
+        var itemsList = inv.getItems();
+
         //Menu
         sb.append(Affichage.BOLD).append(Affichage.BLUE).append("     ");
         if(line==0){
@@ -37,7 +42,21 @@ public class Menu {
                 if (Start.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Start.getPlayer().getInventory().getCurrentArmure().getNom();
                 else equipement+="X";
                 sb.append(print_txt_in_menu_center(equipement));
-            }else {
+            }
+            else if(line == etage.getHeigth() - 4) {
+                sb.append(print_txt_in_menu_leftorRight(true, "Vous avez " +  itemsList.size() + " potions :"));
+            }
+            else if(line == etage.getHeigth() - 3) {
+                StringBuilder potionsString = new StringBuilder();
+                for(int i = 0; i < itemsList.size(); i++) {
+                    if(i == 0)
+                        potionsString.append("[" + itemsList.get(i).toString() + "] ");
+                    else
+                        potionsString.append(itemsList.get(i).toString() + " ");
+                }
+                sb.append(print_txt_in_menu_leftorRight(true, potionsString.toString()));
+            }
+            else {
                 sb.append("║                                                                                 ║");
             }
         }

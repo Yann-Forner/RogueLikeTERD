@@ -21,7 +21,7 @@ public abstract class AbstractItem extends Entity {
         //TODO remplacer le instanceof #JP
         if(!(e instanceof AbstractMonster)){
             BasicPlayer player = (BasicPlayer) e;
-            TourManager.addMessage(Affichage.BLUE + player.getNom() + " a rammassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
+            TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
             player.getInventory().addItem(this);
             player.getEtage().removeItem(this);
         }
