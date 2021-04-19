@@ -41,8 +41,25 @@ public abstract class AbstractMonster extends AbstractAlive {
         return pathToPlayer.size()==0 ? null : pathToPlayer.get(pathToPlayer.size() - 2);
     }
 
+    @Override
+    public void death() {
+        TourManager.addMessage(getNom() + Affichage.BRIGTH_RED + " est mort.");
+        getEtage().removeMonster(this);
+        Start.getPlayer().addExp(getExp());
+    }
+
     public int getUpdate_rate_ms() {
         return update_rate_ms;
+    }
+
+    @Override
+    public void updatePVMessage() {
+        TourManager.addMessage(getNom() + Affichage.YELLOW + " n'a plus que " + getPv() + "pv.");
+    }
+
+    @Override
+    public String getNom() {
+        return Affichage.GREEN + super.getNom() + Affichage.BRIGTH_GREEN + Affichage.BOLD + "[" + lvl + "]" + Affichage.RESET;
     }
 
     @Override

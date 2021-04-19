@@ -1,13 +1,9 @@
 package Model.Entitys;
 
 import Model.Entitys.Inventaires.Inventory;
-import Model.Entitys.Monsters.AbstractMonster;
-import Model.Utils.Affichage;
-import Model.Utils.Start;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
-import Model.Utils.TourManager;
 
 public abstract class AbstractAlive extends Entity {
     private final double vision_radius;
@@ -28,24 +24,16 @@ public abstract class AbstractAlive extends Entity {
         this.lvl=lvl;
     }
 
+    public abstract void death();
+    public abstract void updatePVMessage();
+
     public boolean updatePV(int pv){
         this.pv = getPv() + pv;
-        String nom_lvl = getNom() + (this instanceof AbstractMonster ? Affichage.BRIGTH_GREEN+Affichage.BOLD+"["+lvl+"]"+Affichage.RESET : "");
         if(getPv()<=0){
-            TourManager.addMessage(Affichage.BRIGTH_RED + nom_lvl + Affichage.BRIGTH_RED + " est mort.");
-            if (this instanceof AbstractMonster) {
-                getEtage().removeMonster((AbstractMonster) this);
-                Start.getPlayer().addExp(getExp());
-            } else {
-                Affichage.getMap(Start.getMap());
-                System.out.println("\nFin de la partie.");
-                Start.end();
-            }
+            death();
         }
         else {
-            if (this instanceof AbstractMonster) {
-                TourManager.addMessage(pv > 0 ? Affichage.YELLOW + nom_lvl + Affichage.YELLOW + " s'est soigné de " + pv + "pv." : Affichage.YELLOW + nom_lvl + Affichage.YELLOW + " n'a plus que " + getPv() + "pv.");
-            }
+            updatePVMessage();
         }
         return getPv()>0;
     }
@@ -60,19 +48,18 @@ public abstract class AbstractAlive extends Entity {
                     setPosition(pos);
                 }
                 else{
-                    Entity e = cell.getEntity();
-                    if(e instanceof AbstractAlive){
-                        ((AbstractAlive)e).updatePV(-getForce());
-                    }
-                    else if(e instanceof AbstractItem) {
-                        ((AbstractItem)e).pickupItem();
-                    }
+                    cell.getEntity().onContact(this);
                 }
             }
             else{
                 //TODO faire un bruit de colision
             }
         }
+    }
+
+    @Override
+    public void onContact(Entity e) {
+        updatePV(-((AbstractAlive)e).getForce());
     }
 
     public int getPv(){

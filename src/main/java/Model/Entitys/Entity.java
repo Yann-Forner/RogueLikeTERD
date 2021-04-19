@@ -15,6 +15,8 @@ public abstract class Entity {
         this.nom = nom;
     }
 
+    public abstract void onContact(Entity e);
+
     public Position getPosition() {
         return position;
     }

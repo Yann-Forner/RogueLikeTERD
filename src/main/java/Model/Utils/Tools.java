@@ -1,5 +1,6 @@
 package Model.Utils;
 
+import Model.Entitys.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -67,7 +68,7 @@ public class Tools {
                 voisins.add(new Noeud(getX(),getY() - 1));
                 voisins.add(new Noeud(getX(),getY() + 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
             }
 
             private ArrayList<Noeud> getDiagonalNeighboors(){
@@ -77,7 +78,7 @@ public class Tools {
                 voisins.add(new Noeud(getX() + 1,getY() + 1));
                 voisins.add(new Noeud(getX() + 1,getY() - 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
             }
 
             private ArrayList<Noeud> getNoClipStandardNeighboors(){
@@ -87,7 +88,7 @@ public class Tools {
                 voisins.add(new Noeud(getX(),getY() - 1));
                 voisins.add(new Noeud(getX(),getY() + 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()))).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()))).collect(Collectors.toCollection(ArrayList::new));
             }
 
             private ArrayList<Noeud> getStandardNoMobsNeighboors(){
@@ -97,7 +98,7 @@ public class Tools {
                 voisins.add(new Noeud(getX(),getY() - 1));
                 voisins.add(new Noeud(getX(),getY() + 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && !(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractMonster) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem || etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractMonster) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
             }
         }
 

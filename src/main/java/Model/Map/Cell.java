@@ -8,13 +8,11 @@ public class Cell{
         public enum CellType {
             BORDER(Affichage.BOLD+Affichage.RED,"*"),
             NORMAL(Affichage.GREEN,"."),
-            PATH(Affichage.BOLD+Affichage.BLUE,"*"),
             VOID(Affichage.BLACK,"."),
             CHEST(Affichage.YELLOW+Affichage.BOLD,"\uD83D\uDCB0","$"),
             UP(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4D","^"),
             DOWN(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4E","v"),
             TRAP_ROOM(Affichage.BLUE,"X"),
-            OBJET(Affichage.BLUE,"K"),
             SPECIAL(Affichage.YELLOW,"X");
 
             private final String base_color;

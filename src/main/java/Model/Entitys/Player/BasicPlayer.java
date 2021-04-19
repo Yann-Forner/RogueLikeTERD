@@ -1,9 +1,11 @@
 package Model.Entitys.Player;
 
 import Model.Entitys.AbstractAlive;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Start;
 import Model.Utils.TourManager;
 
 public class BasicPlayer extends AbstractAlive {
@@ -36,6 +38,17 @@ public class BasicPlayer extends AbstractAlive {
             TourManager.addMessage(Affichage.BRIGTH_CYAN+"Vous avez gagné un niveau");
         }
     }
+
+    @Override
+    public void death() {
+        TourManager.addMessage(Affichage.BRIGTH_RED + getNom() + Affichage.BRIGTH_RED + " est mort.");
+        Affichage.getMap(Start.getMap());
+        System.out.println("\nFin de la partie.");
+        Start.end();
+    }
+
+    @Override
+    public void updatePVMessage() {}
 
     public int getMAX_EXP() {
         return MAX_EXP;

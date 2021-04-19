@@ -1,6 +1,6 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.AbstractAlive;
+import Model.Entitys.Entity;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -24,15 +24,9 @@ public class Volcano extends AbstractMonster {
                     if(c.getType().equals(Cell.Style.CellType.NORMAL)){
                         c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BRIGTH_RED,"~"));
                     }
-                    Object o = c.getEntity();
-                    AbstractAlive e = null;
-                    if(o instanceof AbstractAlive) {
-                        e = (AbstractAlive) c.getEntity();
-                    }
-
-
-                    if(e != null && e!=this) {
-                        e.updatePV(- getForce());
+                    Entity e= c.getEntity();
+                    if(e!=null){
+                        e.onContact(this);
                     }
                 }
             }

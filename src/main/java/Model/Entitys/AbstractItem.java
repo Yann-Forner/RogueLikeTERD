@@ -1,9 +1,9 @@
 package Model.Entitys;
 
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Position;
-import Model.Utils.Start;
 
 public abstract class AbstractItem extends Entity {
 
@@ -14,10 +14,14 @@ public abstract class AbstractItem extends Entity {
         this.isOnInventory = isOnInventory;
     }
 
-    public void pickupItem(){
-        BasicPlayer player = Start.getPlayer();
-        player.getInventory().addItem(this);
-        player.getEtage().removeItem(this);
+    @Override
+    public void onContact(Entity e) {
+        //TODO remplacer le instanceof #JP
+        if(!(e instanceof AbstractMonster)){
+            BasicPlayer player = (BasicPlayer) e;
+            player.getInventory().addItem(this);
+            player.getEtage().removeItem(this);
+        }
     }
 
     public abstract void useItem(BasicPlayer player);
