@@ -45,6 +45,7 @@ public class Map {
         }
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         Start.getPlayer().updateEtage(etage,pos);
+
     }
 
     public void UP(){
