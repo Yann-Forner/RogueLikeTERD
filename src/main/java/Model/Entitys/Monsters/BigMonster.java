@@ -1,5 +1,6 @@
 package Model.Entitys.Monsters;
 
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -36,6 +37,12 @@ public class BigMonster  extends AbstractMonster {
             rightHand.move(new Position(pos.getX()+1,pos.getY()-1));
             super.move(pos);
         }
+    }
+
+    @Override
+    public void death() {
+        super.death();
+        Procedure.setRandomUPnDOWN(getEtage());
     }
 
     @Override

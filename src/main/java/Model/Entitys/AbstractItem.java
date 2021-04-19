@@ -3,7 +3,9 @@ package Model.Entitys;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.TourManager;
 
 public abstract class AbstractItem extends Entity {
 
@@ -19,6 +21,7 @@ public abstract class AbstractItem extends Entity {
         //TODO remplacer le instanceof #JP
         if(!(e instanceof AbstractMonster)){
             BasicPlayer player = (BasicPlayer) e;
+            TourManager.addMessage(Affichage.BLUE + player.getNom() + " a rammassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
             player.getInventory().addItem(this);
             player.getEtage().removeItem(this);
         }

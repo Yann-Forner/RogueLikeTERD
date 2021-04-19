@@ -25,7 +25,7 @@ public class Volcano extends AbstractMonster {
                         c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL,Affichage.BRIGTH_RED,"~"));
                     }
                     Entity e= c.getEntity();
-                    if(e!=null){
+                    if(e!=null && e!=this){
                         e.onContact(this);
                     }
                 }

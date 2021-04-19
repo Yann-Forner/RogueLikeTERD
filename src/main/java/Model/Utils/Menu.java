@@ -29,7 +29,7 @@ public class Menu {
         }
         else{
             if(line==1){
-                sb.append(print_txt_in_menu_leftorRight(true,"  Etage n°"+map.getIndexCurrent()+ " | Joueur : "+ Start.getPlayer().getNom()));
+                sb.append(print_txt_in_menu_leftorRight(true,"  Etage n°"+(map.getIndexCurrent()+1)+ " | Joueur : "+ Start.getPlayer().getNom()));
             } else if (line==7 && Start.getPlayer()!= null){
                 String equipement = "Equipement : ";
                 if (Start.getPlayer().getInventory().getCurrentWeapon()!=null)equipement+=Start.getPlayer().getInventory().getCurrentWeapon().getNom()+"/";

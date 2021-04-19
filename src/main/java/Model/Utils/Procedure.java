@@ -149,9 +149,7 @@ public class Procedure {
                 r.setAbsolutePos(pos);
                 etage.addRoom(r);
                 nbrRooms++;
-            }catch (CollisionRoom e){
-
-            }
+            }catch (CollisionRoom e){}
         }
         Collections.sort(etage.getRooms());
     }

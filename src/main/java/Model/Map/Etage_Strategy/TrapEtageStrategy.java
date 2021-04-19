@@ -17,7 +17,6 @@ public class TrapEtageStrategy extends EtageStrategy{
         Procedure.setRandomRooms(etage,this, RoomFactory.roomType.TRAP);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY));
         Procedure.setRandomUP(etage);
-        setMonsters(etage);
         setItems(etage);
     }
 

@@ -3,6 +3,7 @@ package Model.Map.Etage_Strategy;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Map.Room;
 import Model.Map.RoomFactory;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
@@ -35,7 +36,7 @@ public class DonjonStrategy extends EtageStrategy {
                 case CIRCLENORMAL -> CircleRooms++;
             }
         }
-        Cell.Style fusion_style = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"#");
+        Cell.Style fusion_style = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,".");
         if(NormalRooms==getNbrMaxRoom()){
             fusion_style = new Cell.Style(Cell.Style.CellType.NORMAL);
         }
@@ -52,8 +53,10 @@ public class DonjonStrategy extends EtageStrategy {
 
     @Override
     public void setMonsters(Etage etage) {
-        for(int i = 0; i < 3; i++)
+        super.setMonsters(etage);
+        for(int i = 0; i < 3; i++){
             etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.VOLCANO));
+        }
     }
 
     @Override

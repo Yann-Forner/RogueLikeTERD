@@ -1,6 +1,5 @@
 package Model.Map.Etage_Strategy;
 
-import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -16,18 +15,17 @@ public abstract class EtageStrategy {
     public abstract int getNbrMaxRoom();
 
     public static EtageStrategy getRandomStrategy(){
-        ArrayList<EtageStrategy> strategies = new ArrayList<>();
-        strategies.add(new NormalEtageStrategy());// 3/10
-        strategies.add(new NormalEtageStrategy());
-        strategies.add(new NormalEtageStrategy());
-        strategies.add(new DonjonStrategy());// 5/10
-        strategies.add(new DonjonStrategy());
-        strategies.add(new DonjonStrategy());
-        strategies.add(new DonjonStrategy());
-        strategies.add(new DonjonStrategy());
-        strategies.add(new CircleEtageStrategy());// 2/10
-        strategies.add(new CircleEtageStrategy());
-        return strategies.get(Procedure.getRandomInt(strategies.size(), 0));
+        switch (Procedure.getRandomInt(9,0)){
+            case 0, 1, 2 -> {
+                return new NormalEtageStrategy();
+            }
+            case 3, 4, 5, 6, 7 -> {
+                return new DonjonStrategy();
+            }
+            default -> {
+                return new CircleEtageStrategy();
+            }
+        }
     }
 
     protected void EtageFusion(Etage etage, Cell.Style style_fusion){

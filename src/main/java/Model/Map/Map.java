@@ -1,6 +1,6 @@
 package Model.Map;
 
-import Model.Entitys.Monsters.MonsterFactory;
+import Model.Map.Etage_Strategy.BossEtageStategy;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Start;
@@ -36,7 +36,8 @@ public class Map {
         Etage etage;
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
-            etage=new Etage(MapWidth,MapHeigth, EtageStrategy.getRandomStrategy());
+            EtageStrategy strategy = currentIndex%10==0 ? new BossEtageStategy() : EtageStrategy.getRandomStrategy();
+            etage=new Etage(MapWidth,MapHeigth, strategy);
             etages.add(etage);
         }
         else{

@@ -1,5 +1,6 @@
 package Model.Entitys.Monsters;
 
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.*;
 
@@ -78,6 +79,12 @@ public class Snake extends AbstractMonster {
             }
         }
         return Alive;
+    }
+
+    @Override
+    public void death() {
+        super.death();
+        Procedure.setRandomUPnDOWN(getEtage());
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Main {
             Start.startGame();
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(1);
         }
     }
 }

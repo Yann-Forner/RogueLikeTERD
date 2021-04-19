@@ -2,10 +2,7 @@ package Model.Entitys.Monsters;
 
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
-import Model.Utils.Position;
-import Model.Utils.Start;
-import Model.Utils.TourManager;
+import Model.Utils.*;
 
 import java.util.ArrayList;
 
@@ -57,6 +54,12 @@ public class Invoqueur extends AbstractMonster {
             }
         }
         Start.end();
+    }
+
+    @Override
+    public void death() {
+        super.death();
+        Procedure.setRandomUPnDOWN(getEtage());
     }
 
     @Override

@@ -12,7 +12,6 @@ public class ReposEtageStrategy extends EtageStrategy{
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.REPOS);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,";"));
         Procedure.setRandomUPnDOWN(etage);
-        setMonsters(etage);
         setItems(etage);
     }
 

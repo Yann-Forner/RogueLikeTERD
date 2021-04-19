@@ -19,7 +19,7 @@ public class Etage {
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
     protected ArrayList<AbstractItem> Items = new ArrayList<>();
-    //TODO supprimer le champs trapcell
+    //TODO supprimer le champs trapcell #YANN
     private Position trapCellPosition;
 
     protected Etage(int Width, int Heigth) {

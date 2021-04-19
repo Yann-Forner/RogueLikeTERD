@@ -5,7 +5,8 @@ import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Map.Map;
 
-import java.io.Console;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,11 +28,8 @@ public class TourManager{
         Affichage.getMap(map);
     }
 
-    public void playTour() {
-        Console console = System.console();
-        if(console!=null){
-            processInput(console.readPassword());
-        }
+    public void playTour(BufferedReader reader) throws IOException {
+        processInput(reader.readLine());
 
         processEtage();
         etage = map.getCurrent();
@@ -43,9 +41,9 @@ public class TourManager{
         Affichage.getMap(map);
     }
 
-    private void processInput(char[] input){
-        if(input.length>0){
-            switch (input[0]) {
+    private void processInput(String input){
+        if(input.length()>0){
+            switch (input.charAt(0)) {
                 case 'z' , 'Z' -> player.moveUp();
                 case 'q' , 'Q' -> player.moveLeft();
                 case 's' , 'S' -> player.moveDown();
@@ -76,7 +74,7 @@ public class TourManager{
     }
 
     public void schedule() {
-        //executor.scheduleAtFixedRate(() -> Affichage.getMap(map), 0, 200, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(() -> Affichage.getMap(map), 0, 300, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 
@@ -84,9 +82,8 @@ public class TourManager{
         executor.scheduleAtFixedRate(() -> {
             if (running && m.getPv()>0 && m.getEtage().equals(player.getEtage())){
                 m.updateMonster();
-                Affichage.getMap(Start.getMap());
             }
-        }, 0, m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
+        }, 10, m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
     }
 
     public static void TourParTour(){
