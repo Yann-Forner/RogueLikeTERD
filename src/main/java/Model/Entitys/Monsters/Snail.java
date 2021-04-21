@@ -3,7 +3,6 @@ package Model.Entitys.Monsters;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import org.json.JSONObject;
 
 public class Snail extends AbstractMonster {
     private boolean toleft = true;
@@ -37,14 +36,5 @@ public class Snail extends AbstractMonster {
         else{
             return Affichage.BLUE+Affichage.BOLD+"G";
         }
-    }
-
-    @Override
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        json.put("AbstractMonster",super.toJSON());
-        json.put("MonsterType","Snail");
-        json.put("toleft",true);
-        return json;
     }
 }

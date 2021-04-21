@@ -8,11 +8,11 @@ import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
-import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Etage {
+public class Etage implements Serializable {
     protected int Width;
     protected int Heigth;
     private  ArrayList<ArrayList<Cell>> Cells;
@@ -123,27 +123,4 @@ public class Etage {
         return Items;
     }
 
-    public JSONObject toJSON(){
-        JSONObject json = new JSONObject();
-        json.put("Width",Width);
-        json.put("Heigth",Heigth);
-        for (int i = 0; i < Heigth; i++) {
-            for (int j = 0; j < Width; j++) {
-                JSONObject cell = new JSONObject();
-                cell.put("position",new Position(j,i).toJSON());
-                cell.put("cell",get(j,i).toJSON());
-                json.append("Cells",cell);
-            }
-        }
-        for(Room r : Rooms){
-            json.append("Rooms",r.toJSON());
-        }
-        for(AbstractMonster m : Monsters){
-            json.append("Monsters",m.toJSON());
-        }
-        for(AbstractItem i : Items){
-            json.append("Items",i.toJSON());
-        }
-        return json;
-    }
 }

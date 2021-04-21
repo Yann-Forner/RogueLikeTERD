@@ -1,32 +1,34 @@
 package Model.Map;
 
+import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage_Strategy.BossEtageStategy;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Start;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
-import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Map {
+public class Map implements Serializable {
     private final ArrayList<Etage> etages = new ArrayList<>();
-    public static final int MapWidth = 40;
-    public static final int MapHeigth = 40;
+    public final int MapWidth = 40;
+    public final int MapHeigth = 40;
     private boolean inTemporaryEtage=false;
 
-    public Map(){
+    public Map(BasicPlayer player){
         Etage etage = new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy());
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        etage.get(pos).setEntity(Start.getPlayer());
-        Start.getPlayer().setEtage(etage);
-        Start.getPlayer().setPosition(pos);
+        etage.get(pos).setEntity(player);
+        player.setEtage(etage);
+        player.setPosition(pos);
     }
 
     public Etage getCurrent(){
-        return Start.getPlayer().getEtage();
+        return Objects.requireNonNull(Start.getPlayer()).getEtage();
     }
 
     public int getIndexCurrent(){
@@ -45,15 +47,14 @@ public class Map {
             etage = etages.get(currentIndex + 1);
         }
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        Start.getPlayer().updateEtage(etage,pos);
-
+        Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
     }
 
     public void UP(){
         if(inTemporaryEtage){
             Etage etage=etages.get(etages.size()-1);
             Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-            Start.getPlayer().updateEtage(etage,pos);
+            Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
             inTemporaryEtage=false;
         }
         else{
@@ -61,7 +62,7 @@ public class Map {
             if(currentIndex!=0){
                 Etage etage=etages.get(currentIndex-1);
                 Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-                Start.getPlayer().updateEtage(etage,pos);
+                Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
             }
         }
     }
@@ -70,23 +71,11 @@ public class Map {
         //TODO revenir a l'etage de depart en remontant et non le dernier index de l'arraylist
         Etage etage = new Etage(MapWidth,MapHeigth,new TrapEtageStrategy());
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
-        Start.getPlayer().updateEtage(etage,pos);
+        Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
         inTemporaryEtage=true;
     }
 
     public ArrayList<Etage> getEtages(){
         return etages;
     }
-
-    public JSONObject toJSON(){
-        JSONObject json = new JSONObject();
-        json.put("MapWidth",MapWidth);
-        json.put("MapHeight",MapHeigth);
-        json.put("inTemporaryEtage",inTemporaryEtage);
-        for(Etage e : etages){
-            json.append("Etages",e.toJSON());
-        }
-        return json;
-    }
-
 }

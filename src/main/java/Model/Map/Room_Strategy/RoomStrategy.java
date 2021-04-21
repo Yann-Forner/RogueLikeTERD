@@ -1,14 +1,14 @@
 package Model.Map.Room_Strategy;
 
-import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
-import org.json.JSONObject;
 
-public abstract class RoomStrategy {
+import java.io.Serializable;
+
+public abstract class RoomStrategy implements Serializable {
 
     public void composeRoom(Room r){
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_YELLOW, ".")));

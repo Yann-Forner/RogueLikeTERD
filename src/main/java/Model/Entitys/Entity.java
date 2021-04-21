@@ -2,10 +2,10 @@ package Model.Entitys;
 
 import Model.Map.Etage;
 import Model.Utils.Position;
-import Model.Utils.Start;
-import org.json.JSONObject;
 
-public abstract class Entity {
+import java.io.Serializable;
+
+public abstract class Entity implements Serializable {
     private Position position;
     private Etage etage;
     private String nom;
@@ -43,11 +43,4 @@ public abstract class Entity {
         this.nom = nom;
     }
 
-    public JSONObject toJSON(){
-        JSONObject json = new JSONObject();
-        json.put("position",position.toJSON());
-        json.put("etage", Start.getMap().getEtages().indexOf(etage));
-        json.put("nom",nom);
-        return json;
-    }
 }

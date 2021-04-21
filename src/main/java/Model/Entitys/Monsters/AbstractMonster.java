@@ -4,7 +4,6 @@ import Model.Entitys.AbstractAlive;
 import Model.Utils.Start;
 import Model.Map.Etage;
 import Model.Utils.*;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -68,14 +67,4 @@ public abstract class AbstractMonster extends AbstractAlive {
         return Affichage.RED+'N';
     }
 
-    @Override
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        json.put("AbstractAlive",super.toJSON());
-        json.put("Alert",Alert);
-        json.put("Agro",Agro);
-        json.put("pathtype",pathtype);
-        json.put("update_rate_ms",update_rate_ms);
-        return json;
-    }
 }

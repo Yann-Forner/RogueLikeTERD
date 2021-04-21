@@ -7,7 +7,6 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
-import org.json.JSONObject;
 
 public class Skull extends AbstractMonster {
 
@@ -56,13 +55,5 @@ public class Skull extends AbstractMonster {
         else{
             return Affichage.GREEN+Affichage.BOLD+"S";
         }
-    }
-
-    @Override
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        json.put("AbstractMonster",super.toJSON());
-        json.put("MonsterType","Skull");
-        return json;
     }
 }

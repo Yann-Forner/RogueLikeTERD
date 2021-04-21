@@ -3,7 +3,6 @@ package Model.Entitys.Monsters;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import org.json.JSONObject;
 
 public class Bee extends AbstractMonster {
     private final int BasePv;
@@ -33,14 +32,5 @@ public class Bee extends AbstractMonster {
         else{
             return Affichage.YELLOW+Affichage.BOLD+"B";
         }
-    }
-
-    @Override
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        json.put("AbstractMonster",super.toJSON());
-        json.put("MonsterType","Bee");
-        json.put("BasePv",BasePv);
-        return json;
     }
 }

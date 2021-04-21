@@ -2,11 +2,13 @@ package Model.Entitys.Inventaires;
 
 import Model.Entitys.AbstractItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
 
-public class Inventory {
+public class Inventory implements Serializable {
     private ArrayList<Weapon> armes;
     private ArrayList<Armures> armures;
     private ArrayList<Consomables> consomables;

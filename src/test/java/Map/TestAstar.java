@@ -65,7 +65,8 @@ public class TestAstar extends TestCase {
 
     @Test
     public void testMapTrapRoom() {
-        Map map = new Map();
+        //TODO le test va plus marcher je pense TODO 21/04 #JP
+        Map map = new Map(Start.getPlayer());
         Etage etage = map.getCurrent();
 
         ArrayList<ArrayList<Cell>> oldCells = etage.getCells();

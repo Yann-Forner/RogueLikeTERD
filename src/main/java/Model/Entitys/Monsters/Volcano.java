@@ -5,8 +5,6 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 
 public class Volcano extends AbstractMonster {
@@ -17,6 +15,7 @@ public class Volcano extends AbstractMonster {
 
     @Override
     public void updateMonster() {
+        //TODO ne pas recalculer a chaque fois mais stocker les cases adj
         int posX = getPosition().getX();
         int posY = getPosition().getY();
         for(int x = posX - (int)getVision_radius(); x < posX + getVision_radius()*2 -1; x++) {
@@ -43,13 +42,5 @@ public class Volcano extends AbstractMonster {
         else{
             return Affichage.RED+Affichage.BOLD+"V";
         }
-    }
-
-    @Override
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        json.put("AbstractMonster",super.toJSON());
-        json.put("MonsterType","Volcano");
-        return json;
     }
 }

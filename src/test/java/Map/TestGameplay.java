@@ -12,8 +12,8 @@ public class TestGameplay /*extends TestCase*/ {
     protected Etage etage;
 
     public TestGameplay() {
-        map = new Map();
         player = Start.getPlayer();
+        map = new Map(player);
         etage = map.getCurrent();
     }
 

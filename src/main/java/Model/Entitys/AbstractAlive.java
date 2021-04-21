@@ -4,7 +4,6 @@ import Model.Entitys.Inventaires.Inventory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
-import org.json.JSONObject;
 
 public abstract class AbstractAlive extends Entity {
     private final double vision_radius;
@@ -91,15 +90,4 @@ public abstract class AbstractAlive extends Entity {
         return lvl;
     }
 
-    @Override
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        json.put("Entity",super.toJSON());
-        json.put("vision_radius",vision_radius);
-        json.put("pv",pv);
-        json.put("force",force);
-        json.put("lvl",lvl);
-        //json.put("inventory",inventory.toJSON());
-        return json;
-    }
 }

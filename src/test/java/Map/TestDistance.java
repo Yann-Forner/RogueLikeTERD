@@ -14,9 +14,9 @@ public class TestDistance extends TestCase {
 
     @Test
     public void testDistanceBetweenTwoEntitys() {
-        Map map = new Map();
-        Etage etage = map.getCurrent();
         BasicPlayer player = Start.getPlayer();
+        Map map = new Map(player);
+        Etage etage = map.getCurrent();
 
         AbstractMonster z = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE);
         etage.addMonster(z);

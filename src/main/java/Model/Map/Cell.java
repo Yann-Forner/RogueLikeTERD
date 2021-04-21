@@ -1,11 +1,12 @@
 package Model.Map;
 
 import Model.Utils.Affichage;
-import org.json.JSONObject;
 
-public class Cell{
+import java.io.Serializable;
 
-    public static class Style{
+public class Cell implements Serializable {
+
+    public static class Style implements Serializable{
         public enum CellType {
             BORDER(Affichage.BOLD+Affichage.RED,"*"),
             NORMAL(Affichage.GREEN,"."),
@@ -56,15 +57,6 @@ public class Cell{
         public String toString() {
             String forme= System.getProperty("os.name").equals("Linux") ? custom_forme_linux==null ? type.forme : custom_forme_linux : custom_forme_windows==null ? type.forme : custom_forme_windows;
             return forme.length() > 1 ? forme : custom_color == null ? type.base_color + forme : custom_color + forme;
-        }
-
-        public JSONObject toJSON(){
-            JSONObject json = new JSONObject();
-            json.put("type", type);
-            json.put("custom_color", custom_color);
-            json.put("custom_forme_linux", custom_forme_linux);
-            json.put("custom_forme_windows", custom_forme_windows);
-            return json;
         }
     }
 
@@ -129,13 +121,5 @@ public class Cell{
         else {
             return Entity.toString();
         }
-    }
-
-    public JSONObject toJSON(){
-        JSONObject json = new JSONObject();
-        json.put("style",style.toJSON());
-        json.put("isAccesible",isAccesible);
-        json.put("Entity",Entity==null ? null : Entity.toJSON());
-        return json;
     }
 }

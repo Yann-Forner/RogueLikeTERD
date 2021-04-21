@@ -2,45 +2,42 @@ package Model.Utils;
 
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
-import Model.Map.Etage;
 import Model.Map.Map;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayDeque;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class TourManager{
+public class TourManager implements Serializable {
     private static boolean running = true;
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    private static BasicPlayer player;
+    private final BasicPlayer player;
     private final Map map;
-    private static Etage etage;
 
-    public TourManager(BasicPlayer player, Map map, Etage etage) {
-        this.map = map;
-        TourManager.player = player;
-        TourManager.etage = etage;
-        schedule();
-        Affichage.getMap(map);
+    public TourManager(BasicPlayer player) {
+        this.player = player;
+        map = new Map(player);
     }
 
-    public void playTour(BufferedReader reader) throws IOException {
-        processInput(reader.readLine());
-
+    public void playTour(BufferedReader reader){
+        Affichage.getMap(map);
+        try {
+            processInput(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         processEtage();
-        etage = map.getCurrent();
         if(!running){
             for(AbstractMonster m : player.getEtage().getMonsters()){
                 m.updateMonster();
             }
         }
-        Affichage.getMap(map);
     }
 
     private void processInput(String input) throws IOException {
@@ -62,7 +59,7 @@ public class TourManager{
     }
 
     private void processEtage() {
-        switch (etage.get(player.getPosition()).getType()) {
+        switch (map.getCurrent().get(player.getPosition()).getType()) {
             case UP :
                 map.UP();
                 break;
@@ -84,7 +81,7 @@ public class TourManager{
 
     public static void addMonsterSchedule(AbstractMonster m){
         executor.scheduleAtFixedRate(() -> {
-            if (running && m.getPv()>0 && m.getEtage().equals(player.getEtage())){
+            if (running && m.getPv()>0 && m.getEtage().equals(Objects.requireNonNull(Start.getPlayer()).getEtage())){
                 m.updateMonster();
             }
         }, 10, m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
@@ -110,10 +107,11 @@ public class TourManager{
         return executor;
     }
 
-    public static JSONObject toJSON(){
-        JSONObject json = new JSONObject();
-        json.put("running",running);
-        json.put("messages",new JSONArray(messages));
-        return json;
+    public BasicPlayer getPlayer() {
+        return player;
+    }
+
+    public Map getMap() {
+        return map;
     }
 }

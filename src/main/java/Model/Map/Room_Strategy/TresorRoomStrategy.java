@@ -6,7 +6,6 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Procedure;
-import org.json.JSONObject;
 
 public class TresorRoomStrategy extends RoomStrategy{
     @Override

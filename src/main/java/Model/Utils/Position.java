@@ -1,13 +1,13 @@
 package Model.Utils;
 
 import Model.Map.Etage;
-import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Position {
+public class Position implements Serializable {
     private final int x;
     private final int y;
 
@@ -85,13 +85,6 @@ public class Position {
     @Override
     public String toString() {
         return "Position{x:"+x+" ; y:"+y+"}";
-    }
-
-    public JSONObject toJSON(){
-        JSONObject json = new JSONObject();
-        json.put("x",x);
-        json.put("y",y);
-        return json;
     }
 
 }

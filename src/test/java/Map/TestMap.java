@@ -5,6 +5,7 @@ import Model.Map.Etage;
 import Model.Map.Map;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.Start;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
@@ -15,7 +16,8 @@ public class TestMap extends TestCase {
 
     @Test
     public void testOutOfBondsCell() {
-        Map map = new Map();
+        //TODO 21/04 #JP
+        Map map = new Map(Start.getPlayer());
         Etage etage = map.getCurrent();
 
         try {
@@ -28,14 +30,16 @@ public class TestMap extends TestCase {
 
     @Disabled
     public void testCellAccess() {
-        Map map = new Map();
+        //TODO 21/04 #JP
+        Map map = new Map(Start.getPlayer());
         Etage etage = map.getCurrent();
 
     }
 
     @Test
     public void testMapRandomAccessiblePosition() {
-        Map map = new Map();
+        //TODO 21/04 #JP
+        Map map = new Map(Start.getPlayer());
         Etage etage = map.getCurrent();
 
         Position pf = Procedure.getAccesibleRandomPosition(false, etage);
@@ -46,7 +50,8 @@ public class TestMap extends TestCase {
 
     @Test
     public void testMapTrapRoom() {
-        Map map = new Map();
+        //TODO 21/04 #JP
+        Map map = new Map(Start.getPlayer());
         Etage etage = map.getCurrent();
 
         ArrayList<ArrayList<Cell>> oldCells = etage.getCells();
