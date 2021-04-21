@@ -3,6 +3,7 @@ package Model.Entitys.Monsters;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import org.json.JSONObject;
 
 public class Rat extends AbstractMonster {
     public Rat(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
@@ -17,5 +18,13 @@ public class Rat extends AbstractMonster {
         else{
             return Affichage.RED+Affichage.BOLD+"M";
         }
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractMonster",super.toJSON());
+        json.put("MonsterType","Rat");
+        return json;
     }
 }

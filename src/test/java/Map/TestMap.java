@@ -19,7 +19,7 @@ public class TestMap extends TestCase {
         Etage etage = map.getCurrent();
 
         try {
-            Cell p = etage.Cells.get(45).get(45);
+            Cell p = etage.getCells().get(45).get(45);
             fail("(45;45) est valide !");
         }catch(IndexOutOfBoundsException e) {
             assertTrue(true);
@@ -49,9 +49,9 @@ public class TestMap extends TestCase {
         Map map = new Map();
         Etage etage = map.getCurrent();
 
-        ArrayList<ArrayList<Cell>> oldCells = etage.Cells;
+        ArrayList<ArrayList<Cell>> oldCells = etage.getCells();
         map.TRAP_ROOM();
-        ArrayList<ArrayList<Cell>> newCells = map.getCurrent().Cells;
+        ArrayList<ArrayList<Cell>> newCells = map.getCurrent().getCells();
 
         assertFalse(oldCells.equals(newCells));
     }

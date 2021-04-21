@@ -50,4 +50,9 @@ public class MarchandRoomStrategy extends RoomStrategy{
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "MarchandRoomStrategy";
+    }
+
 }

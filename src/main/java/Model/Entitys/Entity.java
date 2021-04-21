@@ -2,9 +2,10 @@ package Model.Entitys;
 
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Start;
+import org.json.JSONObject;
 
 public abstract class Entity {
-
     private Position position;
     private Etage etage;
     private String nom;
@@ -16,6 +17,7 @@ public abstract class Entity {
     }
 
     public abstract void onContact(Entity e);
+    public abstract String toString();
 
     public Position getPosition() {
         return position;
@@ -41,5 +43,11 @@ public abstract class Entity {
         this.nom = nom;
     }
 
-    public abstract String toString();
+    public JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("position",position.toJSON());
+        json.put("etage", Start.getMap().getEtages().indexOf(etage));
+        json.put("nom",nom);
+        return json;
+    }
 }

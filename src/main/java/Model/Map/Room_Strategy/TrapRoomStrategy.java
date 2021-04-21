@@ -42,4 +42,9 @@ public class TrapRoomStrategy extends RoomStrategy {
         return 1;
     }
 
+    @Override
+    public String toString() {
+        return "TrapRoomStrategy";
+    }
+
 }

@@ -5,6 +5,7 @@ import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import org.json.JSONObject;
 
 public class StrengthPotion extends AbstractItem {
 
@@ -28,5 +29,14 @@ public class StrengthPotion extends AbstractItem {
         else{
             return Affichage.GREEN+Affichage.BOLD+"H";
         }
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractItem",super.toJSON());
+        json.put("ItemType","StrengthPotion");
+        json.put("buffMultiplicator",buffMultiplicator);
+        return json;
     }
 }

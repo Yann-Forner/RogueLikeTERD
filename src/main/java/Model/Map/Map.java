@@ -6,11 +6,12 @@ import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Start;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class Map {
-    public ArrayList<Etage> etages = new ArrayList<>();
+    private final ArrayList<Etage> etages = new ArrayList<>();
     public static final int MapWidth = 40;
     public static final int MapHeigth = 40;
     private boolean inTemporaryEtage=false;
@@ -71,6 +72,21 @@ public class Map {
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         Start.getPlayer().updateEtage(etage,pos);
         inTemporaryEtage=true;
+    }
+
+    public ArrayList<Etage> getEtages(){
+        return etages;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("MapWidth",MapWidth);
+        json.put("MapHeight",MapHeigth);
+        json.put("inTemporaryEtage",inTemporaryEtage);
+        for(Etage e : etages){
+            json.append("Etages",e.toJSON());
+        }
+        return json;
     }
 
 }

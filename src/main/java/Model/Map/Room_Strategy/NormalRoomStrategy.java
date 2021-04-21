@@ -43,4 +43,9 @@ public class NormalRoomStrategy extends RoomStrategy{
     public int getNbrMaxMobPerRoom() {
         return 5;
     }
+
+    @Override
+    public String toString() {
+        return "NormalRoomStrategy";
+    }
 }

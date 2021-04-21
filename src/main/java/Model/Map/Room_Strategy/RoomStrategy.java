@@ -6,6 +6,7 @@ import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
+import org.json.JSONObject;
 
 public abstract class RoomStrategy {
 

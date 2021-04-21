@@ -32,4 +32,9 @@ public class BigBossRoomStrategy extends CircleRoomStrategy {
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,0);
     }
+
+    @Override
+    public String toString() {
+        return "BigBossRoomStrategy";
+    }
 }

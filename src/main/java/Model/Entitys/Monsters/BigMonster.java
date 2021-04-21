@@ -5,6 +5,7 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import org.json.JSONObject;
 
 public class BigMonster  extends AbstractMonster {
     private final HandOfMonster leftHand;
@@ -48,5 +49,15 @@ public class BigMonster  extends AbstractMonster {
     @Override
     public String toString() {
         return Affichage.BLUE_BACKGROUND+Affichage.BOLD+"o";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractMonster",super.toJSON());
+        json.put("MonsterType","BigMonster");
+        json.put("leftHand",leftHand.toJSON());
+        json.put("rightHand",rightHand.toJSON());
+        return json;
     }
 }

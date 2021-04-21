@@ -5,6 +5,8 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 public class Volcano extends AbstractMonster {
@@ -41,5 +43,13 @@ public class Volcano extends AbstractMonster {
         else{
             return Affichage.RED+Affichage.BOLD+"V";
         }
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractMonster",super.toJSON());
+        json.put("MonsterType","Volcano");
+        return json;
     }
 }

@@ -7,6 +7,7 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Start;
 import Model.Utils.TourManager;
+import org.json.JSONObject;
 
 public class BasicPlayer extends AbstractAlive {
     private int MAX_EXP;
@@ -96,6 +97,16 @@ public class BasicPlayer extends AbstractAlive {
         else{
             return Affichage.GREEN+Affichage.BOLD+"@";
         }
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractAlive",super.toJSON());
+        json.put("MAX_EXP",MAX_EXP);
+        json.put("CURRENT_EXP",CURRENT_EXP);
+        json.put("MAX_PV",MAX_PV);
+        return json;
     }
 
 }

@@ -8,19 +8,18 @@ import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import org.json.JSONObject;
 
 import java.util.*;
 
 public class Etage {
     protected int Width;
     protected int Heigth;
-    public ArrayList<ArrayList<Cell>> Cells;
+    private  ArrayList<ArrayList<Cell>> Cells;
     //TODO supprimer arraylist rooms
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
     protected ArrayList<AbstractItem> Items = new ArrayList<>();
-    //TODO supprimer le champs trapcell #YANN
-    private Position trapCellPosition;
 
     protected Etage(int Width, int Heigth) {
         this.Width = Width;
@@ -80,12 +79,11 @@ public class Etage {
 
     public void removeItem(AbstractItem i) {
         get(i.getPosition()).setEntity(null);
-        Monsters.remove(i);
+        Items.remove(i);
     }
 
     public void setTrapCell() {
         Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
-        this.trapCellPosition = accesibleRandomPosition;
         get(accesibleRandomPosition).updateCell(true, new Cell.Style(Cell.Style.CellType.TRAP_ROOM));
     }
 
@@ -99,10 +97,6 @@ public class Etage {
 
     public void set(int x, int y, Cell c) {
         Cells.get(y).set(x, c);
-    }
-
-    public Position getTrapCellPosition() {
-        return trapCellPosition;
     }
 
     public int getWidth() {
@@ -121,4 +115,35 @@ public class Etage {
         return Rooms;
     }
 
+    public ArrayList<ArrayList<Cell>> getCells(){
+        return Cells;
+    }
+
+    public ArrayList<AbstractItem> getItems() {
+        return Items;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("Width",Width);
+        json.put("Heigth",Heigth);
+        for (int i = 0; i < Heigth; i++) {
+            for (int j = 0; j < Width; j++) {
+                JSONObject cell = new JSONObject();
+                cell.put("position",new Position(j,i).toJSON());
+                cell.put("cell",get(j,i).toJSON());
+                json.append("Cells",cell);
+            }
+        }
+        for(Room r : Rooms){
+            json.append("Rooms",r.toJSON());
+        }
+        for(AbstractMonster m : Monsters){
+            json.append("Monsters",m.toJSON());
+        }
+        for(AbstractItem i : Items){
+            json.append("Items",i.toJSON());
+        }
+        return json;
+    }
 }

@@ -4,6 +4,7 @@ import Model.Entitys.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Utils.Position;
 import Model.Map.Room_Strategy.RoomStrategy;
+import org.json.JSONObject;
 
 public class Room extends Etage implements Comparable<Room> {
     private Position AbsolutePos=null;
@@ -54,5 +55,14 @@ public class Room extends Etage implements Comparable<Room> {
     public int compareTo(Room o) {
         //TODO on a encore beosin du comparable? #YANN
         return (int) (getAbsolutePos().Distance(new Position(0,0)) - o.getAbsolutePos().Distance(new Position(0,0)));
+    }
+
+    @Override
+    public JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("Room",super.toJSON());
+        json.put("AbsolutePos",AbsolutePos);
+        json.put("strategy",strategy);
+        return json;
     }
 }

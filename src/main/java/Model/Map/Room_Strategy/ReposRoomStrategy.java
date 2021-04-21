@@ -33,4 +33,9 @@ public class ReposRoomStrategy extends RoomStrategy {
     public int getNbrMaxMobPerRoom() {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "ReposRoomStrategy";
+    }
 }

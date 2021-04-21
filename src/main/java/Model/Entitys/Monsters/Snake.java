@@ -3,6 +3,8 @@ package Model.Entitys.Monsters;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,14 @@ public class Snake extends AbstractMonster {
             if(getEtage().get(pos).getEntity()==null){
                 super.move(pos);
             }
+        }
+
+        @Override
+        public JSONObject toJSON() {
+            JSONObject json = new JSONObject();
+            json.put("AbstractMonster",super.toJSON());
+            json.put("MonsterType","Tail");
+            return json;
         }
     }
 
@@ -90,5 +100,15 @@ public class Snake extends AbstractMonster {
     @Override
     public String toString() {
         return Affichage.BLUE+Affichage.BOLD+"Q";
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractMonster",super.toJSON());
+        json.put("MonsterType","Snake");
+        json.put("size_of_tail",size_of_tail);
+        json.put("snakeTail", new JSONArray(snakeTail));
+        return json;
     }
 }

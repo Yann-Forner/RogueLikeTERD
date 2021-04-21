@@ -3,6 +3,7 @@ package Model.Entitys.Monsters;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import org.json.JSONObject;
 
 public class Bird extends AbstractMonster {
 
@@ -39,5 +40,14 @@ public class Bird extends AbstractMonster {
         else{
             return Affichage.BLUE+Affichage.BOLD+"ù";
         }
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractMonster",super.toJSON());
+        json.put("MonsterType","Bird");
+        json.put("totop",totop);
+        return json;
     }
 }

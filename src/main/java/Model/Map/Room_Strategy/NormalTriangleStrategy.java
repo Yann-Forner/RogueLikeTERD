@@ -53,4 +53,9 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
     public int getNbrMaxMobPerRoom() {
         return 5;
     }
+
+    @Override
+    public String toString() {
+        return "NormalTriangleStrategy";
+    }
 }

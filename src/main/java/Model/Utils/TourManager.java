@@ -4,6 +4,8 @@ import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Map.Map;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,7 +43,7 @@ public class TourManager{
         Affichage.getMap(map);
     }
 
-    private void processInput(String input){
+    private void processInput(String input) throws IOException {
         if(input.length()>0){
             switch (input.charAt(0)) {
                 case 'z' , 'Z' -> player.moveUp();
@@ -52,6 +54,7 @@ public class TourManager{
                 case 'i' , 'I' -> player.getInventory().switchWeapons(); //Inventaire
                 case 'p' , 'P' -> player.getInventory().switchPotions(); // Potions
                 case 'a' , 'A' -> System.out.println("A"); //Attaque distance
+                case 'w' , 'W' -> Start.sauvegarde();
                 case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
                 case 'e' , 'E' , 3 -> Start.end();
             }
@@ -105,5 +108,12 @@ public class TourManager{
 
     public static ScheduledExecutorService getExecutor(){
         return executor;
+    }
+
+    public static JSONObject toJSON(){
+        JSONObject json = new JSONObject();
+        json.put("running",running);
+        json.put("messages",new JSONArray(messages));
+        return json;
     }
 }

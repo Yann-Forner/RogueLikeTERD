@@ -57,4 +57,9 @@ public class NormalCircleRoomStrategy extends CircleRoomStrategy {
     public int getNbrMaxMobPerRoom() {
         return 5;
     }
+
+    @Override
+    public String toString() {
+        return "NormalCircleRoomStrategy";
+    }
 }

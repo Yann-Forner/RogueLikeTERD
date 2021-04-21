@@ -3,6 +3,7 @@ package Model.Entitys.Monsters;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.*;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -70,5 +71,13 @@ public class Invoqueur extends AbstractMonster {
         else{
             return Affichage.RED+Affichage.BOLD+"I";
         }
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("AbstractMonster",super.toJSON());
+        json.put("MonsterType","Invoqueur");
+        return json;
     }
 }

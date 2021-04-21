@@ -6,6 +6,7 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
+import org.json.JSONObject;
 
 public abstract class AbstractItem extends Entity {
 
@@ -29,5 +30,11 @@ public abstract class AbstractItem extends Entity {
 
     public abstract void useItem(BasicPlayer player);
 
-    public abstract String toString();
+    @Override
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("Entity",super.toJSON());
+        json.put("isOnInventory",isOnInventory);
+        return json;
+    }
 }
