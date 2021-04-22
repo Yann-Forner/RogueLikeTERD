@@ -29,6 +29,7 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
                     r.set(posAngle1.getX() + j, posAngle1.getY() + i, new Cell(true, s));
                     r.set(posAngle1.getX() - j, posAngle1.getY() + i, new Cell(true, s));
                 } catch (IndexOutOfBoundsException e) {
+                    //TODO c'est degeulasse de stopper avec une exception #YANN
                     stop = true;
                     break;
                 }

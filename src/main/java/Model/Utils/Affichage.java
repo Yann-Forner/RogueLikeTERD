@@ -16,18 +16,17 @@ public class Affichage {
     }
     private static final Shadow ombre = Shadow.NONE;
 
+    //TODO a quoi sert le champs si il est pas inir #YANN
     private Menu menu;
 
-    public static void getMap(Map map){
-        //Start.setConsoleMode(false);
+    public static void getMap(){
+        Start.setConsoleMode(false);
         System.out.print(Affichage.CLEAR);
-        System.out.println(map.getCurrent());
-        int index = map.getIndexCurrent()+1;
-        //TODO ça va pas marcher du coup #YANN
+        System.out.println(Start.getMap());
         Affichage.getPv();
         Affichage.getTouches();
         Affichage.getMessages();
-        //Start.setConsoleMode(true);
+        Start.setConsoleMode(true);
     }
 
     public static String etage(Etage etage){

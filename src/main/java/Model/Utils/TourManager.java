@@ -14,9 +14,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TourManager implements Serializable {
-    private static boolean running = true;
+    private static boolean running = System.getProperty("os.name").equals("Linux");
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    private static int Tour = 0;
     private final BasicPlayer player;
     private final Map map;
 
@@ -26,16 +27,20 @@ public class TourManager implements Serializable {
     }
 
     public void playTour(BufferedReader reader){
-        Affichage.getMap(map);
+        Affichage.getMap();
         try {
             processInput(reader.readLine());
         } catch (IOException e) {
+            Start.setConsoleMode(false);
             e.printStackTrace();
         }
         processEtage();
         if(!running){
+            Tour++;
             for(AbstractMonster m : player.getEtage().getMonsters()){
-                m.updateMonster();
+                if(Tour % Math.ceil((float) m.getUpdate_rate_ms() /300)==0){
+                    m.updateMonster();
+                }
             }
         }
     }
@@ -75,7 +80,11 @@ public class TourManager implements Serializable {
     }
 
     public void schedule() {
-        executor.scheduleAtFixedRate(() -> Affichage.getMap(map), 0, 300, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(() -> {
+            if(running){
+                Affichage.getMap();
+            }
+        }, 0, 300, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 

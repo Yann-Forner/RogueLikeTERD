@@ -78,4 +78,9 @@ public class Map implements Serializable {
     public ArrayList<Etage> getEtages(){
         return etages;
     }
+
+    @Override
+    public String toString() {
+        return getCurrent().toString();
+    }
 }
