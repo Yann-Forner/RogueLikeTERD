@@ -11,6 +11,7 @@ public class BasicPlayer extends AbstractAlive {
     private int MAX_EXP;
     private int CURRENT_EXP;
     private int MAX_PV;
+    private long MovementCoolDown = System.currentTimeMillis();
 
     public BasicPlayer(int vision_radius, String nom,int pv,int force) {
         super(null,null, vision_radius, nom, pv, force,1);
@@ -58,19 +59,31 @@ public class BasicPlayer extends AbstractAlive {
     }
 
     public void moveLeft() {
-        move(getPosition().somme(-1,0));
+        if(System.currentTimeMillis()-MovementCoolDown>100){
+            move(getPosition().somme(-1,0));
+            MovementCoolDown=System.currentTimeMillis();
+        }
     }
 
     public void moveRight() {
-        move(getPosition().somme(1,0));
+        if(System.currentTimeMillis()-MovementCoolDown>100){
+            move(getPosition().somme(1,0));
+            MovementCoolDown=System.currentTimeMillis();
+        }
     }
 
     public void moveUp() {
-        move(getPosition().somme(0,-1));
+        if(System.currentTimeMillis()-MovementCoolDown>100){
+            move(getPosition().somme(0,-1));
+            MovementCoolDown=System.currentTimeMillis();
+        }
     }
 
     public void moveDown() {
-        move(getPosition().somme(0,1));
+        if(System.currentTimeMillis()-MovementCoolDown>100){
+            move(getPosition().somme(0,1));
+            MovementCoolDown=System.currentTimeMillis();
+        }
     }
 
     @Override

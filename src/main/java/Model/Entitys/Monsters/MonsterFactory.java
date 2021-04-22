@@ -34,7 +34,7 @@ public class MonsterFactory {
                 return new Bird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,5,60,60,600, Tools.PATH_DIAG,getBaseLvl());
             }
             case VOLCANO -> {
-                return new Volcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",100000,10,2,0,1000, Tools.PATH_CROSS,getBaseLvl());
+                return new Volcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",0,10,2,0,1000, Tools.PATH_CROSS,getBaseLvl());
             }
             case SKULL -> {
                 return new Skull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,15,20,750, Tools.PATH_CROSS,getBaseLvl());

@@ -15,6 +15,7 @@ public class Volcano extends AbstractMonster {
 
     @Override
     public void updateMonster() {
+        /*
         //TODO ne pas recalculer a chaque fois mais stocker les cases adj
         int posX = getPosition().getX();
         int posY = getPosition().getY();
@@ -31,7 +32,12 @@ public class Volcano extends AbstractMonster {
                     }
                 }
             }
-        }
+        }*/
+    }
+
+    @Override
+    public boolean updatePV(int pv) {
+        return true;
     }
 
     @Override
