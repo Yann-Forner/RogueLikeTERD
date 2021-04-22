@@ -8,12 +8,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayDeque;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Classe qui gère ce qui se passe a chaque tour.
+ * @author Quentin
+ */
 public class TourManager implements Serializable {
     private static boolean running = System.getProperty("os.name").equals("Linux");
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
@@ -22,19 +25,24 @@ public class TourManager implements Serializable {
     private final BasicPlayer player;
     private final Map map;
 
+    /**
+     * Prend un joueur en parametre et initialise la Map.
+     * @param player Joueur
+     * @author Quentin
+     */
     public TourManager(BasicPlayer player) {
         this.player = player;
         map = new Map(player);
     }
 
+    /**
+     * Methode appelé chaque tour et qui permet de réaliser l'action du joueur (et des mobs si TpT).
+     * @param reader Reader
+     * @author Quentin
+     */
     public void playTour(BufferedReader reader){
         Affichage.getMap();
-        try {
-            processInput(reader);
-        } catch (IOException e) {
-            Start.setConsoleMode(false);
-            e.printStackTrace();
-        }
+        processInput(reader);
         processEtage();
         if(!running){
             Tour++;
@@ -47,7 +55,14 @@ public class TourManager implements Serializable {
         }
     }
 
-    private void processInput(BufferedReader reader) throws IOException {
+    /**
+     * Lis la premier char de la console comme une commande.
+     * -Depuis le terminal pas besoin d'appuyer sur entré.
+     * -Depuis un IDE la console est null donc il faut passé par un Reader et appuyer sur entré.
+     * @param reader Que depuis un IDE
+     * @author Quentin
+     */
+    private void processInput(BufferedReader reader) {
         char cmd = 0;
         if(System.console()!=null){
             char[] input = System.console().readPassword();
@@ -56,7 +71,12 @@ public class TourManager implements Serializable {
             }
         }
         else{
-            String input = reader.readLine();
+            String input = "";
+            try {
+                input = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             if(input.length()>0){
                 cmd = input.charAt(0);
             }
@@ -77,6 +97,10 @@ public class TourManager implements Serializable {
         }
     }
 
+    /**
+     * Action selon la case ou le joueur se deplace.
+     * @author Quentin
+     */
     private void processEtage() {
         switch (map.getCurrent().get(player.getPosition()).getType()) {
             case UP :
@@ -93,6 +117,10 @@ public class TourManager implements Serializable {
         }
     }
 
+    /**
+     * Gere l'affichage et les messages periodiquement.
+     * @author Quentin
+     */
     public void schedule() {
         executor.scheduleAtFixedRate(() -> {
             if(running){
@@ -102,6 +130,11 @@ public class TourManager implements Serializable {
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 
+    /**
+     * Crée des schedule pour un Monstre ce qui lui permet de se mettre a jour periodiquement.
+     * @param m Monstre
+     * @author Quentin
+     */
     public static void addMonsterSchedule(AbstractMonster m){
         executor.scheduleAtFixedRate(() -> {
             if (running){
@@ -112,11 +145,20 @@ public class TourManager implements Serializable {
         }, 10, m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * Change le mode de jeu de temps réel a Tour par Tour.
+     * @author Quentin
+     */
     public static void TourParTour(){
         TourManager.addMessage(running ? "Le jeu est en mode Tour par tour" : "Le jeu n'est plus en mode Tour par tour");
         running=!running;
     }
 
+    /**
+     * Ajoute le message a la queue des messages du jeu.
+     * @param message Message
+     * @author Quentin
+     */
     public static void addMessage(String message){
         if(messages.size()>8){
             messages.pollFirst();
@@ -124,18 +166,38 @@ public class TourManager implements Serializable {
         messages.add(message);
     }
 
+    /**
+     * Renvoit la queue des messages.
+     * @return Queue des messages
+     * @author Quentin
+     */
     public static ArrayDeque<String> getMessages(){
         return messages;
     }
 
+    /**
+     * Renvoit l'executor.
+     * @return Executor
+     * @author Quentin
+     */
     public static ScheduledExecutorService getExecutor(){
         return executor;
     }
 
+    /**
+     * Renvoit le joueur.
+     * @return Joueur
+     * @author Quentin
+     */
     public BasicPlayer getPlayer() {
         return player;
     }
 
+    /**
+     * Renvoit la map.
+     * @return Map
+     * @author Quentin
+     */
     public Map getMap() {
         return map;
     }

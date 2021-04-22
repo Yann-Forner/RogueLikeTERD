@@ -12,17 +12,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * Toutes les fonctions aleatoires.
+ * @author Quentin
+ */
 public class Procedure {
     private static final Random rand=new Random();
 
     /**
      * Seed de la Map.
      * @param seed long
+     * @author Quentin
      */
     public static void setSeed(long seed){
         rand.setSeed(seed);
     }
 
+    /**
+     * Renvoit un entier aleatoire entre min et max.
+     * @param Max int
+     * @param Min int
+     * @return Entier
+     * @author Quentin
+     */
     public static int getRandomInt(int Max, int Min){
         return rand.nextInt(Max-Min)+Min;
     }
@@ -34,6 +46,7 @@ public class Procedure {
      * @param MinWidth int
      * @param MinHeigth int
      * @return Position
+     * @author Quentin
      */
     private static Position getRandomPosition(int MaxWidth, int MaxHeigth, int MinWidth, int MinHeigth) {
         int posX = rand.nextInt((MaxWidth - MinWidth)) + MinWidth;
@@ -54,6 +67,7 @@ public class Procedure {
      * Renvoit une position random absolue dans la Room r.
      * @param r Room
      * @return Position
+     * @author Quentin
      */
     public static Position getRandomPosition(Room r){
         Position abs = r.getAbsolutePos();
@@ -64,6 +78,7 @@ public class Procedure {
      * Renvoit une position random dans la Room r.
      * @param r Room
      * @return Position
+     * @author Quentin
      */
     public static Position getRelativeRandomPosition(Room r){
         return getRandomPosition(r.getWidth(),r.getHeigth(),0,0);
@@ -73,6 +88,7 @@ public class Procedure {
      * Renvoit un mur Random dans la Room r.
      * @param r Room
      * @return Position
+     * @author Quentin
      */
     public static Position getRandomWall(Room r){
         Position pos = Procedure.getRelativeRandomPosition(r);
@@ -94,8 +110,9 @@ public class Procedure {
      * alors la position est aussi sans AbstractAlive et non Reservé.
      * @param isEntityGeneration boolean
      * @param e Etage
-     * @param r Room ...
+     * @param r Room: optionel remplace l'etage
      * @return Position
+     * @author Quentin
      */
     //TODO comment faire ça sans le getRandomPosition(Etage e, Room... r) ?
     public static Position getAccesibleRandomPosition(boolean isEntityGeneration,Etage e,Room ... r){
@@ -120,6 +137,7 @@ public class Procedure {
      * @param MinSize int
      * @param MaxSize int
      * @return Room
+     * @author Quentin
      */
     public static Room getRandomRoom(int MinSize, int MaxSize, RoomStrategy strategy) {
         Position pos = getRandomPosition(MaxSize, MaxSize, MinSize, MinSize);
@@ -130,6 +148,7 @@ public class Procedure {
      * @param MinSize int
      * @param MaxSize int
      * @return Room
+     * @author Quentin
      */
     public static Room getRandomImpairSizeRoom(int MinSize, int MaxSize, RoomStrategy strategy) {
         int size = rand.nextInt((MaxSize - MinSize)) + MinSize;
@@ -137,19 +156,24 @@ public class Procedure {
         return new Room(size,size,strategy);
     }
 
-
+    /**
+     * Ajoute les rooms aleatoirement dans l'etage selon les differentes strategy.
+     * @param etage Etage
+     * @param etageStrategy Strategy de l'etage
+     * @param roomTypes Liste des strategy des rooms.
+     * @author Quentin
+     */
     public static void setRandomRooms(Etage etage,EtageStrategy etageStrategy ,ArrayList<RoomFactory.roomType> roomTypes ){
         int nbrRooms = 0;
         long t1 = System.currentTimeMillis();
         while (nbrRooms < etageStrategy.getNbrMaxRoom() && nbrRooms < roomTypes.size()  &&  (System.currentTimeMillis()-t1<500) ){
             Room r = RoomFactory.getNewRoom(roomTypes.get(nbrRooms));
-
             Position pos =  getRandomPosition(etage.getWidth()-1 - r.getWidth(), etage.getHeigth()-1 - r.getHeigth(),1,1).somme(1,1);
             try {
                 r.setAbsolutePos(pos);
                 etage.addRoom(r);
                 nbrRooms++;
-            }catch (CollisionRoom e){}
+            }catch (CollisionRoom ignored){}
         }
         Collections.sort(etage.getRooms());
     }
@@ -158,13 +182,14 @@ public class Procedure {
      * Genere nbrMaxRooms dans l'Etage.
      * @param etage Etage
      * @param type RoomFactory.roomType
+     * @author Quentin
      */
     public static void setRandomRooms(Etage etage, EtageStrategy etageStrategy, RoomFactory.roomType type) {
         int nbrRooms = 0;
         long t1 = System.currentTimeMillis();
         while (nbrRooms < etageStrategy.getNbrMaxRoom() && (System.currentTimeMillis()-t1<500)) {
             Room r = RoomFactory.getNewRoom(type);
-           Position pos;
+            Position pos;
             if (etageStrategy.getNbrMaxRoom() == 1) {
                  pos = new Position(((etage.getWidth()-1)/2)- r.getWidth()/2,(etage.getHeigth())/2- r.getHeigth()/2);
             }else {
@@ -174,25 +199,15 @@ public class Procedure {
                 r.setAbsolutePos(pos);
                 etage.addRoom(r);
                 nbrRooms++;
-            } catch (CollisionRoom e) {}
+            } catch (CollisionRoom ignored) {}
         }
         Collections.sort(etage.getRooms());
     }
 
     /**
-     * Genere nbr coffres dans l'etage.
-     * @param etage Etage
-     * @param nbr int
-     */
-    public static void setRandomChest(Etage etage, int nbr){
-        for (int i = 0; i < nbr; i++) {
-            etage.get(getAccesibleRandomPosition(false,etage)).updateCell(true, new Cell.Style(Cell.Style.CellType.CHEST));
-        }
-    }
-
-    /**
      * Genere les escaliers aleatoirement dans un etage.
      * @param etage Etage
+     * @author Quentin
      */
     public static void setRandomUPnDOWN(Etage etage) {
         setRandomUP(etage);
@@ -202,6 +217,7 @@ public class Procedure {
     /**
      * Escalier vers l'etage du dessus.
      * @param etage Etage
+     * @author Quentin
      */
     public static void setRandomUP(Etage etage){
         Position p1 = getAccesibleRandomPosition(false, etage);
@@ -211,6 +227,7 @@ public class Procedure {
     /**
      * Escalier vers l'etage du dessous.
      * @param etage Etage
+     * @author Quentin
      */
     private static void setRandomDOWN(Etage etage){
         Position p2 = getAccesibleRandomPosition(false, etage);

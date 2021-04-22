@@ -3,6 +3,10 @@ package Model.Map;
 import Model.Map.Room_Strategy.*;
 import Model.Utils.Procedure;
 
+/**
+ * Factory des types de Rooms.
+ * @author Yann
+ */
 public class RoomFactory {
     public enum roomType {
         TRESOR,NORMAL,CIRCLENORMAL,MINIBOSS,BOSS,MARCHAND,REPOS,TRAP,TRIANGLENORMAL
@@ -31,6 +35,12 @@ public class RoomFactory {
 
     private static Room getNewCircleRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new NormalCircleRoomStrategy());}
 
+    /**
+     * Renvoit une nouvelle Room selon le type passé en parametre.
+     * @param r Type de room
+     * @return Room
+     * @author Yann
+     */
     public static Room getNewRoom(roomType r){
         switch (r){
             case MINIBOSS -> {
