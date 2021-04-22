@@ -7,13 +7,21 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
+/**
+ * Un Item est une entité qui ne se deplace pas et n'a pas de point de vie.
+ * @author JP, Quentin
+ */
 public abstract class AbstractItem extends Entity {
 
-    private boolean isOnInventory;
-
-    public AbstractItem(Etage etage, Position position, String nom, boolean isOnInventory) {
+    /**
+     * Crée un item.
+     * @param etage Etage
+     * @param position Position
+     * @param nom Nom
+     * @author JP
+     */
+    public AbstractItem(Etage etage, Position position, String nom) {
         super(etage, position, nom);
-        this.isOnInventory = isOnInventory;
     }
 
     @Override
@@ -27,6 +35,11 @@ public abstract class AbstractItem extends Entity {
         }
     }
 
+    /**
+     * Defini le comportement de l'item lorsque le joueur l'utilise.
+     * @param player Joueur
+     * @author JP
+     */
     public abstract void useItem(BasicPlayer player);
 
 }

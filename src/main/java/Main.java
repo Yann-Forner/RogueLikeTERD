@@ -13,4 +13,13 @@ public class Main {
             System.exit(1);
         }
     }
+
+    //TODO javadoc :
+    // -Affichage
+    // -Menu
+    // -Room Strategy
+    // -Etage Strategy
+    // -Monsters
+    // -Items
+    // -Inventaires
 }
