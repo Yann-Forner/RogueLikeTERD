@@ -1,6 +1,7 @@
 package Model.Entitys.Player;
 
 import Model.Entitys.AbstractAlive;
+import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -16,20 +17,21 @@ public class BasicPlayer extends AbstractAlive {
     private int CURRENT_EXP;
     private int MAX_PV;
     private long MovementCoolDown = System.currentTimeMillis();
+    private final AbstractClass classe;
 
     /**
      * Crée un joueur.
-     * @param vision_radius Champs de vision
      * @param nom Nom
-     * @param pv Points de vie
-     * @param force Force
+     * @param classe Classe du joueur
      * @author Quentin
      */
-    public BasicPlayer(int vision_radius, String nom,int pv,int force) {
-        super(null,null, vision_radius, nom, pv, force,1);
+    public BasicPlayer(String nom, AbstractClass classe) {
+        super(null,null, classe.getVisionRadius(), nom.length()==0 ? classe.getNom() : nom, classe.getBasePV(), classe.getBaseForce(), 1);
+        this.classe=classe;
         MAX_EXP=10;
         CURRENT_EXP=0;
-        MAX_PV=pv;
+        MAX_PV=classe.getBasePV();
+        classe.setBaseItems(this);
     }
 
     /**
@@ -75,6 +77,15 @@ public class BasicPlayer extends AbstractAlive {
     public void updatePVMessage() {}
 
     /**
+     * Renvoit la classe du joueur.
+     * @return Classe
+     * @author Quentin
+     */
+    public AbstractClass getClasse(){
+        return classe;
+    }
+
+    /**
      * Renvoit l'experience necessaire pour monter de niveau.
      * @return Exp necessaire
      * @author Quentin
@@ -97,7 +108,7 @@ public class BasicPlayer extends AbstractAlive {
      * @author Yann
      */
     public void moveLeft() {
-        if(System.currentTimeMillis()-MovementCoolDown>100){
+        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
             move(getPosition().somme(-1,0));
             MovementCoolDown=System.currentTimeMillis();
         }
@@ -108,7 +119,7 @@ public class BasicPlayer extends AbstractAlive {
      * @author Yann
      */
     public void moveRight() {
-        if(System.currentTimeMillis()-MovementCoolDown>100){
+        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
             move(getPosition().somme(1,0));
             MovementCoolDown=System.currentTimeMillis();
         }
@@ -119,7 +130,7 @@ public class BasicPlayer extends AbstractAlive {
      * @author Yann
      */
     public void moveUp() {
-        if(System.currentTimeMillis()-MovementCoolDown>100){
+        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
             move(getPosition().somme(0,-1));
             MovementCoolDown=System.currentTimeMillis();
         }
@@ -130,7 +141,7 @@ public class BasicPlayer extends AbstractAlive {
      * @author Yann
      */
     public void moveDown() {
-        if(System.currentTimeMillis()-MovementCoolDown>100){
+        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
             move(getPosition().somme(0,1));
             MovementCoolDown=System.currentTimeMillis();
         }
@@ -157,11 +168,6 @@ public class BasicPlayer extends AbstractAlive {
 
     @Override
     public String toString() {
-        if(System.getProperty("os.name").equals("Linux")){
-            return "\uD83E\uDD13";
-        }
-        else{
-            return Affichage.GREEN+Affichage.BOLD+"@";
-        }
+        return classe.toString();
     }
 }
