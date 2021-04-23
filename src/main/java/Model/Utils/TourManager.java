@@ -22,6 +22,7 @@ public class TourManager implements Serializable {
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private static int Tour = 0;
+    private static long Timer;
     private final BasicPlayer player;
     private final Map map;
 
@@ -33,6 +34,7 @@ public class TourManager implements Serializable {
     public TourManager(BasicPlayer player) {
         this.player = player;
         map = new Map(player);
+        Timer = System.currentTimeMillis();
     }
 
     /**
@@ -200,5 +202,18 @@ public class TourManager implements Serializable {
      */
     public Map getMap() {
         return map;
+    }
+
+    /**
+     * Renvoit le temps passé depuis le debut de la partie sous le format hh:mm:ss.
+     * @return Temps.
+     * @author Quentin
+     */
+    public static String getTimer(){
+        long durationInMillis = System.currentTimeMillis() - Timer;
+        long second = (durationInMillis / 1000) % 60;
+        long minute = (durationInMillis / (1000 * 60)) % 60;
+        long hour = (durationInMillis / (1000 * 60 * 60)) % 24;
+        return String.format("%02d:%02d:%02d", hour, minute, second);
     }
 }
