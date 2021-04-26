@@ -2,7 +2,7 @@
 
 <b>BEAUCHET Quentin</b> (Quentin Beauchet) <br>
 <b>CARLENS Jean-Philippe</b>  (Coruscant11) <b>("BuildTools" également pour la plupart des commits)</b> <br>
-<b>FORNER Yann</b>  (Yann-Forner)  <br>
+<b>FORNER Yann</b>  (Yann-Forner) <b>("Yann" également pour les commits du début du projet)</b>  <br>
 <b>MASSE Gillian</b>  (GillianMASSE)
 
 <b>Attention : le jdk est en version 15 !</b></br>
