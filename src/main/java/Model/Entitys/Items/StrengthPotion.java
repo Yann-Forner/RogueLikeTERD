@@ -11,7 +11,7 @@ public class StrengthPotion extends AbstractItem {
     private int buffMultiplicator;
 
     public StrengthPotion(Etage e, Position pos, String nom, boolean isOnInventory, int buffMultiplicator) {
-        super(e, pos, nom, isOnInventory);
+        super(e, pos, nom);
         this.buffMultiplicator = buffMultiplicator;
     }
 

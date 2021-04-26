@@ -11,7 +11,7 @@ public class HealPotion extends AbstractItem {
     private int healRate;
 
     public HealPotion(Etage e, Position pos, String nom, boolean isOnInventory, int healRate) {
-        super(e, pos, nom, isOnInventory);
+        super(e, pos, nom);
         this.healRate = healRate;
     }
 

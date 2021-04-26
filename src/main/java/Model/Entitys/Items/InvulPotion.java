@@ -9,7 +9,8 @@ import Model.Utils.Position;
 public class InvulPotion extends AbstractItem {
 
     public InvulPotion(Etage e, Position pos, String nom, boolean isOnInventory) {
-        super(e, pos, nom, isOnInventory);
+        super(e, pos, nom);
+        //TODO tu asvais push avec une errue #JP c'etait super(e, pos, nom,isOnInventory);
     }
 
     @Override
