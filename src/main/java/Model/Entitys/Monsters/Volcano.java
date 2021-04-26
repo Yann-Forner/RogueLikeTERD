@@ -8,7 +8,10 @@ import Model.Utils.Position;
 
 import java.util.ArrayList;
 
-
+/**
+ * Volcan qui fait des degats a toutes les entités étants trop proches.
+ * @author Quentin
+ */
 public class Volcano extends AbstractMonster {
     private final ArrayList<Position> adjacents;
 
@@ -17,18 +20,27 @@ public class Volcano extends AbstractMonster {
         adjacents=getAdjacents(pos,(int)vision_radius);
     }
 
+    /**
+     * Renvoit l'arrayList des cellules adjacentes.
+     * @param position Position
+     * @param vr Champs de vision
+     * @return Cellules adjacentes
+     * @author Quentin
+     */
     private ArrayList<Position> getAdjacents(Position position, int vr) {
         ArrayList<Position> adjacents = new ArrayList<>();
         int posX = position.getX();
         int posY = position.getY();
         for (int x = posX - vr; x < posX + vr * 2 - 1; x++) {
             for (int y = posY - vr; y < posY + vr * 2 - 1; y++) {
-                Position pos = new Position(x, y);
-                if (position.Distance(pos) <= vr) {
-                    Cell c = getEtage().get(pos);
-                    if (c.getType().equals(Cell.Style.CellType.NORMAL)) {
-                        adjacents.add(pos);
-                        c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED, "~"));
+                if(x>=0 && x<getEtage().getWidth() && y>=0 && y<getEtage().getHeigth()){
+                    Position pos = new Position(x, y);
+                    if (position.Distance(pos) <= vr) {
+                        Cell c = getEtage().get(pos);
+                        if (c.getType().equals(Cell.Style.CellType.NORMAL)) {
+                            adjacents.add(pos);
+                            c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED, "~"));
+                        }
                     }
                 }
             }

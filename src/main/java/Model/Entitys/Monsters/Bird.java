@@ -29,7 +29,6 @@ public class Bird extends AbstractMonster {
         }
         totop=true;
         return haut;
-
     }
 
     @Override

@@ -3,6 +3,7 @@ package Model.Map;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage_Strategy.BossEtageStategy;
 import Model.Map.Etage_Strategy.EtageStrategy;
+import Model.Map.Etage_Strategy.ReposEtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
 import Model.Utils.Start;
 import Model.Utils.Position;
@@ -62,7 +63,17 @@ public class Map implements Serializable {
         Etage etage;
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
-            EtageStrategy strategy = currentIndex%10==0 ? new BossEtageStategy() : EtageStrategy.getRandomStrategy();
+            int numEtage = currentIndex + 1;
+            EtageStrategy strategy;
+            if(numEtage%10==0){
+                strategy = new BossEtageStategy();
+            }
+            else if(numEtage%5==0){
+                strategy = new ReposEtageStrategy();
+            }
+            else{
+                strategy = EtageStrategy.getRandomStrategy();
+            }
             etage=new Etage(MapWidth,MapHeigth, strategy);
             etages.add(etage);
         }
