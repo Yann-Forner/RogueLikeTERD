@@ -40,12 +40,14 @@ public abstract class RoomStrategy implements Serializable {
     /**
      * Génère les monstres de la rooms
      * @param r Room faisant office de lieu de génération
+     * @author JP, Quentin
      */
     public abstract void setMonsters(Room r);
 
     /**
      * Génère les items de la rooms
      * @param r Room faisant office de lieu de génération
+     * @author JP
      */
     public abstract void setItems(Room r);
     public abstract boolean noCollision(Etage etage,Room room);
