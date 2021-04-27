@@ -109,7 +109,7 @@ public class TourManager implements Serializable {
 
     /**
      * Action selon la case ou le joueur se deplace.
-     * @author Quentin
+     * @author Quentin, JP
      */
     private void processEtage() {
         switch (map.getCurrent().get(player.getPosition()).getType()) {
