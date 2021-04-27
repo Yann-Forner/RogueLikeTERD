@@ -12,7 +12,7 @@ import Model.Utils.Affichage;
 public abstract class CircleRoomStrategy extends RoomStrategy {
 
     /**
-     * modifie la room en dessinant le cercle cet algo repose sur le "Bresenham's circle drawing algorithm"
+     * Modifie la room en dessinant le cercle cet algo repose sur le "Bresenham's circle drawing algorithm"
      * @param room la salle
      * @param r le rayon
      * @author Yann
@@ -45,7 +45,7 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
     }
 
     /**
-     * fonction qui lance l'agorithm de Bresenham
+     * Fonction qui lance l'agorithm de Bresenham
      * @param room la salle
      * @author Yann
      */
@@ -55,7 +55,7 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
     }
 
     /**
-     * cette fonction a pour but de remplir l'intérieur du cercle une fois que le tour a été fait
+     * Cette fonction a pour but de remplir l'intérieur du cercle une fois que le tour a été fait
      * @param r la salle
      * @auhtor Yann
      */

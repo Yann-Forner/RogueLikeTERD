@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 public abstract class RoomStrategy implements Serializable {
     /**
-     * génère une room
+     * Génère une room
      * @param r la room
      * @auhtor  Yann, Quentin
      */
@@ -24,7 +24,7 @@ public abstract class RoomStrategy implements Serializable {
     }
 
     /**
-     * set le style room
+     * Setter le style room
      * @param r la room
      * @auhtor Quentin
      */
@@ -73,7 +73,7 @@ public abstract class RoomStrategy implements Serializable {
     public abstract void setItems(Room r);
 
     /**
-     *
+     *Renvoie si oui on non il y a une collision avec une autre salle
      * @param etage l'etage courant
      * @param room la salle
      * @return un booleen

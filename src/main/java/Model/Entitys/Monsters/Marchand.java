@@ -72,13 +72,6 @@ public class Marchand extends AbstractMonster {
     }
 
 
-    /**
-     * Lance la procédure du marchand lorsque l'on marche dessus (en fonction de son état)
-     *
-     * @param pv
-     * @return boolean
-     * @author Gillian
-     */
     @Override
     public boolean updatePV(int pv) {
         if (state == STATE.NOTVISITED) {

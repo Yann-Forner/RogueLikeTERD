@@ -7,12 +7,20 @@ import Model.Utils.Tools;
 
 /**
  * Factory qui crée les monstres
+ * @auhtor Yann,Quentin,JP
  */
 public class MonsterFactory {
     public enum MonsterType {
         GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER ,BIRD, VOLCANO, SKULL, SNAKE, INVOQUEUR, MARCHAND
     }
 
+    /**
+     * Renvoi un nouveau monstre
+     * @param etage etage courant
+     * @param m enum d'un monstre
+     * @return un monstre
+     * @auhtor Yann,Quentin,JP
+     */
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
@@ -61,6 +69,14 @@ public class MonsterFactory {
         }
     }
 
+    /**
+     * retourne un nouveau monstre avec des pvs prédifinis
+     * @param etage etage courant
+     * @param m enum de monstre
+     * @param pv les pvs du monstre
+     * @return le monstre
+     * @auhtor Quentin
+     */
     protected static AbstractMonster getNewMonster(Etage etage, MonsterType m, int pv){
         switch (m){
             case BEE -> {
@@ -72,6 +88,11 @@ public class MonsterFactory {
         }
     }
 
+    /**
+     * retourne le level de base
+     * @return int
+     * @auhtor Quentin
+     */
     private static int getBaseLvl(){
         return Start.getMap() == null ? 1 : Procedure.getRandomInt(3,0)+Start.getMap().getIndexCurrent()+1;
     }

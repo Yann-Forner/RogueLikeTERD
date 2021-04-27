@@ -98,7 +98,7 @@ public class Menu {
     }
 
     /**
-     * retourne le contenu du message sur la gauche ou la droite du menu
+     * Retourne le contenu du message sur la gauche ou la droite du menu
      * @param left booléen permettant de savoir si l'on va print à gauche ou à droite le message
      * @param message String
      * @param color la couleur du message
@@ -123,7 +123,7 @@ public class Menu {
     }
 
     /**
-     * retourne le contenu du message au centre du menu
+     * Retourne le contenu du message au centre du menu
      * @param message String
      * @param color la couleur du message
      * @return String
@@ -152,7 +152,7 @@ public class Menu {
     }
 
     /**
-     * retourne le contenu du message dans un encadré
+     * Retourne le contenu du message dans un encadré
      * @param message le message
      * @param lineNumber la ligne sur laquelle on se trouve
      * @return String

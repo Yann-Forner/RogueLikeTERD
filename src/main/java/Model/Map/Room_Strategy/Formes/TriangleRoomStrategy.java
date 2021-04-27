@@ -18,7 +18,7 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
     }
 
     /**
-     * rempli le triangle
+     * Rempli le triangle
      * @param r la salle
      * @auhtor Yann
      */
@@ -27,7 +27,7 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
     }
 
     /**
-     * dessine le triangle et le rempli
+     * Dessine le triangle et le rempli
      * @param r la salle
      * @param s le style de la cellule a ajouter
      * @auhtor Yann

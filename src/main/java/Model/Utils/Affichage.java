@@ -35,7 +35,7 @@ public class Affichage {
     }
 
     /**
-     * renvoi l'étage en String
+     * Renvoi l'étage en String
      * @param etage etage courrant
      * @return String de l'étage
      * @author Quentin,Yann

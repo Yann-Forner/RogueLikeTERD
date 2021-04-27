@@ -4,6 +4,7 @@ package Model.Map;
 import Exceptions.CollisionRoom;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;

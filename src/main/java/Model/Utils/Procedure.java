@@ -14,7 +14,7 @@ import java.util.Random;
 
 /**
  * Toutes les fonctions aleatoires.
- * @author Quentin
+ * @author Quentin,Yann
  */
 public class Procedure {
     private static final Random rand=new Random();
@@ -29,8 +29,8 @@ public class Procedure {
         seed = s;
     }
     /**
-     * getteur du Seed de la Map.
-     * @author Yann
+     * Getteur du Seed de la Map.
+     * @author Quentin,Yann
      */
     public static long getSeed(){
         return seed;
