@@ -9,12 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-
     private Etage etage;
-
-
     private Map map;
-
 
     public Menu(Etage etage, Map map) {
         this.etage = etage;

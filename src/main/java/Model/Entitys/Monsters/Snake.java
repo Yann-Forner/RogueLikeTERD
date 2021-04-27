@@ -5,10 +5,17 @@ import Model.Utils.*;
 
 import java.util.ArrayList;
 
-
+/**
+ * Boss serpent qui est en plusieurs parties et ne meurt que quand elles sont toutes mortes.
+ * @author Quentin
+ */
 public class Snake extends AbstractMonster {
+    /**
+     * Classe d'un bout de queue du serpent.
+     * @author Quentin
+     */
     private class Tail extends AbstractMonster {
-        protected Tail(Etage m, Position pos, String nom, int pv, int path_type, int lvl) {
+        private Tail(Etage m, Position pos, String nom, int pv, int path_type, int lvl) {
             super(m, pos, nom, pv, 0,0,0,60000, path_type, lvl);
         }
 
@@ -39,12 +46,36 @@ public class Snake extends AbstractMonster {
 
     protected final ArrayList<Tail> snakeTail = new ArrayList<>();
     private final int size_of_tail;
+
+    /**
+     * Crée un Boss serpent.
+     * @param m Etage
+     * @param pos Position
+     * @param nom Nom
+     * @param pv Points de vie
+     * @param force Force
+     * @param vision_radius Champs de vision
+     * @param agro Agro
+     * @param update_rate_ms Vitesse
+     * @param path_type Type de chemin
+     * @param lvl Niveau de base
+     * @param size_of_tail Nombre que partie pour sa queue
+     * @author Quentin
+     */
     protected Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl, int size_of_tail) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
         this.size_of_tail=size_of_tail;
         setTail(m,pos,pv,path_type);
     }
 
+    /**
+     * Crée les queues du serpent.
+     * @param m Etage
+     * @param pos Position
+     * @param pv PV des queues
+     * @param path_type Type de deplacement des queues
+     * @author Quentin
+     */
     private void setTail(Etage m, Position pos,int pv, int path_type){
         Position random_pos = Procedure.getAccesibleRandomPosition(true, m);
         while (pos.Distance(random_pos)<size_of_tail+1){
@@ -71,11 +102,9 @@ public class Snake extends AbstractMonster {
 
     @Override
     public boolean updatePV(int pv) {
-        boolean Alive = super.updatePV(pv);
-        if(!Alive){
-            while(snakeTail.size()>0){
-                snakeTail.get(0).updatePV(-Integer.MAX_VALUE);
-            }
+        boolean Alive = true;
+        if(snakeTail.size()==0){
+            Alive = super.updatePV(pv);
         }
         return Alive;
     }

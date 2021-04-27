@@ -3,7 +3,6 @@ package Model.Utils;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Map.Map;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -87,8 +86,6 @@ public class Affichage {
         return sb.toString();
     }
 
-
-
     public static void getPv(){
         BasicPlayer player = Start.getPlayer();
         StringBuilder sb = new StringBuilder();
@@ -113,12 +110,13 @@ public class Affichage {
             max_pv = max_pv /10;
         }
 
-        int middle = 49;
+        int Width = 120;
+        int middle = Width/2 - 1;
         int start = middle-(liste_current_pv.size()+1);
         int end = middle+(liste_max_pv.size()+1);
 
-        for (int i = 0; i < 100; i++) {
-            sb.append(i >= ((double)player.getPv()/(double)player.getMAX_PV())*100 ? RED_BACKGROUND : GREEN_BACKGROUND);
+        for (int i = 0; i < Width; i++) {
+            sb.append(i >= ((double)player.getPv()/(double)player.getMAX_PV())*Width ? RED_BACKGROUND : GREEN_BACKGROUND);
             if(i==start){
                 sb.append("[");
             }
@@ -139,21 +137,13 @@ public class Affichage {
             }
         }
         sb.append(RESET);
-
-        //LVL
-        sb.append(BLUE).append("   LVL: ").append(player.getLvl());
-        sb.append(" -> ").append("[");
-        sb.append(BRIGTH_BLUE).append(player.getCURRENT_EXP());
-        sb.append(BLUE).append("/");
-        sb.append(BRIGTH_BLUE).append(player.getMAX_EXP());
-        sb.append(BLUE).append("]");
         System.out.print(sb);
     }
 
     public static void getTouches(){
         StringBuilder sb = new StringBuilder();
         sb.append(YELLOW).append(BOLD);
-        sb.append("     ");
+        sb.append("    ");
         sb.append("Deplacement: ");
         sb.append(BRIGTH_GREEN).append("ZQSD");
         sb.append(YELLOW);

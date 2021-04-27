@@ -2,14 +2,20 @@ package Model.Utils;
 
 import Model.Entitys.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
+/**
+ * Outils utilisé dans les programmes.
+ * @author Quentin, JP
+ */
 public class Tools {
     public static final int PATH_CROSS = 0;
     public static final int PATH_DIAG = 1;
@@ -19,10 +25,11 @@ public class Tools {
     /**
      * Algoritme A* qui permet de trouver le plus court chemin entre la Position de depart et celle d'arrivé.
      * @param etage Etage
-     * @param depart Position
-     * @param arrive Position
-     * @param pathType int : 0->Normal 1->Diagonales 2->Fantome
-     * @return ArrayList<Position>
+     * @param depart Position de depart
+     * @param arrive Position d'arrivé
+     * @param pathType int : 0->Normal 1->Diagonales 2->Fantome 3->Evite les monstres
+     * @return ArrayList<Noeud> Noeud implemente Position
+     * @author JP, Quentin
      */
     public static ArrayList<Position> Astar(Etage etage, Position depart, Position arrive, int pathType){
         class Noeud extends Position{
@@ -68,7 +75,7 @@ public class Tools {
                 voisins.add(new Noeud(getX(),getY() - 1));
                 voisins.add(new Noeud(getX(),getY() + 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> ((etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
             }
 
             private ArrayList<Noeud> getDiagonalNeighboors(){
@@ -78,7 +85,7 @@ public class Tools {
                 voisins.add(new Noeud(getX() + 1,getY() + 1));
                 voisins.add(new Noeud(getX() + 1,getY() - 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> ((etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
             }
 
             private ArrayList<Noeud> getNoClipStandardNeighboors(){
@@ -88,7 +95,7 @@ public class Tools {
                 voisins.add(new Noeud(getX(),getY() - 1));
                 voisins.add(new Noeud(getX(),getY() + 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()))).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> ((etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()))).collect(Collectors.toCollection(ArrayList::new));
             }
 
             private ArrayList<Noeud> getStandardNoMobsNeighboors(){
@@ -98,7 +105,7 @@ public class Tools {
                 voisins.add(new Noeud(getX(),getY() - 1));
                 voisins.add(new Noeud(getX(),getY() + 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
-                return voisins.stream().filter(p -> (!(etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractItem || etage.get(p.getX(),p.getY()).getEntity() instanceof AbstractMonster) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
+                return voisins.stream().filter(p -> ((etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer) && (p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth()) && etage.get(p.getX(),p.getY()).isAccesible())).collect(Collectors.toCollection(ArrayList::new));
             }
         }
 
@@ -146,6 +153,12 @@ public class Tools {
         return new ArrayList<>();
     }
 
+    /**
+     * Renvoit la bordure de l'etage.
+     * @param etage Etage
+     * @return ArrayList de Positions.
+     * @author Quentin
+     */
     public static ArrayList<Position> getBorder(Etage etage){
         ArrayList<Position> bordure = new ArrayList<>();
         for (int y = 0; y < etage.getHeigth(); y++) {
@@ -165,8 +178,9 @@ public class Tools {
      * le nombre de virage depend du degree.
      * @param etage Etage
      * @param p1 Position
-     * @param p2 Posiiton
+     * @param p2 Position
      * @param degree int
+     * @author Quentin
      */
     public static void ligne(Etage etage, Position p1, Position p2, Cell.Style style_ligne, int degree){
         if(degree==0){
@@ -185,6 +199,15 @@ public class Tools {
         }
     }
 
+    /**
+     * Trace une ligne simple qui ignore tous les obstacles entre la Position p1 et la Position p2,
+     * selon le style donné en parametre.
+     * @param etage Etage
+     * @param p1 Position
+     * @param p2 Position
+     * @param style_ligne Style des cellules
+     * @author Quentin
+     */
     private static void ligne(Etage etage, Position p1, Position p2, Cell.Style style_ligne) {
         ArrayList<Position> chemin = new ArrayList<>();
         chemin.add(p1);
@@ -212,6 +235,14 @@ public class Tools {
         }
     }
 
+    /**
+     * Renvoit la liste de toutes les cellules visibles entre P1 et P2.
+     * @param etage Etage
+     * @param p1 Position
+     * @param p2 Position
+     * @return Liste des cellules visibles.
+     * @author Quentin
+     */
     public static ArrayList<Position> getVisibles(Etage etage,Position p1, Position p2){
         ArrayList<Position> chemin = getLigne(p1,p2);
         ArrayList<Position> visibles = new ArrayList<>();
@@ -224,6 +255,13 @@ public class Tools {
         return visibles;
     }
 
+    /**
+     * Renvoit une VRAI ligne entre P1 et P2 en ignorant la Map.
+     * @param p1 Position
+     * @param p2 Position
+     * @return ArrayList<Position> entre P1 et P2
+     * @author StackOverflow
+     */
     public static ArrayList<Position> getLigne(Position p1, Position p2){
         ArrayList<Position> chemin = new ArrayList<>();
         int x,y,xe,ye;
@@ -290,7 +328,7 @@ public class Tools {
             }
         }
         chemin.sort((o1, o2) -> {
-            Position pos = Start.getPlayer().getPosition();
+            Position pos = Objects.requireNonNull(Start.getPlayer()).getPosition();
             return Double.compare(o1.Distance(pos), o2.Distance(pos));
         });
         return chemin;

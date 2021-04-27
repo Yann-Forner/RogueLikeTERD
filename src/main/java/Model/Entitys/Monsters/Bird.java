@@ -10,6 +10,7 @@ public class Bird extends AbstractMonster {
 
     public Bird(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
+        //TODO eviter qu'il se bloque dans un objet
     }
 
     @Override
@@ -28,7 +29,6 @@ public class Bird extends AbstractMonster {
         }
         totop=true;
         return haut;
-
     }
 
     @Override

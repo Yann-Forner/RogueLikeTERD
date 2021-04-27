@@ -74,7 +74,6 @@ public abstract class EtageStrategy {
     }
 
     public void setSpecialCell(Etage etage){
-        Procedure.setRandomChest(etage,3);
         Procedure.setRandomUPnDOWN(etage);
         etage.setTrapCell();
     }

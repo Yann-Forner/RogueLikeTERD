@@ -7,10 +7,20 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Positions.
+ * @author Yann, Quentin
+ */
 public class Position implements Serializable {
     private final int x;
     private final int y;
 
+    /**
+     * Crée un position
+     * @param x Horizontal
+     * @param y Vertical
+     * @author Yann
+     */
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
@@ -20,6 +30,7 @@ public class Position implements Serializable {
      * Renvoit la Position egale a ma somme de this et de la Position pos.
      * @param pos Position
      * @return Position
+     * @author Quentin
      */
     public Position somme(Position pos){
         return new Position(x+pos.getX(),y+pos.getY());
@@ -30,6 +41,7 @@ public class Position implements Serializable {
      * @param x int
      * @param y int
      * @return Position
+     * @author Quentin
      */
     public Position somme(int x, int y) {
         return somme(new Position(x,y));
@@ -38,15 +50,28 @@ public class Position implements Serializable {
     /**
      * Renvoit une copie de this.
      * @return Position
+     * @author Quentin
      */
     public Position copyOf(){
         return new Position(x,y);
     }
 
+    /**
+     * Calcul la distance euclidienne entre pos et this.
+     * @param pos Position
+     * @return Distance
+     * @author Quentin
+     */
     public double Distance(Position pos){
         return Math.sqrt(Math.pow((pos.getX() - getX()), 2) + Math.pow((pos.getY() - getY()), 2));
     }
 
+    /**
+     * Renvoit la liste des voisins de this.
+     * @param e Etage
+     * @return ArrayList<Position>
+     * @author Quentin
+     */
     public ArrayList<Position> voisins(Etage e){
         ArrayList<Position> voisins = new ArrayList<>();
         voisins.add(somme(0, -1));
@@ -60,10 +85,20 @@ public class Position implements Serializable {
         return voisins.stream().filter(p -> (p.getX() >= 0 && p.getY() >= 0 && p.getX() < e.getWidth() && p.getY() < e.getHeigth())).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Renvoit x.
+     * @return int
+     * @author Yann
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Renvoit y.
+     * @return int
+     * @author Yann
+     */
     public int getY() {
         return y;
     }

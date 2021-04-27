@@ -20,21 +20,14 @@ import Model.Utils.TourManager;
  * @author JP, Quentin, Gillian
  */
 public abstract class AbstractItem extends Entity {
-
-    /**
-     * Prix de l'objet. (tout objet n'aura pas un prix différent de 0)
-     *
-     * @author Gillian
-     */
     private int prix;
 
-
     /**
-     * Crée un item.
+     * Crée un item avec un prix.
      *
-     * @param etage    Etage
+     * @param etage Etage
      * @param position Position
-     * @param nom      Nom
+     * @param nom Nom
      * @author JP
      */
 
@@ -56,6 +49,14 @@ public abstract class AbstractItem extends Entity {
         super(etage, position, nom);
         this.prix = prix;
 
+     * Crée un item.
+     * @param etage Etage
+     * @param position Position
+     * @param nom Nom
+     * @author JP
+     */
+    public AbstractItem(Etage etage, Position position, String nom) {
+        super(etage, position, nom);
     }
 
     /**
@@ -100,7 +101,6 @@ public abstract class AbstractItem extends Entity {
 
     /**
      * Renvoie le prix de l'objet
-     *
      * @return prix
      * @author Gillian
      */
@@ -110,9 +110,9 @@ public abstract class AbstractItem extends Entity {
 
 
     /**
-     * retourne un item aléatoire
+     * Renvoit un item aléatoire
+     * @return Item
      * @author Gillian
-     */
     /*
     public static AbstractItem getRandomItem(){
         switch (Procedure.getRandomInt(11,0)){
@@ -133,10 +133,8 @@ public abstract class AbstractItem extends Entity {
             }
         }
     }
-    */
-    /**
+     /** 
      * Defini le comportement de l'item lorsque le joueur l'utilise.
-     *
      * @param player Joueur
      * @author JP
      */
