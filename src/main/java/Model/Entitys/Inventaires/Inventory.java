@@ -17,6 +17,11 @@ public class Inventory implements Serializable {
     private ArrayList<AbstractPotion> potions;
 
 
+    /**
+     * Constructeur d'inventory. Initialise les listes.
+     *
+     * @author JP
+     */
     public Inventory(){
         weapons = new ArrayList<>();
         foods = new ArrayList<>();
@@ -75,16 +80,29 @@ public class Inventory implements Serializable {
     /**
      * Retourne la liste de potions
      *
+     * @return Retourne la liste de potions
      * @author JP
      */
     public ArrayList<AbstractPotion> getPotions() {
         return potions;
     }
 
+    /**
+     * Retourne la liste d'armes
+     *
+     * @return Retourne la liste d'armes
+     * @author JP
+     */
     public ArrayList<Weapon> getWeapons() {
         return weapons;
     }
 
+    /**
+     * Retourne la liste de consommables
+     *
+     * @return Retourne la liste de nourritures
+     * @author JP
+     */
     public ArrayList<AbstractFood> getFoods() {
         return foods;
     }

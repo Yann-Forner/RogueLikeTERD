@@ -1,6 +1,5 @@
 package Model.Entitys.Items.Potions;
 
-import Model.Entitys.AbstractItem;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -12,11 +11,25 @@ import Model.Utils.Position;
  */
 public class InvulPotion extends AbstractPotion {
 
+    /**
+     * Constructeur de la potion d'invincibilité
+     *
+     * @param e Etage où se situe la potion
+     * @param nom Nom de la potion
+     * @param pos Position de la potion
+     * @author JP
+     */
     public InvulPotion(Etage e, Position pos, String nom) {
         super(e, pos, nom);
         //TODO tu asvais push avec une errue #JP c'etait super(e, pos, nom,isOnInventory);
     }
 
+    /**
+     * Utilise la potion
+     *
+     * @param player Joueur utilisant la potion
+     * @author JP
+     */
     @Override
     public void useItem(BasicPlayer player) {
 

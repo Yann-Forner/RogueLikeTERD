@@ -1,6 +1,6 @@
 package Model.Entitys.Items.Weapons;
 
-import Model.Entitys.AbstractItem;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Entity;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
@@ -21,11 +21,22 @@ public class Weapon extends AbstractItem {
     private int range;
     private int durability;
 
+    /**
+     * Constructeur de l'arme
+     * @param etage Etage où se situe l'arme
+     * @param position Position de l'arme
+     * @param nom Nom de l'arme
+     * @param weaponType Type de l'arme
+     */
     public Weapon(Etage etage, Position position, String nom, WeaponFactory.WeaponType weaponType) {
         super(etage, position, nom);
         this.weaponType = weaponType;
     }
 
+    /**
+     * Ajoute l'arme a l'inventaire du joueur, si c'est un joueur
+     * @param e Entité qui entre en contact de l'arme
+     */
     @Override
     public void onContact(Entity e) {
         if(!(e instanceof AbstractMonster)){
@@ -36,6 +47,10 @@ public class Weapon extends AbstractItem {
         }
     }
 
+    /**
+     * Utilise l'arme
+     * @param player Joueur possédant l'arme
+     */
     @Override
     public void useItem(BasicPlayer player) {
         player.setForce(strength);
@@ -60,29 +75,53 @@ public class Weapon extends AbstractItem {
 
     @Override
     public String toString() {
-        return null;
+        return weaponType.getValue();
     }
 
+    /**
+     *
+     * @return Retourne la puissance de l'arme
+     */
     public int getStrength() {
         return strength;
     }
 
+    /**
+     *
+     * @param strength Force a redéfinir
+     */
     public void setStrength(int strength) {
         this.strength = strength;
     }
 
+    /**
+     *
+     * @return Retourne la portée de l'arme
+     */
     public int getRange() {
         return range;
     }
 
+    /**
+     *
+     * @param range Portée à redéfinir
+     */
     public void setRange(int range) {
         this.range = range;
     }
 
+    /**
+     *
+     * @return Retourne la durabilitée de l'arme
+     */
     public int getDurability() {
         return durability;
     }
 
+    /**
+     *
+     * @param durability Durabilitée a redéfinir
+     */
     public void setDurability(int durability) {
         this.durability = durability;
     }

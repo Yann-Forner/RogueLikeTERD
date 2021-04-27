@@ -1,6 +1,5 @@
 package Model.Entitys.Items;
 
-import Model.Entitys.AbstractItem;
 import Model.Entitys.Entity;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;

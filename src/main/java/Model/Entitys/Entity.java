@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * Entité de base du jeu peut etre un Mob ou un Objet.
- * @author Yann, Quentin
+ * @author Yann, Quentin, JP
  */
 public abstract class Entity implements Serializable {
     private Position position;
@@ -19,7 +19,7 @@ public abstract class Entity implements Serializable {
      * @param etage Etage
      * @param position Position
      * @param nom Nom
-     * @author Yann
+     * @author Yann, JP
      */
     public Entity(Etage etage, Position position, String nom) {
         this.position = position;

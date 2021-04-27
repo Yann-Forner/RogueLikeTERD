@@ -2,7 +2,7 @@ package Model.Map;
 
 
 import Exceptions.CollisionRoom;
-import Model.Entitys.AbstractItem;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
