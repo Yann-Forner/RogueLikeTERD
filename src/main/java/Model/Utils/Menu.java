@@ -58,8 +58,9 @@ public class Menu {
                 String equipement = "Equipement : ";
                 if (Start.getPlayer().getInventory().getWeapons()!=null && Start.getPlayer().getInventory().getWeapons().size() > 0 )equipement+=Start.getPlayer().getInventory().getWeapons().get(0).getNom()+"/";
                 else equipement+="X/";
-                if (Start.getPlayer().getInventory().getArmures()!=null && Start.getPlayer().getInventory().getArmures().size() > 0)equipement+=Start.getPlayer().getInventory().getArmures().get(0).getNom();
-                else equipement+="X";
+                //if (Start.getPlayer().getInventory().getArmures()!=null && Start.getPlayer().getInventory().getArmures().size() > 0)equipement+=Start.getPlayer().getInventory().getArmures().get(0).getNom();
+                //else
+                equipement+="X";
                 sb.append(print_txt_in_menu_center(equipement,Affichage.YELLOW));
             }
             else if (line == 12){
