@@ -5,6 +5,10 @@ import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Procedure;
 
+/**
+ * Défini une salle de repos
+ * @auhtor Quentin,Yann
+ */
 public class ReposRoomStrategy extends RoomStrategy {
 
     @Override
@@ -31,11 +35,6 @@ public class ReposRoomStrategy extends RoomStrategy {
     @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,0);
-    }
-
-    @Override
-    public int getNbrMaxMobPerRoom() {
-        return 0;
     }
 
     @Override

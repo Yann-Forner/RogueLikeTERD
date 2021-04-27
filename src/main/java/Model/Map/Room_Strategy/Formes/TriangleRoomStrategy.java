@@ -6,6 +6,10 @@ import Model.Map.Room_Strategy.RoomStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
+/**
+ * Créer une salle triangulaire
+ * @author Yann
+ */
 public abstract class TriangleRoomStrategy extends RoomStrategy {
 
     @Override
@@ -13,10 +17,21 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
         fillTriangle(r);
     }
 
+    /**
+     * rempli le triangle
+     * @param r la salle
+     * @auhtor Yann
+     */
     public void fillTriangle(Room r){
         fillTriangle(r, new Cell.Style(Cell.Style.CellType.NORMAL));
     }
 
+    /**
+     * dessine le triangle et le rempli
+     * @param r la salle
+     * @param s le style de la cellule a ajouter
+     * @auhtor Yann
+     */
     public void fillTriangle(Room r, Cell.Style s){
 
         Position posAngle1 = new Position((r.getWidth()-1)/2, 1);

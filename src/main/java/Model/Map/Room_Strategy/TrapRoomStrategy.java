@@ -8,6 +8,10 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 
+/**
+ * Défini une salle piégée
+ * @auhtor Quentin
+ */
 public class TrapRoomStrategy extends RoomStrategy {
 
     @Override
@@ -39,11 +43,6 @@ public class TrapRoomStrategy extends RoomStrategy {
     @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,1);
-    }
-
-    @Override
-    public int getNbrMaxMobPerRoom() {
-        return 1;
     }
 
     @Override

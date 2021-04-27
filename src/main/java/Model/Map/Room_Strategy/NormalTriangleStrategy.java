@@ -9,6 +9,10 @@ import Model.Map.Room_Strategy.Formes.TriangleRoomStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
+/**
+ * Défini une salle normale triangulaire
+ * @auhtor Quentin,Yann
+ */
 public class NormalTriangleStrategy extends TriangleRoomStrategy {
 
     @Override
@@ -47,11 +51,6 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
     @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,1);
-    }
-
-    @Override
-    public int getNbrMaxMobPerRoom() {
-        return 5;
     }
 
     @Override

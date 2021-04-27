@@ -15,22 +15,10 @@ import Model.Utils.Procedure;
  */
 public class MarchandRoomStrategy extends RoomStrategy{
 
-
-    /**
-     * Création de la room
-     * @param r
-     * @author Gillian
-     */
     @Override
     public void composeRoom(Room r) {
         super.composeRoom(r);
     }
-
-    /**
-     * Permet de définir le style de la cellule
-     * @param r
-     * @author Gillian
-     */
 
     //TODO CONVERTIR LE STYLE EN VRAI SAC D'ARGENT
 
@@ -53,21 +41,12 @@ public class MarchandRoomStrategy extends RoomStrategy{
     }
 
 
-    /**
-     * Ajout du marchand dans la salle
-     * @param r
-     * @author Gillian
-     */
     @Override
     public void setMonsters(Room r) {
         r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.MARCHAND));
     }
 
-    /**
-     * Ajoute les stacks d'argent dans la salle
-     * @param r
-     * @author Gillian
-     */
+
     @Override
     public void setItems(Room r) {
 
@@ -76,11 +55,6 @@ public class MarchandRoomStrategy extends RoomStrategy{
     @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,0);
-    }
-
-    @Override
-    public int getNbrMaxMobPerRoom() {
-        return 0;
     }
 
     @Override

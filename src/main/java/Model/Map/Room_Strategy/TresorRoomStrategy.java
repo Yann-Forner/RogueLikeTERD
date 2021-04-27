@@ -7,6 +7,10 @@ import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Procedure;
 
+/**
+ * Défini une salle de trésor
+ * @auhtor Quentin,Yann
+ */
 public class TresorRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
@@ -37,11 +41,6 @@ public class TresorRoomStrategy extends RoomStrategy{
     @Override
     public boolean noCollision(Etage etage, Room room) {
         return super.noCollision(etage,room,0);
-    }
-
-    @Override
-    public int getNbrMaxMobPerRoom() {
-        return 0;
     }
 
     @Override

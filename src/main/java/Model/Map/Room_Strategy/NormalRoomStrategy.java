@@ -7,6 +7,10 @@ import Model.Map.Cell;
 import Model.Map.Room;
 import Model.Utils.Procedure;
 
+/**
+ * Défini une salle normale (rectangulaire)
+ * @auhtor Quentin,Yann
+ */
 public class NormalRoomStrategy extends RoomStrategy{
     @Override
     public void composeRoom(Room r) {
@@ -42,11 +46,6 @@ public class NormalRoomStrategy extends RoomStrategy{
                 case 2 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.INVUL_POTION));
             }
         }
-    }
-
-    @Override
-    public int getNbrMaxMobPerRoom() {
-        return 5;
     }
 
     @Override

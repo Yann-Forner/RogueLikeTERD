@@ -6,6 +6,10 @@ import Model.Map.Room;
 import Model.Map.Room_Strategy.Formes.CircleRoomStrategy;
 import Model.Utils.Procedure;
 
+/**
+ * Une salle de boss
+ * @auhtor Quentin,Yann
+ */
 public class BigBossRoomStrategy extends CircleRoomStrategy {
     @Override
     public void composeRoom(Room r) {

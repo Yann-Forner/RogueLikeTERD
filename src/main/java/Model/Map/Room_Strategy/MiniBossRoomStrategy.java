@@ -7,6 +7,10 @@ import Model.Map.Room;
 import Model.Map.Room_Strategy.Formes.CircleRoomStrategy;
 import Model.Utils.Procedure;
 
+/**
+ * Défini les salles de miniboss
+ * @auhtor Quentin,Yann
+ */
 public class MiniBossRoomStrategy extends CircleRoomStrategy {
     @Override
     public void composeRoom(Room r) {
