@@ -1,7 +1,5 @@
 package Model.Utils;
 
-import Model.Entitys.AbstractItem;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;

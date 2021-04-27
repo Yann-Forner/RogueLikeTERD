@@ -1,9 +1,6 @@
 package Model.Entitys.Items.Potions;
 
-import Model.Entitys.AbstractItem;
-import Model.Entitys.Items.Potions.HealPotion;
-import Model.Entitys.Items.Potions.InvulPotion;
-import Model.Entitys.Items.Potions.StrengthPotion;
+import Model.Entitys.Items.AbstractItem;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 
@@ -13,11 +10,19 @@ import Model.Utils.Procedure;
  */
 
 public class PotionFactory {
-    public enum ItemType {
+    public enum PotionType {
         HEAL_POTION, INVUL_POTION, STRENGTH_POTION, STACK_OF_MONEY
     }
 
-    public static AbstractItem getNewPotion(Etage etage, ItemType i) {
+    /**
+     * Générateur de potion
+     *
+     * @param etage Etage où se situe la potion
+     * @param i Type de la potion
+     * @return Retourne la potion générée
+     * @author JP
+     */
+    public static AbstractItem getNewPotion(Etage etage, PotionType i) {
         switch(i) {
             case HEAL_POTION -> {
                 return new HealPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de heal", 25);

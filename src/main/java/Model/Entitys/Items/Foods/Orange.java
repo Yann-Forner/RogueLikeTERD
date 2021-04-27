@@ -8,6 +8,12 @@ import Model.Utils.Position;
  * @author JP
  */
 public class Orange extends AbstractFood {
+    /**
+     * Constructeur de l'orange
+     * @param etage Etage de l'orange
+     * @param position Position de l'oange
+     * @param nom Nom de l'oange
+     */
     public Orange(Etage etage, Position position, String nom) {
         super(etage, position, nom);
     }

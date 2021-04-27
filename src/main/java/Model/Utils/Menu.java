@@ -1,6 +1,5 @@
 package Model.Utils;
 
-import Model.Entitys.AbstractItem;
 import Model.Entitys.Inventaires.Inventory;
 import Model.Map.Etage;
 import Model.Map.Map;

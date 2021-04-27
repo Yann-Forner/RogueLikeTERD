@@ -1,6 +1,6 @@
 package Model.Entitys.Items.Foods;
 
-import Model.Entitys.AbstractItem;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Position;
@@ -10,6 +10,13 @@ import Model.Utils.Position;
  * @author JP
  */
 public class AbstractFood extends AbstractItem {
+
+    /**
+     * Constructeur de la nourriture
+     * @param etage Etage de la nourriture
+     * @param position Position de la nourriture
+     * @param nom Nom de la nourriture
+     */
     public AbstractFood(Etage etage, Position position, String nom) {
         super(etage, position, nom);
     }

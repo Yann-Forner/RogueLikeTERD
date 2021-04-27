@@ -1,6 +1,6 @@
 package Model.Map;
 
-import Model.Entitys.AbstractItem;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Utils.Position;
 import Model.Map.Room_Strategy.RoomStrategy;
