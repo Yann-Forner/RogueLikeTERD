@@ -169,7 +169,7 @@ public class Procedure {
      * @param etage Etage
      * @param etageStrategy Strategy de l'etage
      * @param roomTypes Liste des strategy des rooms.
-     * @author Quentin
+     * @author Yann,Quentin
      */
     public static void setRandomRooms(Etage etage,EtageStrategy etageStrategy ,ArrayList<RoomFactory.roomType> roomTypes ){
         int nbrRooms = 0;
