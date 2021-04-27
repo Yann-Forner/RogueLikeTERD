@@ -18,18 +18,16 @@ public class StackOfMoney extends AbstractItem {
 
     /**
      * Champ indiquant le montant du stack d'argent
-     *
      * @author Gillian
      */
     private int montant;
 
     /**
      * Constructeur d'un stack d'argent
-     *
-     * @param e
-     * @param pos
-     * @param nom
-     * @param montant
+     * @param e Etage
+     * @param pos Posisiton
+     * @param nom Nom
+     * @param montant Montant
      * @author Gillian
      */
     public StackOfMoney(Etage e, Position pos, String nom, int montant) {
@@ -39,7 +37,6 @@ public class StackOfMoney extends AbstractItem {
 
     /**
      * Pas besoin de redéfinir la méthode car on ne peut pas utiliser un stack d'argent (disparait au ramassage)
-     *
      * @param player Joueur
      */
     @Override
@@ -48,12 +45,6 @@ public class StackOfMoney extends AbstractItem {
     }
 
 
-    /**
-     * Récupère le tas d'argent et augmente l'argent du jouer lorsque l'on passe dessus
-     *
-     * @param e
-     * @author Gillian
-     */
     @Override
     public void onContact(Entity e) {
         if (!(e instanceof AbstractMonster)) {
@@ -80,8 +71,7 @@ public class StackOfMoney extends AbstractItem {
     }
 
     /**
-     * to string avec affichage différent en fonction du montant
-     *
+     * To string avec affichage différent en fonction du montant.
      * @return string (ce qu'on doit afficher
      * @author Gillian
      */
