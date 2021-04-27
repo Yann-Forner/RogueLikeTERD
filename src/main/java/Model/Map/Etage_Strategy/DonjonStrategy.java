@@ -11,6 +11,10 @@ import Model.Utils.Procedure;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Classe de la strategie principale du jeu, cet etage peut etre rempli de plusieurs rooms qui seront différentes les unes des autres
+ * @author Yann,Quentin
+ */
 public class DonjonStrategy extends EtageStrategy {
 
     private final ArrayList<RoomFactory.roomType> myRooms = new ArrayList<>() {{
@@ -55,7 +59,7 @@ public class DonjonStrategy extends EtageStrategy {
     public void setMonsters(Etage etage) {
         super.setMonsters(etage);
         for(int i = 0; i < 3; i++){
-            etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.VOLCANO));
+            etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BIGMONSTER));
         }
     }
 

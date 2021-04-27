@@ -6,6 +6,10 @@ import Model.Map.RoomFactory;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
+/**
+ * Un étage rempli de salles rondes
+ * @author Yann
+ */
 public class CircleEtageStrategy extends  EtageStrategy{
 
     @Override

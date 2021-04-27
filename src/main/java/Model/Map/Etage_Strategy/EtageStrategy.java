@@ -9,11 +9,29 @@ import Model.Utils.Tools;
 
 import java.util.ArrayList;
 
+/**
+ * Classe abstraite définissant le fonctionnement d'un étage
+ * @author Yann, Quentin
+ */
 public abstract class EtageStrategy {
-
+    /**
+     * génère l'étage
+     * @param etage etage courant
+     * @author Yann
+     */
     public abstract void composeEtage(Etage etage);
+
+    /**
+     * getter du nombre maximal de rooms dans un etage
+     * @return int
+     */
     public abstract int getNbrMaxRoom();
 
+    /**
+     * Retourne aléatoirement une Strategie d'étage
+     * @return EtageStrategy
+     * @author Quentin,Yann
+     */
     public static EtageStrategy getRandomStrategy(){
         switch (Procedure.getRandomInt(9,0)){
             case 0, 1, 2 -> {
@@ -28,6 +46,12 @@ public abstract class EtageStrategy {
         }
     }
 
+    /**
+     * Trace les chemins, ajoute les murs, et supprime les murs inutiles d'un étage
+     * @param etage etage courant
+     * @param style_fusion style
+     * @author Quentin , Yann
+     */
     protected void EtageFusion(Etage etage, Cell.Style style_fusion){
         //Trace du chemin
         for (int i = 0; i < etage.getRooms().size()-1; i++) {
@@ -73,17 +97,33 @@ public abstract class EtageStrategy {
         }
     }
 
+    /**
+     * set les cellules spéciales
+     * @param etage etage courant
+     * @author Quentin
+     */
     public void setSpecialCell(Etage etage){
         Procedure.setRandomUPnDOWN(etage);
         etage.setTrapCell();
     }
 
+    /**
+     * set les monstres qui seront présents dans l'étage
+     * @param etage etage courant
+     * @author Quentin
+     */
     public void setMonsters(Etage etage){
         for(Room r : etage.getRooms()){
             r.setMonsters(etage);
         }
+
     }
 
+    /**
+     * set les items au sol dans l'étage
+     * @param etage etage courant
+     * @author JP
+     */
     public void setItems(Etage etage) {
         for (Room r : etage.getRooms()) {
             r.setItems(etage);

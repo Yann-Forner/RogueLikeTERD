@@ -11,6 +11,10 @@ import Model.Utils.Tools;
 
 import java.util.ArrayList;
 
+/**
+ * le trap étage est un étage ressemblant à un labyrinthe
+ * @author Quentin
+ */
 public class TrapEtageStrategy extends EtageStrategy{
     @Override
     public void composeEtage(Etage etage) {

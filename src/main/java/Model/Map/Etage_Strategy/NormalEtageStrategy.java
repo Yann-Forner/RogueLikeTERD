@@ -7,6 +7,10 @@ import Model.Map.RoomFactory;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
+/**
+ * Cet étage est composé de plusieurs salles, elle seront toutes de forme normale (rectangulaire)
+ * @author Yann
+ */
 public class NormalEtageStrategy extends EtageStrategy{
 
     @Override
