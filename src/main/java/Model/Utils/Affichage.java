@@ -9,15 +9,21 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Classe de l'affichage du jeu
+ * @author Quentin,Yann
+ */
 public class Affichage {
+
     public enum Shadow{
         CIRCLE,RAY,NONE
     }
     private static final Shadow ombre = Shadow.NONE;
 
-    //TODO a quoi sert le champs si il est pas inir #YANN
-    private Menu menu;
-
+    /**
+     * Affiche la map
+     * @author Quentin
+     */
     public static void getMap(){
         Start.setConsoleMode(false);
         System.out.print(Affichage.CLEAR);
@@ -28,6 +34,12 @@ public class Affichage {
         Start.setConsoleMode(true);
     }
 
+    /**
+     * renvoi l'étage en String
+     * @param etage etage courrant
+     * @return String de l'étage
+     * @author Quentin,Yann
+     */
     public static String etage(Etage etage){
         Menu menu = new Menu(etage,Start.getMap());
         StringBuilder sb = new StringBuilder();
@@ -86,6 +98,10 @@ public class Affichage {
         return sb.toString();
     }
 
+    /**
+     * Affiche les pvs du joueur
+     * @author Quentin
+     */
     public static void getPv(){
         BasicPlayer player = Start.getPlayer();
         StringBuilder sb = new StringBuilder();
@@ -140,6 +156,10 @@ public class Affichage {
         System.out.print(sb);
     }
 
+    /**
+     * Affiche les touches
+     * @author Quentin
+     */
     public static void getTouches(){
         StringBuilder sb = new StringBuilder();
         sb.append(YELLOW).append(BOLD);
@@ -170,6 +190,10 @@ public class Affichage {
         System.out.println(sb);
     }
 
+    /**
+     * Affiche les évènements
+     * @auhtor Quentin
+     */
     public static void getMessages(){
         StringBuilder sb = new StringBuilder();
         sb.append(PURPLE).append(BOLD).append("-----> ").append(UNDERLINE).append("Evenements:");
@@ -180,6 +204,13 @@ public class Affichage {
         System.out.print(sb);
     }
 
+    /**
+     * Affiche un projectile sur la map
+     * @param etage etage
+     * @param p1 position départ
+     * @param p2 position arrivée
+     * @param style apparence du projectile
+     */
     public static void Projectile(Etage etage,Position p1, Position p2, Cell.Style style){
         int delay = 1;
         ArrayList<Position> ligne = Tools.getLigne(p1, p2);
@@ -192,6 +223,9 @@ public class Affichage {
         }
     }
 
+    /**
+     * Affiche le menu d'accueil du jeu
+     */
     public static void start(){
         StringBuilder sb = new StringBuilder();
         String marge="                        ";

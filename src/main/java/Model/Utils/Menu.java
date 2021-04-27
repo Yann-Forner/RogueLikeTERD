@@ -10,18 +10,30 @@ import java.util.List;
 
 /**
  * Classe servant a afficher le menu sur la droite du terminal
- * @author Yann-FORNER
+ * @author Yann
  */
 public class Menu {
     private Etage etage;
     private Map map;
 
+    /**
+     * Constructeur d'un menu
+     * @param etage etage
+     * @param map map en entier
+     * @author Yann
+     */
     public Menu(Etage etage, Map map) {
         this.etage = etage;
         this.map = map;
     }
 
-    public StringBuilder toStringByLine(int line ,StringBuilder sb ) {
+    /**
+     * Modifier le stringbuilder de la map pour s'afficher avec un menu
+     * @param line la ligne sur laquelle on se trouve
+     * @param sb le stringbuilder qui affiche le jeu
+     * @author Yann
+     */
+    public void toStringByLine(int line ,StringBuilder sb ) {
         Inventory inv = Start.getPlayer().getInventory();
         var potionsList = inv.getPotions();
 
@@ -84,10 +96,16 @@ public class Menu {
             }
         }
         sb.append("\n");
-
-
-        return sb;
     }
+
+    /**
+     * retourne le contenu du message sur la gauche ou la droite du menu
+     * @param left booléen permettant de savoir si l'on va print à gauche ou à droite le message
+     * @param message String
+     * @param color la couleur du message
+     * @return la string finale de la ligne
+     * @author Yann
+     */
     public static String print_txt_in_menu_leftorRight(boolean left, String message,String color){
         StringBuilder sb = new StringBuilder();
         if(message.length()<81){
@@ -104,6 +122,14 @@ public class Menu {
         }
         return sb.toString();
     }
+
+    /**
+     * retourne le contenu du message au centre du menu
+     * @param message String
+     * @param color la couleur du message
+     * @return String
+     * @author Yann
+     */
     public static String print_txt_in_menu_center(String message,String color){//81
         StringBuilder sb = new StringBuilder();
         if(message.length()<81){
@@ -126,6 +152,13 @@ public class Menu {
         return sb.toString();
     }
 
+    /**
+     * retourne le contenu du message dans un encadré
+     * @param message le message
+     * @param lineNumber la ligne sur laquelle on se trouve
+     * @return String
+     * @author Yann
+     */
     public static String make_a_border(ArrayList<String> message,int lineNumber){
         StringBuilder sb = new StringBuilder();
         switch (lineNumber) {
@@ -159,11 +192,4 @@ public class Menu {
         return sb.toString();
     }
 
-    public StringBuilder menuToStringBuilder(){
-        StringBuilder sb= new StringBuilder();
-        for (int i = 0; i < etage.getHeigth(); i++) {
-            this.toStringByLine(i ,sb);
-        }
-        return sb;
-    }
 }
