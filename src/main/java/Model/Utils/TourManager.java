@@ -24,17 +24,24 @@ public class TourManager implements Serializable {
     private static int Tour = 0;
     private static long Timer;
     private final BasicPlayer player;
-    private final Map map;
+    private Map map;
 
     /**
-     * Prend un joueur en parametre et initialise la Map.
+     * Prend un joueur en parametre.
      * @param player Joueur
      * @author Quentin
      */
     public TourManager(BasicPlayer player) {
         this.player = player;
-        map = new Map(player);
         Timer = System.currentTimeMillis();
+    }
+
+    /**
+     * Initialise la Map.
+     * @author Quentin
+     */
+    public void setMap(){
+        map = new Map(player);
     }
 
     /**
