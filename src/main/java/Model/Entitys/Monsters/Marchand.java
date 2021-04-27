@@ -11,20 +11,50 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-
 //TODO Faut changer la salle en fonction du statut du marchand
 //TODO Système de vente
 //TODO Système d'achat
+
+/**
+ * Classe décrivant le marchand (considéré donc comme un monstre
+ *
+ * @author Gillian
+ */
 public class Marchand extends AbstractMonster {
 
 
+    /**
+     * Différents états du marchands
+     *
+     * @author Gillian
+     */
     public enum STATE {
-        NOTVISITED, VISITED, BUYER, SELLER, AGGRESSIVE
+        NOTVISITED, VISITED, BUY, SELL, AGGRESSIVE
     }
 
+    /**
+     * Champs décrivant l'état du marchand
+     *
+     * @author Gillian
+     */
     STATE state;
 
-
+    /**
+     * Constructeur du marchand
+     *
+     * @param m             Etage où mettre le marchand
+     * @param pos           Position du marchand
+     * @param nom           Nom du marchand
+     * @param pv            Pv de base du marchand
+     * @param force         Force de base du marchand
+     * @param vision_radius Portée de vision du marchand
+     * @param agro          Agro
+     * @param update_rate   Taux de raffraichissement
+     * @param pathCross     Type de déplacement
+     * @param lvl           niveau du marchand
+     * @param state         Etat du marchand
+     * @author Gillian
+     */
     public Marchand(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, int pathCross, int lvl, STATE state) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
         this.state = state;
@@ -43,9 +73,11 @@ public class Marchand extends AbstractMonster {
 
 
     /**
+     * Lance la procédure du marchand lorsque l'on marche dessus (en fonction de son état)
      *
      * @param pv
      * @return boolean
+     * @author Gillian
      */
     @Override
     public boolean updatePV(int pv) {
@@ -53,9 +85,9 @@ public class Marchand extends AbstractMonster {
             dialogueInit();
         } else if (state == STATE.VISITED) {
             dialogue();
-        } else if (state == STATE.BUYER) {
+        } else if (state == STATE.BUY) {
             //TODO
-        } else if (state == STATE.SELLER) {
+        } else if (state == STATE.SELL) {
             //TODO
         } else if (state == STATE.AGGRESSIVE) {
             super.updatePV(pv);
@@ -63,6 +95,11 @@ public class Marchand extends AbstractMonster {
         return true;
     }
 
+    /**
+     * Dialogue de "bienvenue" lancé lorsque l'on a jamais vu le marchand
+     *
+     * @author Gillian
+     */
     public void dialogueInit() {
 
         TourManager.addMessage("Bonjour" + getNom()
@@ -76,12 +113,13 @@ public class Marchand extends AbstractMonster {
                 + "Je vends, j'achète, je vo... enfin bref, je mène mon buisness quoi !"
                 + "\n \n"
         );
-
         dialogue();
-
-
     }
 
+    /**
+     * Dialogue de déclaration des options de vente / d'achat / d'attaque
+     * @author Gillian
+     */
     public void dialogue() {
 
         if (state == STATE.VISITED) {
@@ -107,6 +145,10 @@ public class Marchand extends AbstractMonster {
         }
     }
 
+    /**
+     * Dialogue lorsque le joueur a entré un mauvais caractère
+     * @author Gillian
+     */
     public void dialogueError() {
         TourManager.addMessage("Cher Monsieur, Chère Madame" + getNom()
                 + "\n"
@@ -120,6 +162,10 @@ public class Marchand extends AbstractMonster {
     //TODO vendre
 
 
+    /**
+     * Analyse de l'entrée utilisateur et redirection vers les différentes procédures
+     * @throws IOException
+     */
     private void processInput() throws IOException {
         char cmd = 0;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -143,6 +189,10 @@ public class Marchand extends AbstractMonster {
     }
 
 
+    /**
+     * Procédure d'attaque lorsque le marchand est aggressif
+     * @author Gillian
+     */
     public void updateMonster() {
 
         if (state == STATE.AGGRESSIVE) {
@@ -161,16 +211,19 @@ public class Marchand extends AbstractMonster {
     }
 
     /**
+     *Procédure lorsque le marchand est en mode "vente"
      *
      */
-    public void typeBuy(){
+    public void typeBuy() {
 
         TourManager.addMessage("Tu veux donc acquérir un de mes merveilleux objets ? EHEH ! ça me va !"
                 + "\n"
                 + Affichage.GREEN + " Voici tous mes beaux objets !"
                 + "\n"
-                + " Tu n'as qu'à avancer sur l'un d'eux pour me "+ Affichage.GREEN + " l'acheter !"
+                + " Tu n'as qu'à avancer sur l'un d'eux pour me " + Affichage.GREEN + " l'acheter !"
         );
+
+       // getEtage().addItem();
         //TODO AJOUTER LES ITEMS AU SOL
         //getEtage().addItem();
 
@@ -178,14 +231,13 @@ public class Marchand extends AbstractMonster {
     }
 
 
-    public void typeSell(){
-
+    public void typeSell() {
 
 
     }
 
 
-    public void typeAggressive(){
+    public void typeAggressive() {
 
         TourManager.addMessage("Vous auriez pu choisir la fortune... " + getNom()
                 + "\n"

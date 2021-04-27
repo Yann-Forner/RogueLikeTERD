@@ -1,10 +1,17 @@
 package Model.Entitys;
 
+import Model.Entitys.Items.HealPotion;
+import Model.Entitys.Items.ItemFactory;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
+import Model.Map.Etage_Strategy.CircleEtageStrategy;
+import Model.Map.Etage_Strategy.DonjonStrategy;
+import Model.Map.Etage_Strategy.EtageStrategy;
+import Model.Map.Etage_Strategy.NormalEtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Procedure;
 import Model.Utils.TourManager;
 
 /**
@@ -101,6 +108,32 @@ public abstract class AbstractItem extends Entity {
         return prix;
     }
 
+
+    /**
+     * retourne un item aléatoire
+     * @author Gillian
+     */
+    /*
+    public static AbstractItem getRandomItem(){
+        switch (Procedure.getRandomInt(11,0)){
+            case 0, 1, 2 -> {
+                return new ;
+            }
+            case 3, 4, 5  -> {
+                return new ;
+            }
+            case 6, 7, 8 -> {
+                return new  ;
+            }
+            case 9,10,11 -> {
+                return new ItemFactory().get
+            }
+            default -> {
+                return new CircleEtageStrategy();
+            }
+        }
+    }
+    */
     /**
      * Defini le comportement de l'item lorsque le joueur l'utilise.
      *
