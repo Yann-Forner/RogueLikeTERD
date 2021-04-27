@@ -1,110 +1,56 @@
 package Model.Entitys.Inventaires;
 
-import Model.Entitys.AbstractItem;
+import Model.Entitys.Items.Potions.AbstractPotion;
+import Model.Entitys.Items.Weapons.Weapon;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ScheduledFuture;
 
 public class Inventory implements Serializable {
-    private ArrayList<Weapon> armes;
-    private ArrayList<Armures> armures;
-    private ArrayList<Consomables> consomables;
-    private ArrayList<AbstractItem> items;
+    private ArrayList<Weapon> weapons;
+    private ArrayList<Armures> armors;
+    private ArrayList<Consomables> foods;
+    private ArrayList<AbstractPotion> potions;
 
-    private Weapon currentWeapon=null;
-    private Armures currentArmure=null;
 
     public Inventory(){
-        armes = new ArrayList<>();
-        armures = new ArrayList<>();
-        consomables = new ArrayList<>();
-        items = new ArrayList<>();
+        weapons = new ArrayList<>();
+        armors = new ArrayList<>();
+        foods = new ArrayList<>();
+        potions = new ArrayList<>();
     }
 
     public void switchWeapons() {
-        var first = armes.remove(0);
-        armes.add(first);
+        var first = weapons.remove(0);
+        weapons.add(first);
     }
 
     public void switchPotions() {
-        var first = items.remove(0);
-        items.add(first);
+        var first = potions.remove(0);
+        potions.add(first);
     }
 
-    public void addItem(AbstractItem i){
-        items.add(i);
+    public void addPotion(AbstractPotion i){
+        potions.add(i);
     }
 
-    public Weapon getCurrentWeapon() {
-        return currentWeapon;
+    public void addWeapon(Weapon w){
+        weapons.add(w);
     }
 
-    public Armures getCurrentArmure() {
-        return currentArmure;
+    public ArrayList<AbstractPotion> getPotions() {
+        return potions;
     }
 
-    public Consomables useConsomables(int index){
-        Consomables conso = consomables.get(index);
-        consomables.remove(index);
-        return conso;
-    }
-
-    public int getWeaponDamages(){
-        return currentWeapon.getDegats();
-    }
-
-    public int getArmureProtection(){
-        return currentArmure.getProtection();
-    }
-
-    public ArrayList<Weapon> getArmes() {
-        return armes;
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
     }
 
     public ArrayList<Armures> getArmures() {
-        return armures;
+        return armors;
     }
 
-    public ArrayList<Consomables> getObjets_temporaires() {
-        return consomables;
-    }
-
-    public void setCurrentWeapon(Weapon currentWeapon) {
-        if(this.currentWeapon!=null){
-            addArme(this.currentWeapon);
-            this.getArmes().remove(currentWeapon);
-        }
-        this.currentWeapon = currentWeapon;
-    }
-
-    public void setCurrentArmure(Armures currentArmure) {
-        if (this.currentArmure!=null){
-            addArmure(this.currentArmure);
-            this.getArmures().remove(currentArmure);
-        }
-        this.currentArmure = currentArmure;
-    }
-
-    public Inventory addArme(Weapon weapon){
-        if (this.getArmes().size()==0)this.setCurrentWeapon(weapon);
-        else this.getArmes().add(weapon);
-        return this;
-    }
-
-    public Inventory addArmure(Armures armures){
-        if(this.getArmures().size()==0)this.setCurrentArmure(armures);
-        else this.getArmures().add(armures);
-        return this;
-    }
-    public Inventory addConsomables(Consomables c){
-        this.getObjets_temporaires().add(c);
-        return this;
-    }
-
-    public ArrayList<AbstractItem> getItems() {
-        return items;
+    public ArrayList<Consomables> getFoods() {
+        return foods;
     }
 }

@@ -1,4 +1,4 @@
-package Model.Entitys.Items;
+package Model.Entitys.Items.Potions;
 
 import Model.Entitys.AbstractItem;
 import Model.Entitys.Player.BasicPlayer;
@@ -6,11 +6,11 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
-public class StrengthPotion extends AbstractItem {
+public class StrengthPotion extends AbstractPotion {
 
     private int buffMultiplicator;
 
-    public StrengthPotion(Etage e, Position pos, String nom, boolean isOnInventory, int buffMultiplicator) {
+    public StrengthPotion(Etage e, Position pos, String nom, int buffMultiplicator) {
         super(e, pos, nom);
         this.buffMultiplicator = buffMultiplicator;
     }

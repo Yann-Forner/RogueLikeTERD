@@ -1,4 +1,4 @@
-package Model.Entitys.Items;
+package Model.Entitys.Items.Potions;
 
 import Model.Entitys.AbstractItem;
 import Model.Entitys.Player.BasicPlayer;
@@ -6,9 +6,9 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
-public class InvulPotion extends AbstractItem {
+public class InvulPotion extends AbstractPotion {
 
-    public InvulPotion(Etage e, Position pos, String nom, boolean isOnInventory) {
+    public InvulPotion(Etage e, Position pos, String nom) {
         super(e, pos, nom);
         //TODO tu asvais push avec une errue #JP c'etait super(e, pos, nom,isOnInventory);
     }

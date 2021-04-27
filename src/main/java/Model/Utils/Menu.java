@@ -19,7 +19,7 @@ public class Menu {
 
     public StringBuilder toStringByLine(int line ,StringBuilder sb ) {
         Inventory inv = Start.getPlayer().getInventory();
-        var itemsList = inv.getItems();
+        var potionsList = inv.getPotions();
 
         //Menu
         sb.append(Affichage.BOLD).append(Affichage.BLUE).append("     ");
@@ -46,22 +46,22 @@ public class Menu {
             }
             else if (line==7 && Start.getPlayer()!= null){
                 String equipement = "Equipement : ";
-                if (Start.getPlayer().getInventory().getCurrentWeapon()!=null)equipement+=Start.getPlayer().getInventory().getCurrentWeapon().getNom()+"/";
+                if (Start.getPlayer().getInventory().getWeapons()!=null && Start.getPlayer().getInventory().getWeapons().size() > 0 )equipement+=Start.getPlayer().getInventory().getWeapons().get(0).getNom()+"/";
                 else equipement+="X/";
-                if (Start.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Start.getPlayer().getInventory().getCurrentArmure().getNom();
+                if (Start.getPlayer().getInventory().getArmures()!=null && Start.getPlayer().getInventory().getArmures().size() > 0)equipement+=Start.getPlayer().getInventory().getArmures().get(0).getNom();
                 else equipement+="X";
                 sb.append(print_txt_in_menu_center(equipement,Affichage.YELLOW));
             }
             else if(line == etage.getHeigth() - 4) {
-                sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " +  itemsList.size() + " potions :", Affichage.RED));
+                sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " +  potionsList.size() + " potions :", Affichage.RED));
             }
             else if(line == etage.getHeigth() - 3) {
                 StringBuilder potionsString = new StringBuilder();
-                for(int i = 0; i < itemsList.size(); i++) {
+                for(int i = 0; i < potionsList.size(); i++) {
                     if(i == 0)
-                        potionsString.append("[" + itemsList.get(i).toString() + "] ");
+                        potionsString.append("[" + potionsList.get(i).toString() + "] ");
                     else
-                        potionsString.append(itemsList.get(i).toString() + " ");
+                        potionsString.append(potionsList.get(i).toString() + " ");
                 }
                 sb.append(print_txt_in_menu_leftorRight(true, potionsString.toString(),Affichage.RED));
             }

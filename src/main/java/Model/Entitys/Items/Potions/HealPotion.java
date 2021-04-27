@@ -1,4 +1,4 @@
-package Model.Entitys.Items;
+package Model.Entitys.Items.Potions;
 
 import Model.Entitys.AbstractItem;
 import Model.Entitys.Player.BasicPlayer;
@@ -6,11 +6,11 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
-public class HealPotion extends AbstractItem {
+public class HealPotion extends AbstractPotion {
 
     private int healRate;
 
-    public HealPotion(Etage e, Position pos, String nom, boolean isOnInventory, int healRate) {
+    public HealPotion(Etage e, Position pos, String nom, int healRate) {
         super(e, pos, nom);
         this.healRate = healRate;
     }

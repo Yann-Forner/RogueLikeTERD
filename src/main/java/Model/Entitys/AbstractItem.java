@@ -26,13 +26,7 @@ public abstract class AbstractItem extends Entity {
 
     @Override
     public void onContact(Entity e) {
-        //TODO remplacer le instanceof #JP
-        if(!(e instanceof AbstractMonster)){
-            BasicPlayer player = (BasicPlayer) e;
-            TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
-            player.getInventory().addItem(this);
-            player.getEtage().removeItem(this);
-        }
+
     }
 
     /**
