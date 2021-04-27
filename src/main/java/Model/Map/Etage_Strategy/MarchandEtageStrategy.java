@@ -8,17 +8,12 @@ import Model.Utils.Procedure;
 
 
 /**
- * Création de l'étage du marchant
+ * Création de l'étage du marchand, cet étage comporte une seule salle avec un marchand
  * @author Gillian
  */
 public class MarchandEtageStrategy extends EtageStrategy{
 
 
-    /**
-     * Composition de l'étage
-     * @param etage
-     * @author Gillian
-     */
     @Override
     public void composeEtage(Etage etage) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.MARCHAND);
@@ -27,11 +22,6 @@ public class MarchandEtageStrategy extends EtageStrategy{
         setItems(etage);
     }
 
-    /**
-     * nombre de salle maximale : 1 pour le marchand.
-     * @return 1
-     * @author Gillian
-     */
     @Override
     public int getNbrMaxRoom() {
         return 1;

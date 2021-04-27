@@ -6,6 +6,10 @@ import Model.Map.RoomFactory;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
+/**
+ * cet étage est composé d'une seule salle qui permet de se reposer
+ * @author Yann
+ */
 public class ReposEtageStrategy extends EtageStrategy{
     @Override
     public void composeEtage(Etage etage) {
