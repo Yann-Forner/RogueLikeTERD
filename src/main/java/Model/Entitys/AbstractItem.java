@@ -48,20 +48,10 @@ public abstract class AbstractItem extends Entity {
     public AbstractItem(Etage etage, Position position, String nom, int prix) {
         super(etage, position, nom);
         this.prix = prix;
-
-     * Crée un item.
-     * @param etage Etage
-     * @param position Position
-     * @param nom Nom
-     * @author JP
-     */
-    public AbstractItem(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
     }
 
     /**
      * Permet de réagir en cas de contact avec un objet : tente d'acheter s'il a un prix, ramasse sinon
-     *
      * @param e
      * @author Gillian, JP
      */
