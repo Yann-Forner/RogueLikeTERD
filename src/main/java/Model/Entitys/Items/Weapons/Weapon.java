@@ -9,6 +9,10 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
+/**
+ * Objet représentant les armes, contenant leurs caractéristiques (puissance, portée, type...)
+ * @author JP
+ */
 public class Weapon extends AbstractItem {
 
     private WeaponFactory.WeaponType weaponType;

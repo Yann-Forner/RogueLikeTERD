@@ -9,6 +9,10 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
+/**
+ * Concept abstrait des potions, contenant le processus de ramassage (dans onContact)
+ * @author JP
+ */
 public class AbstractPotion extends AbstractItem {
     public AbstractPotion(Etage etage, Position position, String nom) {
         super(etage, position, nom);

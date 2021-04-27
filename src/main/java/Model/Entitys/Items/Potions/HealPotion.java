@@ -6,6 +6,10 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
+/**
+ * Poition dont le but est de soigner le joueur. Le taux de heal est ajustable.
+ * @author JP
+ */
 public class HealPotion extends AbstractPotion {
 
     private int healRate;

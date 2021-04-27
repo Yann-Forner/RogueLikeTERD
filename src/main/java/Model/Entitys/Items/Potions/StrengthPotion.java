@@ -6,6 +6,10 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
+/**
+ * Potion de puissance, le but est d'augmenter temporairement les dégats du joueur
+ * @author JP
+ */
 public class StrengthPotion extends AbstractPotion {
 
     private int buffMultiplicator;

@@ -7,6 +7,11 @@ import Model.Entitys.Items.Potions.StrengthPotion;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 
+/**
+ * Factory permettant de générer les potions, ramassables par le joueur
+ * @author JP
+ */
+
 public class PotionFactory {
     public enum ItemType {
         HEAL_POTION, INVUL_POTION, STRENGTH_POTION, STACK_OF_MONEY
@@ -23,9 +28,10 @@ public class PotionFactory {
             case STRENGTH_POTION -> {
                 return new StrengthPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de force", 50);
             }
+            /*
             case STACK_OF_MONEY -> {
                 return new StackOfMoney(etage,Procedure.getAccesibleRandomPosition(true,etage),"Tas d'argent",(10 + (int)(Math.random() * ((50 - 10) + 1))));
-            }
+            }*/
             default -> {
                 return null;
             }

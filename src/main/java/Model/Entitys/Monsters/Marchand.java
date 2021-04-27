@@ -121,7 +121,7 @@ public class Marchand extends AbstractMonster {
      * @author Gillian
      */
     public void dialogue() {
-
+        /*
         if (state == STATE.VISITED) {
             TourManager.addMessage("Comme on se retrouve !" + "\n \n");
         } else if (state == STATE.NOTVISITED) {
@@ -143,6 +143,7 @@ public class Marchand extends AbstractMonster {
         } catch (Exception e) {
             dialogueError();
         }
+        */
     }
 
     /**

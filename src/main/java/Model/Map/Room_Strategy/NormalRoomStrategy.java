@@ -40,6 +40,13 @@ public class NormalRoomStrategy extends RoomStrategy{
                 case 2 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.ItemType.INVUL_POTION));
             }
         }
+        for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
+            switch(i) {
+                case 0 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.ItemType.HEAL_POTION));
+                case 1 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.ItemType.STRENGTH_POTION));
+                case 2 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.ItemType.INVUL_POTION));
+            }
+        }
     }
 
     @Override

@@ -5,6 +5,10 @@ import Model.Entitys.Items.Weapons.Weapon;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 
+/**
+ * Factory permettant de générer les armes.
+ * @author JP
+ */
 public class WeaponFactory {
 
     public enum WeaponType {

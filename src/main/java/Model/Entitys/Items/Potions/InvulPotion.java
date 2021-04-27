@@ -6,6 +6,10 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
+/**
+ * Potion dont le but est d'octroyer une invincibilité temporaire au joueur
+ * @author JP
+ */
 public class InvulPotion extends AbstractPotion {
 
     public InvulPotion(Etage e, Position pos, String nom) {

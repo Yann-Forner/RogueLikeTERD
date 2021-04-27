@@ -1,7 +1,5 @@
 package Model.Entitys;
 
-import Model.Entitys.Items.HealPotion;
-import Model.Entitys.Items.ItemFactory;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
@@ -57,7 +55,7 @@ public abstract class AbstractItem extends Entity {
      */
     @Override
     public void onContact(Entity e) {
-        //TODO remplacer le instanceof #JP
+        /*
         if (!(e instanceof AbstractMonster)) {
             BasicPlayer player = (BasicPlayer) e;
             if (prix == 0) {
@@ -87,6 +85,7 @@ public abstract class AbstractItem extends Entity {
                 }
             }
         }
+        */
     }
 
     /**
