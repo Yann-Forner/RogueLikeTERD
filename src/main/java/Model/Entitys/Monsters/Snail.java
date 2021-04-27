@@ -14,6 +14,8 @@ public class Snail extends AbstractMonster {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
     }
 
+
+
     @Override
     protected Position nextPosition() {
         Position gauche = getPosition().somme(-1,0);
