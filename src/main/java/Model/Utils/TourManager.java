@@ -77,6 +77,7 @@ public class TourManager implements Serializable {
             char[] input = System.console().readPassword();
             if(input.length>0){
                 cmd = input[0];
+                
             }
         }
         else{

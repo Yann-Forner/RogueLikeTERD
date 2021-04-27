@@ -18,7 +18,8 @@ public class BasicPlayer extends AbstractAlive {
     private int MAX_PV;
     private long MovementCoolDown = System.currentTimeMillis();
     private final AbstractClass classe;
-
+    private int money;
+  
     /**
      * Crée un joueur.
      * @param nom Nom
@@ -32,6 +33,7 @@ public class BasicPlayer extends AbstractAlive {
         CURRENT_EXP=0;
         MAX_PV=classe.getBasePV();
         classe.setBaseItems(this);
+        money = 0;
     }
 
     /**
@@ -46,7 +48,7 @@ public class BasicPlayer extends AbstractAlive {
         setPosition(position);
         etage.get(getPosition()).setEntity(this);
     }
-
+  
     /**
      * Ajoute de l'experience au joueur.
      * Quend celle ci atteint un certain seuil, le joueur monte d'un niveau et elle rappart de 0.
@@ -55,14 +57,44 @@ public class BasicPlayer extends AbstractAlive {
      */
     public void addExp(int exp){
         CURRENT_EXP += exp;
-        if(CURRENT_EXP>=MAX_EXP){
+        if (CURRENT_EXP >= MAX_EXP) {
             MAX_EXP *= 2;
             CURRENT_EXP = 0;
-            updatePV(MAX_PV/2);
+            updatePV(MAX_PV / 2);
             MAX_PV *= 1.5;
             lvl++;
-            TourManager.addMessage(Affichage.BRIGTH_CYAN+"Vous avez gagné un niveau");
+            TourManager.addMessage(Affichage.BRIGTH_CYAN + "Vous avez gagné un niveau");
         }
+    }
+
+    /**
+     * Ajoute de l'argent au joueur.
+     * @param m Montant de la monnaie à ajouter
+     * @return true
+     * @author Gillian
+     */
+    public boolean addMoney(int m) {
+      //TODO debile de renvoyer tout le temps true #GILLIAN
+        money += m;
+        return true;
+    }
+
+    /**
+     * Enlève de l'argent au joueur
+     *
+     * @param m Montant de la monnaie à soustraire
+     * @return true si possible, false sinon
+     * @author Gillian
+     */
+    public boolean removeMoney(int m) {
+
+        if (money - m < 0) {
+            return false;
+        } else {
+            money -= m;
+            return true;
+        }
+
     }
 
     @Override
@@ -74,7 +106,8 @@ public class BasicPlayer extends AbstractAlive {
     }
 
     @Override
-    public void updatePVMessage() {}
+    public void updatePVMessage() {
+    }
 
     /**
      * Renvoit la classe du joueur.
@@ -151,7 +184,7 @@ public class BasicPlayer extends AbstractAlive {
     public int getPv() {
         return super.getPv();
     }
-
+  
     /**
      * Renvoit les pv maximum du joueur.
      * @return pv max
@@ -161,9 +194,19 @@ public class BasicPlayer extends AbstractAlive {
         return MAX_PV;
     }
 
+    /**
+     * Retourne le montant de l'argent du joueur
+     *
+     * @return money
+     * @author Gillian
+     */
+    public int getMoney() {
+        return money;
+    }
+
     @Override
     public int getForce() {
-        return super.getForce()*lvl;
+        return super.getForce() * lvl;
     }
 
     @Override
