@@ -9,7 +9,6 @@ import Model.Utils.Procedure;
 
 public class NormalEtageStrategy extends EtageStrategy{
 
-
     @Override
     public void composeEtage(Etage etage) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.NORMAL);
