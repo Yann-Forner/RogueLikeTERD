@@ -26,7 +26,6 @@ public class Affichage {
         Affichage.getTouches();
         Affichage.getMessages();
         Start.setConsoleMode(true);
-        System.out.println("seed = "+Procedure.getSeed());
     }
 
     public static String etage(Etage etage){
