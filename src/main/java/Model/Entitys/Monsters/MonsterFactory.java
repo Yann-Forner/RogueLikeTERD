@@ -5,6 +5,9 @@ import Model.Utils.Procedure;
 import Model.Utils.Start;
 import Model.Utils.Tools;
 
+/**
+ * Factory qui crée les monstres
+ */
 public class MonsterFactory {
     public enum MonsterType {
         GHOST, ZOMBIE, RAT, BEE, ALIEN, SNAIL , BIGMONSTER ,BIRD, VOLCANO, SKULL, SNAKE, INVOQUEUR, MARCHAND

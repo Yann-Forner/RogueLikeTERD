@@ -6,6 +6,10 @@ import Model.Utils.*;
 
 import java.util.ArrayList;
 
+/**
+ * TODO
+ * @auhtor Quentin
+ */
 public class Invoqueur extends AbstractMonster {
     public Invoqueur(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);

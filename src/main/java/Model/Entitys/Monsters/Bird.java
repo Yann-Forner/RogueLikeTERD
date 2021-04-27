@@ -4,6 +4,10 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
+/**
+ * Bird, se déplace en diagonale, ne cheche pas à attaquer le joueur
+ * @auhtor JP
+ */
 public class Bird extends AbstractMonster {
 
     private boolean totop = true;

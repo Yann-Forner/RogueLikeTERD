@@ -4,6 +4,10 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
+/**
+ * Bee, lorsqu'elle meurs elle fais apparaitre deux abeilles avec deux fois moins de pv
+ * @author Quentin
+ */
 public class Bee extends AbstractMonster {
     private final int BasePv;
 
