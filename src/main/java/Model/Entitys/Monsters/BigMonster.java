@@ -1,5 +1,6 @@
 package Model.Entitys.Monsters;
 
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -10,9 +11,15 @@ import Model.Utils.Procedure;
  * @author Yann
  */
 public class BigMonster  extends AbstractMonster {
-    private static class HandOfMonster extends AbstractMonster {
-        protected HandOfMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
+    private Arm leftArm ;
+    private Arm rightArm;
+
+
+    private class Arm extends AbstractMonster {
+
+        protected Arm(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
             super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
+            m.addMonster(this);
         }
 
         @Override
@@ -22,50 +29,49 @@ public class BigMonster  extends AbstractMonster {
 
         @Override
         public String toString() {
-            return Affichage.BLUE_BACKGROUND+Affichage.BOLD+"|";
+            return Affichage.BLUE+"#";
         }
     }
 
-    private final HandOfMonster leftHand;
-    private final HandOfMonster rightHand;
+
     protected BigMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
-        leftHand = new HandOfMonster(m, new Position(pos.getX() - 1, pos.getY() - 1), nom, pv / 2, force, vision_radius, agro, update_rate_ms, path_type, lvl);
-        rightHand = new HandOfMonster(m, new Position(pos.getX() + 1, pos.getY() - 1), nom, pv / 2, force, vision_radius, agro, update_rate_ms, path_type, lvl);
-        while(!leftHand.getEtage().get(pos.getX()-1,pos.getY()-1).isAccesible() && !rightHand.getEtage().get(pos.getX()+1,pos.getY()-1).isAccesible()){
-            this.move(Procedure.getAccesibleRandomPosition(true,this.getEtage()));
+        while ((!m.get(this.getPosition().getX()-1,this.getPosition().getY()-1).isAccesible() && m.get(this.getPosition().getX()-1,this.getPosition().getY()-1).getType() != Cell.Style.CellType.NORMAL)
+                && (!m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).isAccesible()  && m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).getType() != Cell.Style.CellType.NORMAL)){
+            this.move(Procedure.getAccesibleRandomPosition(true,m));
         }
-    }
+        leftArm = new Arm(m, new Position(this.getPosition().getX()-1,this.getPosition().getY()-1), nom, pv/2, force/2, vision_radius, agro, update_rate_ms, path_type, lvl);
+        rightArm= new Arm(m, new Position(this.getPosition().getX()+1,this.getPosition().getY()-1), nom, pv/2, force/2, vision_radius, agro, update_rate_ms, path_type, lvl);
 
-    @Override
-    public boolean updatePV(int pv) {
-        boolean isAlive = super.updatePV(pv);
-        if (!isAlive){
-            leftHand.updatePV(-leftHand.getPv());
-            rightHand.updatePV(-rightHand.getPv());
-        }
-        return isAlive;
     }
 
     @Override
     public void move(Position pos) {
-        if(leftHand.getEtage().get(new Position(pos.getX()-1,pos.getY()-1)).isAccesible()
-                && rightHand.getEtage().get(new Position(pos.getX()+1,pos.getY()-1)).isAccesible()
-                && this.getEtage().get(pos).isAccesible() ){
-            leftHand.move(new Position(pos.getX()-1,pos.getY()-1));
-            rightHand.move(new Position(pos.getX()+1,pos.getY()-1));
+
+        if(leftArm ==null && rightArm == null)super.move(pos);
+        else if( this.getEtage().get(pos).isAccesible()
+               && this.getEtage().get(pos.getX()-1,pos.getY()-1).isAccesible()
+                && this.getEtage().get(pos.getX()+1,pos.getY()-1).isAccesible()){
+            leftArm.move(new Position(pos.getX()-1, pos.getY()-1));
+            rightArm.move(new Position(pos.getX()+1, pos.getY()-1));
             super.move(pos);
         }
     }
 
     @Override
     public void death() {
+        leftArm.death();
+        rightArm.death();
         super.death();
-        Procedure.setRandomUPnDOWN(getEtage());
+    }
+
+    @Override
+    public void updateMonster() {
+        super.updateMonster();
     }
 
     @Override
     public String toString() {
-        return Affichage.BLUE_BACKGROUND+Affichage.BOLD+"o";
+        return Affichage.BLUE+"U";
     }
 }

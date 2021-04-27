@@ -18,14 +18,22 @@ import java.util.Random;
  */
 public class Procedure {
     private static final Random rand=new Random();
-
+    private static long seed ;
     /**
      * Seed de la Map.
-     * @param seed long
+     * @param s long
      * @author Quentin
      */
-    public static void setSeed(long seed){
-        rand.setSeed(seed);
+    public static void setSeed(long s){
+        rand.setSeed(s);
+        seed = s;
+    }
+    /**
+     * getteur du Seed de la Map.
+     * @author Yann
+     */
+    public static long getSeed(){
+        return seed;
     }
 
     /**

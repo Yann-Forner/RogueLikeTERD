@@ -8,6 +8,10 @@ import Model.Map.Map;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe servant a afficher le menu sur la droite du terminal
+ * @author Yann-FORNER
+ */
 public class Menu {
     private Etage etage;
     private Map map;
@@ -36,13 +40,19 @@ public class Menu {
                 sb.append(print_txt_in_menu_leftorRight(true,"  Etage n°"+(map.getIndexCurrent()+1)+ " | Joueur : "+ Start.getPlayer().getNom(),Affichage.PURPLE));
             }
             else if(line == 2){
-                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,0),Affichage.BRIGTH_GREEN));
+                sb.append(print_txt_in_menu_leftorRight(false,Procedure.getSeed()+ "  ",Affichage.RED));
             }
             else if(line == 3){
-                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,1),Affichage.BRIGTH_GREEN));
+                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,0),Affichage.BRIGTH_GREEN));
             }
             else if(line == 4){
+                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,1),Affichage.BRIGTH_GREEN));
+            }
+            else if(line == 5){
                 sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,2),Affichage.BRIGTH_GREEN));
+            }
+            else if (line == 6){
+                sb.append(print_txt_in_menu_center(Start.getPlayer().getClasse().getNom(),Affichage.YELLOW));
             }
             else if (line==7 && Start.getPlayer()!= null){
                 String equipement = "Equipement : ";
@@ -51,6 +61,9 @@ public class Menu {
                 if (Start.getPlayer().getInventory().getCurrentArmure()!=null)equipement+=Start.getPlayer().getInventory().getCurrentArmure().getNom();
                 else equipement+="X";
                 sb.append(print_txt_in_menu_center(equipement,Affichage.YELLOW));
+            }
+            else if (line == 12){
+                sb.append(print_txt_in_menu_center(TourManager.getTimer(),Affichage.BLUE));
             }
             else if(line == etage.getHeigth() - 4) {
                 sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " +  itemsList.size() + " potions :", Affichage.RED));
