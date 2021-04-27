@@ -103,7 +103,9 @@ public abstract class AbstractItem extends Entity {
      * Renvoit un item aléatoire
      * @return Item
      * @author Gillian
-    /*
+     *
+     */
+
     public static AbstractItem getRandomItem(){
         switch (Procedure.getRandomInt(11,0)){
             case 0, 1, 2 -> {
@@ -116,13 +118,15 @@ public abstract class AbstractItem extends Entity {
                 return new  ;
             }
             case 9,10,11 -> {
-                return new ItemFactory().get
+                return new ItemFactory().getNewItem();
             }
             default -> {
                 return new CircleEtageStrategy();
             }
         }
     }
+
+
      /** 
      * Defini le comportement de l'item lorsque le joueur l'utilise.
      * @param player Joueur

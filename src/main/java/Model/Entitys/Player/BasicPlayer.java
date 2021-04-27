@@ -10,7 +10,8 @@ import Model.Utils.TourManager;
 
 /**
  * Classe de base du joueur
- * @author Quentin, Yann
+ *
+ * @author Quentin, Yann, Gillian
  */
 public class BasicPlayer extends AbstractAlive {
     private int MAX_EXP;
@@ -19,43 +20,46 @@ public class BasicPlayer extends AbstractAlive {
     private long MovementCoolDown = System.currentTimeMillis();
     private final AbstractClass classe;
     private int money;
-  
+
     /**
      * Crée un joueur.
-     * @param nom Nom
+     *
+     * @param nom    Nom
      * @param classe Classe du joueur
      * @author Quentin
      */
     public BasicPlayer(String nom, AbstractClass classe) {
-        super(null,null, classe.getVisionRadius(), nom.length()==0 ? classe.getNom() : nom, classe.getBasePV(), classe.getBaseForce(), 1);
-        this.classe=classe;
-        MAX_EXP=10;
-        CURRENT_EXP=0;
-        MAX_PV=classe.getBasePV();
+        super(null, null, classe.getVisionRadius(), nom.length() == 0 ? classe.getNom() : nom, classe.getBasePV(), classe.getBaseForce(), 1);
+        this.classe = classe;
+        MAX_EXP = 10;
+        CURRENT_EXP = 0;
+        MAX_PV = classe.getBasePV();
         classe.setBaseItems(this);
         money = 0;
     }
 
     /**
      * Change l'etage et la position du joueur dans celui ci.
-     * @param etage Etage
+     *
+     * @param etage    Etage
      * @param position Position
      * @author Quentin
      */
-    public void updateEtage(Etage etage, Position position){
+    public void updateEtage(Etage etage, Position position) {
         getEtage().get(getPosition()).setEntity(null);
         setEtage(etage);
         setPosition(position);
         etage.get(getPosition()).setEntity(this);
     }
-  
+
     /**
      * Ajoute de l'experience au joueur.
      * Quend celle ci atteint un certain seuil, le joueur monte d'un niveau et elle rappart de 0.
+     *
      * @param exp Experience.
      * @author Quentin
      */
-    public void addExp(int exp){
+    public void addExp(int exp) {
         CURRENT_EXP += exp;
         if (CURRENT_EXP >= MAX_EXP) {
             MAX_EXP *= 2;
@@ -69,14 +73,15 @@ public class BasicPlayer extends AbstractAlive {
 
     /**
      * Ajoute de l'argent au joueur.
+     *
      * @param m Montant de la monnaie à ajouter
      * @return true
      * @author Gillian
      */
-    public boolean addMoney(int m) {
-      //TODO debile de renvoyer tout le temps true #GILLIAN
+    public void addMoney(int m) {
+
         money += m;
-        return true;
+
     }
 
     /**
@@ -111,15 +116,17 @@ public class BasicPlayer extends AbstractAlive {
 
     /**
      * Renvoit la classe du joueur.
+     *
      * @return Classe
      * @author Quentin
      */
-    public AbstractClass getClasse(){
+    public AbstractClass getClasse() {
         return classe;
     }
 
     /**
      * Renvoit l'experience necessaire pour monter de niveau.
+     *
      * @return Exp necessaire
      * @author Quentin
      */
@@ -129,6 +136,7 @@ public class BasicPlayer extends AbstractAlive {
 
     /**
      * Renvoit l'experience actuelle.
+     *
      * @return Exp actuelle
      * @author Quentin
      */
@@ -138,45 +146,49 @@ public class BasicPlayer extends AbstractAlive {
 
     /**
      * Deplace le joueur d'une cellule a sa gauche.
+     *
      * @author Yann
      */
     public void moveLeft() {
-        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
-            move(getPosition().somme(-1,0));
-            MovementCoolDown=System.currentTimeMillis();
+        if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
+            move(getPosition().somme(-1, 0));
+            MovementCoolDown = System.currentTimeMillis();
         }
     }
 
     /**
      * Deplace le joueur d'une cellule a sa droite.
+     *
      * @author Yann
      */
     public void moveRight() {
-        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
-            move(getPosition().somme(1,0));
-            MovementCoolDown=System.currentTimeMillis();
+        if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
+            move(getPosition().somme(1, 0));
+            MovementCoolDown = System.currentTimeMillis();
         }
     }
 
     /**
      * Deplace le joueur d'une cellule vers le haut.
+     *
      * @author Yann
      */
     public void moveUp() {
-        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
-            move(getPosition().somme(0,-1));
-            MovementCoolDown=System.currentTimeMillis();
+        if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
+            move(getPosition().somme(0, -1));
+            MovementCoolDown = System.currentTimeMillis();
         }
     }
 
     /**
      * Deplace le joueur d'une cellule vers le bas.
+     *
      * @author Yann
      */
     public void moveDown() {
-        if(System.currentTimeMillis()-MovementCoolDown > classe.getSpeed()){
-            move(getPosition().somme(0,1));
-            MovementCoolDown=System.currentTimeMillis();
+        if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
+            move(getPosition().somme(0, 1));
+            MovementCoolDown = System.currentTimeMillis();
         }
     }
 
@@ -184,13 +196,14 @@ public class BasicPlayer extends AbstractAlive {
     public int getPv() {
         return super.getPv();
     }
-  
+
     /**
      * Renvoit les pv maximum du joueur.
+     *
      * @return pv max
      * @author Quentin
      */
-    public int getMAX_PV(){
+    public int getMAX_PV() {
         return MAX_PV;
     }
 

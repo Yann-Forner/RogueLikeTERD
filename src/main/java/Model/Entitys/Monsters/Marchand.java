@@ -1,5 +1,6 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -118,6 +119,7 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Dialogue de déclaration des options de vente / d'achat / d'attaque
+     *
      * @author Gillian
      */
     public void dialogue() {
@@ -147,6 +149,8 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Dialogue lorsque le joueur a entré un mauvais caractère
+     * Renvoie directement au dialogue correspondant
+     *
      * @author Gillian
      */
     public void dialogueError() {
@@ -154,6 +158,12 @@ public class Marchand extends AbstractMonster {
                 + "\n"
                 + "Je crois que vous n'avez pas bien compris ma question"
         );
+
+        switch (state) {
+            case VISITED -> dialogue();
+            case BUY -> dialogueBuy();
+            case SELL -> dialogueSell();
+        }
         dialogue();
     }
 
@@ -164,9 +174,12 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Analyse de l'entrée utilisateur et redirection vers les différentes procédures
+     *
      * @throws IOException
+     * @author Gillian
      */
     private void processInput() throws IOException {
+        //TODO Comment limiter aux actions voulues (car pour l'instant dans la procédure d'achat il peut vendre
         char cmd = 0;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         if (System.console() != null) {
@@ -181,9 +194,12 @@ public class Marchand extends AbstractMonster {
             }
         }
         switch (cmd) {
-            case '1' -> typeBuy();
-            case '2' -> typeSell();
+            case '1' -> dialogueBuy();
+            case '2' -> dialogueSell();
             case '3' -> typeAggressive();
+            case 'V', 'v' -> sellItem();
+            case 'y', 'Y' -> procedureYes();
+            case 'n', 'N' -> procedureNo();
             default -> processInput();
         }
     }
@@ -191,6 +207,7 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Procédure d'attaque lorsque le marchand est aggressif
+     *
      * @author Gillian
      */
     public void updateMonster() {
@@ -211,10 +228,12 @@ public class Marchand extends AbstractMonster {
     }
 
     /**
-     *Procédure lorsque le marchand est en mode "vente"
-     *
+     * dialogue initial quand le marchand est en mode "vente" (que le joueur veut acheter)
+     * @author Gillian
      */
-    public void typeBuy() {
+    public void dialogueBuy() {
+
+        state = STATE.BUY;
 
         TourManager.addMessage("Tu veux donc acquérir un de mes merveilleux objets ? EHEH ! ça me va !"
                 + "\n"
@@ -223,7 +242,7 @@ public class Marchand extends AbstractMonster {
                 + " Tu n'as qu'à avancer sur l'un d'eux pour me " + Affichage.GREEN + " l'acheter !"
         );
 
-       // getEtage().addItem();
+        // getEtage().addItem();
         //TODO AJOUTER LES ITEMS AU SOL
         //getEtage().addItem();
 
@@ -231,12 +250,59 @@ public class Marchand extends AbstractMonster {
     }
 
 
-    public void typeSell() {
+    /**
+     * dialogue initial quand le marchand veut acheter (que le joueur veut vendre)
+     * @author Gillian
+     */
+    public void dialogueSell() {
 
+        state = STATE.SELL;
+        TourManager.addMessage("Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !"
+                + "\n"
+                + Affichage.GREEN + " Montre moi ce que tu veux me vendre !"
+                + "\n"
+                + " Tu n'as qu'à appuyer sur la touche " + Affichage.GREEN + "V" + Affichage.YELLOW + "pour me vendre" + "l'objet que tu tiens dans la main !"
+        );
+
+        try {
+            processInput();
+        } catch (Exception e) {
+            dialogueError();
+        }
+
+    }
+
+    /**
+     * réalisation de la vente par le joueur.
+     * @author Gillian
+     */
+    public void sellItem() {
+
+        var first = getInventory().getItems().remove(getInventory().getItems().size() - 1);
+        Start.getPlayer().addMoney(first.getPrix());
+
+        TourManager.addMessage("Tu viens de gagner " + first.getPrix() + "!"
+                + "\n \n"
+                + Affichage.GREEN + " Veux-tu me vendre autre chose ?"
+                + "\n"
+                + Affichage.GREEN + "Y - OUI"
+                + "\n"
+                + Affichage.YELLOW + "N - NON"
+        );
+
+        try {
+            processInput();
+        } catch (Exception e) {
+            dialogueError();
+        }
 
     }
 
 
+    /**
+     * Passage du marchand en mode agressif lorsque le joueur a décidé d'attaquer le marchand
+     * @author Gillian
+     */
     public void typeAggressive() {
 
         TourManager.addMessage("Vous auriez pu choisir la fortune... " + getNom()
@@ -246,6 +312,27 @@ public class Marchand extends AbstractMonster {
         state = STATE.AGGRESSIVE;
     }
 
+
+    /**
+     * redirection lorsque le joueur répond "yes" aux questions du marchand
+     * @author Gillian
+     */
+    public void procedureYes() {
+
+        switch (state) {
+            case BUY -> dialogueBuy();
+            case SELL -> dialogueSell();
+        }
+    }
+
+    /**
+     * redirection et changement de mode du marchand lorsque le joueur répond "no" aux questions du marchand
+     * @author Gillian
+     */
+    public void procedureNo() {
+        dialogue();
+        state = STATE.VISITED;
+    }
 
     // lui parler
     // acheter des trucs
