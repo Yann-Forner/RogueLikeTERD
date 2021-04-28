@@ -14,7 +14,7 @@ import java.util.List;
 public class Menu {
     private Etage etage;
     private Map map;
-
+    private static final int LARGEUR_MENU = 81;
     /**
      * Constructeur d'un menu
      * @param etage etage
@@ -36,75 +36,64 @@ public class Menu {
         Inventory inv = Start.getPlayer().getInventory();
         var potionsList = inv.getPotions();
         var armesList = inv.getWeapons();
-
         //Menu
         sb.append(Affichage.BOLD).append(Affichage.BLUE).append("     ");
-        if(line==0){
+        if (line == 0) {
             sb.append("╔═════════════════════════════════════════════════════════════════════════════════╗");
-        }
-        else if(line==etage.getHeigth()-1){
+        } else if (line == etage.getHeigth() - 1) {
             sb.append("╚═════════════════════════════════════════════════════════════════════════════════╝");
-        }
-        else{
+        } else {
+            ArrayList<String> enteteMenu = new ArrayList(
+                    List.of(" Seed : " + Procedure.getSeed()+" ", " Timer : " + TourManager.getTimer()+" ")
+            );
             ArrayList<String> levelPlayer = new ArrayList(
-                    List.of(" Niveau "+Start.getPlayer().getLvl()+ " ["+Start.getPlayer().getCURRENT_EXP()+"/"+Start.getPlayer().getMAX_EXP()+"] ") );
-            if(line==1){
-                sb.append(print_txt_in_menu_leftorRight(true,"  Etage n°"+(map.getIndexCurrent()+1)+ " | Joueur : "+ Start.getPlayer().getNom(),Affichage.PURPLE));
+                    List.of(" Niveau " + Start.getPlayer().getLvl() + " [" + Start.getPlayer().getCURRENT_EXP() + "/" + Start.getPlayer().getMAX_EXP() + "] "));
+            if (line == 1) {
+                sb.append(print_txt_in_menu_center(make_a_border(enteteMenu, 0), Affichage.BLUE));
+            } else if (line == 2) {
+                sb.append(print_txt_in_menu_center(make_a_border(enteteMenu, 1), Affichage.BLUE));
+            } else if (line == 3) {
+                sb.append(print_txt_in_menu_center(make_a_border(enteteMenu, 2), Affichage.BLUE));
+            } else if (line == 5) {
+                sb.append(print_txt_in_menu_leftorRight(true, "    Joueur : " + Start.getPlayer().getNom(), Affichage.RED));
+            } else if (line == 6) {
+                sb.append(print_txt_in_menu_leftorRight(true, "    Classe : " + Start.getPlayer().getClasse().getNom(), Affichage.RED));
+            } else if (line == 7) {
+                sb.append(print_txt_in_menu_leftorRight(true, "    Etage n°" + (map.getIndexCurrent() + 1), Affichage.RED));
+            }else if (line == 8){
+                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,0),Affichage.RED));
+            }else if (line == 9){
+                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,1),Affichage.RED));
+            }else if (line == 10){
+                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,2),Affichage.RED));
+            }else if (line == 11) {
+                sb.append("║═════════════════════════════════════════════════════════════════════════════════║");
+            } else if (line == 12) {
+                sb.append(print_txt_in_menu_leftorRight(true, "  Inventaire", Affichage.PURPLE));
             }
-            else if(line == 2){
-                sb.append(print_txt_in_menu_leftorRight(false,Procedure.getSeed()+ "  ",Affichage.RED));
-            }
-            else if(line == 3){
-                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,0),Affichage.BRIGTH_GREEN));
-            }
-            else if(line == 4){
-                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,1),Affichage.BRIGTH_GREEN));
-            }
-            else if(line == 5){
-                sb.append(print_txt_in_menu_leftorRight(false,make_a_border(levelPlayer,2),Affichage.BRIGTH_GREEN));
-            }
-            else if (line == 6){
-                sb.append(print_txt_in_menu_center(Start.getPlayer().getClasse().getNom(),Affichage.YELLOW));
-            }
-            else if (line==7 && Start.getPlayer()!= null){
-                String equipement = "Equipement : ";
-                if (Start.getPlayer().getInventory().getWeapons()!=null && Start.getPlayer().getInventory().getWeapons().size() > 0 )equipement+=Start.getPlayer().getInventory().getWeapons().get(0).getNom()+"/";
-                else equipement+="X/";
-                //if (Start.getPlayer().getInventory().getArmures()!=null && Start.getPlayer().getInventory().getArmures().size() > 0)equipement+=Start.getPlayer().getInventory().getArmures().get(0).getNom();
-                //else
-                equipement+="X";
-                sb.append(print_txt_in_menu_center(equipement,Affichage.YELLOW));
-            }
-            else if (line == 12){
-                sb.append(print_txt_in_menu_center(TourManager.getTimer(),Affichage.BLUE));
-            }
-            else if(line == etage.getHeigth() - 6) {
-                sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " +  armesList.size() + " armes :", Affichage.RED));
-            }
-            else if(line == etage.getHeigth() - 5) {
+            else if (line == etage.getHeigth() - 6) {
+                    sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " + armesList.size() + " armes :", Affichage.RED));
+            } else if (line == etage.getHeigth() - 5) {
                 StringBuilder armesString = new StringBuilder();
-                for(int index = 0; index < armesList.size(); index++) {
-                    if(index == 0)
-                        armesString.append("[" + armesList.get(index).toString() + "] ");
-                    else
-                        armesString.append(armesList.get(index).toString() + " ");
-                }
-                sb.append(print_txt_in_menu_leftorRight(true, armesString.toString(),Affichage.RED));
-            }
-            else if(line == etage.getHeigth() - 4) {
-                sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " +  potionsList.size() + " potions :", Affichage.RED));
-            }
-            else if(line == etage.getHeigth() - 3) {
-                StringBuilder potionsString = new StringBuilder();
-                for(int i = 0; i < potionsList.size(); i++) {
-                    if(i == 0)
-                        potionsString.append("[" + potionsList.get(i).toString() + "] ");
-                    else
-                        potionsString.append(potionsList.get(i).toString() + " ");
-                }
-                sb.append(print_txt_in_menu_leftorRight(true, potionsString.toString(),Affichage.RED));
-            }
-            else {
+                for (int index = 0; index < armesList.size(); index++) {
+                        if (index == 0)
+                            armesString.append("[" + armesList.get(index).toString() + "] ");
+                        else
+                            armesString.append(armesList.get(index).toString() + " ");
+                    }
+                    sb.append(print_txt_in_menu_leftorRight(true, armesString.toString(), Affichage.RED));
+            } else if (line == etage.getHeigth() - 4) {
+                    sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " + potionsList.size() + " potions :", Affichage.RED));
+            } else if (line == etage.getHeigth() - 3) {
+                    StringBuilder potionsString = new StringBuilder();
+                    for (int i = 0; i < potionsList.size(); i++) {
+                        if (i == 0)
+                            potionsString.append("[" + potionsList.get(i).toString() + "] ");
+                        else
+                            potionsString.append(potionsList.get(i).toString() + " ");
+                    }
+                    sb.append(print_txt_in_menu_leftorRight(true, potionsString.toString(), Affichage.RED));
+            } else {
                 sb.append("║                                                                                 ║");
             }
         }
@@ -121,18 +110,19 @@ public class Menu {
      */
     public static String print_txt_in_menu_leftorRight(boolean left, String message,String color){
         StringBuilder sb = new StringBuilder();
-        if(message.length()<81){
-            sb.append("║");
-            sb.append(color);
-            int spacing = (81 - message.length());
-            if (!left)sb.append(" ".repeat(spacing));
-            sb.append(message);
-            if(left)sb.append(" ".repeat(spacing));
-            sb.append(Affichage.BLUE);
-            sb.append("║");
-        }else{
-            sb.append("║                                                                                 ║");
+        if (message.length()>LARGEUR_MENU){
+            message = message.substring(0,LARGEUR_MENU-3);
+            message += "...";
         }
+        sb.append("║");
+        sb.append(color);
+        int spacing = (LARGEUR_MENU - message.length());
+        if (!left)sb.append(" ".repeat(spacing));
+        sb.append(message);
+        if(left)sb.append(" ".repeat(spacing));
+        sb.append(Affichage.BLUE);
+        sb.append("║");
+
         return sb.toString();
     }
 
@@ -145,18 +135,20 @@ public class Menu {
      */
     public static String print_txt_in_menu_center(String message,String color){//81
         StringBuilder sb = new StringBuilder();
-        if(message.length()<81){
+        if (message.length()>LARGEUR_MENU){
+            message = message.substring(0,LARGEUR_MENU-3);
+            message += "...";
+        }
+        if(message.length()<LARGEUR_MENU){
             sb.append("║");
             sb.append(color);
-            int spacing = (81 - message.length())/2;
+            int spacing = (LARGEUR_MENU - message.length())/2;
             sb.append(" ".repeat(spacing));
             sb.append(message);
             if((message.length()%2==0))++spacing;
             sb.append(" ".repeat(spacing));
             sb.append(Affichage.BLUE);
             sb.append("║");
-        }else if (message.length()>81){
-            sb.append("║                                                                                 ║");
         }
         else {
             sb.append("║").append(message).append("║");
