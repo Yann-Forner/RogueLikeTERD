@@ -69,10 +69,13 @@ public class WeaponFactory {
     }
 
     /**
-     * Retourne la liste de potions
+     * Retourne l'arme générée avec les caractéristiques indiquées
      *
      * @param etage Etage ou aura lieu la génération de l'arme
      * @param i Type d'arme à générer
+     * @param durability Durabilitée de l'arme
+     * @param range Portée de l'arme
+     * @param strength Force de l'arme
      * @return Retourne l'arme généré
      * @author JP
      */
@@ -96,6 +99,14 @@ public class WeaponFactory {
         }
     }
 
+    /**
+     * Retourne l'arme générée avec des caractéristiques par défaut
+     *
+     * @param etage Etage ou aura lieu la génération de l'arme
+     * @param i Type d'arme à générer
+     * @return Retourne l'arme généré
+     * @author JP
+     */
     public static AbstractItem getNewWeapon(Etage etage, WeaponType i) {
         switch(i) {
             case SWORD -> {
