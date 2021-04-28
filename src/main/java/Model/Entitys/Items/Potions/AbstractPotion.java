@@ -13,7 +13,7 @@ import Model.Utils.TourManager;
  * Concept abstrait des potions, contenant le processus de ramassage (dans onContact)
  * @author JP
  */
-public class AbstractPotion extends AbstractItem {
+public abstract class AbstractPotion extends AbstractItem {
     /**
      * Constructeur de la potion
      *

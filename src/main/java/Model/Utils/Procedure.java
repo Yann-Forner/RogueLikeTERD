@@ -125,14 +125,14 @@ public class Procedure {
     //TODO comment faire ça sans le getRandomPosition(Etage e, Room... r) ?
     public static Position getAccesibleRandomPosition(boolean isEntityGeneration,Etage e,Room ... r){
         Position pos = r.length==1 ? getRandomPosition(r[0]) : getRandomPosition(e);
-        if(isEntityGeneration){
+        if(isEntityGeneration) {
             Cell c = e.get(pos);
             while(!c.isAccesible() || c.getEntity()!=null || c.isReserved()){
                 pos = r.length==1 ? getRandomPosition(r[0]) : getRandomPosition(e);
                 c = e.get(pos);
             }
         }
-        else{
+        else {
             while(!e.get(pos).isAccesible()){
                 pos = r.length==1 ? getRandomPosition(r[0]) : getRandomPosition(e);
             }

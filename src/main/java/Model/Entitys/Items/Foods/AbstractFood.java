@@ -10,7 +10,7 @@ import Model.Utils.Position;
  * Concept abstrait des nourriture. C'est ici que sera gérer le fait de manger l'item.
  * @author JP
  */
-public class AbstractFood extends AbstractItem {
+public abstract class AbstractFood extends AbstractItem {
 
     private int heal;
     /**
