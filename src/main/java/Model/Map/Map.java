@@ -63,7 +63,7 @@ public class Map implements Serializable {
         Etage etage;
         int currentIndex = getIndexCurrent();
         if(currentIndex == etages.size()-1){
-            int numEtage = currentIndex + 1;
+            int numEtage = currentIndex + 2;
             EtageStrategy strategy;
             if(numEtage%10==0){
                 strategy = new BossEtageStategy();

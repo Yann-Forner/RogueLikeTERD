@@ -8,9 +8,11 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
+import java.util.Objects;
+
 /**
  * Skull, attaque le joueur en lui tirant des projectiles
- * @auhtor Quentin
+ * @author Quentin
  */
 public class Skull extends AbstractMonster {
 
@@ -21,7 +23,7 @@ public class Skull extends AbstractMonster {
     @Override
     public void updateMonster() {
         BasicPlayer player = Start.getPlayer();
-        double distance = player.getPosition().Distance(getPosition());
+        double distance = Objects.requireNonNull(player).getPosition().Distance(getPosition());
         if(Alert==0 && distance<getVision_radius()){
             Alert=1;
             TourManager.addMessage(getNom()+" vous a reperé!!!");
@@ -37,7 +39,7 @@ public class Skull extends AbstractMonster {
             move(plus_loin);
         }
         else if(distance>=getVision_radius()/4 && distance<getVision_radius()/3){
-            Affichage.Projectile(getEtage(),getPosition(),player.getPosition(),new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED,"\uD83D\uDD25"));
+            Affichage.Projectile(getEtage(),getPosition(),player.getPosition(),new Cell.Style(Cell.Style.CellType.PROJECTILE));
             player.updatePV(- getForce());
         }
         else if(distance>=getVision_radius()/3 && distance < (Alert==0 ? getVision_radius() : Agro)){

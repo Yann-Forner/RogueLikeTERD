@@ -30,14 +30,19 @@ public class DonjonStrategy extends EtageStrategy {
     @Override
     public void composeEtage(Etage etage) {
         ArrayList<RoomFactory.roomType> roomsOfEtage = new ArrayList<>();
-        int CircleRooms, NormalRooms;
-        CircleRooms = NormalRooms = 0;
-        for (int i = 0; i < getNbrMaxRoom() ; i++) {
+        int CircleRooms = 0, NormalRooms = 0, MarchandRooms = 0,nbrCurrentRooms = 0;
+        while (nbrCurrentRooms< getNbrMaxRoom()){
             RoomFactory.roomType roomType = myRooms.get(new Random().nextInt((myRooms.size())));
-            roomsOfEtage.add(roomType);
-            switch (roomType){
-                case NORMAL -> NormalRooms++;
-                case CIRCLENORMAL -> CircleRooms++;
+            if(roomType != RoomFactory.roomType.MARCHAND || MarchandRooms == 0){
+                if(MarchandRooms==0){
+                    MarchandRooms++;
+                }
+                nbrCurrentRooms++;
+                roomsOfEtage.add(roomType);
+                switch (roomType){
+                    case NORMAL -> NormalRooms++;
+                    case CIRCLENORMAL -> CircleRooms++;
+                }
             }
         }
         Cell.Style fusion_style = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,".");

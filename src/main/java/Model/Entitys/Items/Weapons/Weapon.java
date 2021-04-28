@@ -73,7 +73,7 @@ public class Weapon extends AbstractItem {
                             Entity e = player.getEtage().get(xScan, yScan).getEntity();
                             if(e != null && e instanceof AbstractMonster) {
                                 ((AbstractMonster) e).updatePV(-strength);
-                                Affichage.Projectile(player.getEtage(), player.getPosition(), e.getPosition(), new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED,"\uD83D\uDD25"));
+                                Affichage.Projectile(player.getEtage(), player.getPosition(), e.getPosition(), new Cell.Style(Cell.Style.CellType.PROJECTILE));
                             }
                         }
                     }

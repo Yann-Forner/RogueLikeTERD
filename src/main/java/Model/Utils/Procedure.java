@@ -171,7 +171,7 @@ public class Procedure {
      * @param roomTypes Liste des strategy des rooms.
      * @author Yann,Quentin
      */
-    public static void setRandomRooms(Etage etage,EtageStrategy etageStrategy ,ArrayList<RoomFactory.roomType> roomTypes ){
+    public static void setRandomRooms(Etage etage,EtageStrategy etageStrategy ,ArrayList<RoomFactory.roomType> roomTypes){
         int nbrRooms = 0;
         long t1 = System.currentTimeMillis();
         while (nbrRooms < etageStrategy.getNbrMaxRoom() && nbrRooms < roomTypes.size()  &&  (System.currentTimeMillis()-t1<500) ){

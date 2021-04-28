@@ -216,9 +216,11 @@ public class Affichage {
         ArrayList<Position> ligne = Tools.getLigne(p1, p2);
         for (int i = 0; i < ligne.size(); i++) {
             Cell cell = etage.get(ligne.get(ligne.size()-(i+1)));
-            Cell.Style base_style = cell.getStyle();
-            cell.updateCell(cell.isAccesible(), style);
-            TourManager.getExecutor().schedule(() -> cell.updateCell(cell.isAccesible(), base_style), 50*delay, TimeUnit.MILLISECONDS);
+            if(cell.getType()!=Cell.Style.CellType.PROJECTILE){
+                Cell.Style base_style = cell.getStyle();
+                cell.updateCell(cell.isAccesible(), style);
+                TourManager.getExecutor().schedule(() -> cell.updateCell(cell.isAccesible(), base_style), 100*delay, TimeUnit.MILLISECONDS);
+            }
             delay++;
         }
     }

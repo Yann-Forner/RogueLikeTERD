@@ -23,10 +23,7 @@ public class Cell implements Serializable {
             UP(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4D","^"),
             DOWN(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4E","v"),
             TRAP_ROOM(Affichage.BLUE,"X"),
-            SPECIAL(Affichage.YELLOW,"X"),
-            FIREBALL(Affichage.RED,"\u2600");
-
-
+            PROJECTILE(Affichage.RED+Affichage.BOLD,"\uD83D\uDD25","+");
 
             private final String base_color;
             private final String forme;
@@ -131,8 +128,7 @@ public class Cell implements Serializable {
         return getType().equals(Style.CellType.UP)
                 || getType().equals(Style.CellType.DOWN)
                 || getType().equals(Style.CellType.CHEST)
-                || getType().equals(Style.CellType.TRAP_ROOM)
-                || getType().equals(Style.CellType.SPECIAL);
+                || getType().equals(Style.CellType.TRAP_ROOM);
     }
 
     /**
