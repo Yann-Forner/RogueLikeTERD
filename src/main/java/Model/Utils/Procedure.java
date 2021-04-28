@@ -29,8 +29,8 @@ public class Procedure {
         seed = s;
     }
     /**
-     * Getteur du Seed de la Map.
-     * @author Quentin,Yann
+     * Renvoit la Seed de la Map.
+     * @author Quentin
      */
     public static long getSeed(){
         return seed;

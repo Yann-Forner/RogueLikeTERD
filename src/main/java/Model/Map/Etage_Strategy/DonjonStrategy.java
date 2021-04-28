@@ -3,16 +3,16 @@ package Model.Map.Etage_Strategy;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Map.Room;
 import Model.Map.RoomFactory;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
- * Classe de la strategie principale du jeu, cet etage peut etre rempli de plusieurs rooms qui seront différentes les unes des autres
+ * Classe de la strategie principale du jeu, cet etage peut etre rempli de plusieurs rooms qui seront différentes les unes des autres.
  * @author Yann,Quentin
  */
 public class DonjonStrategy extends EtageStrategy {
@@ -58,8 +58,11 @@ public class DonjonStrategy extends EtageStrategy {
     @Override
     public void setMonsters(Etage etage) {
         super.setMonsters(etage);
-        for(int i = 0; i < 3; i++){
-            etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BIGMONSTER));
+        for(int i = 0; i < Procedure.getRandomInt(3,0); i++){
+            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT)));
+        }
+        for(int i = 0; i < Procedure.getRandomInt(2,0); i++){
+            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SNAIL)));
         }
     }
 

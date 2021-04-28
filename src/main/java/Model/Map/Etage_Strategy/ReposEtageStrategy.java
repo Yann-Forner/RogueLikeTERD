@@ -7,7 +7,7 @@ import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
 /**
- * cet étage est composé d'une seule salle qui permet de se reposer
+ * Cet étage est composé d'une seule salle qui permet de se reposer.
  * @author Yann
  */
 public class ReposEtageStrategy extends EtageStrategy{

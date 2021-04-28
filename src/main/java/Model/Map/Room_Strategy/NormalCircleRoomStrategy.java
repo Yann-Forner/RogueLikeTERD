@@ -38,8 +38,11 @@ public class NormalCircleRoomStrategy extends CircleRoomStrategy {
 
     @Override
     public void setMonsters(Room r) {
-        for (int i = 0; i < Procedure.getRandomInt(2,1); i++) {
+        for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
             r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.BIRD));
+        }
+        for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
+            r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.VOLCANO));
         }
     }
 

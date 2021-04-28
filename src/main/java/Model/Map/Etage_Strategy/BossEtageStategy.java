@@ -7,7 +7,7 @@ import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
 /**
- * Cet étage est composé d'une seule salle grande qui comporte un boss
+ * Cet étage est composé d'une seule salle grande qui comporte un boss.
  * @auhtor Yann
  */
 

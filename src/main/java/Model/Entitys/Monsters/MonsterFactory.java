@@ -60,7 +60,7 @@ public class MonsterFactory {
                 return new Invoqueur(etage,Procedure.getAccesibleRandomPosition(true,etage),"INVOQUEUR",10,18,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5);
             }
             case MARCHAND -> {
-                return new Marchand(etage,Procedure.getAccesibleRandomPosition(true,etage),"MARCHAND",50,20,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5, Marchand.STATE.NOTVISITED);
+                return new Marchand(etage,Procedure.getAccesibleRandomPosition(true,etage),"MARCHAND",50,8,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5, Marchand.STATE.NOTVISITED);
             }
 
             default -> {
