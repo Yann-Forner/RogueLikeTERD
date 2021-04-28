@@ -14,7 +14,12 @@ public class Banana extends AbstractFood {
      * @param position Position de la banane
      * @param nom Nom de la banane
      */
-    public Banana(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
+    public Banana(Etage etage, Position position, String nom, int heal) {
+        super(etage, position, nom, heal);
+    }
+
+    @Override
+    public String toString() {
+        return 	"\uD83C\uDF4C";
     }
 }

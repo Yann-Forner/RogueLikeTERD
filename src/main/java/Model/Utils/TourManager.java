@@ -99,7 +99,7 @@ public class TourManager implements Serializable {
             case 't' , 'T' -> TourParTour();
             case 'i' , 'I' -> player.getInventory().switchWeapons(); //Inventaire
             case 'p' , 'P' -> player.getInventory().switchPotions(); // Potions
-            case 'a' , 'A' -> System.out.println("A"); //Attaque distance
+            case 'a' , 'A' -> player.getInventory().useCurrentWeapon(player); //Attaque distance
             case 'w' , 'W' -> Start.sauvegarde();
             case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
             case 'e' , 'E' , 3 -> Start.end();

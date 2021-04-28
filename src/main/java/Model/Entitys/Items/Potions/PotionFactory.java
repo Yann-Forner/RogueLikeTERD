@@ -1,6 +1,7 @@
 package Model.Entitys.Items.Potions;
 
 import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Items.Foods.AbstractFood;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 
@@ -22,7 +23,7 @@ public class PotionFactory {
      * @return Retourne la potion générée
      * @author JP
      */
-    public static AbstractItem getNewPotion(Etage etage, PotionType i) {
+    public static AbstractPotion getNewPotion(Etage etage, PotionType i) {
         switch(i) {
             case HEAL_POTION -> {
                 return new HealPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de heal", 25);

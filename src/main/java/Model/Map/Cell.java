@@ -23,7 +23,10 @@ public class Cell implements Serializable {
             UP(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4D","^"),
             DOWN(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4E","v"),
             TRAP_ROOM(Affichage.BLUE,"X"),
-            SPECIAL(Affichage.YELLOW,"X");
+            SPECIAL(Affichage.YELLOW,"X"),
+            FIREBALL(Affichage.RED,"\u2600");
+
+
 
             private final String base_color;
             private final String forme;

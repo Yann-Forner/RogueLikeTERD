@@ -14,7 +14,12 @@ public class Apple extends AbstractFood {
      * @param position Position de la pomme
      * @param nom Nom de la pomme
      */
-    public Apple(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
+    public Apple(Etage etage, Position position, String nom, int heal) {
+        super(etage, position, nom, heal);
+    }
+
+    @Override
+    public String toString() {
+        return "\uD83C\uDF4E";
     }
 }
