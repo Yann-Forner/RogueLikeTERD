@@ -2,6 +2,10 @@ package Exceptions;
 
 import Model.Map.Room;
 
+/**
+ * Exception en cas de collision entre deux rooms
+ * @author Yann
+ */
 public class CollisionRoom extends RuntimeException{
     Room r;
 
