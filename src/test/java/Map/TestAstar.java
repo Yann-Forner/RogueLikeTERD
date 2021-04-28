@@ -1,13 +1,13 @@
 package Map;
 
+import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Classes.ClassFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Utils.Start;
-import Model.Utils.Position;
-import Model.Utils.Procedure;
-import Model.Utils.Tools;
+import Model.Utils.*;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -15,27 +15,33 @@ import java.util.ArrayList;
 
 public class TestAstar extends TestCase {
 
-    /*
-    @Test(timeout=100)
-    public void testEfficiencyAstarPlayerToTrapRoom() {
-        Map map = new Map();
-        Etage etage = map.getCurrent();
-        BasicPlayer player = Start.getPlayer();
 
-        Position trapPosition = etage.getTrapCellPosition();
-        System.out.println("Trap-Position : " + trapPosition);
-        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), trapPosition, Tools.PATH_CROSS);
+    @Test(timeout=100)
+    public void testEfficiencyAstarPlayerToRandomEntity() {
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
+        Etage etage = map.getCurrent();
+        AbstractItem i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
+        etage.getItems().add(i1);
+
+        System.out.println("Item position : " + i1.getPosition());
+        ArrayList<Position> cheminitem = Tools.Astar(etage, player.getPosition(), i1.getPosition(), Tools.PATH_CROSS);
     }
 
     @Test
     public void testAstarPlayer() {
-        Map map = new Map();
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
-        BasicPlayer player = Start.getPlayer();
+
 
         ArrayList<Position> cheminRandom = Tools.Astar(etage, player.getPosition(), Procedure.getAccesibleRandomPosition(false, etage), Tools.PATH_CROSS);
-        ArrayList<Position> cheminTrapRoom = Tools.Astar(etage, player.getPosition(), etage.getTrapCellPosition(), Tools.PATH_CROSS);
-        ArrayList<Position> reversedCheminTrapRoom = Tools.Astar(etage, etage.getTrapCellPosition(), player.getPosition(), Tools.PATH_CROSS);
 
         Position outsidePos = new Position(0, 0);
         while(etage.getCells().get(outsidePos.getY()).get(outsidePos.getX()).getType() != Cell.Style.CellType.VOID) {
@@ -57,17 +63,19 @@ public class TestAstar extends TestCase {
         ArrayList<Position> cheminWall = Tools.Astar(etage, player.getPosition(), wallPos, Tools.PATH_CROSS);
 
         assertFalse(cheminRandom == null || cheminRandom.size() == 0);
-        assertFalse(cheminTrapRoom == null || cheminTrapRoom.size() == 0);
-        assertFalse(reversedCheminTrapRoom == null || reversedCheminTrapRoom.size() == 0);
         assertTrue(cheminOutside == null || cheminOutside.size() == 0);
         assertTrue(cheminWall == null || cheminWall.size() == 0);
-    }*/
+    }
 
     @Test
     public void testMapTrapRoom() {
-        //TODO le test va plus marcher je pense TODO 21/04 #JP
-        Map map = new Map(Start.getPlayer());
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
 
         ArrayList<ArrayList<Cell>> oldCells = etage.getCells();
         map.TRAP_ROOM();

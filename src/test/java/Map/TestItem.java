@@ -9,6 +9,7 @@ import Model.Map.Etage;
 import Model.Map.Map;
 import Model.Utils.Position;
 import Model.Utils.Start;
+import Model.Utils.TourManager;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -16,7 +17,11 @@ public class TestItem extends TestCase {
 
     @Test
     public void testSpawnItemSameLocation() {
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
 
         AbstractItem i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
@@ -30,8 +35,13 @@ public class TestItem extends TestCase {
 
     @Test
     public void testItemSpawnLocation() {
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
 
         AbstractItem i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
         etage.getItems().add(i1);
@@ -41,8 +51,13 @@ public class TestItem extends TestCase {
 
     @Test
     public void testCellUpdatedState() {
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
 
         AbstractItem i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
         etage.getItems().add(i1);
@@ -52,9 +67,13 @@ public class TestItem extends TestCase {
 
     @Test
     public void testPotionHeal() {
-        var player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
 
         AbstractItem i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
         etage.getItems().add(i1);

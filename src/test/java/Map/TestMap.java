@@ -1,5 +1,6 @@
 package Map;
 
+import Model.Entitys.Player.BasicPlayer;
 import Model.Entitys.Player.Classes.ClassFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -7,6 +8,7 @@ import Model.Map.Map;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 import Model.Utils.Start;
+import Model.Utils.TourManager;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
@@ -17,9 +19,13 @@ public class TestMap extends TestCase {
 
     @Test
     public void testOutOfBondsCell() {
-        //TODO 21/04 #JP
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
 
         try {
             Cell p = etage.getCells().get(45).get(45);
@@ -31,17 +37,25 @@ public class TestMap extends TestCase {
 
     @Disabled
     public void testCellAccess() {
-        //TODO 21/04 #JP
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
 
     }
 
     @Test
     public void testMapRandomAccessiblePosition() {
-        //TODO 21/04 #JP
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
 
         Position pf = Procedure.getAccesibleRandomPosition(false, etage);
         Position pt = Procedure.getAccesibleRandomPosition(true, etage);
@@ -51,9 +65,14 @@ public class TestMap extends TestCase {
 
     @Test
     public void testMapTrapRoom() {
-        //TODO 21/04 #JP
-        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
+        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
         Etage etage = map.getCurrent();
+
+
 
         ArrayList<ArrayList<Cell>> oldCells = etage.getCells();
         map.TRAP_ROOM();
