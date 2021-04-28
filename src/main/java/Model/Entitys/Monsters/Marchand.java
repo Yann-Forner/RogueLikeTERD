@@ -161,7 +161,7 @@ public class Marchand extends AbstractMonster {
                 "Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !\n" +
                 "Montre moi ce que tu veux me vendre !\n" +
                 "Tu n'as qu'à appuyer sur la touche" +
-                Affichage.YELLOW + Affichage.BOLD + " V " + Affichage.RESET + Affichage.GREEN +
+                Affichage.YELLOW + " V " + Affichage.RESET + Affichage.GREEN + Affichage.BOLD +
                 "pour me vendre l'objet que tu tiens dans la main !\n";
         System.out.println(sb);
         System.exit(1);
