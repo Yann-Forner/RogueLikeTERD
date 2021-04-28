@@ -117,7 +117,7 @@ public class TourManager implements Serializable {
             case 'i' , 'I' -> player.getInventory().switchWeapons(); //Inventaire
             case 'p' , 'P' -> player.getInventory().switchPotions(); // Potions
             case 'a' , 'A' -> {
-                System.out.println("A"); //Attaque distance
+                player.getInventory().useCurrentWeapon(player); //Attaque distance
                 return true;
             }
             case 'w' , 'W' -> Start.sauvegarde();
