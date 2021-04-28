@@ -1,5 +1,6 @@
 package Map;
 
+import Model.Entitys.Player.Classes.ClassFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
@@ -17,7 +18,7 @@ public class TestMap extends TestCase {
     @Test
     public void testOutOfBondsCell() {
         //TODO 21/04 #JP
-        Map map = new Map(Start.getPlayer());
+        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
         Etage etage = map.getCurrent();
 
         try {
@@ -31,7 +32,7 @@ public class TestMap extends TestCase {
     @Disabled
     public void testCellAccess() {
         //TODO 21/04 #JP
-        Map map = new Map(Start.getPlayer());
+        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
         Etage etage = map.getCurrent();
 
     }
@@ -39,7 +40,7 @@ public class TestMap extends TestCase {
     @Test
     public void testMapRandomAccessiblePosition() {
         //TODO 21/04 #JP
-        Map map = new Map(Start.getPlayer());
+        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
         Etage etage = map.getCurrent();
 
         Position pf = Procedure.getAccesibleRandomPosition(false, etage);
@@ -51,7 +52,7 @@ public class TestMap extends TestCase {
     @Test
     public void testMapTrapRoom() {
         //TODO 21/04 #JP
-        Map map = new Map(Start.getPlayer());
+        Map map = new Map(ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER));
         Etage etage = map.getCurrent();
 
         ArrayList<ArrayList<Cell>> oldCells = etage.getCells();
