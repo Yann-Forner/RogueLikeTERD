@@ -3,6 +3,7 @@ package Model.Entitys.Inventaires;
 import Model.Entitys.Items.Foods.AbstractFood;
 import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.Weapon;
+import Model.Entitys.Player.BasicPlayer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,6 +27,15 @@ public class Inventory implements Serializable {
         weapons = new ArrayList<>();
         foods = new ArrayList<>();
         potions = new ArrayList<>();
+    }
+
+
+    /**
+     * Utilise l'arme courante
+     */
+    public void useCurrentWeapon(BasicPlayer player) {
+        if(weapons.size() > 0)
+            weapons.get(0).useItem(player);
     }
 
     /**

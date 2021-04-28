@@ -35,6 +35,7 @@ public class Menu {
     public void toStringByLine(int line ,StringBuilder sb ) {
         Inventory inv = Start.getPlayer().getInventory();
         var potionsList = inv.getPotions();
+        var armesList = inv.getWeapons();
 
         //Menu
         sb.append(Affichage.BOLD).append(Affichage.BLUE).append("     ");
@@ -76,6 +77,19 @@ public class Menu {
             }
             else if (line == 12){
                 sb.append(print_txt_in_menu_center(TourManager.getTimer(),Affichage.BLUE));
+            }
+            else if(line == etage.getHeigth() - 6) {
+                sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " +  armesList.size() + " armes :", Affichage.RED));
+            }
+            else if(line == etage.getHeigth() - 5) {
+                StringBuilder armesString = new StringBuilder();
+                for(int index = 0; index < armesList.size(); index++) {
+                    if(index == 0)
+                        armesString.append("[" + armesList.get(index).toString() + "] ");
+                    else
+                        armesString.append(armesList.get(index).toString() + " ");
+                }
+                sb.append(print_txt_in_menu_leftorRight(true, armesString.toString(),Affichage.RED));
             }
             else if(line == etage.getHeigth() - 4) {
                 sb.append(print_txt_in_menu_leftorRight(true, " Vous avez " +  potionsList.size() + " potions :", Affichage.RED));

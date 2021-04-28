@@ -4,6 +4,7 @@ import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Entity;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -28,9 +29,12 @@ public class Weapon extends AbstractItem {
      * @param nom Nom de l'arme
      * @param weaponType Type de l'arme
      */
-    public Weapon(Etage etage, Position position, String nom, WeaponFactory.WeaponType weaponType) {
+    public Weapon(Etage etage, Position position, String nom, WeaponFactory.WeaponType weaponType, int strength, int range, int durability) {
         super(etage, position, nom);
         this.weaponType = weaponType;
+        this.strength = strength;
+        this.range = range;
+        this.durability = durability;
     }
 
     /**
@@ -54,17 +58,22 @@ public class Weapon extends AbstractItem {
     @Override
     public void useItem(BasicPlayer player) {
         player.setForce(strength);
+        System.out.println(weaponType);
         switch(weaponType) {
             case BOW -> {
                 int playerPositionX = player.getPosition().getX(), playerPositionY = player.getPosition().getY();
 
                 for(int xScan = playerPositionX - range; xScan < playerPositionX + range; xScan++) {
                     for(int yScan = playerPositionY - range; yScan < playerPositionY + range; yScan++) {
-                        if(xScan != playerPositionX && yScan != playerPositionY) {
+
+                        if(xScan != playerPositionX && yScan != playerPositionY
+                                && xScan < getEtage().getWidth() && yScan < getEtage().getHeigth()
+                                    && xScan > 0 && yScan > 0) {
+
                             Entity e = player.getEtage().get(xScan, yScan).getEntity();
-                            if(e instanceof AbstractMonster) {
+                            if(e != null && e instanceof AbstractMonster) {
                                 ((AbstractMonster) e).updatePV(-strength);
-                                // Affichage.Projectile(player.getEtage(), player.getPosition(), e.getPosition(), );
+                                Affichage.Projectile(player.getEtage(), player.getPosition(), e.getPosition(), new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED,"\uD83D\uDD25"));
                             }
                         }
                     }

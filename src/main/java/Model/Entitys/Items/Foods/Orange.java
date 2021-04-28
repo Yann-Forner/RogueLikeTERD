@@ -14,7 +14,12 @@ public class Orange extends AbstractFood {
      * @param position Position de l'oange
      * @param nom Nom de l'oange
      */
-    public Orange(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
+    public Orange(Etage etage, Position position, String nom, int heal) {
+        super(etage, position, nom, heal);
+    }
+
+    @Override
+    public String toString() {
+        return "\uD83C\uDF4A";
     }
 }

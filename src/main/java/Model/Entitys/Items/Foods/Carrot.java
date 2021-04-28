@@ -14,7 +14,12 @@ public class Carrot extends AbstractFood {
      * @param position Position de la carotte
      * @param nom Nom de la carotte
      */
-    public Carrot(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
+    public Carrot(Etage etage, Position position, String nom, int heal) {
+        super(etage, position, nom, heal);
+    }
+
+    @Override
+    public String toString() {
+        return 	"\uD83E\uDD55";
     }
 }
