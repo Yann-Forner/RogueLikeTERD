@@ -4,8 +4,9 @@ import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.RoomFactory;
-import Model.Utils.Affichage;
 import Model.Utils.Procedure;
+
+import java.util.Objects;
 
 /**
  * Cet étage est composé de plusieurs salles, elle seront toutes de forme normale (rectangulaire)
@@ -20,6 +21,14 @@ public class NormalEtageStrategy extends EtageStrategy{
         setSpecialCell(etage);
         setMonsters(etage);
         setItems(etage);
+    }
+
+    @Override
+    public void setMonsters(Etage etage) {
+        super.setMonsters(etage);
+        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
+            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST)));
+        }
     }
 
     @Override

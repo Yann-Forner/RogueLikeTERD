@@ -16,7 +16,7 @@ public abstract class RoomStrategy implements Serializable {
     /**
      * Génère une room
      * @param r la room
-     * @auhtor  Yann, Quentin
+     * @auhtor Yann,Quentin
      */
     public void composeRoom(Room r){
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_YELLOW, ".")));
