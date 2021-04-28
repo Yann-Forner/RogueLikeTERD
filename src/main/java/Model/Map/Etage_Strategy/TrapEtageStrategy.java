@@ -12,7 +12,7 @@ import Model.Utils.Tools;
 import java.util.ArrayList;
 
 /**
- * le trap étage est un étage ressemblant à un labyrinthe
+ * L'etage piege est un étage ressemblant à un labyrinthe.
  * @author Quentin
  */
 public class TrapEtageStrategy extends EtageStrategy{
@@ -26,6 +26,7 @@ public class TrapEtageStrategy extends EtageStrategy{
 
     @Override
     public void EtageFusion(Etage etage, Cell.Style style_fusion) {
+        //TODO rework
         ArrayList<Position> doors = new ArrayList<>();
         for(Room r : etage.getRooms()) {
             for (int i = 0; i < r.getHeigth(); i++) {

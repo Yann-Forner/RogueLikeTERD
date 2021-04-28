@@ -10,25 +10,26 @@ import Model.Utils.Tools;
 import java.util.ArrayList;
 
 /**
- * Classe abstraite définissant le fonctionnement d'un étage
- * @author Yann, Quentin
+ * Classe abstraite définissant le fonctionnement d'un étage.
+ * @author Yann,Quentin
  */
 public abstract class EtageStrategy {
     /**
-     * génère l'étage
+     * Genere les composants de l'étage
      * @param etage etage courant
-     * @author Yann
+     * @author Quentin,Yann
      */
     public abstract void composeEtage(Etage etage);
 
     /**
-     * getter du nombre maximal de rooms dans un etage
+     * Renvoit le nombre maximal de rooms dans un etage.
      * @return int
+     * @author Quentin
      */
     public abstract int getNbrMaxRoom();
 
     /**
-     * Retourne aléatoirement une Strategie d'étage
+     * Retourne aléatoirement une Strategie d'étage.
      * @return EtageStrategy
      * @author Quentin,Yann
      */
@@ -47,10 +48,10 @@ public abstract class EtageStrategy {
     }
 
     /**
-     * Trace les chemins, ajoute les murs, et supprime les murs inutiles d'un étage
+     * Trace les chemins, ajoute les murs, et supprime les murs inutiles d'un étage.
      * @param etage etage courant
      * @param style_fusion style
-     * @author Quentin , Yann
+     * @author Quentin,Yann
      */
     protected void EtageFusion(Etage etage, Cell.Style style_fusion){
         //Trace du chemin
@@ -98,7 +99,7 @@ public abstract class EtageStrategy {
     }
 
     /**
-     * set les cellules spéciales
+     * Definit les cellules spéciales.
      * @param etage etage courant
      * @author Quentin
      */
@@ -108,7 +109,7 @@ public abstract class EtageStrategy {
     }
 
     /**
-     * set les monstres qui seront présents dans l'étage
+     * Defini les monstres qui seront présents dans l'étage.
      * @param etage etage courant
      * @author Quentin
      */
@@ -120,7 +121,7 @@ public abstract class EtageStrategy {
     }
 
     /**
-     * set les items au sol dans l'étage
+     * Defini les items au sol dans l'étage.
      * @param etage etage courant
      * @author JP
      */

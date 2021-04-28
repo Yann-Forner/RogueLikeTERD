@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TourManager implements Serializable {
     private static boolean running = System.getProperty("os.name").equals("Linux");
+    private static boolean inDialogue = false;
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private static int Tour = 0;
@@ -50,15 +51,18 @@ public class TourManager implements Serializable {
      * @author Quentin
      */
     public void playTour(BufferedReader reader){
-        Affichage.getMap();
-        processInput(reader);
-        processEtage();
-        if(!running){
-            Tour++;
-            for(AbstractMonster m : player.getEtage().getMonsters()){
-                m.updateMonster();
-                if(Tour % Math.ceil((float) m.getUpdate_rate_ms() /300)==0){
-                   m.updateMonster();
+        System.out.println("------>"+inDialogue);
+        if(!inDialogue){
+            Affichage.getMap();
+            boolean mouvement = processInput(reader);
+            processEtage();
+            if(!running && mouvement){
+                Tour++;
+                for(AbstractMonster m : player.getEtage().getMonsters()){
+                    m.updateMonster();
+                    if(Tour % Math.ceil((float) m.getUpdate_rate_ms()/300)==0){
+                        m.updateMonster();
+                    }
                 }
             }
         }
@@ -69,9 +73,10 @@ public class TourManager implements Serializable {
      * -Depuis le terminal pas besoin d'appuyer sur entré.
      * -Depuis un IDE la console est null donc il faut passé par un Reader et appuyer sur entré.
      * @param reader Que depuis un IDE
+     * @return Si le joueur s'est deplacé ou a attaqué.
      * @author Quentin
      */
-    private void processInput(BufferedReader reader) {
+    private boolean processInput(BufferedReader reader) {
         char cmd = 0;
         if(System.console()!=null){
             char[] input = System.console().readPassword();
@@ -92,19 +97,35 @@ public class TourManager implements Serializable {
             }
         }
         switch (cmd){
-            case 'z' , 'Z' -> player.moveUp();
-            case 'q' , 'Q' -> player.moveLeft();
-            case 's' , 'S' -> player.moveDown();
-            case 'd' , 'D' -> player.moveRight();
+            case 'z' , 'Z' -> {
+                player.moveUp();
+                return true;
+            }
+            case 'q' , 'Q' -> {
+                player.moveLeft();
+                return true;
+            }
+            case 's' , 'S' -> {
+                player.moveDown();
+                return true;
+            }
+            case 'd' , 'D' -> {
+                player.moveRight();
+                return true;
+            }
             case 't' , 'T' -> TourParTour();
             case 'i' , 'I' -> player.getInventory().switchWeapons(); //Inventaire
             case 'p' , 'P' -> player.getInventory().switchPotions(); // Potions
-            case 'a' , 'A' -> player.getInventory().useCurrentWeapon(player); //Attaque distance
+            case 'a' , 'A' -> {
+                player.getInventory().useCurrentWeapon(player); //Attaque distance
+                return true;
+            }
             case 'w' , 'W' -> Start.sauvegarde();
             case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
             case 'e' , 'E' , 3 -> Start.end();
             default -> processInput(reader);
         }
+        return false;
     }
 
     /**
@@ -161,7 +182,24 @@ public class TourManager implements Serializable {
      */
     public static void TourParTour(){
         TourManager.addMessage(running ? "Le jeu est en mode Tour par tour" : "Le jeu n'est plus en mode Tour par tour");
+        Pause();
+    }
+
+    /**
+     * Met en pause le jeu.
+     * @author Quentin
+     */
+    public static void Pause(){
         running=!running;
+    }
+
+    /**
+     * Change vers quoi va la capture des touches.
+     * @author Quentin
+     */
+    public static void InDialogue(){
+        Start.setConsoleMode(false);
+        inDialogue=!inDialogue;
     }
 
     /**

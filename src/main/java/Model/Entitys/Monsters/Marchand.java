@@ -1,6 +1,5 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -18,31 +17,22 @@ import java.io.InputStreamReader;
 
 /**
  * Classe décrivant le marchand (considéré donc comme un monstre
- *
- * @author Gillian
+ * @author Gillian, Quentin
  */
 public class Marchand extends AbstractMonster {
 
-
     /**
      * Différents états du marchands
-     *
      * @author Gillian
      */
     public enum STATE {
         NOTVISITED, VISITED, BUY, SELL, AGGRESSIVE
     }
 
-    /**
-     * Champs décrivant l'état du marchand
-     *
-     * @author Gillian
-     */
-    STATE state;
+    private STATE state;
 
     /**
      * Constructeur du marchand
-     *
      * @param m             Etage où mettre le marchand
      * @param pos           Position du marchand
      * @param nom           Nom du marchand
@@ -61,10 +51,148 @@ public class Marchand extends AbstractMonster {
         this.state = state;
     }
 
+    /**
+     * Lance la procédure du marchand lorsque l'on marche dessus (en fonction de son état).
+     * @param pv Points de vie
+     * @return boolean
+     * @author Gillian, Quentin
+     */
+    @Override
+    public boolean updatePV(int pv) {
+        switch (state){
+            case  NOTVISITED, VISITED -> dialogue();
+            case BUY -> System.out.println("buy"); //TODO
+            case AGGRESSIVE -> System.out.println("agrressive"); //TODO
+        }
+        return true;
+    }
+
+    /**
+     * Dialogue de "bienvenue" lancé lorsque l'on a jamais vu le marchand.
+     * @author Gillian, Quentin
+     */
+    private String dialogueInit() {
+        state = STATE.VISITED;
+        return Affichage.BRIGTH_YELLOW + Affichage.BOLD +
+                "\nBonjour " +
+                Start.getPlayer().getNom() +
+                "\nBienvenue chez le plus grand, le pLus beau, le plus charismatique marchand de tout le labyrinthe." +
+                "\nCela fait maintenant près de 10 ans que je suis bloqué dans ce labyrinthe." +
+                "Je suis donc l'homme le plus riiiiche que tu puisses trouver ici" +
+                "\nTu te doutes bien que toute cette fortune n'est pas sortie de nulle part !" +
+                "\nJe vends, j'achète, je vo... enfin bref, je mène mon buisness quoi !\n\n";
+    }
+
+    /**
+     * Dialogue de déclaration des options de vente / d'achat / d'attaque
+     * @author Gillian, Quentin
+     */
+    public void dialogue() {
+        changeDialogueState();
+        StringBuilder sb = new StringBuilder();
+        switch (state){
+            case VISITED -> sb.append("Comme on se retrouve !\n\n");
+            case NOTVISITED -> sb.append(dialogueInit());
+        }
+        sb.append("Tu es ici pour acheter un de mes merveilleux objets ou pour me vendre un des tiens ?\n\n");
+        sb.append(Affichage.GREEN);
+        sb.append("1 - Acheter\n");
+        sb.append(Affichage.YELLOW);
+        sb.append("2 - Vendre\n");
+        sb.append(Affichage.RED);
+        sb.append("3 - Attaquer\n");
+        sb.append(Affichage.BLUE);
+        sb.append("4 - Quitter\n");
+        System.out.println(sb);
+        try {
+            processInput();
+        } catch (Exception e) {}
+    }
+
+    /**
+     * Analyse de l'entrée utilisateur et redirection vers les différentes procédures.
+     * @throws IOException Si le reader ne fonctionne pas
+     * @author Gillian, Quentin
+     */
+    private void processInput() throws IOException {
+        //TODO Comment limiter aux actions voulues (car pour l'instant dans la procédure d'achat il peut vendre
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        switch (reader.readLine()) {
+            case "1" -> dialogueBuy();
+            case "2" -> dialogueSell();
+            case "3" -> typeAggressive();
+        }
+        changeDialogueState();
+    }
+
+    /**
+     * Procédure d'attaque lorsque le marchand est aggressif.
+     * @author Gillian, Quentin
+     */
+    public void updateMonster() {
+        if (state == STATE.AGGRESSIVE) {
+            super.updateMonster();
+        }
+    }
+
+    /**
+     * Dialogue initial quand le marchand est en mode "vente" (que le joueur veut acheter.
+     * @author Gillian, Quentin
+     */
+    public void dialogueBuy(){
+        state = STATE.BUY;
+        String sb = Affichage.GREEN +
+                "Tu veux donc acquérir un de mes merveilleux objets ? EHEH ! ça me va !\n" +
+                "Voici tous mes beaux objets !\n" +
+                "Tu n'as qu'à avancer sur l'un d'eux pour me l'acheter !\n";
+        System.out.println(sb);
+        //TODO ne pas les mettre au sol sa va poser probleme -> Les lister plutot
+        System.exit(1);
+    }
+
+
+    /**
+     * Dialogue initial quand le marchand veut acheter (que le joueur veut vendre.
+     * @author Gillian, Quentin
+     */
+    public void dialogueSell(){
+        state = STATE.SELL;
+        String sb = Affichage.GREEN +
+                "Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !\n" +
+                "Montre moi ce que tu veux me vendre !\n" +
+                "Tu n'as qu'à appuyer sur la touche" +
+                Affichage.YELLOW + " V " + Affichage.RESET + Affichage.GREEN + Affichage.BOLD +
+                "pour me vendre l'objet que tu tiens dans la main !\n";
+        System.out.println(sb);
+        System.exit(1);
+    }
+
+    /**
+     * Passage du marchand en mode agressif lorsque le joueur a décidé d'attaquer le marchand.
+     * @author Gillian, Quentin
+     */
+    public void typeAggressive() {
+        state = STATE.AGGRESSIVE;
+        TourManager.addMessage(Affichage.YELLOW+
+                "Vous auriez pu choisir la fortune... " +
+                Start.getPlayer().getNom() +
+                "\n" + Affichage.RED +
+                "Mais vous avez choisi la "+
+                Affichage.BRIGTH_RED + "MORT" + Affichage.RED + " !!!!");
+    }
+
+    /**
+     * Permet de quitter/commencer le dialogue du marchand.
+     * @author Quentin
+     */
+    public void changeDialogueState(){
+        TourManager.Pause();
+        TourManager.InDialogue();
+    }
+
     @Override
     public String toString() {
         //TODO Changer le smiley s'il est énervé
-
         if (System.getProperty("os.name").equals("Linux")) {
             return "\uD83D\uDC73";
         } else {
@@ -72,215 +200,46 @@ public class Marchand extends AbstractMonster {
         }
     }
 
+    //------------------------------------------TOUT lES TRUCS A REVOIR----------------------------------------------
 
-    /**
-     * Lance la procédure du marchand lorsque l'on marche dessus (en fonction de son état)
-     *
-     * @param pv
-     * @return boolean
-     * @author Gillian
-     */
-    @Override
-    public boolean updatePV(int pv) {
-        if (state == STATE.NOTVISITED) {
-            dialogueInit();
-        } else if (state == STATE.VISITED) {
-            dialogue();
-        } else if (state == STATE.BUY) {
-            //TODO
-        } else if (state == STATE.SELL) {
-            //TODO
-        } else if (state == STATE.AGGRESSIVE) {
-            super.updatePV(pv);
-        }
-        return true;
+
+    /*
+    public ArrayList<AbstractItem> getItems(){
+        //TODO implementer ça #GILLIAN
+        return null;
     }
+    */
+
+    // lui parler
+    // acheter des trucs
+
 
     /**
-     * Dialogue de "bienvenue" lancé lorsque l'on a jamais vu le marchand
-     *
+     * Redirection lorsque le joueur répond "yes" aux questions du marchand.
      * @author Gillian
      */
-    public void dialogueInit() {
-
-        TourManager.addMessage("Bonjour" + getNom()
-                + "\n"
-                + "Bienvenue chez le plus grand, le pLus beau, le plus charismatique marchand de tout le labyrinthe."
-                + "\n"
-                + "Cela fait maintenant près de 10 ans que je suis bloqué dans ce labyrinthe. Je suis donc l'homme le plus riiiiche que tu puisses trouver ici "
-                + "\n"
-                + "Tu te doutes bien que toute cette fortune n'est pas sortie de nulle part !"
-                + "\n"
-                + "Je vends, j'achète, je vo... enfin bref, je mène mon buisness quoi !"
-                + "\n \n"
-        );
-        dialogue();
-    }
-
-    /**
-     * Dialogue de déclaration des options de vente / d'achat / d'attaque
-     *
-     * @author Gillian
-     */
-    public void dialogue() {
-
-        if (state == STATE.VISITED) {
-            TourManager.addMessage("Comme on se retrouve !" + "\n \n");
-        } else if (state == STATE.NOTVISITED) {
-            state = STATE.VISITED;
-        }
-
-        TourManager.addMessage(
-                "Tu es ici pour acheter un de mes merveilleux objets ou pour me vendre un des tiens ?"
-                        + "\n \n"
-                        + Affichage.GREEN + "1 - Acheter"
-                        + "\n"
-                        + Affichage.YELLOW + "2 - Vendre"
-                        + "\n"
-                        + Affichage.RED + " 3 - Attaquer"
-        );
-
-        try {
-            processInput();
-        } catch (Exception e) {
-            dialogueError();
-        }
-    }
-
-    /**
-     * Dialogue lorsque le joueur a entré un mauvais caractère
-     * Renvoie directement au dialogue correspondant
-     *
-     * @author Gillian
-     */
-    public void dialogueError() {
-        TourManager.addMessage("Cher Monsieur, Chère Madame" + getNom()
-                + "\n"
-                + "Je crois que vous n'avez pas bien compris ma question"
-        );
-
+    public void procedureYes() {
         switch (state) {
-            case VISITED -> dialogue();
             case BUY -> dialogueBuy();
             case SELL -> dialogueSell();
         }
+    }
+
+    /**
+     * Redirection et changement de mode du marchand lorsque le joueur répond "no" aux questions du marchand.
+     * @author Gillian
+     */
+    public void procedureNo() {
         dialogue();
-    }
-
-
-//TODO compteur à erreur : si trop attaquer
-    //TODO vendre
-
-
-    /**
-     * Analyse de l'entrée utilisateur et redirection vers les différentes procédures
-     *
-     * @throws IOException
-     * @author Gillian
-     */
-    private void processInput() throws IOException {
-        //TODO Comment limiter aux actions voulues (car pour l'instant dans la procédure d'achat il peut vendre
-        char cmd = 0;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        if (System.console() != null) {
-            char[] input = System.console().readPassword();
-            if (input.length > 0) {
-                cmd = input[0];
-            }
-        } else {
-            String input = reader.readLine();
-            if (input.length() > 0) {
-                cmd = input.charAt(0);
-            }
-        }
-        switch (cmd) {
-            case '1' -> dialogueBuy();
-            case '2' -> dialogueSell();
-            case '3' -> typeAggressive();
-            case 'V', 'v' -> sellItem();
-            case 'y', 'Y' -> procedureYes();
-            case 'n', 'N' -> procedureNo();
-            default -> processInput();
-        }
+        state = STATE.VISITED;
     }
 
 
     /**
-     * Procédure d'attaque lorsque le marchand est aggressif
-     *
-     * @author Gillian
-     */
-    public void updateMonster() {
-
-        if (state == STATE.AGGRESSIVE) {
-            double vision_radius = Alert > 0 ? Agro : getVision_radius();
-            if (Start.getPlayer().getPosition().Distance(getPosition()) <= vision_radius) {
-                if (Alert == 0) {
-                    TourManager.addMessage(getNom() + " vous a reperé!!!");
-                }
-                Alert = Agro;
-                move(nextPosition());
-                Alert--;
-            } else {
-                Alert = 0;
-            }
-        }
-    }
-
-    /**
-     * dialogue initial quand le marchand est en mode "vente" (que le joueur veut acheter)
-     *
-     * @author Gillian
-     */
-    public void dialogueBuy() {
-
-        state = STATE.BUY;
-
-        TourManager.addMessage("Tu veux donc acquérir un de mes merveilleux objets ? EHEH ! ça me va !"
-                + "\n"
-                + Affichage.GREEN + " Voici tous mes beaux objets !"
-                + "\n"
-                + " Tu n'as qu'à avancer sur l'un d'eux pour me " + Affichage.GREEN + " l'acheter !"
-        );
-
-        // getEtage().addItem();
-        //TODO AJOUTER LES ITEMS AU SOL
-        //getEtage().addItem();
-
-
-    }
-
-
-    /**
-     * dialogue initial quand le marchand veut acheter (que le joueur veut vendre)
-     *
-     * @author Gillian
-     */
-    public void dialogueSell() {
-
-        state = STATE.SELL;
-        TourManager.addMessage("Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !"
-                + "\n"
-                + Affichage.GREEN + " Montre moi ce que tu veux me vendre !"
-                + "\n"
-                + " Tu n'as qu'à appuyer sur la touche " + Affichage.GREEN + "V" + Affichage.YELLOW + "pour me vendre" + "l'objet que tu tiens dans la main !"
-        );
-
-        try {
-            processInput();
-        } catch (Exception e) {
-            dialogueError();
-        }
-
-    }
-
-    /**
-     * réalisation de la vente par le joueur.
-     *
+     * Réalisation de la vente par le joueur.
      * @author Gillian
      */
     public void sellItem() {
-
         var first = getInventory().getPotions().remove(getInventory().getPotions().size() - 1);
         Start.getPlayer().addMoney(first.getPrix());
 
@@ -292,7 +251,6 @@ public class Marchand extends AbstractMonster {
                 + "\n"
                 + Affichage.YELLOW + "N - NON"
         );
-
         try {
             processInput();
         } catch (Exception e) {
@@ -302,53 +260,25 @@ public class Marchand extends AbstractMonster {
     }
 
 
-    /**
-     * Passage du marchand en mode agressif lorsque le joueur a décidé d'attaquer le marchand
-     *
-     * @author Gillian
-     */
-    public void typeAggressive() {
 
-        TourManager.addMessage("Vous auriez pu choisir la fortune... " + getNom()
-                + "\n"
-                + Affichage.RED + " Mais vous avez choisi la MORT !"
-        );
-        state = STATE.AGGRESSIVE;
-    }
-
+//TODO compteur à erreur : si trop attaquer
+    //TODO vendre
 
     /**
-     * redirection lorsque le joueur répond "yes" aux questions du marchand
-     *
+     * Dialogue lorsque le joueur a entré un mauvais caractère.
+     * Renvoie directement au dialogue correspondant.
      * @author Gillian
      */
-    public void procedureYes() {
-
+    public void dialogueError() {
+        //TODO elle sert a rien cette methode
+        System.out.println("Cher Monsieur, Chère Madame" + Start.getPlayer().getNom() + "\nJe crois que vous n'avez pas bien compris ma question");
         switch (state) {
+            case VISITED -> dialogue();
             case BUY -> dialogueBuy();
             case SELL -> dialogueSell();
         }
-    }
-
-    /**
-     * redirection et changement de mode du marchand lorsque le joueur répond "no" aux questions du marchand
-     *
-     * @author Gillian
-     */
-    public void procedureNo() {
         dialogue();
-        state = STATE.VISITED;
     }
-
-    /*
-    public ArrayList<AbstractItem> getItems(){
-        //TODO implementer ça #GILLIAN
-        return null;
-    }
-    */
-
-    // lui parler
-    // acheter des trucs
 
 
 }

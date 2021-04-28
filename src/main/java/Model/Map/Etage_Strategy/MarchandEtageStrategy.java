@@ -8,7 +8,7 @@ import Model.Utils.Procedure;
 
 
 /**
- * Création de l'étage du marchand, cet étage comporte une seule salle avec un marchand
+ * Création de l'étage du marchand, cet étage comporte une seule salle avec un marchand.
  * @author Gillian
  */
 public class MarchandEtageStrategy extends EtageStrategy{
