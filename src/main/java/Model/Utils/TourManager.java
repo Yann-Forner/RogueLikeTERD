@@ -122,7 +122,7 @@ public class TourManager implements Serializable {
             }
             case 'w' , 'W' -> Start.sauvegarde();
             case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
-            case 'e' , 'E' , 3 -> Start.end();
+            case 27 , 3 -> Start.end();
             default -> processInput(reader);
         }
         return false;

@@ -172,7 +172,7 @@ public class Affichage {
         sb.append(BRIGTH_GREEN).append("T");
         sb.append(YELLOW);
         sb.append("  |  ");
-        sb.append("Inventaire: ");
+        sb.append("Changement armes: ");
         sb.append(BRIGTH_GREEN).append("I");
         sb.append("\n                                                                                                                                 ");
         sb.append(YELLOW);
@@ -180,12 +180,12 @@ public class Affichage {
         sb.append(BRIGTH_GREEN).append("A");
         sb.append(YELLOW);
         sb.append("  |  ");
-        sb.append("Objets: ");
-        sb.append(BRIGTH_GREEN  ).append("123456789");
+        sb.append("Changement potions: ");
+        sb.append(BRIGTH_GREEN  ).append("P");
         sb.append(YELLOW);
         sb.append("  |  ");
         sb.append("Quitter: ");
-        sb.append(BRIGTH_GREEN).append("E");
+        sb.append(BRIGTH_GREEN).append("ESC");
         sb.append(RESET);
         System.out.println(sb);
     }
