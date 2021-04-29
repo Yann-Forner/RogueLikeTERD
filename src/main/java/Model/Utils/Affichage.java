@@ -29,7 +29,8 @@ public class Affichage {
         System.out.print(Affichage.CLEAR);
         System.out.println(Start.getMap());
         Affichage.getPv();
-        Affichage.getTouches();
+        System.out.print(Affichage.getTouches(0));
+        System.out.print(Affichage.getTouches(1));
         Affichage.getMessages();
         Start.setConsoleMode(true);
     }
@@ -159,35 +160,48 @@ public class Affichage {
     /**
      * Affiche les touches
      * @author Quentin
+     * @return
      */
-    public static void getTouches(){
+    public static String getTouches(int index){
         StringBuilder sb = new StringBuilder();
         sb.append(YELLOW).append(BOLD);
-        sb.append("    ");
-        sb.append("Deplacement: ");
-        sb.append(BRIGTH_GREEN).append("ZQSD");
-        sb.append(YELLOW);
-        sb.append("  |  ");
-        sb.append("Mode Tour par tour: ");
-        sb.append(BRIGTH_GREEN).append("T");
-        sb.append(YELLOW);
-        sb.append("  |  ");
-        sb.append("Changement armes: ");
-        sb.append(BRIGTH_GREEN).append("I");
-        sb.append("\n                                                                                                                                 ");
-        sb.append(YELLOW);
-        sb.append("Attaque à distance: ");
-        sb.append(BRIGTH_GREEN).append("A");
-        sb.append(YELLOW);
-        sb.append("  |  ");
-        sb.append("Changement potions: ");
-        sb.append(BRIGTH_GREEN  ).append("P");
-        sb.append(YELLOW);
-        sb.append("  |  ");
-        sb.append("Quitter: ");
-        sb.append(BRIGTH_GREEN).append("ESC");
+        switch (index){
+            case 0 -> {
+                sb.append("    ");
+                sb.append("Deplacement: ");
+                sb.append(BRIGTH_GREEN).append("ZQSD");
+                sb.append(YELLOW);
+                sb.append("  |  ");
+                sb.append("Mode Tour par tour: ");
+                sb.append(BRIGTH_GREEN).append("T");
+                sb.append(YELLOW);
+                sb.append("  |  ");
+                sb.append("Changement armes: ");
+                sb.append(BRIGTH_GREEN).append("I");
+                sb.append("\n");
+            }
+            case 1 -> {
+                sb.append("                                                                                                                                 ");
+                sb.append("Attaque à distance: ");
+                sb.append(BRIGTH_GREEN).append("A");
+                sb.append(YELLOW);
+                sb.append("  |  ");
+                sb.append("Changement potions: ");
+                sb.append(BRIGTH_GREEN  ).append("P");
+                sb.append(YELLOW);
+                sb.append("  |  ");
+                sb.append("Utiliser la potion courante: ");
+                sb.append(BRIGTH_GREEN  ).append("Y");
+            }
+            case 2 -> {
+                sb.append("                                                                                                               ");
+                sb.append("Quitter: ");
+                sb.append(BRIGTH_GREEN).append("ESC");
+            }
+            default -> {}
+        }
         sb.append(RESET);
-        System.out.println(sb);
+        return sb.toString();
     }
 
     /**
@@ -197,6 +211,8 @@ public class Affichage {
     public static void getMessages(){
         StringBuilder sb = new StringBuilder();
         sb.append(PURPLE).append(BOLD).append("-----> ").append(UNDERLINE).append("Evenements:");
+        sb.append(RESET);
+        sb.append(getTouches(2));
         sb.append(RESET);
         for (String s :TourManager.getMessages()){
             sb.append("\n").append(BRIGTH_PURPLE).append(s);

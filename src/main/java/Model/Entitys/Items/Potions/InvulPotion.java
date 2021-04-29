@@ -32,7 +32,7 @@ public class InvulPotion extends AbstractPotion {
      */
     @Override
     public void useItem(BasicPlayer player) {
-
+        super.useItem(player);
     }
 
     @Override

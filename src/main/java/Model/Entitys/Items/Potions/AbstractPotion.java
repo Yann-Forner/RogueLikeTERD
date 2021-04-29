@@ -28,13 +28,13 @@ public abstract class AbstractPotion extends AbstractItem {
 
     /**
      * Utilise la potion
-     *
      * @param player Joueur utilisant la potion
      * @author JP
      */
     @Override
     public void useItem(BasicPlayer player) {
-
+        player.getInventory().getPotions().remove(this);
+        TourManager.addMessage(Affichage.BRIGTH_PURPLE+Affichage.BOLD+"La potion a été utilisée.");
     }
 
     @Override

@@ -12,7 +12,7 @@ import Model.Utils.Procedure;
 
 public class PotionFactory {
     public enum PotionType {
-        HEAL_POTION, INVUL_POTION, STRENGTH_POTION, STACK_OF_MONEY
+        HEAL_POTION, INVUL_POTION, STRENGTH_POTION,
     }
 
     /**

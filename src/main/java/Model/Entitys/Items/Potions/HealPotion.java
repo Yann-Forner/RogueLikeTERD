@@ -35,6 +35,7 @@ public class HealPotion extends AbstractPotion {
      */
     @Override
     public void useItem(BasicPlayer player) {
+        super.useItem(player);
         player.updatePV(healRate);
     }
 

@@ -2,6 +2,7 @@ package Model.Entitys.Items.Weapons;
 
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
+import Model.Entitys.Monsters.Marchand;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -44,6 +45,9 @@ public class Wand extends AbstractWeapon {
         for(Position p : zone){
             Entity entity = Start.getPlayer().getEtage().get(p).getEntity();
             if(entity instanceof AbstractAlive){
+                if (entity instanceof Marchand && ((Marchand) entity).getState() == Marchand.STATE.AGGRESSIVE){
+                    continue;
+                }
                 entity.onContact(Start.getPlayer());
             }
         }

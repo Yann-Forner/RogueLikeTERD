@@ -120,9 +120,13 @@ public class TourManager implements Serializable {
                 player.getInventory().useCurrentWeapon(player); //Attaque distance
                 return true;
             }
+            case 'y' , 'Y' -> {
+                player.getInventory().useCurrentPotion(player); //Utilise la potion courrante
+                return true;
+            }
             case 'w' , 'W' -> Start.sauvegarde();
             case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
-            case 27 , 3 -> Start.end();
+            case 27 , 3 -> Start.end(); //TODO sa capte aussi les fleches du coup
             default -> processInput(reader);
         }
         return false;

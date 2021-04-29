@@ -190,6 +190,15 @@ public class Marchand extends AbstractMonster {
         TourManager.InDialogue();
     }
 
+    /**
+     * Renvoit l'etat du marchand.
+     * @return Etat
+     * @author Quentin
+     */
+    public STATE getState(){
+        return state;
+    }
+
     @Override
     public String toString() {
         //TODO Changer le smiley s'il est énervé

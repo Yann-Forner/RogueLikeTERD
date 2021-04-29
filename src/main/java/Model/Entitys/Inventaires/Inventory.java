@@ -25,11 +25,12 @@ public class Inventory implements Serializable {
     public Inventory(){ }
 
     /**
-     * Utilise l'arme courante
+     * Utilise l'arme courante.
+     * @author JP, Quentin
      */
     public void useCurrentWeapon(BasicPlayer player) {
-        if(weapons.size() > 0){
-            AbstractWeapon weapon = weapons.get(0);
+        AbstractWeapon weapon = getCurrentWeapon();
+        if(weapon!=null){
             if(player.getClasse().canUse(weapon)){
                 weapon.useItem(player);
             }
@@ -40,6 +41,15 @@ public class Inventory implements Serializable {
                         " Le type de l'arme est incompatible avec la classe du joueur.");
             }
         }
+    }
+
+    /**
+     * Utilise la potion courante.
+     * @author Quentin
+     */
+    public void useCurrentPotion(BasicPlayer player) {
+        AbstractPotion potion = getCurrentPotion();
+        if(potion!=null) potion.useItem(player);
     }
 
     /**
@@ -103,6 +113,15 @@ public class Inventory implements Serializable {
      */
     public AbstractWeapon getCurrentWeapon(){
         return weapons.size()>0 ? weapons.get(0) : null;
+    }
+
+    /**
+     * Renvoit la potion courante.
+     * @return La poion equipée par le joueur
+     * @author Quentin
+     */
+    public AbstractPotion getCurrentPotion(){
+        return potions.size()>0 ? potions.get(0) : null;
     }
 
 }

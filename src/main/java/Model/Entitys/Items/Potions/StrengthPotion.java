@@ -35,6 +35,7 @@ public class StrengthPotion extends AbstractPotion {
      */
     @Override
     public void useItem(BasicPlayer player) {
+        super.useItem(player);
         player.setForce(player.getForce() * buffMultiplicator);
     }
 

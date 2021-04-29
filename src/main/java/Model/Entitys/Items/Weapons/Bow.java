@@ -2,6 +2,7 @@ package Model.Entitys.Items.Weapons;
 
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
+import Model.Entitys.Monsters.Marchand;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -37,6 +38,9 @@ public class Bow extends AbstractWeapon {
                     if (position.Distance(pos) <= range) {
                         Entity entity = getEtage().get(pos).getEntity();
                         if (entity instanceof AbstractAlive && entity!=player) {
+                            if (entity instanceof Marchand && ((Marchand) entity).getState() == Marchand.STATE.AGGRESSIVE){
+                                continue;
+                            }
                             ArrayList<Position> zone = Tools.getLigne(entity.getPosition(),player.getPosition());
                             boolean noBorder = true;
                             for(Position p : zone){
