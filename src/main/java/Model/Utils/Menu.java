@@ -1,6 +1,7 @@
 package Model.Utils;
 
 import Model.Entitys.Inventaires.Inventory;
+import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Map.Etage;
 import Model.Map.Map;
 
@@ -69,10 +70,17 @@ public class Menu {
 
         StringBuilder armesString = new StringBuilder();
         for (int index = 0; index < armesList.size(); index++) {
-            if (index == 0)
-                armesString.append("[" + armesList.get(index).toString() + "] ");
+            AbstractWeapon abstractWeapon = armesList.get(index);
+            if (index == 0){
+                if (Start.getPlayer().getClasse().canUse(abstractWeapon)) {
+                    armesString.append(Affichage.GREEN);
+                } else {
+                    armesString.append(Affichage.RED);
+                }
+                armesString.append("[" + abstractWeapon.toString() + "] ");
+            }
             else
-                armesString.append(armesList.get(index).toString() + " ");
+                armesString.append(abstractWeapon.toString() + " ");
         }
 
         printStringOnSide(0,armesString.toString(),18,Affichage.RED);
@@ -82,9 +90,9 @@ public class Menu {
        StringBuilder potionsString = new StringBuilder();
        for (int i = 0; i < potionsList.size(); i++) {
            if (i == 0)
-               potionsString.append("[" + potionsList.get(i).toStringWithoutColor() + "] ");
+               potionsString.append("[" + potionsList.get(i).toString() + "]");
            else
-               potionsString.append(potionsList.get(i).toStringWithoutColor() + " ");
+               potionsString.append(potionsList.get(i).toString() + " ");
        }
       printStringOnSide(0, potionsString.toString(),21, Affichage.RED);
     }

@@ -48,13 +48,4 @@ public abstract class AbstractFood extends AbstractItem {
         return null;
     }
 
-    /**
-     * renvoi la string sans couleur
-     *
-     * @return String
-     */
-    @Override
-    public String toStringWithoutColor() {
-        return toString();
-    }
 }

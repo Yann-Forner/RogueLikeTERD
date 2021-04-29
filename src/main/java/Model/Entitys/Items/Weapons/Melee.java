@@ -25,21 +25,6 @@ public class Melee extends AbstractWeapon{
 
     }
 
-    /**
-     * renvoi la string sans couleur
-     *
-     * @return String
-     */
-    @Override
-    public String toStringWithoutColor() {
-        if(System.getProperty("os.name").equals("Linux")){
-            return "🗡️";
-        }
-        else{
-            return "S";
-        }
-    }
-
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){

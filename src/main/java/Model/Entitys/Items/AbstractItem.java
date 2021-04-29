@@ -134,5 +134,5 @@ public abstract class AbstractItem extends Entity {
      * renvoi la string sans couleur
      * @return String
      */
-    public abstract String toStringWithoutColor();
+    //public abstract String toStringWithoutColor();
 }
