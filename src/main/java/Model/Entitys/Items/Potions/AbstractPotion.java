@@ -51,5 +51,5 @@ public abstract class AbstractPotion extends AbstractItem {
     public String toString() {
         return null;
     }
-    public abstract String toStringWithoutColor();
+
 }

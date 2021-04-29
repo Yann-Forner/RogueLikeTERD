@@ -130,4 +130,9 @@ public abstract class AbstractItem extends Entity {
      */
     public abstract void useItem(BasicPlayer player);
 
+    /**
+     * renvoi la string sans couleur
+     * @return String
+     */
+    public abstract String toStringWithoutColor();
 }

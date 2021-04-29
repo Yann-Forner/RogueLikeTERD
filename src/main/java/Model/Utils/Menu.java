@@ -36,7 +36,7 @@ public class Menu {
     public void refresh(){
         clear();
         String[] UpperMenu = {"║","║","║"};
-
+        Inventory inv = Start.getPlayer().getInventory();
         String lvl = " Niveau " + Start.getPlayer().getLvl() + " [" + Start.getPlayer().getCURRENT_EXP() + "/" + Start.getPlayer().getMAX_EXP() + "] ";
         String[] niveau = {
                 "╔"+"═".repeat(lvl.length())+"╗ ",
@@ -51,15 +51,18 @@ public class Menu {
         printStringOnSide(0,"   Classe : "+ Start.getPlayer().getClasse().getNom(),7,Affichage.RED);
         printStringOnSide(0,"   Etage n°"+(map.getIndexCurrent()+1),11,Affichage.YELLOW);
         printStringOnSide(1,niveau,6,Affichage.RED);
-        printStringOnSide(0,"   Golds : "+Start.getPlayer().getMoney(),8,Affichage.RED);
-        printStringOnSide(0,"   Force : "+Start.getPlayer().getForce(),9,Affichage.RED);
+        printStringOnSide(0,"   Force : "+Start.getPlayer().getForce(),8,Affichage.RED);
+        int range = 1 ;
+        if(inv.getWeapons().size()!=0)range = inv.getWeapons().get(0).getRange();
+
+        printStringOnSide(0,"   Portée : "+range,9,Affichage.RED);
 
         printLine(12,Affichage.BLUE);
 
         printStringOnSide(0, "  Inventaire",14,Affichage.PURPLE);
 
 
-        Inventory inv = Start.getPlayer().getInventory();
+
         var potionsList = inv.getPotions();
         var armesList = inv.getWeapons();
         printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17 , Affichage.RED);

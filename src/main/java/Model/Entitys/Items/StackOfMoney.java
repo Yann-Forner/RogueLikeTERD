@@ -43,6 +43,16 @@ public class StackOfMoney extends AbstractItem {
 
     }
 
+    /**
+     * renvoi la string sans couleur
+     *
+     * @return String
+     */
+    @Override
+    public String toStringWithoutColor() {
+        return toString();
+    }
+
 
     @Override
     public void onContact(Entity e) {

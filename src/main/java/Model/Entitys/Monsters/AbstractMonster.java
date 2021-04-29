@@ -71,6 +71,7 @@ public abstract class AbstractMonster extends AbstractAlive {
 
     @Override
     public void death() {
+        System.out.println(getNom());
         TourManager.addMessage(getNom() + Affichage.BRIGTH_RED + " est mort.");
         getEtage().removeMonster(this);
         Objects.requireNonNull(Start.getPlayer()).addExp(getExp());

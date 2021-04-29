@@ -50,6 +50,21 @@ public class Wand extends AbstractWeapon {
         Affichage.Projectile(player.getEtage(),zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"💥","+"));
     }
 
+    /**
+     * renvoi la string sans couleur
+     *
+     * @return String
+     */
+    @Override
+    public String toStringWithoutColor() {
+        if(System.getProperty("os.name").equals("Linux")){
+            return 	"🧹";
+        }
+        else{
+            return "S";
+        }
+    }
+
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
