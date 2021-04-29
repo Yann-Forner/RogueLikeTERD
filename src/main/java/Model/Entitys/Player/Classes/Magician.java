@@ -1,5 +1,6 @@
 package Model.Entitys.Player.Classes;
 
+import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Utils.Affichage;
 
@@ -32,6 +33,18 @@ public class Magician extends AbstractClass{
     @Override
     public void setBaseItems(BasicPlayer player) {
 
+    }
+
+    @Override
+    public boolean canUse(AbstractWeapon weapon) {
+        switch (weapon.getType()){
+            case WAND -> {
+                return true;
+            }
+            default -> {
+                return false;
+            }
+        }
     }
 
     @Override

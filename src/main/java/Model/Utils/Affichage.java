@@ -172,7 +172,7 @@ public class Affichage {
         sb.append(BRIGTH_GREEN).append("T");
         sb.append(YELLOW);
         sb.append("  |  ");
-        sb.append("Inventaire: ");
+        sb.append("Changement armes: ");
         sb.append(BRIGTH_GREEN).append("I");
         sb.append("\n                                                                                                                                 ");
         sb.append(YELLOW);
@@ -180,12 +180,12 @@ public class Affichage {
         sb.append(BRIGTH_GREEN).append("A");
         sb.append(YELLOW);
         sb.append("  |  ");
-        sb.append("Objets: ");
-        sb.append(BRIGTH_GREEN  ).append("123456789");
+        sb.append("Changement potions: ");
+        sb.append(BRIGTH_GREEN  ).append("P");
         sb.append(YELLOW);
         sb.append("  |  ");
         sb.append("Quitter: ");
-        sb.append(BRIGTH_GREEN).append("E");
+        sb.append(BRIGTH_GREEN).append("ESC");
         sb.append(RESET);
         System.out.println(sb);
     }
@@ -207,15 +207,13 @@ public class Affichage {
     /**
      * Affiche un projectile sur la map
      * @param etage etage
-     * @param p1 position départ
-     * @param p2 position arrivée
+     * @param zone Zone de degats
      * @param style apparence du projectile
      */
-    public static void Projectile(Etage etage,Position p1, Position p2, Cell.Style style){
+    public static void Projectile(Etage etage,ArrayList<Position> zone, Cell.Style style){
         int delay = 1;
-        ArrayList<Position> ligne = Tools.getLigne(p1, p2);
-        for (int i = 0; i < ligne.size(); i++) {
-            Cell cell = etage.get(ligne.get(ligne.size()-(i+1)));
+        for (int i = 0; i < zone.size(); i++) {
+            Cell cell = etage.get(zone.get(i));
             if(cell.getType()!=Cell.Style.CellType.PROJECTILE){
                 Cell.Style base_style = cell.getStyle();
                 cell.updateCell(cell.isAccesible(), style);

@@ -1,5 +1,6 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -129,6 +130,7 @@ public abstract class EtageStrategy {
         for (Room r : etage.getRooms()) {
             r.setItems(etage);
         }
+        etage.addItem(WeaponFactory.getNewWeapon(etage, WeaponFactory.WeaponType.WAND));
     }
 
 }
