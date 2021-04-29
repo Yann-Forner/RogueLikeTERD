@@ -3,13 +3,13 @@ package Model.Entitys.Items.Weapons;
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
 import Model.Entitys.Player.BasicPlayer;
-import Model.Entitys.Player.Classes.AbstractClass;
-import Model.Entitys.Player.Classes.Warrior;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Tools;
+
+import java.util.ArrayList;
 
 public class Bow extends AbstractWeapon {
 
@@ -18,7 +18,7 @@ public class Bow extends AbstractWeapon {
      * @param etage Etage où se situe l'arme
      * @param position Position de l'arme
      * @param nom Nom de l'arme
-     * @param type     Type de l'arme
+     * @param type Type de l'arme
      * @param strength Puissance de l'arme
      * @param range Portée de l'arme
      */
@@ -37,9 +37,18 @@ public class Bow extends AbstractWeapon {
                     if (position.Distance(pos) <= range) {
                         Entity entity = getEtage().get(pos).getEntity();
                         if (entity instanceof AbstractAlive && entity!=player) {
-                            entity.onContact(player);
-                            Affichage.Projectile(getEtage(), Tools.getLigne(entity.getPosition(),player.getPosition()),new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"🌀","x"));
-                            x=y=1000;
+                            ArrayList<Position> zone = Tools.getLigne(entity.getPosition(),player.getPosition());
+                            boolean noBorder = true;
+                            for(Position p : zone){
+                                if(getEtage().get(p).getType().equals(Cell.Style.CellType.BORDER)){
+                                    noBorder = false;
+                                }
+                            }
+                            if(noBorder) {
+                                entity.onContact(player);
+                                Affichage.Projectile(getEtage(), zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"🌀","x"));
+                                x=y=1000;
+                            }
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 package Model.Entitys.Player;
 
 import Model.Entitys.AbstractAlive;
+import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -222,7 +223,8 @@ public class BasicPlayer extends AbstractAlive {
 
     @Override
     public int getForce() {
-        return super.getForce() * lvl;
+        AbstractWeapon currentWeapon = getInventory().getCurrentWeapon();
+        return super.getForce() * lvl + (currentWeapon==null ? 0 : currentWeapon.getStrength());
     }
 
     /**
