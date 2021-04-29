@@ -2,11 +2,13 @@ package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Player.BasicPlayer;
 
+import java.io.Serializable;
+
 /**
  * Classe du joueur.
  * @author Quentin
  */
-public abstract class AbstractClass{
+public abstract class AbstractClass implements Serializable {
 
     public AbstractClass(){ }
 
