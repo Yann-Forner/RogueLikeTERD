@@ -47,4 +47,9 @@ public class StrengthPotion extends AbstractPotion {
             return Affichage.GREEN+Affichage.BOLD+"H";
         }
     }
+
+    @Override
+    public String toStringWithoutColor() {
+        return "H";
+    }
 }
