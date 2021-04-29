@@ -1,8 +1,7 @@
 package Model.Entitys.Inventaires;
 
-import Model.Entitys.Items.Foods.AbstractFood;
 import Model.Entitys.Items.Potions.AbstractPotion;
-import Model.Entitys.Items.Weapons.Weapon;
+import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.BasicPlayer;
 
 import java.io.Serializable;
@@ -13,9 +12,8 @@ import java.util.ArrayList;
  * @author JP
  */
 public class Inventory implements Serializable {
-    private ArrayList<Weapon> weapons;
-    private ArrayList<AbstractFood> foods;
-    private ArrayList<AbstractPotion> potions;
+    private final ArrayList<AbstractWeapon> weapons;
+    private final ArrayList<AbstractPotion> potions;
 
 
     /**
@@ -25,7 +23,6 @@ public class Inventory implements Serializable {
      */
     public Inventory(){
         weapons = new ArrayList<>();
-        foods = new ArrayList<>();
         potions = new ArrayList<>();
     }
 
@@ -59,32 +56,22 @@ public class Inventory implements Serializable {
     }
 
     /**
-     * Fais rouler la liste de nourritures afin de se déplacer vers le deuxième élement.
-     *
-     * @author JP
-     */    public void switchFoods() {
-        var first = foods.remove(0);
-        foods.add(first);
-    }
-
-    /**
-     * Ajoute une potion a la liste de potions
-     *
-     * @param i Potion à ajouter a la liste de potions
+     * Ajoute une potion a la liste de potions.
+     * @param potion Potion à ajouter a la liste de potions
      * @author JP
      */
-    public void addPotion(AbstractPotion i){
-        potions.add(i);
+    public void addPotion(AbstractPotion potion){
+        potions.add(potion);
     }
 
     /**
      * Fais rouler la liste d'armes afin de se déplacer vers le deuxième élement.
      *
-     * @param w Arme à ajouter a la liste d'armes
+     * @param arme Arme à ajouter a la liste d'armes
      * @author JP
      */
-    public void addWeapon(Weapon w){
-        weapons.add(w);
+    public void addWeapon(AbstractWeapon arme){
+        weapons.add(arme);
     }
 
     /**
@@ -103,17 +90,8 @@ public class Inventory implements Serializable {
      * @return Retourne la liste d'armes
      * @author JP
      */
-    public ArrayList<Weapon> getWeapons() {
+    public ArrayList<AbstractWeapon> getWeapons() {
         return weapons;
     }
 
-    /**
-     * Retourne la liste de consommables
-     *
-     * @return Retourne la liste de nourritures
-     * @author JP
-     */
-    public ArrayList<AbstractFood> getFoods() {
-        return foods;
-    }
 }

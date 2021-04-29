@@ -11,7 +11,7 @@ import Model.Utils.Position;
  */
 public class StrengthPotion extends AbstractPotion {
 
-    private int buffMultiplicator;
+    private final int buffMultiplicator;
 
     /**
      * Constructeur de la potion de force.

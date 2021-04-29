@@ -1,5 +1,6 @@
 package Model.Entitys.Player.Classes;
 
+import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.BasicPlayer;
 
 import java.io.Serializable;
@@ -47,6 +48,9 @@ public abstract class AbstractClass implements Serializable {
      * @author Quentin
      */
     public abstract void setBaseItems(BasicPlayer player);
+
+
+    public abstract boolean canUse(AbstractWeapon weapon);
 
     /**
      * Renvoit le nom de la classe.

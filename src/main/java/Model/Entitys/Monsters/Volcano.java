@@ -29,10 +29,8 @@ public class Volcano extends AbstractMonster {
      */
     private ArrayList<Position> getAdjacents(Position position, int vr) {
         ArrayList<Position> adjacents = new ArrayList<>();
-        int posX = position.getX();
-        int posY = position.getY();
-        for (int x = posX - vr; x < posX + vr * 2 - 1; x++) {
-            for (int y = posY - vr; y < posY + vr * 2 - 1; y++) {
+        for (int x = position.getX() - vr; x < position.getX() + vr * 2 - 1; x++) {
+            for (int y = position.getY() - vr; y < position.getY() + vr * 2 - 1; y++) {
                 if(x>=0 && x<getEtage().getWidth() && y>=0 && y<getEtage().getHeigth()){
                     Position pos = new Position(x, y);
                     if (position.Distance(pos) <= vr) {

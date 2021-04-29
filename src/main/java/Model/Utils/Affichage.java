@@ -207,15 +207,13 @@ public class Affichage {
     /**
      * Affiche un projectile sur la map
      * @param etage etage
-     * @param p1 position départ
-     * @param p2 position arrivée
+     * @param zone Zone de degats
      * @param style apparence du projectile
      */
-    public static void Projectile(Etage etage,Position p1, Position p2, Cell.Style style){
+    public static void Projectile(Etage etage,ArrayList<Position> zone, Cell.Style style){
         int delay = 1;
-        ArrayList<Position> ligne = Tools.getLigne(p1, p2);
-        for (int i = 0; i < ligne.size(); i++) {
-            Cell cell = etage.get(ligne.get(ligne.size()-(i+1)));
+        for (int i = 0; i < zone.size(); i++) {
+            Cell cell = etage.get(zone.get(i));
             if(cell.getType()!=Cell.Style.CellType.PROJECTILE){
                 Cell.Style base_style = cell.getStyle();
                 cell.updateCell(cell.isAccesible(), style);
