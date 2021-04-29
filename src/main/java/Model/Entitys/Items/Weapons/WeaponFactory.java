@@ -88,7 +88,7 @@ public class WeaponFactory {
                 return new Weapon(etage, Procedure.getAccesibleRandomPosition(true, etage), "Couteau", WeaponType.KNIFE, strength, durability, range);
             }
             case BOW -> {
-                return new Weapon(etage, Procedure.getAccesibleRandomPosition(true, etage), "Arc", WeaponType.BOW, strength, durability, range);
+                return new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), "Arc", WeaponType.BOW, strength, durability, range);
             }
             case SHIELD -> {
                 return new Weapon(etage, Procedure.getAccesibleRandomPosition(true, etage), "Bouclier", WeaponType.SHIELD, strength, durability, range);

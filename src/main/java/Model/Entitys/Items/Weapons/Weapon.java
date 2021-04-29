@@ -28,6 +28,9 @@ public class Weapon extends AbstractItem {
      * @param position Position de l'arme
      * @param nom Nom de l'arme
      * @param weaponType Type de l'arme
+     * @param strength Puissance de l'arme
+     * @param range Portée de l'arme
+     * @param durability Durabilitée de l'arme
      */
     public Weapon(Etage etage, Position position, String nom, WeaponFactory.WeaponType weaponType, int strength, int range, int durability) {
         super(etage, position, nom);
@@ -58,28 +61,6 @@ public class Weapon extends AbstractItem {
     @Override
     public void useItem(BasicPlayer player) {
         player.setForce(strength);
-        System.out.println(weaponType);
-        switch(weaponType) {
-            case BOW -> {
-                int playerPositionX = player.getPosition().getX(), playerPositionY = player.getPosition().getY();
-
-                for(int xScan = playerPositionX - range; xScan < playerPositionX + range; xScan++) {
-                    for(int yScan = playerPositionY - range; yScan < playerPositionY + range; yScan++) {
-
-                        if(xScan != playerPositionX && yScan != playerPositionY
-                                && xScan < getEtage().getWidth() && yScan < getEtage().getHeigth()
-                                    && xScan > 0 && yScan > 0) {
-
-                            Entity e = player.getEtage().get(xScan, yScan).getEntity();
-                            if(e != null && e instanceof AbstractMonster) {
-                                ((AbstractMonster) e).updatePV(-strength);
-                                Affichage.Projectile(player.getEtage(), player.getPosition(), e.getPosition(), new Cell.Style(Cell.Style.CellType.PROJECTILE));
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     @Override
