@@ -198,7 +198,6 @@ public class Menu {
      * @return la nouvelle string
      */
     public String setCharAt( String s , int i , char c){
-        System.out.println(c);
         return s.substring(0,i)+c+s.substring(i+1);
     }
 
