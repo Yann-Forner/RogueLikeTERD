@@ -25,8 +25,8 @@ public class NormalCircleRoomStrategy extends CircleRoomStrategy {
 
     @Override
     protected void setStyleCell(Room r) {
-        Cell.Style coquillage = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLUE,"\uD83D\uDC1A", "T");
-        Cell.Style vagues = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF0A", "Ø");
+        Cell.Style coquillage = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"\uD83D\uDC1A", "T");
+        Cell.Style vagues = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_GREY,"\uD83C\uDF0A", "Ø");
 
         for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
             r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, coquillage);

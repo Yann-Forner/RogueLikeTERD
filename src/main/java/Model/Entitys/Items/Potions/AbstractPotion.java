@@ -49,7 +49,7 @@ public abstract class AbstractPotion extends AbstractItem {
 
     @Override
     public String toString() {
-        return null;
+        return super.toString() + Affichage.PURPLE;
     }
 
 }

@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @author Quentin
  */
 public class TourManager implements Serializable {
-    private static boolean running = System.getProperty("os.name").equals("Linux");
+    private static boolean running = System.getProperty("os.name").equals("Linux") && System.console()!=null;
     private static boolean inDialogue = false;
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();

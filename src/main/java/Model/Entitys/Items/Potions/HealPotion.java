@@ -42,10 +42,10 @@ public class HealPotion extends AbstractPotion {
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return 	"\uD83C\uDF7C";
+            return "\uD83C\uDF7C";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"H";
+            return super.toString()+"h";
         }
     }
 }

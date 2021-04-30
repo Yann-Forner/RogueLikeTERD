@@ -29,7 +29,7 @@ public class Alien extends AbstractMonster {
             return "\uD83D\uDC7D";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"&";
+            return super.toString() + "&";
         }
     }
 }

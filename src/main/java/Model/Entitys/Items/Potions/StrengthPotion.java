@@ -45,7 +45,7 @@ public class StrengthPotion extends AbstractPotion {
             return 	"\uD83C\uDF7A";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"H";
+            return super.toString()+"s";
         }
     }
 }

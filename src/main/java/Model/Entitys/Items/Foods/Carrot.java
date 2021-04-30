@@ -20,6 +20,11 @@ public class Carrot extends AbstractFood {
 
     @Override
     public String toString() {
-        return 	"\uD83E\uDD55";
+        if(System.getProperty("os.name").equals("Linux")){
+            return "🥕";
+        }
+        else{
+            return super.toString()+"p";
+        }
     }
 }

@@ -2,7 +2,6 @@ package Model.Entitys.Monsters;
 
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
@@ -35,7 +34,7 @@ public class Ghost extends AbstractMonster {
             return "\uD83D\uDC7B";
         }
         else{
-            return Affichage.GREY+Affichage.BOLD+"H";
+            return super.toString() + "H";
         }
     }
 }

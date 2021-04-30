@@ -20,6 +20,11 @@ public class Orange extends AbstractFood {
 
     @Override
     public String toString() {
-        return "\uD83C\uDF4A";
+        if(System.getProperty("os.name").equals("Linux")){
+            return "🍊";
+        }
+        else{
+            return super.toString()+"p";
+        }
     }
 }

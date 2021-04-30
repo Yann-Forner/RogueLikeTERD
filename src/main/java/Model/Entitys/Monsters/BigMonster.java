@@ -11,11 +11,10 @@ import Model.Utils.Procedure;
  * @author Yann
  */
 public class BigMonster  extends AbstractMonster {
-    private Arm leftArm ;
-    private Arm rightArm;
+    private final Arm leftArm ;
+    private final Arm rightArm;
 
-
-    private class Arm extends AbstractMonster {
+    private static class Arm extends AbstractMonster {
 
         protected Arm(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
             super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
@@ -29,7 +28,7 @@ public class BigMonster  extends AbstractMonster {
 
         @Override
         public String toString() {
-            return Affichage.BLUE+"#";
+            return super.toString() + "#";
         }
     }
 
@@ -40,8 +39,8 @@ public class BigMonster  extends AbstractMonster {
                 && (!m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).isAccesible()  && m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).getType() != Cell.Style.CellType.NORMAL)){
             this.move(Procedure.getAccesibleRandomPosition(true,m));
         }
-        leftArm = new Arm(m, new Position(this.getPosition().getX()-1,this.getPosition().getY()-1), nom, pv/2, force/2, vision_radius, agro, update_rate_ms, path_type, lvl);
-        rightArm= new Arm(m, new Position(this.getPosition().getX()+1,this.getPosition().getY()-1), nom, pv/2, force/2, vision_radius, agro, update_rate_ms, path_type, lvl);
+        leftArm = new Arm(m, new Position(this.getPosition().getX() - 1, this.getPosition().getY() - 1), nom, pv / 2, force / 2, vision_radius, agro, update_rate_ms, path_type, lvl);
+        rightArm= new Arm(m, new Position(this.getPosition().getX() + 1, this.getPosition().getY() - 1), nom, pv / 2, force / 2, vision_radius, agro, update_rate_ms, path_type, lvl);
 
     }
 
@@ -72,6 +71,6 @@ public class BigMonster  extends AbstractMonster {
 
     @Override
     public String toString() {
-        return Affichage.BLUE+"U";
+        return super.toString() + "U";
     }
 }

@@ -23,11 +23,6 @@ public class Snake extends AbstractMonster {
         public void updateMonster() {}
 
         @Override
-        public String toString() {
-            return Affichage.BRIGTH_BLUE+Affichage.BOLD+"O";
-        }
-
-        @Override
         public boolean updatePV(int pv) {
             boolean Alive = super.updatePV(pv);
             if(!Alive){
@@ -41,6 +36,11 @@ public class Snake extends AbstractMonster {
             if(getEtage().get(pos).getEntity()==null){
                 super.move(pos);
             }
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + "O";
         }
     }
 
@@ -117,6 +117,6 @@ public class Snake extends AbstractMonster {
 
     @Override
     public String toString() {
-        return Affichage.BLUE+Affichage.BOLD+"Q";
+        return super.toString() + "Q";
     }
 }

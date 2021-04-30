@@ -1,9 +1,11 @@
 package Model.Entitys;
 
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 import java.io.Serializable;
+import java.nio.file.attribute.AclFileAttributeView;
 
 /**
  * Entité de base du jeu peut etre un Mob ou un Objet.
@@ -33,7 +35,6 @@ public abstract class Entity implements Serializable {
      * @author Quentin
      */
     public abstract void onContact(Entity e);
-    public abstract String toString();
 
     /**
      * Renvoit sa position.
@@ -87,4 +88,8 @@ public abstract class Entity implements Serializable {
         this.nom = nom;
     }
 
+    @Override
+    public String toString() {
+        return Affichage.BOLD;
+    }
 }

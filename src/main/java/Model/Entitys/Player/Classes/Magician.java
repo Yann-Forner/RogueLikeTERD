@@ -63,7 +63,7 @@ public class Magician extends AbstractClass{
             return "🧙";
         }
         else{
-            return Affichage.BLUE+Affichage.BOLD+"@";
+            return super.toString() + "@";
         }
     }
 }

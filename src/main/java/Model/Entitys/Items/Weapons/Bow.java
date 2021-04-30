@@ -67,7 +67,7 @@ public class Bow extends AbstractWeapon {
             return "🏹";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"S";
+            return super.toString()+"b";
         }
     }
 }

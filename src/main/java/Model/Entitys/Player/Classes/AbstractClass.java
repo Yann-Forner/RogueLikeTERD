@@ -2,6 +2,7 @@ package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.BasicPlayer;
+import Model.Utils.Affichage;
 
 import java.io.Serializable;
 
@@ -65,4 +66,9 @@ public abstract class AbstractClass implements Serializable {
      * @author Quentin
      */
     public abstract String getNom();
+
+    @Override
+    public String toString() {
+        return Affichage.BOLD + Affichage.BRIGTH_GREEN + Affichage.ITALIC;
+    }
 }

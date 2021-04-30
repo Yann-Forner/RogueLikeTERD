@@ -63,7 +63,7 @@ public class Warrior extends AbstractClass {
             return "👹";
         }
         else{
-            return Affichage.RED+Affichage.BOLD+"@";
+            return super.toString() + "@";
         }
     }
 }

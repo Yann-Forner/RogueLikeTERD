@@ -15,7 +15,6 @@ import Model.Utils.TourManager;
 
 /**
  * Un Item est une entité qui ne se deplace pas et n'a pas de point de vie.
- *
  * @author JP, Quentin, Gillian
  */
 public abstract class AbstractItem extends Entity {
@@ -23,7 +22,6 @@ public abstract class AbstractItem extends Entity {
 
     /**
      * Crée un item avec un prix.
-     *
      * @param etage Etage
      * @param position Position
      * @param nom Nom
@@ -38,7 +36,6 @@ public abstract class AbstractItem extends Entity {
 
     /**
      * Crée un item avec un prix
-     *
      * @param etage
      * @param position
      * @param nom
@@ -130,9 +127,8 @@ public abstract class AbstractItem extends Entity {
      */
     public abstract void useItem(BasicPlayer player);
 
-    /**
-     * renvoi la string sans couleur
-     * @return String
-     */
-    //public abstract String toStringWithoutColor();
+    @Override
+    public String toString() {
+        return Affichage.FRAMED;
+    }
 }

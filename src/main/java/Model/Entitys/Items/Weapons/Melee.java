@@ -31,7 +31,7 @@ public class Melee extends AbstractWeapon{
             return "🗡️";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"S";
+            return super.toString()+"m";
         }
     }
 }

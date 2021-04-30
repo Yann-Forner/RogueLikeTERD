@@ -40,7 +40,7 @@ public class Snail extends AbstractMonster {
             return "\uD83D\uDC0C";
         }
         else{
-            return Affichage.BLUE+Affichage.BOLD+"G";
+            return super.toString() + "G";
         }
     }
 }

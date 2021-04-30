@@ -19,7 +19,7 @@ public class Zombie extends AbstractMonster {
             return "\uD83E\uDDDF";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"Z";
+            return super.toString() + "Z";
         }
     }
 }

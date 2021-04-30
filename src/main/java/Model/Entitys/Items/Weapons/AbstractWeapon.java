@@ -92,4 +92,8 @@ public abstract class AbstractWeapon extends AbstractItem {
         return coutEndurence;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + Affichage.CYAN;
+    }
 }

@@ -67,7 +67,7 @@ public class Volcano extends AbstractMonster {
             return "\uD83C\uDF0B";
         }
         else{
-            return Affichage.RED+Affichage.BOLD+"V";
+            return super.toString() + "V";
         }
     }
 }

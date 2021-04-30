@@ -1,6 +1,7 @@
 package Model.Entitys.Items.Foods;
 
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
@@ -20,6 +21,11 @@ public class Apple extends AbstractFood {
 
     @Override
     public String toString() {
-        return "\uD83C\uDF4E";
+        if(System.getProperty("os.name").equals("Linux")){
+            return "🍎";
+        }
+        else{
+            return super.toString()+"p";
+        }
     }
 }

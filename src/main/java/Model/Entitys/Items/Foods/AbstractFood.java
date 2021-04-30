@@ -4,6 +4,7 @@ import Model.Entitys.Entity;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
@@ -45,7 +46,7 @@ public abstract class AbstractFood extends AbstractItem {
 
     @Override
     public String toString() {
-        return null;
+        return super.toString() + Affichage.RED;
     }
 
 }

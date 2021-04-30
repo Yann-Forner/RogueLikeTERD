@@ -5,6 +5,7 @@ import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
@@ -175,4 +176,8 @@ public abstract class AbstractAlive extends Entity {
         return lvl;
     }
 
+    @Override
+    public String toString() {
+        return Affichage.GREEN;
+    }
 }

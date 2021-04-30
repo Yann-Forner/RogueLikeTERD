@@ -19,7 +19,7 @@ public class Rat extends AbstractMonster {
             return 	"\uD83D\uDC00";
         }
         else{
-            return Affichage.RED+Affichage.BOLD+"M";
+            return super.toString() + "M";
         }
     }
 }

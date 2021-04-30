@@ -38,10 +38,10 @@ public class InvulPotion extends AbstractPotion {
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return 	"\uD83D\uDC89";
+            return "\uD83D\uDC89";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"H";
+            return super.toString()+"i";
         }
     }
 }

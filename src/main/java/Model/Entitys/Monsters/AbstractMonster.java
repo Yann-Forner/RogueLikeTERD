@@ -96,4 +96,8 @@ public abstract class AbstractMonster extends AbstractAlive {
         return Affichage.GREEN + super.getNom() + Affichage.BRIGTH_GREEN + Affichage.BOLD + "[" + lvl + "]" + Affichage.RESET;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + Affichage.ITALIC;
+    }
 }

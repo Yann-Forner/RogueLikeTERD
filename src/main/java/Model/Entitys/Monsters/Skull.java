@@ -56,7 +56,7 @@ public class Skull extends AbstractMonster {
             return 	"\uD83D\uDC80";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"S";
+            return super.toString() + "S";
         }
     }
 }

@@ -23,15 +23,15 @@ public class ReposRoomStrategy extends RoomStrategy {
 
     @Override
     protected void setStyleCell(Room r) {
-        Cell.Style vase = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,"\uD83C\uDFFA", "v");
+        Cell.Style vase = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_GREY,"\uD83C\uDFFA", "v");
         Cell.Style fleure_type1 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF3B", "a");
-        Cell.Style fleure_type2 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF3C", "b");
+        Cell.Style fleure_type2 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_BLACK,"\uD83C\uDF3C", "b");
         Cell.Style fleure_type3 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF37", "c");
-        Cell.Style fleure_type4 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF31", "d");
-        Cell.Style fleure_type5 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF3A", "e");
-        Cell.Style fleure_type6 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83E\uDD40", "f");
+        Cell.Style fleure_type4 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_BLACK,"\uD83C\uDF31", "d");
+        Cell.Style fleure_type5 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"\uD83C\uDF3A", "e");
+        Cell.Style fleure_type6 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_BLACK,"\uD83E\uDD40", "f");
         Cell.Style fleure_type7 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF3F", "g");
-        Cell.Style fleure_type8 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83C\uDF44", "h");
+        Cell.Style fleure_type8 = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_GREY,"\uD83C\uDF44", "h");
         for (int i = 0; i < Procedure.getRandomInt(3,1); i++) {
             r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(false, vase);
         }

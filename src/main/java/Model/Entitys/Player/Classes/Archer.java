@@ -63,7 +63,7 @@ public class Archer extends AbstractClass{
             return "🧝";
         }
         else{
-            return Affichage.GREEN+Affichage.BOLD+"@";
+            return super.toString() + "@";
         }
     }
 }

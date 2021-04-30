@@ -10,7 +10,6 @@ import Model.Utils.TourManager;
 
 /**
  * Classe décrivant un tas d'argent ramassable par le joueur
- *
  * @author Gillian
  */
 public class StackOfMoney extends AbstractItem {
@@ -89,7 +88,7 @@ public class StackOfMoney extends AbstractItem {
             }
 
         } else {
-            return Affichage.GREEN + Affichage.BOLD + "H";
+            return Affichage.YELLOW + "$";
         }
 
         return "";

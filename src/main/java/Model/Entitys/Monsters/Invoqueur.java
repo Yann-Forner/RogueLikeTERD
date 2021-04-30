@@ -7,8 +7,8 @@ import Model.Utils.*;
 import java.util.ArrayList;
 
 /**
- * TODO
- * @auhtor Quentin
+ * TODO le mec
+ * @author Quentin
  */
 public class Invoqueur extends AbstractMonster {
     public Invoqueur(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
@@ -72,7 +72,7 @@ public class Invoqueur extends AbstractMonster {
             return "\uD83D\uDDFD";
         }
         else{
-            return Affichage.RED+Affichage.BOLD+"I";
+            return super.toString() + "I";
         }
     }
 }

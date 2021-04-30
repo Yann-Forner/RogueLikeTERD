@@ -1,12 +1,11 @@
 package Model.Entitys.Monsters;
 
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
  * Bird, se déplace en diagonale, ne cheche pas à attaquer le joueur
- * @auhtor JP
+ * @author JP
  */
 public class Bird extends AbstractMonster {
 
@@ -41,7 +40,7 @@ public class Bird extends AbstractMonster {
             return "\uD83D\uDC26";
         }
         else{
-            return Affichage.BLUE+Affichage.BOLD+"ù";
+            return super.toString() + "U";
         }
     }
 }

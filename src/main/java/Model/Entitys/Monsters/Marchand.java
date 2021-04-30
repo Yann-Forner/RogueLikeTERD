@@ -205,7 +205,7 @@ public class Marchand extends AbstractMonster {
         if (System.getProperty("os.name").equals("Linux")) {
             return "\uD83D\uDC73";
         } else {
-            return Affichage.YELLOW + Affichage.BOLD + "M";
+            return Affichage.YELLOW + Affichage.BOLD + Affichage.ITALIC + "£";
         }
     }
 
