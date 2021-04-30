@@ -22,7 +22,7 @@ public class Melee extends AbstractWeapon{
 
     @Override
     public void useItem(BasicPlayer player) {
-
+        super.useItem(player);
     }
 
     @Override

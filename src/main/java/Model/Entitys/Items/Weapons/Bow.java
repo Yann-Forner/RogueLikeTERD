@@ -29,6 +29,7 @@ public class Bow extends AbstractWeapon {
 
     @Override
     public void useItem(BasicPlayer player) {
+        super.useItem(player);
         Position position = player.getPosition();
         int range = getRange();
         for (int x = position.getX() - range; x < position.getX() + range * 2 - 1; x++) {

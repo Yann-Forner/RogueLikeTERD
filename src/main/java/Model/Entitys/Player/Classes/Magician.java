@@ -48,6 +48,11 @@ public class Magician extends AbstractClass{
     }
 
     @Override
+    public int getEndurenceRate() {
+        return 400;
+    }
+
+    @Override
     public String getNom() {
         return "Le Magicien";
     }

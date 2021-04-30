@@ -51,7 +51,6 @@ public class TourManager implements Serializable {
      * @author Quentin
      */
     public void playTour(BufferedReader reader){
-        System.out.println("------>"+inDialogue);
         if(!inDialogue){
             Affichage.getMap();
             boolean mouvement = processInput(reader);
@@ -162,6 +161,11 @@ public class TourManager implements Serializable {
                 Affichage.getMap();
             }
         }, 0, 300, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(() -> {
+            if(running && player.getEndurence()<100){
+                player.updateEndurence(1);
+            }
+        }, 0, player.getClasse().getEndurenceRate(), TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
     }
 

@@ -22,6 +22,7 @@ public class BasicPlayer extends AbstractAlive {
     private final AbstractClass classe;
     private int money = 0;
     private Direction direction = Direction.HAUT;
+    private int endurence = 100;
 
     public enum Direction{
         HAUT(new Position(0,-1)),
@@ -196,6 +197,24 @@ public class BasicPlayer extends AbstractAlive {
             direction=Direction.BAS;
             MovementCoolDown = System.currentTimeMillis();
         }
+    }
+
+    /**
+     * Change l'endurence du joueur.
+     * @param endurence Endurence
+     * @author Quentin
+     */
+    public void updateEndurence(int endurence){
+        this.endurence = this.endurence + endurence;
+    }
+
+    /**
+     * Renvoit l'endurence du joueur.
+     * @return Endurence
+     * @author Quentin
+     */
+    public int getEndurence(){
+        return endurence;
     }
 
     @Override

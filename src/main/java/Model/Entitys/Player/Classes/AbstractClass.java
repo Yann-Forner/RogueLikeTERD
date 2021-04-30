@@ -10,9 +10,6 @@ import java.io.Serializable;
  * @author Quentin
  */
 public abstract class AbstractClass implements Serializable {
-
-    public AbstractClass(){ }
-
     /**
      * Renvoit le champs de vision de cette classe.
      * @return Champs de vision
@@ -49,8 +46,18 @@ public abstract class AbstractClass implements Serializable {
      */
     public abstract void setBaseItems(BasicPlayer player);
 
-
+    /**
+     * Defini si l'amr est utilisable par la classe.
+     * @author Quentin
+     */
     public abstract boolean canUse(AbstractWeapon weapon);
+
+    /**
+     * Vitesse de recuperation de l'endurence en ms.
+     * @return frequence
+     * @author Quentin
+     */
+    public abstract int getEndurenceRate();
 
     /**
      * Renvoit le nom de la classe.

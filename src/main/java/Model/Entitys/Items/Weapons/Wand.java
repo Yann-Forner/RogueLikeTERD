@@ -34,6 +34,7 @@ public class Wand extends AbstractWeapon {
 
     @Override
     public void useItem(BasicPlayer player) {
+        super.useItem(player);
         ArrayList<Position> zone = new ArrayList<>();
         int distance = getRange();
         Position current = Objects.requireNonNull(Start.getPlayer()).getPosition().somme(Start.getPlayer().getDirection().getVecteur());

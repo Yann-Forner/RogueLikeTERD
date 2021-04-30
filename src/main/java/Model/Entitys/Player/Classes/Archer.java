@@ -48,6 +48,11 @@ public class Archer extends AbstractClass{
     }
 
     @Override
+    public int getEndurenceRate() {
+        return 900;
+    }
+
+    @Override
     public String getNom() {
         return "L'Archer";
     }

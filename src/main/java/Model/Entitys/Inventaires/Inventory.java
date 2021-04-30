@@ -32,7 +32,15 @@ public class Inventory implements Serializable {
         AbstractWeapon weapon = getCurrentWeapon();
         if(weapon!=null){
             if(player.getClasse().canUse(weapon)){
-                weapon.useItem(player);
+                if(weapon.getCoutEndurence() <= player.getEndurence()){
+                    weapon.useItem(player);
+                }
+                else{
+                    TourManager.addMessage(Affichage.RED + Affichage.BOLD +
+                            "[ERREUR]" +
+                            Affichage.RESET + Affichage.RED +
+                            " Pas assez d'energie.");
+                }
             }
             else{
                 TourManager.addMessage(Affichage.RED + Affichage.BOLD +

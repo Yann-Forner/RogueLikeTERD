@@ -16,6 +16,7 @@ import Model.Utils.TourManager;
 public abstract class AbstractWeapon extends AbstractItem {
     private final int strength;
     private final int range;
+    private final int coutEndurence;
     private final WeaponFactory.WeaponType type;
 
     /**
@@ -32,6 +33,7 @@ public abstract class AbstractWeapon extends AbstractItem {
         this.type = type;
         this.strength = strength;
         this.range = range;
+        this.coutEndurence = 7;
     }
 
     /**
@@ -47,6 +49,11 @@ public abstract class AbstractWeapon extends AbstractItem {
             player.getInventory().addWeapon(this);
             player.getEtage().removeItem(this);
         }
+    }
+
+    @Override
+    public void useItem(BasicPlayer player) {
+        player.updateEndurence(-getCoutEndurence());
     }
 
     /**
@@ -74,6 +81,15 @@ public abstract class AbstractWeapon extends AbstractItem {
      */
     public int getRange() {
         return range;
+    }
+
+    /**
+     * Renvoit le cout en endurence pour utiliser l'arme.
+     * @return Cout en endurence
+     * @author Quentin
+     */
+    public int getCoutEndurence(){
+        return coutEndurence;
     }
 
 }

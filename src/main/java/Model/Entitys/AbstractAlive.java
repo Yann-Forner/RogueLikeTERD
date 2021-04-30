@@ -1,6 +1,8 @@
 package Model.Entitys;
 
 import Model.Entitys.Inventaires.Inventory;
+import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
@@ -102,6 +104,12 @@ public abstract class AbstractAlive extends Entity {
 
     @Override
     public void onContact(Entity e) {
+        //TODO empecher le CaC si la currentWepaon est une arme de distance
+        if(e instanceof BasicPlayer){
+            BasicPlayer player = (BasicPlayer) e;
+            AbstractWeapon currentWeapon = player.getInventory().getCurrentWeapon();
+            player.updateEndurence(- (currentWeapon == null ? 1 : currentWeapon.getCoutEndurence()));
+        }
         updatePV(-((AbstractAlive)e).getForce());
     }
 

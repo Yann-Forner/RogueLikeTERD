@@ -48,6 +48,11 @@ public class Warrior extends AbstractClass {
     }
 
     @Override
+    public int getEndurenceRate() {
+        return 700;
+    }
+
+    @Override
     public String getNom() {
         return "Le Guerrier";
     }

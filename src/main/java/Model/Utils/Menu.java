@@ -62,8 +62,6 @@ public class Menu {
 
         printStringOnSide(0, "  Inventaire",14,Affichage.PURPLE);
 
-
-
         var potionsList = inv.getPotions();
         var armesList = inv.getWeapons();
         printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17 , Affichage.RED);
