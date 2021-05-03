@@ -8,7 +8,6 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import Model.Utils.Start;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -37,19 +36,19 @@ public class Wand extends AbstractWeapon {
         super.useItem(player);
         ArrayList<Position> zone = new ArrayList<>();
         int distance = getRange();
-        Position current = Objects.requireNonNull(Start.getPlayer()).getPosition().somme(Start.getPlayer().getDirection().getVecteur());
+        Position current = Objects.requireNonNull(player).getPosition().somme(player.getDirection().getVecteur());
         while(player.getEtage().get(current).getType() != Cell.Style.CellType.BORDER && distance!=0){
             zone.add(current);
-            current = current.somme(Start.getPlayer().getDirection().getVecteur());
+            current = current.somme(player.getDirection().getVecteur());
             distance--;
         }
         for(Position p : zone){
-            Entity entity = Start.getPlayer().getEtage().get(p).getEntity();
+            Entity entity = player.getEtage().get(p).getEntity();
             if(entity instanceof AbstractAlive){
                 if (entity instanceof Marchand && ((Marchand) entity).getState() == Marchand.STATE.AGGRESSIVE){
                     continue;
                 }
-                entity.onContact(Start.getPlayer());
+                entity.onContact(player);
             }
         }
         Affichage.Projectile(player.getEtage(),zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"💥","+"));

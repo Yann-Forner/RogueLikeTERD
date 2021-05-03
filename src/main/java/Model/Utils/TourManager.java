@@ -270,4 +270,13 @@ public class TourManager implements Serializable {
         long hour = (durationInMillis / (1000 * 60 * 60)) % 24;
         return String.format("%02d:%02d:%02d", hour, minute, second);
     }
+
+    /**
+     * Renvoit le tour du jeu.
+     * @return int
+     * @author Quentin
+     */
+    public int getTour(){
+        return Tour;
+    }
 }

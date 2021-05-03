@@ -8,7 +8,7 @@ import Model.Utils.Procedure;
 
 /**
  * Une salle de boss
- * @auhtor Quentin,Yann
+ * @author Quentin,Yann
  */
 public class BigBossRoomStrategy extends CircleRoomStrategy {
     @Override

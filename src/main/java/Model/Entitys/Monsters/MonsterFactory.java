@@ -7,7 +7,7 @@ import Model.Utils.Tools;
 
 /**
  * Factory qui crée les monstres
- * @auhtor Yann,Quentin,JP
+ * @author Yann,Quentin,JP
  */
 public class MonsterFactory {
     public enum MonsterType {
@@ -19,15 +19,12 @@ public class MonsterFactory {
      * @param etage etage courant
      * @param m enum d'un monstre
      * @return un monstre
-     * @auhtor Yann,Quentin,JP
+     * @author Yann,Quentin,JP
      */
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
                 return new Ghost(etage, Procedure.getAccesibleRandomPosition(true,etage),"GHOST", 10,3,10,10,700, Tools.PATH_GHOST,getBaseLvl());
-            }
-            case ZOMBIE -> {
-                return new Zombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE",25,5,5,30,1500, Tools.PATH_CROSS,getBaseLvl());
             }
             case RAT -> {
                 return new Rat(etage, Procedure.getAccesibleRandomPosition(true,etage),"RAT",5,1,15,15,300, Tools.PATH_DIAG, getBaseLvl());
@@ -57,14 +54,13 @@ public class MonsterFactory {
                 return new Snake(etage,Procedure.getAccesibleRandomPosition(true,etage),"Snake",10,1,15,20,900,Tools.PATH_NOMOBS,getBaseLvl()+5,10);
             }
             case INVOQUEUR -> {
-                return new Invoqueur(etage,Procedure.getAccesibleRandomPosition(true,etage),"INVOQUEUR",10,18,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5);
+                return new Invoqueur(etage,Procedure.getAccesibleRandomPosition(true,etage),"INVOQUEUR",25,5,3,20,800,Tools.PATH_CROSS,getBaseLvl()+5);
             }
             case MARCHAND -> {
                 return new Marchand(etage,Procedure.getAccesibleRandomPosition(true,etage),"MARCHAND",50,8,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5, Marchand.STATE.NOTVISITED);
             }
-
             default -> {
-                return null;
+                return new Zombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE",25,5,5,30,1500, Tools.PATH_CROSS,getBaseLvl());
             }
         }
     }
@@ -75,23 +71,21 @@ public class MonsterFactory {
      * @param m enum de monstre
      * @param pv les pvs du monstre
      * @return le monstre
-     * @auhtor Quentin
+     * @author Quentin
      */
     protected static AbstractMonster getNewMonster(Etage etage, MonsterType m, int pv){
-        switch (m){
-            case BEE -> {
-                return new Bee(etage,Procedure.getAccesibleRandomPosition(true,etage),"BEE", pv,5,15,20,900, Tools.PATH_CROSS, getBaseLvl());
-            }
-            default -> {
-                return null;
-            }
+        //TODO sup cette methode
+        if (m == MonsterType.BEE) {
+            return new Bee(etage, Procedure.getAccesibleRandomPosition(true, etage), "BEE", pv, 5, 15, 20, 900, Tools.PATH_CROSS, getBaseLvl());
+        } else {
+            return null;
         }
     }
 
     /**
      * retourne le level de base
      * @return int
-     * @auhtor Quentin
+     * @author Quentin
      */
     private static int getBaseLvl(){
         return Start.getMap() == null ? 1 : Procedure.getRandomInt(3,0)+Start.getMap().getIndexCurrent()+1;

@@ -111,7 +111,16 @@ public abstract class AbstractAlive extends Entity {
             AbstractWeapon currentWeapon = player.getInventory().getCurrentWeapon();
             player.updateEndurence(- (currentWeapon == null ? 1 : currentWeapon.getCoutEndurence()));
         }
-        updatePV(-((AbstractAlive)e).getForce());
+        updatePV(((AbstractAlive)e).caC());
+    }
+
+    /**
+     * Defini les pv enlévé lors d'un Corps a corps.
+     * @return Points de vie en moins
+     * @author Quentin
+     */
+    public int caC(){
+        return -this.getForce();
     }
 
     /**

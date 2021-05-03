@@ -2,7 +2,6 @@ package Model.Entitys.Items.Weapons;
 
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 public class Melee extends AbstractWeapon{
@@ -28,7 +27,7 @@ public class Melee extends AbstractWeapon{
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return "🗡️";
+            return "🔪";
         }
         else{
             return super.toString()+"m";

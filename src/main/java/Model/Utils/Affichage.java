@@ -69,7 +69,22 @@ public class Affichage {
      */
     public static void getMap(){
         Start.setConsoleMode(false);
-        System.out.print(CLEAR);
+        System.out.println(System.console()==null ?
+                Affichage.BRIGTH_RED +
+                    "---------------------------------------------------------------------------------------------------------" +
+                    "---------------------------------------------------------------------------------------------------------" +
+                    "\n" +
+                    "                                                                                                     " +
+                    Affichage.YELLOW +
+                    "TOUR: " +
+                    Start.getTourManager().getTour() +
+                    Affichage.BRIGTH_RED +
+                    "                                                                                                     " +
+                    "\n" +
+                    "---------------------------------------------------------------------------------------------------------" +
+                    "---------------------------------------------------------------------------------------------------------"
+                : CLEAR);
+        System.out.println();
         System.out.println(Start.getMap());
         System.out.print(Affichage.getBarre(GREEN,"PV",GREY, Objects.requireNonNull(Start.getPlayer()).getPv(),Start.getPlayer().getMAX_PV(),GREEN_BACKGROUND,RED_BACKGROUND,120));
         System.out.print(Affichage.getTouches(0));
@@ -134,7 +149,8 @@ public class Affichage {
                     default -> throw new IllegalStateException("Unexpected value: " + ombre);
                 }
                 sb.append(" ").append(cell);
-                if(cell.toString().length()>2){
+                int length = cell.toString().length();
+                if(length>2 || length==1){
                     sb.append(" ");
                 }
             }
