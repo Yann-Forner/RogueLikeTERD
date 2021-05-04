@@ -114,7 +114,7 @@ public class BasicPlayer extends AbstractAlive {
     @Override
     public void death() {
         TourManager.addMessage(Affichage.BRIGTH_RED + getNom() + Affichage.BRIGTH_RED + " est mort.");
-        Affichage.getMap();
+        Affichage.getMap(true);
         System.out.println("\nFin de la partie.");
         Start.end();
     }

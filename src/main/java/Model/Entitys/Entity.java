@@ -5,7 +5,6 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 import java.io.Serializable;
-import java.nio.file.attribute.AclFileAttributeView;
 
 /**
  * Entité de base du jeu peut etre un Mob ou un Objet.

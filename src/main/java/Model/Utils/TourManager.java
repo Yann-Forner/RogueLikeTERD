@@ -22,6 +22,7 @@ public class TourManager implements Serializable {
     private static boolean inDialogue = false;
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    private static final int refreshRate = 300;
     private static int Tour = 0;
     private static long Timer;
     private final BasicPlayer player;
@@ -52,7 +53,7 @@ public class TourManager implements Serializable {
      */
     public void playTour(BufferedReader reader){
         if(!inDialogue){
-            Affichage.getMap();
+            Affichage.getMap(true);
             boolean mouvement = processInput(reader);
             processEtage();
             if(!running && mouvement){
@@ -158,10 +159,12 @@ public class TourManager implements Serializable {
     public void schedule() {
         executor.scheduleAtFixedRate(() -> {
             if(running){
-                Affichage.getMap();
+                Affichage.getMap(false);
             }
-        }, 0, 300, TimeUnit.MILLISECONDS);
+        }, 0, refreshRate, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(() -> {
+            //TODO bug quand 0
+            //TODO pas colision quand 0
             if(running && player.getEndurence()<100){
                 player.updateEndurence(1);
             }
@@ -179,6 +182,7 @@ public class TourManager implements Serializable {
             if (running){
                 if(m.getPv()>0 && m.getEtage().equals(Objects.requireNonNull(Start.getPlayer()).getEtage())) {
                     m.updateMonster();
+                    Affichage.getMap(false);
                 }
             }
         }, 10, m.getUpdate_rate_ms(), TimeUnit.MILLISECONDS);
@@ -216,7 +220,7 @@ public class TourManager implements Serializable {
      * @author Quentin
      */
     public static void addMessage(String message){
-        if(messages.size()>8){
+        if(messages.size()>9){
             messages.pollFirst();
         }
         messages.add(message);
@@ -278,5 +282,14 @@ public class TourManager implements Serializable {
      */
     public int getTour(){
         return Tour;
+    }
+
+    /**
+     * Renvoit la frequence de reafrchissement de la map
+     * @return Temps en ms
+     * @author Quentin
+     */
+    public static int getRefreshRate(){
+        return refreshRate;
     }
 }

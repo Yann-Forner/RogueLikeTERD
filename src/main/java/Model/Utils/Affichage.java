@@ -58,6 +58,8 @@ public class Affichage {
     public static final String BRIGTH_CYAN_BACKGROUND = "\u001B[106m";
     public static final String BRIGTH_GREY_BACKGROUND = "\u001B[107m";
 
+    private static long lastRefresh = System.currentTimeMillis();
+
     public enum Shadow{
         CIRCLE,RAY,NONE
     }
@@ -67,31 +69,34 @@ public class Affichage {
      * Affiche la map
      * @author Quentin
      */
-    public static void getMap(){
-        Start.setConsoleMode(false);
-        System.out.println(System.console()==null ?
-                Affichage.BRIGTH_RED +
-                    "---------------------------------------------------------------------------------------------------------" +
-                    "---------------------------------------------------------------------------------------------------------" +
-                    "\n" +
-                    "                                                                                                     " +
-                    Affichage.YELLOW +
-                    "TOUR: " +
-                    Start.getTourManager().getTour() +
-                    Affichage.BRIGTH_RED +
-                    "                                                                                                     " +
-                    "\n" +
-                    "---------------------------------------------------------------------------------------------------------" +
-                    "---------------------------------------------------------------------------------------------------------"
-                : CLEAR);
-        System.out.println();
-        System.out.println(Start.getMap());
-        System.out.print(Affichage.getBarre(GREEN,"PV",GREY, Objects.requireNonNull(Start.getPlayer()).getPv(),Start.getPlayer().getMAX_PV(),GREEN_BACKGROUND,RED_BACKGROUND,120));
-        System.out.print(Affichage.getTouches(0));
-        System.out.print(Affichage.getBarre(BLUE,"Endurence",GREY,Start.getPlayer().getEndurence(),100,BLUE_BACKGROUND,RED_BACKGROUND,100));
-        System.out.print(Affichage.getTouches(1));
-        Affichage.getMessages();
-        Start.setConsoleMode(true);
+    public static void getMap(boolean playerRefresh){
+        if(System.currentTimeMillis()-lastRefresh >= TourManager.getRefreshRate() || playerRefresh) {
+            Start.setConsoleMode(false);
+            System.out.print(System.console() == null ?
+                    Affichage.BRIGTH_RED
+                            + "---------------------------------------------------------------------------------------------------------"
+                            + "---------------------------------------------------------------------------------------------------------"
+                            + "\n"
+                            + "                                                                                                     "
+                            + Affichage.YELLOW
+                            + "TOUR: "
+                            + Start.getTourManager().getTour()
+                            + Affichage.BRIGTH_RED
+                            + "                                                                                                     "
+                            + "\n"
+                            + "---------------------------------------------------------------------------------------------------------"
+                            + "---------------------------------------------------------------------------------------------------------"
+                            + "\n"
+                    : CLEAR);
+            System.out.println(Start.getMap());
+            System.out.print(Affichage.getBarre(GREEN, "PV", GREY, Objects.requireNonNull(Start.getPlayer()).getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, 120));
+            System.out.print(Affichage.getTouches(0));
+            System.out.print(Affichage.getBarre(BLUE, "Endurence", GREY, Start.getPlayer().getEndurence(), 100, BLUE_BACKGROUND, RED_BACKGROUND, 100));
+            System.out.print(Affichage.getTouches(1));
+            Affichage.getMessages();
+            Start.setConsoleMode(true);
+            lastRefresh = System.currentTimeMillis();
+        }
     }
 
     /**
@@ -282,8 +287,9 @@ public class Affichage {
         sb.append(RESET);
         sb.append(getTouches(2));
         for (String s :TourManager.getMessages()){
-            sb.append("\n").append(BRIGTH_PURPLE).append(s);
+            sb.append(BRIGTH_PURPLE).append(s).append("\n");
         }
+        sb.deleteCharAt(sb.length()-1);
         System.out.print(sb);
     }
 

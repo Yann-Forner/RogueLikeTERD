@@ -1,8 +1,15 @@
 package Model.Entitys.Items.Weapons;
 
+import Model.Entitys.AbstractAlive;
+import Model.Entitys.Entity;
+import Model.Entitys.Monsters.Marchand;
 import Model.Entitys.Player.BasicPlayer;
+import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
+
+import java.util.ArrayList;
 
 public class Melee extends AbstractWeapon{
 
@@ -22,6 +29,19 @@ public class Melee extends AbstractWeapon{
     @Override
     public void useItem(BasicPlayer player) {
         super.useItem(player);
+        Position pos = player.getPosition();
+        for (int i = 0; i < getRange(); i++) {
+            pos = pos.somme(player.getDirection().getVecteur());
+        }
+        ArrayList<Position> zone = new ArrayList<>();
+        zone.add(pos);
+        Entity entity = player.getEtage().get(pos).getEntity();
+        if(entity instanceof AbstractAlive){
+            if (!(entity instanceof Marchand && ((Marchand) entity).getState() == Marchand.STATE.AGGRESSIVE)){
+                entity.onContact(player);
+            }
+        }
+        Affichage.Projectile(player.getEtage(),zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"💫","+"));
     }
 
     @Override
