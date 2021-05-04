@@ -34,10 +34,11 @@ public abstract class AbstractFood extends AbstractItem {
     @Override
     public void onContact(Entity e) {
         if(e instanceof BasicPlayer) {
+            super.onContact(e);
             BasicPlayer player = ((BasicPlayer) e);
             player.updatePV(Math.min(heal, player.getMAX_PV() - player.getPv()));
+            getEtage().removeItem(this);
         }
-        getEtage().removeItem(this);
     }
 
     public int getHeal() {

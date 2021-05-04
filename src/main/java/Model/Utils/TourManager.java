@@ -27,6 +27,9 @@ public class TourManager implements Serializable {
     private static long Timer;
     private final BasicPlayer player;
     private Map map;
+    private static int nbrKill = 0;
+    private static int nbrKillBoss = 0;
+    private static int nbrObjetsTotal = 0;
 
     /**
      * Prend un joueur en parametre.
@@ -291,5 +294,57 @@ public class TourManager implements Serializable {
      */
     public static int getRefreshRate(){
         return refreshRate;
+    }
+
+    /**
+     * Ajoute un monstre tué au nombre de tués.
+     * @author Quentin
+     */
+    public static void addKill(){
+        nbrKill++;
+    }
+
+    /**
+     * Renvoit le nombre de monstres tués au total.
+     * @return nbr
+     * @author Quentin
+     */
+    public static int getNbrKill(){
+        return nbrKill;
+    }
+
+    /**
+     * Ajoute un boss tué au nombre de tués.
+     * @author Quentin
+     */
+    public static void addKillBoss(){
+        nbrKillBoss++;
+        nbrKill++;
+    }
+
+    /**
+     * Renvoit le nombre de boss tués au total.
+     * @return nbr
+     * @author Quentin
+     */
+    public static int getNbrKillBoss(){
+        return nbrKillBoss;
+    }
+
+    /**
+     * Ajoute un objets recuperé au nombre total des objets recuperés.
+     * @author Quentin
+     */
+    public static void addNbrObjetsTotal(){
+        nbrObjetsTotal++;
+    }
+
+    /**
+     * Renvoit le nombre d'objets total d'objets recuperées durant la partie.
+     * @return nbr
+     * @author Quentin
+     */
+    public static int getNbrObjetsTotal(){
+        return nbrObjetsTotal;
     }
 }

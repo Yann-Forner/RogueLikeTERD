@@ -298,6 +298,7 @@ public class Affichage {
      * @param etage etage
      * @param zone Zone de degats
      * @param style apparence du projectile
+     * @author Quentin
      */
     public static void Projectile(Etage etage,ArrayList<Position> zone, Cell.Style style){
         int delay = 1;
@@ -314,6 +315,7 @@ public class Affichage {
 
     /**
      * Affiche le menu d'accueil du jeu
+     * @author Quentin
      */
     public static void start(){
         String marge="                        ";
@@ -349,5 +351,67 @@ public class Affichage {
                 "3. QUITTER\n" +
                 RESET;
         System.out.println(sb);
+    }
+
+    public static void end(){
+        Start.setConsoleMode(false);
+        int width = 90;
+        String timerTxt = "   Temps total:  ";
+        String nbrKillTxt = "   Nombre de monstres tuées:  ";
+        String nbrKillBossTxt = "   Boss tués:  ";
+        String maxEtageTxt = "   Etage maximal atteint:  ";
+        String nbrObjetsTxt = "   Nombre total d'objets ramassés:  ";
+        System.out.print(
+                YELLOW
+                + BOLD
+                + "┌──────────────────────────────────────────────────────────────────────────────────────────┐\n"
+                + "│                                     "
+                + BRIGTH_RED
+                + ITALIC
+                + "FIN DE LA PARTIE"
+                + RESET
+                + YELLOW
+                + BOLD
+                + "                                     │\n"
+                + "│                                                                                          │\n│"
+                + timerTxt
+                + BRIGTH_GREEN
+                + addSpace(TourManager.getTimer(),timerTxt.length(),width)
+                + YELLOW
+                + "│\n│"
+                + nbrKillTxt
+                + BRIGTH_GREEN
+                + addSpace(String.valueOf(TourManager.getNbrKill()),nbrKillTxt.length(),width)
+                + YELLOW
+                + "│\n│"
+                + nbrKillBossTxt
+                + BRIGTH_GREEN
+                + addSpace(String.valueOf(TourManager.getNbrKillBoss()),nbrKillBossTxt.length(),width)
+                + YELLOW
+                + "│\n│"
+                + maxEtageTxt
+                + BRIGTH_GREEN
+                + addSpace(String.valueOf(Objects.requireNonNull(Start.getMap()).getEtages().size()),maxEtageTxt.length(),width)
+                + YELLOW
+                + "│\n│"
+                + nbrObjetsTxt
+                + BRIGTH_GREEN
+                + addSpace(String.valueOf(TourManager.getNbrObjetsTotal()),nbrObjetsTxt.length(),width)
+                + YELLOW
+                + "│\n│                                                                                          │\n"
+                + "└──────────────────────────────────────────────────────────────────────────────────────────┘\n"
+        );
+    }
+
+    /**
+     * Ajoute des espaces a la fin du String s.length fois.
+     * @param s String
+     * @param before_length Longueur du string avant s
+     * @param width Largeur totale du string
+     * @return La concatenation
+     * @author Quentin
+     */
+    private static String addSpace(String s, int before_length, int width){
+        return s + " ".repeat(width - (s.length() + before_length));
     }
 }

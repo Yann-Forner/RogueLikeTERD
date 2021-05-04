@@ -6,7 +6,6 @@ import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import Model.Utils.Start;
 import Model.Utils.TourManager;
 
 /**
@@ -113,10 +112,10 @@ public class BasicPlayer extends AbstractAlive {
 
     @Override
     public void death() {
-        TourManager.addMessage(Affichage.BRIGTH_RED + getNom() + Affichage.BRIGTH_RED + " est mort.");
+        TourManager.addMessage(Affichage.BRIGTH_RED + getNom() + Affichage.BRIGTH_RED + " est mort.\n");
         Affichage.getMap(true);
-        System.out.println("\nFin de la partie.");
-        Start.end();
+        Affichage.end();
+        System.exit(0);
     }
 
     @Override

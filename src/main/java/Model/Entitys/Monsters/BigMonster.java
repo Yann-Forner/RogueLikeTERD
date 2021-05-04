@@ -2,9 +2,9 @@ package Model.Entitys.Monsters;
 
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.TourManager;
 
 /**
  * Boss en 3 parties.
@@ -62,6 +62,7 @@ public class BigMonster  extends AbstractMonster {
         leftArm.death();
         rightArm.death();
         super.death();
+        TourManager.addKillBoss();
     }
 
     @Override

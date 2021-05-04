@@ -1,18 +1,13 @@
 package Model.Entitys.Items;
 
 import Model.Entitys.Entity;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
-import Model.Map.Etage_Strategy.CircleEtageStrategy;
-import Model.Map.Etage_Strategy.DonjonStrategy;
-import Model.Map.Etage_Strategy.EtageStrategy;
-import Model.Map.Etage_Strategy.NormalEtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
-import Model.Utils.Procedure;
 import Model.Utils.TourManager;
 
+//TODO cette classe est une vrai poubelle #GILLIAN #JP
 /**
  * Un Item est une entité qui ne se deplace pas et n'a pas de point de vie.
  * @author JP, Quentin, Gillian
@@ -49,10 +44,11 @@ public abstract class AbstractItem extends Entity {
     /**
      * Permet de réagir en cas de contact avec un objet : tente d'acheter s'il a un prix, ramasse sinon
      * @param e
-     * @author Gillian, JP
+     * @author Gillian, JP, Quentin
      */
     @Override
     public void onContact(Entity e) {
+        TourManager.addNbrObjetsTotal();
         /*
         if (!(e instanceof AbstractMonster)) {
             BasicPlayer player = (BasicPlayer) e;

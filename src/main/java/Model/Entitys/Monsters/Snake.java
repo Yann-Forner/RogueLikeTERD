@@ -112,6 +112,7 @@ public class Snake extends AbstractMonster {
     @Override
     public void death() {
         super.death();
+        TourManager.addKillBoss();
         Procedure.setRandomUPnDOWN(getEtage());
     }
 
