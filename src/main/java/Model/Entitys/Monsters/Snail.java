@@ -1,7 +1,8 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.Entity;
+import Model.Entitys.Items.AbstractItem;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
@@ -20,18 +21,31 @@ public class Snail extends AbstractMonster {
     protected Position nextPosition() {
         Position gauche = getPosition().somme(-1,0);
         Position droite = getPosition().somme(1,0);
+        Position next;
         if(toleft) {
             if(getEtage().get(gauche).isAccesible()){
-                return gauche;
+                next = gauche;
             }
-            toleft=false;
-            return droite;
+            else{
+                next = droite;
+                toleft = false;
+            }
         }
-        if(getEtage().get(droite).isAccesible()){
-            return droite;
+        else{
+            if(getEtage().get(droite).isAccesible()){
+                next = droite;
+            }
+            else{
+                next = gauche;
+                toleft = true;
+            }
         }
-        toleft=true;
-        return gauche;
+        Entity e = getEtage().get(next).getEntity();
+        if(e instanceof AbstractMonster || e instanceof AbstractItem ){
+            toleft = !toleft;
+            return null;
+        }
+        return next;
     }
 
     @Override
