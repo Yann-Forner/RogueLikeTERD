@@ -4,7 +4,6 @@ package Model.Map;
 import Exceptions.CollisionRoom;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -20,11 +19,12 @@ import java.util.*;
 public class Etage implements Serializable {
     protected int Width;
     protected int Heigth;
-    private  ArrayList<ArrayList<Cell>> Cells;
-    //TODO supprimer arraylist rooms
+    private ArrayList<ArrayList<Cell>> Cells;
     protected ArrayList<Room> Rooms = new ArrayList<>();
     protected ArrayList<AbstractMonster> Monsters = new ArrayList<>();
     protected ArrayList<AbstractItem> Items = new ArrayList<>();
+    private Position up;
+    private Position down;
 
     /**
      * Crée un etage selon ces dimensions.
@@ -43,11 +43,12 @@ public class Etage implements Serializable {
      * @param Width Largeur
      * @param Heigth Hauteur
      * @param strategy Strategy
+     * @param etageDepart determine si c'est le premier ateg de la map
      * @author Yann
      */
-    public Etage(int Width, int Heigth, EtageStrategy strategy) {
+    public Etage(int Width, int Heigth, EtageStrategy strategy, boolean etageDepart) {
         this(Width,Heigth);
-        strategy.composeEtage(this);
+        strategy.composeEtage(this, etageDepart);
     }
 
     /**
@@ -218,6 +219,42 @@ public class Etage implements Serializable {
      */
     public ArrayList<AbstractItem> getItems() {
         return Items;
+    }
+
+    /**
+     * Renvoit la position de la cellule pour monter.
+     * @return Position
+     * @author Quentin
+     */
+    public Position getUp() {
+        return up;
+    }
+
+    /**
+     * Renvoit la position de la cellule pour descendre.
+     * @return Position
+     * @author Quentin
+     */
+    public Position getDown() {
+        return down;
+    }
+
+    /**
+     * Defini la position de la cellule pour monter.
+     * @param up Position
+     * @author Quentin
+     */
+    public void setUp(Position up) {
+        this.up = up;
+    }
+
+    /**
+     * Defini la position de la cellule pour descendre.
+     * @param down Position
+     * @author Quentin
+     */
+    public void setDown(Position down) {
+        this.down = down;
     }
 
     @Override

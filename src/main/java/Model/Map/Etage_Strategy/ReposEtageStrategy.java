@@ -12,7 +12,7 @@ import Model.Utils.Procedure;
  */
 public class ReposEtageStrategy extends EtageStrategy{
     @Override
-    public void composeEtage(Etage etage) {
+    public void composeEtage(Etage etage, boolean etageDepart) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.REPOS);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,";"));
         Procedure.setRandomUPnDOWN(etage);

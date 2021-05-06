@@ -15,7 +15,7 @@ public class MarchandEtageStrategy extends EtageStrategy{
 
 
     @Override
-    public void composeEtage(Etage etage) {
+    public void composeEtage(Etage etage, boolean etageDepart) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.MARCHAND);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.YELLOW));
         setMonsters(etage);

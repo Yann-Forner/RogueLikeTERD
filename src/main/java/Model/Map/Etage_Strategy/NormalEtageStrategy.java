@@ -15,10 +15,10 @@ import java.util.Objects;
 public class NormalEtageStrategy extends EtageStrategy{
 
     @Override
-    public void composeEtage(Etage etage) {
+    public void composeEtage(Etage etage, boolean etageDepart) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.NORMAL);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL));
-        setSpecialCell(etage);
+        setSpecialCell(etage, etageDepart);
         setMonsters(etage);
         setItems(etage);
     }

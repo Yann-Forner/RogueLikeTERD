@@ -142,15 +142,26 @@ public class TourManager implements Serializable {
     private void processEtage() {
         switch (map.getCurrent().get(player.getPosition()).getType()) {
             case UP :
-                map.UP();
+                if(map.getMonterDescendre()){
+                    map.setMonterDescendre(true);
+                }
+                else{
+                    map.UP();
+                }
                 break;
             case DOWN :
-                map.DOWN();
+                if(map.getMonterDescendre()){
+                    map.setMonterDescendre(true);
+                }
+                else{
+                    map.DOWN();
+                }
                 break;
             case TRAP_ROOM :
                 map.TRAP_ROOM();
                 break;
             default:
+                map.setMonterDescendre(false);
                 break;
         }
     }

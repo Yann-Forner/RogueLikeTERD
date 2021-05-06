@@ -8,12 +8,12 @@ import Model.Utils.Procedure;
 
 /**
  * Cet étage est composé d'une seule salle grande qui comporte un boss.
- * @auhtor Yann
+ * @author Yann
  */
 
 public class BossEtageStategy extends EtageStrategy{
     @Override
-    public void composeEtage(Etage etage) {
+    public void composeEtage(Etage etage, boolean etageDepart) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.BOSS);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY));
         setMonsters(etage);

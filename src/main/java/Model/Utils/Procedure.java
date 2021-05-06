@@ -228,8 +228,9 @@ public class Procedure {
      * @author Quentin
      */
     public static void setRandomUP(Etage etage){
-        Position p1 = getAccesibleRandomPosition(false, etage);
-        etage.get(p1).updateCell(true, new Cell.Style(Cell.Style.CellType.UP));
+        Position pos = getAccesibleRandomPosition(false, etage);
+        etage.setUp(pos);
+        etage.get(pos).updateCell(true, new Cell.Style(Cell.Style.CellType.UP));
     }
 
     /**
@@ -237,9 +238,10 @@ public class Procedure {
      * @param etage Etage
      * @author Quentin
      */
-    private static void setRandomDOWN(Etage etage){
-        Position p2 = getAccesibleRandomPosition(false, etage);
-        etage.get(p2).updateCell(true, new Cell.Style(Cell.Style.CellType.DOWN));
+    public static void setRandomDOWN(Etage etage){
+        Position pos = getAccesibleRandomPosition(false, etage);
+        etage.setDown(pos);
+        etage.get(pos).updateCell(true, new Cell.Style(Cell.Style.CellType.DOWN));
     }
 
 }

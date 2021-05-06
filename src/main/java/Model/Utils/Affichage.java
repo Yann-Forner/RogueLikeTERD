@@ -2,6 +2,7 @@ package Model.Utils;
 
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Map.Room;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -118,13 +119,15 @@ public class Affichage {
             }
         }
 
+
         //Champs de vision
         HashSet<Position> visibles = new HashSet<>();
+        /* //TODO probleme avec le menu
         if(Start.getPlayer()!=null){
             for(Position p : Tools.getBorder(etage)){
-                visibles.addAll(Tools.getVisibles(etage, Start.getPlayer().getPosition(), p));
+                visibles.addAll(Tools.getVisibles(etage, etage instanceof Room ? new Position(etage.getWidth()/2,etage.getHeigth()/2) : Start.getPlayer().getPosition(), p));
             }
-        }
+        }*/
         //Titre Menu
         sb.append("    ");
         sb.append("                                      ");
@@ -159,7 +162,13 @@ public class Affichage {
                     sb.append(" ");
                 }
             }
-            menu.toStringByLine(y,sb);
+            //TODO probleme quand room
+            if(etage instanceof Room){
+                sb.append("\n");
+            }
+            else{
+                menu.toStringByLine(y,sb);
+            }
         }
         return sb.toString();
     }

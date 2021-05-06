@@ -14,10 +14,10 @@ import Model.Utils.Procedure;
 public class CircleEtageStrategy extends EtageStrategy{
 
     @Override
-    public void composeEtage(Etage etage) {
+    public void composeEtage(Etage etage, boolean etageDepart) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.CIRCLENORMAL);
         EtageFusion(etage, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLUE));
-        setSpecialCell(etage);
+        setSpecialCell(etage, etageDepart);
         setMonsters(etage);
         setItems(etage);
     }

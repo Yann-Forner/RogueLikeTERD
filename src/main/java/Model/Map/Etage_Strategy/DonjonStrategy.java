@@ -28,7 +28,7 @@ public class DonjonStrategy extends EtageStrategy {
     }};
 
     @Override
-    public void composeEtage(Etage etage) {
+    public void composeEtage(Etage etage, boolean etageDepart) {
         ArrayList<RoomFactory.roomType> roomsOfEtage = new ArrayList<>();
         int CircleRooms = 0, NormalRooms = 0, MarchandRooms = 0,nbrCurrentRooms = 0;
         while (nbrCurrentRooms< getNbrMaxRoom()){
@@ -55,7 +55,7 @@ public class DonjonStrategy extends EtageStrategy {
 
         Procedure.setRandomRooms(etage,this,roomsOfEtage);
         EtageFusion(etage,fusion_style);
-        setSpecialCell(etage);
+        setSpecialCell(etage, etageDepart);
         setMonsters(etage);
         setItems(etage);
     }

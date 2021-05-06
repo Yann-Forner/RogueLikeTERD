@@ -39,6 +39,11 @@ public class Snake extends AbstractMonster {
         }
 
         @Override
+        public int getExp() {
+            return 1;
+        }
+
+        @Override
         public String toString() {
             return super.toString() + "O";
         }

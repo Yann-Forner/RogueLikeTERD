@@ -10,6 +10,7 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 
+//TODO ajouter mobs
 /**
  * Défini une salle piégée
  * @auhtor Quentin
@@ -19,11 +20,6 @@ public class TrapRoomStrategy extends RoomStrategy {
     @Override
     public void composeRoom(Room r) {
         r.fillMap(new Cell(false, new Cell.Style(Cell.Style.CellType.BORDER,Affichage.RED)));
-        for (int i = 0; i < Procedure.getRandomInt(4,1); i++) {
-            Position pos = Procedure.getRandomWall(r);
-            //TODO empecher de tomber sur le même mur deux fois
-            r.get(pos).updateCell(true, new Cell.Style(Cell.Style.CellType.NORMAL));
-        }
     }
 
     @Override

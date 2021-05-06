@@ -18,10 +18,11 @@ public class TestEtage extends TestCase {
          * Genere les composants de l'étage
          *
          * @param etage etage courant
+         * @param etageDepart
          * @author Quentin, Yann
          */
         @Override
-        public void composeEtage(Etage etage) {
+        public void composeEtage(Etage etage, boolean etageDepart) {
 
         }
 
@@ -37,7 +38,7 @@ public class TestEtage extends TestCase {
         }
     }
 
-    private final Etage ETAGE   = new Etage(50,50,new TestStrategyEtage());
+    private final Etage ETAGE = new Etage(50,50,new TestStrategyEtage(),false);
 
     public void  testIfCollide(){
         Room room = new Room(5,5,new NormalRoomStrategy());
