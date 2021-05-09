@@ -1,6 +1,6 @@
 package Model.Entitys;
 
-import Model.Entitys.Inventaires.Inventory;
+import Model.Entitys.Items.Inventory;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;

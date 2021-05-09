@@ -1,12 +1,9 @@
 package Model.Utils;
 
-import Model.Entitys.Inventaires.Inventory;
+import Model.Entitys.Items.Inventory;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Map.Etage;
 import Model.Map.Map;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe servant a afficher le menu sur la droite du terminal

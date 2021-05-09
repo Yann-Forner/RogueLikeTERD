@@ -45,9 +45,7 @@ public class WeaponFactory {
             case WAND -> {
                 return new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), "Baguette", type, 5, 10);
             }
-            default -> {
-                return null;
-            }
+            default -> throw new IllegalStateException("Unexpected WeaponType: " + type);
         }
     }
 }

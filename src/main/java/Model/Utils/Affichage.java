@@ -64,7 +64,7 @@ public class Affichage {
     public enum Shadow{
         CIRCLE,RAY,NONE
     }
-    private static final Shadow ombre = Shadow.NONE;
+    private static Shadow ombre = Shadow.NONE;
 
     /**
      * Affiche la map
@@ -122,12 +122,13 @@ public class Affichage {
 
         //Champs de vision
         HashSet<Position> visibles = new HashSet<>();
-        /* //TODO probleme avec le menu
-        if(Start.getPlayer()!=null){
+        //TODO probleme avec le menu
+        if(Start.getPlayer()!=null && ombre.equals(Shadow.RAY)){
             for(Position p : Tools.getBorder(etage)){
                 visibles.addAll(Tools.getVisibles(etage, etage instanceof Room ? new Position(etage.getWidth()/2,etage.getHeigth()/2) : Start.getPlayer().getPosition(), p));
             }
-        }*/
+        }
+
         //Titre Menu
         sb.append("    ");
         sb.append("                                      ");
@@ -151,7 +152,7 @@ public class Affichage {
                 Position pos = new Position(x,y);
                 Cell cell;
                 switch (ombre){
-                    case CIRCLE -> cell = Start.getPlayer().getPosition().Distance(pos) <= 15 ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
+                    case CIRCLE -> cell = Start.getPlayer().getPosition().Distance(pos) <= Start.getPlayer().getVision_radius() ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
                     case RAY -> cell = visibles.contains(pos) ? etage.get(pos) : new Cell(etage.get(x, y).isAccesible(), new Cell.Style(Cell.Style.CellType.VOID));
                     case NONE -> cell = etage.get(pos);
                     default -> throw new IllegalStateException("Unexpected value: " + ombre);
@@ -422,5 +423,9 @@ public class Affichage {
      */
     private static String addSpace(String s, int before_length, int width){
         return s + " ".repeat(width - (s.length() + before_length));
+    }
+
+    public static void setOmbre(Shadow ombre) {
+        Affichage.ombre = ombre;
     }
 }

@@ -5,6 +5,7 @@ import Model.Map.Etage_Strategy.BossEtageStategy;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.ReposEtageStrategy;
 import Model.Map.Etage_Strategy.TrapEtageStrategy;
+import Model.Utils.Affichage;
 import Model.Utils.Start;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
@@ -97,6 +98,7 @@ public class Map implements Serializable {
         if(inTemporaryEtage){
             etage = etages.get(indexLastEtage);
             inTemporaryEtage=false;
+            Affichage.setOmbre(Affichage.Shadow.NONE);
         }
         else{
             indexLastEtage--;
@@ -116,6 +118,7 @@ public class Map implements Serializable {
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
         inTemporaryEtage = true;
+        Affichage.setOmbre(Affichage.Shadow.RAY);
     }
 
     /**

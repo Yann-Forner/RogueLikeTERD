@@ -59,9 +59,10 @@ public class MonsterFactory {
             case MARCHAND -> {
                 return new Marchand(etage,Procedure.getAccesibleRandomPosition(true,etage),"MARCHAND",50,8,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5, Marchand.STATE.NOTVISITED);
             }
-            default -> {
+            case ZOMBIE -> {
                 return new Zombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE",25,5,5,30,1500, Tools.PATH_CROSS,getBaseLvl());
             }
+            default -> throw new IllegalStateException("Unexpected MonsterType: " + m);
         }
     }
 
@@ -78,7 +79,7 @@ public class MonsterFactory {
         if (m == MonsterType.BEE) {
             return new Bee(etage, Procedure.getAccesibleRandomPosition(true, etage), "BEE", pv, 5, 15, 20, 900, Tools.PATH_CROSS, getBaseLvl());
         } else {
-            return null;
+            throw new IllegalStateException("Unexpected MonsterType: " + m);
         }
     }
 

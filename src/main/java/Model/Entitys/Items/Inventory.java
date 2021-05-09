@@ -1,4 +1,4 @@
-package Model.Entitys.Inventaires;
+package Model.Entitys.Items;
 
 import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;

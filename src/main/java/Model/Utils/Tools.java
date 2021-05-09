@@ -255,14 +255,9 @@ public class Tools {
      * @author Quentin
      */
     public static ArrayList<Position> getVisibles(Etage etage, Position p1, Position p2){
-        ArrayList<Position> chemin = getLigne(p1,p2);
-        System.out.println("Chemin : ");
-        for(Position p : chemin){
-            System.out.println(p);
-        }
         ArrayList<Position> visibles = new ArrayList<>();
+        ArrayList<Position> chemin = getLigne(p1,p2);
         for(Position p : chemin) {
-            System.out.println("w: " + etage.getWidth() + "; h: " + etage.getHeigth() + "; p: " + p);
             visibles.add(p);
             if (etage.get(p).getType().equals(Cell.Style.CellType.BORDER)) {
                 break;
