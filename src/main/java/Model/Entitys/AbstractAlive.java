@@ -7,6 +7,7 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 
 /**
  * Classe abstraite des mobs du jeu, un mob peut se deplacer et mourir.
@@ -98,7 +99,9 @@ public abstract class AbstractAlive extends Entity {
                 }
             }
             else{
-                //TODO faire un bruit de colision
+                if(this instanceof BasicPlayer){
+                    Sound.playAudio(Sound.Sons.COLLISION,0);
+                }
             }
         }
     }

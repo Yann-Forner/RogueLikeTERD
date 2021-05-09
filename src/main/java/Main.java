@@ -1,4 +1,5 @@
 import Model.Utils.Affichage;
+import Model.Utils.Sound;
 import Model.Utils.Start;
 
 public class Main {

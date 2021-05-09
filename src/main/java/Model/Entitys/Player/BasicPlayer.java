@@ -6,6 +6,7 @@ import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 import Model.Utils.TourManager;
 
 /**
@@ -81,6 +82,7 @@ public class BasicPlayer extends AbstractAlive {
             MAX_PV *= 1.5;
             lvl++;
             TourManager.addMessage(Affichage.BRIGTH_CYAN + "Vous avez gagné un niveau");
+            Sound.playAudio(Sound.Sons.LEVELUP,0);
         }
     }
 

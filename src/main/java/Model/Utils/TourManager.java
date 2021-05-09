@@ -39,6 +39,7 @@ public class TourManager implements Serializable {
     public TourManager(BasicPlayer player) {
         this.player = player;
         Timer = System.currentTimeMillis();
+        Sound.playAudio(Sound.Sons.MUSIQUE,1);
     }
 
     /**
@@ -147,6 +148,7 @@ public class TourManager implements Serializable {
                 }
                 else{
                     map.UP();
+                    Sound.playAudio(Sound.Sons.TP,0);
                 }
                 break;
             case DOWN :
@@ -155,10 +157,12 @@ public class TourManager implements Serializable {
                 }
                 else{
                     map.DOWN();
+                    Sound.playAudio(Sound.Sons.TP,0);
                 }
                 break;
             case TRAP_ROOM :
                 map.TRAP_ROOM();
+                Sound.playAudio(Sound.Sons.TP,0);
                 break;
             default:
                 map.setMonterDescendre(false);
