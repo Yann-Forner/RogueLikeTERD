@@ -6,6 +6,7 @@ import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 
 /**
  * Concept abstrait des nourriture. C'est ici que sera gérer le fait de manger l'item.
@@ -19,7 +20,7 @@ public abstract class AbstractFood extends AbstractItem {
      * @param etage Etage de la nourriture
      * @param position Position de la nourriture
      * @param nom Nom de la nourriture
-     * @param heal
+     * @param heal Quantité de pv restoré
      */
     public AbstractFood(Etage etage, Position position, String nom, int heal) {
         super(etage, position, nom);
@@ -38,6 +39,7 @@ public abstract class AbstractFood extends AbstractItem {
             BasicPlayer player = ((BasicPlayer) e);
             player.updatePV(Math.min(heal, player.getMAX_PV() - player.getPv()));
             getEtage().removeItem(this);
+            Sound.playAudio(Sound.Sons.MANGER,0);
         }
     }
 

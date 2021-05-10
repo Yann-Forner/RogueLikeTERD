@@ -37,14 +37,14 @@ public class Procedure {
     }
 
     /**
-     * Renvoit un entier aleatoire entre min et max.
+     * Renvoit un entier aleatoire entre min et max inclus.
      * @param Max int
      * @param Min int
      * @return Entier
      * @author Quentin
      */
     public static int getRandomInt(int Max, int Min){
-        return rand.nextInt(Max-Min)+Min;
+        return rand.nextInt(Max - Min + 1) + Min;
     }
 
     /**

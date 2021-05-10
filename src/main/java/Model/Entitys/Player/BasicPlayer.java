@@ -9,6 +9,8 @@ import Model.Utils.Position;
 import Model.Utils.Sound;
 import Model.Utils.TourManager;
 
+import java.util.concurrent.Executors;
+
 /**
  * Classe de base du joueur
  *
@@ -114,14 +116,21 @@ public class BasicPlayer extends AbstractAlive {
 
     @Override
     public void death() {
+        Sound.playAudio(Sound.Sons.MORT,0);
         TourManager.addMessage(Affichage.BRIGTH_RED + getNom() + Affichage.BRIGTH_RED + " est mort.\n");
+        TourManager.Pause();
         Affichage.getMap(true);
         Affichage.end();
+        try {
+            Thread.sleep(1500);
+        }
+        catch (InterruptedException ignored) { }
         System.exit(0);
     }
 
     @Override
     public void updatePVMessage() {
+        Sound.playAudio(Sound.Sons.DEGATSJOUEUR,0);
     }
 
     /**
