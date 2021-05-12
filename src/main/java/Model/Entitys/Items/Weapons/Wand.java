@@ -45,19 +45,38 @@ public class Wand extends AbstractWeapon {
         for(Position p : zone){
             Entity entity = player.getEtage().get(p).getEntity();
             if(entity instanceof AbstractAlive){
-                if (entity instanceof Marchand && ((Marchand) entity).getState() == Marchand.STATE.AGGRESSIVE){
+                if (entity instanceof Marchand && ((Marchand) entity).getState() != Marchand.STATE.AGGRESSIVE){
                     continue;
                 }
                 entity.onContact(player);
             }
         }
-        Affichage.Projectile(player.getEtage(),zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"💥","+"));
+        Affichage.Projectile(player.getEtage(),zone,getMagicStyle());
+    }
+
+    /**
+     * Renvoit un style de magie selon la portée.
+     * @return Style
+     * @author Quentin
+     */
+    private Cell.Style getMagicStyle(){
+        return switch (getRange()){
+            case 1, 2, 3 -> new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"💥","+");
+            case 4, 5, 6 -> new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_YELLOW,"🌟","*");
+            case 7, 8, 9 -> new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_GREEN,"🌀","x");
+            default -> new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"💢","¤");
+        };
     }
 
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return 	"🧹";
+            return switch (getRange()){
+                case 1, 2, 3 -> "🧹";
+                case 4, 5, 6 -> "🦴";
+                case 7, 8, 9 -> "🥢";
+                default -> "🦯";
+            };
         }
         else{
             return super.toString()+"w";

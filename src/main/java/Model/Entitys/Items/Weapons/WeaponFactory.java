@@ -31,19 +31,19 @@ public class WeaponFactory {
     public static AbstractItem getNewWeapon(Etage etage, WeaponType type) {
         switch(type) {
             case SWORD -> {
-                return new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), "Epee", type, 10, 1);
+                return new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), "Epee", type, 10, Procedure.getRandomInt(5,1));
             }
             case KNIFE -> {
                 return new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), "Couteau", type, 10, 1);
             }
             case BOW -> {
-                return new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), "Arc", type,10, 4);
+                return new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), "Arc", type,10, Procedure.getRandomInt(15,2));
             }
             case SHIELD -> {
                 return new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), "Bouclier", type, 0, 0);
             }
             case WAND -> {
-                return new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), "Baguette", type, 5, 10);
+                return new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), "Baguette", type, 5, Procedure.getRandomInt(10,1));
             }
             default -> throw new IllegalStateException("Unexpected WeaponType: " + type);
         }

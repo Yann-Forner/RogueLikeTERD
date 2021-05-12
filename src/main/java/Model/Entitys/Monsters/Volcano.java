@@ -37,7 +37,7 @@ public class Volcano extends AbstractMonster {
         ArrayList<Position> adjacents = new ArrayList<>();
         for (int x = position.getX() - vr; x < position.getX() + vr * 2 - 1; x++) {
             for (int y = position.getY() - vr; y < position.getY() + vr * 2 - 1; y++) {
-                if(x+offset.getX()>=0 && x< etage.getWidth() && y+offset.getY()>=0 && y< etage.getHeigth()){
+                if(x>=0 && x< etage.getWidth() && y>=0 && y< etage.getHeigth()){
                     Position pos = new Position(x, y);
                     if (position.Distance(pos) <= vr) {
                         Cell c = etage.get(pos);
