@@ -9,8 +9,6 @@ import Model.Utils.Position;
 import Model.Utils.Sound;
 import Model.Utils.TourManager;
 
-import java.util.concurrent.Executors;
-
 /**
  * Classe de base du joueur
  *

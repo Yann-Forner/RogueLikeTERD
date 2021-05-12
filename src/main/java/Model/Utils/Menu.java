@@ -175,7 +175,6 @@ public class Menu {
                 Matcher m = p.matcher(s.substring(currenti, currenti+5));
 
                 if( m.find()){
-                    System.out.println("trouvé "+y +" "+i +" "+m.start() +" - "+m.end() );
                         int size =m.end()-m.start();
                         if( m.start() == 0){
                             res = m.group(0);

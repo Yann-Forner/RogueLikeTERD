@@ -119,7 +119,6 @@ public class Affichage {
             }
         }
 
-
         //Champs de vision
         HashSet<Position> visibles = new HashSet<>();
         //TODO probleme avec le menu

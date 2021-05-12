@@ -19,7 +19,7 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
 
     @Override
     public void composeRoom(Room r) {
-        this.fillTriangle(r, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.YELLOW, "."));
+        fillTriangle(r, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.YELLOW, "."));
         setStyleCell(r);
     }
 

@@ -89,19 +89,19 @@ public class Cell implements Serializable {
 
         @Override
         public String toString() {
-            //TODO decalage inelij
             String forme, color;
             if(System.getProperty("os.name").equals("Linux")){
                 if(custom_forme_linux==null){
                     if(type.forme.length()==2){
                         return type.forme;
                     }
-                    else{
-                        forme = type.forme;
-                    }
+                    forme = type.forme;
                 }
                 else{
-                    return custom_forme_linux;
+                    if(custom_forme_linux.length()==2){
+                        return custom_forme_linux;
+                    }
+                    forme = custom_forme_linux;
                 }
             }
             else{

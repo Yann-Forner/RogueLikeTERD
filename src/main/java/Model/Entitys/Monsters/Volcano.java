@@ -3,6 +3,7 @@ package Model.Entitys.Monsters;
 import Model.Entitys.Entity;
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Map.Room;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 
@@ -18,6 +19,9 @@ public class Volcano extends AbstractMonster {
     public Volcano(Etage m, Position pos,String nom, int pv, int force, double vision_radius , int agro, int update_rate, int path_type, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, path_type, lvl);
         adjacents=getAdjacents(pos,(int)vision_radius);
+        for(Position p : adjacents){
+            System.out.println(p);
+        }
     }
 
     /**
@@ -28,16 +32,18 @@ public class Volcano extends AbstractMonster {
      * @author Quentin
      */
     private ArrayList<Position> getAdjacents(Position position, int vr) {
+        Etage etage = getEtage();
+        Position offset = etage instanceof Room ? ((Room) etage).getAbsolutePos() : new Position(0,0);
         ArrayList<Position> adjacents = new ArrayList<>();
         for (int x = position.getX() - vr; x < position.getX() + vr * 2 - 1; x++) {
             for (int y = position.getY() - vr; y < position.getY() + vr * 2 - 1; y++) {
-                if(x>=0 && x<getEtage().getWidth() && y>=0 && y<getEtage().getHeigth()){
+                if(x+offset.getX()>=0 && x< etage.getWidth() && y+offset.getY()>=0 && y< etage.getHeigth()){
                     Position pos = new Position(x, y);
                     if (position.Distance(pos) <= vr) {
-                        Cell c = getEtage().get(pos);
+                        Cell c = etage.get(pos);
                         if (c.getType().equals(Cell.Style.CellType.NORMAL)) {
-                            adjacents.add(pos);
-                            c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_RED, "~"));
+                            adjacents.add(pos.somme(offset));
+                            c.updateCell(c.isAccesible(), new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.RED, "~"));
                         }
                     }
                 }
