@@ -35,7 +35,7 @@ public class TrapEtageStrategy extends EtageStrategy{
             }
         }
         for (int i = 0; i < doors.size()-1; i++) {
-            for(Position p : Tools.Astar(etage,doors.get(i),doors.get(i+1),-1)){
+            for(Position p : Tools.Astar(etage,doors.get(i),doors.get(i+1), Tools.PathType.LABY)){
                 etage.get(p).updateCell(true, style_fusion);
             }
         }

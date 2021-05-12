@@ -1,9 +1,11 @@
 package Model.Utils;
 ;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Inventory;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Map.Etage;
 import Model.Map.Map;
+import Model.Map.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,6 @@ public class Menu {
     public Menu(Etage etage, Map map) {
         this.etage = etage;
         this.map = map;
-
     }
 
     /**

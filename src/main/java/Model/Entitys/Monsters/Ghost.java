@@ -3,13 +3,14 @@ package Model.Entitys.Monsters;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Tools;
 
 /**
  * Ghost, se déplace à travers les murs
  * @author Quentin
  */
 public class Ghost extends AbstractMonster {
-    public Ghost(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, int path_type, int lvl) {
+    public Ghost(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, Tools.PathType path_type, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, path_type, lvl);
     }
 

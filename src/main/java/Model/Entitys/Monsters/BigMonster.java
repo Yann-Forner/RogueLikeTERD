@@ -4,6 +4,7 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.Tools;
 import Model.Utils.TourManager;
 
 /**
@@ -16,7 +17,7 @@ public class BigMonster  extends AbstractMonster {
 
     private static class Arm extends AbstractMonster {
 
-        protected Arm(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
+        protected Arm(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl) {
             super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
             m.addMonster(this);
         }
@@ -33,7 +34,7 @@ public class BigMonster  extends AbstractMonster {
     }
 
 
-    protected BigMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
+    protected BigMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
         while ((!m.get(this.getPosition().getX()-1,this.getPosition().getY()-1).isAccesible() && m.get(this.getPosition().getX()-1,this.getPosition().getY()-1).getType() != Cell.Style.CellType.NORMAL)
                 && (!m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).isAccesible()  && m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).getType() != Cell.Style.CellType.NORMAL)){

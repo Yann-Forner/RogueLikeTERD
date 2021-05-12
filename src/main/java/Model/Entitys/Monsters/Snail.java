@@ -4,6 +4,7 @@ import Model.Entitys.Entity;
 import Model.Entitys.Items.AbstractItem;
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Tools;
 
 /**
  * Escargot qui se deplace en ligne droite jusqu'a ce qu'il rencontre un obstacle.
@@ -11,7 +12,7 @@ import Model.Utils.Position;
  */
 public class Snail extends AbstractMonster {
     private boolean toleft = true;
-    public Snail(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
+    public Snail(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, Tools.PathType pathCross, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
     }
 

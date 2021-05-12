@@ -1,10 +1,7 @@
 package Model.Entitys.Monsters;
 
 import Model.Map.Etage;
-import Model.Utils.Affichage;
-import Model.Utils.Position;
-import Model.Utils.Start;
-import Model.Utils.TourManager;
+import Model.Utils.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,7 +43,7 @@ public class Marchand extends AbstractMonster {
      * @param state         Etat du marchand
      * @author Gillian
      */
-    public Marchand(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, int pathCross, int lvl, STATE state) {
+    public Marchand(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, Tools.PathType pathCross, int lvl, STATE state) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
         this.state = state;
     }

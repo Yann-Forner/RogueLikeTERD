@@ -93,27 +93,6 @@ public class Procedure {
     }
 
     /**
-     * Renvoit un mur Random dans la Room r.
-     * @param r Room
-     * @return Position
-     * @author Quentin
-     */
-    public static Position getRandomWall(Room r){
-        Position pos = Procedure.getRelativeRandomPosition(r);
-        while((pos.getX()!=0
-                && pos.getX()!= r.getWidth()
-                && pos.getY()!=0
-                && pos.getY()!=r.getHeigth())
-                || pos.equals(new Position(0,0))
-                || pos.equals(new Position(r.getWidth()-1,0))
-                || pos.equals(new Position(0,r.getHeigth()-1))
-                || pos.equals(new Position(r.getWidth()-1,+r.getHeigth()-1))){
-            pos =  Procedure.getRelativeRandomPosition(r);
-        }
-        return pos;
-    }
-
-    /**
      * Renvoit une Position aleatoire dans l'Etage/Room accesible, si isEntityGeneration est vrai
      * alors la position est aussi sans AbstractAlive et non Reservé.
      * @param isEntityGeneration boolean
@@ -122,7 +101,6 @@ public class Procedure {
      * @return Position
      * @author Quentin
      */
-    //TODO comment faire ça sans le getRandomPosition(Etage e, Room... r) ?
     public static Position getAccesibleRandomPosition(boolean isEntityGeneration,Etage e,Room ... r){
         Position pos = r.length==1 ? getRandomPosition(r[0]) : getRandomPosition(e);
         if(isEntityGeneration) {

@@ -33,7 +33,7 @@ public class Invoqueur extends AbstractMonster {
      * @param lvl Son niveau
      * @author Quentin
      */
-    public Invoqueur(Etage m, Position pos, String nom, int pv, int force, double portee_min , int portee_max, int update_rate, int pathCross, int lvl) {
+    public Invoqueur(Etage m, Position pos, String nom, int pv, int force, double portee_min , int portee_max, int update_rate, Tools.PathType pathCross, int lvl) {
         super(m, pos, nom, pv, force, portee_min, portee_max, update_rate, pathCross, lvl);
         this.portee_min = portee_min;
         portee = portee_min;

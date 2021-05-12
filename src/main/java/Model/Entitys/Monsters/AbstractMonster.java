@@ -15,7 +15,7 @@ import java.util.Objects;
 public abstract class AbstractMonster extends AbstractAlive {
     protected int Alert=0;
     protected final int Agro;
-    private final int pathtype;
+    private final Tools.PathType pathtype;
     private final int update_rate_ms;
 
     /**
@@ -32,7 +32,7 @@ public abstract class AbstractMonster extends AbstractAlive {
      * @param lvl Son niveau
      * @author Quentin
      */
-    protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl) {
+    protected AbstractMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl) {
         super(m, pos, vision_radius, nom, pv, force, lvl);
         this.update_rate_ms=update_rate_ms;
         this.Agro=agro;

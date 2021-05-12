@@ -15,7 +15,7 @@ public class Snake extends AbstractMonster {
      * @author Quentin
      */
     private class Tail extends AbstractMonster {
-        private Tail(Etage m, Position pos, String nom, int pv, int path_type, int lvl) {
+        private Tail(Etage m, Position pos, String nom, int pv, Tools.PathType path_type, int lvl) {
             super(m, pos, nom, pv, 0,0,0,60000, path_type, lvl);
         }
 
@@ -67,7 +67,7 @@ public class Snake extends AbstractMonster {
      * @param size_of_tail Nombre que partie pour sa queue
      * @author Quentin
      */
-    protected Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, int path_type, int lvl, int size_of_tail) {
+    protected Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl, int size_of_tail) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
         this.size_of_tail=size_of_tail;
         setTail(m,pos,pv,path_type);
@@ -81,7 +81,7 @@ public class Snake extends AbstractMonster {
      * @param path_type Type de deplacement des queues
      * @author Quentin
      */
-    private void setTail(Etage m, Position pos,int pv, int path_type){
+    private void setTail(Etage m, Position pos,int pv, Tools.PathType path_type){
         Position random_pos = Procedure.getAccesibleRandomPosition(true, m);
         while (pos.Distance(random_pos)<size_of_tail+1){
             random_pos = Procedure.getAccesibleRandomPosition(true, m);

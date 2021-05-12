@@ -4,13 +4,14 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
+import Model.Utils.Tools;
 
 /**
  * L'alien, losqu'il perd des points de vie il se téléporte à un endroit aléatoire
  * @author Quentin
  */
 public class Alien extends AbstractMonster {
-    public Alien(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
+    public Alien(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, Tools.PathType pathCross, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
     }
 

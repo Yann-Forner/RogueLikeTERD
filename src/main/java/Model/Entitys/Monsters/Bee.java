@@ -2,6 +2,7 @@ package Model.Entitys.Monsters;
 
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Tools;
 
 import java.util.Objects;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
 public class Bee extends AbstractMonster {
     private final int BasePv;
 
-    public Bee(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
+    public Bee(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, Tools.PathType pathCross, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
         this.BasePv=pv;
     }

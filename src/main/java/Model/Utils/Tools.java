@@ -15,23 +15,20 @@ import java.util.stream.Collectors;
  * @author Quentin, JP
  */
 public class Tools {
-    //TODO en fair eun enum
-    public static final int PATH_LABY = -1;
-    public static final int PATH_CROSS = 0;
-    public static final int PATH_DIAG = 1;
-    public static final int PATH_GHOST = 2;
-    public static final int PATH_NOMOBS = 3;
+    public enum PathType{
+        LABY, CROSS, DIAG, GHOST, NOMOBS
+    }
 
     /**
      * Algoritme A* qui permet de trouver le plus court chemin entre la Position de depart et celle d'arrivé.
      * @param etage Etage
      * @param depart Position de depart
      * @param arrive Position d'arrivé
-     * @param pathType int : 0->Normal 1->Diagonales 2->Fantome 3->Evite les monstres
+     * @param pathType Defini le type de chemin
      * @return ArrayList<Noeud> Noeud implemente Position
      * @author JP, Quentin
      */
-    public static ArrayList<Position> Astar(Etage etage, Position depart, Position arrive, int pathType){
+    public static ArrayList<Position> Astar(Etage etage, Position depart, Position arrive, PathType pathType){
         class Noeud extends Position{
             public double heuristique=0;
             public double cout=0;
@@ -58,7 +55,7 @@ public class Tools {
             }
 
             private double CoutPerType(Cell.Style.CellType type){
-                if(pathType==PATH_LABY){
+                if(pathType==PathType.LABY){
                     return switch (type) {
                         case BORDER -> 1000;
                         case VOID -> 100;
@@ -142,10 +139,10 @@ public class Tools {
 
             // Génération des voisins
             ArrayList<Noeud> voisins = switch (pathType) {
-                case 0 -> u.getStandardNeighboors();
-                case 1 -> u.getDiagonalNeighboors();
-                case 2, -1 -> u.getNoClipStandardNeighboors();
-                default -> u.getStandardNoMobsNeighboors();
+                case CROSS -> u.getStandardNeighboors();
+                case DIAG -> u.getDiagonalNeighboors();
+                case GHOST, LABY -> u.getNoClipStandardNeighboors();
+                case NOMOBS -> u.getStandardNoMobsNeighboors();
             };
 
             //Parcous voisins

@@ -24,50 +24,50 @@ public class MonsterFactory {
     public static AbstractMonster getNewMonster(Etage etage, MonsterType m){
         switch (m){
             case GHOST -> {
-                return new Ghost(etage, Procedure.getAccesibleRandomPosition(true,etage),"GHOST", 10,3,10,10,700, Tools.PATH_GHOST,getBaseLvl());
+                return new Ghost(etage, Procedure.getAccesibleRandomPosition(true,etage),"GHOST", 10,3,10,10,700, Tools.PathType.GHOST,getBaseLvl());
             }
             case RAT -> {
-                return new Rat(etage, Procedure.getAccesibleRandomPosition(true,etage),"RAT",5,1,15,15,300, Tools.PATH_DIAG, getBaseLvl());
+                return new Rat(etage, Procedure.getAccesibleRandomPosition(true,etage),"RAT",5,1,15,15,300, Tools.PathType.DIAG, getBaseLvl());
             }
             case BEE -> {
-                return new Bee(etage, Procedure.getAccesibleRandomPosition(true,etage),"BEE",20,5,15,20,900, Tools.PATH_CROSS,getBaseLvl());
+                return new Bee(etage, Procedure.getAccesibleRandomPosition(true,etage),"BEE",20,5,15,20,900, Tools.PathType.CROSS,getBaseLvl());
             }
             case ALIEN -> {
-                return new Alien(etage, Procedure.getAccesibleRandomPosition(true,etage),"ALIEN",15,2,20,60,300, Tools.PATH_CROSS,getBaseLvl());
+                return new Alien(etage, Procedure.getAccesibleRandomPosition(true,etage),"ALIEN",15,2,20,60,300, Tools.PathType.CROSS,getBaseLvl());
             }
             case SNAIL -> {
-                return new Snail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,5,60,60,600, Tools.PATH_CROSS,getBaseLvl());
+                return new Snail(etage, Procedure.getAccesibleRandomPosition(true,etage),"SNAIL",10,5,60,60,600, Tools.PathType.CROSS,getBaseLvl());
             }
             case BIRD -> {
-                return new Bird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,5,60,60,600, Tools.PATH_DIAG,getBaseLvl());
+                return new Bird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,5,60,60,600, Tools.PathType.DIAG,getBaseLvl());
             }
             case VOLCANO -> {
-                return new Volcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",1,10,2,0,1000, Tools.PATH_CROSS,getBaseLvl());
+                return new Volcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",1,10,2,0,1000, Tools.PathType.CROSS,getBaseLvl());
             }
             case SKULL -> {
-                return new Skull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,15,20,750, Tools.PATH_CROSS,getBaseLvl());
+                return new Skull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,15,20,750, Tools.PathType.CROSS,getBaseLvl());
             }
             case BIGMONSTER -> {
-                return new BigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900,Tools.PATH_CROSS,getBaseLvl()+5);
+                return new BigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900, Tools.PathType.CROSS,getBaseLvl()+5);
             }
             case SNAKE -> {
-                return new Snake(etage,Procedure.getAccesibleRandomPosition(true,etage),"Snake",10,1,15,20,900,Tools.PATH_NOMOBS,getBaseLvl()+5,10);
+                return new Snake(etage,Procedure.getAccesibleRandomPosition(true,etage),"Snake",10,1,15,20,900, Tools.PathType.NOMOBS,getBaseLvl()+5,10);
             }
             case INVOQUEUR -> {
-                return new Invoqueur(etage,Procedure.getAccesibleRandomPosition(true,etage),"INVOQUEUR",25,5,3,20,800,Tools.PATH_CROSS,getBaseLvl()+5);
+                return new Invoqueur(etage,Procedure.getAccesibleRandomPosition(true,etage),"INVOQUEUR",25,5,3,20,800, Tools.PathType.CROSS,getBaseLvl()+5);
             }
             case MARCHAND -> {
-                return new Marchand(etage,Procedure.getAccesibleRandomPosition(true,etage),"MARCHAND",50,8,15,20,1000,Tools.PATH_CROSS,getBaseLvl()+5, Marchand.STATE.NOTVISITED);
+                return new Marchand(etage,Procedure.getAccesibleRandomPosition(true,etage),"MARCHAND",50,8,15,20,1000, Tools.PathType.CROSS,getBaseLvl()+5, Marchand.STATE.NOTVISITED);
             }
             case ZOMBIE -> {
-                return new Zombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE",25,5,5,30,1500, Tools.PATH_CROSS,getBaseLvl());
+                return new Zombie(etage, Procedure.getAccesibleRandomPosition(true,etage),"ZOMBIE",25,5,5,30,1500, Tools.PathType.CROSS,getBaseLvl());
             }
             default -> throw new IllegalStateException("Unexpected MonsterType: " + m);
         }
     }
 
     /**
-     * retourne un nouveau monstre avec des pvs prédifinis
+     * Retourne un nouveau monstre avec des pvs prédifinis
      * @param etage etage courant
      * @param m enum de monstre
      * @param pv les pvs du monstre
@@ -77,14 +77,14 @@ public class MonsterFactory {
     protected static AbstractMonster getNewMonster(Etage etage, MonsterType m, int pv){
         //TODO sup cette methode
         if (m == MonsterType.BEE) {
-            return new Bee(etage, Procedure.getAccesibleRandomPosition(true, etage), "BEE", pv, 5, 15, 20, 900, Tools.PATH_CROSS, getBaseLvl());
+            return new Bee(etage, Procedure.getAccesibleRandomPosition(true, etage), "BEE", pv, 5, 15, 20, 900, Tools.PathType.CROSS, getBaseLvl());
         } else {
             throw new IllegalStateException("Unexpected MonsterType: " + m);
         }
     }
 
     /**
-     * retourne le level de base
+     * Retourne le level de base
      * @return int
      * @author Quentin
      */

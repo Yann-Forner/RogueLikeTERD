@@ -2,6 +2,7 @@ package Model.Entitys.Monsters;
 
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Tools;
 
 /**
  * Bird, se déplace en diagonale, ne cheche pas à attaquer le joueur
@@ -11,7 +12,7 @@ public class Bird extends AbstractMonster {
 
     private boolean totop = true;
 
-    public Bird(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, int pathCross, int lvl) {
+    public Bird(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, Tools.PathType pathCross, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
         //TODO eviter qu'il se bloque dans un objet
     }

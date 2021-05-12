@@ -28,7 +28,7 @@ public class TestAstar extends TestCase {
         etage.getItems().add(i1);
 
         System.out.println("Item position : " + i1.getPosition());
-        ArrayList<Position> cheminitem = Tools.Astar(etage, player.getPosition(), i1.getPosition(), Tools.PATH_CROSS);
+        ArrayList<Position> cheminitem = Tools.Astar(etage, player.getPosition(), i1.getPosition(), Tools.PathType.CROSS);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TestAstar extends TestCase {
         Etage etage = map.getCurrent();
 
 
-        ArrayList<Position> cheminRandom = Tools.Astar(etage, player.getPosition(), Procedure.getAccesibleRandomPosition(false, etage), Tools.PATH_CROSS);
+        ArrayList<Position> cheminRandom = Tools.Astar(etage, player.getPosition(), Procedure.getAccesibleRandomPosition(false, etage), Tools.PathType.CROSS);
 
         Position outsidePos = new Position(0, 0);
         while(etage.getCells().get(outsidePos.getY()).get(outsidePos.getX()).getType() != Cell.Style.CellType.VOID) {
@@ -59,8 +59,8 @@ public class TestAstar extends TestCase {
             }
             wallPos = new Position(wallPos.getX() + 1, wallPos.getY());
         }
-        ArrayList<Position> cheminOutside = Tools.Astar(etage, player.getPosition(), outsidePos, Tools.PATH_CROSS);
-        ArrayList<Position> cheminWall = Tools.Astar(etage, player.getPosition(), wallPos, Tools.PATH_CROSS);
+        ArrayList<Position> cheminOutside = Tools.Astar(etage, player.getPosition(), outsidePos, Tools.PathType.CROSS);
+        ArrayList<Position> cheminWall = Tools.Astar(etage, player.getPosition(), wallPos, Tools.PathType.CROSS);
 
         assertFalse(cheminRandom == null || cheminRandom.size() == 0);
         assertTrue(cheminOutside == null || cheminOutside.size() == 0);
