@@ -100,8 +100,10 @@ public class Inventory implements Serializable {
      * @author JP
      */
     public void switchWeapons() {
-        AbstractWeapon first = weapons.remove(0);
-        weapons.add(first);
+        if(weapons != null && weapons.size() > 0) {
+            AbstractWeapon first = weapons.remove(0);
+            weapons.add(first);
+        }
     }
 
     /**
@@ -109,8 +111,10 @@ public class Inventory implements Serializable {
      * @author JP
      */
     public void switchPotions() {
-        AbstractPotion first = potions.remove(0);
-        potions.add(first);
+        if(potions != null && potions.size() > 0) {
+            AbstractPotion first = potions.remove(0);
+            potions.add(first);
+        }
     }
 
     /**
