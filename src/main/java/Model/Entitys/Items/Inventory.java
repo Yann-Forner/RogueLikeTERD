@@ -34,6 +34,8 @@ public class Inventory implements Serializable {
      * @param item Item a jeter
      */
     public void dropEntity(BasicPlayer player, AbstractItem item) {
+        if(item == null) return;
+
         Etage e = player.getEtage();
 
         int scanRange = 1;
@@ -157,12 +159,25 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * Retourne l'arme courante et l'enlève de l'inventaire
+     * @return L'arme équipée par le joueur
+     * @author JP
+     */
+    public AbstractWeapon removeCurrentWeapon() { return weapons.size() > 0 ? weapons.remove(0) : null ;}
+
+    /**
      * Renvoit la potion courante.
-     * @return La poion equipée par le joueur
+     * @return La potion equipée par le joueur
      * @author Quentin
      */
     public AbstractPotion getCurrentPotion(){
         return potions.size()>0 ? potions.get(0) : null;
     }
 
+    /**
+     * Retourne la potion courante et l'enlève de l'inventaire
+     * @return La potion équipée par le joueur
+     * @author JP
+     */
+    public AbstractPotion removeCurrentPotion() { return potions.size() > 0 ? potions.remove(0) : null ;}
 }

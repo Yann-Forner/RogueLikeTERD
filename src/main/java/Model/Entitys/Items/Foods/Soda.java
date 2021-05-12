@@ -21,7 +21,7 @@ public class Soda extends AbstractFood {
 
     @Override
     public void useItem(BasicPlayer player) {
-        player.updateEndurence(Math.min(100, player.getEndurence() + getHeal()));
+        onContact(player);
     }
 
     @Override
@@ -29,7 +29,10 @@ public class Soda extends AbstractFood {
         if(e instanceof BasicPlayer) {
             super.onContact(e);
             BasicPlayer player = ((BasicPlayer) e);
-            player.updateEndurence(Math.min(100, player.getEndurence() + getHeal()));
+            int enduMax = ((BasicPlayer) e).getMAX_ENDURENCE();
+            int healConverted = enduMax / 100 * getHeal();
+
+            player.updateEndurence(healConverted);
             getEtage().removeItem(this);
             Sound.playAudio(Sound.Sons.MANGER,0);
         }

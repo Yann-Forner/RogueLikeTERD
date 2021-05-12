@@ -25,6 +25,7 @@ public class BasicPlayer extends AbstractAlive {
     private int money = 0;
     private Direction direction = Direction.HAUT;
     private int endurence = 100;
+    private int MAX_ENDURENCE = 100;
 
     public enum Direction{
         HAUT(new Position(0,-1)),
@@ -215,7 +216,7 @@ public class BasicPlayer extends AbstractAlive {
      * @author Quentin
      */
     public void updateEndurence(int endurence){
-        this.endurence = this.endurence + endurence;
+        this.endurence = Math.min(getMAX_ENDURENCE(), this.endurence + endurence);
     }
 
     /**
@@ -239,6 +240,23 @@ public class BasicPlayer extends AbstractAlive {
      */
     public int getMAX_PV() {
         return MAX_PV;
+    }
+
+    /**
+     * Retorune l'endurance maximale
+     * @return Endurance
+     * @author JP
+     */
+    public int getMAX_ENDURENCE() {
+        return MAX_ENDURENCE;
+    }
+
+    /**
+     * Met à jour l'endurance maximale
+     * @param MAX_ENDURENCE Maximum
+     */
+    public void setMAX_ENDURENCE(int MAX_ENDURENCE) {
+        this.MAX_ENDURENCE = MAX_ENDURENCE;
     }
 
     /**

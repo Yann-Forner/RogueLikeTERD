@@ -29,7 +29,9 @@ public abstract class AbstractFood extends AbstractItem {
 
     @Override
     public void useItem(BasicPlayer player) {
-        player.updatePV(heal);
+        int pvMax = ((BasicPlayer) player).getMAX_PV();
+        int healConverted = pvMax / 100 * getHeal();
+        player.updatePV(healConverted);
     }
 
     @Override
@@ -37,7 +39,9 @@ public abstract class AbstractFood extends AbstractItem {
         if(e instanceof BasicPlayer) {
             super.onContact(e);
             BasicPlayer player = ((BasicPlayer) e);
-            player.updatePV(Math.min(heal, player.getMAX_PV() - player.getPv()));
+            int pvMax = ((BasicPlayer) e).getMAX_PV();
+            int healConverted = pvMax / 100 * getHeal();
+            player.updatePV(Math.min(healConverted, pvMax - player.getPv()));
             getEtage().removeItem(this);
             Sound.playAudio(Sound.Sons.MANGER,0);
         }
