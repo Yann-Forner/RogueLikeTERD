@@ -33,6 +33,7 @@ public abstract class AbstractWeapon extends AbstractItem {
         this.type = type;
         this.strength = strength;
         this.range = range;
+        //TODO cout endurence selon arme ?
         this.coutEndurence = 7;
     }
 

@@ -32,22 +32,26 @@ public class Melee extends AbstractWeapon{
         Position pos = player.getPosition();
         for (int i = 0; i < getRange(); i++) {
             pos = pos.somme(player.getDirection().getVecteur());
+            Entity entity = player.getEtage().get(pos).getEntity();
+            if(entity instanceof AbstractAlive && !(entity instanceof Marchand && ((Marchand) entity).getState() != Marchand.STATE.AGGRESSIVE)){
+                entity.onContact(player);
+                break;
+            }
         }
         ArrayList<Position> zone = new ArrayList<>();
         zone.add(pos);
-        Entity entity = player.getEtage().get(pos).getEntity();
-        if(entity instanceof AbstractAlive){
-            if (!(entity instanceof Marchand && ((Marchand) entity).getState() == Marchand.STATE.AGGRESSIVE)){
-                entity.onContact(player);
-            }
-        }
         Affichage.Projectile(player.getEtage(),zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"💫","+"));
     }
 
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return "🔪";
+            return switch (getRange()){
+                case 1, 2 -> "🔧";
+                case 3 -> "🔪";
+                case 4 -> "🪓";
+                default -> "🔗";
+            };
         }
         else{
             return super.toString()+"m";

@@ -29,9 +29,11 @@ public class Bow extends AbstractWeapon {
 
     @Override
     public void useItem(BasicPlayer player) {
-        super.useItem(player);
         Position position = player.getPosition();
         int range = getRange();
+        Entity cible = null;
+        int distanceCible = 1000;
+        ArrayList<Position> zone = new ArrayList<>();
         for (int x = position.getX() - range; x < position.getX() + range * 2 - 1; x++) {
             for (int y = position.getY() - range; y < position.getY() + range * 2 - 1; y++) {
                 if(x>=0 && x<getEtage().getWidth() && y>=0 && y<getEtage().getHeigth()){
@@ -39,32 +41,43 @@ public class Bow extends AbstractWeapon {
                     if (position.Distance(pos) <= range) {
                         Entity entity = getEtage().get(pos).getEntity();
                         if (entity instanceof AbstractAlive && entity!=player) {
-                            if (entity instanceof Marchand && ((Marchand) entity).getState() == Marchand.STATE.AGGRESSIVE){
+                            if (entity instanceof Marchand && ((Marchand) entity).getState() != Marchand.STATE.AGGRESSIVE){
                                 continue;
                             }
-                            ArrayList<Position> zone = Tools.getLigne(entity.getPosition(),player.getPosition());
-                            boolean noBorder = true;
-                            for(Position p : zone){
-                                if(getEtage().get(p).getType().equals(Cell.Style.CellType.BORDER)){
-                                    noBorder = false;
+                            if (pos.Distance(position) < distanceCible) {
+                                zone = Tools.getLigne(entity.getPosition(),player.getPosition());
+                                boolean noBorder = true;
+                                for(Position p : zone){
+                                    if(getEtage().get(p).getType().equals(Cell.Style.CellType.BORDER)){
+                                        noBorder = false;
+                                    }
                                 }
-                            }
-                            if(noBorder) {
-                                entity.onContact(player);
-                                Affichage.Projectile(getEtage(), zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"🌀","x"));
-                                x=y=1000;
+                                if(noBorder) {
+                                    distanceCible = (int) pos.Distance(position);
+                                    cible = entity;
+                                }
                             }
                         }
                     }
                 }
             }
         }
+        if(cible != null){
+            super.useItem(player);
+            cible.onContact(player);
+            Affichage.Projectile(getEtage(), zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"📍","x"));
+        }
     }
 
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return "🏹";
+            return switch (getRange()){
+                case 1,2,3,4 -> "🎣";
+                case 5,6,7,8 -> "🏹";
+                case 9,10,11,12 -> "🔱";
+                default -> "🔫";
+            };
         }
         else{
             return super.toString()+"b";

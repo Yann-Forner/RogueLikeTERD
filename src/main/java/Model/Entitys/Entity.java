@@ -29,8 +29,8 @@ public abstract class Entity implements Serializable {
     }
 
     /**
-     * Defini le comportement de l'entité lorqu'une autre lui rentre dedans.
-     * @param e Entité
+     * Defini le comportement de this lorsque l'entite e lui rentre dedans.
+     * @param e Entité qui avance vers this
      * @author Quentin
      */
     public abstract void onContact(Entity e);

@@ -1,7 +1,9 @@
 package Model.Entitys.Player;
 
 import Model.Entitys.AbstractAlive;
+import Model.Entitys.Entity;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Weapons.Melee;
 import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
