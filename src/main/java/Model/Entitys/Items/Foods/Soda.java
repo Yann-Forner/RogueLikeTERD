@@ -1,8 +1,10 @@
 package Model.Entitys.Items.Foods;
 
+import Model.Entitys.Entity;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 
 public class Soda extends AbstractFood {
     /**
@@ -19,7 +21,18 @@ public class Soda extends AbstractFood {
 
     @Override
     public void useItem(BasicPlayer player) {
-        player.setEndurence(Math.min(100, player.getEndurence() + getHeal()));
+        player.updateEndurence(Math.min(100, player.getEndurence() + getHeal()));
+    }
+
+    @Override
+    public void onContact(Entity e) {
+        if(e instanceof BasicPlayer) {
+            super.onContact(e);
+            BasicPlayer player = ((BasicPlayer) e);
+            player.updateEndurence(Math.min(100, player.getEndurence() + getHeal()));
+            getEtage().removeItem(this);
+            Sound.playAudio(Sound.Sons.MANGER,0);
+        }
     }
 
     @Override
