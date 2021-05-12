@@ -29,6 +29,37 @@ public class Inventory implements Serializable {
     public Inventory(){ }
 
     /**
+     * Drop l'item donné dans la case accessible la plus proche
+     * @param player Joueur
+     * @param item Item a jeter
+     */
+    public void dropEntity(BasicPlayer player, AbstractItem item) {
+        Etage e = player.getEtage();
+
+        int scanRange = 1;
+
+        while(true) {
+            int playerPosX = player.getPosition().getX();
+            int playerPosY = player.getPosition().getY();
+
+            for(int x = playerPosX - scanRange; x <= playerPosX + scanRange; x++) {
+                TourManager.addMessage(Integer.toString(x));
+                for(int y = playerPosY - scanRange; y <= playerPosY + scanRange; y++) {
+                    TourManager.addMessage(Integer.toString(y));
+                    Cell c = e.get(x, y);
+
+                    if(c.isAccesible() && c.getEntity() == null) {
+                        item.setPosition(new Position(x, y));
+                        e.addItem(item);
+                        return;
+                    }
+                }
+            }
+            scanRange++;
+        }
+    }
+
+    /**
      * Utilise l'arme courante.
      * @author JP, Quentin
      */
@@ -80,32 +111,6 @@ public class Inventory implements Serializable {
     public void switchPotions() {
         AbstractPotion first = potions.remove(0);
         potions.add(first);
-    }
-
-    public void dropEntity(BasicPlayer player, AbstractItem item) {
-        Etage e = player.getEtage();
-
-        int scanRange = 1;
-
-        while(true) {
-            int playerPosX = player.getPosition().getX();
-            int playerPosY = player.getPosition().getY();
-
-            for(int x = playerPosX - scanRange; x <= playerPosX + scanRange; x++) {
-                TourManager.addMessage(Integer.toString(x));
-                for(int y = playerPosY - scanRange; y <= playerPosY + scanRange; y++) {
-                    TourManager.addMessage(Integer.toString(y));
-                    Cell c = e.get(x, y);
-
-                    if(c.isAccesible() && c.getEntity() == null) {
-                        item.setPosition(new Position(x, y));
-                        e.addItem(item);
-                        return;
-                    }
-                }
-            }
-            scanRange++;
-        }
     }
 
     /**
