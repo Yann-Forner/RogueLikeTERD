@@ -85,8 +85,7 @@ public class TourManager implements Serializable {
         if(System.console()!=null){
             char[] input = System.console().readPassword();
             if(input.length>0){
-                cmd = input[0];
-                
+                cmd = input[input.length-1];
             }
         }
         else{
@@ -118,21 +117,20 @@ public class TourManager implements Serializable {
                 return true;
             }
             case 't' , 'T' -> TourParTour();
-            case 'i' , 'I' -> player.getInventory().switchWeapons(); //Inventaire
-            case 'k' , 'K' -> player.getInventory().dropEntity(player, player.getInventory().removeCurrentWeapon()); // Drop de l'arme courante
-            case 'p' , 'P' -> player.getInventory().switchPotions(); // Potions
+            case 'i' , 'I' -> player.getInventory().switchWeapons(); //Changement armes
+            case 'o' , 'O' -> player.getInventory().switchPotions(); //Changement Potions
+            case 'l' , 'L' -> player.getInventory().dropEntity(player, player.getInventory().removeCurrentWeapon()); // Drop de l'arme courante
             case 'm' , 'M' -> player.getInventory().dropEntity(player, player.getInventory().removeCurrentPotion()); // Drop de la potion courante
             case 'a' , 'A' -> {
-                player.getInventory().useCurrentWeapon(player); //Attaque distance
+                player.getInventory().useCurrentWeapon(player); //Attaque à distance
                 return true;
             }
-            case 'y' , 'Y' -> {
+            case 'p' , 'P' -> {
                 player.getInventory().useCurrentPotion(player); //Utilise la potion courrante
                 return true;
             }
             case 'w' , 'W' -> Start.sauvegarde();
-            case '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9'  -> System.out.println("Nombre"); //Objets
-            case 27 , 3 -> Start.end(); //TODO sa capte aussi les fleches du coup
+            case 3 , 27 -> Start.end();
             default -> processInput(reader);
         }
         return false;

@@ -90,10 +90,12 @@ public class Affichage {
                             + "\n"
                     : CLEAR);
             System.out.println(Start.getMap());
-            System.out.print(Affichage.getBarre(GREEN, "PV", GREY, Objects.requireNonNull(Start.getPlayer()).getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, 120));
-            System.out.print(Affichage.getTouches(0));
-            System.out.print(Affichage.getBarre(BLUE, "Endurence", GREY, Start.getPlayer().getEndurence(), 100, BLUE_BACKGROUND, RED_BACKGROUND, 100));
-            System.out.print(Affichage.getTouches(1));
+            String pv = Affichage.getBarre(GREEN, "PV", GREY, Objects.requireNonNull(Start.getPlayer()).getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, 120);
+            System.out.print(pv);
+            System.out.print(Affichage.getTouches(0, getTrueLength(pv)));
+            String endurence = Affichage.getBarre(BLUE, "Endurence", GREY, Start.getPlayer().getEndurence(), 100, BLUE_BACKGROUND, RED_BACKGROUND, 100);
+            System.out.print(endurence);
+            System.out.print(Affichage.getTouches(1, getTrueLength(endurence)));
             Affichage.getMessages();
             Start.setConsoleMode(true);
             lastRefresh = System.currentTimeMillis();
@@ -241,15 +243,23 @@ public class Affichage {
 
     /**
      * Renvoit les touches.
+     * @param index La ligne des touches
+     * @param beforeWidth le largeur du text avant sur la ligne
      * @return String des touches
      * @author Quentin
      */
-    public static String getTouches(int index){
+    public static String getTouches(int index, int beforeWidth){
         StringBuilder sb = new StringBuilder();
         sb.append(YELLOW).append(BOLD);
+        int nbrSpace = 129-beforeWidth;
+        if(nbrSpace>=0){
+            sb.append(addSpace("",0,nbrSpace));
+        }
+        else{
+            sb.append("\n");
+        }
         switch (index){
             case 0 -> {
-                sb.append("    ");
                 sb.append("Deplacement: ");
                 sb.append(BRIGTH_GREEN).append("ZQSD");
                 sb.append(YELLOW);
@@ -258,24 +268,34 @@ public class Affichage {
                 sb.append(BRIGTH_GREEN).append("T");
                 sb.append(YELLOW);
                 sb.append("  |  ");
-                sb.append("Changement armes: ");
-                sb.append(BRIGTH_GREEN).append("I");
-            }
-            case 1 -> {
-                sb.append("                 ");
                 sb.append("Attaque à distance: ");
                 sb.append(BRIGTH_GREEN).append("A");
-                sb.append(YELLOW);
-                sb.append("  |  ");
-                sb.append("Changement potions: ");
+            }
+            case 1 -> {
+                sb.append("Utiliser la potion: ");
                 sb.append(BRIGTH_GREEN  ).append("P");
                 sb.append(YELLOW);
                 sb.append("  |  ");
-                sb.append("Utiliser la potion courante: ");
-                sb.append(BRIGTH_GREEN  ).append("Y");
+                sb.append("Changement armes: ");
+                sb.append(BRIGTH_GREEN).append("I");
+                sb.append(YELLOW);
+                sb.append("  |  ");
+                sb.append("Changement potions: ");
+                sb.append(BRIGTH_GREEN  ).append("O");
             }
             case 2 -> {
-                sb.append("                                                                                                               ");
+                sb.append("Lacher arme: ");
+                sb.append(BRIGTH_GREEN).append("L");
+                sb.append(YELLOW);
+                sb.append("  |  ");
+                sb.append("Lacher potion: ");
+                sb.append(BRIGTH_GREEN  ).append("M");
+                sb.append(YELLOW);
+                sb.append("  |  ");
+                sb.append("Sauvegarder: ");
+                sb.append(BRIGTH_GREEN  ).append("W");
+                sb.append(YELLOW);
+                sb.append("  |  ");
                 sb.append("Quitter: ");
                 sb.append(BRIGTH_GREEN).append("ESC");
             }
@@ -294,7 +314,7 @@ public class Affichage {
         StringBuilder sb = new StringBuilder();
         sb.append(PURPLE).append(BOLD).append("-----> ").append(UNDERLINE).append("Evenements:");
         sb.append(RESET);
-        sb.append(getTouches(2));
+        sb.append(getTouches(2,getTrueLength(sb.toString())));
         for (String s :TourManager.getMessages()){
             sb.append(BRIGTH_PURPLE).append(s).append("\n");
         }
@@ -424,6 +444,21 @@ public class Affichage {
         return s + " ".repeat(width - (s.length() + before_length));
     }
 
+    /**
+     * Renvoit la vrai longueur d'un string sans les characteres ANSI.
+     * @param s String dont on cherche la longeure
+     * @return Vrai longueure du string
+     * @author Quentin
+     */
+    public static int getTrueLength(String s){
+        return s.replaceAll("\u001B\\[[0-9]*m", "").length();
+    }
+
+    /**
+     * Change le type d'ombre de la map.
+     * @param ombre Type d'ombre
+     * @author Quentin
+     */
     public static void setOmbre(Shadow ombre) {
         Affichage.ombre = ombre;
     }
