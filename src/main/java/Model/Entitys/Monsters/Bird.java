@@ -1,5 +1,7 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.Items.AbstractItem;
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.Tools;
@@ -14,21 +16,23 @@ public class Bird extends AbstractMonster {
 
     public Bird(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, Tools.PathType pathCross, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
-        //TODO eviter qu'il se bloque dans un objet
     }
 
     @Override
     protected Position nextPosition() {
         Position haut = getPosition().somme(-1,-1);
         Position bas = getPosition().somme(+1,+1);
+        Cell cell;
         if(totop) {
-            if(getEtage().get(haut).isAccesible()){
+            cell = getEtage().get(haut);
+            if(cell.isAccesible() && !(cell.getEntity() instanceof AbstractItem)){
                 return haut;
             }
             totop=false;
             return bas;
         }
-        if(getEtage().get(bas).isAccesible()){
+        cell = getEtage().get(bas);
+        if(cell.isAccesible() && !(cell.getEntity() instanceof AbstractItem)){
             return bas;
         }
         totop=true;

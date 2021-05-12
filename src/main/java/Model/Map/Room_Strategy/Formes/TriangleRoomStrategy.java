@@ -33,7 +33,6 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
      * @auhtor Yann
      */
     public void fillTriangle(Room r, Cell.Style s){
-
         Position posAngle1 = new Position((r.getWidth()-1)/2, 1);
         boolean stop = false;
         for (int i = 0; i <  r.getHeigth()-2; i++) {

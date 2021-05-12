@@ -181,8 +181,6 @@ public class TourManager implements Serializable {
             }
         }, 0, refreshRate, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(() -> {
-            //TODO bug quand 0
-            //TODO pas colision quand 0
             if(running && player.getEndurence()<100){
                 player.updateEndurence(1);
             }

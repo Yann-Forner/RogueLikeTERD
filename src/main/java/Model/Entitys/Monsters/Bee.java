@@ -2,9 +2,8 @@ package Model.Entitys.Monsters;
 
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Procedure;
 import Model.Utils.Tools;
-
-import java.util.Objects;
 
 /**
  * Bee, lorsqu'elle meurs elle fais apparaitre deux abeilles avec deux fois moins de pv
@@ -23,8 +22,8 @@ public class Bee extends AbstractMonster {
         boolean isAlive = super.updatePV(pv);
         if(!isAlive){
             if(BasePv!=1){
-                getEtage().addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(getEtage(), MonsterFactory.MonsterType.BEE, BasePv / 2)));
-                getEtage().addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(getEtage(), MonsterFactory.MonsterType.BEE, BasePv / 2)));
+                getEtage().addMonster(new Bee(getEtage(), Procedure.getAccesibleRandomPosition(true, getEtage()), "CHILD BEE",BasePv / 2, 5, 15, 20, 900, Tools.PathType.CROSS, lvl));
+                getEtage().addMonster(new Bee(getEtage(), Procedure.getAccesibleRandomPosition(true, getEtage()), "CHILD BEE",BasePv / 2, 5, 15, 20, 900, Tools.PathType.CROSS, lvl));
             }
         }
         return isAlive;

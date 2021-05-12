@@ -67,23 +67,6 @@ public class MonsterFactory {
     }
 
     /**
-     * Retourne un nouveau monstre avec des pvs prédifinis
-     * @param etage etage courant
-     * @param m enum de monstre
-     * @param pv les pvs du monstre
-     * @return le monstre
-     * @author Quentin
-     */
-    protected static AbstractMonster getNewMonster(Etage etage, MonsterType m, int pv){
-        //TODO sup cette methode
-        if (m == MonsterType.BEE) {
-            return new Bee(etage, Procedure.getAccesibleRandomPosition(true, etage), "BEE", pv, 5, 15, 20, 900, Tools.PathType.CROSS, getBaseLvl());
-        } else {
-            throw new IllegalStateException("Unexpected MonsterType: " + m);
-        }
-    }
-
-    /**
      * Retourne le level de base
      * @return int
      * @author Quentin

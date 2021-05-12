@@ -10,8 +10,6 @@ import Model.Utils.Tools;
 
 import java.util.ArrayList;
 import java.util.Objects;
-//TODO probleme couleur cell pour Triangle/marchand/tresor
-
 /**
  * Classe abstraite définissant le fonctionnement d'un étage.
  * @author Yann,Quentin
