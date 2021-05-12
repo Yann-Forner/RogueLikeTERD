@@ -43,9 +43,7 @@ public class Inventory implements Serializable {
             int playerPosY = player.getPosition().getY();
 
             for(int x = playerPosX - scanRange; x <= playerPosX + scanRange; x++) {
-                TourManager.addMessage(Integer.toString(x));
                 for(int y = playerPosY - scanRange; y <= playerPosY + scanRange; y++) {
-                    TourManager.addMessage(Integer.toString(y));
                     Cell c = e.get(x, y);
 
                     if(c.isAccesible() && c.getEntity() == null) {

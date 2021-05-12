@@ -10,7 +10,7 @@ import Model.Utils.Procedure;
 public class FoodFactory {
 
     public enum FoodType {
-        APPLE, BANANA, CARROT, ORANGE;
+        APPLE, BANANA, CARROT, ORANGE, SODA;
     }
 
     /**
@@ -25,6 +25,7 @@ public class FoodFactory {
             case BANANA -> { return new Banana(etage, Procedure.getAccesibleRandomPosition(true, etage), "Banane", 20); }
             case CARROT -> { return new Carrot(etage, Procedure.getAccesibleRandomPosition(true, etage), "Carotte", 20); }
             case ORANGE -> { return new Orange(etage, Procedure.getAccesibleRandomPosition(true, etage), "Orange", 20); }
+            case SODA -> { return new Soda(etage, Procedure.getAccesibleRandomPosition(true, etage), "Soda", 20); }
             default -> throw new IllegalStateException("Unexpected FoodType: " + ft);
         }
     }

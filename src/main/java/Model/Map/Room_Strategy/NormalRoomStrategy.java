@@ -48,12 +48,13 @@ public class NormalRoomStrategy extends RoomStrategy{
                 case 2 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.KNIFE));
             }
         }
-        for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
+        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
             switch(i) {
                 case 0 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.APPLE));
-                case 1 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BANANA));
-                case 2 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.CARROT));
-                case 3 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.ORANGE));
+                case 1 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.SODA));
+                case 2 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BANANA));
+                case 3 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.CARROT));
+                case 4 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.ORANGE));
             }
         }
     }

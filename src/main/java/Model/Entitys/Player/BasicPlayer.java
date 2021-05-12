@@ -225,6 +225,14 @@ public class BasicPlayer extends AbstractAlive {
         return endurence;
     }
 
+    /**
+     * Modifie l'endurance
+     * @param endurence Endurance
+     */
+    public void setEndurence(int endurence) {
+        this.endurence = endurence;
+    }
+
     @Override
     public int getPv() {
         return super.getPv();
