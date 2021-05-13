@@ -1,9 +1,8 @@
 package Model.Entitys.Player;
 
 import Model.Entitys.AbstractAlive;
-import Model.Entitys.Entity;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Items.Weapons.Melee;
 import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -26,6 +25,8 @@ public class BasicPlayer extends AbstractAlive {
     private Direction direction = Direction.HAUT;
     private int endurence = 100;
     private int MAX_ENDURENCE = 100;
+    private AbstractItem[] poche = {null,null};
+    private boolean inPoche = false;
 
     public enum Direction{
         HAUT(new Position(0,-1)),
@@ -163,50 +164,24 @@ public class BasicPlayer extends AbstractAlive {
     }
 
     /**
-     * Deplace le joueur d'une cellule a sa gauche.
-     * @author Yann, Quentin
+     * Deplace le joueur dans cette direction.
+     * @param dir Direction
+     * @author Quentin
      */
-    public void moveLeft() {
+    public void moveDirection(Direction dir){
         if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
-            move(getPosition().somme(-1, 0));
-            direction=Direction.GAUCHE;
+            Position oldPos = getPosition();
+            Position newPos = getPosition().somme(dir.getVecteur());
+            move(newPos);
+            if(poche[1] != null){
+                getEtage().addItem(poche[1]);
+                poche[1] = null;
+            }
+            direction = dir;
             MovementCoolDown = System.currentTimeMillis();
-        }
-    }
-
-    /**
-     * Deplace le joueur d'une cellule a sa droite.
-     * @author Yann, Quentin
-     */
-    public void moveRight() {
-        if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
-            move(getPosition().somme(1, 0));
-            direction=Direction.DROITE;
-            MovementCoolDown = System.currentTimeMillis();
-        }
-    }
-
-    /**
-     * Deplace le joueur d'une cellule vers le haut.
-     * @author Yann, Quentin
-     */
-    public void moveUp() {
-        if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
-            move(getPosition().somme(0, -1));
-            direction=Direction.HAUT;
-            MovementCoolDown = System.currentTimeMillis();
-        }
-    }
-
-    /**
-     * Deplace le joueur d'une cellule vers le bas.
-     * @author Yann, Quentin
-     */
-    public void moveDown() {
-        if (System.currentTimeMillis() - MovementCoolDown > classe.getSpeed()) {
-            move(getPosition().somme(0, 1));
-            direction=Direction.BAS;
-            MovementCoolDown = System.currentTimeMillis();
+            if(getEtage().get(newPos).isAccesible()){
+                videPoche(oldPos);
+            }
         }
     }
 
@@ -291,6 +266,47 @@ public class BasicPlayer extends AbstractAlive {
      */
     public Direction getDirection(){
         return direction;
+    }
+
+    /**
+     * Stock l'item dans la poche du joueur.
+     * @param item Item a stocker
+     * @author Quentin
+     */
+    public void setPoche(AbstractItem item){
+        if(poche[0] != null){
+            poche[1] = poche[0];
+            poche[1].setPosition(getPosition());
+        }
+        getEtage().removeItem(item);
+        inPoche=true;
+        poche[0] = item;
+    }
+
+    /**
+     * Vide la poche du joueur.
+     * @param pos Position de l'item contenu dans la poche
+     * @author Quentin
+     */
+    public void videPoche(Position pos){
+        if(inPoche){
+            inPoche=false;
+        }
+        else{
+            if(poche[0] != null){
+                poche[0].setPosition(pos);
+                getEtage().addItem(poche[0]);
+                poche[0] = null;
+            }
+        }
+    }
+
+    /**
+     * Est appelé si le joueur n'a pas bougé et du coup il ne fait pas enlever l'objet de la poche.
+     * @author Quentin
+     */
+    public void notMovedforPoche(){
+        inPoche = true;
     }
 
     @Override

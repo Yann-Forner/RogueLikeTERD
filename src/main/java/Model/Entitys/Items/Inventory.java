@@ -1,6 +1,5 @@
 package Model.Entitys.Items;
 
-import Model.Entitys.Entity;
 import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.BasicPlayer;
@@ -19,7 +18,8 @@ import java.util.ArrayList;
  */
 public class Inventory implements Serializable {
 
-    private int WEAPONS_LIMIT, POTIONS_LIMIT;
+    private final int WEAPONS_LIMIT;
+    private final int POTIONS_LIMIT;
 
     private final ArrayList<AbstractWeapon> weapons = new ArrayList<>();
     private final ArrayList<AbstractPotion> potions = new ArrayList<>();
@@ -30,26 +30,14 @@ public class Inventory implements Serializable {
      * @author JP
      */
     public Inventory(){
-        WEAPONS_LIMIT = 10;
-        POTIONS_LIMIT = 10;
-    }
-
-    /**
-     * Constructeur assignant les limites de l'inventaire
-     * @param weaponsLimit Limite d'armes
-     * @param potionsLimit Limite de potions
-     * @author JP
-     */
-    public Inventory(int weaponsLimit, int potionsLimit) {
-        WEAPONS_LIMIT = weaponsLimit;
-        POTIONS_LIMIT = potionsLimit;
+        WEAPONS_LIMIT = 15;
+        POTIONS_LIMIT = 15;
     }
 
     /**
      * Drop l'item donné dans la case accessible la plus proche
      * @param player Joueur
      * @param item Item a jeter
-     * @author JP
      */
     public void dropEntity(BasicPlayer player, AbstractItem item) {
         if(item == null) return;
@@ -118,7 +106,7 @@ public class Inventory implements Serializable {
      * @author JP
      */
     public void switchWeapons() {
-        if(weapons != null && weapons.size() > 0) {
+        if(weapons.size() > 0) {
             AbstractWeapon first = weapons.remove(0);
             weapons.add(first);
         }
@@ -129,7 +117,7 @@ public class Inventory implements Serializable {
      * @author JP
      */
     public void switchPotions() {
-        if(potions != null && potions.size() > 0) {
+        if(potions.size() > 0) {
             AbstractPotion first = potions.remove(0);
             potions.add(first);
         }
@@ -208,17 +196,8 @@ public class Inventory implements Serializable {
      * @return Limite d'armes
      * @author JP
      */
-    public int getWEAPONS_LIMIT() {
-        return WEAPONS_LIMIT;
-    }
-
-    /**
-     * Redéfinit la limite d'arme
-     * @param WEAPONS_LIMIT Limite d'arme
-     * @author JP
-     */
-    public void setWEAPONS_LIMIT(int WEAPONS_LIMIT) {
-        this.WEAPONS_LIMIT = WEAPONS_LIMIT;
+    public boolean isWeaponsFull() {
+        return weapons.size()>=WEAPONS_LIMIT;
     }
 
     /**
@@ -226,16 +205,8 @@ public class Inventory implements Serializable {
      * @return Limite de potions
      * @author JP
      */
-    public int getPOTIONS_LIMIT() {
-        return POTIONS_LIMIT;
+    public boolean isPotionsFull() {
+        return potions.size()>=POTIONS_LIMIT;
     }
 
-    /**
-     * Redéfinit la limite de potion
-     * @param POTIONS_LIMIT Limite de potions
-     * @author JP
-     */
-    public void setPOTIONS_LIMIT(int POTIONS_LIMIT) {
-        this.POTIONS_LIMIT = POTIONS_LIMIT;
-    }
 }

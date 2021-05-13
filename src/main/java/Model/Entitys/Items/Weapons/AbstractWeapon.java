@@ -44,16 +44,11 @@ public abstract class AbstractWeapon extends AbstractItem {
     @Override
     public void onContact(Entity e) {
         if(!(e instanceof AbstractMonster)){
-            super.onContact(e);
             BasicPlayer player = (BasicPlayer) e;
+            super.onContact(e);
             TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
-            if(player.getInventory().getWeapons().size() <= player.getInventory().getWEAPONS_LIMIT()) {
-                player.getInventory().addWeapon(this);
-                player.getEtage().removeItem(this);
-            }
-            else {
-
-            }
+            player.getInventory().addWeapon(this);
+            player.getEtage().removeItem(this);
         }
     }
 

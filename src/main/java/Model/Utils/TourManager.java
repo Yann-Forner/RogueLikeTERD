@@ -101,19 +101,19 @@ public class TourManager implements Serializable {
         }
         switch (cmd){
             case 'z' , 'Z' -> {
-                player.moveUp();
+                player.moveDirection(BasicPlayer.Direction.HAUT);
                 return true;
             }
             case 'q' , 'Q' -> {
-                player.moveLeft();
+                player.moveDirection(BasicPlayer.Direction.GAUCHE);
                 return true;
             }
             case 's' , 'S' -> {
-                player.moveDown();
+                player.moveDirection(BasicPlayer.Direction.BAS);
                 return true;
             }
             case 'd' , 'D' -> {
-                player.moveRight();
+                player.moveDirection(BasicPlayer.Direction.DROITE);
                 return true;
             }
             case 't' , 'T' -> TourParTour();
@@ -196,7 +196,7 @@ public class TourManager implements Serializable {
      */
     public static void addMonsterSchedule(AbstractMonster m){
         executor.scheduleAtFixedRate(() -> {
-            if (running){
+            if(running){
                 if(m.getPv()>0 && m.getEtage().equals(Objects.requireNonNull(Start.getPlayer()).getEtage())) {
                     m.updateMonster();
                     Affichage.getMap(false);

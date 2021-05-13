@@ -1,14 +1,15 @@
 package Model.Entitys;
 
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Inventory;
+import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Items.Weapons.Melee;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.BasicPlayer;
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
-import Model.Utils.Position;
-import Model.Utils.Sound;
+import Model.Utils.*;
 
 /**
  * Classe abstraite des mobs du jeu, un mob peut se deplacer et mourir.
@@ -84,24 +85,30 @@ public abstract class AbstractAlive extends Entity {
     /**
      * Deplace l'entité a la position passé en parametre.
      * @param pos Position cible
-     * @author Yann
+     * @author Yann, Quentin
      */
     public void move(Position pos) {
-        if(pos!=null){
+        BasicPlayer player = Start.getPlayer();
+        if(player != null && pos != null) {
             Cell cell = getEtage().get(pos);
-            if(cell.isAccesible()){
-                if(cell.getEntity()==null){
+            if (cell.isAccesible()) {
+                Entity entity = cell.getEntity();
+                if (entity == null || (entity instanceof AbstractWeapon && inventory.isWeaponsFull()) || (entity instanceof AbstractPotion && inventory.isPotionsFull())) {
+                    if (entity != null) {
+                        player.setPoche((AbstractItem) entity);
+                    }
                     cell.setEntity(this);
                     getEtage().get(getPosition()).setEntity(null);
                     setPosition(pos);
+                } else {
+                    entity.onContact(this);
+                    if(entity instanceof AbstractMonster && getEtage().getMonsters().contains(entity)){
+                        player.notMovedforPoche();
+                    }
                 }
-                else{
-                    cell.getEntity().onContact(this);
-                }
-            }
-            else{
-                if(this instanceof BasicPlayer){
-                    Sound.playAudio(Sound.Sons.COLLISION,0);
+            } else {
+                if (this instanceof BasicPlayer) {
+                    Sound.playAudio(Sound.Sons.COLLISION, 0);
                 }
             }
         }
