@@ -79,7 +79,7 @@ public class Menu {
 
         ArrayList<? extends AbstractItem> potionsList = inv.getPotions();
         ArrayList<? extends AbstractItem> armesList = Start.getPlayer().getInventory().getWeapons();
-        Start.getPlayer().getInventory().addPotion(new HealPotion(Start.getPlayer().getEtage(),new Position(0,0),"test",10));
+  
         printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17);
         printArrayOnTheWholeLine(18,armesList,0);
 
