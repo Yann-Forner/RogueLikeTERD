@@ -31,7 +31,6 @@ public abstract class AbstractFood extends AbstractItem {
     public void useItem(Player player) {
         double pvMax = player.getMAX_PV();
         double healConverted = pvMax / 100 * heal;
-        TourManager.addMessage("soin: "+healConverted);
         player.updatePV((int) healConverted,true);
     }
 
