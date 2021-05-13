@@ -20,9 +20,6 @@ public class Volcano extends AbstractMonster {
     public Volcano(Etage m, Position pos, String nom, int pv, int force, double vision_radius , int agro, int update_rate, Tools.PathType path_type, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, path_type, lvl);
         adjacents=getAdjacents(pos,(int)vision_radius);
-        for(Position p : adjacents){
-            System.out.println(p);
-        }
     }
 
     /**

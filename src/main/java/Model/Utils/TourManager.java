@@ -179,7 +179,7 @@ public class TourManager implements Serializable {
             if(running){
                 Affichage.getMap(false);
             }
-        }, 0, refreshRate, TimeUnit.MILLISECONDS);
+        }, 100, refreshRate, TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(() -> {
             if(running && player.getEndurence()<100){
                 player.updateEndurence(1);

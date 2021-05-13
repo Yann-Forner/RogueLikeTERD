@@ -70,7 +70,7 @@ public class Affichage {
      * Affiche la map
      * @author Quentin
      */
-    public static void getMap(boolean playerRefresh){
+    public synchronized static void getMap(boolean playerRefresh){
         if(System.currentTimeMillis()-lastRefresh >= TourManager.getRefreshRate() || playerRefresh) {
             Start.setConsoleMode(false);
             System.out.print(System.console() == null ?
