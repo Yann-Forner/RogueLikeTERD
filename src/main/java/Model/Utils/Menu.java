@@ -2,13 +2,14 @@ package Model.Utils;
 ;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Inventory;
-import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Potions.HealPotion;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Map.Room;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,6 +42,7 @@ public class Menu {
     public Menu(Etage etage, Map map) {
         this.etage = etage;
         this.map = map;
+
     }
 
     /**
@@ -75,38 +77,46 @@ public class Menu {
 
         printStringOnSide(0, "  Inventaire",14);
 
-        var potionsList = inv.getPotions();
-        var armesList = inv.getWeapons();
+        ArrayList<? extends AbstractItem> potionsList = inv.getPotions();
+        ArrayList<? extends AbstractItem> armesList = Start.getPlayer().getInventory().getWeapons();
+        Start.getPlayer().getInventory().addPotion(new HealPotion(Start.getPlayer().getEtage(),new Position(0,0),"test",10));
         printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17);
+        printArrayOnTheWholeLine(18,armesList,0);
 
-        StringBuilder armesString = new StringBuilder();
-        for (int index = 0; index < armesList.size(); index++) {
-            AbstractWeapon abstractWeapon = armesList.get(index);
-            if (index == 0){
-                if (Start.getPlayer().getClasse().canUse(abstractWeapon)) {
-                    armesString.append(Affichage.GREEN);
-                } else {
-                    armesString.append(Affichage.RED);
+        printStringOnSide(0, " Vous avez " + potionsList.size() + " potions :",20);
+        printArrayOnTheWholeLine(21,potionsList,0);
+
+        printLine(24,Affichage.GREEN);
+        printStringOnSide(2,Affichage.RED+" Monstres ",25);
+        
+        HashMap<AbstractMonster,Integer > monsterTypes = new HashMap<>();
+
+        for ( AbstractMonster m : Start.getPlayer().getEtage().getMonsters()
+             ) {
+            AtomicBoolean added = new AtomicBoolean(false);
+            monsterTypes.forEach((k, v) -> {
+
+                if(k.getClass().getName().equals(m.getClass().getName())){
+                    monsterTypes.put(k,v+1);
+                    added.set(true);
                 }
-                armesString.append("[" + abstractWeapon.toString() +Affichage.RESET+ "]  ");
-            }
-            else
-                armesString.append(abstractWeapon.toString()+Affichage.RESET + "  ");
+            });
+            if(!added.get()) monsterTypes.put(m,1);
         }
+        ArrayList<String> monsters = new ArrayList<>();
+        monsterTypes.forEach((k, v) -> {
+            String name = k.getClass().getName().split("\\.")[3];
+           monsters.add( " "+k+" = "  +name+ " x"+v+"  ");
+        });
+        printAndBackToTheLine(27,monsters);
 
-        printStringOnSide(0,armesString.toString(),18);
-
-       printStringOnSide(0, " Vous avez " + potionsList.size() + " potions :",20);
-
-       StringBuilder potionsString = new StringBuilder();
-       for (int i = 0; i < potionsList.size(); i++) {
-           if (i == 0)
-               potionsString.append("[" + potionsList.get(i).toString()+Affichage.RESET + "]  ");
-           else
-               potionsString.append(potionsList.get(i).toString() +Affichage.RESET + "  ");
-       }
-      printStringOnSide(0, potionsString.toString(),21);
+        printLine(33,Affichage.GREEN);
+        printStringOnSide(2,Affichage.PURPLE+" Endurence ",34);
     }
+
+
+
+
 
     /**
      * Fonction qui met réinitialise le menu
@@ -130,8 +140,22 @@ public class Menu {
             if(i == menuAffichage[line].length-1) menuAffichage[line][i].container = Affichage.BLUE+s.charAt(i)+"\n";
             else
             menuAffichage[line][i].container = s.charAt(i)+"";
-
         }
+    }
+
+    public void printArrayOnTheWholeLine(int line, ArrayList<? extends AbstractItem> itemList , int cursor){
+        StringBuilder itemString = new StringBuilder("  ");
+        for (int index = 0; index < itemList.size(); index++) {
+            AbstractItem abstractItem = itemList.get(index);
+            if (index == cursor){
+               itemString.append(Affichage.GREEN);
+                itemString.append("[" + abstractItem.toString() +Affichage.RESET+ "]  ");
+            }
+            else
+                itemString.append(abstractItem.toString()+Affichage.RESET + "  ");
+        }
+
+        printStringOnSide(0,itemString.toString(),line);
     }
 
     /**
@@ -140,7 +164,8 @@ public class Menu {
      * @param color couleur de la ligne
      */
     public void printLine (int  y,String color){
-        printStringOnLine(1,y,color+"═══════════════════════════════════════════════════════════════════════════════════════════");
+        modifyCase(0,y,"║"+color);
+        printStringOnLine(1,y,"═══════════════════════════════════════════════════════════════════════════════════════════");
 
     }
 
@@ -157,6 +182,21 @@ public class Menu {
         }
     }
 
+
+    public void printAndBackToTheLine(int y,ArrayList<String> myArrayString){
+        int x = 1;
+        for (int i = 0; i < myArrayString.size(); i++) {
+            if(x+getTrueLength(myArrayString.get(i)) > menuAffichage[y].length){
+                x=1;
+                ++y;
+                if(y >= etage.getHeigth()-1)break;
+            }
+            printStringOnLine(x ,y,myArrayString.get(i));
+            x=x+getTrueLength(myArrayString.get(i));
+        }
+    }
+
+
     /**
      * Trace la string aux coordonnées du menu
      * @param x Coordonnée x
@@ -169,13 +209,10 @@ public class Menu {
             int currenti = i;
             String res = s.charAt(currenti)+"";
             Pattern p = Pattern.compile(".\\[([0-9]{1,3})m");
-
-            // création d'un moteur de recherche
             if( i < s.length() - 5){
-
                 Matcher m = p.matcher(s.substring(currenti, currenti+5));
-
                 if( m.find()){
+
                         int size =m.end()-m.start();
                         if( m.start() == 0){
                             res = m.group(0);
@@ -185,9 +222,13 @@ public class Menu {
                 }
             }
             modifyCase(x,y,res);
+
             ++x;
         }
     }
+
+
+
 
     /**
      * Trace un tableau de string d'un coté précis
@@ -250,17 +291,13 @@ public class Menu {
         return s.toString();
     }
 
-    public int numberOfColorChanges(String s){
-        Pattern p = Pattern.compile(".\\[([0-9]{1,3})m");
-        // création d'un moteur de recherche
-        Matcher m = p.matcher(s);
-        // lancement de la recherche de toutes les occurrences
-
-        long l = (m.results().count());
-
-        return  (int) l*2;
+    /**
+     * Renvoit la vrai longueur d'un string sans les characteres ANSI.
+     * @param s String dont on cherche la longeure
+     * @return Vrai longueure du string
+     * @author Quentin
+     */
+    public static int getTrueLength(String s){
+        return s.replaceAll("\u001B\\[[0-9]*m", "").length();
     }
-
-
-
 }
