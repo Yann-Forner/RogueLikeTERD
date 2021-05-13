@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class StaminaPotion extends AbstractPotion {
 
-    private int seconds;
+    private final int seconds;
 
     /**
      * Constructeur de la potion d'endurance
@@ -39,15 +39,13 @@ public class StaminaPotion extends AbstractPotion {
         int originalEndurence = player.getEndurence();
         TourManager.addMessage("Pendant " + seconds + "s, votre endurance sera infinie.");
         player.setEndurence(player.getMAX_ENDURENCE() * 1000);
-        TourManager.getExecutor().schedule(() -> {
-            player.setEndurence(originalEndurence);
-        }, 5, TimeUnit.SECONDS);
+        TourManager.getExecutor().schedule(() -> player.setEndurence(originalEndurence), 5, TimeUnit.SECONDS);
     }
 
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return "🍰";
+            return "🥃";
         }
         else{
             return super.toString()+"e";
