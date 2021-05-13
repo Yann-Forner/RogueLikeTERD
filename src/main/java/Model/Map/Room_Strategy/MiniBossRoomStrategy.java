@@ -43,7 +43,7 @@ public class MiniBossRoomStrategy extends CircleRoomStrategy {
             switch(i) {
                 case 0 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.SWORD));
                 case 1 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.BOW));
-                case 2 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.KNIFE));
+                case 2 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.WAND));
             }
         }
         for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {

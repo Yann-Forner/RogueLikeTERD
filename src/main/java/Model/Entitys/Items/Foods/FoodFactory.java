@@ -20,13 +20,12 @@ public class FoodFactory {
      * @return Retourne la nourriture générée
      */
     public static AbstractFood getNewFood(Etage etage, FoodType ft) {
-        switch(ft) {
-            case APPLE -> { return new Apple(etage, Procedure.getAccesibleRandomPosition(true, etage), "Pomme", 20); }
-            case BANANA -> { return new Banana(etage, Procedure.getAccesibleRandomPosition(true, etage), "Banane", 20); }
-            case CARROT -> { return new Carrot(etage, Procedure.getAccesibleRandomPosition(true, etage), "Carotte", 20); }
-            case ORANGE -> { return new Orange(etage, Procedure.getAccesibleRandomPosition(true, etage), "Orange", 20); }
-            case SODA -> { return new Soda(etage, Procedure.getAccesibleRandomPosition(true, etage), "Soda", 10); }
-            default -> throw new IllegalStateException("Unexpected FoodType: " + ft);
-        }
+        return switch(ft) {
+            case APPLE -> new Apple(etage, Procedure.getAccesibleRandomPosition(true, etage), "Pomme", 20);
+            case BANANA -> new Banana(etage, Procedure.getAccesibleRandomPosition(true, etage), "Banane", 20);
+            case CARROT -> new Carrot(etage, Procedure.getAccesibleRandomPosition(true, etage), "Carotte", 20);
+            case ORANGE -> new Orange(etage, Procedure.getAccesibleRandomPosition(true, etage), "Orange", 20);
+            case SODA -> new Soda(etage, Procedure.getAccesibleRandomPosition(true, etage), "Soda", 10);
+        };
     }
 }

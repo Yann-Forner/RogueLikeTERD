@@ -31,14 +31,12 @@ public class Archer extends AbstractClass{
     }
 
     @Override
-    public void setBaseItems(BasicPlayer player) {
-
-    }
+    public void setBaseItems(BasicPlayer player) { }
 
     @Override
     public boolean canUse(AbstractWeapon weapon) {
         switch (weapon.getType()){
-            case BOW, KNIFE -> {
+            case BOW -> {
                 return true;
             }
             default -> {

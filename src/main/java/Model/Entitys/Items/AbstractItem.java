@@ -125,6 +125,6 @@ public abstract class AbstractItem extends Entity {
 
     @Override
     public String toString() {
-        return Affichage.FRAMED;
+        return Affichage.UNDERLINE;
     }
 }

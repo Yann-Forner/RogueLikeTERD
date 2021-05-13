@@ -38,7 +38,7 @@ public class Warrior extends AbstractClass {
     @Override
     public boolean canUse(AbstractWeapon weapon) {
         switch (weapon.getType()){
-            case SWORD, KNIFE, SHIELD -> {
+            case SWORD -> {
                 return true;
             }
             default -> {

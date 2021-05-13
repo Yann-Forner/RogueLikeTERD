@@ -186,6 +186,7 @@ public class TourManager implements Serializable {
             }
         }, 0, player.getClasse().getEndurenceRate(), TimeUnit.MILLISECONDS);
         executor.scheduleAtFixedRate(messages::pollFirst, 8, 8, TimeUnit.SECONDS);
+
     }
 
     /**

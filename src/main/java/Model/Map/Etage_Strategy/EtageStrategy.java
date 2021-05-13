@@ -36,17 +36,11 @@ public abstract class EtageStrategy {
      * @author Quentin,Yann
      */
     public static EtageStrategy getRandomStrategy(){
-        switch (Procedure.getRandomInt(9,0)){
-            case 0, 1, 2 -> {
-                return new NormalEtageStrategy();
-            }
-            case 3, 4, 5, 6, 7 -> {
-                return new DonjonStrategy();
-            }
-            default -> {
-                return new CircleEtageStrategy();
-            }
-        }
+        return switch (Procedure.getRandomInt(9,0)){
+            case 0, 1, 2 -> new NormalEtageStrategy();
+            case 3, 4, 5, 6, 7 -> new DonjonStrategy();
+            default -> new CircleEtageStrategy();
+        };
     }
 
     /**

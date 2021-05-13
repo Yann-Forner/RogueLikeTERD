@@ -109,6 +109,14 @@ public class Affichage {
      * @author Quentin,Yann
      */
     public static String etage(Etage etage){
+        /*
+        for (int y = 0; y < etage.getHeigth(); y++) {
+            for (int x = 0; x < etage.getWidth(); x++) {
+                System.out.print(etage.get(x,y)+"\n");
+            }
+        }*/
+
+
         Menu menu = new Menu(etage,Start.getMap());
         StringBuilder sb = new StringBuilder();
         sb.append("    ").append(RESET);
@@ -164,7 +172,7 @@ public class Affichage {
                     sb.append(" ");
                 }
             }
-            //TODO probleme quand room
+            //TODO probleme quand room #YANN
             if(etage instanceof Room){
                 sb.append("\n");
             }

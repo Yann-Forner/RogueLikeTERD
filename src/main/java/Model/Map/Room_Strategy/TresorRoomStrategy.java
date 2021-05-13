@@ -31,6 +31,7 @@ public class TresorRoomStrategy extends RoomStrategy{
 
     @Override
     public void setItems(Room r) {
+        //TODO refaire tout ça
         for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
             switch(i) {
                 case 0 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.HEAL_POTION));
@@ -42,7 +43,7 @@ public class TresorRoomStrategy extends RoomStrategy{
             switch(i) {
                 case 0 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.SWORD));
                 case 1 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.BOW));
-                case 2 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.KNIFE));
+                case 2 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.WAND));
             }
         }
         for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
