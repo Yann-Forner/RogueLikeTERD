@@ -191,6 +191,15 @@ public abstract class AbstractAlive extends Entity {
         return lvl;
     }
 
+    /**
+     * Redéfinit la vie
+     * @param pv Vie
+     * @author JP
+     */
+    public void setPv(int pv) {
+        this.pv = pv;
+    }
+
     @Override
     public String toString() {
         return Affichage.GREEN;
