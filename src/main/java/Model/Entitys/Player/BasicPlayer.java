@@ -228,6 +228,15 @@ public class BasicPlayer extends AbstractAlive {
         return endurence;
     }
 
+    /**
+     * Redéfinit l'endurance du joueur
+     * @param endurence Endurance
+     * @author JP
+     */
+    public void setEndurence(int endurence) {
+        this.endurence = endurence;
+    }
+
     @Override
     public int getPv() {
         return super.getPv();
@@ -254,6 +263,7 @@ public class BasicPlayer extends AbstractAlive {
     /**
      * Met à jour l'endurance maximale
      * @param MAX_ENDURENCE Maximum
+     * @author JP
      */
     public void setMAX_ENDURENCE(int MAX_ENDURENCE) {
         this.MAX_ENDURENCE = MAX_ENDURENCE;

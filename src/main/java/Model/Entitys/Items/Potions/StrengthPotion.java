@@ -51,7 +51,7 @@ public class StrengthPotion extends AbstractPotion {
         TourManager.getExecutor().schedule(() -> {
             int previousForce = player.getForce() - forceConverted;
             player.setForce(previousForce);
-            TourManager.addMessage("Retour de la force a sa valeur de base. (" + previousForce + ")");
+            TourManager.addMessage("Retour de la force à sa valeur de base. (" + previousForce + ")");
         }, seconds, TimeUnit.SECONDS);
     }
 

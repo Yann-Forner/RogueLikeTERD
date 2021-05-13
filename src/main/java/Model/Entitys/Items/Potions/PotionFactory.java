@@ -10,7 +10,7 @@ import Model.Utils.Procedure;
 
 public class PotionFactory {
     public enum PotionType {
-        HEAL_POTION, INVUL_POTION, STRENGTH_POTION,
+        HEAL_POTION, INVUL_POTION, STRENGTH_POTION, ENDURENCE_POTION,
     }
 
     /**
@@ -26,6 +26,7 @@ public class PotionFactory {
             case HEAL_POTION -> new HealPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de heal", 25);
             case INVUL_POTION -> new InvulPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'invulnérabilité", 5);
             case STRENGTH_POTION -> new StrengthPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de force", 50.0, 5);
+            case ENDURENCE_POTION -> new StaminaPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'endurance", 10);
         };
     }
 }
