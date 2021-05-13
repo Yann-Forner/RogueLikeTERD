@@ -1,6 +1,6 @@
 package Model.Entitys.Player.Classes;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 
 /**
  * Factory qui permet de créer des classes.
@@ -18,16 +18,16 @@ public class ClassFactory {
      * @return Joueur
      * @author Quentin
      */
-    public static BasicPlayer getNewPlayer(String nom, Class classe){
+    public static Player getNewPlayer(String nom, Class classe){
         switch (classe){
             case WARRIOR -> {
-                return new BasicPlayer(nom,new Warrior());
+                return new Player(nom,new Warrior());
             }
             case ARCHER -> {
-                return new BasicPlayer(nom,new Archer());
+                return new Player(nom,new Archer());
             }
             case MAGICIAN -> {
-                return new BasicPlayer(nom,new Magician());
+                return new Player(nom,new Magician());
             }
             default -> {
                 return null;

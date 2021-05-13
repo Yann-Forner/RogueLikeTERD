@@ -31,7 +31,7 @@ public class RoomFactory {
 
     private static Room getNewTresorRoom(){return Procedure.getRandomRoom(6,10,new TresorRoomStrategy());}
 
-    private static Room getNewReposRoom(){return new Room(10,10,new ReposRoomStrategy());}
+    private static Room getNewReposRoom(){return new Room(9,3,new ReposRoomStrategy());}
 
     private static Room getNewCircleRoom(){return Procedure.getRandomImpairSizeRoom(11,15,new NormalCircleRoomStrategy());}
 

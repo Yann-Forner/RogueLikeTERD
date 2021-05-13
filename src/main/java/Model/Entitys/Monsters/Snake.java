@@ -23,8 +23,8 @@ public class Snake extends AbstractMonster {
         public void updateMonster() {}
 
         @Override
-        public boolean updatePV(int pv) {
-            boolean Alive = super.updatePV(pv);
+        public boolean updatePV(int pv, boolean limited) {
+            boolean Alive = super.updatePV(pv, limited);
             if(!Alive){
                 snakeTail.remove(this);
             }
@@ -106,10 +106,10 @@ public class Snake extends AbstractMonster {
     }
 
     @Override
-    public boolean updatePV(int pv) {
+    public boolean updatePV(int pv, boolean limited) {
         boolean Alive = true;
         if(snakeTail.size()==0){
-            Alive = super.updatePV(pv);
+            Alive = super.updatePV(pv, limited);
         }
         return Alive;
     }

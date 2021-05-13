@@ -2,7 +2,7 @@ package Model.Entitys.Items;
 
 import Model.Entitys.Entity;
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -38,14 +38,14 @@ public class StackOfMoney extends AbstractItem {
      * @param player Joueur
      */
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
 
     }
 
     @Override
     public void onContact(Entity e) {
         if (!(e instanceof AbstractMonster)) {
-            BasicPlayer player = (BasicPlayer) e;
+            Player player = (Player) e;
             TourManager.addMessage(Affichage.BLUE + player.getNom()
                     + " a ramassé "
                     + Affichage.BRIGTH_BLUE + getNom()

@@ -1,6 +1,6 @@
 package Model.Utils;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
 
@@ -74,7 +74,7 @@ public class Tools {
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
                 return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth())
                                                     && etage.get(p.getX(),p.getY()).isAccesible()
-                                                    && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer)))
+                                                    && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof Player)))
                                                     .collect(Collectors.toCollection(ArrayList::new));
             }
 
@@ -87,7 +87,7 @@ public class Tools {
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
                 return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth())
                                                     && etage.get(p.getX(),p.getY()).isAccesible())
-                                                    && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer))
+                                                    && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof Player))
                                                     .collect(Collectors.toCollection(ArrayList::new));
             }
 
@@ -99,7 +99,7 @@ public class Tools {
                 voisins.add(new Noeud(getX(),getY() + 1));
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
                 return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth())
-                                                && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer)))
+                                                && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof Player)))
                                                 .collect(Collectors.toCollection(ArrayList::new));
             }
 
@@ -112,7 +112,7 @@ public class Tools {
                 // Filtrage pour obtenir un voisin valide (dans la map, accessible...)
                 return voisins.stream().filter(p -> ((p.getX() >= 0 && p.getY() >= 0 && p.getX() < etage.getWidth() && p.getY() < etage.getHeigth())
                                             && etage.get(p.getX(),p.getY()).isAccesible())
-                                            && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof BasicPlayer))
+                                            && (etage.get(p.getX(),p.getY()).getEntity() == null || etage.get(p.getX(),p.getY()).getEntity() instanceof Player))
                                             .collect(Collectors.toCollection(ArrayList::new));
             }
         }

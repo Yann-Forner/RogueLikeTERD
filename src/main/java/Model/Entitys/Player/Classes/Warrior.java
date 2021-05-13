@@ -1,8 +1,7 @@
 package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Player.BasicPlayer;
-import Model.Utils.Affichage;
+import Model.Entitys.Player.Player;
 
 /**
  * Le guerrier est celui qui as le plus de points de vie mais le moins d'attaque.
@@ -31,7 +30,7 @@ public class Warrior extends AbstractClass {
     }
 
     @Override
-    public void setBaseItems(BasicPlayer player) {
+    public void setBaseItems(Player player) {
 
     }
 

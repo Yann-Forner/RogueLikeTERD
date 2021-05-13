@@ -3,7 +3,7 @@ package Model.Entitys.Items.Potions;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Entity;
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -32,7 +32,7 @@ public abstract class AbstractPotion extends AbstractItem {
      * @author JP
      */
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
         player.getInventory().getPotions().remove(this);
         TourManager.addMessage(Affichage.BRIGTH_PURPLE+Affichage.BOLD+"La potion a été utilisée.");
     }
@@ -41,7 +41,7 @@ public abstract class AbstractPotion extends AbstractItem {
     public void onContact(Entity e) {
         if(!(e instanceof AbstractMonster)){
             super.onContact(e);
-            BasicPlayer player = (BasicPlayer) e;
+            Player player = (Player) e;
             TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
             player.getInventory().addPotion(this);
             player.getEtage().removeItem(this);

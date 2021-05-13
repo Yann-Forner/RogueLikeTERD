@@ -173,11 +173,11 @@ public class Affichage {
                 }
             }
             //TODO probleme quand room #YANN
-            if(etage instanceof Room){
-                sb.append("\n");
-            }
-            else{
+            try{
                 menu.toStringByLine(y,sb);
+            }
+            catch (Exception e){
+                sb.append("\n");
             }
         }
         return sb.toString();

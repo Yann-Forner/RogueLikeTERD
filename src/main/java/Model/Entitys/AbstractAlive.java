@@ -6,7 +6,7 @@ import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Items.Weapons.Melee;
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.*;
@@ -67,11 +67,16 @@ public abstract class AbstractAlive extends Entity {
 
     /**
      * Defini ce qu'il se passe lorsque les pv de l'entité changent.
-     * @param pv int
+     * @param pv Quantité de pv a ajouté
+     * @param limited Defini si les pv ajoutés peuvent depassé le seuil maximal
      * @return True si l'entité est toujours en vie
      * @author Quentin
      */
-    public boolean updatePV(int pv){
+    public boolean updatePV(int pv, boolean limited){
+        if(limited && this instanceof Player){
+            int pvMax = ((Player) this).getMAX_PV();
+            pv = Math.min(pv, Math.max(pvMax - getPv(),0));
+        }
         this.pv = getPv() + pv;
         if(getPv()<=0){
             death();
@@ -88,7 +93,7 @@ public abstract class AbstractAlive extends Entity {
      * @author Yann, Quentin
      */
     public void move(Position pos) {
-        BasicPlayer player = Start.getPlayer();
+        Player player = Start.getPlayer();
         if(player != null && pos != null) {
             Cell cell = getEtage().get(pos);
             if (cell.isAccesible()) {
@@ -107,7 +112,7 @@ public abstract class AbstractAlive extends Entity {
                     }
                 }
             } else {
-                if (this instanceof BasicPlayer) {
+                if (this instanceof Player) {
                     Sound.playAudio(Sound.Sons.COLLISION, 0);
                 }
             }
@@ -116,8 +121,8 @@ public abstract class AbstractAlive extends Entity {
 
     @Override
     public void onContact(Entity e) {
-        if(e instanceof BasicPlayer){
-            BasicPlayer player = (BasicPlayer) e;
+        if(e instanceof Player){
+            Player player = (Player) e;
             AbstractWeapon currentWeapon = player.getInventory().getCurrentWeapon();
             int force = ((AbstractAlive)e).getForce();
             if(e.getPosition().Distance(getPosition())<=1 && currentWeapon!=null){
@@ -128,11 +133,11 @@ public abstract class AbstractAlive extends Entity {
             int endurence_requis = (currentWeapon == null ? 1 : currentWeapon.getCoutEndurence());
             if(player.getEndurence() >= endurence_requis){
                 player.updateEndurence(- endurence_requis);
-                updatePV(-force);
+                updatePV(-force,false);
             }
         }
         else{
-            updatePV( - ((AbstractAlive)e).getForce());
+            updatePV( - ((AbstractAlive)e).getForce(),false);
         }
     }
 

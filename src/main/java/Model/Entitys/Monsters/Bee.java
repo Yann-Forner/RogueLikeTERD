@@ -18,8 +18,8 @@ public class Bee extends AbstractMonster {
     }
 
     @Override
-    public boolean updatePV(int pv){
-        boolean isAlive = super.updatePV(pv);
+    public boolean updatePV(int pv, boolean limited){
+        boolean isAlive = super.updatePV(pv, limited);
         if(!isAlive){
             if(BasePv!=1){
                 getEtage().addMonster(new Bee(getEtage(), Procedure.getAccesibleRandomPosition(true, getEtage()), "CHILD BEE",BasePv / 2, 5, 15, 20, 900, Tools.PathType.CROSS, lvl));

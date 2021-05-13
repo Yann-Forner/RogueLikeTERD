@@ -1,7 +1,7 @@
 package Model.Utils;
 
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Map;
 
 import java.io.BufferedReader;
@@ -25,7 +25,7 @@ public class TourManager implements Serializable {
     private static final int refreshRate = 300;
     private static int Tour = 0;
     private static long Timer;
-    private final BasicPlayer player;
+    private final Player player;
     private Map map;
     private static int nbrKill = 0;
     private static int nbrKillBoss = 0;
@@ -36,7 +36,7 @@ public class TourManager implements Serializable {
      * @param player Joueur
      * @author Quentin
      */
-    public TourManager(BasicPlayer player) {
+    public TourManager(Player player) {
         this.player = player;
         Timer = System.currentTimeMillis();
         Sound.playAudio(Sound.Sons.MUSIQUE,1);
@@ -101,19 +101,19 @@ public class TourManager implements Serializable {
         }
         switch (cmd){
             case 'z' , 'Z' -> {
-                player.moveDirection(BasicPlayer.Direction.HAUT);
+                player.moveDirection(Player.Direction.HAUT);
                 return true;
             }
             case 'q' , 'Q' -> {
-                player.moveDirection(BasicPlayer.Direction.GAUCHE);
+                player.moveDirection(Player.Direction.GAUCHE);
                 return true;
             }
             case 's' , 'S' -> {
-                player.moveDirection(BasicPlayer.Direction.BAS);
+                player.moveDirection(Player.Direction.BAS);
                 return true;
             }
             case 'd' , 'D' -> {
-                player.moveDirection(BasicPlayer.Direction.DROITE);
+                player.moveDirection(Player.Direction.DROITE);
                 return true;
             }
             case 't' , 'T' -> TourParTour();
@@ -266,7 +266,7 @@ public class TourManager implements Serializable {
      * @return Joueur
      * @author Quentin
      */
-    public BasicPlayer getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 

@@ -1,7 +1,7 @@
 package Model.Entitys.Items;
 
 import Model.Entitys.Entity;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -90,7 +90,7 @@ public abstract class AbstractItem extends Entity {
      * @param player Joueur
      * @author JP
      */
-    public abstract void useItem(BasicPlayer player);
+    public abstract void useItem(Player player);
 
     @Override
     public String toString() {

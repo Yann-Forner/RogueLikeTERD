@@ -1,8 +1,7 @@
 package Model.Entitys.Items.Potions;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
@@ -40,7 +39,7 @@ public class StrengthPotion extends AbstractPotion {
      * @author JP
      */
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
         super.useItem(player);
 
         int originalForce = player.getForce();

@@ -1,8 +1,7 @@
 package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Player.BasicPlayer;
-import Model.Utils.Affichage;
+import Model.Entitys.Player.Player;
 
 /**
  * L'archer est le plus rapide et peut attaquer de loin mais en contrepartie il a tres peu de points de vie.
@@ -31,7 +30,7 @@ public class Archer extends AbstractClass{
     }
 
     @Override
-    public void setBaseItems(BasicPlayer player) { }
+    public void setBaseItems(Player player) { }
 
     @Override
     public boolean canUse(AbstractWeapon weapon) {

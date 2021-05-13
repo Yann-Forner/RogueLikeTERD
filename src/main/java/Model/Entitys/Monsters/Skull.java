@@ -1,6 +1,6 @@
 package Model.Entitys.Monsters;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Utils.*;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -19,7 +19,7 @@ public class Skull extends AbstractMonster {
 
     @Override
     public void updateMonster() {
-        BasicPlayer player = Start.getPlayer();
+        Player player = Start.getPlayer();
         double distance = Objects.requireNonNull(player).getPosition().Distance(getPosition());
         if(Alert==0 && distance<getVision_radius()){
             Alert=1;
@@ -37,7 +37,7 @@ public class Skull extends AbstractMonster {
         }
         else if(distance>=getVision_radius()/4 && distance<getVision_radius()/3){
             Affichage.Projectile(getEtage(),Tools.getLigne(player.getPosition(),getPosition()),new Cell.Style(Cell.Style.CellType.PROJECTILE));
-            player.updatePV(- getForce());
+            player.updatePV(- getForce(),false);
         }
         else if(distance>=getVision_radius()/3 && distance < (Alert==0 ? getVision_radius() : Agro)){
             move(nextPosition());

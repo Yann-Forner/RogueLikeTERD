@@ -3,7 +3,7 @@ package Model.Entitys.Items.Weapons;
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
 import Model.Entitys.Monsters.Marchand;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -27,7 +27,7 @@ public class Melee extends AbstractWeapon{
     }
 
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
         super.useItem(player);
         Position pos = player.getPosition();
         for (int i = 0; i < getRange(); i++) {

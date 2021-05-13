@@ -3,7 +3,7 @@ package Map;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Foods.FoodFactory;
 import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Entitys.Player.Classes.ClassFactory;
 import Model.Map.Etage;
 import Model.Map.Map;
@@ -17,7 +17,7 @@ public class TestItem extends TestCase {
 
     @Test
     public void testSpawnItemSameLocation() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);
@@ -35,7 +35,7 @@ public class TestItem extends TestCase {
 
     @Test
     public void testItemSpawnLocation() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);
@@ -51,7 +51,7 @@ public class TestItem extends TestCase {
 
     @Test
     public void testCellUpdatedState() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);
@@ -67,7 +67,7 @@ public class TestItem extends TestCase {
 
     @Test
     public void testPotionHeal() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);
@@ -78,7 +78,7 @@ public class TestItem extends TestCase {
         AbstractItem i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
         etage.getItems().add(i1);
 
-        player.updatePV(-10);
+        player.updatePV(-10, true);
         i1.useItem(player);
         assertTrue(player.getPv() <= player.getMAX_PV());
     }

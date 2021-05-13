@@ -1,7 +1,6 @@
 package Model.Entitys.Monsters;
 
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 import Model.Utils.Tools;
@@ -16,8 +15,8 @@ public class Alien extends AbstractMonster {
     }
 
     @Override
-    public boolean updatePV(int pv){
-        boolean isAlive = super.updatePV(pv);
+    public boolean updatePV(int pv, boolean limited){
+        boolean isAlive = super.updatePV(pv, limited);
         if(isAlive){
             move(Procedure.getAccesibleRandomPosition(true,getEtage()));
         }

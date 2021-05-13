@@ -2,7 +2,7 @@ package Model.Entitys.Items;
 
 import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -39,7 +39,7 @@ public class Inventory implements Serializable {
      * @param player Joueur
      * @param item Item a jeter
      */
-    public void dropEntity(BasicPlayer player, AbstractItem item) {
+    public void dropEntity(Player player, AbstractItem item) {
         if(item == null) return;
 
         Etage e = player.getEtage();
@@ -69,7 +69,7 @@ public class Inventory implements Serializable {
      * Utilise l'arme courante.
      * @author JP, Quentin
      */
-    public void useCurrentWeapon(BasicPlayer player) {
+    public void useCurrentWeapon(Player player) {
         AbstractWeapon weapon = getCurrentWeapon();
         if(weapon!=null){
             if(player.getClasse().canUse(weapon)){
@@ -96,7 +96,7 @@ public class Inventory implements Serializable {
      * Utilise la potion courante.
      * @author Quentin
      */
-    public void useCurrentPotion(BasicPlayer player) {
+    public void useCurrentPotion(Player player) {
         AbstractPotion potion = getCurrentPotion();
         if(potion!=null) potion.useItem(player);
     }

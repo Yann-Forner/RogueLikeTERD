@@ -1,6 +1,6 @@
 package Map;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Entitys.Player.Classes.ClassFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -19,7 +19,7 @@ public class TestMap extends TestCase {
 
     @Test
     public void testOutOfBondsCell() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);
@@ -37,7 +37,7 @@ public class TestMap extends TestCase {
 
     @Disabled
     public void testCellAccess() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);
@@ -49,7 +49,7 @@ public class TestMap extends TestCase {
 
     @Test
     public void testMapRandomAccessiblePosition() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);
@@ -65,7 +65,7 @@ public class TestMap extends TestCase {
 
     @Test
     public void testMapTrapRoom() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);

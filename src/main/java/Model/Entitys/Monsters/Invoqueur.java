@@ -2,7 +2,7 @@ package Model.Entitys.Monsters;
 
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.*;
@@ -41,7 +41,7 @@ public class Invoqueur extends AbstractMonster {
 
     @Override
     public void updateMonster() {
-        BasicPlayer player = Start.getPlayer();
+        Player player = Start.getPlayer();
         if(Objects.requireNonNull(player).getPosition().Distance(getPosition()) != 1) {
             move(nextPosition());
         }
@@ -75,10 +75,10 @@ public class Invoqueur extends AbstractMonster {
     }
 
     @Override
-    public boolean updatePV(int pv) {
+    public boolean updatePV(int pv, boolean limited) {
         Etage etage = getEtage();
         etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT)));
-        return super.updatePV(pv);
+        return super.updatePV(pv, limited);
     }
 
     @Override

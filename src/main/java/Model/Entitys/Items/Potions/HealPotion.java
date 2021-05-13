@@ -1,8 +1,7 @@
 package Model.Entitys.Items.Potions;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
@@ -11,11 +10,10 @@ import Model.Utils.Position;
  */
 public class HealPotion extends AbstractPotion {
 
-    private int healRate;
+    private final int healRate;
 
     /**
      * Constructeur de la potion de soin
-     *
      * @param e Etage où se situe la potion
      * @param nom Nom de la potion
      * @param pos Position de la potion
@@ -29,14 +27,15 @@ public class HealPotion extends AbstractPotion {
 
     /**
      * Utilise la potion
-     *
      * @param player Joueur utilisant la potion
      * @author JP
      */
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
         super.useItem(player);
-        player.updatePV(healRate);
+        double pvMax = player.getMAX_PV();
+        double healConverted = pvMax / 100 * healRate;
+        player.updatePV((int) healConverted,true);
     }
 
     @Override

@@ -51,11 +51,12 @@ public class Marchand extends AbstractMonster {
     /**
      * Lance la procédure du marchand lorsque l'on marche dessus (en fonction de son état).
      * @param pv Points de vie
+     * @param limited
      * @return boolean
      * @author Gillian, Quentin
      */
     @Override
-    public boolean updatePV(int pv) {
+    public boolean updatePV(int pv, boolean limited) {
         switch (state){
             case  NOTVISITED, VISITED -> dialogue();
             case BUY -> System.out.println("buy"); //TODO

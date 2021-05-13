@@ -1,6 +1,6 @@
 package Map;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Entitys.Player.Classes.ClassFactory;
@@ -16,7 +16,7 @@ public class TestDistance extends TestCase {
 
     @Test
     public void testDistanceBetweenTwoEntitys() {
-        BasicPlayer player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
         TourManager tm = new TourManager(player);
         tm.setMap();
         Start.setTourManager(tm);

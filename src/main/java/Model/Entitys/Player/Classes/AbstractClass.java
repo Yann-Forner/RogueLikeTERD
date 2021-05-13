@@ -1,7 +1,7 @@
 package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Utils.Affichage;
 
 import java.io.Serializable;
@@ -45,7 +45,7 @@ public abstract class AbstractClass implements Serializable {
      * @param player joueur
      * @author Quentin
      */
-    public abstract void setBaseItems(BasicPlayer player);
+    public abstract void setBaseItems(Player player);
 
     /**
      * Defini si l'amr est utilisable par la classe.

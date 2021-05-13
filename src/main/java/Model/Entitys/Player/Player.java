@@ -15,7 +15,7 @@ import Model.Utils.TourManager;
  *
  * @author Quentin, Yann, Gillian
  */
-public class BasicPlayer extends AbstractAlive {
+public class Player extends AbstractAlive {
     private int MAX_EXP = 10;
     private int CURRENT_EXP = 0;
     private int MAX_PV;
@@ -51,7 +51,7 @@ public class BasicPlayer extends AbstractAlive {
      * @param classe Classe du joueur
      * @author Quentin
      */
-    public BasicPlayer(String nom, AbstractClass classe) {
+    public Player(String nom, AbstractClass classe) {
         super(null, null, classe.getVisionRadius(), nom.length() == 0 ? classe.getNom() : nom, classe.getBasePV(), classe.getBaseForce(), 1);
         this.classe = classe;
         MAX_PV = classe.getBasePV();
@@ -82,7 +82,7 @@ public class BasicPlayer extends AbstractAlive {
         if (CURRENT_EXP >= MAX_EXP) {
             MAX_EXP *= 2;
             CURRENT_EXP = 0;
-            updatePV(MAX_PV / 2);
+            updatePV(MAX_PV / 2,true);
             MAX_PV *= 1.5;
             lvl++;
             TourManager.addMessage(Affichage.BRIGTH_CYAN + "Vous avez gagné un niveau");

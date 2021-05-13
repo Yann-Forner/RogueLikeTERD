@@ -1,6 +1,6 @@
 package Model.Map;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage_Strategy.BossEtageStategy;
 import Model.Map.Etage_Strategy.EtageStrategy;
 import Model.Map.Etage_Strategy.ReposEtageStrategy;
@@ -31,7 +31,7 @@ public class Map implements Serializable {
      * @param player Joueur
      * @author Quentin
      */
-    public Map(BasicPlayer player){
+    public Map(Player player){
         Etage etage = new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy(),true);
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);

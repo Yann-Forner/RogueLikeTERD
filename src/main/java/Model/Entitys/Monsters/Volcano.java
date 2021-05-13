@@ -61,7 +61,7 @@ public class Volcano extends AbstractMonster {
     }
 
     @Override
-    public boolean updatePV(int pv) {
+    public boolean updatePV(int pv, boolean limited) {
         return true;
     }
 

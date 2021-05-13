@@ -1,6 +1,6 @@
 package Model.Entitys.Items.Potions;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
@@ -34,14 +34,11 @@ public class StaminaPotion extends AbstractPotion {
      * @author JP
      */
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
         super.useItem(player);
-
         int originalEndurence = player.getEndurence();
         TourManager.addMessage("Pendant " + seconds + "s, votre endurance sera infinie.");
-
         player.setEndurence(player.getMAX_ENDURENCE() * 1000);
-
         TourManager.getExecutor().schedule(() -> {
             player.setEndurence(originalEndurence);
         }, 5, TimeUnit.SECONDS);
@@ -50,7 +47,7 @@ public class StaminaPotion extends AbstractPotion {
     @Override
     public String toString() {
         if(System.getProperty("os.name").equals("Linux")){
-            return "\u2615";
+            return "🍰";
         }
         else{
             return super.toString()+"e";

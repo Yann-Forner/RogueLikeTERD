@@ -1,8 +1,7 @@
 package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Player.BasicPlayer;
-import Model.Utils.Affichage;
+import Model.Entitys.Player.Player;
 
 /**
  * Le magicien est le plus lent et peut faire des degats de zone.
@@ -31,7 +30,7 @@ public class Magician extends AbstractClass{
     }
 
     @Override
-    public void setBaseItems(BasicPlayer player) {
+    public void setBaseItems(Player player) {
 
     }
 

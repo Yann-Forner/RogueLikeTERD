@@ -3,7 +3,7 @@ package Model.Entitys.Items.Weapons;
 import Model.Entitys.Entity;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
@@ -44,7 +44,7 @@ public abstract class AbstractWeapon extends AbstractItem {
     @Override
     public void onContact(Entity e) {
         if(!(e instanceof AbstractMonster)){
-            BasicPlayer player = (BasicPlayer) e;
+            Player player = (Player) e;
             super.onContact(e);
             TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
             player.getInventory().addWeapon(this);
@@ -53,7 +53,7 @@ public abstract class AbstractWeapon extends AbstractItem {
     }
 
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
         player.updateEndurence(-getCoutEndurence());
     }
 

@@ -1,6 +1,6 @@
 package Model.Entitys.Items.Potions;
 
-import Model.Entitys.Player.BasicPlayer;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class InvulPotion extends AbstractPotion {
 
-    private int seconds;
+    private final int seconds;
 
     /**
      * Constructeur de la potion d'invincibilité
@@ -34,17 +34,13 @@ public class InvulPotion extends AbstractPotion {
      * @author JP
      */
     @Override
-    public void useItem(BasicPlayer player) {
+    public void useItem(Player player) {
         super.useItem(player);
-
         int originalHp = player.getPv();
         TourManager.addMessage("Pendant " + seconds + "s, votre vie sera infinie.");
-
+        //TODO fait pas ça je t'en supplie
         player.setPv(player.getMAX_PV() * 1000);
-
-        TourManager.getExecutor().schedule(() -> {
-            player.setPv(originalHp);
-        }, 5, TimeUnit.SECONDS);
+        TourManager.getExecutor().schedule(() -> player.setPv(originalHp), 5, TimeUnit.SECONDS);
     }
 
     @Override
