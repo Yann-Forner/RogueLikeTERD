@@ -43,8 +43,13 @@ public abstract class AbstractPotion extends AbstractItem {
             super.onContact(e);
             BasicPlayer player = (BasicPlayer) e;
             TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
-            player.getInventory().addPotion(this);
-            player.getEtage().removeItem(this);
+            if(player.getInventory().getPotions().size() <= player.getInventory().getPOTIONS_LIMIT()) {
+                player.getInventory().addPotion(this);
+                player.getEtage().removeItem(this);
+            }
+            else {
+
+            }
         }
     }
 

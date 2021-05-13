@@ -47,8 +47,13 @@ public abstract class AbstractWeapon extends AbstractItem {
             super.onContact(e);
             BasicPlayer player = (BasicPlayer) e;
             TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
-            player.getInventory().addWeapon(this);
-            player.getEtage().removeItem(this);
+            if(player.getInventory().getWeapons().size() <= player.getInventory().getWEAPONS_LIMIT()) {
+                player.getInventory().addWeapon(this);
+                player.getEtage().removeItem(this);
+            }
+            else {
+
+            }
         }
     }
 

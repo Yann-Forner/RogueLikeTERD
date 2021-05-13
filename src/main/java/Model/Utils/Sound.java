@@ -51,6 +51,6 @@ public class Sound {
                 clip.loop(nbrLoop>=0 ? nbrLoop : Clip.LOOP_CONTINUOUSLY);
             }
         }
-        catch (LineUnavailableException | UnsupportedAudioFileException | IOException ignored) {}
+        catch (IllegalArgumentException | LineUnavailableException | UnsupportedAudioFileException | IOException ignored) {}
     }
 }

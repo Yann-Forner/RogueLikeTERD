@@ -49,37 +49,6 @@ public abstract class AbstractItem extends Entity {
     @Override
     public void onContact(Entity e) {
         TourManager.addNbrObjetsTotal();
-        /*
-        if (!(e instanceof AbstractMonster)) {
-            BasicPlayer player = (BasicPlayer) e;
-            if (prix == 0) {
-                TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé " + Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
-                player.getInventory().addItem(this);
-                player.getEtage().removeItem(this);
-            } else {
-                if (player.removeMoney(getPrix())) {
-                    TourManager.addMessage(Affichage.BLUE + player.getNom()
-                            + " a acheté "
-                            + Affichage.BRIGTH_BLUE + getNom()
-                            + Affichage.BLUE + "pour la somme de"
-                            + Affichage.GREEN + getPrix()
-                            + Affichage.GREEN + "$"
-
-                    );
-                    player.getInventory().addItem(this);
-                    player.getEtage().removeItem(this);
-                } else {
-                    TourManager.addMessage(Affichage.BLUE + player.getNom()
-                            + Affichage.RED + "ne peut pas acheter"
-                            + Affichage.BRIGTH_BLUE + getNom()
-                            + Affichage.BLUE + "pour la somme de"
-                            + Affichage.GREEN + getPrix()
-                            + Affichage.GREEN + "$"
-                    );
-                }
-            }
-        }
-        */
     }
 
     /**

@@ -18,6 +18,9 @@ import java.util.ArrayList;
  * @author JP
  */
 public class Inventory implements Serializable {
+
+    private int WEAPONS_LIMIT, POTIONS_LIMIT;
+
     private final ArrayList<AbstractWeapon> weapons = new ArrayList<>();
     private final ArrayList<AbstractPotion> potions = new ArrayList<>();
 
@@ -26,7 +29,20 @@ public class Inventory implements Serializable {
      * Constructeur d'inventory. Initialise les listes.
      * @author JP
      */
-    public Inventory(){ }
+    public Inventory(){
+        WEAPONS_LIMIT = 10;
+        POTIONS_LIMIT = 10;
+    }
+
+    /**
+     * Constructeur assignant les limites de l'inventaire
+     * @param weaponsLimit Limite d'armes
+     * @param potionsLimit Limite de potions
+     */
+    public Inventory(int weaponsLimit, int potionsLimit) {
+        WEAPONS_LIMIT = weaponsLimit;
+        POTIONS_LIMIT = potionsLimit;
+    }
 
     /**
      * Drop l'item donné dans la case accessible la plus proche
@@ -184,4 +200,36 @@ public class Inventory implements Serializable {
      * @author JP
      */
     public AbstractPotion removeCurrentPotion() { return potions.size() > 0 ? potions.remove(0) : null ;}
+
+    /**
+     * Retourne la limite d'armes
+     * @return Limite d'armes
+     */
+    public int getWEAPONS_LIMIT() {
+        return WEAPONS_LIMIT;
+    }
+
+    /**
+     * Redéfinit la limite d'arme
+     * @param WEAPONS_LIMIT Limite d'arme
+     */
+    public void setWEAPONS_LIMIT(int WEAPONS_LIMIT) {
+        this.WEAPONS_LIMIT = WEAPONS_LIMIT;
+    }
+
+    /**
+     * Retourne la limite de potions
+     * @return Limite de potions
+     */
+    public int getPOTIONS_LIMIT() {
+        return POTIONS_LIMIT;
+    }
+
+    /**
+     * Redéfinit la limite de potion
+     * @param POTIONS_LIMIT Limite de potions
+     */
+    public void setPOTIONS_LIMIT(int POTIONS_LIMIT) {
+        this.POTIONS_LIMIT = POTIONS_LIMIT;
+    }
 }
