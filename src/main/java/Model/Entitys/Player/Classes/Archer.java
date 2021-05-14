@@ -1,6 +1,7 @@
 package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Player.Player;
 
 /**
@@ -30,18 +31,13 @@ public class Archer extends AbstractClass{
     }
 
     @Override
-    public void setBaseItems(Player player) { }
+    public void setBaseItems(Player player) {
+        player.getInventory().addWeapon(WeaponFactory.getNewWeapon(player.getEtage(), WeaponFactory.WeaponType.BOW));
+    }
 
     @Override
     public boolean canUse(AbstractWeapon weapon) {
-        switch (weapon.getType()){
-            case BOW -> {
-                return true;
-            }
-            default -> {
-                return false;
-            }
-        }
+        return weapon.getType() == WeaponFactory.WeaponType.BOW;
     }
 
     @Override

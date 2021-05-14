@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayDeque;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -62,10 +63,10 @@ public class TourManager implements Serializable {
             processEtage();
             if(!running && mouvement){
                 Tour++;
-                for(AbstractMonster m : player.getEtage().getMonsters()){
-                    m.updateMonster();
-                    if(Tour % Math.ceil((float) m.getUpdate_rate_ms()/300)==0){
-                        m.updateMonster();
+                for (Iterator<AbstractMonster> iterator = player.getEtage().getMonsters().iterator(); iterator.hasNext();) {
+                    AbstractMonster monster = iterator.next();
+                    if(Tour % Math.ceil((float) monster.getUpdate_rate_ms()/600)==0){
+                        monster.updateMonster();
                     }
                 }
             }
@@ -84,8 +85,8 @@ public class TourManager implements Serializable {
         char cmd = 0;
         if(System.console()!=null){
             char[] input = System.console().readPassword();
-            if(input != null && input.length>0){
-                cmd = input[input.length-1];
+            if(input != null && input.length==1){
+                cmd = input[0];
             }
         }
         else{

@@ -22,13 +22,12 @@ public class Wand extends AbstractWeapon {
      * Constructeur de la baguette
      * @param etage      Etage où se situe l'arme
      * @param position   Position de l'arme
-     * @param nom        Nom de l'arme
      * @param type     Type de l'arme
      * @param strength   Puissance de l'arme
      * @param range      Portée de l'arme
      */
-    public Wand(Etage etage, Position position, String nom, WeaponFactory.WeaponType type, int strength, int range) {
-        super(etage, position, nom, type, strength, range);
+    public Wand(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range) {
+        super(etage, position, null, type, strength, range);
     }
 
     @Override
@@ -65,6 +64,16 @@ public class Wand extends AbstractWeapon {
             case 4, 5, 6 -> new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_YELLOW,"🌟","*");
             case 7, 8, 9 -> new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_GREEN,"🌀","x");
             default -> new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"💢","¤");
+        };
+    }
+
+    @Override
+    public String getNom() {
+        return switch (getRange()){
+            case 1, 2, 3 -> "Balait";
+            case 4, 5, 6 -> "Os";
+            case 7, 8, 9 -> "Baguette";
+            default -> "Canne";
         };
     }
 

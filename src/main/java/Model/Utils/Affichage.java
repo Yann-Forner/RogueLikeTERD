@@ -90,10 +90,10 @@ public class Affichage {
                             + "\n"
                     : CLEAR);
             System.out.println(Start.getMap());
-            String pv = Affichage.getBarre(GREEN, "PV", GREY, Objects.requireNonNull(Start.getPlayer()).getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, 120);
+            String pv = Affichage.getBarre(GREEN, "PV", GREY, Objects.requireNonNull(Start.getPlayer()).getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, BLACK_BACKGROUND,120);
             System.out.print(pv);
             System.out.print(Affichage.getTouches(0, getTrueLength(pv)));
-            String endurence = Affichage.getBarre(BLUE, "Endurence", GREY, Start.getPlayer().getEndurence(), 100, BLUE_BACKGROUND, RED_BACKGROUND, 100);
+            String endurence = Affichage.getBarre(BLUE, "Endurence", GREY, Start.getPlayer().getEndurence(), 100, BLUE_BACKGROUND, RED_BACKGROUND, BLACK_BACKGROUND, 100);
             System.out.print(endurence);
             System.out.print(Affichage.getTouches(1, getTrueLength(endurence)));
             Affichage.getMessages();
@@ -109,14 +109,6 @@ public class Affichage {
      * @author Quentin,Yann
      */
     public static String etage(Etage etage){
-        /*
-        for (int y = 0; y < etage.getHeigth(); y++) {
-            for (int x = 0; x < etage.getWidth(); x++) {
-                System.out.print(etage.get(x,y)+"\n");
-            }
-        }*/
-
-
         Menu menu = new Menu(etage,Start.getMap());
         StringBuilder sb = new StringBuilder();
         sb.append("    ").append(RESET);
@@ -172,13 +164,7 @@ public class Affichage {
                     sb.append(" ");
                 }
             }
-            //TODO probleme quand room #YANN
-            try{
-                menu.toStringByLine(y,sb);
-            }
-            catch (Exception e){
-                sb.append("\n");
-            }
+            menu.toStringByLine(y,sb);
         }
         return sb.toString();
     }
@@ -196,7 +182,7 @@ public class Affichage {
      * @return le String de la barre
      * @author Quentin
      */
-    public static String getBarre(String textColor, String text, String infoColor, int currentStat, int maxStat, String barFullColor, String barEmptyColor, int width){
+    public static String getBarre(String textColor, String text, String infoColor, int currentStat, int maxStat, String barFullColor, String barEmptyColor, String barMoreThanFullColor, int width){
         StringBuilder sb = new StringBuilder();
         sb.append(textColor);
         sb.append(text);
@@ -225,7 +211,7 @@ public class Affichage {
         int end = middle+(liste_max_Stat.size()+1);
 
         for (int i = 0; i < width; i++) {
-            sb.append(i >= ((double)currentStat/(double)maxStat)*width ? barEmptyColor : barFullColor);
+            sb.append(i >= ((double)currentStat/(double)maxStat)*width ? barEmptyColor : currentStat > maxStat ? barMoreThanFullColor : barFullColor);
             if(i==start){
                 sb.append("[");
             }
