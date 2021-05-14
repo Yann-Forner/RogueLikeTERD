@@ -82,12 +82,15 @@ public class Menu {
 
             ArrayList<? extends AbstractItem> potionsList = inv.getPotions();
             ArrayList<? extends AbstractItem> armesList = Start.getPlayer().getInventory().getWeapons();
-
+            boolean canUse = true;
+            if( Start.getPlayer().getInventory().getWeapons().size()!= 0){
+                canUse = Start.getPlayer().getClasse().canUse(Start.getPlayer().getInventory().getWeapons().get(0));
+            }
             printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17);
-            printArrayOnTheWholeLine(18,armesList,0);
+            printArrayOnTheWholeLine(18,armesList,canUse);
 
             printStringOnSide(0, " Vous avez " + potionsList.size() + " potions :",20);
-            printArrayOnTheWholeLine(21,potionsList,0);
+            printArrayOnTheWholeLine(21,potionsList,true);
 
             printLine(24,Affichage.GREEN);
             printStringOnSide(2,Affichage.RED+" Monstres ",25);
@@ -144,13 +147,15 @@ public class Menu {
         }
     }
 
-    public void printArrayOnTheWholeLine(int line, ArrayList<? extends AbstractItem> itemList , int cursor){
+    public void printArrayOnTheWholeLine(int line, ArrayList<? extends AbstractItem> itemList  , boolean canUse){
         StringBuilder itemString = new StringBuilder("  ");
         for (int index = 0; index < itemList.size(); index++) {
             AbstractItem abstractItem = itemList.get(index);
-            if (index == cursor){
-               itemString.append(Affichage.GREEN);
-                itemString.append("[" + abstractItem.toString() +Affichage.RESET+ "]  ");
+            if (index == 0){
+                String color = Affichage.RED;
+                if(canUse)color =Affichage.GREEN;
+                itemString.append(color);
+                itemString.append("[" + abstractItem.toString() +Affichage.RESET+Affichage.BOLD + color +"]  ");
             }
             else
                 itemString.append(abstractItem.toString()+Affichage.RESET + "  ");
