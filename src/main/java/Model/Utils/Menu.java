@@ -48,10 +48,11 @@ public class Menu {
      * @auhtor Yann
      */
     public void refresh(){
+        clear();
         if(Start.getPlayer() != null){
 
 
-            clear();
+
             String[] UpperMenu = {"║","║","║"};
             Inventory inv = Start.getPlayer().getInventory();
             String lvl = " Niveau " + Start.getPlayer().getLvl() + " [" + Start.getPlayer().getCURRENT_EXP() + "/" + Start.getPlayer().getMAX_EXP() + "] ";
