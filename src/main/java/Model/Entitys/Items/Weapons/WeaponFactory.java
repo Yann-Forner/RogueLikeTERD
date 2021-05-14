@@ -1,6 +1,5 @@
 package Model.Entitys.Items.Weapons;
 
-import Model.Entitys.Items.AbstractItem;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 import Model.Utils.Start;
@@ -27,11 +26,11 @@ public class WeaponFactory {
      * @return Retourne l'arme généré
      * @author JP
      */
-    public static AbstractItem getNewWeapon(Etage etage, WeaponType type) {
+    public static AbstractWeapon getNewWeapon(Etage etage, WeaponType type) {
         return switch(type) {
-            case SWORD -> new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), "Epée", type, 10*getBaseLvl(), Procedure.getRandomInt(5,1));
-            case BOW -> new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), "Arc", type,10*getBaseLvl(), Procedure.getRandomInt(15,2));
-            case WAND -> new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), "Baguette", type, 5*getBaseLvl(), Procedure.getRandomInt(10,1));
+            case SWORD -> new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 10*getBaseLvl(), Procedure.getRandomInt(5,1));
+            case BOW -> new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), type,10*getBaseLvl(), Procedure.getRandomInt(15,2));
+            case WAND -> new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 5*getBaseLvl(), Procedure.getRandomInt(10,1));
         };
     }
 

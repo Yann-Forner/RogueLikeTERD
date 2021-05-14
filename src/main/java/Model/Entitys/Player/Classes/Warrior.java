@@ -1,6 +1,7 @@
 package Model.Entitys.Player.Classes;
 
 import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Player.Player;
 
 /**
@@ -31,19 +32,12 @@ public class Warrior extends AbstractClass {
 
     @Override
     public void setBaseItems(Player player) {
-
+        player.getInventory().addWeapon(WeaponFactory.getNewWeapon(player.getEtage(), WeaponFactory.WeaponType.SWORD));
     }
 
     @Override
     public boolean canUse(AbstractWeapon weapon) {
-        switch (weapon.getType()){
-            case SWORD -> {
-                return true;
-            }
-            default -> {
-                return false;
-            }
-        }
+        return weapon.getType() == WeaponFactory.WeaponType.SWORD;
     }
 
     @Override

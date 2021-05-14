@@ -6,7 +6,7 @@ public class Main {
         try{
             Start.StartGame();
         }
-        catch (Exception e){
+        catch (Exception e) {
             Start.setConsoleMode(false);
             System.out.println(Affichage.RED);
             e.printStackTrace();

@@ -18,13 +18,12 @@ public class Bow extends AbstractWeapon {
      * Constructeur de l'arc.
      * @param etage Etage où se situe l'arme
      * @param position Position de l'arme
-     * @param nom Nom de l'arme
      * @param type Type de l'arme
      * @param strength Puissance de l'arme
      * @param range Portée de l'arme
      */
-    public Bow(Etage etage, Position position, String nom, WeaponFactory.WeaponType type, int strength, int range) {
-        super(etage, position, nom, type,strength, range);
+    public Bow(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range) {
+        super(etage, position,null, type,strength, range);
     }
 
     @Override
@@ -67,6 +66,16 @@ public class Bow extends AbstractWeapon {
             cible.onContact(player);
             Affichage.Projectile(getEtage(), zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"📍","x"));
         }
+    }
+
+    @Override
+    public String getNom() {
+        return switch (getRange()){
+            case 1,2,3,4 -> "Canne a pêche";
+            case 5,6,7,8 -> "Arc";
+            case 9,10,11,12 -> "Tridant";
+            default -> "Revolver";
+        };
     }
 
     @Override

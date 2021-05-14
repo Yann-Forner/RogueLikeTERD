@@ -56,7 +56,6 @@ public class Player extends AbstractAlive {
         super(null, null, classe.getVisionRadius(), nom.length() == 0 ? classe.getNom() : nom, classe.getBasePV(), classe.getBaseForce(), 1);
         this.classe = classe;
         MAX_PV = classe.getBasePV();
-        classe.setBaseItems(this);
     }
 
     /**
@@ -256,7 +255,7 @@ public class Player extends AbstractAlive {
     @Override
     public int getForce() {
         AbstractWeapon currentWeapon = getInventory().getCurrentWeapon();
-        return super.getForce() * lvl + (currentWeapon==null ? 0 : currentWeapon.getStrength());
+        return super.getForce() * lvl + (currentWeapon==null || !classe.canUse(currentWeapon) ? 0 : currentWeapon.getStrength());
     }
 
     /**

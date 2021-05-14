@@ -38,6 +38,7 @@ public class Map implements Serializable {
         etage.get(pos).setEntity(player);
         player.setEtage(etage);
         player.setPosition(pos);
+        player.getClasse().setBaseItems(player);
     }
 
     /**
