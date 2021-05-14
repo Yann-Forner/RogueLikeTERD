@@ -59,7 +59,7 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
         for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
             switch(i) {
                 case 0 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.APPLE));
-                case 1 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.SODA));
+                case 1 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BURGER));
                 case 2 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BANANA));
                 case 3 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.CARROT));
                 case 4 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.ORANGE));

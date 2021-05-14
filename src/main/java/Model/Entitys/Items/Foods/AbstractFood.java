@@ -13,24 +13,22 @@ import java.util.Objects;
  * @author JP
  */
 public abstract class AbstractFood extends AbstractItem {
-
-    private final int heal;
+    protected final FoodFactory.FoodType foodType;
     /**
      * Constructeur de la nourriture
      * @param etage Etage de la nourriture
      * @param position Position de la nourriture
-     * @param nom Nom de la nourriture
-     * @param heal Quantité de pv restoré en %
+     * @param foodType Quantité de pv restoré en %
      */
-    public AbstractFood(Etage etage, Position position, String nom, int heal) {
-        super(etage, position, nom);
-        this.heal = heal;
+    public AbstractFood(Etage etage, Position position, FoodFactory.FoodType foodType) {
+        super(etage, position, foodType.getNom());
+        this.foodType = foodType;
     }
 
     @Override
     public void useItem(Player player) {
         double pvMax = player.getMAX_PV();
-        double healConverted = pvMax / 100 * heal;
+        double healConverted = pvMax / 100 * foodType.getHeal();
         player.updatePV((int) healConverted,true);
     }
 
@@ -46,7 +44,12 @@ public abstract class AbstractFood extends AbstractItem {
 
     @Override
     public String toString() {
-        return super.toString() + Affichage.RED;
+        if(System.getProperty("os.name").equals("Linux")){
+            return foodType.getForme_linux();
+        }
+        else{
+            return super.toString() + Affichage.RED + foodType.getForme_windows();
+        }
     }
 
 }

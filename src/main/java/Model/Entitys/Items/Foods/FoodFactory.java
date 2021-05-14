@@ -8,9 +8,41 @@ import Model.Utils.Procedure;
  * @author JP
  */
 public class FoodFactory {
+    public enum FoodType{
+        APPLE(20,"Pomme","🍎","p"),
+        BANANA(30,"Banane","🍌","b"),
+        CARROT(50,"Carrote","🥕","c"),
+        ORANGE(70,"Orange","🍊","o"),
+        PEACH(100,"Peche","🍑","g"),
+        BURGER(10,"Burger","🍔","b");
 
-    public enum FoodType {
-        APPLE, BANANA, CARROT, ORANGE, SODA;
+        private final int heal;
+        private final String nom;
+        private final String forme_linux;
+        private final String forme_windows;
+
+        FoodType(int heal,String nom,String forme_linux,String forme_windows){
+            this.heal = heal;
+            this.nom = nom;
+            this.forme_linux = forme_linux;
+            this.forme_windows = forme_windows;
+        }
+
+        public int getHeal() {
+            return heal;
+        }
+
+        public String getNom() {
+            return nom;
+        }
+
+        public String getForme_linux() {
+            return forme_linux;
+        }
+
+        public String getForme_windows() {
+            return forme_windows;
+        }
     }
 
     /**
@@ -20,12 +52,9 @@ public class FoodFactory {
      * @return Retourne la nourriture générée
      */
     public static AbstractFood getNewFood(Etage etage, FoodType ft) {
-        return switch(ft) {
-            case APPLE -> new Apple(etage, Procedure.getAccesibleRandomPosition(true, etage), "Pomme", 20);
-            case BANANA -> new Banana(etage, Procedure.getAccesibleRandomPosition(true, etage), "Banane", 20);
-            case CARROT -> new Carrot(etage, Procedure.getAccesibleRandomPosition(true, etage), "Carotte", 20);
-            case ORANGE -> new Orange(etage, Procedure.getAccesibleRandomPosition(true, etage), "Orange", 20);
-            case SODA -> new Soda(etage, Procedure.getAccesibleRandomPosition(true, etage), "Soda", 10);
-        };
+        if(ft.equals(FoodType.BURGER)){
+            return new Burger(etage, Procedure.getAccesibleRandomPosition(true, etage),ft);
+        }
+        return new Fruit(etage, Procedure.getAccesibleRandomPosition(true, etage), ft);
     }
 }

@@ -23,8 +23,6 @@ public class Menu {
     private CaseMenu[][] menuAffichage;
     private static final int LARGEUR_MENU = 83;
 
-
-
     private class CaseMenu{
         public String container= " ";
 
