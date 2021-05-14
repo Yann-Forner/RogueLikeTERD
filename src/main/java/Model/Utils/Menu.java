@@ -4,6 +4,7 @@ import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Inventory;
 import Model.Entitys.Items.Potions.HealPotion;
 import Model.Entitys.Monsters.AbstractMonster;
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Map;
 
@@ -57,28 +58,30 @@ public class Menu {
             Inventory inv = Start.getPlayer().getInventory();
             String lvl = " Niveau " + Start.getPlayer().getLvl() + " [" + Start.getPlayer().getCURRENT_EXP() + "/" + Start.getPlayer().getMAX_EXP() + "] ";
             String[] niveau = {
-                    "╔"+"═".repeat(lvl.length())+"╗ ",
-                    "║"+lvl+"║ ",
-                    "╚"+"═".repeat(lvl.length())+"╝ "
+                    Affichage.RED+"╔"+"═".repeat(lvl.length())+"╗   ",
+                    Affichage.RED+"║"+lvl+"║   ",
+                    Affichage.RED+"╚"+"═".repeat(lvl.length())+"╝   "
             };
-            printStringOnSide(0,"  SEED : "+Procedure.getSeed(),2);
-            printStringOnSide(1,"  TIMER : "+TourManager.getTimer()+"         ",2);
+            printStringOnSide(0,Affichage.PURPLE+"   SEED : "+Procedure.getSeed()+Affichage.BLUE +" " ,2);
+            printStringOnSide(1,Affichage.PURPLE+"  TIMER : "+TourManager.getTimer()+Affichage.BLUE+"      ",2);
             printStringOnSide(2,UpperMenu,1);
-            printLine(4,Affichage.GREEN);
+            printLine(4,Affichage.BLUE);
 
-            printStringOnSide(0,Affichage.RED+"   Joueur  :  "+ Start.getPlayer().getNom() + Affichage.BLUE+" ",6);
-            printStringOnSide(0,"   Classe  :  "+ Start.getPlayer().getClasse().getNom(),7);
-            printStringOnSide(1,Affichage.RED+" Etage n°"+(map.getIndexCurrent()+1)+"     ",11);
-            printStringOnSide(1,niveau,6);
-            printStringOnSide(0,"   Force  :  "+Start.getPlayer().getForce(),8);
+            printStringOnSide(0,Affichage.RED+"   Joueur  :  "+ Start.getPlayer().getNom() + Affichage.BLUE+" ",5);
+            printStringOnSide(0,Affichage.RED+"   Classe  :  "+ Start.getPlayer().getClasse().getNom(),6);
+            printStringOnSide(1,Affichage.RED+" Etage n°"+(map.getIndexCurrent()+1)+"        ",9);
+            printStringOnSide(1,niveau,5);
+            printStringOnSide(0,Affichage.RED+"   Force  :  "+Start.getPlayer().getForce(),7);
+
+
             int range = 1 ;
             if(inv.getWeapons().size()!=0)range = inv.getWeapons().get(0).getRange();
 
-            printStringOnSide(0,"   Portée  :  "+range,9);
+            printStringOnSide(0,Affichage.RED+"   Portée  :  "+range,8);
 
-            printLine(12,Affichage.BLUE);
+            printLine(10,Affichage.BLUE);
 
-            printStringOnSide(2, "Inventaire",14);
+            printStringOnSide(2, Affichage.GREEN+"Inventaire",12);
 
             ArrayList<? extends AbstractItem> potionsList = inv.getPotions();
             ArrayList<? extends AbstractItem> armesList = Start.getPlayer().getInventory().getWeapons();
@@ -86,14 +89,14 @@ public class Menu {
             if( Start.getPlayer().getInventory().getWeapons().size()!= 0){
                 canUse = Start.getPlayer().getClasse().canUse(Start.getPlayer().getInventory().getWeapons().get(0));
             }
-            printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17);
-            printArrayOnTheWholeLine(18,armesList,canUse);
+            printStringOnSide(0, Affichage.GREEN+" Vous avez " + armesList.size() + " armes :",14);
+            printArrayOnTheWholeLine(15,armesList,canUse);
 
-            printStringOnSide(0, " Vous avez " + potionsList.size() + " potions :",20);
-            printArrayOnTheWholeLine(21,potionsList,true);
+            printStringOnSide(0, Affichage.GREEN+" Vous avez " + potionsList.size() + " potions :",16);
+            printArrayOnTheWholeLine(17,potionsList,true);
 
-            printLine(24,Affichage.GREEN);
-            printStringOnSide(2,Affichage.RED+" Monstres ",25);
+            printLine(18,Affichage.BLUE);
+            printStringOnSide(2,Affichage.YELLOW+" Monstres ",20);
 
             HashMap<AbstractMonster,Integer > monsterTypes = new HashMap<>();
 
@@ -114,7 +117,63 @@ public class Menu {
                 String name = k.getClass().getName().split("\\.")[3];
                monsters.add( " "+k+" = "  +name+ " x"+v+"  ");
             });
-            printAndBackToTheLine(27,monsters);
+            printAndBackToTheLine(22,monsters);
+
+            printLine(25,Affichage.BLUE);
+
+            printStringOnSide(2,Affichage.BRIGTH_CYAN+" Items ",27);
+
+
+            HashMap<AbstractItem,Integer > itemTypes = new HashMap<>();
+
+            for ( AbstractItem p : Start.getPlayer().getEtage().getItems()
+            ) {
+                AtomicBoolean added = new AtomicBoolean(false);
+                itemTypes.forEach((k, v) -> {
+                    if(k.getClass().getName().equals(p.getClass().getName())){
+                        itemTypes.put(k,v+1);
+                        added.set(true);
+                    }
+                });
+                if(!added.get()) itemTypes.put(p,1);
+            }
+
+            ArrayList<String> items = new ArrayList<>();
+            itemTypes.forEach((k, v) -> {
+                String name = k.getClass().getName().split("\\.")[3];
+                items.add( " "+k+" = "  +name+ " x"+v+"  ");
+            });
+            printAndBackToTheLine(29,items);
+
+            printLine(32,Affichage.BLUE);
+
+            printStringOnSide(2,Affichage.BRIGTH_GREEN+" Cellules ",34);
+
+
+            HashMap<Cell,Integer > CellsTypes = new HashMap<>();
+
+            for ( ArrayList<Cell> arrayListCell : Start.getPlayer().getEtage().getCells()
+            ) {
+                for ( Cell c : arrayListCell
+                ) {
+                    AtomicBoolean added = new AtomicBoolean(false);
+                    CellsTypes.forEach((k, v) -> {
+                        if (c.getType() == k.getType()) {
+                            CellsTypes.put(k, v + 1);
+                            added.set(true);
+                        }
+                    });
+                    if (!added.get()) CellsTypes.put(c, 1);
+                }
+            }
+
+            ArrayList<String> cells = new ArrayList<>();
+            CellsTypes.forEach((k, v) -> {
+                String name = k.getType().name();
+                cells.add( " "+k+" = "  +name+ " x"+v+"  ");
+            });
+            printAndBackToTheLine(36,cells);
+
         }
     }
 
@@ -155,7 +214,7 @@ public class Menu {
                 String color = Affichage.RED;
                 if(canUse)color =Affichage.GREEN;
                 itemString.append(color);
-                itemString.append("[" + abstractItem.toString() +Affichage.RESET+Affichage.BOLD + color +"]  ");
+                itemString.append(" [" + abstractItem.toString() +Affichage.RESET+Affichage.BOLD + color +"]  ");
             }
             else
                 itemString.append(abstractItem.toString()+Affichage.RESET + "  ");
@@ -218,9 +277,9 @@ public class Menu {
             if( i < s.length() - 5){
                 Matcher m = p.matcher(s.substring(currenti, currenti+5));
                 if( m.find()){
-
                         int size =m.end()-m.start();
                         if( m.start() == 0){
+                            //System.out.println(s.charAt(currenti)+ " " + s.charAt(currenti+1) + " "+ s.charAt(currenti+2)+ " "+s.charAt(currenti+3)+  " "+s.charAt(currenti+4) + " "+y);
                             res = m.group(0);
                             res += s.charAt(currenti+m.end());
                             i = i+size;
