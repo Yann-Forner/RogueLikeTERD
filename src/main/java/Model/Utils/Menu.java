@@ -48,68 +48,70 @@ public class Menu {
      * @auhtor Yann
      */
     public void refresh(){
-        clear();
-        String[] UpperMenu = {"║","║","║"};
-        Inventory inv = Start.getPlayer().getInventory();
-        String lvl = " Niveau " + Start.getPlayer().getLvl() + " [" + Start.getPlayer().getCURRENT_EXP() + "/" + Start.getPlayer().getMAX_EXP() + "] ";
-        String[] niveau = {
-                "╔"+"═".repeat(lvl.length())+"╗ ",
-                "║"+lvl+"║ ",
-                "╚"+"═".repeat(lvl.length())+"╝ "
-        };
-        printStringOnSide(0,"  SEED : "+Procedure.getSeed(),2);
-        printStringOnSide(1,"  TIMER : "+TourManager.getTimer()+"         ",2);
-        printStringOnSide(2,UpperMenu,1);
-        printLine(4,Affichage.GREEN);
-        printStringOnSide(0,Affichage.RED+"   Joueur : "+ Start.getPlayer().getNom() + Affichage.BLUE+" ",6);
-        printStringOnSide(0,"   Classe : "+ Start.getPlayer().getClasse().getNom(),7);
-        printStringOnSide(0,"   Etage n°"+(map.getIndexCurrent()+1),11);
-        printStringOnSide(1,niveau,6);
-        printStringOnSide(0,"   Force : "+Start.getPlayer().getForce(),8);
-        int range = 1 ;
-        if(inv.getWeapons().size()!=0)range = inv.getWeapons().get(0).getRange();
+        if(Start.getPlayer() != null){
 
-        printStringOnSide(0,"   Portée : "+range,9);
 
-        printLine(12,Affichage.BLUE);
+            clear();
+            String[] UpperMenu = {"║","║","║"};
+            Inventory inv = Start.getPlayer().getInventory();
+            String lvl = " Niveau " + Start.getPlayer().getLvl() + " [" + Start.getPlayer().getCURRENT_EXP() + "/" + Start.getPlayer().getMAX_EXP() + "] ";
+            String[] niveau = {
+                    "╔"+"═".repeat(lvl.length())+"╗ ",
+                    "║"+lvl+"║ ",
+                    "╚"+"═".repeat(lvl.length())+"╝ "
+            };
+            printStringOnSide(0,"  SEED : "+Procedure.getSeed(),2);
+            printStringOnSide(1,"  TIMER : "+TourManager.getTimer()+"         ",2);
+            printStringOnSide(2,UpperMenu,1);
+            printLine(4,Affichage.GREEN);
 
-        printStringOnSide(0, "  Inventaire",14);
+            printStringOnSide(0,Affichage.RED+"   Joueur  :  "+ Start.getPlayer().getNom() + Affichage.BLUE+" ",6);
+            printStringOnSide(0,"   Classe  :  "+ Start.getPlayer().getClasse().getNom(),7);
+            printStringOnSide(1,Affichage.RED+" Etage n°"+(map.getIndexCurrent()+1)+"     ",11);
+            printStringOnSide(1,niveau,6);
+            printStringOnSide(0,"   Force  :  "+Start.getPlayer().getForce(),8);
+            int range = 1 ;
+            if(inv.getWeapons().size()!=0)range = inv.getWeapons().get(0).getRange();
 
-        ArrayList<? extends AbstractItem> potionsList = inv.getPotions();
-        ArrayList<? extends AbstractItem> armesList = Start.getPlayer().getInventory().getWeapons();
-  
-        printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17);
-        printArrayOnTheWholeLine(18,armesList,0);
+            printStringOnSide(0,"   Portée  :  "+range,9);
 
-        printStringOnSide(0, " Vous avez " + potionsList.size() + " potions :",20);
-        printArrayOnTheWholeLine(21,potionsList,0);
+            printLine(12,Affichage.BLUE);
 
-        printLine(24,Affichage.GREEN);
-        printStringOnSide(2,Affichage.RED+" Monstres ",25);
-        
-        HashMap<AbstractMonster,Integer > monsterTypes = new HashMap<>();
+            printStringOnSide(2, "Inventaire",14);
 
-        for ( AbstractMonster m : Start.getPlayer().getEtage().getMonsters()
-             ) {
-            AtomicBoolean added = new AtomicBoolean(false);
+            ArrayList<? extends AbstractItem> potionsList = inv.getPotions();
+            ArrayList<? extends AbstractItem> armesList = Start.getPlayer().getInventory().getWeapons();
+
+            printStringOnSide(0, " Vous avez " + armesList.size() + " armes :",17);
+            printArrayOnTheWholeLine(18,armesList,0);
+
+            printStringOnSide(0, " Vous avez " + potionsList.size() + " potions :",20);
+            printArrayOnTheWholeLine(21,potionsList,0);
+
+            printLine(24,Affichage.GREEN);
+            printStringOnSide(2,Affichage.RED+" Monstres ",25);
+
+            HashMap<AbstractMonster,Integer > monsterTypes = new HashMap<>();
+
+            for ( AbstractMonster m : Start.getPlayer().getEtage().getMonsters()
+                 ) {
+                AtomicBoolean added = new AtomicBoolean(false);
+                monsterTypes.forEach((k, v) -> {
+
+                    if(k.getClass().getName().equals(m.getClass().getName())){
+                        monsterTypes.put(k,v+1);
+                        added.set(true);
+                    }
+                });
+                if(!added.get()) monsterTypes.put(m,1);
+            }
+            ArrayList<String> monsters = new ArrayList<>();
             monsterTypes.forEach((k, v) -> {
-
-                if(k.getClass().getName().equals(m.getClass().getName())){
-                    monsterTypes.put(k,v+1);
-                    added.set(true);
-                }
+                String name = k.getClass().getName().split("\\.")[3];
+               monsters.add( " "+k+" = "  +name+ " x"+v+"  ");
             });
-            if(!added.get()) monsterTypes.put(m,1);
+            printAndBackToTheLine(27,monsters);
         }
-        ArrayList<String> monsters = new ArrayList<>();
-        monsterTypes.forEach((k, v) -> {
-            String name = k.getClass().getName().split("\\.")[3];
-           monsters.add( " "+k+" = "  +name+ " x"+v+"  ");
-        });
-        printAndBackToTheLine(27,monsters);
-
-        printLine(33,Affichage.GREEN);
-        printStringOnSide(2,Affichage.PURPLE+" Endurence ",34);
     }
 
 
