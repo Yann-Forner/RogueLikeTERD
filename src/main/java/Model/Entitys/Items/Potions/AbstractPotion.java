@@ -2,7 +2,6 @@ package Model.Entitys.Items.Potions;
 
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Entity;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -39,12 +38,13 @@ public abstract class AbstractPotion extends AbstractItem {
 
     @Override
     public void onContact(Entity e) {
-        if(!(e instanceof AbstractMonster)){
+        if(e instanceof Player){
             super.onContact(e);
             Player player = (Player) e;
             TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
-            player.getInventory().addPotion(this);
-            player.getEtage().removeItem(this);
+            if(player.getInventory().addPotion(this)){
+                player.getEtage().removeItem(this);
+            }
         }
     }
 

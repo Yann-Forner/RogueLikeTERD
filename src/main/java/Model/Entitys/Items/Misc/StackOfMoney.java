@@ -1,6 +1,7 @@
-package Model.Entitys.Items;
+package Model.Entitys.Items.Misc;
 
 import Model.Entitys.Entity;
+import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.Player;
 import Model.Map.Etage;

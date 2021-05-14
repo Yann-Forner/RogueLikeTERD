@@ -3,6 +3,7 @@ package Model.Entitys.Player;
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -97,7 +98,6 @@ public class Player extends AbstractAlive {
      */
     public void addMoney(int m) {
         money += m;
-
     }
 
     /**

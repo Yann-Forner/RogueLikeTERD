@@ -2,7 +2,6 @@ package Model.Entitys.Items.Weapons;
 
 import Model.Entitys.Entity;
 import Model.Entitys.Items.AbstractItem;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -43,12 +42,13 @@ public abstract class AbstractWeapon extends AbstractItem {
      */
     @Override
     public void onContact(Entity e) {
-        if(!(e instanceof AbstractMonster)){
+        if(e instanceof Player){
             Player player = (Player) e;
             super.onContact(e);
             TourManager.addMessage(Affichage.BLUE + player.getNom() + " a ramassé "+ Affichage.BRIGTH_BLUE + getNom() + Affichage.BLUE + ".");
-            player.getInventory().addWeapon(this);
-            player.getEtage().removeItem(this);
+            if(player.getInventory().addWeapon(this)){
+                player.getEtage().removeItem(this);
+            }
         }
     }
 

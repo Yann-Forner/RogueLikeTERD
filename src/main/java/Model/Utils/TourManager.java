@@ -119,8 +119,8 @@ public class TourManager implements Serializable {
             case 't' , 'T' -> TourParTour();
             case 'i' , 'I' -> player.getInventory().switchWeapons(); //Changement armes
             case 'o' , 'O' -> player.getInventory().switchPotions(); //Changement Potions
-            case 'l' , 'L' -> player.getInventory().dropEntity(player, player.getInventory().removeCurrentWeapon()); // Drop de l'arme courante
-            case 'm' , 'M' -> player.getInventory().dropEntity(player, player.getInventory().removeCurrentPotion()); // Drop de la potion courante
+            case 'l' , 'L' -> player.getInventory().dropItem(player, player.getInventory().getCurrentWeapon()); // Drop de l'arme courante
+            case 'm' , 'M' -> player.getInventory().dropItem(player, player.getInventory().getCurrentPotion()); // Drop de la potion courante
             case 'a' , 'A' -> {
                 player.getInventory().useCurrentWeapon(player); //Attaque à distance
                 return true;

@@ -13,7 +13,7 @@ import Model.Utils.TourManager;
  * @author JP, Quentin, Gillian
  */
 public abstract class AbstractItem extends Entity {
-    private int prix;
+    private final int prix;
 
     /**
      * Crée un item avec un prix.
@@ -24,17 +24,15 @@ public abstract class AbstractItem extends Entity {
      */
 
     public AbstractItem(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
-        prix = 0;
-
+        this(etage, position, nom,0);
     }
 
     /**
      * Crée un item avec un prix
-     * @param etage
-     * @param position
-     * @param nom
-     * @Gillian
+     * @param etage Etage de l'item
+     * @param position Position de l'item dans l'etage
+     * @param nom Nom de l'item
+     * @author Gillian
      */
     public AbstractItem(Etage etage, Position position, String nom, int prix) {
         super(etage, position, nom);
@@ -42,9 +40,9 @@ public abstract class AbstractItem extends Entity {
     }
 
     /**
-     * Permet de réagir en cas de contact avec un objet : tente d'acheter s'il a un prix, ramasse sinon
-     * @param e
-     * @author Gillian, JP, Quentin
+     * Permet de réagir en cas de contact avec un objet : tente d'acheter s'il a un prix, ramasse sinon.
+     * @param e L'entité qui rentre en contact avec this.
+     * @author Quentin
      */
     @Override
     public void onContact(Entity e) {
@@ -63,7 +61,6 @@ public abstract class AbstractItem extends Entity {
 
     /**
      * Renvoit un item aléatoire
-     * @return Item
      * @author Gillian
     /*
     public static AbstractItem getRandomItem(){

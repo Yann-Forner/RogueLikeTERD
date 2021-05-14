@@ -2,11 +2,13 @@ package Model.Entitys.Items;
 
 import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Start;
 import Model.Utils.TourManager;
 
 import java.io.Serializable;
@@ -38,30 +40,41 @@ public class Inventory implements Serializable {
      * Drop l'item donné dans la case accessible la plus proche
      * @param player Joueur
      * @param item Item a jeter
+     * @author JP
      */
-    public void dropEntity(Player player, AbstractItem item) {
-        if(item == null) return;
-
-        Etage e = player.getEtage();
-
-        int scanRange = 1;
-
-        while(true) {
-            int playerPosX = player.getPosition().getX();
-            int playerPosY = player.getPosition().getY();
-
-            for(int x = playerPosX - scanRange; x <= playerPosX + scanRange; x++) {
-                for(int y = playerPosY - scanRange; y <= playerPosY + scanRange; y++) {
-                    Cell c = e.get(x, y);
-
-                    if(c.isAccesible() && c.getEntity() == null) {
-                        item.setPosition(new Position(x, y));
-                        e.addItem(item);
-                        return;
+    public void dropItem(Player player, AbstractItem item) {
+        if(item != null) {
+            Etage e = player.getEtage();
+            int scanRange = 1;
+            while(scanRange<2) {
+                int playerPosX = player.getPosition().getX();
+                int playerPosY = player.getPosition().getY();
+                for(int x = playerPosX - scanRange; x <= playerPosX + scanRange; x++) {
+                    for(int y = playerPosY - scanRange; y <= playerPosY + scanRange; y++) {
+                        Cell c = e.get(x, y);
+                        if(c.isAccesible() && c.getEntity() == null) {
+                            //TODO enelever instanceof
+                            if(item instanceof AbstractPotion){
+                                potions.remove(item);
+                            }
+                            if(item instanceof AbstractWeapon){
+                                weapons.remove(item);
+                            }
+                            e.addItem(WeaponFactory.getNewWeapon(e, WeaponFactory.WeaponType.WAND));
+                            item.setPosition(new Position(x, y));
+                            e.addItem(item);
+                            return;
+                        }
                     }
                 }
+                scanRange++;
             }
-            scanRange++;
+            TourManager.addMessage(Affichage.RED
+                    + Affichage.BOLD
+                    + "[ERREUR]"
+                    + Affichage.RESET
+                    + Affichage.RED
+                    + " L'item ne peut pas etre jeté l'endroit est trop encombré.");
         }
     }
 
@@ -126,19 +139,35 @@ public class Inventory implements Serializable {
     /**
      * Ajoute une potion a la liste de potions.
      * @param potion Potion à ajouter a la liste de potions
-     * @author JP
+     * @return Si le joueur a pu recuperer la potion
+     * @author JP, Quentin
      */
-    public void addPotion(AbstractPotion potion){
-        potions.add(potion);
+    public boolean addPotion(AbstractPotion potion){
+        if(isPotionsFull()){
+            dropItem(Start.getPlayer(),potion);
+            return false;
+        }
+        else{
+            potions.add(potion);
+            return true;
+        }
     }
 
     /**
      * Fais rouler la liste d'armes afin de se déplacer vers le deuxième élement.
      * @param arme Arme à ajouter a la liste d'armes
-     * @author JP
+     * @return Si le joueur a pu recuperer la potion
+     * @author JP, Quentin
      */
-    public void addWeapon(AbstractWeapon arme){
-        weapons.add(arme);
+    public boolean addWeapon(AbstractWeapon arme){
+        if(isWeaponsFull()){
+            dropItem(Start.getPlayer(),arme);
+            return false;
+        }
+        else{
+            weapons.add(arme);
+            return true;
+        }
     }
 
     /**
@@ -169,13 +198,6 @@ public class Inventory implements Serializable {
     }
 
     /**
-     * Retourne l'arme courante et l'enlève de l'inventaire
-     * @return L'arme équipée par le joueur
-     * @author JP
-     */
-    public AbstractWeapon removeCurrentWeapon() { return weapons.size() > 0 ? weapons.remove(0) : null ;}
-
-    /**
      * Renvoit la potion courante.
      * @return La potion equipée par le joueur
      * @author Quentin
@@ -183,13 +205,6 @@ public class Inventory implements Serializable {
     public AbstractPotion getCurrentPotion(){
         return potions.size()>0 ? potions.get(0) : null;
     }
-
-    /**
-     * Retourne la potion courante et l'enlève de l'inventaire
-     * @return La potion équipée par le joueur
-     * @author JP
-     */
-    public AbstractPotion removeCurrentPotion() { return potions.size() > 0 ? potions.remove(0) : null ;}
 
     /**
      * Retourne la limite d'armes

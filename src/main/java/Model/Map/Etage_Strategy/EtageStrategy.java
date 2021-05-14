@@ -1,5 +1,6 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Items.Misc.Chest;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -142,6 +143,7 @@ public abstract class EtageStrategy {
         for (Room r : etage.getRooms()) {
             r.setItems(etage);
         }
+        etage.addItem( new Chest(etage,Procedure.getAccesibleRandomPosition(true,etage),"Tresor"));
     }
 
 }
