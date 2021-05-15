@@ -1,9 +1,11 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.AbstractAlive;
+import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
-import Model.Utils.Procedure;
 import Model.Utils.Tools;
 import Model.Utils.TourManager;
 
@@ -36,25 +38,20 @@ public class BigMonster  extends AbstractMonster {
 
     protected BigMonster(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
-        while ((!m.get(this.getPosition().getX()-1,this.getPosition().getY()-1).isAccesible() && m.get(this.getPosition().getX()-1,this.getPosition().getY()-1).getType() != Cell.Style.CellType.NORMAL)
-                && (!m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).isAccesible()  && m.get(this.getPosition().getX()+1,this.getPosition().getY()-1).getType() != Cell.Style.CellType.NORMAL)){
-            this.move(Procedure.getAccesibleRandomPosition(true,m));
-        }
-        leftArm = new Arm(m, new Position(this.getPosition().getX() - 1, this.getPosition().getY() - 1), nom, pv / 2, force / 2, vision_radius, agro, update_rate_ms, path_type, lvl);
-        rightArm= new Arm(m, new Position(this.getPosition().getX() + 1, this.getPosition().getY() - 1), nom, pv / 2, force / 2, vision_radius, agro, update_rate_ms, path_type, lvl);
-
+        leftArm = new Arm(m,pos.somme(Player.Direction.GAUCHE.getVecteur()).somme(Player.Direction.HAUT.getVecteur()),"Bras gauche",pv,force,vision_radius,agro,update_rate_ms,path_type,lvl);
+        rightArm = new Arm(m,pos.somme(Player.Direction.DROITE.getVecteur()).somme(Player.Direction.HAUT.getVecteur()),"Bras droite",pv,force,vision_radius,agro,update_rate_ms,path_type,lvl);
     }
 
     @Override
     public void move(Position pos) {
-
-        if(leftArm ==null && rightArm == null)super.move(pos);
-        else if( this.getEtage().get(pos).isAccesible()
-               && this.getEtage().get(pos.getX()-1,pos.getY()-1).isAccesible()
-                && this.getEtage().get(pos.getX()+1,pos.getY()-1).isAccesible()){
-            leftArm.move(new Position(pos.getX()-1, pos.getY()-1));
-            rightArm.move(new Position(pos.getX()+1, pos.getY()-1));
+        Position nextLeft = pos.somme(Player.Direction.GAUCHE.getVecteur()).somme(Player.Direction.HAUT.getVecteur());
+        Position nextRight = pos.somme(Player.Direction.DROITE.getVecteur()).somme(Player.Direction.HAUT.getVecteur());
+        Cell cellLeft = getEtage().get(nextLeft);
+        Cell cellRight = getEtage().get(nextRight);
+        if(cellLeft.isAccesible() && cellRight.isAccesible()){
             super.move(pos);
+            leftArm.move(nextLeft);
+            rightArm.move(nextRight);
         }
     }
 
@@ -73,6 +70,7 @@ public class BigMonster  extends AbstractMonster {
 
     @Override
     public String toString() {
+        System.out.println("BIG: "+ "force: "+ getForce() + " pv: "+getPv());
         return super.toString() + "U";
     }
 }

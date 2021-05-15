@@ -19,7 +19,6 @@ public class Cell implements Serializable {
             BORDER(Affichage.BOLD+Affichage.RED,"*"),
             NORMAL(Affichage.GREEN,"."),
             VOID(Affichage.BLACK,"."),
-            CHEST(Affichage.YELLOW+Affichage.BOLD,"\uD83D\uDCB0","$"),
             UP(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4D","^"),
             DOWN(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4E","v"),
             TRAP_ROOM(Affichage.BLUE,"X"),
@@ -145,7 +144,6 @@ public class Cell implements Serializable {
     public boolean isReserved(){
         return getType().equals(Style.CellType.UP)
                 || getType().equals(Style.CellType.DOWN)
-                || getType().equals(Style.CellType.CHEST)
                 || getType().equals(Style.CellType.TRAP_ROOM);
     }
 

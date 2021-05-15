@@ -1,8 +1,8 @@
 package Model.Entitys.Items;
 
+import Model.Entitys.Entity;
 import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -19,13 +19,10 @@ import java.util.ArrayList;
  * @author JP
  */
 public class Inventory implements Serializable {
-
     private final int WEAPONS_LIMIT;
     private final int POTIONS_LIMIT;
-
     private final ArrayList<AbstractWeapon> weapons = new ArrayList<>();
     private final ArrayList<AbstractPotion> potions = new ArrayList<>();
-
 
     /**
      * Constructeur d'inventory. Initialise les listes.
@@ -38,17 +35,17 @@ public class Inventory implements Serializable {
 
     /**
      * Drop l'item donné dans la case accessible la plus proche
-     * @param player Joueur
+     * @param entity l'entité qui drop l'item
      * @param item Item a jeter
      * @author JP
      */
-    public void dropItem(Player player, AbstractItem item) {
+    public void dropItem(Entity entity, AbstractItem item) {
         if(item != null) {
-            Etage e = player.getEtage();
+            Etage e = entity.getEtage();
             int scanRange = 1;
             while(scanRange<2) {
-                int playerPosX = player.getPosition().getX();
-                int playerPosY = player.getPosition().getY();
+                int playerPosX = entity.getPosition().getX();
+                int playerPosY = entity.getPosition().getY();
                 for(int x = playerPosX - scanRange; x <= playerPosX + scanRange; x++) {
                     for(int y = playerPosY - scanRange; y <= playerPosY + scanRange; y++) {
                         Cell c = e.get(x, y);
@@ -60,7 +57,6 @@ public class Inventory implements Serializable {
                             if(item instanceof AbstractWeapon){
                                 weapons.remove(item);
                             }
-                            e.addItem(WeaponFactory.getNewWeapon(e, WeaponFactory.WeaponType.WAND));
                             item.setPosition(new Position(x, y));
                             e.addItem(item);
                             return;

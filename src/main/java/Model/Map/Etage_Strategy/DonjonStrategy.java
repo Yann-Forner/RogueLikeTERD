@@ -9,7 +9,6 @@ import Model.Utils.Procedure;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * Classe de la strategie principale du jeu, cet etage peut etre rempli de plusieurs rooms qui seront différentes les unes des autres.
@@ -32,7 +31,7 @@ public class DonjonStrategy extends EtageStrategy {
         ArrayList<RoomFactory.roomType> roomsOfEtage = new ArrayList<>();
         int CircleRooms = 0, NormalRooms = 0, MarchandRooms = 0,nbrCurrentRooms = 0;
         while (nbrCurrentRooms< getNbrMaxRoom()){
-            RoomFactory.roomType roomType = myRooms.get(new Random().nextInt((myRooms.size())));
+            RoomFactory.roomType roomType = myRooms.get(Procedure.getRandomInt(myRooms.size()-1,0));
             if(roomType != RoomFactory.roomType.MARCHAND || MarchandRooms == 0){
                 if(MarchandRooms==0){
                     MarchandRooms++;

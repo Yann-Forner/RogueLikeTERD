@@ -143,7 +143,8 @@ public abstract class EtageStrategy {
         for (Room r : etage.getRooms()) {
             r.setItems(etage);
         }
-        etage.addItem( new Chest(etage,Procedure.getAccesibleRandomPosition(true,etage),"Tresor"));
+        //TODO enelver ça
+        etage.addItem( new Chest(etage,Procedure.getAccesibleRandomPosition(true,etage)));
     }
 
 }

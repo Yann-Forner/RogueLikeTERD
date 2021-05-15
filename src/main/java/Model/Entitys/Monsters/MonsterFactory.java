@@ -31,7 +31,7 @@ public class MonsterFactory {
             case BIRD -> new Bird(etage, Procedure.getAccesibleRandomPosition(true,etage),"BIRD",10,5,60,60,600, Tools.PathType.DIAG,getBaseLvl());
             case VOLCANO -> new Volcano(etage, Procedure.getAccesibleRandomPosition(true,etage),"VOLCANO",1,10,2,0,1000, Tools.PathType.CROSS,getBaseLvl());
             case SKULL -> new Skull(etage, Procedure.getAccesibleRandomPosition(true,etage),"SKULL",10,3,15,20,750, Tools.PathType.CROSS,getBaseLvl());
-            case BIGMONSTER -> new BigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,18,15,20,900, Tools.PathType.CROSS,getBaseLvl()+5);
+            case BIGMONSTER -> new BigMonster(etage,Procedure.getAccesibleRandomPosition(true,etage),"BigMonster",10,2,15,20,900, Tools.PathType.CROSS,getBaseLvl()+5);
             case SNAKE -> new Snake(etage,Procedure.getAccesibleRandomPosition(true,etage),"Snake",10,1,15,20,900, Tools.PathType.NOMOBS,getBaseLvl()+5,10);
             case INVOQUEUR -> new Invoqueur(etage,Procedure.getAccesibleRandomPosition(true,etage),"INVOQUEUR",25,5,3,20,800, Tools.PathType.CROSS,getBaseLvl()+5);
             case MARCHAND -> new Marchand(etage,Procedure.getAccesibleRandomPosition(true,etage),"MARCHAND",50,8,15,20,1000, Tools.PathType.CROSS,getBaseLvl()+5, Marchand.STATE.NOTVISITED);
