@@ -174,14 +174,21 @@ public class Marchand extends AbstractMonster {
                 }
 
             }
+            case VISITED -> {
+                switch (string) {
+                    case "1" -> dialogueInitBuy();
+                    case "2" -> dialogueSell();
+                    case "3" -> typeAggressive();
+                    case "4" -> {
+                    }
+                }
+            }
             default -> {
                 switch (string) {
                     case "1" -> dialogueInitBuy();
                     case "2" -> dialogueSell();
                     case "3" -> typeAggressive();
                     case "4" -> {}
-                    //case "y", "Y" -> procedureYes();
-                    //case "n", "N" -> procedureNo();
                     case "w", "W" -> procedureSell(1);
                     case "p", "P" -> procedureSell(2);
                     case "v", "V" -> selling();
