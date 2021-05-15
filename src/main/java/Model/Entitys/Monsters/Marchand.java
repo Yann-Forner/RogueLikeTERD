@@ -261,12 +261,35 @@ public class Marchand extends AbstractMonster {
             AbstractItem item = itemArrayList.remove(index);
             Start.getPlayer().removeMoney(item.getPrix());
             getInventory().dropItem(this,item);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Félicitations, tu viens de m'acheter ");
+            sb.append(Affichage.YELLOW);
+            sb.append(item.getNom());
+            sb.append(Affichage.GREEN);
+            sb.append(" pour la belle somme de ");
+            sb.append(Affichage.YELLOW);
+            sb.append(item.getPrix());
+            sb.append("\n\n");
+            sb.append(Start.getMap());
+            sb.append(Affichage.GREEN);
+            sb.append("Veux tu m'acheter autre chose ?");
+            sb.append(Affichage.YELLOW);
+            sb.append(" - Y - OUI");
+            sb.append(Affichage.YELLOW);
+            sb.append("- N - NON");
+            System.out.println(sb);
+            try {
+                processInput();
+            } catch (Exception e) {
+            }
         }
         else{
             System.out.println("Vous n'avez pas assez d'argent mon pauvre, choissez un autre objet\n");
             dialogueBuy();
         }
-        state = STATE.VISITED;
+
+
     }
 
 
@@ -415,8 +438,6 @@ public class Marchand extends AbstractMonster {
         sb.append(Affichage.YELLOW);
         sb.append("- N - NON");
         System.out.println(sb);
-
-
         try {
             processInput();
         } catch (Exception e) {
