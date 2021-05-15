@@ -254,6 +254,7 @@ public class Marchand extends AbstractMonster {
 
         for (int j = min; j < min+ getInventory().getPotions().size(); j++)
         {
+            System.out.println("j = "+ j);
             sb2.append(Affichage.YELLOW);
             sb2.append(getInventory().getPotions().get(j).getNom());
             sb2.append(Affichage.GREEN);
@@ -280,7 +281,7 @@ public class Marchand extends AbstractMonster {
         } catch (Exception e) {
         }
 
-        System.exit(1);
+
     }
 
     /**
