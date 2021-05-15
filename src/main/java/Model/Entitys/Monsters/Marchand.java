@@ -269,10 +269,9 @@ public class Marchand extends AbstractMonster {
             sb2.append(j);
             sb2.append("'");
             sb2.append("\n");
-            System.out.println(sb2);
 
         }
-
+        System.out.println("test");
         sb2.append("\n Il te suffit d'appuyer sur la touche correspondante pour m'acheter un de mes merveilleux objet ");
         System.out.println(sb2);
 
