@@ -158,7 +158,7 @@ public class Affichage {
                     case NONE -> cell = etage.get(pos);
                     default -> throw new IllegalStateException("Unexpected value: " + ombre);
                 }
-                sb.append(" ").append(cell);
+                sb.append(" ").append(cell).append(RESET);
                 int length = cell.toString().length();
                 if(length>2 || length==1){
                     sb.append(" ");

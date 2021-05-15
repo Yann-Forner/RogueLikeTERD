@@ -57,7 +57,7 @@ public class Chest extends AbstractItem {
             return 	"📦";
         }
         else{
-            return super.toString()+"€";
+            return super.toString()+Affichage.YELLOW+"€";
         }
     }
 }
