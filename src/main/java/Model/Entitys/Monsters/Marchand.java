@@ -227,9 +227,11 @@ public class Marchand extends AbstractMonster {
         StringBuilder sb2 = new StringBuilder();
         sb2.append(Affichage.GREEN);
         sb2.append(" Voici tout d'abord mes armes... \n \n ");
+        System.out.println("test");
 
         for (int i = 0; i<getInventory().getWeapons().size(); i++)
         {
+            System.out.println("i = "+ i);
             sb2.append(Affichage.YELLOW);
             sb2.append(getInventory().getWeapons().get(i).getNom());
             sb2.append(Affichage.GREEN);
