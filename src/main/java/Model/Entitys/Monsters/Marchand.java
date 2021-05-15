@@ -32,7 +32,7 @@ public class Marchand extends AbstractMonster {
      * @author Gillian
      */
     public enum STATE {
-        NOTVISITED, VISITED, BUY, SELL, AGGRESSIVE, SELLWEAPONS, SELLPOTIONS
+        NOTVISITED, VISITED, BUY, BUYSELECTION, BUYCONFIRMATION, SELL, AGGRESSIVE, SELLWEAPONS, SELLPOTIONS, SELLEMPTY, SELLCONFIRMATION
     }
 
     private STATE state;
@@ -126,14 +126,59 @@ public class Marchand extends AbstractMonster {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String string = reader.readLine();
         switch (state) {
+            case BUYSELECTION -> {
+                switch (string) {
+                    case "0","1","2","3","4","5","6","7","8","9" -> buying(Integer.parseInt(string));
+                    case "q", "Q" -> {}
+                    default -> processInput();
+                }
+            }
+
+            case BUYCONFIRMATION -> {
+                switch (string) {
+                    case "y", "Y" -> dialogueBuy();
+                    case "n", "N" -> dialogue(true);
+                    default -> processInput();
+                }
+            }
             case BUY -> {
                 switch (string) {
                     case "0","1","2","3","4","5","6","7","8","9" -> buying(Integer.parseInt(string));
-                    case "y", "Y" -> dialogueBuy();
-                    case "n", "N" -> dialogue(true);
-                    case "v", "V" -> selling();
                     default -> processInput();
                 }
+            }
+            case SELLPOTIONS -> {
+                switch (string){
+                    case "p", "P" -> procedureSell(2);
+                    case "v", "V" -> selling();
+                    case "4" -> {}
+                    default -> processInput();
+                }
+            }
+            case SELLWEAPONS -> {
+                switch (string){
+                    case "w", "W" -> procedureSell(1);
+                    case "v", "V" -> selling();
+                    case "4" -> {}
+                    default -> processInput();
+                }
+            }
+            case SELL -> {
+                switch (string) {
+                    case "w", "W" -> procedureSell(1);
+                    case "p", "P" -> procedureSell(2);
+                    case "v", "V" -> selling();
+                    case "4" -> {}
+                    default -> processInput();
+                }
+            }
+            case SELLCONFIRMATION -> {
+                switch (string) {
+                    case "y", "Y" -> dialogueSell();
+                    case "n", "N" -> dialogue(true);
+                    default -> processInput();
+                }
+
             }
             default -> {
                 switch (string) {
@@ -141,8 +186,8 @@ public class Marchand extends AbstractMonster {
                     case "2" -> dialogueSell();
                     case "3" -> typeAggressive();
                     case "4" -> {}
-                    case "y", "Y" -> procedureYes();
-                    case "n", "N" -> procedureNo();
+                    //case "y", "Y" -> procedureYes();
+                    //case "n", "N" -> procedureNo();
                     case "w", "W" -> procedureSell(1);
                     case "p", "P" -> procedureSell(2);
                     case "v", "V" -> selling();
@@ -154,6 +199,7 @@ public class Marchand extends AbstractMonster {
         }
         changeDialogueState();
     }
+
 
 
 
@@ -225,6 +271,7 @@ public class Marchand extends AbstractMonster {
             dialogue(false);
         }
         else{
+            setState(STATE.BUYSELECTION);
             try {
                 processInput();
             } catch (Exception e) { }
@@ -239,39 +286,49 @@ public class Marchand extends AbstractMonster {
      */
 
     public void buying (int index) {
-        if (checkMoney(itemArrayList.get(index))){
-            AbstractItem item = itemArrayList.remove(index);
-            Start.getPlayer().removeMoney(item.getPrix());
-            getInventory().dropItem(this,item);
 
+        if (index>itemArrayList.size()-1)
+        {
             StringBuilder sb = new StringBuilder();
-            sb.append("Félicitations, tu viens de m'acheter ");
-            sb.append(Affichage.YELLOW);
-            sb.append(item.getNom());
-            sb.append(Affichage.GREEN);
-            sb.append(" pour la belle somme de ");
-            sb.append(Affichage.YELLOW);
-            sb.append(item.getPrix());
-            sb.append("\n\n");
-            sb.append(Start.getMap());
-            sb.append(Affichage.GREEN);
-            sb.append("Veux tu m'acheter autre chose ?");
-            sb.append(Affichage.YELLOW);
-            sb.append(" - Y - OUI");
-            sb.append(Affichage.YELLOW);
-            sb.append("- N - NON");
-            System.out.println(sb);
-            try {
-                processInput();
-            } catch (Exception e) {
-            }
-        }
-        else{
-            System.out.println("Vous n'avez pas assez d'argent mon pauvre, choissez un autre objet\n");
+            sb.append(Affichage.RED);
+            sb.append("Oups, je crois que tu t'es trompé de touche ");
             dialogueBuy();
         }
+        else {
+            if (checkMoney(itemArrayList.get(index))) {
+                AbstractItem item = itemArrayList.remove(index);
+                Start.getPlayer().removeMoney(item.getPrix());
+                getInventory().dropItem(this, item);
 
+                setState(STATE.BUYCONFIRMATION);
 
+                StringBuilder sb = new StringBuilder();
+                sb.append("Félicitations, tu viens de m'acheter ");
+                sb.append(Affichage.YELLOW);
+                sb.append(item.getNom());
+                sb.append(Affichage.GREEN);
+                sb.append(" pour la belle somme de ");
+                sb.append(Affichage.YELLOW);
+                sb.append(item.getPrix());
+                sb.append("\n\n");
+                sb.append(Start.getMap());
+                sb.append(Affichage.GREEN);
+                sb.append("Veux tu m'acheter autre chose ?");
+                sb.append(Affichage.YELLOW);
+                sb.append(" - Y - OUI");
+                sb.append(Affichage.YELLOW);
+                sb.append("- N - NON");
+                System.out.println(sb);
+                try {
+                    processInput();
+                } catch (Exception e) {
+                }
+            } else {
+                System.out.println("Vous n'avez pas assez d'argent mon pauvre, choissez un autre objet\n");
+                dialogueBuy();
+            }
+
+        }
     }
 
 
@@ -326,13 +383,60 @@ public class Marchand extends AbstractMonster {
      * @author Gillian, Quentin
      */
     public void dialogueSell() {
-
         state = STATE.SELL;
-        String sb = Affichage.GREEN
-                + "Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !\n"
-                + "Préfères tu me vendre une de tes armes ? " + Affichage.GREEN + "Appuyez sur " + Affichage.YELLOW + " 'W' \n"
-                + "Ou plutôt une de tes potions ? " + Affichage.GREEN + "Appuyez sur " + Affichage.YELLOW + " 'P' \n";
+        if (Start.getPlayer().getInventory().getWeapons().isEmpty())
+        {
+            state = STATE.SELLPOTIONS;
+        }
+        if (Start.getPlayer().getInventory().getPotions().isEmpty())
+        {
+            state = STATE.SELLWEAPONS;
+        }
+        if (Start.getPlayer().getInventory().getPotions().isEmpty()
+                && Start.getPlayer().getInventory().getWeapons().isEmpty())
+        {
+            state = STATE.SELLEMPTY;
+        }
 
+       StringBuilder sb = new StringBuilder();
+        sb.append(Affichage.GREEN);
+        sb.append("Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !\n");
+
+        String appuyer = Affichage.GREEN + "Appuyez sur " + Affichage.YELLOW;
+        switch (state) {
+
+            case SELLPOTIONS -> {
+                sb.append("Veux tu me vendre une de tes potions ?");
+                sb.append(Affichage.GREEN);
+                sb.append("Appuyez sur ");
+                sb.append(Affichage.YELLOW);
+                sb.append(" 'P' \n");
+            }
+            case SELLWEAPONS -> {
+                sb.append("Veux tu me vendre une de tes armes ?");
+                sb.append(Affichage.GREEN);
+                sb.append("Appuyez sur ");
+                sb.append(Affichage.YELLOW);
+                sb.append(" 'W' \n");
+            }
+            case SELLEMPTY -> {
+                sb.append(Affichage.RED);
+                sb.append("Et bien alors mon pauvre, on a rien à me proposer ?");
+                dialogue(false);
+            }
+            case SELL -> {
+                sb.append("Veux tu me vendre une de tes potions ?");
+                sb.append(Affichage.GREEN);
+                sb.append("Appuyez sur ");
+                sb.append(Affichage.YELLOW);
+                sb.append(" 'P' \n");
+                sb.append("Veux tu me vendre une de tes armes ?");
+                sb.append(Affichage.GREEN);
+                sb.append("Appuyez sur ");
+                sb.append(Affichage.YELLOW);
+                sb.append(" 'W' \n");
+            }
+        }
         System.out.println(sb);
 
         try {
@@ -400,7 +504,7 @@ public class Marchand extends AbstractMonster {
             default -> item = Start.getPlayer().getInventory().getWeapons().get(0);
         }
 
-        state = STATE.SELL;
+        state = STATE.SELLCONFIRMATION;
 
         StringBuilder sb = new StringBuilder();
         sb.append("Félicitations, tu viens de me vendre ");
@@ -494,6 +598,7 @@ public class Marchand extends AbstractMonster {
      *
      * @author Gillian
      */
+    /*
     public void procedureYes() {
         switch (state) {
             case BUY -> dialogueBuy();
@@ -501,15 +606,20 @@ public class Marchand extends AbstractMonster {
         }
     }
 
+     */
+
     /**
      * Redirection et changement de mode du marchand lorsque le joueur répond "no" aux questions du marchand.
      *
      * @author Gillian
      */
+    /*
     public void procedureNo() {
         state = STATE.VISITED;
         dialogue(true);
     }
+    */
+
 
     public void dialogueError() {
         //TODO elle sert a rien cette methode
