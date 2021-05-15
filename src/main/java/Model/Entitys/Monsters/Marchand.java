@@ -101,6 +101,7 @@ public class Marchand extends AbstractMonster {
             case VISITED -> sb.append("Comme on se retrouve !\n\n");
             case NOTVISITED -> sb.append(dialogueInit());
         }
+        setState (STATE.VISITED);
         sb.append("Tu es ici pour acheter un de mes merveilleux objets ou pour me vendre un des tiens ?\n\n");
         sb.append(Affichage.GREEN);
         sb.append("1 - Acheter\n");
