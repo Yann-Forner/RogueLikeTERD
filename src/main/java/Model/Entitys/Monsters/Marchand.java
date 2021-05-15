@@ -1,5 +1,7 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.*;
 
@@ -11,6 +13,7 @@ import java.io.InputStreamReader;
 //TODO Faut changer la salle en fonction du statut du marchand
 //TODO Système de vente
 //TODO Système d'achat
+//TODO déplacer money dans inventory
 
 /**
  * Classe décrivant le marchand (considéré donc comme un monstre
@@ -23,10 +26,11 @@ public class Marchand extends AbstractMonster {
      * @author Gillian
      */
     public enum STATE {
-        NOTVISITED, VISITED, BUY, SELL, AGGRESSIVE
+        NOTVISITED, VISITED, BUY, SELL, AGGRESSIVE, SELLWEAPONS, SELLPOTIONS
     }
 
     private STATE state;
+
 
     /**
      * Constructeur du marchand
@@ -61,6 +65,7 @@ public class Marchand extends AbstractMonster {
             case  NOTVISITED, VISITED -> dialogue();
             case BUY -> System.out.println("buy"); //TODO
             case AGGRESSIVE -> System.out.println("agrressive"); //TODO
+            case SELL -> System.out.println("sell");
         }
         return true;
     }
@@ -119,10 +124,15 @@ public class Marchand extends AbstractMonster {
             case "1" -> dialogueBuy();
             case "2" -> dialogueSell();
             case "3" -> typeAggressive();
+            case "w", "W" -> procedureSell(1);
+            case "p", "P" -> procedureSell(2);
             default -> processInput();
         }
         changeDialogueState();
     }
+
+
+
 
     /**
      * Procédure d'attaque lorsque le marchand est aggressif.
@@ -145,6 +155,7 @@ public class Marchand extends AbstractMonster {
                 "Voici tous mes beaux objets !\n" +
                 "Tu n'as qu'à avancer sur l'un d'eux pour me l'acheter !\n";
         System.out.println(sb);
+
         //TODO ne pas les mettre au sol sa va poser probleme -> Les lister plutot
         System.exit(1);
     }
@@ -155,22 +166,110 @@ public class Marchand extends AbstractMonster {
      * @author Gillian, Quentin
      */
     public void dialogueSell(){
+        //TODO Choisir type d'item à vendre
+        //
+
         state = STATE.SELL;
-        String sb = Affichage.GREEN +
-                "Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !\n" +
-                "Montre moi ce que tu veux me vendre !\n" +
-                "Tu n'as qu'à appuyer sur la touche" +
-                Affichage.YELLOW + " V " + Affichage.RESET + Affichage.GREEN + Affichage.BOLD +
-                "pour me vendre l'objet que tu tiens dans la main !\n";
+        String sb = Affichage.GREEN
+                + "Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !\n"
+                + "Préfères tu me vendre une de tes armes ? "  + Affichage.GREEN + "Appuyez sur " + Affichage.YELLOW + " 'W' \n"
+                + "Ou plutôt une de tes potions ? "  + Affichage.GREEN + "Appuyez sur " + Affichage.YELLOW + " 'P' \n";
+
         System.out.println(sb);
+
+        try {
+            processInput();
+        } catch (Exception e) {}
+
         System.exit(1);
     }
+
+
+    /**
+     * Permet d'engager la procédure de vente. Laiise le choix de vendre ou de quitter
+     * @param v     type d'objet que le joueur veut vendre
+     * @throws IOException
+     */
+    public void procedureSell (int v) throws IOException {
+        String type;
+        switch (v) {
+            case 1 -> {
+                type = "armes";
+                setState(STATE.SELLWEAPONS);
+                }
+            case 2 -> {
+                type = "potions";
+                setState(STATE.SELLPOTIONS);
+            }
+            default -> {
+                type = "none";
+                processInput();
+            }
+        }
+
+        String sb = Affichage.GREEN
+                +"Montre moi quelles  !" + Affichage.YELLOW  + type + "tu veux me vendre ! \n"
+                +"Tu n'as qu'à appuyer sur la touche" +
+                Affichage.YELLOW + " 'V' " + Affichage.RESET + Affichage.GREEN + Affichage.BOLD +
+                "pour me vendre l'objet que tu tiens dans la main !\n"
+                + "Tu peux également me laisser tranquille et t'en aller en appuyant sur " +   Affichage.YELLOW + " '4' ";
+
+        try {
+            processInput();
+        } catch (Exception e) {}
+
+
+    }
+
+    /**
+     * Permet de vendre un objet en fonction du type de vente du marchand
+     * @author Gillian
+     */
+    public void selling ()
+    {
+        AbstractItem item;
+
+        switch (getState()) {
+            case SELLPOTIONS -> {
+                item = Start.getPlayer().getInventory().getPotions().get(0);
+                Start.getPlayer().getInventory().sellPotion();
+            }
+            case SELLWEAPONS -> {
+
+                item = Start.getPlayer().getInventory().getWeapons().get(0);
+                Start.getPlayer().getInventory().sellWeapon();
+            }
+            default -> item = Start.getPlayer().getInventory().getWeapons().get(0);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Félicitations, tu viens de me vendre ");
+        sb.append(Affichage.YELLOW);
+        sb.append(item.getNom());
+        sb.append(Affichage.GREEN);
+        sb.append(" pour la belle somme de ");
+        sb.append(Affichage.YELLOW);
+        sb.append(item.getPrix());
+
+        dialogueSell();
+
+
+    }
+
+
+    public void sellConfirmation()
+    {
+
+    }
+
 
     /**
      * Passage du marchand en mode agressif lorsque le joueur a décidé d'attaquer le marchand.
      * @author Gillian, Quentin
      */
     public void typeAggressive() {
+        //TODO le faire attaquer
+
         state = STATE.AGGRESSIVE;
         TourManager.addMessage(Affichage.YELLOW+
                 "Vous auriez pu choisir la fortune... " +
@@ -178,6 +277,7 @@ public class Marchand extends AbstractMonster {
                 "\n" + Affichage.RED +
                 "Mais vous avez choisi la "+
                 Affichage.BRIGTH_RED + "MORT" + Affichage.RED + " !!!!");
+
     }
 
     /**
@@ -192,10 +292,19 @@ public class Marchand extends AbstractMonster {
     /**
      * Renvoit l'etat du marchand.
      * @return Etat
-     * @author Quentin
+     * @author Gillian
      */
     public STATE getState(){
         return state;
+    }
+
+    /**
+     * Fixe l'état du marchand
+     * @param state
+     * @author Gillian
+     */
+    public void setState(STATE state) {
+        this.state = state;
     }
 
     @Override
@@ -207,6 +316,8 @@ public class Marchand extends AbstractMonster {
             return Affichage.YELLOW + Affichage.BOLD + Affichage.ITALIC + "£";
         }
     }
+
+
 
     //------------------------------------------TOUT lES TRUCS A REVOIR----------------------------------------------
 

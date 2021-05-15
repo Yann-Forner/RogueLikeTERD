@@ -206,11 +206,38 @@ public class Inventory implements Serializable {
         return potions.size()>0 ? potions.get(0) : null;
     }
 
+
+
+    /**
+     * Permet de vendre une potion en ajoutant l'argent au joueur
+     * @author Gillian
+     */
+    public void sellPotion ()
+    {
+        if(potions.size() > 0) {
+            AbstractPotion first = potions.remove(0);
+            Start.getPlayer().addMoney(first.getPrix());
+        }
+
+    }
+    /**
+     * Permet de vendre une arme en ajoutant l'argent au joueur
+     * @author Gillian
+     */
+    public void sellWeapon ()
+    {
+        if(weapons.size() > 0) {
+            AbstractWeapon first = weapons.remove(0);
+            Start.getPlayer().addMoney(first.getPrix());
+        }
+    }
+
     /**
      * Retourne la limite d'armes
      * @return Limite d'armes
      * @author JP
      */
+
     public boolean isWeaponsFull() {
         return weapons.size()>=WEAPONS_LIMIT;
     }
