@@ -117,7 +117,7 @@ public class Marchand extends AbstractMonster {
         catch (IOException ignored) { }
     }
 
-    //test
+
     /**
      * Analyse de l'entrée utilisateur et redirection vers les différentes procédures.
      * @throws IOException Si le reader ne fonctionne pas
@@ -130,7 +130,6 @@ public class Marchand extends AbstractMonster {
             case BUYSELECTION -> {
                 switch (string) {
                     case "0","1","2","3","4","5","6","7","8","9" -> buying(Integer.parseInt(string));
-                    case "q", "Q" -> {}
                     default -> processInput();
                 }
             }
@@ -138,13 +137,7 @@ public class Marchand extends AbstractMonster {
             case BUYCONFIRMATION -> {
                 switch (string) {
                     case "y", "Y" -> dialogueBuy();
-                    case "n", "N" -> dialogue(true);
-                    default -> processInput();
-                }
-            }
-            case BUY -> {
-                switch (string) {
-                    case "0","1","2","3","4","5","6","7","8","9" -> buying(Integer.parseInt(string));
+                    case "n", "N" -> dialogue(false);
                     default -> processInput();
                 }
             }
@@ -176,7 +169,7 @@ public class Marchand extends AbstractMonster {
             case SELLCONFIRMATION -> {
                 switch (string) {
                     case "y", "Y" -> dialogueSell();
-                    case "n", "N" -> dialogue(true);
+                    case "n", "N" -> dialogue(false);
                     default -> processInput();
                 }
 
