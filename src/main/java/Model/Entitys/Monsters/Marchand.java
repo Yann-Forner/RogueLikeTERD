@@ -133,7 +133,6 @@ public class Marchand extends AbstractMonster {
                     default -> processInput();
                 }
             }
-
             case BUYCONFIRMATION -> {
                 switch (string) {
                     case "y", "Y" -> dialogueBuy();
@@ -280,12 +279,12 @@ public class Marchand extends AbstractMonster {
      */
 
     public void buying (int index) {
-
-        if (index>itemArrayList.size()-1)
-        {
+        //TODO supp doublons
+        if (index>itemArrayList.size()-1){
             StringBuilder sb = new StringBuilder();
             sb.append(Affichage.RED);
             sb.append("Oups, je crois que tu t'es trompé de touche ");
+            System.out.println(sb);
             dialogueBuy();
         }
         else {
@@ -550,6 +549,9 @@ public class Marchand extends AbstractMonster {
      * @author Quentin
      */
     public void changeDialogueState() {
+        if(state != STATE.AGGRESSIVE){
+            state = STATE.VISITED;
+        }
         TourManager.Pause();
         TourManager.InDialogue();
     }

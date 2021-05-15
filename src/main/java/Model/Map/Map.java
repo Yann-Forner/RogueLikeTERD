@@ -29,7 +29,7 @@ public class Map implements Serializable {
      * @author Quentin
      */
     public Map(Player player){
-        Etage etage = new Etage(MapWidth, MapHeigth, new BossEtageStategy(),true);
+        Etage etage = new Etage(MapWidth, MapHeigth, new MarchandEtageStrategy(),true);
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         etage.get(pos).setEntity(player);
