@@ -33,7 +33,7 @@ public class Inventory implements Serializable {
      */
     public Inventory(){
         WEAPONS_LIMIT = 15;
-        POTIONS_LIMIT = 5;
+        POTIONS_LIMIT = 15;
     }
 
     /**

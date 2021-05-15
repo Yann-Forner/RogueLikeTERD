@@ -128,7 +128,7 @@ public class Menu {
             objects.put(obj.getClass(),pair);
         }
         ArrayList<String> items = new ArrayList<>();
-        objects.forEach((k, v) -> items.add( " "+v.getLeft()+" = " + k.getSimpleName() + " x"+v.getRight()+"  "));
+        objects.forEach((k, v) -> items.add( " "+v.getLeft() + couleur +" = " + k.getSimpleName() + " x"+v.getRight()+"  "));
         setArrayOnMultipleLine(y,items);
     }
 
@@ -252,10 +252,10 @@ public class Menu {
                     String color = canUse ? Affichage.GREEN : Affichage.RED;
                     sb.append(color);
                     sb.append(TAB);
-                    sb.append("[ ").append(obj).append(" ]");
+                    sb.append("[ ").append(obj).append(Affichage.RESET).append(color).append(" ]");
                 }
                 else{
-                    sb.append(obj);
+                    sb.append(obj).append(Affichage.RESET);
                 }
                 sb.append(" ");
             }
