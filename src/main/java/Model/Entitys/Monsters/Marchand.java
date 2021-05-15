@@ -58,6 +58,7 @@ public class Marchand extends AbstractMonster {
     public Marchand(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, Tools.PathType pathCross, int lvl, STATE state) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
         this.state = state;
+        generateItems(3,5);
     }
 
     /**
@@ -201,7 +202,7 @@ public class Marchand extends AbstractMonster {
     //TODO drop au sol
 
     /**
-     * Affichage des objets et sélection de l'objet à vendre
+     * Dialogue initial de la vente
      *
      * @author Gillian
      */
@@ -216,6 +217,11 @@ public class Marchand extends AbstractMonster {
 
     }
 
+    /**
+     * Dialogue permettant de montrer les différents items du marchand
+     *
+     * @author Gillian
+     */
     public void dialogueBuy(){
 
         StringBuilder sb2 = new StringBuilder();
@@ -274,6 +280,13 @@ public class Marchand extends AbstractMonster {
 
         System.exit(1);
     }
+
+    /**
+     * Procédure de la vente de l'objet sélectionné
+     * @param rank place de l'objet vendu dans la liste
+     *
+     * @author Gillian
+     */
 
     public void buying (int rank)
     {
