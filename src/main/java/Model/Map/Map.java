@@ -1,10 +1,7 @@
 package Model.Map;
 
 import Model.Entitys.Player.Player;
-import Model.Map.Etage_Strategy.BossEtageStategy;
-import Model.Map.Etage_Strategy.EtageStrategy;
-import Model.Map.Etage_Strategy.ReposEtageStrategy;
-import Model.Map.Etage_Strategy.TrapEtageStrategy;
+import Model.Map.Etage_Strategy.*;
 import Model.Utils.Affichage;
 import Model.Utils.Start;
 import Model.Utils.Position;
@@ -32,7 +29,7 @@ public class Map implements Serializable {
      * @author Quentin
      */
     public Map(Player player){
-        Etage etage = new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy(),true);
+        Etage etage = new Etage(MapWidth, MapHeigth, new MarchandEtageStrategy(),true);
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         etage.get(pos).setEntity(player);

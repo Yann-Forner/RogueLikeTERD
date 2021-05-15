@@ -13,7 +13,7 @@ import Model.Utils.TourManager;
  * @author JP, Quentin, Gillian
  */
 public abstract class AbstractItem extends Entity {
-    private final int prix;
+    private int prix;
 
     /**
      * Crée un item avec un prix.
@@ -50,7 +50,7 @@ public abstract class AbstractItem extends Entity {
     }
 
     /**
-     * Renvoie le prix de l'objet
+     * Renvoie le prix de l'item.
      * @return prix
      * @author Gillian
      */
@@ -58,30 +58,16 @@ public abstract class AbstractItem extends Entity {
         return prix;
     }
 
-
     /**
-     * Renvoit un item aléatoire
-     * @author Gillian
-    /*
-    public static AbstractItem getRandomItem(){
-        switch (Procedure.getRandomInt(11,0)){
-            case 0, 1, 2 -> {
-                return new ;
-            }
-            case 3, 4, 5  -> {
-                return new ;
-            }
-            case 6, 7, 8 -> {
-                return new  ;
-            }
-            case 9,10,11 -> {
-                return new ItemFactory().get
-            }
-            default -> {
-                return new CircleEtageStrategy();
-            }
-        }
+     * Defini le prix de l'item.
+     * @param prix Prix de l'item
+     * @author Quentin
+     */
+    public void setPrix(int prix){
+        this.prix = prix;
     }
+
+
      /** 
      * Defini le comportement de l'item lorsque le joueur l'utilise.
      * @param player Joueur

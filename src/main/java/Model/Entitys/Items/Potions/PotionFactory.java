@@ -1,5 +1,7 @@
 package Model.Entitys.Items.Potions;
 
+import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 
@@ -15,7 +17,6 @@ public class PotionFactory {
 
     /**
      * Générateur de potion
-     *
      * @param etage Etage où se situe la potion
      * @param i Type de la potion
      * @return Retourne la potion générée
@@ -28,5 +29,12 @@ public class PotionFactory {
             case STRENGTH_POTION -> new StrengthPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de force", 50.0, 5);
             case ENDURENCE_POTION -> new StaminaPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'endurance", 10);
         };
+    }
+
+    public static AbstractPotion getNewWeapon(Etage etage, PotionType type, int prix){
+        //TODO faire avec le constructteur ou le supprimer
+        AbstractPotion potion = getNewPotion(etage,type);
+        potion.setPrix(prix);
+        return potion;
     }
 }

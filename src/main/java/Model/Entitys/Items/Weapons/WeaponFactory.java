@@ -34,6 +34,13 @@ public class WeaponFactory {
         };
     }
 
+    public static AbstractWeapon getNewWeapon(Etage etage, WeaponType type , int prix){
+        //TODO faire avec le constructteur ou le supprimer
+        AbstractWeapon weapon = getNewWeapon(etage,type);
+        weapon.setPrix(prix);
+        return weapon;
+    }
+
     /**
      * Retourne le level de base
      * @return int
