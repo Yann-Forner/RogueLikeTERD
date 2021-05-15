@@ -88,7 +88,7 @@ public class Affichage {
                             + "---------------------------------------------------------------------------------------------------------"
                             + "---------------------------------------------------------------------------------------------------------"
                             + "\n"
-                    : CLEAR);
+                    : "");//CLEAR);
             System.out.println(Start.getMap());
             String pv = Affichage.getBarre(GREEN, "PV", GREY, Objects.requireNonNull(Start.getPlayer()).getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, BLACK_BACKGROUND,120);
             System.out.print(pv);

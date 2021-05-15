@@ -1,11 +1,9 @@
 package Model.Entitys.Monsters;
 
 import Model.Entitys.Items.AbstractItem;
-import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Items.Weapons.AbstractWeapon;
+import Model.Entitys.Items.Weapons.Wand;
 import Model.Entitys.Items.Weapons.WeaponFactory;
-import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.*;
 
@@ -62,18 +60,10 @@ public class Marchand extends AbstractMonster {
         generateItems(3,5);
     }
 
-    /**
-     * Lance la procédure du marchand lorsque l'on marche dessus (en fonction de son état).
-     *
-     * @param pv      Points de vie
-     * @param limited
-     * @return boolean
-     * @author Gillian, Quentin
-     */
     @Override
     public boolean updatePV(int pv, boolean limited) {
         switch (state) {
-            case NOTVISITED, VISITED -> dialogue();
+            case NOTVISITED, VISITED -> dialogue(true);
             case BUY -> System.out.println("buy"); //TODO
             case AGGRESSIVE -> System.out.println("agrressive"); //TODO
             case SELL -> System.out.println("sell");
@@ -99,12 +89,13 @@ public class Marchand extends AbstractMonster {
     }
 
     /**
-     * Dialogue de déclaration des options de vente / d'achat / d'attaque
-     *
+     * Dialogue de déclaration des options de vente / d'achat / d'attaque.
      * @author Gillian, Quentin
      */
-    public void dialogue() {
-        changeDialogueState();
+    public void dialogue(boolean changeState) {
+        if(changeState){
+            changeDialogueState();
+        }
         StringBuilder sb = new StringBuilder();
         switch (state) {
             case VISITED -> sb.append("Comme on se retrouve !\n\n");
@@ -122,47 +113,34 @@ public class Marchand extends AbstractMonster {
         System.out.println(sb);
         try {
             processInput();
-        } catch (Exception e) {
         }
+        catch (IOException ignored) { }
     }
 
     /**
      * Analyse de l'entrée utilisateur et redirection vers les différentes procédures.
-     *
      * @throws IOException Si le reader ne fonctionne pas
      * @author Gillian, Quentin
      */
     private void processInput() throws IOException {
-        //TODO Comment limiter aux actions voulues (car pour l'instant dans la procédure d'achat il peut vendre
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+        String string = reader.readLine();
         switch (state) {
             case BUY -> {
-                switch (reader.readLine()) {
-                    case "0" -> buying(0);
-                    case "1" -> buying(1);
-                    case "2" -> buying(2);
-                    case "3" -> buying(3);
-                    case "4" -> buying(4);
-                    case "5" -> buying(5);
-                    case "6" -> buying(6);
-                    case "7" -> buying(7);
-                    case "8" -> buying(8);
-                    case "9" -> buying(9);
+                switch (string) {
+                    case "0","1","2","3","4","5","6","7","8","9" -> buying(Integer.parseInt(string));
                     case "y", "Y" -> dialogueBuy();
-                    case "n", "N" -> dialogue();
+                    case "n", "N" -> dialogue(true);
                     case "v", "V" -> selling();
                     default -> processInput();
                 }
             }
             default -> {
-                switch (reader.readLine()) {
+                switch (string) {
                     case "1" -> dialogueInitBuy();
                     case "2" -> dialogueSell();
                     case "3" -> typeAggressive();
-                    case "4" -> {
-                        break;
-                    }
+                    case "4" -> {}
                     case "y", "Y" -> procedureYes();
                     case "n", "N" -> procedureNo();
                     case "w", "W" -> procedureSell(1);
@@ -193,12 +171,6 @@ public class Marchand extends AbstractMonster {
 
     //// ------------------------------------------Achat-------------------------------------------------------------
 
-    /**
-     * Dialogue initial quand le marchand est en mode "vente" (que le joueur veut acheter.
-     *
-     * @author Gillian, Quentin
-     */
-
     //TODO créer une liste d'item du marchand
     //TODO Pouvoir parcourir la liste d'item du marchand
     //TODO deux options : soit on agglomère les listes pour en former une, soit on différencie les deux à la vente
@@ -225,9 +197,11 @@ public class Marchand extends AbstractMonster {
      */
     public void dialogueBuy(){
         StringBuilder sb = new StringBuilder();
-        sb.append(Affichage.GREEN).append("Voici tout d'abord mes armes... \n\n");
+        if(getInventory().getWeapons().size()!=0){
+            sb.append(Affichage.GREEN).append("Voici tout d'abord mes armes... \n\n");
+        }
         for (int i = 0; i < itemArrayList.size(); i++) {
-            if(i==getInventory().getWeapons().size()){
+            if(i==getInventory().getWeapons().size() && getInventory().getPotions().size()!=0){
                 sb.append(Affichage.GREEN).append("\nMais aussi mes belles et succulentes potions ... \n\n");
             }
             AbstractItem item = itemArrayList.get(i);
@@ -242,11 +216,19 @@ public class Marchand extends AbstractMonster {
             sb.append(i);
             sb.append("\n");
         }
-        sb.append(Affichage.GREEN).append("\nIl te suffit d'appuyer sur la touche correspondante pour m'acheter un de mes merveilleux objet.");
+        sb.append(Affichage.GREEN).append(itemArrayList.size()==0 ?
+                "Je n'ai plus rien en stock.\n" :
+                "\nIl te suffit d'appuyer sur la touche correspondante pour m'acheter un de mes merveilleux objet.");
         System.out.println(sb);
-        try {
-            processInput();
-        } catch (Exception e) { }
+        if(itemArrayList.size()==0){
+            state = STATE.VISITED;
+            dialogue(false);
+        }
+        else{
+            try {
+                processInput();
+            } catch (Exception e) { }
+        }
     }
 
     /**
@@ -257,7 +239,7 @@ public class Marchand extends AbstractMonster {
      */
 
     public void buying (int index) {
-        if (checkMoney(getInventory().getWeapons().get(index))) {
+        if (checkMoney(itemArrayList.get(index))){
             AbstractItem item = itemArrayList.remove(index);
             Start.getPlayer().removeMoney(item.getPrix());
             getInventory().dropItem(this,item);
@@ -300,14 +282,10 @@ public class Marchand extends AbstractMonster {
      * @return true si l'achat est possible, false sinon
      * @author Gillian
      */
-    public boolean checkMoney (AbstractItem item)
-    {
-        if (item.getPrix()>Start.getPlayer().getMoney())
-        {
-            return false;
-        }
-        return true;
+    public boolean checkMoney (AbstractItem item) {
+        return item.getPrix()<=Start.getPlayer().getMoney();
     }
+
     /**
      * Méthode permettant de réinitialiser l'inventaire du marchand et d'ajouter des items aléatoires
      * @param nbWeapons nombre d'armes à ajouter
@@ -317,6 +295,7 @@ public class Marchand extends AbstractMonster {
 
 
     public void generateItems (int nbWeapons, int nbPotions) {
+        /*
         for (int i = 0; i < nbWeapons; i++) {
             getInventory().getWeapons().add(switch (Procedure.getRandomInt(3, 1)) {
                 case 1 -> WeaponFactory.getNewWeapon(getEtage(), WeaponFactory.WeaponType.SWORD);
@@ -332,6 +311,8 @@ public class Marchand extends AbstractMonster {
                 default -> PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.STRENGTH_POTION);
             });
         }
+         */
+        getInventory().getWeapons().add(WeaponFactory.getNewWeapon(getEtage(), WeaponFactory.WeaponType.WAND));
         itemArrayList.addAll(getInventory().getWeapons());
         itemArrayList.addAll(getInventory().getPotions());
     }
@@ -527,75 +508,18 @@ public class Marchand extends AbstractMonster {
      */
     public void procedureNo() {
         state = STATE.VISITED;
-        dialogue();
+        dialogue(true);
     }
-
-
-
-    //------------------------------------------TOUT lES TRUCS A REVOIR----------------------------------------------
-
-
-    /*
-    public ArrayList<AbstractItem> getItems(){
-        //TODO implementer ça #GILLIAN
-        return null;
-    }
-    */
-
-    // lui parler
-    // acheter des trucs
-
-
-/*
-
-
-    /**
-     * Réalisation de la vente par le joueur.
-     *
-     * @author Gillian
-     */
-
-    /*
-    public void sellItem() {
-        var first = getInventory().getPotions().remove(getInventory().getPotions().size() - 1);
-        Start.getPlayer().addMoney(first.getPrix());
-
-        TourManager.addMessage("Tu viens de gagner " + first.getPrix() + "!"
-                + "\n \n"
-                + Affichage.GREEN + " Veux-tu me vendre autre chose ?"
-                + "\n"
-                + Affichage.GREEN + "Y - OUI"
-                + "\n"
-                + Affichage.YELLOW + "N - NON"
-        );
-        try {
-            processInput();
-        } catch (Exception e) {
-            dialogueError();
-        }
-
-    }
- */
-/*
-//TODO compteur à erreur : si trop attaquer
-    //TODO vendre
-
-    /**
-     * Dialogue lorsque le joueur a entré un mauvais caractère.
-     * Renvoie directement au dialogue correspondant.
-     *
-     * @author Gillian
-     */
 
     public void dialogueError() {
         //TODO elle sert a rien cette methode
         System.out.println("Cher Monsieur, Chère Madame" + Start.getPlayer().getNom() + "\nJe crois que vous n'avez pas bien compris ma question");
         switch (state) {
-            case VISITED -> dialogue();
+            case VISITED -> dialogue(true);
             case BUY -> dialogueInitBuy();
             case SELL -> dialogueSell();
         }
-        dialogue();
+        dialogue(true);
     }
 
 
