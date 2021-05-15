@@ -109,7 +109,7 @@ public class Affichage {
      * @author Quentin,Yann
      */
     public static String etage(Etage etage){
-        Menu menu = new Menu(etage,Start.getMap());
+        Menu menu = new Menu(etage);
         StringBuilder sb = new StringBuilder();
         sb.append("    ").append(RESET);
         for (int x = 0; x < etage.getWidth(); x++) {
@@ -164,7 +164,7 @@ public class Affichage {
                     sb.append(" ");
                 }
             }
-            menu.toStringByLine(y,sb);
+            menu.appendLigne(y,sb);
         }
         return sb.toString();
     }
@@ -434,8 +434,8 @@ public class Affichage {
      * @return La concatenation
      * @author Quentin
      */
-    private static String addSpace(String s, int before_length, int width){
-        return s + " ".repeat(width - (s.length() + before_length));
+    public static String addSpace(String s, int before_length, int width){
+        return s + " ".repeat(Math.max(0,width - (s.length() + before_length)));
     }
 
     /**

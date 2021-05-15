@@ -3,7 +3,6 @@ package Model.Entitys.Player;
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Items.AbstractItem;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -26,7 +25,7 @@ public class Player extends AbstractAlive {
     private Direction direction = Direction.HAUT;
     private int endurence = 100;
     private int MAX_ENDURENCE = 100;
-    private AbstractItem[] poche = {null,null};
+    private final AbstractItem[] poche = {null,null};
     private boolean inPoche = false;
 
     public enum Direction{
@@ -298,6 +297,15 @@ public class Player extends AbstractAlive {
                 poche[0] = null;
             }
         }
+    }
+
+    /**
+     * Renvoit le contenu de la poche.
+     * @return Contenu de la poche
+     * @author Quentin
+     */
+    public AbstractItem getPoche(){
+        return poche[0];
     }
 
     /**

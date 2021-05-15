@@ -7,118 +7,118 @@ import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Map.Map;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Objects;
 
-;import static Model.Utils.Affichage.getTrueLength;
 
 /**
  * Classe servant a afficher le menu sur la droite du terminal
  * @author Yann
  */
 public class Menu {
-    private Etage etage;
-    private Map map;
-    private CaseMenu[][] menuAffichage;
-    private String[] lignes;
+    private final Etage etage;
+    private static final String TAB = "   ";
+    private static final String couleur = Affichage.RESET + Affichage.BLUE;
+    public String[] Lignes;
     private static final int LARGEUR_MENU = 83;
 
-    private class CaseMenu{
-        public String container= " ";
-
-        @Override
-        public String toString() {
-            return container;
-        }
+    /**
+     * Enum pour fractionner le menu en 3 parties.
+     * @author Quentin
+     */
+    public enum Side{
+        GAUCHE,MILIEU,DROITE
     }
+
     /**
      * Constructeur d'un menu
      * @param etage etage
-     * @param map map en entier
-     * @author Yann
+     * @author Yann, Quentin
      */
-    public Menu(Etage etage, Map map) {
+    public Menu(Etage etage) {
         this.etage = etage;
-        this.map = map;
-
+        refresh();
     }
 
     /**
-     * Fonction servant à injecter les informations dans le menu
+     * Fonction servant à injecter les informations dans le menu.
      * @author Yann, Quentin
      */
-    public void refresh(){
+    private void refresh(){
         clear();
         Player player = Start.getPlayer();
         if(player != null){
             Inventory inv = player.getInventory();
 
             //SEED & TIMER
-            printStringOnSide(0,Affichage.PURPLE+"   SEED : "+Procedure.getSeed()+Affichage.BLUE +" " ,2);
-            printStringOnSide(1,Affichage.PURPLE+"  TIMER : "+TourManager.getTimer()+Affichage.BLUE+"      ",2);
-            printStringOnSide(2, new String[]{"║","║","║"},1);
+            setStringOnSide(2,Affichage.PURPLE+"SEED : "+Procedure.getSeed()+couleur,Side.GAUCHE,true);
+            setStringOnSide(1, new String[]{"║","║","║"},Side.MILIEU,true);
+            setStringOnSide(2,Affichage.PURPLE+"TIMER : "+TourManager.getTimer()+couleur,Side.DROITE,true);
 
             //JOUEUR
-            printLine(4,Affichage.BLUE);
-            printStringOnSide(0,Affichage.RED+"   Joueur  :  "+ player.getNom() + Affichage.BLUE+" ",5);
+            setFullLine(4);
+            setStringOnSide(5,Affichage.RED+"Joueur  :  "+ player.getNom() + couleur+" ",Side.GAUCHE,false);
             String lvl = " Niveau " + player.getLvl() + " [" + player.getCURRENT_EXP() + "/" + player.getMAX_EXP() + "] ";
-            printStringOnSide(1, new String[]{
+            setStringOnSide(6,Affichage.RED+"Classe  :  "+ player.getClasse().getNom(),Side.GAUCHE,false);
+            setStringOnSide(7,Affichage.RED+"Force  :  "+ player.getForce(),Side.GAUCHE,false);
+            setStringOnSide(5, new String[]{
                     Affichage.RED+"╔"+"═".repeat(lvl.length())+"╗   ",
                     Affichage.RED+"║"+lvl+"║   ",
                     Affichage.RED+"╚"+"═".repeat(lvl.length())+"╝   "
-            },5);
-            printStringOnSide(0,Affichage.RED+"   Classe  :  "+ player.getClasse().getNom(),6);
-            printStringOnSide(0,Affichage.RED+"   Force  :  "+ player.getForce(),7);
-            printStringOnSide(0,Affichage.RED+"   Portée  :  "+ (inv.getWeapons().size()==0 ? 1 :  inv.getWeapons().get(0).getRange()),8);
-            printStringOnSide(1,Affichage.RED+" Etage n°"+(map.getIndexCurrent()+1)+"        ",8);
+            },Side.DROITE,true);
+            setStringOnSide(8,Affichage.RED+"Portée  :  "+ (inv.getWeapons().size()==0 ? 1 :  inv.getWeapons().get(0).getRange()),Side.GAUCHE,false);
+            setStringOnSide(8,Affichage.RED+"Etage n°"+(Objects.requireNonNull(Start.getMap()).getIndexCurrent()+1)+"",Side.DROITE,true);
 
             //INVENTAIRE
-            printLine(10,Affichage.BLUE);
-            printStringOnSide(2, Affichage.GREEN+"Inventaire",12);
+            setFullLine(10);
+            setStringOnSide(12, Affichage.GREEN+"Inventaire",Side.MILIEU,true);
 
             //ARMES
             ArrayList<AbstractWeapon> armesList = inv.getWeapons();
-            printStringOnSide(0, Affichage.GREEN+" Vous avez " + armesList.size() + " armes :",14);
-            printArrayOnTheWholeLine(15,armesList,armesList.size() == 0 ? false : player.getClasse().canUse(armesList.get(0)));
+            setStringOnSide(14, Affichage.GREEN+"Vous avez " + armesList.size() + " armes :",Side.GAUCHE,false);
+            setArrayOnTheWholeLine(15,armesList, armesList.size() != 0 && player.getClasse().canUse(armesList.get(0)),inv.isWeaponsFull());
 
             //POTIONS
             ArrayList<AbstractPotion> potionsList = inv.getPotions();
-            printStringOnSide(0, Affichage.GREEN+" Vous avez " + potionsList.size() + " potions :",16);
-            printArrayOnTheWholeLine(17,potionsList,true);
+            setStringOnSide(16, Affichage.GREEN+"Vous avez " + potionsList.size() + " potions :",Side.GAUCHE,false);
+            setArrayOnTheWholeLine(17,potionsList,true, inv.isPotionsFull());
 
             //MONSTRES
-            printLine(18,Affichage.BLUE);
-            printStringOnSide(2,Affichage.YELLOW+" Monstres ",20);
-            afficheListeEntity(new ArrayList<>(player.getEtage().getMonsters()),22);
+            setFullLine(18);
+            setStringOnSide(20,Affichage.YELLOW+"Monstres",Side.MILIEU,true);
+            setListeObjects(new ArrayList<>(etage.getMonsters()),22);
 
             //ITEMS
-            printLine(25,Affichage.BLUE);
-            printStringOnSide(2,Affichage.BRIGTH_CYAN+" Items ",27);
-            afficheListeEntity(new ArrayList<>(player.getEtage().getItems()),29);
+            setFullLine(25);
+            setStringOnSide(27,Affichage.BRIGTH_CYAN+"Items",Side.MILIEU,true);
+            ArrayList<Object> abstractItems = new ArrayList<>(etage.getItems());
+            if(player.getPoche()!=null){
+                abstractItems.add(player.getPoche());
+            }
+            setListeObjects(abstractItems,29);
 
             //CELLULES
-            printLine(32,Affichage.BLUE);
-            printStringOnSide(2,Affichage.BRIGTH_GREEN+" Cellules ",34);
-            //TODO pourquoi c'est cut #YANN
+            setFullLine(32);
+            setStringOnSide(34,Affichage.BRIGTH_GREEN+"Cellules",Side.MILIEU,true);
             ArrayList<String> types = new ArrayList<>();
-            Arrays.stream(Cell.Style.CellType.values()).forEach((v) -> types.add( " "+ new Cell(true,new Cell.Style(v)) + Affichage.BLUE + " = " + v + "  "));
-            printAndBackToTheLine(36, types);
+            Arrays.stream(Cell.Style.CellType.values()).forEach((v) -> types.add( " "+ new Cell(true,new Cell.Style(v)) + couleur + " = " + v + "  "));
+            setArrayOnMultipleLine(36, types);
+
+            setEndOfLine();
         }
     }
 
     /**
      * Affiche le nombre d'objets selon le type dans le menu.
-     * @param ? L'arraylist contenant les objets.
+     * @param list L'arraylist contenant les objets.
      * @param y La ligne de l'affichage
      * @author Quentin
      */
-    private void afficheListeEntity(ArrayList<Object> list, int y){
-        HashMap<Class, Pair<String,Integer>> objects = new HashMap<>(){};
+    private void setListeObjects(ArrayList<Object> list, int y){
+        HashMap<Class<?>, Pair<String,Integer>> objects = new HashMap<>(){};
         for (Object obj : list){
             Pair<String, Integer> pair = objects.get(obj.getClass());
             if(pair == null){
@@ -129,196 +129,169 @@ public class Menu {
         }
         ArrayList<String> items = new ArrayList<>();
         objects.forEach((k, v) -> items.add( " "+v.getLeft()+" = " + k.getSimpleName() + " x"+v.getRight()+"  "));
-        printAndBackToTheLine(y,items);
+        setArrayOnMultipleLine(y,items);
     }
 
     /**
-     * Fonction qui met réinitialise le menu
-     * @auhtor Yann
+     * Réinitialise le menu.
+     * @author Yann, Quentin
      */
-    public void clear(){
-        menuAffichage = new CaseMenu[etage.getHeigth()][LARGEUR_MENU];
-        for (int i = 0; i < menuAffichage.length ; i++) {
-            for (int j = 0; j < menuAffichage[0].length; j++) {
-                menuAffichage[i][j] = new CaseMenu();
-            }
-        }
-        printAllLine(0, "╔═════════════════════════════════════════════════════════════════════════════════╗");
+    private void clear(){
+        Lignes = new String[etage.getHeigth()];
+        Arrays.fill(Lignes, couleur + TAB);
+        setFullLine(0);
         for (int i = 1; i < etage.getHeigth()-1 ; i++){
-            printAllLine(i, "║                                                                                 ║") ;
+            addToLine(i,"║");
         }
-        printAllLine(etage.getHeigth()-1, "╚═════════════════════════════════════════════════════════════════════════════════╝");
+        setFullLine(etage.getHeigth()-1);
     }
 
+    /**
+     * Rajoute un string a la fin de la ligne.
+     * @param y Hauteur d ela ligne
+     * @param s String a rajouter
+     * @author Quentin
+     */
+    private void addToLine(int y, String s){
+        Lignes[y] = Lignes[y] + s;
+    }
 
-    public void printAllLine(int line, String s){
-        for (int i = 0; i < menuAffichage[line].length; i++) {
-            if(i == menuAffichage[line].length-1){
-                menuAffichage[line][i].container = Affichage.BLUE+s.charAt(i)+"\n";
+    /**
+     * Crée une ligne sur tout le menu a la hauteur y.
+     * @param y Hauteur de la ligne
+     * @author Quentin
+     */
+    private void setFullLine(int y){
+        String line;
+        if(y==0){
+            line = "╔═════════════════════════════════════════════════════════════════════════════════╗";
+        }
+        else if (y==Lignes.length-1){
+            line = "╚═════════════════════════════════════════════════════════════════════════════════╝";
+        }
+        else{
+            Lignes[y] = couleur + TAB + "╠" + "═".repeat(LARGEUR_MENU-2);
+            return;
+        }
+        addToLine(y,line);
+    }
+
+    /**
+     * Affiche l'ArrayList sur plusieurs ligne lorsqu'elle depasse de celle courante.
+     * @param y hauteur de depart de l'affichage
+     * @param arrayList ArrayList des Strings a afficher
+     * @author Quentin
+     */
+    private void setArrayOnMultipleLine(int y, ArrayList<String> arrayList){
+        StringBuilder sb = new StringBuilder();
+        for(String s : arrayList){
+            if(Affichage.getTrueLength(sb.toString()) + Affichage.getTrueLength(s) < LARGEUR_MENU-1){
+                sb.append(s);
             }
             else{
-                menuAffichage[line][i].container = s.charAt(i)+"";
+                addToLine(y,sb.toString());
+                sb = new StringBuilder();
+                sb.append(s);
+                y++;
             }
         }
-    }
-
-    public void printArrayOnTheWholeLine(int line, ArrayList<? extends AbstractItem> itemList  , boolean canUse){
-        StringBuilder itemString = new StringBuilder("  ");
-        for (int index = 0; index < itemList.size(); index++) {
-            AbstractItem abstractItem = itemList.get(index);
-            if (index == 0){
-                String color = Affichage.RED;
-                if(canUse)color =Affichage.GREEN;
-                itemString.append(color);
-                itemString.append(" [" + abstractItem.toString() +Affichage.RESET+Affichage.BOLD + color +"]  ");
-            }
-            else
-                itemString.append(abstractItem.toString()+Affichage.RESET + "  ");
-        }
-        System.out.println(itemString + " size="+itemString.length() + " != trueSize="+ getTrueLength(itemString.toString()));
-        printStringOnSide(0,itemString.toString(),line);
+        addToLine(y,sb.toString());
     }
 
     /**
-     * Trace une ligne aux coordonnés y du menu
-     * @param y ligne
-     * @param color couleur de la ligne
+     * Ajoute un string a un coté du menu.
+     * @param y Hauteur de la ligne
+     * @param s String a ajouter
+     * @param side Coté ou le string doit etre ajouté
+     * @param centered Si le string doit etre centré sur son coté
+     * @author Quentin
      */
-    public void printLine (int  y,String color){
-        modifyCase(0,y,"║"+color);
-        printStringOnLine(1,y,"═══════════════════════════════════════════════════════════════════════════════════════════");
-
+    private void setStringOnSide(int y, String s, Side side, boolean centered){
+        //TODO centrer a droite marhc epas vraiment
+        StringBuilder sb = new StringBuilder();
+        int trueLengthL = Affichage.getTrueLength(Lignes[y]);
+        int trueLengthS = Affichage.getTrueLength(s);
+        int width = (centered ? trueLengthS/2 : trueLengthS);
+        sb.append(switch (side){
+            case GAUCHE -> Affichage.addSpace(TAB,0,centered ? 41/2-width : 0);
+            case MILIEU -> Affichage.addSpace("", trueLengthL,43-width + width%2);
+            case DROITE -> Affichage.addSpace("", trueLengthL,(LARGEUR_MENU-41/2)-width-1);
+        });
+        sb.append(s);
+        addToLine(y,sb.toString());
     }
 
     /**
-     * Trace le tableau de strings aux coordonnées du menu
-     * @param x Coordonnée x
-     * @param y Coordonnée y
-     * @param myArrayString le tableau de string
-
+     * Ajoute un tableau de string a un coté du menu sur plusieurs ligne.
+     * @param y Hauteur de la ligne
+     * @param s String a ajouter
+     * @param side Coté ou le string doit etre ajouté
+     * @param centered Si le string doit etre centré sur son coté
+     * @author Quentin
      */
-    public void printOnMenu(int x, int y , String[] myArrayString){
-        for (int i = 0; i < myArrayString.length; i++) {
-            printStringOnLine(x,y+i,myArrayString[i]);
+    private void setStringOnSide(int y, String[] s, Side side, boolean centered){
+        for(String string : s){
+            setStringOnSide(y,string,side,centered);
+            y++;
         }
     }
-
-
-    public void printAndBackToTheLine(int y,ArrayList<String> myArrayString){
-        int x = 1;
-        for (int i = 0; i < myArrayString.size(); i++) {
-            if(x+getTrueLength(myArrayString.get(i)) > menuAffichage[y].length){
-                x=1;
-                ++y;
-                if(y >= etage.getHeigth()-1)break;
-            }
-            printStringOnLine(x ,y,myArrayString.get(i));
-            x=x+getTrueLength(myArrayString.get(i));
-        }
-    }
-
 
     /**
-     * Trace la string aux coordonnées du menu
-     * @param x Coordonnée x
-     * @param y Coordonnée y
-     * @param s la string
+     * Affiche l'Arrayliste sur toute la ligne et la coupe si elle est trop grande.
+     * @param y Hauteur de la ligne
+     * @param arrayList ArrayList d'Items a afficher.
+     * @param canUse Defini si le joueur peut utiliser cet item
+     * @author Quentin
      */
-    public void printStringOnLine(int x, int y ,String s){
-        if(y==15){
-            //TODO elenver le if
-            int indexX = x;
-            System.out.println(s);
-            for (int i = 0; i < s.length() && i < LARGEUR_MENU; i++) {
-                modifyCase(indexX,y,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            }
-        }
-        else {
-            int xInitial = x;
-            for (int i = 0; i < s.length() && i + xInitial < LARGEUR_MENU - 1; i++) {
-                int currenti = i;
-                String res = s.charAt(currenti) + "";
-                Pattern p = Pattern.compile(".\\[([0-9]{1,3})m");
-                if (i < s.length() - 5) {
-                    Matcher m = p.matcher(s.substring(currenti, currenti + 5));
-                    if (m.find()) {
-                        int size = m.end() - m.start();
-                        if (m.start() == 0) {
-                            //System.out.println(s.charAt(currenti)+ " " + s.charAt(currenti+1) + " "+ s.charAt(currenti+2)+ " "+s.charAt(currenti+3)+  " "+s.charAt(currenti+4) + " "+y);
-                            res = m.group(0);
-                            res += s.charAt(currenti + m.end());
-                            i = i + size;
-                        }
-                    }
+    private void setArrayOnTheWholeLine(int y, ArrayList<? extends AbstractItem> arrayList, boolean canUse, boolean isFull){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < arrayList.size(); i++) {
+            Object obj = arrayList.get(i);
+            if(Affichage.getTrueLength(sb.toString())+Affichage.getTrueLength(obj.toString())<LARGEUR_MENU-10){
+                if(i==0){
+                    String color = canUse ? Affichage.GREEN : Affichage.RED;
+                    sb.append(color);
+                    sb.append(TAB);
+                    sb.append("[ ").append(obj).append(" ]");
                 }
-                modifyCase(x, y, res);
-                ++x;
+                else{
+                    sb.append(obj);
+                }
+                sb.append(" ");
+            }
+            else{
+                sb.append(Affichage.RED).append("...");
+                break;
             }
         }
-    }
-
-
-
-
-    /**
-     * Trace un tableau de string d'un coté précis
-     * @param side 0 = left, 1 = right, 2 = center
-     * @param strings le tableau de string
-     * @param y Coordonnée y
-     */
-    public  void printStringOnSide(int side,String[] strings ,int y){
-        for (int i = 0; i < strings.length; i++) {
-            printStringOnSide(side,strings[i],y+i);
+        if(isFull){
+            sb.append(Affichage.RED).append(Affichage.BOLD).append("   MAX");
         }
+        addToLine(y,sb.toString());
     }
 
     /**
-     * Trace une string d'un coté précis
-     * @param side  0 = left, 1 = right, 2 = center
-     * @param s la string
-     * @param y Coordonnée y
+     * Rejoute la ligne y du tableau au StringBuilder.
+     * @param y La hauteur de la ligne.
+     * @param sb Le StringBuilder ou ajouter la ligne
+     * @author Quentin
      */
-    public void printStringOnSide(int side ,String s, int y ){
-        switch (side){
-            case 0 -> {//left
-                printStringOnLine(1,y,s);
-            }
-            case 1 -> {//right
-                printStringOnLine(LARGEUR_MENU-s.length(),y,s);
-            }
-            default -> {//center
-                int spacing = (LARGEUR_MENU-s.length())/2;
-                printStringOnLine(spacing,y,s);
-            }
-        }
+    public void appendLigne(int y, StringBuilder sb){
+        sb.append(Lignes[y]);
     }
-
-
-
-    public void modifyCase(int x , int y , String s){
-        menuAffichage[y][x].container = s;
-    }
-
 
     /**
-     * Modifier le stringbuilder de la map pour s'afficher avec un menu
-     * @param line la ligne sur laquelle on se trouve
-     * @param sb le stringbuilder qui affiche le jeu
-     * @author Yann
+     * Ajoute la fin du tableau a la ligne.
+     * @author Quentin
      */
-    public void toStringByLine(int line ,StringBuilder sb ) {
-        if (line==0)refresh();
-        sb.append(Affichage.BOLD).append(Affichage.BLUE).append("     ");
-        sb.append(toStringLine(line));
-    }
-
-
-    public String toStringLine(int line){
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < menuAffichage[line].length; i++) {
-            s.append(menuAffichage[line][i]);
-            System.out.println("MENU: line="+line +" i="+ i +" "+menuAffichage[line][i] + " -> "+menuAffichage[line][i].toString().length());
+    private void setEndOfLine(){
+        for (int i = 0; i < Lignes.length-1; i++) {
+            if(i>0 && i < Lignes.length-1){
+                String end = couleur + (Lignes[i].charAt(Lignes[i].length()-1) == '═' ? "╣" : "║");
+                Lignes[i] = Lignes[i] + Affichage.addSpace("",Affichage.getTrueLength(Lignes[i])-2,LARGEUR_MENU) + end;
+            }
+            Lignes[i] = Lignes[i] + "\n";
         }
-        return s.toString();
     }
+
 }
