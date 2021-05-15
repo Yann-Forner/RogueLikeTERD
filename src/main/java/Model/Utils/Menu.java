@@ -226,6 +226,7 @@ public class Menu {
      */
     public void printStringOnLine(int x, int y ,String s){
         if(y==15){
+            //TODO elenver le if
             int indexX = x;
             System.out.println(s);
             for (int i = 0; i < s.length() && i < LARGEUR_MENU; i++) {
