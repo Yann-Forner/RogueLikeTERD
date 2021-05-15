@@ -119,6 +119,7 @@ public class Marchand extends AbstractMonster {
             case "1" -> dialogueBuy();
             case "2" -> dialogueSell();
             case "3" -> typeAggressive();
+            default -> processInput();
         }
         changeDialogueState();
     }

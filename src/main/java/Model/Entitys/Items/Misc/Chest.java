@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class Chest extends AbstractItem {
 
-    public Chest(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
+    public Chest(Etage etage, Position position) {
+        super(etage, position, "Coffre");
     }
 
     @Override
