@@ -19,13 +19,10 @@ import java.util.ArrayList;
  * @author JP
  */
 public class Inventory implements Serializable {
-
     private final int WEAPONS_LIMIT;
     private final int POTIONS_LIMIT;
-
     private final ArrayList<AbstractWeapon> weapons = new ArrayList<>();
     private final ArrayList<AbstractPotion> potions = new ArrayList<>();
-
 
     /**
      * Constructeur d'inventory. Initialise les listes.

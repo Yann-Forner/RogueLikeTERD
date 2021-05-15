@@ -71,7 +71,7 @@ public class Invoqueur extends AbstractMonster {
                 entity.onContact(this);
             }
         }
-        Affichage.Projectile(getEtage(),effet,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"⚡","+"));
+        Affichage.Projectile(getEtage(),effet,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"🔆","+"));
     }
 
     @Override

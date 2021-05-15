@@ -1,5 +1,7 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.Items.Foods.AbstractFood;
+import Model.Entitys.Items.Foods.FoodFactory;
 import Model.Map.Etage;
 import Model.Utils.*;
 
@@ -27,6 +29,14 @@ public class Snake extends AbstractMonster {
             boolean Alive = super.updatePV(pv, limited);
             if(!Alive){
                 snakeTail.remove(this);
+            }
+            AbstractFood food = switch (Procedure.getRandomInt(49,0)){
+                case 0,1,2,3,4 -> FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.BURGER);
+                case 5,6 -> FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.APPLE);
+                default -> null;
+            };
+            if(food != null){
+                getEtage().addItem(food);
             }
             return Alive;
         }
