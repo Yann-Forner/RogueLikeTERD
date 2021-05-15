@@ -117,6 +117,7 @@ public class Marchand extends AbstractMonster {
         catch (IOException ignored) { }
     }
 
+    //test
     /**
      * Analyse de l'entrée utilisateur et redirection vers les différentes procédures.
      * @throws IOException Si le reader ne fonctionne pas
