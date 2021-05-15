@@ -30,7 +30,7 @@ public class Snake extends AbstractMonster {
             if(!Alive){
                 snakeTail.remove(this);
             }
-            AbstractFood food = switch (Procedure.getRandomInt(49,0)){
+            AbstractFood food = switch (Procedure.getRandomInt(39,0)){
                 case 0,1,2,3,4 -> FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.BURGER);
                 case 5,6 -> FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.APPLE);
                 default -> null;
