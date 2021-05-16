@@ -12,6 +12,16 @@
 
 Le but du jeu est d'avancer le plus loin dans un labyrinthe composé de plusieurs etages eux même composés de plusieurs pieces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face a de nombreux monstres dont des boss et a d'autres pieges tout aussi mortels, heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
 
+<h2>⚠️Warnings⚠️</h2>
+
+Le jeu est jouable est sur Linux et sur Windows. <br>
+
+Attention toutefois à son utilisation sur Windows :<br>
+  - Les smileys seront remplacés par des lettres. <br>
+  - Le jeu sera lancé de base en tour par tour, il faudra appuyer sur T pour changer ce mode si désiré.<br>
+Ces spécifications seront de même valables sur l'IDE.<br>
+
+
 <h1>Touches</h1>
 Déplacement : <b>ZQSD</b></br>
 Mode Tour par tour : <b>T</b></br>
