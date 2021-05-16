@@ -74,6 +74,9 @@ C'est un etage piege qui apparait lorsque l'on marche sur une <b>case piegée</b
 <h4>1.1.5. Etage boss</h4>
 C'est un étage où un <b>boss</b> apparaît .</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118412126-94a41e80-b698-11eb-8806-96f54fef143b.png"/>
+<h4>1.1.5. Etage repos</h4>
+C'est un étage qui <b>régénère la vie</b> du joueur. Cette salle possède de même <b>une arme</b> que le joueur pourra rammaser</br></br>
+<img src="https://user-images.githubusercontent.com/74865920/118413200-5dd10700-b69e-11eb-92ef-330ffcff5d77.png"/>
 
 <h3>1.2. Types salles</h3>
 <h4>1.2.1. Salle normale</h4>
@@ -342,7 +345,7 @@ Elle permet de descendre à <b>l'etage precedent</b>.</br>
 Linux: 👎</br>
 Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
-Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé<b>.
+Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé</b>.
 <h4>3.1.7. Cellules Chest</h4>
  Linux: 📦</br>
 Windows: <b>"€"</b></br>
