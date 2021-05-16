@@ -19,7 +19,7 @@ public class StackOfMoney extends AbstractItem {
      * Champ indiquant le montant du stack d'argent
      * @author Gillian
      */
-    private int montant;
+    private final int montant;
 
     /**
      * Constructeur d'un stack d'argent
@@ -43,6 +43,14 @@ public class StackOfMoney extends AbstractItem {
 
     }
 
+    //TODO ajouter l'argent au joueur
+
+    /**
+     * Ajoute l'argent au joueur
+     * @param e L'entité qui rentre en contact avec this.
+     *
+     * @author Gillian
+     */
     @Override
     public void onContact(Entity e) {
         if (!(e instanceof AbstractMonster)) {
@@ -52,7 +60,7 @@ public class StackOfMoney extends AbstractItem {
                     + Affichage.BRIGTH_BLUE + getNom()
                     + Affichage.BLUE + "d'une valeur de "
                     + Affichage.GREEN + getMontant() + "$");
-            player.addMoney(montant);
+            player.getInventory().addMoney(montant);
             player.getEtage().removeItem(this);
         }
 
@@ -76,13 +84,13 @@ public class StackOfMoney extends AbstractItem {
     @Override
     public String toString() {
         if (System.getProperty("os.name").equals("Linux")) {
-            if (getMontant() <= 20) {
+            if (getMontant() <= 25) {
                 //return 	smiley 1;
-            } else if (getMontant() <= 30) {
-                //return 	smiley 2;
-            } else if (getMontant() <= 40) {
-                //return 	smiley 3
             } else if (getMontant() <= 50) {
+                //return 	smiley 2;
+            } else if (getMontant() <= 75) {
+                //return 	smiley 3
+            } else if (getMontant() <= 100) {
                 //return smiley 4
             } else {
                 return "";
