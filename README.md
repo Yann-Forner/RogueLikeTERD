@@ -10,7 +10,7 @@
 
 <h1>Presentation du jeu</h1>
 
-Le but du jeu est d'avancer le plus loin dans un labyrinthe composé de plusieurs etages eux même composés de plusieurs pieces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face a de nombreux monstres dont des boss et a d'autres pieges tout aussi mortels, heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
+Le but du jeu est d'avancer <b>le plus loin possible</b> dans un labyrinthe composé de <b>plusieurs etages</b> eux même composés de plusieurs pieces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face à de <b>nombreux monstres</b>, boss et divers pièges tout aussi mortels. Heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
 
 <h2>⚠️Warnings⚠️</h2>
 
@@ -35,11 +35,11 @@ Sauvegarder : <b>W</b></br>
 Quitter : <b>ESC</b></br>
 
 <h1>Attributs du joueur</h1>
-Le joueur est doté de différents attributs lui permettant d'évoluer dans le jeu.<br>
+Le joueur est doté de <b>différents attributs</b> lui permettant d'évoluer dans le jeu.<br>
 
 <h2>La vie</h2>
 
-La vie est la donnée la plus importante du jeu. Si celle-ci tombe à 0, le joueur a perdu. <br>
+La vie est la donnée la plus importante du jeu. Si celle-ci <b>tombe à 0, le joueur a perdu.</b> <br>
 Le joueur peut perdre de la vie par les dégats que peuvent lui infliger les monstres et en regagner grâce à la nourriture ou aux potions de vie  <br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
 <h2>L'endurance</h2>
