@@ -21,8 +21,8 @@ import java.util.Objects;
  * @author Gillian, Quentin
  */
 public class Marchand extends AbstractMonster {
-    private static STATE state = STATE.NOTVISITED;
     ArrayList<AbstractItem> itemArrayList = new ArrayList<>();
+    private static STATE state = STATE.NOTVISITED;
     private final String couleurText = Affichage.GREEN;
     private final String couleurTouches = Affichage.BRIGTH_PURPLE;
     private final String couleurItems = Affichage.YELLOW;
@@ -30,16 +30,14 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Différents états du marchands
-     *
-     * @author Gillian
+     * @author Gillian, Quentin
      */
     public enum STATE {
         NOTVISITED, NORMAL, DEAD, AGGRESSIVE, ACHAT, CONFIRMATION, VENTE
     }
 
     /**
-     * Constructeur du marchand
-     *
+     * Classe du marchand
      * @param m             Etage où mettre le marchand
      * @param pos           Position du marchand
      * @param nom           Nom du marchand
@@ -50,7 +48,8 @@ public class Marchand extends AbstractMonster {
      * @param update_rate   Taux de raffraichissement
      * @param pathCross     Type de déplacement
      * @param lvl           niveau du marchand
-     * @author Gillian
+     * @param nbrWeaponsMax Nombre d'arme max que peut vendre le marchand
+     * @param nbrPotionsMax Nombre de potion max que peut vendre le marchand
      */
     public Marchand(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, Tools.PathType pathCross, int lvl, int nbrWeaponsMax, int nbrPotionsMax) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
@@ -76,7 +75,6 @@ public class Marchand extends AbstractMonster {
         }
     }
 
-
     @Override
     public void death() {
         super.death();
@@ -87,7 +85,11 @@ public class Marchand extends AbstractMonster {
         TourManager.addMessage(Affichage.RED + Affichage.BOLD + "Tuer le seul marchand du labyrinthe n'etait peut etre pas une bonne idée.");
     }
 
-    public void dialogue(){
+    /**
+     * Dialogue du marchand de base.
+     * @author Quentin
+     */
+    private void dialogue(){
         StringBuilder sb = new StringBuilder();
         if(state==STATE.NOTVISITED){
             sb.append(Affichage.BRIGTH_YELLOW).append(Affichage.BOLD).append("\nBonjour ").append(Objects.requireNonNull(Start.getPlayer()).getNom());
@@ -111,7 +113,13 @@ public class Marchand extends AbstractMonster {
         }
     }
 
-    public boolean processInput() throws IOException {
+    /**
+     * Defini le comportement selon la touche et l'etat du marchand.
+     * @return Si la confiramtion est vrai ou fausse
+     * @throws IOException Exception
+     * @author Quentin
+     */
+    private boolean processInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String string = reader.readLine();
         boolean result = false;
@@ -177,7 +185,11 @@ public class Marchand extends AbstractMonster {
         return result;
     }
 
-    public void startAchat(){
+    /**
+     * Demarre la phase d'achat d'objet du marchand.
+     * @author Quentin
+     */
+    private void startAchat(){
         state = STATE.ACHAT;
         StringBuilder sb = new StringBuilder();
         sb.append(couleurText);
@@ -218,7 +230,7 @@ public class Marchand extends AbstractMonster {
      * @param index Index de l'item dans l'ArrayList du marchand
      * @author Quentin
      */
-    public void startAchatSelection(int index){
+    private void startAchatSelection(int index){
         state = STATE.CONFIRMATION;
         AbstractItem abstractItem = itemArrayList.get(index);
         System.out.println(getConfirmationItem(abstractItem,false));
@@ -268,7 +280,11 @@ public class Marchand extends AbstractMonster {
         }
     }
 
-    public void startVente(){
+    /**
+     * Demare la phase de vente du marchand.
+     * @author Quentin
+     */
+    private void startVente(){
         state = STATE.VENTE;
         StringBuilder sb = new StringBuilder();
         sb.append(couleurText).append("Qu'avez vous a me vendre ?\n");
@@ -295,7 +311,7 @@ public class Marchand extends AbstractMonster {
      * @param venteArme Defini si je joueur vent son arme ou sa potion courrante
      * @author Quentin
      */
-    public void startVenteSelection(boolean venteArme){
+    private void startVenteSelection(boolean venteArme){
         state = STATE.CONFIRMATION;
         Player player = Start.getPlayer();
         AbstractItem abstractItem = venteArme ? Objects.requireNonNull(player).getInventory().getCurrentWeapon() : Objects.requireNonNull(player).getInventory().getCurrentPotion();
@@ -354,6 +370,10 @@ public class Marchand extends AbstractMonster {
         itemArrayList.addAll(getInventory().getPotions());
     }
 
+    /**
+     * Commmence la phase d'attaque du marchand, il va devenir un vrai mob et attaquer le joueur.
+     * @author Quentin
+     */
     private void startAttaque(){
         state = STATE.AGGRESSIVE;
         TourManager.addMessage(Affichage.YELLOW +
@@ -406,7 +426,7 @@ public class Marchand extends AbstractMonster {
      * Permet de passer du mode dialogue avec le marchand a celui de joueur dans le jeu.
      * @author Quentin
      */
-    public void changeDialogueState() {
+    private void changeDialogueState() {
         switch (state){
             case AGGRESSIVE, NOTVISITED -> {}
             default -> state = STATE.NORMAL;
