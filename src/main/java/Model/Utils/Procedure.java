@@ -18,23 +18,16 @@ import java.util.Random;
  */
 public class Procedure {
     private static final Random rand=new Random();
-    private static long seed ;
+
     /**
-     * Seed de la Map.
-     * @param s long
+     * Renvoit le random de la procedure.
+     * @return Random
      * @author Quentin
      */
-    public static void setSeed(long s){
-        rand.setSeed(s);
-        seed = s;
+    public static Random getRand(){
+        return rand;
     }
-    /**
-     * Renvoit la Seed de la Map.
-     * @author Quentin
-     */
-    public static long getSeed(){
-        return seed;
-    }
+
 
     /**
      * Renvoit un entier aleatoire entre min et max inclus.

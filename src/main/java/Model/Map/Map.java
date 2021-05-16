@@ -44,7 +44,7 @@ public class Map implements Serializable {
      * @author Quentin
      */
     public Etage getCurrent(){
-        return Objects.requireNonNull(Start.getPlayer()).getEtage();
+        return Start.getPlayer() == null ? etages.get(0) :  Start.getPlayer().getEtage();
     }
 
     /**
