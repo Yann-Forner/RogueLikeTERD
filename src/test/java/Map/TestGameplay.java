@@ -63,6 +63,7 @@ public class TestGameplay extends TestCase {
         System.out.println(etage);
     }*/
 
+
     public void testPocheWithCollideToAWall(){
 
         Position pos = Procedure.getAccesibleRandomPosition(false,etage,etage.getRooms().get(0));
