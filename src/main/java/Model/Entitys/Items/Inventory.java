@@ -38,8 +38,9 @@ public class Inventory implements Serializable {
      * @param entity l'entité qui drop l'item
      * @param item Item a jeter
      * @author JP
+     * @return Si l'item a pu etre laché.
      */
-    public void dropItem(Entity entity, AbstractItem item) {
+    public boolean dropItem(Entity entity, AbstractItem item) {
         if(item != null) {
             Etage e = entity.getEtage();
             int scanRange = 1;
@@ -59,7 +60,7 @@ public class Inventory implements Serializable {
                             }
                             item.setPosition(new Position(x, y));
                             e.addItem(item);
-                            return;
+                            return true;
                         }
                     }
                 }
@@ -72,6 +73,7 @@ public class Inventory implements Serializable {
                     + Affichage.RED
                     + " L'item ne peut pas etre jeté l'endroit est trop encombré.");
         }
+        return false;
     }
 
     /**

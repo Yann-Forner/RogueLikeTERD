@@ -1,9 +1,12 @@
 package Model.Entitys.Monsters;
 
 import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Items.Inventory;
+import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Items.Weapons.Wand;
+import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Items.Weapons.WeaponFactory;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.*;
 
@@ -11,20 +14,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-
-//TODO Faut changer la salle en fonction du statut du marchand
-//TODO Système de vente
-//TODO Système d'achat
-//TODO déplacer money dans inventory
+import java.util.Objects;
 
 /**
- * Classe décrivant le marchand (considéré donc comme un monstre
- *
+ * Classe décrivant le marchand
  * @author Gillian, Quentin
  */
 public class Marchand extends AbstractMonster {
+    private static STATE state = STATE.NOTVISITED;
     ArrayList<AbstractItem> itemArrayList = new ArrayList<>();
+    private final String couleurText = Affichage.GREEN;
+    private final String couleurTouches = Affichage.BRIGTH_PURPLE;
+    private final String couleurItems = Affichage.YELLOW;
+    private final String couleurPrix = Affichage.BRIGTH_YELLOW;
 
     /**
      * Différents états du marchands
@@ -32,11 +34,8 @@ public class Marchand extends AbstractMonster {
      * @author Gillian
      */
     public enum STATE {
-        NOTVISITED, VISITED, BUY, BUYSELECTION, BUYCONFIRMATION, SELL, AGGRESSIVE, SELLWEAPONS, SELLPOTIONS, SELLEMPTY, SELLCONFIRMATION
+        NOTVISITED, NORMAL, DEAD, AGGRESSIVE, ACHAT, CONFIRMATION, VENTE
     }
-
-    private STATE state;
-
 
     /**
      * Constructeur du marchand
@@ -51,317 +50,296 @@ public class Marchand extends AbstractMonster {
      * @param update_rate   Taux de raffraichissement
      * @param pathCross     Type de déplacement
      * @param lvl           niveau du marchand
-     * @param state         Etat du marchand
      * @author Gillian
      */
-    public Marchand(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, Tools.PathType pathCross, int lvl, STATE state) {
+    public Marchand(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate, Tools.PathType pathCross, int lvl, int nbrWeaponsMax, int nbrPotionsMax) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate, pathCross, lvl);
-        this.state = state;
-        generateItems(3,5);
+        generateStock(nbrWeaponsMax,nbrPotionsMax);
     }
 
     @Override
     public boolean updatePV(int pv, boolean limited) {
-        switch (state) {
-            case NOTVISITED, VISITED -> dialogue(true);
-            case BUY -> System.out.println("buy"); //TODO
-            case AGGRESSIVE -> System.out.println("agrressive"); //TODO
-            case SELL -> System.out.println("sell");
+        if(state == STATE.AGGRESSIVE){
+            return super.updatePV(pv,limited);
         }
-        return true;
-    }
-
-    /**
-     * Dialogue de "bienvenue" lancé lorsque l'on a jamais vu le marchand.
-     *
-     * @author Gillian, Quentin
-     */
-    private String dialogueInit() {
-        state = STATE.VISITED;
-        return Affichage.BRIGTH_YELLOW + Affichage.BOLD +
-                "\nBonjour " +
-                Start.getPlayer().getNom() +
-                "\nBienvenue chez le plus grand, le pLus beau, le plus charismatique marchand de tout le labyrinthe." +
-                "\nCela fait maintenant près de 10 ans que je suis bloqué dans ce labyrinthe." +
-                "Je suis donc l'homme le plus riiiiche que tu puisses trouver ici" +
-                "\nTu te doutes bien que toute cette fortune n'est pas sortie de nulle part !" +
-                "\nJe vends, j'achète, je vo... enfin bref, je mène mon buisness quoi !\n\n";
-    }
-
-    /**
-     * Dialogue de déclaration des options de vente / d'achat / d'attaque.
-     * @author Gillian, Quentin
-     */
-    public void dialogue(boolean changeState) {
-        if(changeState){
+        else{
             changeDialogueState();
+            dialogue();
+            return true;
         }
-        StringBuilder sb = new StringBuilder();
-        switch (state) {
-            case VISITED -> sb.append("Comme on se retrouve !\n\n");
-            case NOTVISITED -> sb.append(dialogueInit());
-        }
-        setState (STATE.VISITED);
-        sb.append("Tu es ici pour acheter un de mes merveilleux objets ou pour me vendre un des tiens ?\n\n");
-        sb.append(Affichage.GREEN);
-        sb.append("1 - Acheter\n");
-        sb.append(Affichage.YELLOW);
-        sb.append("2 - Vendre\n");
-        sb.append(Affichage.RED);
-        sb.append("3 - Attaquer\n");
-        sb.append(Affichage.BLUE);
-        sb.append("4 - Quitter\n");
-        System.out.println(sb);
-        try {
-            processInput();
-        }
-        catch (IOException ignored) { }
     }
 
-
-    /**
-     * Analyse de l'entrée utilisateur et redirection vers les différentes procédures.
-     * @throws IOException Si le reader ne fonctionne pas
-     * @author Gillian, Quentin
-     */
-    private void processInput() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String string = reader.readLine();
-        switch (state) {
-            case BUYSELECTION -> {
-                switch (string) {
-                    case "0","1","2","3","4","5","6","7","8","9" -> buying(Integer.parseInt(string));
-                    default -> processInput();
-                }
-            }
-            case BUYCONFIRMATION -> {
-                switch (string) {
-                    case "y", "Y" -> dialogueBuy();
-                    case "n", "N" -> dialogue(false);
-                    default -> processInput();
-                }
-            }
-            case SELLPOTIONS -> {
-                switch (string){
-                    case "p", "P" -> procedureSell(2);
-                    case "v", "V" -> selling();
-                    case "4" -> {}
-                    default -> processInput();
-                }
-            }
-            case SELLWEAPONS -> {
-                switch (string){
-                    case "w", "W" -> procedureSell(1);
-                    case "v", "V" -> selling();
-                    case "4" -> {}
-                    default -> processInput();
-                }
-            }
-            case SELL -> {
-                switch (string) {
-                    case "w", "W" -> procedureSell(1);
-                    case "p", "P" -> procedureSell(2);
-                    case "v", "V" -> selling();
-                    case "4" -> {}
-                    default -> processInput();
-                }
-            }
-            case SELLCONFIRMATION -> {
-                switch (string) {
-                    case "y", "Y" -> dialogueSell();
-                    case "n", "N" -> dialogue(false);
-                    default -> processInput();
-                }
-
-            }
-            case VISITED -> {
-                switch (string) {
-                    case "1" -> dialogueInitBuy();
-                    case "2" -> dialogueSell();
-                    case "3" -> typeAggressive();
-                    case "4" -> {
-                    }
-                }
-            }
-            default -> {
-                switch (string) {
-                    case "1" -> dialogueInitBuy();
-                    case "2" -> dialogueSell();
-                    case "3" -> typeAggressive();
-                    case "4" -> {}
-                    case "w", "W" -> procedureSell(1);
-                    case "p", "P" -> procedureSell(2);
-                    case "v", "V" -> selling();
-                    default -> processInput();
-                }
-
-            }
-
-        }
-        changeDialogueState();
-    }
-
-
-
-
-
-    /**
-     * Procédure d'attaque lorsque le marchand est aggressif.
-     *
-     * @author Gillian, Quentin
-     */
+    @Override
     public void updateMonster() {
-        if (state == STATE.AGGRESSIVE) {
+        if(state == STATE.AGGRESSIVE){
             super.updateMonster();
         }
     }
 
-    //// ------------------------------------------Achat-------------------------------------------------------------
 
-    //TODO créer une liste d'item du marchand
-    //TODO Pouvoir parcourir la liste d'item du marchand
-    //TODO deux options : soit on agglomère les listes pour en former une, soit on différencie les deux à la vente
-    //TODO drop au sol
-
-    /**
-     * Dialogue initial de la vente
-     *
-     * @author Gillian
-     */
-
-    public void dialogueInitBuy() {
-        state = STATE.BUY;
-        String sb = Affichage.GREEN +
-                "Tu veux donc acquérir un de mes merveilleux objets ? EHEH ! ça me va !\n" +
-                "Voici tous mes beaux objets !\n";
-        System.out.println(sb);
-        dialogueBuy();
+    @Override
+    public void death() {
+        super.death();
+        state = STATE.DEAD;
+        TourManager.addMessage(Affichage.RED + Affichage.BOLD + "Tuer le seul marchand du labyrinthe n'etait peut etre pas une bonne idée.");
     }
 
-    /**
-     * Dialogue permettant de montrer les différents items du marchand
-     * @author Gillian
-     */
-    public void dialogueBuy(){
+    public void dialogue(){
         StringBuilder sb = new StringBuilder();
-        if(getInventory().getWeapons().size()!=0){
-            sb.append(Affichage.GREEN).append("Voici tout d'abord mes armes... \n\n");
+        if(state==STATE.NOTVISITED){
+            sb.append(Affichage.BRIGTH_YELLOW).append(Affichage.BOLD).append("\nBonjour ").append(Objects.requireNonNull(Start.getPlayer()).getNom());
+            sb.append("\nBienvenue chez le plus grand, le pLus beau, le plus charismatique marchand de tout le labyrinthe.");
+            sb.append("\nCela fait maintenant près de 10 ans que je suis bloqué dans ce labyrinthe.");
+            sb.append("Je suis donc l'homme le plus riiiiche que tu puisses trouver ici");
+            sb.append("\nTu te doutes bien que toute cette fortune n'est pas sortie de nulle part !");
+            sb.append("\nJe vends, j'achète, je vo... enfin bref, je mène mon buisness quoi !\n\n");
+            state = STATE.NORMAL;
         }
-        for (int i = 0; i < itemArrayList.size(); i++) {
-            if(i==getInventory().getWeapons().size() && getInventory().getPotions().size()!=0){
-                sb.append(Affichage.GREEN).append("\nMais aussi mes belles et succulentes potions ... \n\n");
-            }
-            AbstractItem item = itemArrayList.get(i);
-            sb.append(Affichage.YELLOW);
-            sb.append(item.getNom());
-            sb.append(": ");
-            sb.append(item);
-            sb.append("  pour ");
-            sb.append(item.getPrix());
-            sb.append("$");
-            sb.append("   Touche ---> ");
-            sb.append(i);
-            sb.append("\n");
-        }
-        sb.append(Affichage.GREEN).append(itemArrayList.size()==0 ?
-                "Je n'ai plus rien en stock.\n" :
-                "\nIl te suffit d'appuyer sur la touche correspondante pour m'acheter un de mes merveilleux objet.");
+        sb.append(couleurText).append("Tu es ici pour acheter un de mes merveilleux objets ou pour me vendre un des tiens ?\n\n");
+        sb.append("Acheter - ").append(couleurTouches).append("1\n");
+        sb.append(couleurText).append("Vendre - ").append(couleurTouches).append("2\n");
+        sb.append(couleurText).append("Voler - ").append(couleurTouches).append("3\n");
+        sb.append(couleurText).append("Quitter - ").append(couleurTouches).append("4\n");
         System.out.println(sb);
+        try {
+            processInput();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean processInput() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String string = reader.readLine();
+        boolean result = false;
+        switch (state){
+            case NORMAL -> {
+                switch (string){
+                    case "1" -> startAchat();
+                    case "2" -> startVente();
+                    case "3" -> startAttaque();
+                    default -> {
+                        System.out.println("A la prochaine");
+                        changeDialogueState();
+                    }
+                }
+            }
+            case ACHAT -> {
+                switch (string){
+                    case "1","2","3","4","5","6","7","8","9" -> startAchatSelection(Integer.parseInt(string));
+                    case "q", "Q" -> {
+                        state = STATE.NORMAL;
+                        dialogue();
+                    }
+                    default -> {
+                        System.out.println(Affichage.RED+"MAUVAISE TOUCHE");
+                        processInput();
+                    }
+                }
+            }
+            case VENTE -> {
+                Inventory inventory = Objects.requireNonNull(Start.getPlayer()).getInventory();
+                switch (string){
+                    case "i", "I" -> {
+                        inventory.switchWeapons();
+                        System.out.println(couleurText+ "Vos armes:");
+                        System.out.print(getListeItem(new ArrayList<>(inventory.getWeapons())));
+                        processInput();
+                    }
+                    case "o", "O" -> {
+                        inventory.switchPotions();
+                        System.out.println(couleurText + "Vos potions:");
+                        System.out.print(getListeItem(new ArrayList<>(inventory.getPotions())));
+                        processInput();
+                    }
+                    case "l", "L" -> startVenteSelection(true);
+                    case "m", "M" -> startVenteSelection(false);
+                    case "q", "Q" -> {
+                        state = STATE.NORMAL;
+                        dialogue();
+                    }
+                    default -> {
+                        System.out.println(Affichage.RED+"MAUVAISE TOUCHE");
+                        processInput();
+                    }
+                }
+            }
+            case CONFIRMATION -> {
+                switch (string){
+                    case "y", "Y" -> result = true;
+                    default -> {}
+                }
+            }
+        }
+        return result;
+    }
+
+    public void startAchat(){
+        state = STATE.ACHAT;
+        StringBuilder sb = new StringBuilder();
+        sb.append(couleurText);
         if(itemArrayList.size()==0){
-            state = STATE.VISITED;
-            dialogue(false);
+            sb.append("Je n'ai plus rien en stock.\n");
         }
         else{
-            setState(STATE.BUYSELECTION);
-            try {
-                processInput();
-            } catch (Exception e) { }
-        }
-    }
-
-    /**
-     * Procédure de la vente de l'objet sélectionné
-     * @param index place de l'objet vendu dans la liste
-     *
-     * @author Gillian
-     */
-
-    public void buying (int index) {
-        //TODO supp doublons
-        if (index>itemArrayList.size()-1){
-            StringBuilder sb = new StringBuilder();
-            sb.append(Affichage.RED);
-            sb.append("Oups, je crois que tu t'es trompé de touche ");
-            System.out.println(sb);
-            dialogueBuy();
-        }
-        else {
-            if (checkMoney(itemArrayList.get(index))) {
-                AbstractItem item = itemArrayList.remove(index);
-                Start.getPlayer().removeMoney(item.getPrix());
-                getInventory().dropItem(this, item);
-
-                setState(STATE.BUYCONFIRMATION);
-
-                StringBuilder sb = new StringBuilder();
-                sb.append("Félicitations, tu viens de m'acheter ");
-                sb.append(Affichage.YELLOW);
-                sb.append(item.getNom());
-                sb.append(Affichage.GREEN);
-                sb.append(" pour la belle somme de ");
-                sb.append(Affichage.YELLOW);
-                sb.append(item.getPrix());
-                sb.append("\n\n");
-                sb.append(Start.getMap());
-                sb.append(Affichage.GREEN);
-                sb.append("Veux tu m'acheter autre chose ?");
-                sb.append(Affichage.YELLOW);
-                sb.append(" - Y - OUI");
-                sb.append(Affichage.YELLOW);
-                sb.append("- N - NON");
-                System.out.println(sb);
-                try {
-                    processInput();
-                } catch (Exception e) {
-                }
-            } else {
-                System.out.println("Vous n'avez pas assez d'argent mon pauvre, choissez un autre objet\n");
-                dialogueBuy();
+            sb.append("J'ai de amrmes et des potions a vendre, que voulez vous ?");
+            if(getInventory().getWeapons().size()>0){
+                sb.append(couleurText).append("Voici d'abord mes armes\n");
             }
-
+            for (int i = 0; i < itemArrayList.size(); i++) {
+                if(i==getInventory().getWeapons().size() && getInventory().getPotions().size()!=0){
+                    sb.append(couleurText).append("\nMais aussi mes belles et succulentes potions ... \n\n");
+                }
+                AbstractItem item = itemArrayList.get(i);
+                sb.append(couleurItems).append(item.getNom()).append(": ").append(item);
+                sb.append(couleurText).append("  pour ");
+                sb.append(couleurPrix).append(item.getPrix()).append("$");
+                sb.append(couleurText).append(" ---> ");
+                sb.append(couleurTouches).append(i).append("\n");
+            }
+        }
+        if(itemArrayList.size()!=0){
+            sb.append(couleurText).append("Il te suffit d'appuyer sur la touche correspondante pour m'acheter un de mes merveilleux objet.\n");
+            sb.append("Ou sur ").append(couleurTouches).append("Q").append(couleurText).append(" pour quitter.");
+        }
+        System.out.println(sb);
+        try {
+            processInput();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-
-
     /**
-     * Permet de voir s'il est possible d'acheter l'item en fonction de la monnaie du joueur
-     * @param item l'objet que le joueur veut acheter
-     * @return true si l'achat est possible, false sinon
-     * @author Gillian
+     * Procedure d'achat de l'item a l'index passé en parametre.
+     * @param index Index de l'item dans l'ArrayList du marchand
+     * @author Quentin
      */
-    public boolean checkMoney (AbstractItem item) {
-        return item.getPrix()<=Start.getPlayer().getMoney();
+    public void startAchatSelection(int index){
+        state = STATE.CONFIRMATION;
+        AbstractItem abstractItem = itemArrayList.get(index);
+        System.out.println(getConfirmationItem(abstractItem,false));
+        try {
+            if(processInput()){
+                if(Objects.requireNonNull(Start.getPlayer()).getMoney()>=abstractItem.getPrix()){
+                    Inventory inventory = Start.getPlayer().getInventory();
+                    if(index>=getInventory().getWeapons().size()){
+                        if(inventory.isPotionsFull()){
+                            if(inventory.dropItem(Start.getPlayer(),abstractItem)){
+                                getInventory().getPotions().remove((AbstractPotion)abstractItem);
+                                itemArrayList.remove(abstractItem);
+                            }
+                            else{
+                                System.out.println(couleurText + "L'item ne peut pas etre acheté l'endroit est trop encombré.");
+                            }
+                        }
+                        else{
+                            inventory.addWeapon((AbstractWeapon) abstractItem);
+                        }
+                    }
+                    else{
+                        if(inventory.isWeaponsFull()){
+                            if(inventory.dropItem(Start.getPlayer(),abstractItem)){
+                                getInventory().getWeapons().remove((AbstractWeapon) abstractItem);
+                                itemArrayList.remove(abstractItem);
+                            }
+                            else{
+                                System.out.println(couleurText + "L'item ne peut pas etre acheté l'endroit est trop encombré.");
+                            }
+                        }
+                        else{
+                            inventory.addPotion((AbstractPotion) abstractItem);
+                        }
+                    }
+                    Start.getPlayer().removeMoney(abstractItem.getPrix());
+                    System.out.println(couleurText +  "Félicitation pour cet achat!!!");
+                }
+                else{
+                    System.out.println(couleurText +  "Vous n'avez pas assez d'argent pour cet objet.");
+                }
+            }
+            state = STATE.NORMAL;
+            dialogue();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startVente(){
+        state = STATE.VENTE;
+        StringBuilder sb = new StringBuilder();
+        sb.append(couleurText).append("Qu'avez vous a me vendre ?\n");
+        sb.append("Vous pouver changer vous armes et potions comme bon vous semble avec ");
+        sb.append(couleurTouches).append("I").append(couleurText).append(" et ").append(couleurTouches).append("0").append("\n");
+        sb.append(couleurText).append("Appuyez sur ").append(couleurTouches).append("L");
+        sb.append(couleurText).append(" pour me vendre une arme et ").append(couleurTouches).append("M");
+        sb.append(couleurText).append(" pour me vendre une potion ou ").append(couleurTouches).append("Q").append(couleurText).append(" pour quitter\n");
+        sb.append(couleurText).append("Vos armes:\n");
+        sb.append(getListeItem(new ArrayList<>(Objects.requireNonNull(Start.getPlayer()).getInventory().getWeapons())));
+        sb.append(couleurText).append("Vos potions:\n");
+        sb.append(getListeItem(new ArrayList<>(Start.getPlayer().getInventory().getPotions())));
+        System.out.println(sb);
+        try{
+            processInput();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Méthode permettant de réinitialiser l'inventaire du marchand et d'ajouter des items aléatoires
-     * @param nbWeapons nombre d'armes à ajouter
-     * @param nbPotions nombre de potions à ajouter
-     * @author Gillian
+     * Confirmation de la vente de l'objet courant du joueur, son arme si venteArme est vrai et sa potion si venteArme est faux.
+     * @param venteArme Defini si je joueur vent son arme ou sa potion courrante
+     * @author Quentin
      */
+    public void startVenteSelection(boolean venteArme){
+        state = STATE.CONFIRMATION;
+        Player player = Start.getPlayer();
+        AbstractItem abstractItem = venteArme ? Objects.requireNonNull(player).getInventory().getCurrentWeapon() : Objects.requireNonNull(player).getInventory().getCurrentPotion();
+        StringBuilder sb = new StringBuilder();
+        if(abstractItem==null){
+            sb.append(couleurText).append("Malheureusement vous n'avez rien a me vendre.\n");
+        }
+        else{
+            sb.append(getConfirmationItem(abstractItem,true));
+        }
+        System.out.print(sb);
+        try {
+            if(abstractItem != null){
+                if(processInput()){
+                    if(venteArme){
+                        player.getInventory().getWeapons().remove(abstractItem);
+                    }
+                    else{
+                        player.getInventory().getPotions().remove(abstractItem);
+                    }
+                    player.addMoney(abstractItem.getPrix());
+                    System.out.println(couleurText + "Merci pour cette vente.");
+                }
+            }
+            state = STATE.NORMAL;
+            dialogue();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-
-    public void generateItems (int nbWeapons, int nbPotions) {
-        /*
-        for (int i = 0; i < nbWeapons; i++) {
+    /**
+     * Genere le stock du marchand.
+     * @param nbrWeaponsMax Le nombre d'arme du marchand
+     * @param nbrPotionsMax le nombre de potions du marchand
+     * @author Quentin
+     */
+    private void generateStock(int nbrWeaponsMax, int nbrPotionsMax){
+        for (int i = 0; i < Procedure.getRandomInt(nbrWeaponsMax,0); i++) {
             getInventory().getWeapons().add(switch (Procedure.getRandomInt(3, 1)) {
                 case 1 -> WeaponFactory.getNewWeapon(getEtage(), WeaponFactory.WeaponType.SWORD);
                 case 2 -> WeaponFactory.getNewWeapon(getEtage(), WeaponFactory.WeaponType.WAND);
                 default -> WeaponFactory.getNewWeapon(getEtage(), WeaponFactory.WeaponType.BOW);
             });
         }
-        for (int i = 0; i < nbPotions; i++) {
+        for (int i = 0; i < Procedure.getRandomInt(nbrPotionsMax,0); i++) {
             getInventory().getPotions().add(switch (Procedure.getRandomInt(20, 1)) {
                 case 1, 2, 3, 4, 5, 6, 7 -> PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.HEAL_POTION);
                 case 8, 9, 10 -> PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.ENDURENCE_POTION);
@@ -369,196 +347,66 @@ public class Marchand extends AbstractMonster {
                 default -> PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.STRENGTH_POTION);
             });
         }
-         */
-        getInventory().getWeapons().add(WeaponFactory.getNewWeapon(getEtage(), WeaponFactory.WeaponType.WAND));
         itemArrayList.addAll(getInventory().getWeapons());
         itemArrayList.addAll(getInventory().getPotions());
     }
 
-
-    // // ------------------------------------------Vente-------------------------------------------------------------
-
-    /**
-     * Dialogue initial quand le marchand veut acheter (que le joueur veut vendre.
-     *
-     * @author Gillian, Quentin
-     */
-    public void dialogueSell() {
-        state = STATE.SELL;
-        if (Start.getPlayer().getInventory().getWeapons().isEmpty())
-        {
-            state = STATE.SELLPOTIONS;
-        }
-        if (Start.getPlayer().getInventory().getPotions().isEmpty())
-        {
-            state = STATE.SELLWEAPONS;
-        }
-        if (Start.getPlayer().getInventory().getPotions().isEmpty()
-                && Start.getPlayer().getInventory().getWeapons().isEmpty())
-        {
-            state = STATE.SELLEMPTY;
-        }
-
-       StringBuilder sb = new StringBuilder();
-        sb.append(Affichage.GREEN);
-        sb.append("Tu veux donc vendre un de tes modestes objets ? Mhhhhh... J'accepte !\n");
-
-        String appuyer = Affichage.GREEN + "Appuyez sur " + Affichage.YELLOW;
-        switch (state) {
-
-            case SELLPOTIONS -> {
-                sb.append("Veux tu me vendre une de tes potions ?");
-                sb.append(Affichage.GREEN);
-                sb.append("Appuyez sur ");
-                sb.append(Affichage.YELLOW);
-                sb.append(" 'P' \n");
-            }
-            case SELLWEAPONS -> {
-                sb.append("Veux tu me vendre une de tes armes ?");
-                sb.append(Affichage.GREEN);
-                sb.append("Appuyez sur ");
-                sb.append(Affichage.YELLOW);
-                sb.append(" 'W' \n");
-            }
-            case SELLEMPTY -> {
-                sb.append(Affichage.RED);
-                sb.append("Et bien alors mon pauvre, on a rien à me proposer ?");
-                dialogue(false);
-            }
-            case SELL -> {
-                sb.append("Veux tu me vendre une de tes potions ?");
-                sb.append(Affichage.GREEN);
-                sb.append("Appuyez sur ");
-                sb.append(Affichage.YELLOW);
-                sb.append(" 'P' \n");
-                sb.append("Veux tu me vendre une de tes armes ?");
-                sb.append(Affichage.GREEN);
-                sb.append("Appuyez sur ");
-                sb.append(Affichage.YELLOW);
-                sb.append(" 'W' \n");
-            }
-        }
-        System.out.println(sb);
-
-        try {
-            processInput();
-        } catch (Exception e) { }
-    }
-
-
-    /**
-     * Permet d'engager la procédure de vente. Laisse le choix de vendre ou de quitter
-     *
-     * @param v type d'objet que le joueur veut vendre
-     * @throws IOException
-     */
-    public void procedureSell(int v) throws IOException {
-        String type;
-        switch (v) {
-            case 1 -> {
-                type = "armes";
-                setState(STATE.SELLWEAPONS);
-            }
-            case 2 -> {
-                type = "potions";
-                setState(STATE.SELLPOTIONS);
-            }
-            default -> {
-                type = "none";
-                processInput();
-            }
-        }
-
-        String sb = Affichage.GREEN
-                + "Montre moi quelles  !" + Affichage.YELLOW + type + "tu veux me vendre ! \n"
-                + "Tu n'as qu'à appuyer sur la touche" +
-                Affichage.YELLOW + " 'V' " + Affichage.RESET + Affichage.GREEN + Affichage.BOLD +
-                "pour me vendre l'objet que tu tiens dans la main !\n"
-                + "Tu peux également me laisser tranquille et t'en aller en appuyant sur " + Affichage.YELLOW + " '4' ";
-
-        System.out.println(sb);
-        try {
-            processInput();
-        } catch (Exception e) {
-        }
-
-
-    }
-
-    /**
-     * Permet de vendre un objet en fonction du type de vente du marchand
-     * @author Gillian
-     */
-    public void selling() {
-        AbstractItem item;
-
-        switch (getState()) {
-            case SELLPOTIONS -> {
-                item = Start.getPlayer().getInventory().getPotions().get(0);
-                Start.getPlayer().getInventory().sellPotion();
-            }
-            case SELLWEAPONS -> {
-
-                item = Start.getPlayer().getInventory().getWeapons().get(0);
-                Start.getPlayer().getInventory().sellWeapon();
-            }
-            default -> item = Start.getPlayer().getInventory().getWeapons().get(0);
-        }
-
-        state = STATE.SELLCONFIRMATION;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Félicitations, tu viens de me vendre ");
-        sb.append(Affichage.YELLOW);
-        sb.append(item.getNom());
-        sb.append(Affichage.GREEN);
-        sb.append(" pour la belle somme de ");
-        sb.append(Affichage.YELLOW);
-        sb.append(item.getPrix());
-        sb.append("\n \n");
-        sb.append(Start.getMap());
-        sb.append(Affichage.GREEN);
-        sb.append("Veux tu me vendre autre chose ?");
-        sb.append(Affichage.YELLOW);
-        sb.append(" - Y - OUI");
-        sb.append(Affichage.YELLOW);
-        sb.append("- N - NON");
-        System.out.println(sb);
-        try {
-            processInput();
-        } catch (Exception e) {
-            dialogueError();
-        }
-    }
-
-
-    // ------------------------------------------Aggressif-------------------------------------------------------------
-    /**
-     * Passage du marchand en mode agressif lorsque le joueur a décidé d'attaquer le marchand.
-     *
-     * @author Gillian, Quentin
-     */
-    public void typeAggressive() {
-        //TODO le faire attaquer
+    private void startAttaque(){
         state = STATE.AGGRESSIVE;
         TourManager.addMessage(Affichage.YELLOW +
                 "Vous auriez pu choisir la fortune... " +
-                Start.getPlayer().getNom() +
+                Objects.requireNonNull(Start.getPlayer()).getNom() +
                 "\n" + Affichage.RED +
                 "Mais vous avez choisi la " +
                 Affichage.BRIGTH_RED + "MORT" + Affichage.RED + " !!!!");
-
+        changeDialogueState();
     }
 
-    // ------------------------------------------Méthodes utilitaires-------------------------------------------------------------
+    /**
+     * Renvoit un String contenant la liste des items passé en parametre avec leurs prix et leurs nom.
+     * @param items Liste des items
+     * @return String
+     * @author Quentin
+     */
+    private String getListeItem(ArrayList<AbstractItem> items){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < items.size(); i++) {
+            AbstractItem item = items.get(i);
+            sb.append(Affichage.YELLOW).append(item.getNom()).append(" ");
+            if(i==0){
+                sb.append(Affichage.RED).append("[ ").append(Affichage.RESET).append(item).append(Affichage.BOLD).append(Affichage.RED).append(" ]").append(Affichage.RESET).append(Affichage.BOLD);
+            }
+            else{
+                sb.append(item);
+            }
+            sb.append(Affichage.YELLOW).append(" : ").append(Affichage.BRIGTH_YELLOW).append(item.getPrix()).append("$").append("\n");
+        }
+        return sb.toString();
+    }
 
     /**
-     * Permet de quitter/commencer le dialogue du marchand.
+     * Renvoit le string de demande de confirmation d'achat/de vente.
+     * @param item Item acheté/vendu
+     * @param isVente True si vente False si achat
+     * @return String
+     * @author Quentin
+     */
+    private String getConfirmationItem(AbstractItem item,boolean isVente){
+        return couleurText + "Etes vous sur de vouloir " + (isVente ? "me vendre: " : "acheter: ") +
+                couleurItems + item.getNom() + " " + Affichage.RESET + Affichage.BOLD + item +
+                couleurText + " pour " + couleurPrix + item.getPrix() + "$" + couleurText + " ?\n" +
+                couleurTouches + "Y" + couleurText + " -> OUI\n" +
+                couleurTouches + "N" + couleurText + " -> NON\n";
+    }
+
+    /**
+     * Permet de passer du mode dialogue avec le marchand a celui de joueur dans le jeu.
      * @author Quentin
      */
     public void changeDialogueState() {
-        if(state != STATE.AGGRESSIVE){
-            state = STATE.VISITED;
+        switch (state){
+            case AGGRESSIVE, NOTVISITED -> {}
+            default -> state = STATE.NORMAL;
         }
         TourManager.Pause();
         TourManager.InDialogue();
@@ -566,75 +414,19 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Renvoit l'etat du marchand.
-     *
-     * @return Etat
-     * @author Gillian
+     * @return Son etat
+     * @author Quentin
      */
-    public STATE getState() {
+    public static STATE getState() {
         return state;
-    }
-
-    /**
-     * Fixe l'état du marchand
-     *
-     * @param state
-     * @author Gillian
-     */
-    public void setState(STATE state) {
-        this.state = state;
     }
 
     @Override
     public String toString() {
-        //TODO Changer le smiley s'il est énervé
         if (System.getProperty("os.name").equals("Linux")) {
             return "\uD83D\uDC73";
         } else {
             return Affichage.YELLOW + Affichage.BOLD + Affichage.ITALIC + "£";
         }
     }
-
-
-
-
-    /**
-     * Redirection lorsque le joueur répond "yes" aux questions du marchand.
-     *
-     * @author Gillian
-     */
-    /*
-    public void procedureYes() {
-        switch (state) {
-            case BUY -> dialogueBuy();
-            case SELL -> dialogueSell();
-        }
-    }
-
-     */
-
-    /**
-     * Redirection et changement de mode du marchand lorsque le joueur répond "no" aux questions du marchand.
-     *
-     * @author Gillian
-     */
-    /*
-    public void procedureNo() {
-        state = STATE.VISITED;
-        dialogue(true);
-    }
-    */
-
-
-    public void dialogueError() {
-        //TODO elle sert a rien cette methode
-        System.out.println("Cher Monsieur, Chère Madame" + Start.getPlayer().getNom() + "\nJe crois que vous n'avez pas bien compris ma question");
-        switch (state) {
-            case VISITED -> dialogue(true);
-            case BUY -> dialogueInitBuy();
-            case SELL -> dialogueSell();
-        }
-        dialogue(true);
-    }
-
-
 }

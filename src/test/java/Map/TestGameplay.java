@@ -1,14 +1,12 @@
 package Map;
 
-import Model.Entitys.Items.Potions.HealPotion;
-import Model.Entitys.Player.Player;
+import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Player.Classes.ClassFactory;
+import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Map.Map;
-import Model.Map.Room;
-import Model.Map.Room_Strategy.NormalRoomStrategy;
 import Model.Utils.Position;
-import Model.Utils.Procedure;
 import Model.Utils.Start;
 import Model.Utils.TourManager;
 import junit.framework.TestCase;
@@ -34,16 +32,33 @@ public class TestGameplay extends TestCase {
     }
 
     public void testPoche(){
-        Position pos = Procedure.getAccesibleRandomPosition(false,etage,etage.getRooms().get(0));
+        System.out.println("----------------ETAGE DE BASE----------------");
+        System.out.println(etage);
+        AbstractItem item = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
+        Position up = item.getPosition().somme(Player.Direction.HAUT.getVecteur());
+        player.move(up);
+        assertSame(player.getPosition(),up);
         Position playerPos = player.getPosition();
-        HealPotion pot = new HealPotion(etage,pos ,"potion",10);
-        etage.addItem(pot);
-        while (!player.getInventory().isPotionsFull())player.getInventory().addPotion(new HealPotion(etage,null,"heal",10));
-        assertSame(etage.get(pos).getEntity(), pot);
-        player.move(pos);
-        assertSame(player,etage.get(pos).getEntity());
-        assertSame(player.getPoche(), pot);
-        player.move(playerPos);
-        assertSame(etage.get(pos).getEntity(), pot);
+        etage.addItem(item);
+        while (!player.getInventory().isPotionsFull()){
+            player.getInventory().addPotion(PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION));
+        }
+        System.out.println("----------------AVEC ITEM----------------");
+        System.out.println(etage);
+        player.moveDirection(Player.Direction.BAS);
+        System.out.println("----------------DEPLACEMENT SUR ITEM----------------");
+        System.out.println(etage);
+        assertSame(player,etage.get(item.getPosition()).getEntity());
+        assertSame(player.getPoche(), item);
+        assertNotSame(player.getPosition(),playerPos);
+        try {
+            Thread.sleep(player.getClasse().getSpeed());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        player.moveDirection(Player.Direction.BAS);
+        System.out.println("----------------DEPLACEMENT HORS ITEM----------------");
+        System.out.println(player.getPoche());
+        System.out.println(etage);
     }
 }
