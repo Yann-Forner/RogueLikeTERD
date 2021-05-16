@@ -168,13 +168,13 @@ Les boss sont présents dans le labyrinthe dans les salles prévues à cet effet
 Ce sont des monstres bien <b>plus fort</b> que les précédents, dotés de <b>capacités uniques</b> et prenant plusieurs cases d'affichage.</br>
 <h4>2.3.1. Big Monster</h4>
 Le boss "Big Monster" est un monstre <b>puissant</b> doté de <b>deux bras</b>. Sa particularité est qu'il <b>double sa puissance</b> à chaque perte de bras.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.3.2. Snaker</h4>
+<img src="https://user-images.githubusercontent.com/74865920/118412298-80145600-b699-11eb-9816-ef254a68f539.png"/>
+<h4>2.3.2. Snake</h4>
 Le boss "Snake" est doté d'une <b>longue queue</b> qu'il faudra détruire avant de pouvoir le tuer. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412269-6541e180-b699-11eb-980c-ab2486562bec.png"/>
 <h4>2.3.3. Invoqueur</h4>
 Le boss "Invoqueur" tire de puissant <b>rayons lazer</b>. Il <b>invoque</b> de même des <b>rats</b> lorsque celui-ci se voit infligé des dégats.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412282-74c12a80-b699-11eb-9602-397aad331fa5.png"/>
 
 <h2>2.4. Items</h2>
 <h2>2.4.1 Armes</h2>
@@ -202,7 +202,7 @@ Les armes mélées sont les armes <b>corps à corps</b> du jeu. Elles infligent 
 Il existe des clés à molette, des épées, des haches et des chaînes. </br>
 Les différentes armes influent sur la portée d'attaque du joueur. </br>
 </br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
 <h4>2.4.1.2 Armes à distance</h4>
 Canne à pêche</br>
 Linux: 🎣</br>
@@ -220,7 +220,6 @@ Il existe dans le jeu des <b>arme à distance</b>. Elles permettent d'attaquer u
 Si aucun monstre n'est à portée du joueur, ce dernier ne peut pas attaquer.</br>
 Il existe des Cannes à pêche, des arcs, des tridents et des revolvers </br>
 Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h4>2.4.1.3 Les armes magiques</h4>
 Balais</br>
@@ -239,7 +238,7 @@ Les armes magiques sont les <b>armes à distance</b> du jeu. Le joueur, en les u
 Contrairement aux armes à distance classiques, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut quand même utiliser son arme.</br>
 Il existe des balais, des os, des baguettes et des cannes </br>
 Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
 
 <h2>2.4.2 Les potions</h2>
 Les potions, tout comme les armes, peuvent être trouvées tout le long du labyrinthe : </br>
@@ -252,23 +251,18 @@ Celles-ci ont des <b>effets qui diffèrent</b> en fonction du type de la potion.
 Linux: </br>
 Windows: <b</b></br>
 La potion de vie est une potion tout de ce qu'il y a de plus classique : elle <b>restaure de la vie</b> au joueur à l'utilisation. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.2 La potion de force</h4>
 Linux: </br>
 Windows: <b</b></br>
 Une fois utilisée, la potion de force rend le joueur plus fort en <b>augmentant ses dégats d'attaque</b>. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.3 La potion d'invincibilité</h4>
 Linux: </br>
 Windows: <b</b></br>
 Après avoir consommé cette potion, le joueur devient <b>invulnérable</b> pendant un <b>court instant</b></br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.4 La potion d'endurance</h4>
 Linux: </br>
 Windows: <b</b></br>
-L'utilisation de cette potion octroie au joueur une <b>endurance illimitée</b> pendant une <b>courte durée</b>, permettant au joueur d'utiliser ses attaques sans coût.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-
+L'utilisation de cette potion octroie au joueur une <b>endurance illimitée</b> pendant une <b>courte durée</b>, permettant au joueur d'utiliser ses attaques sans coût.</br>
 
 
 <h2>2.4.3 La nourriture </h2>
