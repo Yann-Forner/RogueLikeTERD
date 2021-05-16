@@ -121,8 +121,33 @@ Linux: 🧟</br>
 Windows: <b>Z</b></br>
 Il se deplace tres lentement et a beaucoup de points de vie.
 
+<h3>2.2. Le marchand</h3>
+
+Le marchand, même si considéré comme un monstre dans notre implémentation, est bien différent des autres entités du labyrinthe</br>
+Il apparaît dans le labyrinthe de manière aléatoire.</br>
+Pour engager la conversation avec celui-ci, il suffit de le colisionner. </br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+<h4>2.2.1. L'achat</h4>
+Le joueur peut acheter auprès du marchand des armes et des potions. </br>
+Le prix est fixé en fonction de l'équilibrage du jeu.
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+<h4>2.2.2. La vente</h4>
+
+Le joueur peut de même vendre ses objets auprès du marchand.</br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+<h4>2.2.3. Le vol</h4>
+
+Il est possible de rompre la pacificité du marchand en essayant de le voler.</br>
+Le marchand devient alors une entité aggressive.
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+
 <h2>2.3. Boss</h2>
-<b><i>Non implementé</b></i>
+Les boss sont présents dans le labyrinthe dans les salles prévues à cet effet. </br>
+Ce sont des monstres bien plus fort que les précédents, dotés de capacités uniques et prenant plusieurs cases d'affichage.</br>
 <h4>2.3.1. Big Monster</h4>
 Le boss "Big Monster" est un monstre puissant doté de deux bras. Sa particularité est qu'il double sa puissance à chaque perte de bras.
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
@@ -209,15 +234,27 @@ Windows: <b</b></br>
 Linux: </br>
 Windows: <b</b></br>
 Le burger permet de rendre de la vie et de l'endurance au joueur. </br></br>
-
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 
 
-
-
-
-
+<h2>2.4.4 Les stacks d'argents</h2>
+Les stacks d'argent sont des objets trouvables par le joueur dans le labyrinthe.</br>
+Une fois ramassé et comme la nourriture, les stacks d'argent disparaissent et créditent le joueur du montant de celui-ci.</br>
+L'affichage va varier en fonction du montant du stack d'argent.</br>
+Entre ... et ... : 
+Linux: </br>
+Windows: <b</b></br></br>
+Entre ... et ... : 
+Linux: </br>
+Windows: <b</b></br></br>
+Entre ... et ... : 
+Linux: </br>
+Windows: <b</b></br></br>
+Entre ... et ... : 
+Linux: </br>
+Windows: <b</b></br></br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>3. Cases</h2>
 Les cases du jeu se divisent en deux categories, les fonctionelles et les cosmetiques: les premieres ont une fonction que se soit dans le jeu ou la programmation alors que les deuxiemes ne sont qu'un changement d'affichage des premieres.
