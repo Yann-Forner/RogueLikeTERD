@@ -1,7 +1,7 @@
 # RogueLikeTERD
 
 <b>BEAUCHET Quentin</b> (Quentin Beauchet) <br>
-<b>CARLENS Jean-Philippe</b>  (Coruscant11) <b>("BuildTools" également pour la plupart des commits)</b> <br>
+<b>CARLENS Jean-Philippe</b>  (Coruscant11) <b>("BuildTools" et "jipey" également pour beaucoup de commits)</b> <br>
 <b>FORNER Yann</b>  (Yann-Forner) <b>("Yann" également pour les commits du début du projet)</b>  <br>
 <b>MASSE Gillian</b>  (GillianMASSE)
 
