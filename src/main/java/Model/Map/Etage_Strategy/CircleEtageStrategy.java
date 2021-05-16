@@ -5,7 +5,6 @@ import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
-import Model.Map.Room;
 import Model.Map.RoomFactory;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
@@ -28,9 +27,11 @@ public class CircleEtageStrategy extends EtageStrategy{
     @Override
     public void setMonsters(Etage etage) {
         super.setMonsters(etage);
-        int rand = Procedure.getRandomInt(3, 0);
-        for(int i = 0; i < rand; i++) {
+        for(int i = 0; i < Procedure.getRandomInt(3, 0); i++) {
             etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
+        }
+        for(int i = 0; i < Procedure.getRandomInt(3, 0); i++) {
+            etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST));
         }
     }
 
