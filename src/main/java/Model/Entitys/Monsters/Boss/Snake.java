@@ -1,7 +1,8 @@
-package Model.Entitys.Monsters;
+package Model.Entitys.Monsters.Boss;
 
 import Model.Entitys.Items.Foods.AbstractFood;
 import Model.Entitys.Items.Foods.FoodFactory;
+import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage;
 import Model.Utils.*;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * Boss serpent qui est en plusieurs parties et ne meurt que quand elles sont toutes mortes.
  * @author Quentin
  */
-public class Snake extends AbstractMonster {
+public class Snake extends Boss {
     /**
      * Classe d'un bout de queue du serpent.
      * @author Quentin
@@ -77,7 +78,7 @@ public class Snake extends AbstractMonster {
      * @param size_of_tail Nombre que partie pour sa queue
      * @author Quentin
      */
-    protected Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl, int size_of_tail) {
+    public Snake(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl, int size_of_tail) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
         this.size_of_tail=size_of_tail;
         setTail(m,pos,pv,path_type);
@@ -124,12 +125,6 @@ public class Snake extends AbstractMonster {
         return Alive;
     }
 
-    @Override
-    public void death() {
-        super.death();
-        TourManager.addKillBoss();
-        Procedure.setRandomUPnDOWN(getEtage());
-    }
 
     @Override
     public String toString() {

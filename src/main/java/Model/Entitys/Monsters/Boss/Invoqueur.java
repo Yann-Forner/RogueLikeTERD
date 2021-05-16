@@ -1,7 +1,9 @@
-package Model.Entitys.Monsters;
+package Model.Entitys.Monsters.Boss;
 
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
+import Model.Entitys.Monsters.AbstractMonster;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -14,7 +16,7 @@ import java.util.Objects;
  * Boss qui tire des lasers et invoque des rat des qu'il prend des degats.
  * @author Quentin
  */
-public class Invoqueur extends AbstractMonster {
+public class Invoqueur extends Boss {
     private final double portee_min;
     private double portee;
     private int direction = 0;
@@ -79,13 +81,6 @@ public class Invoqueur extends AbstractMonster {
         Etage etage = getEtage();
         etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT)));
         return super.updatePV(pv, limited);
-    }
-
-    @Override
-    public void death() {
-        super.death();
-        TourManager.addKillBoss();
-        Procedure.setRandomUPnDOWN(getEtage());
     }
 
     @Override

@@ -1,5 +1,8 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.Monsters.Boss.BigMonster;
+import Model.Entitys.Monsters.Boss.Invoqueur;
+import Model.Entitys.Monsters.Boss.Snake;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
 import Model.Utils.Start;

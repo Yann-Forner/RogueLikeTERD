@@ -1,6 +1,9 @@
 package Model.Entitys.Monsters;
 
 import Model.Entitys.AbstractAlive;
+import Model.Entitys.Items.Foods.FoodFactory;
+import Model.Entitys.Items.Misc.StackOfMoney;
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Utils.Start;
 import Model.Map.Etage;
 import Model.Utils.*;
@@ -72,9 +75,40 @@ public abstract class AbstractMonster extends AbstractAlive {
     @Override
     public void death() {
         TourManager.addMessage(getNom() + Affichage.BRIGTH_RED + " est mort.");
+        dropOnDeath();
         getEtage().removeMonster(this);
         Objects.requireNonNull(Start.getPlayer()).addExp(getExp());
         TourManager.addKill();
+    }
+
+    protected void dropOnDeath()
+    {
+        int rand = Procedure.getRandomInt(1, 0);
+        if(rand == 1) {
+            getInventory().dropItem(this, new StackOfMoney(getEtage(), getPosition(), Procedure.getRandomInt(100, 1)));
+        }
+
+        rand = Procedure.getRandomInt(2, 0);
+        if(rand == 2) {
+            int randFood = Procedure.getRandomInt(5, 0);
+            switch(randFood) {
+                case 0 -> getInventory().dropItem(this, FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.APPLE));
+                case 1 -> getInventory().dropItem(this, FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.BANANA));
+                case 2 -> getInventory().dropItem(this, FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.CARROT));
+                case 3 -> getInventory().dropItem(this, FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.PEACH));
+                case 4 -> getInventory().dropItem(this, FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.ORANGE));
+                case 5 -> getInventory().dropItem(this, FoodFactory.getNewFood(getEtage(), FoodFactory.FoodType.BURGER));
+            }
+        }
+
+        rand = Procedure.getRandomInt(3, 0);
+        if(rand == 3) {
+            int randPotion = Procedure.getRandomInt(1, 0);
+            if(randPotion == 0)
+                getInventory().dropItem(this, PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.HEAL_POTION));
+            else
+                getInventory().dropItem(this, PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.ENDURENCE_POTION));
+        }
     }
 
     /**
