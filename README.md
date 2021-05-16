@@ -47,7 +47,7 @@ L'endurance permet au joueur <b>d'attaquer</b> les monstres du jeu.<br>
 A chaque attaque, celui-ci <b>perd de l'endurance.</b> <br>
 Il sera possible de regagner de l'endurance grâce aux <b>potions d'endurance ou au burger</b>. <br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
-<h2>L'argent</h2>
+<h2>L'argent</h2></br></br></br></br></br></br></br></br>
 L'argent permet au joueur <b>d'acheter des objets au marchand.</b> </br>
 Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou directement en trouvant des <b>stacks d'argent</b> au sein du labyrinthe. </br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
