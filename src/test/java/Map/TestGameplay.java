@@ -51,7 +51,7 @@ public class TestGameplay extends TestCase {
 
         System.out.println(etage);
         System.out.println(player.getPoche());
-//        assertSame(player.getPoche(), item); FAIL
+        assertSame(player.getPoche(), item); FAIL
 
         assertNotSame(player.getPosition(),playerPos);
         try {
