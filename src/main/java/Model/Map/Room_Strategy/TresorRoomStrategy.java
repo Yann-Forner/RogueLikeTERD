@@ -1,9 +1,12 @@
 package Model.Map.Room_Strategy;
 
 import Model.Entitys.Items.Misc.Chest;
+import Model.Entitys.Items.Misc.StackOfMoney;
 import Model.Entitys.Monsters.MonsterFactory;
+import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
 
@@ -29,6 +32,11 @@ public class TresorRoomStrategy extends RoomStrategy{
         int x = (r.getWidth()-1)/2;
         int y = (r.getHeigth()-1)/2;
         r.addItem(new Chest(r, new Position(x,y)));
+
+        int rand = Procedure.getRandomInt(2, 0);
+        for(int i = 0; i < rand; i++) {
+            r.addItem(new StackOfMoney(r, Procedure.getAccesibleRandomPosition(true, r), 50));
+        }
     }
 
     @Override
