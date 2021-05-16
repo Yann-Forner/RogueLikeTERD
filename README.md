@@ -316,7 +316,7 @@ Windows: <b</b></br></br>
 Entre ... et ... : 
 Linux: </br>
 Windows: <b</b></br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
 
 <h2>3. Cases</h2>
 Les cases du jeu se divisent en <b>deux categories</b>, les <b>fonctionnelles</b> et les <b>cosmétiques</b>: les premières ont une <b>utilité</b> que cela soit dans le jeu ou la programmation alors que les deuxièmes n'apporteront qu'un <b>intérêt esthétique</b>. 
