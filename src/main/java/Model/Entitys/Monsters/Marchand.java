@@ -81,6 +81,9 @@ public class Marchand extends AbstractMonster {
     public void death() {
         super.death();
         state = STATE.DEAD;
+        for(AbstractItem item : itemArrayList){
+            getInventory().dropItem(this,item);
+        }
         TourManager.addMessage(Affichage.RED + Affichage.BOLD + "Tuer le seul marchand du labyrinthe n'etait peut etre pas une bonne idée.");
     }
 
@@ -100,7 +103,7 @@ public class Marchand extends AbstractMonster {
         sb.append(couleurText).append("Vendre - ").append(couleurTouches).append("2\n");
         sb.append(couleurText).append("Voler - ").append(couleurTouches).append("3\n");
         sb.append(couleurText).append("Quitter - ").append(couleurTouches).append("4\n");
-        System.out.println(sb);
+        System.out.print(sb);
         try {
             processInput();
         } catch (IOException e) {
