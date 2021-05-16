@@ -1,8 +1,6 @@
 package Model.Map.Etage_Strategy;
 
-import Model.Entitys.Items.Foods.FoodFactory;
 import Model.Entitys.Items.Misc.Chest;
-import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -25,9 +23,14 @@ public class TrapEtageStrategy extends EtageStrategy{
     public void composeEtage(Etage etage, boolean etageDepart) {
         Procedure.setRandomRooms(etage,this, RoomFactory.roomType.TRAP);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_PURPLE));
-        Procedure.setRandomUP(etage);
+        setSpecialCell(etage,etageDepart);
         setItems(etage);
         setMonsters(etage);
+    }
+
+    @Override
+    public void setSpecialCell(Etage etage, boolean etageDepart) {
+        Procedure.setRandomUP(etage);
     }
 
     @Override

@@ -114,8 +114,7 @@ public class Affichage {
         }
 
         //Titre Menu
-        sb.append("    ");
-        sb.append("                                      ");
+        sb.append("                                       ");
         sb.append(BRIGTH_YELLOW).append(BOLD);
         sb.append("[MENU]");
         sb.append(RESET);
