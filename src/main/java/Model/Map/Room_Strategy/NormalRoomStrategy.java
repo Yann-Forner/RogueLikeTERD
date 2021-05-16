@@ -34,14 +34,7 @@ public class NormalRoomStrategy extends RoomStrategy{
 
     @Override
     public void setItems(Room r) {
-        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
-            switch(i) {
-                case 0 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.HEAL_POTION));
-            }
-        }
-        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
-            r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.APPLE));
-        }
+
     }
 
     @Override

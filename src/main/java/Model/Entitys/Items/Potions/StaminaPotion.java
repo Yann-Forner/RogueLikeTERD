@@ -35,11 +35,15 @@ public class StaminaPotion extends AbstractPotion {
      */
     @Override
     public void useItem(Player player) {
-        super.useItem(player);
-        int originalEndurence = player.getEndurence();
-        TourManager.addMessage("Pendant " + seconds + "s, votre endurance sera infinie.");
-        player.setEndurence(player.getMAX_ENDURENCE() * 1000);
-        TourManager.getExecutor().schedule(() -> player.setEndurence(originalEndurence), 5, TimeUnit.SECONDS);
+        if(player.isStimulated()) {
+            TourManager.addMessage("Une potion d'endurance est déjà en train d'être consommée !");
+        }
+        else {
+            TourManager.addMessage("Vous êtes doppé en endurance pendant " + seconds + " secondes. Profitez-en !");
+            player.setStimulated(true);
+            super.useItem(player);
+            TourManager.getExecutor().schedule(() -> { player.setStimulated(false); TourManager.addMessage("Vous n'êtes plus doppé."); }, 5, TimeUnit.SECONDS);
+        }
     }
 
     @Override

@@ -30,9 +30,15 @@ public abstract class RoomStrategy implements Serializable {
      */
     protected void setStyleCell(Room r){
         Cell.Style palmier = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"\uD83C\uDF34", "T");
+        //	"\uD83C\uDF33"
+        Cell.Style tree = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"\uD83C\uDF33", "T");
         Cell.Style barierre = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83D\uDEA7", "Ø");
         for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
-            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, palmier);
+            int rand = Procedure.getRandomInt(1, 0);
+            if(rand == 0)
+                r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, palmier);
+            else
+                r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, tree);
         }
         for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
             r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(false, barierre);
