@@ -125,7 +125,11 @@ Le boss "Invoqueur" tire de puissant rayons lazer. Il invoque de même des rats 
 
 <h2>2.4. Items</h2>
 <h2>2.4.1 Armes</h2>
-Les armes permettent au joueur d'attaquer les différents monstres qu'il va rencontrer durant son aventure. 
+Les armes, peuvent être trouvées tout le long du labyrinthe : 
+  - En les ramassant directement dans le labyrinthe
+  - En les récupérant sur un monstre tué
+  - En les achetant au marchand
+Elles permettent au joueur d'attaquer les différents monstres qu'il va rencontrer durant son aventure. 
 Le type d'attaque va changer en fonction de l'arme portée par le joueur. 
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.1 Epée</h4>
@@ -136,9 +140,48 @@ L'arc est une arme à distance. Il permet d'attaquer un monstre qui est à parti
 Si aucun monstre n'est à portée du joueur, ce dernier ne peut utiliser son arc.
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.3 Baguette</h4>
-La baguette est également une arme à distance. Elle permet d'attaquer en ligne droite, dans la direction du joueur. 
-Le joueur peut utiliser la baguette même si aucun monstre n'est dans sa direction.
+La baguette est la seconde arme à distance du jeu. Le joueur, en l'utilisant, attaquera en ligne droite devant lui. 
+Contrairement à l'arc, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut dquand même utiliser son arme.
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+<h2>2.4.2 Les potions</h2>
+Les potions, tout comme les armes, peuvent être trouvées tout le long du labyrinthe : 
+  - En les ramassant directement dans le labyrinthe
+  - En les récupérant sur un monstre tué
+  - En les achetant au marchand
+Une fois ramassées, les potions se disposent dans l'inventaire du joueur et peuvent être utilisées à tout moment.
+Celles-ci ont des effets qui diffèrent en fonction du type de la potion.
+<h4>2.4.1.1 La potion de vie</h4>
+La potion de vie est une potion tout de ce qu'il y a de plus classique : elle restaure de la vie au joueur à l'utilisation. 
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<h4>2.4.1.2 La potion de force</h4>
+Une fois utilisée, la potion de force rend le joueur plus fort en augmentant ses dégats d'attaque. 
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<h4>2.4.1.3 La potion d'invincibilité</h4>
+Après avoir consommé cette potion, le joueur devient invulnérable pendant un court instant
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<h4>2.4.1.4 La potion d'endurance</h4>
+L'utilisation de cette potion octroie au joueur une endurance illimitée, permettant au joueur d'utiliser ses attaques sans coût.
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+<h2>2.4.3 La nourriture </h2>
+A la différence des potions et des armes, le joueur ne peut pas stocker de nourriture dans son inventaire.
+Une fois ramassée, la nourriture est instantanément consomée et rend de la vie et/ou de l'endurance au joueur.
+<h4>2.4.3.1 Les fruits</h4>
+Les fruits permettent de rendre de la vie au joueur. 
+Ils sont identifiable dans le jeu par les symboles suivant : 
+  -.
+  -.
+  -.
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<h4>2.4.3.2 Le Burger</h4>
+Le burger permet de rendre de la vie et de l'endurance au joueur. 
+Il est idenfiable par le symbole : ...
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+
+
+
 
 
 
