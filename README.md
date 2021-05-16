@@ -71,6 +71,10 @@ Les pieces de cet etage sont un <b>mélange</b> de tout les types commun de piec
 <h4>1.1.4. Etage piege</h4>
 C'est un etage piege qui apparait lorsque l'on marche sur une <b>case piegée</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118411961-97eada80-b697-11eb-86da-c2259e8d6676.png"/>
+<h4>1.1.5. Etage boss</h4>
+C'est un étage où un <b>boss</b> apparaît .</br></br>
+<img src="https://user-images.githubusercontent.com/74865920/118412126-94a41e80-b698-11eb-8806-96f54fef143b.png"/>
+
 <h3>1.2. Types salles</h3>
 <h4>1.2.1. Salle normale</h4>
 C'est la salle de base, elle est <b>rectangulaire</b>.</br></br>
@@ -82,7 +86,8 @@ C'est un <b>triangle</b>, c'est aussi une des salles de base.</br></br>
 C'est un cercle, c'est une <b>plus petite version</b> de salle de boss.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114865403-7a092c00-9df2-11eb-86db-aae4d6977e0e.png"/>
 <h4>1.2.4. Salle marchand</h4>
-<b><i>Non implementé</b></i>
+Salle dans lequel le marchand apparaît<b></b></i>
+<img src="https://user-images.githubusercontent.com/74865920/118412097-6d4d5180-b698-11eb-8d81-a79a82e30674.png"/>
 <h4>1.2.5. Salle tresor</h4>
 <b><i>Non implementé</b></i>
 <h4>1.26. Salle piege</h4>
