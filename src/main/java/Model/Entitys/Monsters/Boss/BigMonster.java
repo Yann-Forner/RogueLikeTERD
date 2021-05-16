@@ -82,7 +82,6 @@ public class BigMonster  extends AbsractBoss {
 
     @Override
     public String toString() {
-        System.out.println("PV: "+getPv() + "  ->  FORCE: "+getForce());
         return super.toString() + "U";
     }
 }

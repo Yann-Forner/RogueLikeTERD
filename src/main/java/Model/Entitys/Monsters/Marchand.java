@@ -151,7 +151,7 @@ public class Marchand extends AbstractMonster {
             }
             case ACHAT -> {
                 switch (string){
-                    case "1","2","3","4","5","6","7","8","9" -> startAchatSelection(Integer.parseInt(string));
+                    case "0","1","2","3","4","5","6","7","8","9" -> startAchatSelection(Integer.parseInt(string));
                     case "q", "Q" -> {
                         state = STATE.NORMAL;
                         dialogue();
@@ -252,7 +252,7 @@ public class Marchand extends AbstractMonster {
             if(processInput()){
                 if(Objects.requireNonNull(Start.getPlayer()).getInventory().getMoney()>=abstractItem.getPrix()){
                     Inventory inventory = Start.getPlayer().getInventory();
-                    if(index>=getInventory().getWeapons().size()){
+                    if(abstractItem instanceof AbstractPotion){
                         if(inventory.isPotionsFull()){
                             if(inventory.dropItem(Start.getPlayer(),abstractItem)){
                                 getInventory().getPotions().remove((AbstractPotion)abstractItem);
@@ -263,7 +263,7 @@ public class Marchand extends AbstractMonster {
                             }
                         }
                         else{
-                            inventory.addWeapon((AbstractWeapon) abstractItem);
+                            inventory.addPotion((AbstractPotion) abstractItem);
                         }
                     }
                     else{
@@ -277,7 +277,7 @@ public class Marchand extends AbstractMonster {
                             }
                         }
                         else{
-                            inventory.addPotion((AbstractPotion) abstractItem);
+                            inventory.addWeapon((AbstractWeapon) abstractItem);
                         }
                     }
                     Start.getPlayer().getInventory().removeMoney(abstractItem.getPrix());
