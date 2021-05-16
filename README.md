@@ -99,15 +99,15 @@ Ses statistiques sont:</br>
 -Puissance d'Attaque (PA)</br>
 Le joueur est representé par cet emoji 🤓 sur Linux et <b>@</b> sur Windows.
 <h3>2.2. Monstres</h3>
-Les monstres ont les <b>mêmes statistiques</b> que le joueur mais avec une vitesse et un champ de vision en plus ce qui leurs permet de le detecter s'il s'approche trop et d'arreter s'il s'eloigne trop loin.
+Les monstres ont les <b>mêmes statistiques</b> que le joueur mais avec une <b>vitesse</b> et un <b>champ de vision</b> en plus ce qui leurs permet de le detecter s'il s'approche trop et de <b>s'arreter</b> s'il s'eloigne trop loin.
 <h4>2.2.1. Alien</h4>
 Linux: 👽</br>
 Windows: <b>&</b></br>
-Il se deplace extrement vite et detecte le joueur de tres loin de plus des qu'il reçoit un coup il se teleporte a l'autre bout de l'etage.
+Il se deplace <b>vite</b> et<b> detecte le joueur de très loin</b> de plus des qu'il reçoit un coup il se <b>teleporte</b> a l'autre bout de l'etage.
 <h4>2.2.2. Abeille</h4>
 Linux: 🐝</br>
 Windows: <b>B</b></br>
-L'abeille n'est pas si dangereuse en revanche des qu'elle meurt deux nouvelles abeilles deux fois moins puissantes apparaissent.
+L'abeille n'est pas si dangereuse en revanche des qu'elle meurt <b>deux nouvelles abeilles</b> deux fois moins puissantes <b>apparaissent</b>.
 <h4>2.2.3. Oiseau</h4>
 Linux: 🐦</br>
 Windows: <b>ù</b></br>
