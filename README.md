@@ -39,8 +39,15 @@ Le joueur est doté de différents attributs lui permettant d'évoluer dans le j
 
 <h2>La vie</h2>
 
-<h2>L'endurance</h2>
+La vie est la donnée la plus importante du jeu. Si celle-ci tombe à 0, le joueur a perdu. <br>
+Le joueur peut perdre de la vie par les dégats que peuvent lui infliger les monstres et en regagner grâce à la nourriture ou aux potions de vie  <br>
+<img src="https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png"/>
 
+<h2>L'endurance</h2>
+L'endurance permet au joueur d'attaquer les monstres du jeu.<br>
+A chaque attaque, celui-ci perd de l'endurance. <br>
+Il sera possible de regagner de l'endurance grâce aux potions d'endurance ou au burger. <br>
+<img src="https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png"/>
 <h2>L'argent</h2>
 
 
