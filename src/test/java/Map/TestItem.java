@@ -27,11 +27,11 @@ public class TestItem extends TestCase {
 
         AbstractItem i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
         AbstractItem i2 = FoodFactory.getNewFood(etage, FoodFactory.FoodType.APPLE);
-        i2.setPosition(new Position(50, 50));
-        i1.setPosition(new Position(50, 50));
 
         etage.getItems().add(i1);
         etage.getItems().add(i2);
+
+        assertFalse(i1.getPosition().equals(i2.getPosition()));
     }
 
     @Test
@@ -93,17 +93,65 @@ public class TestItem extends TestCase {
         tm.setMap();
         Start.setTourManager(tm);
         Map map = tm.getMap();
-        Etage etage = map.getCurrent();
+        Etage etage = player.getEtage();
 
 
-        AbstractPotion i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.STRENGTH_POTION);
-        player.getInventory().addPotion(i1);
-        System.out.println("force previous : " + player.getForce());
-        int previousForce = player.getForce();
-        player.updatePV(-10, true);
-        for(int i = 0; i < 100; i++)
-            i1.useItem(player);
-        System.out.println("next force : " + player.getForce());
-        assertTrue(true);
+        for(int i = 0; i < 10; i++) {
+            AbstractPotion i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.STRENGTH_POTION);
+            etage.addItem(i1);
+            i1.onContact(player);
+        }
+        player.getInventory().useCurrentPotion(player);
+
+        for(int i = 0; i < 9; i++) {
+            player.getInventory().useCurrentPotion(player);
+        }
+        assertTrue(player.getInventory().getPotions().size() >= 9);
+    }
+
+    @Test
+    public void testPotionStaminaMultipleTime() {
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
+        Etage etage = player.getEtage();
+
+
+        for(int i = 0; i < 10; i++) {
+            AbstractPotion i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.ENDURENCE_POTION);
+            etage.addItem(i1);
+            i1.onContact(player);
+        }
+        player.getInventory().useCurrentPotion(player);
+
+        for(int i = 0; i < 9; i++) {
+            player.getInventory().useCurrentPotion(player);
+        }
+        assertTrue(player.getInventory().getPotions().size() >= 9);
+    }
+
+    @Test
+    public void testPotionInvulMultipleTime() {
+        Player player = ClassFactory.getNewPlayer("Testeur", ClassFactory.Class.ARCHER);
+        TourManager tm = new TourManager(player);
+        tm.setMap();
+        Start.setTourManager(tm);
+        Map map = tm.getMap();
+        Etage etage = player.getEtage();
+
+
+        for(int i = 0; i < 10; i++) {
+            AbstractPotion i1 = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.INVUL_POTION);
+            etage.addItem(i1);
+            i1.onContact(player);
+        }
+        player.getInventory().useCurrentPotion(player);
+
+        for(int i = 0; i < 9; i++) {
+            player.getInventory().useCurrentPotion(player);
+        }
+        assertTrue(player.getInventory().getPotions().size() >= 9);
     }
 }

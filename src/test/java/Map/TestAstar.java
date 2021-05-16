@@ -38,10 +38,7 @@ public class TestAstar extends TestCase {
         tm.setMap();
         Start.setTourManager(tm);
         Map map = tm.getMap();
-        Etage etage = map.getCurrent();
-
-
-        ArrayList<Position> cheminRandom = Tools.Astar(etage, player.getPosition(), Procedure.getAccesibleRandomPosition(false, etage), Tools.PathType.CROSS);
+        Etage etage = player.getEtage();
 
         Position outsidePos = new Position(0, 0);
         while(etage.getCells().get(outsidePos.getY()).get(outsidePos.getX()).getType() != Cell.Style.CellType.VOID) {
@@ -62,7 +59,6 @@ public class TestAstar extends TestCase {
         ArrayList<Position> cheminOutside = Tools.Astar(etage, player.getPosition(), outsidePos, Tools.PathType.CROSS);
         ArrayList<Position> cheminWall = Tools.Astar(etage, player.getPosition(), wallPos, Tools.PathType.CROSS);
 
-        assertFalse(cheminRandom == null || cheminRandom.size() == 0);
         assertTrue(cheminOutside == null || cheminOutside.size() == 0);
         assertTrue(cheminWall == null || cheminWall.size() == 0);
     }

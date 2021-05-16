@@ -21,7 +21,7 @@ public class TestDistance extends TestCase {
         tm.setMap();
         Start.setTourManager(tm);
         Map map = tm.getMap();
-        Etage etage = map.getCurrent();
+        Etage etage = player.getEtage();
 
 
         AbstractMonster z = MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ZOMBIE);
@@ -33,5 +33,6 @@ public class TestDistance extends TestCase {
         System.out.println("Position Zombie : " + posZ.toString());
         System.out.println("Position Player : " + posP.toString());
         System.out.println("Distance entre les deux : " + posZ.Distance(posP));
+        assertFalse(posZ.equals(posP));
     }
 }
