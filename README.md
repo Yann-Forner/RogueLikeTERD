@@ -19,7 +19,7 @@ Le jeu est jouable est sur Linux et sur Windows. <br>
 Attention toutefois à son utilisation sur <b>Windows</b> :<br>
   - Les smileys seront remplacés par des lettres. <br>
   - Le jeu sera lancé de base en tour par tour, il faudra appuyer sur T pour changer ce mode si désiré.<br>
-Ces spécifications seront de même valables sur l'IDE.<br>
+Ces spécifications seront de même valables sur un IDE.<br>
 
 
 <h1>Touches</h1>
@@ -45,7 +45,7 @@ Le joueur peut perdre de la vie par les dégats que peuvent lui infliger les mon
 <h2>L'endurance</h2>
 L'endurance permet au joueur <b>d'attaquer</b> les monstres du jeu.</br>
 A chaque attaque, celui-ci <b>perd de l'endurance.</b> </br>
-Il sera possible de regagner de l'endurance grâce aux <b>potions d'endurance ou au burger</b>.</br></br>
+Il sera possible de regagner de l'endurance avec le temps, ou grâce aux <b>potions d'endurance et au burger</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/118410035-c794e500-b68d-11eb-9491-808a5f945331.png"/></br>
 
 <h2>L'argent</h2>
