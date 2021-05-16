@@ -1,19 +1,13 @@
 package Model.Map.Room_Strategy;
 
-import Model.Entitys.Items.Foods.FoodFactory;
-import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Affichage;
-import Model.Utils.Position;
-import Model.Utils.Procedure;
 
-//TODO ajouter mobs
 /**
  * Défini une salle piégée
- * @auhtor Quentin
+ * @author Quentin
  */
 public class TrapRoomStrategy extends RoomStrategy {
 

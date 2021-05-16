@@ -31,7 +31,7 @@ public class WeaponFactory {
     public static AbstractWeapon getNewWeapon(Etage etage, WeaponType type) {
         return switch(type) {
             case SWORD -> new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 10*getBaseLvl(), Procedure.getRandomInt(5,1), getRandomPrix());
-            case BOW -> new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), type,10*getBaseLvl(), Procedure.getRandomInt(15,2), getRandomPrix());
+            case BOW -> new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), type,7*getBaseLvl(), Procedure.getRandomInt(15,2), getRandomPrix());
             case WAND -> new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 5*getBaseLvl(), Procedure.getRandomInt(10,1), getRandomPrix());
         };
     }

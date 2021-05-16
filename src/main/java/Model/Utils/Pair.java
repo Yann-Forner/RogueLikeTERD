@@ -15,18 +15,38 @@ public class Pair<L,R>{
         this.right = rigth;
     }
 
+    /**
+     * Renvoit la partie gauche.
+     * @return partie gauche
+     * @author Quentin
+     */
     public L getLeft(){
         return left;
     }
 
+    /**
+     * Renvoit la partie droite.
+     * @return partie droite
+     * @author Quentin
+     */
     public R getRight(){
         return right;
     }
 
+    /**
+     * Defini la partie gauche.
+     * @param left Partie gauche.
+     * @author Quentin
+     */
     public void setLeft(L left) {
         this.left = left;
     }
 
+    /**
+     * Defini la partie droite.
+     * @param right Partie droite.
+     * @author Quentin
+     */
     public void setRight(R right) {
         this.right = right;
     }

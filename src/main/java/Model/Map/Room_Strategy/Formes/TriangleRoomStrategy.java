@@ -3,7 +3,6 @@ package Model.Map.Room_Strategy.Formes;
 import Model.Map.Cell;
 import Model.Map.Room;
 import Model.Map.Room_Strategy.RoomStrategy;
-import Model.Utils.Affichage;
 import Model.Utils.Position;
 
 /**
@@ -20,7 +19,7 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
     /**
      * Rempli le triangle
      * @param r la salle
-     * @auhtor Yann
+     * @author Yann
      */
     public void fillTriangle(Room r){
         fillTriangle(r, new Cell.Style(Cell.Style.CellType.NORMAL));
@@ -30,7 +29,7 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
      * Dessine le triangle et le rempli
      * @param r la salle
      * @param s le style de la cellule a ajouter
-     * @auhtor Yann
+     * @author Yann
      */
     public void fillTriangle(Room r, Cell.Style s){
         Position posAngle1 = new Position((r.getWidth()-1)/2, 1);
@@ -43,7 +42,6 @@ public abstract class TriangleRoomStrategy extends RoomStrategy {
                     r.set(posAngle1.getX() + j, posAngle1.getY() + i, new Cell(true, s));
                     r.set(posAngle1.getX() - j, posAngle1.getY() + i, new Cell(true, s));
                 } catch (IndexOutOfBoundsException e) {
-                    //TODO c'est degeulasse de stopper avec une exception #YANN
                     stop = true;
                     break;
                 }

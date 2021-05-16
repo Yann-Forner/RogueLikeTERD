@@ -27,15 +27,11 @@ public class TestGameplay extends TestCase {
 
     }
 
-    public void Testgameplay(){
-
-    }
-
     public void testPoche(){
         System.out.println("----------------ETAGE DE BASE----------------");
         System.out.println(etage);
         AbstractItem item = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
-        Position up = item.getPosition().somme(Player.Direction.HAUT.getVecteur());
+        Position up = item.getPosition().somme(Position.Direction.HAUT.getVecteur());
         player.move(up);
         assertSame(player.getPosition(),up);
         Position playerPos = player.getPosition();
@@ -45,7 +41,7 @@ public class TestGameplay extends TestCase {
         }
         System.out.println("----------------AVEC ITEM----------------");
         System.out.println(etage);
-        player.moveDirection(Player.Direction.BAS);
+        player.moveDirection(Position.Direction.BAS);
         System.out.println("----------------DEPLACEMENT SUR ITEM----------------");
         System.out.println(etage);
         assertSame(player,etage.get(item.getPosition()).getEntity());
@@ -56,7 +52,7 @@ public class TestGameplay extends TestCase {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        player.moveDirection(Player.Direction.BAS);
+        player.moveDirection(Position.Direction.BAS);
         System.out.println("----------------DEPLACEMENT HORS ITEM----------------");
         System.out.println(player.getPoche());
         System.out.println(etage);

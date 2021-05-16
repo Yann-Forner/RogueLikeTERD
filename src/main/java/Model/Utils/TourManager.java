@@ -3,12 +3,13 @@ package Model.Utils;
 import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.Player;
 import Model.Map.Map;
+import Model.Utils.Position.Direction;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayDeque;
-import java.util.Iterator;
+import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -63,12 +64,14 @@ public class TourManager implements Serializable {
             processEtage();
             if(!running && mouvement){
                 Tour++;
-                for (Iterator<AbstractMonster> iterator = player.getEtage().getMonsters().iterator(); iterator.hasNext();) {
-                    AbstractMonster monster = iterator.next();
-                    if(Tour % Math.ceil((float) monster.getUpdate_rate_ms()/600)==0){
-                        monster.updateMonster();
+                try{
+                    for (AbstractMonster monster : player.getEtage().getMonsters()) {
+                        if (Tour % Math.ceil((float) monster.getUpdate_rate_ms() / 600) == 0) {
+                            monster.updateMonster();
+                        }
                     }
                 }
+                catch (ConcurrentModificationException ignored){ }
             }
         }
     }
@@ -102,19 +105,19 @@ public class TourManager implements Serializable {
         }
         switch (cmd){
             case 'z' , 'Z' -> {
-                player.moveDirection(Player.Direction.HAUT);
+                player.moveDirection(Direction.HAUT);
                 return true;
             }
             case 'q' , 'Q' -> {
-                player.moveDirection(Player.Direction.GAUCHE);
+                player.moveDirection(Direction.GAUCHE);
                 return true;
             }
             case 's' , 'S' -> {
-                player.moveDirection(Player.Direction.BAS);
+                player.moveDirection(Direction.BAS);
                 return true;
             }
             case 'd' , 'D' -> {
-                player.moveDirection(Player.Direction.DROITE);
+                player.moveDirection(Direction.DROITE);
                 return true;
             }
             case 't' , 'T' -> TourParTour();

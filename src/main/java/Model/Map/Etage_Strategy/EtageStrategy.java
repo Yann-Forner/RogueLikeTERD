@@ -1,6 +1,5 @@
 package Model.Map.Etage_Strategy;
 
-import Model.Entitys.Items.Misc.Chest;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -36,9 +35,9 @@ public abstract class EtageStrategy {
      * @author Quentin,Yann
      */
     public static EtageStrategy getRandomStrategy(){
-        return switch (Procedure.getRandomInt(9,0)){
-            case 0, 1, 2 -> new NormalEtageStrategy();
-            case 3, 4, 5, 6, 7 -> new DonjonStrategy();
+        return switch (Procedure.getRandomInt(11,0)){
+            case 0, 1, 2, 3 -> new NormalEtageStrategy();
+            case 4, 5, 6, 7, 8, 9 -> new DonjonStrategy();
             default -> new CircleEtageStrategy();
         };
     }
@@ -131,7 +130,6 @@ public abstract class EtageStrategy {
         for(Room r : etage.getRooms()){
             r.setMonsters(etage);
         }
-
     }
 
     /**
@@ -143,8 +141,6 @@ public abstract class EtageStrategy {
         for (Room r : etage.getRooms()) {
             r.setItems(etage);
         }
-        //TODO enelver ça
-        etage.addItem( new Chest(etage,Procedure.getAccesibleRandomPosition(true,etage)));
     }
 
 }

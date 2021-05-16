@@ -1,9 +1,6 @@
 package Model.Map.Room_Strategy;
 
 import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Items.Foods.FoodFactory;
-import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Monsters.Marchand;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
@@ -25,11 +22,8 @@ public class MarchandRoomStrategy extends RoomStrategy{
         super.composeRoom(r);
     }
 
-    //TODO CONVERTIR LE STYLE EN VRAI SAC D'ARGENT
-
     @Override
     protected void setStyleCell(Room r) {
-        //TODO à déplacer dans items
         Cell.Style car = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83D\uDE97", "D");
         Cell.Style trophy = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83C\uDFC6", "D");
 

@@ -83,7 +83,9 @@ public class Map implements Serializable {
             etage = etages.get(currentIndex + 1);
         }
         Position pos = etage.getUp();
+        Position oldPos = Objects.requireNonNull(Start.getPlayer()).getPosition();
         Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
+        Start.getPlayer().videPoche(oldPos);
         monterDescendre = true;
     }
 
@@ -102,8 +104,11 @@ public class Map implements Serializable {
             indexLastEtage--;
             etage = etages.get(getIndexCurrent()-1);
         }
+        System.out.println(etage);
         Position pos = etage.getDown();
+        Position oldPos = Objects.requireNonNull(Start.getPlayer()).getPosition();
         Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
+        Start.getPlayer().videPoche(oldPos);
         monterDescendre = true;
     }
 
@@ -114,7 +119,9 @@ public class Map implements Serializable {
     public void TRAP_ROOM(){
         Etage etage = new Etage(MapWidth,MapHeigth,new TrapEtageStrategy(),false);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
+        Position oldPos = Objects.requireNonNull(Start.getPlayer()).getPosition();
         Objects.requireNonNull(Start.getPlayer()).updateEtage(etage,pos);
+        Start.getPlayer().videPoche(oldPos);
         inTemporaryEtage = true;
         Affichage.setOmbre(Affichage.Shadow.RAY);
     }

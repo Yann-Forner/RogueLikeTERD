@@ -52,7 +52,6 @@ public class Inventory implements Serializable {
                     for(int y = playerPosY - scanRange; y <= playerPosY + scanRange; y++) {
                         Cell c = e.get(x, y);
                         if(c.isAccesible() && c.getEntity() == null) {
-                            //TODO enelever instanceof
                             if(item instanceof AbstractPotion){
                                 potions.remove(item);
                             }
@@ -205,32 +204,6 @@ public class Inventory implements Serializable {
         return potions.size()>0 ? potions.get(0) : null;
     }
 
-
-
-    /**
-     * Permet de vendre une potion en ajoutant l'argent au joueur
-     * @author Gillian
-     */
-    public void sellPotion ()
-    {
-        if(potions.size() > 0) {
-            AbstractPotion first = potions.remove(0);
-            Start.getPlayer().getInventory().addMoney(first.getPrix());
-        }
-
-    }
-    /**
-     * Permet de vendre une arme en ajoutant l'argent au joueur
-     * @author Gillian
-     */
-    public void sellWeapon ()
-    {
-        if(weapons.size() > 0) {
-            AbstractWeapon first = weapons.remove(0);
-            Start.getPlayer().getInventory().addMoney(first.getPrix());
-        }
-    }
-
     /**
      * Retourne la limite d'armes
      * @return Limite d'armes
@@ -273,17 +246,10 @@ public class Inventory implements Serializable {
     /**
      * Enlève de l'argent au joueur
      * @param m Montant de la monnaie à soustraire
-     * @return true si possible, false sinon
      * @author Gillian
      */
-    public boolean removeMoney(int m) {
-        if (money - m < 0) {
-            return false;
-        } else {
-            money -= m;
-            return true;
-        }
-
+    public void removeMoney(int m) {
+        money -= m;
     }
 
 }

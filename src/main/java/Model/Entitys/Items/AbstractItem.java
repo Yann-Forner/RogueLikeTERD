@@ -7,13 +7,12 @@ import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
-//TODO cette classe est une vrai poubelle #GILLIAN #JP
 /**
  * Un Item est une entité qui ne se deplace pas et n'a pas de point de vie.
  * @author JP, Quentin, Gillian
  */
 public abstract class AbstractItem extends Entity {
-    private int prix;
+    private final int prix;
 
     /**
      * Crée un item avec un prix.

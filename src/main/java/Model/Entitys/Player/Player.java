@@ -8,13 +8,13 @@ import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.Sound;
+import Model.Utils.Position.Direction;
 import Model.Utils.TourManager;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Classe de base du joueur
- *
  * @author Quentin, Yann, Gillian
  */
 public class Player extends AbstractAlive {
@@ -30,24 +30,6 @@ public class Player extends AbstractAlive {
     private boolean isBuffed;
     private boolean isImmortal;
     private boolean isStimulated;
-
-    public enum Direction{
-        //TODO DEPLACER DANS UTIL
-        HAUT(new Position(0,-1)),
-        BAS(new Position(0,1)),
-        DROITE(new Position(1,0)),
-        GAUCHE(new Position(-1,0));
-
-        private final Position vecteur;
-
-        Direction(Position vecteur){
-            this.vecteur = vecteur;
-        }
-
-        public Position getVecteur(){
-            return vecteur;
-        }
-    }
 
     /**
      * Crée un joueur.
@@ -74,7 +56,7 @@ public class Player extends AbstractAlive {
         getEtage().get(getPosition()).setEntity(null);
         setEtage(etage);
         setPosition(position);
-        etage.get(getPosition()).setEntity(this);
+        etage.get(position).setEntity(this);
     }
 
     /**
@@ -135,7 +117,6 @@ public class Player extends AbstractAlive {
 
     /**
      * Renvoit l'experience actuelle.
-     *
      * @return Exp actuelle
      * @author Quentin
      */
@@ -179,6 +160,12 @@ public class Player extends AbstractAlive {
         return isImmortal() ? super.updatePV(Math.max(0, pv), limited) : super.updatePV(pv, limited);
     }
 
+    /**
+     * Buff la force du joueur selon le multiplicateur.
+     * @param buffMultiplicator Coeff de multiplication
+     * @param seconds La durée du buff
+     * @author Quentin
+     */
     public void buffStrength(double buffMultiplicator, int seconds) {
         if(!isBuffed()) {
             setBuffed(true);
@@ -186,7 +173,6 @@ public class Player extends AbstractAlive {
             int forceConverted = (int) (((double) originalForce) * (1.0 + buffMultiplicator / 100.0));
             setForce(getForce() + forceConverted);
             TourManager.addMessage("Pendant " + seconds + "s, la force sera augmentée de " + buffMultiplicator + "%. (" + originalForce + " -> " + forceConverted + ")");
-
             TourManager.getExecutor().schedule(() -> {
                 int previousForce = getForce() - forceConverted;
                 setForce(previousForce);
@@ -195,6 +181,7 @@ public class Player extends AbstractAlive {
             }, seconds, TimeUnit.SECONDS);
         }
     }
+
     /**
      * Renvoit l'endurence du joueur.
      * @return Endurence
@@ -202,15 +189,6 @@ public class Player extends AbstractAlive {
      */
     public int getEndurence(){
         return endurence;
-    }
-
-    /**
-     * Redéfinit l'endurance du joueur
-     * @param endurence Endurance
-     * @author JP
-     */
-    public void setEndurence(int endurence) {
-        this.endurence = endurence;
     }
 
     @Override
@@ -311,7 +289,7 @@ public class Player extends AbstractAlive {
     }
 
     /**
-     * Définit si une potion de force est en cours d'utilisation
+     * Définit si une potion de force est en cours d'utilisation.
      * @param buffed Defini si le joueur a une potion de force en cours d'utilisation
      * @author JP
      */
@@ -320,8 +298,8 @@ public class Player extends AbstractAlive {
     }
 
     /**
-     * Retourne si une potion d'invulnérabilité est en cours d'utilisation
-     * @return
+     * Retourne si une potion d'invulnérabilité est en cours d'utilisation.
+     * @return Si le joueur est invincible
      * @author JP
      */
     public boolean isImmortal() {
@@ -329,8 +307,8 @@ public class Player extends AbstractAlive {
     }
 
     /**
-     * Définit si une potion d'invulnérabilité est en cours d'utilisation
-     * @param immortal
+     * Définit si une potion d'invulnérabilité est en cours d'utilisation.
+     * @param immortal Defini si le joueur est immortel
      * @author JP
      */
     public void setImmortal(boolean immortal) {
@@ -338,8 +316,8 @@ public class Player extends AbstractAlive {
     }
 
     /**
-     * Retourne si une potion d'endurance est en cours d'utilisation
-     * @return
+     * Retourne si une potion d'endurance est en cours d'utilisation.
+     * @return Si je joueur a une endurence infini.
      * @author JP
      */
     public boolean isStimulated() {
@@ -347,8 +325,8 @@ public class Player extends AbstractAlive {
     }
 
     /**
-     * Définit si une potion d'endurance est en cours d'utilisation
-     * @param stimulated
+     * Définit si une potion d'endurance est en cours d'utilisation.
+     * @param stimulated Defini si je joueur a une endurence infini.
      * @author JP
      */
     public void setStimulated(boolean stimulated) {

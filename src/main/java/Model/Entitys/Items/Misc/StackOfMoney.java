@@ -42,7 +42,7 @@ public class StackOfMoney extends AbstractItem {
             TourManager.addMessage(Affichage.BLUE + player.getNom()
                     + " a ramassé "
                     + Affichage.BRIGTH_BLUE + getNom()
-                    + Affichage.BLUE + "d'une valeur de "
+                    + Affichage.BLUE + " d'une valeur de "
                     + Affichage.GREEN + getMontant() + "$");
             player.getInventory().addMoney(montant);
             player.getEtage().removeItem(this);
@@ -61,15 +61,16 @@ public class StackOfMoney extends AbstractItem {
     @Override
     public String getNom() {
         if (getMontant() <= 25) {
-            return "pièce d'or";
-        } else if (getMontant() <= 50) {
-            return "billet simple";
-        } else if (getMontant() <= 75) {
-            return "liasse de billet";
-        } else if (getMontant() <= 100) {
-            return "sac d'or";
-        } else {
-            return "";
+            return "Pièce d'or";
+        }
+        else if (getMontant() <= 50) {
+            return "Billet simple";
+        }
+        else if (getMontant() <= 75) {
+            return "Liasse de billet";
+        }
+        else{
+            return "Sac d'or";
         }
     }
 

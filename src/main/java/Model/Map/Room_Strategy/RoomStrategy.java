@@ -10,13 +10,13 @@ import java.io.Serializable;
 
 /**
  * Classe abstraite définissant le comportement des rooms
- * @auhtor Yann,Quentin,JP
+ * @author Yann,Quentin,JP
  */
 public abstract class RoomStrategy implements Serializable {
     /**
      * Génère une room
      * @param r la room
-     * @auhtor Yann,Quentin
+     * @author Yann,Quentin
      */
     public void composeRoom(Room r){
         r.fillMap(new Cell(true, new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_YELLOW, ".")));
@@ -26,11 +26,10 @@ public abstract class RoomStrategy implements Serializable {
     /**
      * Setter le style room
      * @param r la room
-     * @auhtor Quentin
+     * @author Quentin
      */
     protected void setStyleCell(Room r){
         Cell.Style palmier = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"\uD83C\uDF34", "T");
-        //	"\uD83C\uDF33"
         Cell.Style tree = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,"\uD83C\uDF33", "T");
         Cell.Style barierre = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BLACK,"\uD83D\uDEA7", "Ø");
         for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
@@ -67,7 +66,7 @@ public abstract class RoomStrategy implements Serializable {
     /**
      * Génère les monstres de la rooms
      * @param r Room faisant office de lieu de génération
-     * @auhtor Quentin,JP
+     * @author Quentin,JP
      */
     public abstract void setMonsters(Room r);
 

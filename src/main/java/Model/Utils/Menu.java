@@ -208,7 +208,6 @@ public class Menu {
      * @author Quentin
      */
     private void setStringOnSide(int y, String s, Side side, boolean centered){
-        //TODO centrer a droite marhc epas vraiment
         StringBuilder sb = new StringBuilder();
         int trueLengthL = Affichage.getTrueLength(Lignes[y]);
         int trueLengthS = Affichage.getTrueLength(s);

@@ -15,6 +15,24 @@ public class Position implements Serializable {
     private final int x;
     private final int y;
 
+    public enum Direction{
+        HAUT(new Position(0,-1)),
+        BAS(new Position(0,1)),
+        DROITE(new Position(1,0)),
+        GAUCHE(new Position(-1,0));
+
+        private final Position vecteur;
+
+        Direction(Position vecteur){
+            this.vecteur = vecteur;
+        }
+
+        public Position getVecteur(){
+            return vecteur;
+        }
+    }
+
+
     /**
      * Crée un position
      * @param x Horizontal
