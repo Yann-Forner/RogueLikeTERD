@@ -184,22 +184,60 @@ Les armes, peuvent être trouvées tout le long du labyrinthe : </br>
 Elles permettent au joueur <b>d'attaquer les différents monstres</b> qu'il va rencontrer durant son aventure. </br>
 Le type d'attaque va changer en fonction de l'arme portée par le joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.1 Epée</h4>
-Linux: </br>
-Windows: <b</b></br>
-L'épée est la seule arme <b>corps à corps</b> du jeu. Elle inflige des <b>dégats conséquent</b> à courte portée. </br></br>
+<h4>2.4.1.1 Mélée</h4>
+Clé à molette :</br>
+Linux: 🔧 </br>
+Windows: <b"m"</b></br></br>
+Epée :</br>
+Linux: 🔪</br>
+Windows: <b"m"</b></br></br>
+Hache :</br>
+Linux: 🪓</br>
+Windows: <b"m"</b></br></br>
+Châine :</br>
+Linux: 🔗</br>
+Windows: <b"m"</b></br></br>
+Les armes mélées sont les armes <b>corps à corps</b> du jeu. Elles infligent des <b>dégats conséquent</b> à courte portée. </br>
+Il existe des clés à molette, des épées, des haches et des chaînes. </br>
+Les différentes armes influent sur la portée d'attaque du joueur. </br>
+</br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.2 Arc</h4>
-Linux: </br>
-Windows: <b</b></br>
-L'arc est une <b>arme à distance</b>. Il permet d'attaquer un monstre qui est à partir du moment où il est à portée. </br>
-Si aucun monstre n'est à portée du joueur, ce dernier ne peut utiliser son arc.</br></br>
+<h4>2.4.1.2 Armes à distance</h4>
+Canne à pêche</br>
+Linux: 🎣</br>
+Windows: <b"b"</b></br></br>
+Arc</br>
+Linux: 🏹</br>
+Windows: <b "b"</b></br></br>
+Tridant</br>
+Linux: 🔱</br>
+Windows: <b "b"</b></br></br>
+Revolver</br>
+Linux: 🔫</br>
+Windows: <b "b"</b></br></br>
+Il existe dans le jeu des <b>arme à distance</b>. Elles permettent d'attaquer un monstre à partir du moment où il est à portée de l'arme </br>
+Si aucun monstre n'est à portée du joueur, ce dernier ne peut pas attaquer.</br>
+Il existe des Cannes à pêche, des arcs, des tridents et des revolvers </br>
+Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.3 Baguette</h4>
-Linux: </br>
-Windows: <b</b></br>
-La baguette est la seconde <b>arme à distance</b> du jeu. Le joueur, en l'utilisant, attaquera en <b>ligne droite</b> devant lui. </br>
-Contrairement à l'arc, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut dquand même utiliser son arme.</br></br>
+
+<h4>2.4.1.3 Les armes magiques</h4>
+Balais</br>
+Linux: 🧹</br>
+Windows: <b"w"</b></br></br>
+Balais </br>
+Linux: 🦴</br>
+Windows: <b"w"</b></br></br>
+Balais</br>
+Linux: 🥢</br>
+Windows: <b"w"</b></br></br>
+Balais</br>
+Linux: 🦯</br>
+Windows: <b"w"</b></br></br>
+Les armes magiques sont les <b>armes à distance</b> du jeu. Le joueur, en les utilisant, attaquera en <b>ligne droite</b> devant lui. </br>
+Contrairement aux armes à distance classiques, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut quand même utiliser son arme.</br>
+Il existe des balais, des os, des baguettes et des cannes </br>
+Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>2.4.2 Les potions</h2>
