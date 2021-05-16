@@ -47,7 +47,7 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
                 case 1 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.STRENGTH_POTION));
             }
         }
-        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
+        for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
             r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BANANA));
         }
     }

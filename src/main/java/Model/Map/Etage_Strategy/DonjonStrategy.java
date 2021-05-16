@@ -1,5 +1,7 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Items.Foods.FoodFactory;
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -60,14 +62,20 @@ public class DonjonStrategy extends EtageStrategy {
     }
 
     @Override
-    public void setMonsters(Etage etage) {
-        super.setMonsters(etage);
-        for(int i = 0; i < Procedure.getRandomInt(3,0); i++){
-            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT)));
+    public void setItems(Etage e) {
+        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
+            e.addItem(PotionFactory.getNewPotion(e, PotionFactory.PotionType.HEAL_POTION));
+            e.addItem(PotionFactory.getNewPotion(e, PotionFactory.PotionType.STRENGTH_POTION));
         }
-        for(int i = 0; i < Procedure.getRandomInt(2,0); i++){
-            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.SNAIL)));
+        for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
+            int rand = Procedure.getRandomInt(1, 0);
+            if(rand == 0)
+                e.addItem(FoodFactory.getNewFood(e, FoodFactory.FoodType.APPLE));
+            else
+                e.addItem(FoodFactory.getNewFood(e, FoodFactory.FoodType.CARROT));
         }
+
+        super.setItems(e);
     }
 
     @Override

@@ -31,6 +31,7 @@ public class Player extends AbstractAlive {
     private boolean inPoche = false;
     private boolean isBuffed;
     private boolean isImmortal;
+    private boolean isStimulated;
 
     public enum Direction{
         //TODO DEPLACER DANS UTIL
@@ -62,6 +63,7 @@ public class Player extends AbstractAlive {
         MAX_PV = classe.getBasePV();
         isBuffed = false;
         isImmortal = false;
+        isStimulated = false;
     }
 
     /**
@@ -197,7 +199,7 @@ public class Player extends AbstractAlive {
      * @author Quentin
      */
     public void updateEndurence(int endurence){
-        this.endurence = Math.min(getMAX_ENDURENCE(), this.endurence + endurence);
+        this.endurence = (endurence < 0 && isStimulated()) ? this.endurence : Math.min(getMAX_ENDURENCE(), this.endurence + endurence);
     }
 
     @Override
@@ -379,6 +381,24 @@ public class Player extends AbstractAlive {
      */
     public void setImmortal(boolean immortal) {
         isImmortal = immortal;
+    }
+
+    /**
+     * Retourne si une potion d'endurance est en cours d'utilisation
+     * @return
+     * @author JP
+     */
+    public boolean isStimulated() {
+        return isStimulated;
+    }
+
+    /**
+     * Définit si une potion d'endurance est en cours d'utilisation
+     * @param stimulated
+     * @author JP
+     */
+    public void setStimulated(boolean stimulated) {
+        isStimulated = stimulated;
     }
 
     @Override

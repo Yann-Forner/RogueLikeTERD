@@ -1,5 +1,7 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Items.Foods.FoodFactory;
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -40,6 +42,21 @@ public class TrapEtageStrategy extends EtageStrategy{
             }
         }
         cleanFusion(etage,style_fusion);
+    }
+
+    @Override
+    public void setItems(Etage e) {
+        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
+            switch(i) {
+                case 0 -> e.addItem(PotionFactory.getNewPotion(e, PotionFactory.PotionType.STRENGTH_POTION));
+                case 1 -> e.addItem(PotionFactory.getNewPotion(e, PotionFactory.PotionType.INVUL_POTION));
+            }
+        }
+        for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
+            e.addItem(FoodFactory.getNewFood(e, FoodFactory.FoodType.CARROT));
+        }
+
+        super.setItems(e);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package Model.Map.Etage_Strategy;
 
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
+import Model.Map.Room;
 import Model.Map.RoomFactory;
 import Model.Utils.Affichage;
 import Model.Utils.Procedure;
@@ -20,6 +22,15 @@ public class MarchandEtageStrategy extends EtageStrategy{
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.YELLOW));
         setMonsters(etage);
         setItems(etage);
+    }
+
+    @Override
+    public void setItems(Etage e) {
+        for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
+            e.addItem(PotionFactory.getNewPotion(e, PotionFactory.PotionType.ENDURENCE_POTION));
+        }
+
+        super.setItems(e);
     }
 
     @Override
