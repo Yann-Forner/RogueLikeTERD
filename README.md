@@ -42,29 +42,29 @@ Quitter : <b>ESC</b></br>
 <h3>1.1. Types d'etages</h3>
 <b>La carte se compose en plusieurs types d'etages:</b>
 <h4>1.1.1. Etage cercle</h4>
-Toutes les pieces de cet etage sont des cercles.
+Toutes les pieces de cet etage sont des cercles.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png"/>
 <h4>1.1.2. Etage normal</h4>
-Toutes les pieces de cet etage sont des rectangles.
+Toutes les pieces de cet etage sont des rectangles.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114860563-75417980-9dec-11eb-81eb-381586e9517f.png"/>
 <h4>1.1.3. Etage dongeon</h4>
-Les pieces de cet etage sont un mix de tout les types commun de pieces.
+Les pieces de cet etage sont un mix de tout les types commun de pieces.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114860765-b6398e00-9dec-11eb-9a1e-1cccf06809d1.png"/>
 <h4>1.1.4. Etage piege</h4>
-C'est un etage piege qui apparait lorsque l'on marche sur une case piegée.
+C'est un etage piege qui apparait lorsque l'on marche sur une case piegée.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114860960-eda83a80-9dec-11eb-8935-82dfc54d8d7d.png"/>
 <h3>1.2. Types salles</h3>
 <h4>1.2.1. Salle normale</h4>
-C'est la salle de base, elle est rectangulaire.
+C'est la salle de base, elle est rectangulaire.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114864633-85a82300-9df1-11eb-96db-ebb69ec51d9c.png"/>
 <h4>1.2.2. Salle triangle</h4>
-C'est un triangle, c'est aussi une des salles de base.
+C'est un triangle, c'est aussi une des salles de base.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114866200-922d7b00-9df3-11eb-9c9e-35d1c7f6dfb4.png"/>
 <h4>1.2.3. Salle cercle</h4>
-C'est un cercle, c'est une plus petite version de salle de boss.
+C'est un cercle, c'est une plus petite version de salle de boss.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114865403-7a092c00-9df2-11eb-86db-aae4d6977e0e.png"/>
 <h4>1.2.4. Salle boss</h4>
-C'est la salle ou apparaissent les boss, elle est beaucoup plus grande que les autres.
+C'est la salle ou apparaissent les boss, elle est beaucoup plus grande que les autres.<br>
 <img src="https://user-images.githubusercontent.com/74865653/114865593-c3f21200-9df2-11eb-97d7-e517fa26ea42.png"/>
 <h4>1.2.5. Salle marchand</h4>
 <b><i>Non implementé</b></i>
@@ -130,7 +130,7 @@ Pour engager la conversation avec celui-ci, il suffit de le colisionner. </br>
 
 <h4>2.2.1. L'achat</h4>
 Le joueur peut acheter auprès du marchand des armes et des potions. </br>
-Le prix est fixé en fonction de l'équilibrage du jeu.
+Le prix est fixé en fonction de l'équilibrage du jeu.<br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h4>2.2.2. La vente</h4>
@@ -141,7 +141,7 @@ Le joueur peut de même vendre ses objets auprès du marchand.</br>
 <h4>2.2.3. Le vol</h4>
 
 Il est possible de rompre la pacificité du marchand en essayant de le voler.</br>
-Le marchand devient alors une entité aggressive.
+Le marchand devient alors une entité aggressive.<br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 
@@ -149,13 +149,13 @@ Le marchand devient alors une entité aggressive.
 Les boss sont présents dans le labyrinthe dans les salles prévues à cet effet. </br>
 Ce sont des monstres bien plus fort que les précédents, dotés de capacités uniques et prenant plusieurs cases d'affichage.</br>
 <h4>2.3.1. Big Monster</h4>
-Le boss "Big Monster" est un monstre puissant doté de deux bras. Sa particularité est qu'il double sa puissance à chaque perte de bras.
+Le boss "Big Monster" est un monstre puissant doté de deux bras. Sa particularité est qu'il double sa puissance à chaque perte de bras.<br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.3.2. Snaker</h4>
-Le boss "Snake" est doté d'une longue queue qu'il faudra détruire avant de pouvoir le tuer. 
+Le boss "Snake" est doté d'une longue queue qu'il faudra détruire avant de pouvoir le tuer. <br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.3.3. Invoqueur</h4>
-Le boss "Invoqueur" tire de puissant rayons lazer. Il invoque de même des rats lorsque celui-ci se voit infligé des dégats.
+Le boss "Invoqueur" tire de puissant rayons lazer. Il invoque de même des rats lorsque celui-ci se voit infligé des dégats.<br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>2.4. Items</h2>
