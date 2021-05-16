@@ -17,12 +17,13 @@ public abstract class AbstractPotion extends AbstractItem {
      * Constructeur de la potion
      *
      * @param etage Etage où se situe la potion
-     * @param nom Nom de la potion
      * @param position Position de la potion
+     * @param nom Nom de la potion
+     * @param prix Prix de la potion
      * @author JP
      */
-    public AbstractPotion(Etage etage, Position position, String nom) {
-        super(etage, position, nom);
+    public AbstractPotion(Etage etage, Position position, String nom, int prix) {
+        super(etage, position, nom, prix);
     }
 
     /**

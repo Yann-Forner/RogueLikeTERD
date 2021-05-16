@@ -18,13 +18,14 @@ public class InvulPotion extends AbstractPotion {
     /**
      * Constructeur de la potion d'invincibilité
      * @param e Etage où se situe la potion
-     * @param nom Nom de la potion
      * @param pos Position de la potion
+     * @param nom Nom de la potion
+     * @param prix Prix de la potion
      * @param seconds Durée d'effet de la potion
      * @author JP
      */
-    public InvulPotion(Etage e, Position pos, String nom, int seconds) {
-        super(e, pos, nom);
+    public InvulPotion(Etage e, Position pos, String nom, int prix, int seconds) {
+        super(e, pos, nom, prix);
         this.seconds = seconds;
     }
 

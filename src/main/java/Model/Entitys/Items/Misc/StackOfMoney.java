@@ -2,7 +2,6 @@ package Model.Entitys.Items.Misc;
 
 import Model.Entitys.Entity;
 import Model.Entitys.Items.AbstractItem;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Player.Player;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
@@ -14,46 +13,31 @@ import Model.Utils.TourManager;
  * @author Gillian
  */
 public class StackOfMoney extends AbstractItem {
-
-    /**
-     * Champ indiquant le montant du stack d'argent
-     * @author Gillian
-     */
     private final int montant;
 
     /**
      * Constructeur d'un stack d'argent
      * @param e Etage
      * @param pos Posisiton
-     * @param nom Nom
      * @param montant Montant
      * @author Gillian
      */
-    public StackOfMoney(Etage e, Position pos, String nom, int montant) {
-        super(e, pos, nom);
+    public StackOfMoney(Etage e, Position pos, int montant) {
+        super(e, pos, "Argent");
         this.montant = montant;
     }
 
-    /**
-     * Pas besoin de redéfinir la méthode car on ne peut pas utiliser un stack d'argent (disparait au ramassage)
-     * @param player Joueur
-     */
     @Override
-    public void useItem(Player player) {
-
-    }
-
-    //TODO ajouter l'argent au joueur
+    public void useItem(Player player) { }
 
     /**
      * Ajoute l'argent au joueur
      * @param e L'entité qui rentre en contact avec this.
-     *
      * @author Gillian
      */
     @Override
     public void onContact(Entity e) {
-        if (!(e instanceof AbstractMonster)) {
+        if (e instanceof Player) {
             Player player = (Player) e;
             TourManager.addMessage(Affichage.BLUE + player.getNom()
                     + " a ramassé "
@@ -63,12 +47,10 @@ public class StackOfMoney extends AbstractItem {
             player.getInventory().addMoney(montant);
             player.getEtage().removeItem(this);
         }
-
     }
 
     /**
-     * récupération du montant
-     *
+     * Récupération du montant
      * @return montant
      * @author Gillian
      */
@@ -81,27 +63,20 @@ public class StackOfMoney extends AbstractItem {
         return super.getNom();
     }
 
-    /**
-     * To string avec affichage différent en fonction du montant.
-     * @return string (ce qu'on doit afficher
-     * @author Gillian
-     */
-
-
-
     @Override
     public String toString() {
         if (System.getProperty("os.name").equals("Linux")) {
             if (getMontant() <= 25) {
                 return "\uD83D\uDCB5";
-            } else if (getMontant() <= 50) {
+            }
+            else if (getMontant() <= 50) {
                 return "\uD83D\uDCB8";
-            } else if (getMontant() <= 75) {
+            }
+            else if (getMontant() <= 75) {
                 return "\uD83D\uDCB4";
-            } else if (getMontant() <= 100) {
+            }
+            else{
                 return "\uD83D\uDCB0";
-            } else {
-                return "";
             }
         } else {
             return Affichage.YELLOW + "$";

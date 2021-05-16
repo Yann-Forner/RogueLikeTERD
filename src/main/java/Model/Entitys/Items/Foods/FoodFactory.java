@@ -48,13 +48,13 @@ public class FoodFactory {
     /**
      * Méthode factory pour les nourritures
      * @param etage Etage ou sera généré la nourriture
-     * @param ft Type de la nourriture
+     * @param fruit Type de la nourriture
      * @return Retourne la nourriture générée
      */
-    public static AbstractFood getNewFood(Etage etage, FoodType ft) {
-        if(ft.equals(FoodType.BURGER)){
-            return new Burger(etage, Procedure.getAccesibleRandomPosition(true, etage),ft);
+    public static AbstractFood getNewFood(Etage etage, FoodType fruit) {
+        if(fruit.equals(FoodType.BURGER)){
+            return new Burger(etage, Procedure.getAccesibleRandomPosition(true, etage),fruit);
         }
-        return new Fruit(etage, Procedure.getAccesibleRandomPosition(true, etage), ft);
+        return new Fruit(etage, Procedure.getAccesibleRandomPosition(true, etage), fruit);
     }
 }

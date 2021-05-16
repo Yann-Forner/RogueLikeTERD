@@ -5,8 +5,6 @@ import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Potion de puissance, le but est d'augmenter temporairement les dégats du joueur
  * @author JP
@@ -14,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class StrengthPotion extends AbstractPotion {
 
     private final double buffMultiplicator;
-    private int seconds;
+    private final int seconds;
 
     /**
      * Constructeur de la potion de force.
@@ -22,12 +20,13 @@ public class StrengthPotion extends AbstractPotion {
      * @param e Etage ou se situe la potion
      * @param pos Position de la potion
      * @param nom Nom de la potion
+     * @param prix Prix de la potion
      * @param buffMultiplicator Multiplicateur de force de la potion
      * @param seconds Durée d'effet de la potion
      * @author JP
      */
-    public StrengthPotion(Etage e, Position pos, String nom, double buffMultiplicator, int seconds) {
-        super(e, pos, nom);
+    public StrengthPotion(Etage e, Position pos, String nom, int prix, double buffMultiplicator, int seconds) {
+        super(e, pos, nom, prix);
         this.buffMultiplicator = buffMultiplicator;
         this.seconds = seconds;
     }
