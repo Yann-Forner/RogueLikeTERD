@@ -8,6 +8,7 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,12 @@ public class Melee extends AbstractWeapon{
         super(etage, position,null, type,strength, range);
     }
 
+
+    @Override
+    public void useItemMessage() {
+        Sound.playAudio(Sound.Sons.EPEEDAMAGE,0);
+    }
+
     @Override
     public void useItem(Player player) {
         super.useItem(player);
@@ -40,6 +47,7 @@ public class Melee extends AbstractWeapon{
         ArrayList<Position> zone = new ArrayList<>();
         zone.add(pos);
         Affichage.Projectile(player.getEtage(),zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_RED,"💫","+"));
+        useItemMessage();
     }
 
     @Override
@@ -51,6 +59,7 @@ public class Melee extends AbstractWeapon{
             default -> "Chaine";
         };
     }
+
 
     @Override
     public String toString() {

@@ -8,6 +8,7 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -31,6 +32,11 @@ public class Wand extends AbstractWeapon {
     }
 
     @Override
+    public void useItemMessage() {
+        Sound.playAudio(Sound.Sons.WANDDAMAGE,0);
+    }
+
+    @Override
     public void useItem(Player player) {
         super.useItem(player);
         ArrayList<Position> zone = new ArrayList<>();
@@ -51,6 +57,7 @@ public class Wand extends AbstractWeapon {
             }
         }
         Affichage.Projectile(player.getEtage(),zone,getMagicStyle());
+        useItemMessage();
     }
 
     /**
