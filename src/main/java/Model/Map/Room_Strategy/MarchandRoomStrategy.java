@@ -1,6 +1,10 @@
 package Model.Map.Room_Strategy;
 
 import Model.Entitys.Items.Potions.PotionFactory;
+import Model.Entitys.Items.Foods.FoodFactory;
+import Model.Entitys.Items.Potions.PotionFactory;
+import Model.Entitys.Items.Weapons.WeaponFactory;
+import Model.Entitys.Monsters.Marchand;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -40,7 +44,9 @@ public class MarchandRoomStrategy extends RoomStrategy{
 
     @Override
     public void setMonsters(Room r) {
-        r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.MARCHAND));
+        if(Marchand.getState() != Marchand.STATE.DEAD){
+            r.addMonster(MonsterFactory.getNewMonster(r, MonsterFactory.MonsterType.MARCHAND));
+        }
     }
 
 

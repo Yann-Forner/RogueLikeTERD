@@ -33,6 +33,7 @@ public class Player extends AbstractAlive {
     private boolean isImmortal;
 
     public enum Direction{
+        //TODO DEPLACER DANS UTIL
         HAUT(new Position(0,-1)),
         BAS(new Position(0,1)),
         DROITE(new Position(1,0)),

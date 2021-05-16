@@ -3,6 +3,7 @@ package Model.Entitys.Monsters;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 import Model.Utils.Tools;
 
 /**
