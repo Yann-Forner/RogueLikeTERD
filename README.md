@@ -13,11 +13,22 @@
 Le but du jeu est d'avancer le plus loin dans un labyrinthe composé de plusieurs etages eux même composés de plusieurs pieces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face a de nombreux monstres dont des boss et a d'autres pieges tout aussi mortels, heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
 
 <h1>Touches</h1>
-Deplacement : <b>ZQSD</b></br>
+Déplacement : <b>ZQSD</b></br>
+Mode Tour par tour : <b>T</b></br>
+Attaque à distance : <b>A</b></br>
+Utiliser la potion courante : <b>P</b></br>
+Changement d'armes : <b>I</b></br>
+Changement de potion : <b>O</b></br>
+Lâcher arme : <b>L</b></br>
+Lâcher potion : <b>M</b></br>
+Sauvegarder : <b>W</b></br>
+Quitter : <b>ESC</b></br>
+
+
 
 <h1>Composants du jeu</h1>
 
-<h2>1. Generation de la carte</h2>
+<h2>1. Génération de la carte</h2>
 <h3>1.1. Types d'etages</h3>
 <b>La carte se compose en plusieurs types d'etages:</b>
 <h4>1.1.1. Etage cercle</h4>
@@ -29,7 +40,7 @@ Toutes les pieces de cet etage sont des rectangles.
 <h4>1.1.3. Etage dongeon</h4>
 Les pieces de cet etage sont un mix de tout les types commun de pieces.
 <img src="https://user-images.githubusercontent.com/74865653/114860765-b6398e00-9dec-11eb-9a1e-1cccf06809d1.png"/>
-<h4>1.1.4. etage piege</h4>
+<h4>1.1.4. Etage piege</h4>
 C'est un etage piege qui apparait lorsque l'on marche sur une case piegée.
 <img src="https://user-images.githubusercontent.com/74865653/114860960-eda83a80-9dec-11eb-8935-82dfc54d8d7d.png"/>
 <h3>1.2. Types salles</h3>
@@ -99,10 +110,22 @@ Il cause des degats a toutes les entités s'approchant dans son champs d'activat
 Linux: 🧟</br>
 Windows: <b>Z</b></br>
 Il se deplace tres lentement et a beaucoup de points de vie.
+
 <h2>2.3. Boss</h2>
 <b><i>Non implementé</b></i>
+<h4>2.3.1. Big Monster</h4>
+Le boss "Big Monster" est un monstre puissant doté de deux bras. Sa particularité est qu'il double sa puissance à chaque perte de bras.
+<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<h4>2.3.2. Snaker</h4>
+Le boss "Snake" est doté d'une longue queue qu'il faudra détruire avant de pouvoir le tuer. 
+<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<h4>2.3.3. Invoqueur</h4>
+Le boss "Invoqueur" tire de puissant rayons lazer. Il invoque de même des rats lorsque celui-ci se voit infligé des dégats.
+<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
 <h2>2.4. Loot</h2>
 <b><i>Non implementé</b></i>
+
+
 
 <h2>3. Cases</h2>
 Les cases du jeu se divisent en deux categories, les fonctionelles et les cosmetiques: les premieres ont une fonction que se soit dans le jeu ou la programmation alors que les deuxiemes ne sont qu'un changement d'affichage des premieres.
