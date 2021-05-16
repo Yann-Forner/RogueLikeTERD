@@ -10,7 +10,7 @@
 
 <h1>Presentation du jeu</h1>
 
-Le but du jeu est d'avancer <b>le plus loin possible</b> dans un labyrinthe composé de <b>plusieurs etages</b> eux même composés de plusieurs pieces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face à de <b>nombreux monstres</b>, boss et divers pièges tout aussi mortels. Heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
+Le but du jeu est d'avancer <b>le plus loin possible</b> dans un labyrinthe composé de <b>plusieurs etages</b> eux même composés de plusieurs pièces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face à de <b>nombreux monstres</b>, boss et divers pièges tout aussi mortels. Heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
 
 <h2>⚠️Warnings⚠️</h2>
 
