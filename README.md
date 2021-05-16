@@ -351,11 +351,11 @@ Un coffre est placé dans cette cellule.
 
 <h2>4. Inventaire</h2>
 L'inventaire du joueur permet de <b>stocker les objets</b> et la <b>monnaie</b> du joueur.</br>
-Il affiche tout ceci dans une interface visible sur la droite de l'écran. </br></br>
+Il affiche tout ceci dans une <b>interface visible sur la droite</b> de l'écran. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118412636-5fe59680-b69b-11eb-95e2-fd7d81c02104.png"/>
 
 <h2>5. Sauvegarde</h2>
-La sauvegarde permet au jouer de sauvegarder la partie pour la reprendre dans le futur. </br></br>  
+La sauvegarde permet au jouer de <b>sauvegarder la partie</b> pour la reprendre dans le futur. </br></br>  
 Exemple quand aucune partie n'est sauvegardée : </br>  </br> 
 <img src="https://user-images.githubusercontent.com/74865920/118412972-33cb1500-b69d-11eb-9bdf-7695a60f3b42.png"/></br> </br> 
 Exemple de sauvegarde de partie: </br>  </br> 
