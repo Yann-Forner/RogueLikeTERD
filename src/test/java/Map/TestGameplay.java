@@ -72,7 +72,7 @@ public class TestGameplay extends TestCase {
 
         while(etage.get(pos).isAccesible())pos = new Position(pos.getX()+1, pos.getY());
         pos=new Position(pos.getX()-1,pos.getY());
-        HealPotion healPotion  = new HealPotion(etage,pos,"test",10);
+        AbstractItem healPotion  = PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION);
         etage.addItem(healPotion);
         System.out.println(etage);
         /* Déplacement du joueur à coté de l'item */
