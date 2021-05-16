@@ -19,7 +19,8 @@ Le jeu est jouable est sur Linux et sur Windows. <br>
 Attention toutefois à son utilisation sur <b>Windows</b> :</br>
   - Les smileys seront remplacés par des lettres. <br>
   - Le jeu sera lancé de base en tour par tour, il faudra appuyer sur T pour changer ce mode si désiré.<br>
-Ces spécifications seront de même valables sur un IDE.<br>
+Ces spécifications seront de même valables sur un IDE.</br>
+De même, attention, l'ambiance musicale du jeu est très prononcée, veuillez baisser le volume ! :)
 
 
 <h1>Touches</h1>
@@ -375,7 +376,8 @@ Ces cellules sont présentes lorsque le joueur <b>tire avec une arme à distance
 
 <h2>4. Inventaire</h2>
 L'inventaire du joueur permet de <b>stocker les objets</b> et la <b>monnaie</b> du joueur.</br>
-Il affiche tout ceci dans une <b>interface visible sur la droite</b> de l'écran. </br></br>
+Il affiche tout ceci dans une <b>interface visible sur la droite</b> de l'écran. </br>
+Ce menu affiche de même <b>les monstres présents sur l'étage</b>.</br>
 <img src="https://user-images.githubusercontent.com/74865920/118412636-5fe59680-b69b-11eb-95e2-fd7d81c02104.png"/>
 
 <h2>5. Sauvegarde</h2>
