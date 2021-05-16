@@ -60,7 +60,17 @@ public class StackOfMoney extends AbstractItem {
 
     @Override
     public String getNom() {
-        return super.getNom();
+        if (getMontant() <= 25) {
+            return "pièce d'or";
+        } else if (getMontant() <= 50) {
+            return "billet simple";
+        } else if (getMontant() <= 75) {
+            return "liasse de billet";
+        } else if (getMontant() <= 100) {
+            return "sac d'or";
+        } else {
+            return "";
+        }
     }
 
     @Override
