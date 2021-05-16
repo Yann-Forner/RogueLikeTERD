@@ -12,6 +12,16 @@
 
 Le but du jeu est d'avancer le plus loin dans un labyrinthe composé de plusieurs etages eux même composés de plusieurs pieces aux attributs differents les unes des autres le tout genéré proceduralement. Le joueur va devoir survivre face a de nombreux monstres dont des boss et a d'autres pieges tout aussi mortels, heureusement pour lui il va pouvoir s'equipper d'armes et d'armures de plus en plus puissantes et avoir recours a des objets lui facilitant son aventure.
 
+<h2>⚠️Warnings⚠️</h2>
+
+Le jeu est jouable est sur Linux et sur Windows. <br>
+
+Attention toutefois à son utilisation sur Windows :<br>
+  - Les smileys seront remplacés par des lettres. <br>
+  - Le jeu sera lancé de base en tour par tour, il faudra appuyer sur T pour changer ce mode si désiré.<br>
+Ces spécifications seront de même valables sur l'IDE.<br>
+
+
 <h1>Touches</h1>
 Déplacement : <b>ZQSD</b></br>
 Mode Tour par tour : <b>T</b></br>
@@ -125,20 +135,86 @@ Le boss "Invoqueur" tire de puissant rayons lazer. Il invoque de même des rats 
 
 <h2>2.4. Items</h2>
 <h2>2.4.1 Armes</h2>
-Les armes permettent au joueur d'attaquer les différents monstres qu'il va rencontrer durant son aventure. 
-Le type d'attaque va changer en fonction de l'arme portée par le joueur. 
+Les armes, peuvent être trouvées tout le long du labyrinthe : </br>
+  - En les ramassant directement dans le labyrinthe</br>
+  - En les récupérant sur un monstre tué</br>
+  - En les achetant au marchand</br>
+Elles permettent au joueur d'attaquer les différents monstres qu'il va rencontrer durant son aventure. </br>
+Le type d'attaque va changer en fonction de l'arme portée par le joueur. </br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.1 Epée</h4>
-L'épée est la seule arme corps à corps du jeu. Elle inflige des dégats conséquent à courte portée. 
+Linux: </br>
+Windows: <b</b></br>
+L'épée est la seule arme corps à corps du jeu. Elle inflige des dégats conséquent à courte portée. </br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.2 Arc</h4>
-L'arc est une arme à distance. Il permet d'attaquer un monstre qui est à partir du moment où il est porté. 
-Si aucun monstre n'est à portée du joueur, ce dernier ne peut utiliser son arc.
+Linux: </br>
+Windows: <b</b></br>
+L'arc est une arme à distance. Il permet d'attaquer un monstre qui est à partir du moment où il est porté. </br>
+Si aucun monstre n'est à portée du joueur, ce dernier ne peut utiliser son arc.</br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.3 Baguette</h4>
-La baguette est également une arme à distance. Elle permet d'attaquer en ligne droite, dans la direction du joueur. 
-Le joueur peut utiliser la baguette même si aucun monstre n'est dans sa direction.
+Linux: </br>
+Windows: <b</b></br>
+La baguette est la seconde arme à distance du jeu. Le joueur, en l'utilisant, attaquera en ligne droite devant lui. </br>
+Contrairement à l'arc, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut dquand même utiliser son arme.</br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+<h2>2.4.2 Les potions</h2>
+Les potions, tout comme les armes, peuvent être trouvées tout le long du labyrinthe : </br>
+  - En les ramassant directement dans le labyrinthe</br>
+  - En les récupérant sur un monstre tué</br>
+  - En les achetant au marchand</br>
+Une fois ramassées, les potions se disposent dans l'inventaire du joueur et peuvent être utilisées à tout moment.</br>
+Celles-ci ont des effets qui diffèrent en fonction du type de la potion.</br>
+<h4>2.4.1.1 La potion de vie</h4>
+Linux: </br>
+Windows: <b</b></br>
+La potion de vie est une potion tout de ce qu'il y a de plus classique : elle restaure de la vie au joueur à l'utilisation. </br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<h4>2.4.1.2 La potion de force</h4>
+Linux: </br>
+Windows: <b</b></br>
+Une fois utilisée, la potion de force rend le joueur plus fort en augmentant ses dégats d'attaque. </br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<h4>2.4.1.3 La potion d'invincibilité</h4>
+Linux: </br>
+Windows: <b</b></br>
+Après avoir consommé cette potion, le joueur devient invulnérable pendant un court instant</br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<h4>2.4.1.4 La potion d'endurance</h4>
+Linux: </br>
+Windows: <b</b></br>
+L'utilisation de cette potion octroie au joueur une endurance illimitée, permettant au joueur d'utiliser ses attaques sans coût.</br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+
+
+<h2>2.4.3 La nourriture </h2>
+A la différence des potions et des armes, le joueur ne peut pas stocker de nourriture dans son inventaire.</br>
+Une fois ramassée, la nourriture est instantanément consomée et rend de la vie et/ou de l'endurance au joueur.
+
+<h4>2.4.3.1 Les fruits</h4>
+Les fruits permettent de rendre de la vie au joueur. </br>
+Ils sont identifiable dans le jeu par les symboles suivant : </br>
+ Linux: </br>
+Windows: <b</b></br>
+Linux: </br>
+Windows: <b</b></br>
+Linux: </br>
+Windows: <b</b></br>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
+
+<h4>2.4.3.2 Le Burger</h4>
+Linux: </br>
+Windows: <b</b></br>
+Le burger permet de rendre de la vie et de l'endurance au joueur. </br></br>
+
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
+
+
+
 
 
 
