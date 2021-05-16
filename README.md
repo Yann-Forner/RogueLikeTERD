@@ -184,7 +184,7 @@ Les armes, peuvent être trouvées tout le long du labyrinthe : </br>
   - En les <b>achetant</b> au marchand</br>
 Elles permettent au joueur <b>d'attaquer les différents monstres</b> qu'il va rencontrer durant son aventure. </br>
 Le type d'attaque va changer en fonction de l'arme portée par le joueur. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
 <h4>2.4.1.1 Mélée</h4>
 Clé à molette :</br>
 Linux: 🔧 </br>
