@@ -179,13 +179,11 @@ L'utilisation de cette potion octroie au joueur une endurance illimitée, permet
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 
-Linux: </br>
-Windows: <b</b></br>
-
 
 <h2>2.4.3 La nourriture </h2>
 A la différence des potions et des armes, le joueur ne peut pas stocker de nourriture dans son inventaire.</br>
 Une fois ramassée, la nourriture est instantanément consomée et rend de la vie et/ou de l'endurance au joueur.
+
 <h4>2.4.3.1 Les fruits</h4>
 Les fruits permettent de rendre de la vie au joueur. </br>
 Ils sont identifiable dans le jeu par les symboles suivant : </br>
