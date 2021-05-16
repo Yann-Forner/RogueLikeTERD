@@ -76,31 +76,36 @@ public class StackOfMoney extends AbstractItem {
         return montant;
     }
 
+    @Override
+    public String getNom() {
+        return super.getNom();
+    }
+
     /**
      * To string avec affichage différent en fonction du montant.
      * @return string (ce qu'on doit afficher
      * @author Gillian
      */
+
+
+
     @Override
     public String toString() {
         if (System.getProperty("os.name").equals("Linux")) {
             if (getMontant() <= 25) {
-                //return 	smiley 1;
+                return "\uD83D\uDCB5";
             } else if (getMontant() <= 50) {
-                //return 	smiley 2;
+                return "\uD83D\uDCB8";
             } else if (getMontant() <= 75) {
-                //return 	smiley 3
+                return "\uD83D\uDCB4";
             } else if (getMontant() <= 100) {
-                //return smiley 4
+                return "\uD83D\uDCB0";
             } else {
                 return "";
             }
-
         } else {
             return Affichage.YELLOW + "$";
         }
-
-        return "";
     }
 }
 
