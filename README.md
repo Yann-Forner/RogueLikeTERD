@@ -81,16 +81,11 @@ C'est un <b>triangle</b>, c'est aussi une des salles de base.</br></br>
 <h4>1.2.3. Salle cercle</h4>
 C'est un cercle, c'est une <b>plus petite version</b> de salle de boss.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114865403-7a092c00-9df2-11eb-86db-aae4d6977e0e.png"/>
-<h4>1.2.4. Salle boss</h4>
-C'est la salle ou apparaissent les <b>boss</b>, elle est beaucoup plus grande que les autres.<br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114865593-c3f21200-9df2-11eb-97d7-e517fa26ea42.png"/>
-<h4>1.2.5. Salle marchand</h4>
+<h4>1.2.4. Salle marchand</h4>
 <b><i>Non implementé</b></i>
-<h4>1.2.6. Salle repos</h4>
+<h4>1.2.5. Salle tresor</h4>
 <b><i>Non implementé</b></i>
-<h4>1.2.7. Salle tresor</h4>
-<b><i>Non implementé</b></i>
-<h4>1.2.8. Salle piege</h4>
+<h4>1.26. Salle piege</h4>
 <b><i>Non implementé</b></i>
   
 <h2>2. Entités</h2>
