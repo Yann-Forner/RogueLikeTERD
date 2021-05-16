@@ -3,6 +3,7 @@ package Model.Entitys.Items.Weapons;
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
 import Model.Entitys.Monsters.Marchand;
+import Model.Entitys.Monsters.Volcano;
 import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -43,19 +44,19 @@ public class Bow extends AbstractWeapon {
         ArrayList<Position> zone = new ArrayList<>();
         for (int x = position.getX() - range; x < position.getX() + range * 2 - 1; x++) {
             for (int y = position.getY() - range; y < position.getY() + range * 2 - 1; y++) {
-                if(x>=0 && x<getEtage().getWidth() && y>=0 && y<getEtage().getHeigth()){
+                if(x>=0 && x<player.getEtage().getWidth() && y>=0 && y<player.getEtage().getHeigth()){
                     Position pos = new Position(x, y);
                     if (position.Distance(pos) <= range) {
-                        Entity entity = getEtage().get(pos).getEntity();
+                        Entity entity = player.getEtage().get(pos).getEntity();
                         if (entity instanceof AbstractAlive && entity!=player) {
-                            if (entity instanceof Marchand && Marchand.getState() != Marchand.STATE.AGGRESSIVE){
+                            if (entity instanceof Marchand && Marchand.getState() != Marchand.STATE.AGGRESSIVE || entity instanceof Volcano){
                                 continue;
                             }
                             if (pos.Distance(position) < distanceCible) {
                                 zone = Tools.getLigne(entity.getPosition(),player.getPosition());
                                 boolean noBorder = true;
                                 for(Position p : zone){
-                                    if(getEtage().get(p).getType().equals(Cell.Style.CellType.BORDER)){
+                                    if(player.getEtage().get(p).getType().equals(Cell.Style.CellType.BORDER)){
                                         noBorder = false;
                                     }
                                 }
@@ -72,7 +73,7 @@ public class Bow extends AbstractWeapon {
         if(cible != null){
             super.useItem(player);
             cible.onContact(player);
-            Affichage.Projectile(getEtage(), zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"📍","x"));
+            Affichage.Projectile(player.getEtage(), zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"📍","x"));
             useItemMessage();
         }
     }

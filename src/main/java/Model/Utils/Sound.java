@@ -25,6 +25,7 @@ public class Sound {
         LEVELUP("levelup.wav"),
         EPEEDAMAGE("Attaque epee 1.wav","Attaque epee 2.wav","Attaque epee 3.wav"),
         BOWDAMAGE("arc1.wav","arc2_1.wav","arc3_1.wav"),
+        MUSIQUEMENU("musique-menu.wav"),
         WANDDAMAGE("wand1.wav","wand2.wav","wand3.wav");
 
         private final String[] paths;
@@ -42,9 +43,10 @@ public class Sound {
      * Lit des sons nbrLoop+1 fois si negatif lit a l'infini.
      * @param son Enum
      * @param nbrLoop le nombre de boucle du son
+     * @return Le clip du son
      * @author Quentin
      */
-    public static void playAudio(Sons son, int nbrLoop){
+    public static Clip playAudio(Sons son, int nbrLoop){
         try {
             Clip clip = AudioSystem.getClip();
             URL fichier = ClassLoader.getSystemResource(son.getPath());
@@ -52,8 +54,10 @@ public class Sound {
                 AudioInputStream ais = AudioSystem.getAudioInputStream(fichier);
                 clip.open(ais);
                 clip.loop(nbrLoop>=0 ? nbrLoop : Clip.LOOP_CONTINUOUSLY);
+                return clip;
             }
         }
-        catch (IllegalArgumentException | LineUnavailableException | UnsupportedAudioFileException | IOException ignored) {}
+        catch (IllegalArgumentException | LineUnavailableException | UnsupportedAudioFileException | IOException ignored) { }
+        return null;
     }
 }

@@ -13,9 +13,13 @@ import Model.Utils.TourManager;
  * @author JP
  */
 public abstract class AbstractPotion extends AbstractItem {
+
+    public enum Buffs{
+        INVINCIBLE, FORCE, ENERGIE
+    }
+
     /**
      * Constructeur de la potion
-     *
      * @param etage Etage où se situe la potion
      * @param position Position de la potion
      * @param nom Nom de la potion

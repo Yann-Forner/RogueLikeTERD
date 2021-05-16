@@ -26,9 +26,9 @@ public class PotionFactory {
     public static AbstractPotion getNewPotion(Etage etage, PotionType i) {
         return switch(i) {
             case HEAL_POTION -> new HealPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de heal", getRandomPrix(), 25);
-            case INVUL_POTION -> new InvulPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'invulnérabilité", getRandomPrix(), 5);
-            case STRENGTH_POTION -> new StrengthPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de force", getRandomPrix(), 50.0, 5);
-            case ENDURENCE_POTION -> new StaminaPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'endurance", getRandomPrix(), 10);
+            case INVUL_POTION -> new InvulPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'invulnérabilité", getRandomPrix());
+            case STRENGTH_POTION -> new StrengthPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de force", getRandomPrix(), 50.0);
+            case ENDURENCE_POTION -> new StaminaPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'endurance", getRandomPrix());
         };
     }
 

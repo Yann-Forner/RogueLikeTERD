@@ -1,5 +1,6 @@
 package Model.Utils;
 
+import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -71,10 +72,10 @@ public class Affichage {
                             + "\n"
                     : CLEAR);
             System.out.println(Start.getMap());
-            String pv = Affichage.getBarre(GREEN, "PV", GREY, Objects.requireNonNull(Start.getPlayer()).getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, BLACK_BACKGROUND,120);
+            String pv = Affichage.getBarre(GREEN, "    PV    : ", GREY, Objects.requireNonNull(Start.getPlayer()).getBuff(AbstractPotion.Buffs.INVINCIBLE) ? Integer.MAX_VALUE : Start.getPlayer().getPv(), Start.getPlayer().getMAX_PV(), GREEN_BACKGROUND, RED_BACKGROUND, BLACK_BACKGROUND,113);
             System.out.print(pv);
             System.out.print(Affichage.getTouches(0, getTrueLength(pv)));
-            String endurence = Affichage.getBarre(BLUE, "Endurence", GREY, Start.getPlayer().getEndurence(), 100, BLUE_BACKGROUND, RED_BACKGROUND, BLACK_BACKGROUND, 100);
+            String endurence = Affichage.getBarre(BLUE, "Endurence : ", GREY, Start.getPlayer().getBuff(AbstractPotion.Buffs.ENERGIE) ? Integer.MAX_VALUE : Start.getPlayer().getEndurence(), 100, BLUE_BACKGROUND, RED_BACKGROUND, BLACK_BACKGROUND, 113);
             System.out.print(endurence);
             System.out.print(Affichage.getTouches(1, getTrueLength(endurence)));
             Affichage.getMessages();
@@ -166,7 +167,6 @@ public class Affichage {
         StringBuilder sb = new StringBuilder();
         sb.append(textColor);
         sb.append(text);
-        sb.append(" : ");
         sb.append(infoColor);
 
         int current_Stat = currentStat;
@@ -361,7 +361,7 @@ public class Affichage {
         int width = 90;
         String timerTxt = "   Temps total:  ";
         String nbrKillTxt = "   Nombre de monstres tuées:  ";
-        String nbrKillBossTxt = "   Boss tués:  ";
+        String nbrKillBossTxt = "   AbsractBoss tués:  ";
         String maxEtageTxt = "   Etage maximal atteint:  ";
         String nbrObjetsTxt = "   Nombre total d'objets ramassés:  ";
         System.out.print(

@@ -2,6 +2,7 @@ package Model.Entitys.Items.Potions;
 
 import Model.Entitys.Player.Player;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
@@ -13,20 +14,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class StaminaPotion extends AbstractPotion {
 
-    private final int seconds;
-
     /**
      * Constructeur de la potion d'endurance
      * @param e Etage où se situe la potion
      * @param pos Position de la potion
      * @param nom Nom de la potion
      * @param prix Prix de la potion
-     * @param seconds Durée d'effet de la potion
      * @author JP
      */
-    public StaminaPotion(Etage e, Position pos, String nom, int prix, int seconds) {
+    public StaminaPotion(Etage e, Position pos, String nom, int prix) {
         super(e, pos, nom, prix);
-        this.seconds = seconds;
     }
 
     /**
@@ -36,14 +33,17 @@ public class StaminaPotion extends AbstractPotion {
      */
     @Override
     public void useItem(Player player) {
-        if(player.isStimulated()) {
+        if(player.getBuff(Buffs.ENERGIE)) {
             TourManager.addMessage("Une potion d'endurance est déjà en train d'être consommée !");
         }
         else {
-            TourManager.addMessage("Vous êtes doppé en endurance pendant " + seconds + " secondes. Profitez-en !");
-            player.setStimulated(true);
+            TourManager.addMessage(Affichage.BRIGTH_BLUE + "Debut endurence infinie");
+            player.setBuff(Buffs.ENERGIE,true);
             super.useItem(player);
-            TourManager.getExecutor().schedule(() -> { player.setStimulated(false); TourManager.addMessage("Vous n'êtes plus doppé."); }, 5, TimeUnit.SECONDS);
+            TourManager.getExecutor().schedule(() -> {
+                player.setBuff(Buffs.ENERGIE,false);
+                TourManager.addMessage(Affichage.BRIGTH_BLUE + "Fin endurence infinie");
+                }, 5, TimeUnit.SECONDS);
         }
     }
 

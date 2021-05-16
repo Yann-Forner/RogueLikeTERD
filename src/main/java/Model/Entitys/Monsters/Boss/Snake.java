@@ -9,10 +9,10 @@ import Model.Utils.*;
 import java.util.ArrayList;
 
 /**
- * Boss serpent qui est en plusieurs parties et ne meurt que quand elles sont toutes mortes.
+ * AbsractBoss serpent qui est en plusieurs parties et ne meurt que quand elles sont toutes mortes.
  * @author Quentin
  */
-public class Snake extends Boss {
+public class Snake extends AbsractBoss {
     /**
      * Classe d'un bout de queue du serpent.
      * @author Quentin
@@ -64,7 +64,7 @@ public class Snake extends Boss {
     private final int size_of_tail;
 
     /**
-     * Crée un Boss serpent.
+     * Crée un AbsractBoss serpent.
      * @param m Etage
      * @param pos Position
      * @param nom Nom

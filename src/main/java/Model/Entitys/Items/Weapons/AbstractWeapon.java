@@ -42,7 +42,7 @@ public abstract class AbstractWeapon extends AbstractItem {
         this.type = type;
         this.strength = strength;
         this.range = range;
-        this.coutEndurence = 7;
+        this.coutEndurence = 3;
     }
 
     /**
