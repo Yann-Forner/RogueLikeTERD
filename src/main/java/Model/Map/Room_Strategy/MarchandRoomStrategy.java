@@ -1,5 +1,6 @@
 package Model.Map.Room_Strategy;
 
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -25,18 +26,14 @@ public class MarchandRoomStrategy extends RoomStrategy{
     @Override
     protected void setStyleCell(Room r) {
         //TODO à déplacer dans items
-        Cell.Style dollar = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83D\uDCB5", "D");
-        Cell.Style dollarAiles = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83D\uDCB8", "D");
-        Cell.Style yen = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.YELLOW,"\uD83D\uDCB4", "Ø");
+        Cell.Style car = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83D\uDE97", "D");
+        Cell.Style trophy = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83C\uDFC6", "D");
 
-        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
-            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, dollar);
-        }
-        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
-            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, dollarAiles);
+        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
+            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, car);
         }
         for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
-            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(false, yen);
+            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, trophy);
         }
     }
 
@@ -49,7 +46,9 @@ public class MarchandRoomStrategy extends RoomStrategy{
 
     @Override
     public void setItems(Room r) {
-
+        for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
+            r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.ENDURENCE_POTION));
+        }
     }
 
     @Override

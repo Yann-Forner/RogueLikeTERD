@@ -41,29 +41,14 @@ public class NormalTriangleStrategy extends TriangleRoomStrategy {
 
     @Override
     public void setItems(Room r) {
-        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
+        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
             switch(i) {
                 case 0 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.HEAL_POTION));
                 case 1 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.STRENGTH_POTION));
-                case 2 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.INVUL_POTION));
-                case 3 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.ENDURENCE_POTION));
             }
         }
-        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
-            switch(i) {
-                case 0 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.SWORD));
-                case 1 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.BOW));
-                case 2 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.WAND));
-            }
-        }
-        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
-            switch(i) {
-                case 0 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.APPLE));
-                case 1 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BURGER));
-                case 2 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BANANA));
-                case 3 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.CARROT));
-                case 4 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.ORANGE));
-            }
+        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
+            r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BANANA));
         }
     }
 

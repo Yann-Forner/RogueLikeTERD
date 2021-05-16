@@ -10,6 +10,8 @@ import Model.Utils.Position;
 import Model.Utils.Sound;
 import Model.Utils.TourManager;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Classe de base du joueur
  *
@@ -27,6 +29,8 @@ public class Player extends AbstractAlive {
     private int MAX_ENDURENCE = 100;
     private final AbstractItem[] poche = {null,null};
     private boolean inPoche = false;
+    private boolean isBuffed;
+    private boolean isImmortal;
 
     public enum Direction{
         HAUT(new Position(0,-1)),
@@ -55,6 +59,8 @@ public class Player extends AbstractAlive {
         super(null, null, classe.getVisionRadius(), nom.length() == 0 ? classe.getNom() : nom, classe.getBasePV(), classe.getBaseForce(), 1);
         this.classe = classe;
         MAX_PV = classe.getBasePV();
+        isBuffed = false;
+        isImmortal = false;
     }
 
     /**
@@ -113,6 +119,7 @@ public class Player extends AbstractAlive {
         }
 
     }
+
 
     @Override
     public void death() {
@@ -192,6 +199,27 @@ public class Player extends AbstractAlive {
         this.endurence = Math.min(getMAX_ENDURENCE(), this.endurence + endurence);
     }
 
+    @Override
+    public boolean updatePV(int pv, boolean limited) {
+        return isImmortal() ? super.updatePV(Math.max(0, pv), limited) : super.updatePV(pv, limited);
+    }
+
+    public void buffStrength(double buffMultiplicator, int seconds) {
+        if(isBuffed() == false) {
+            setBuffed(true);
+            int originalForce = getForce();
+            int forceConverted = (int) (((double) originalForce) * (1.0 + buffMultiplicator / 100.0));
+            setForce(getForce() + forceConverted);
+            TourManager.addMessage("Pendant " + seconds + "s, la force sera augmentée de " + buffMultiplicator + "%. (" + originalForce + " -> " + forceConverted + ")");
+
+            TourManager.getExecutor().schedule(() -> {
+                int previousForce = getForce() - forceConverted;
+                setForce(previousForce);
+                setBuffed(false);
+                TourManager.addMessage("Retour de la force à sa valeur de base. (" + previousForce + ")");
+            }, seconds, TimeUnit.SECONDS);
+        }
+    }
     /**
      * Renvoit l'endurence du joueur.
      * @return Endurence
@@ -314,6 +342,42 @@ public class Player extends AbstractAlive {
      */
     public void notMovedforPoche(){
         inPoche = true;
+    }
+
+    /**
+     * Retourne si une potion de force est en cours d'utilisation
+     * @return
+     * @author JP
+     */
+    public boolean isBuffed() {
+        return isBuffed;
+    }
+
+    /**
+     * Définit si une potion de force est en cours d'utilisation
+     * @param buffed
+     * @author JP
+     */
+    public void setBuffed(boolean buffed) {
+        isBuffed = buffed;
+    }
+
+    /**
+     * Retourne si une potion d'invulnérabilité est en cours d'utilisation
+     * @return
+     * @author JP
+     */
+    public boolean isImmortal() {
+        return isImmortal;
+    }
+
+    /**
+     * Définit si une potion d'invulnérabilité est en cours d'utilisation
+     * @param immortal
+     * @author JP
+     */
+    public void setImmortal(boolean immortal) {
+        isImmortal = immortal;
     }
 
     @Override
