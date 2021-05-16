@@ -1,5 +1,8 @@
 package Model.Entitys.Monsters;
 
+import Model.Entitys.Items.Foods.FoodFactory;
+import Model.Entitys.Items.Misc.StackOfMoney;
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.Procedure;
@@ -27,6 +30,14 @@ public class Bee extends AbstractMonster {
             }
         }
         return isAlive;
+    }
+
+    @Override
+    protected void dropOnDeath() {
+        int rand = Procedure.getRandomInt(4, 0);
+        if(rand == 1) {
+            getInventory().dropItem(this, new StackOfMoney(getEtage(), getPosition(), Procedure.getRandomInt(50, 1)));
+        }
     }
 
     @Override

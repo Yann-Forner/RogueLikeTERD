@@ -1,7 +1,9 @@
 package Model.Map.Etage_Strategy;
 
 import Model.Entitys.Items.Foods.FoodFactory;
+import Model.Entitys.Items.Misc.Chest;
 import Model.Entitys.Items.Potions.PotionFactory;
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
@@ -12,6 +14,7 @@ import Model.Utils.Procedure;
 import Model.Utils.Tools;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * L'etage piege est un étage ressemblant à un labyrinthe.
@@ -45,17 +48,28 @@ public class TrapEtageStrategy extends EtageStrategy{
     }
 
     @Override
-    public void setItems(Etage e) {
-        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
-            switch(i) {
-                case 0 -> e.addItem(PotionFactory.getNewPotion(e, PotionFactory.PotionType.STRENGTH_POTION));
-                case 1 -> e.addItem(PotionFactory.getNewPotion(e, PotionFactory.PotionType.INVUL_POTION));
-            }
+    public void setMonsters(Etage etage) {
+        super.setMonsters(etage);
+        int rand = Procedure.getRandomInt(1, 0);
+        if(rand == 0)
+            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST)));
+        rand = Procedure.getRandomInt(10, 1);
+        for(int i = 0; i < rand; i++) {
+            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT)));
         }
-        for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
-            e.addItem(FoodFactory.getNewFood(e, FoodFactory.FoodType.CARROT));
+        rand = Procedure.getRandomInt(2, 1);
+        for(int i = 0; i < rand; i++) {
+            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ALIEN)));
         }
 
+        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
+            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST)));
+        }
+    }
+
+    @Override
+    public void setItems(Etage e) {
+        e.addItem(new Chest(e, Procedure.getAccesibleRandomPosition(true, e)));
         super.setItems(e);
     }
 

@@ -24,7 +24,7 @@ public class TestGameplay extends TestCase {
         etage = map.getCurrent();
 
     }
-
+    /*
     public void testPoche(){
         System.out.println("----------------ETAGE DE BASE----------------");
         System.out.println(etage);
@@ -59,7 +59,7 @@ public class TestGameplay extends TestCase {
         System.out.println("----------------DEPLACEMENT HORS ITEM----------------");
         System.out.println(player.getPoche());
         System.out.println(etage);
-    }
+    }*/
 
     public void testPocheWithCollideToAWall(){
 

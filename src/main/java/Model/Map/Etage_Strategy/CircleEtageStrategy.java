@@ -28,7 +28,8 @@ public class CircleEtageStrategy extends EtageStrategy{
     @Override
     public void setMonsters(Etage etage) {
         super.setMonsters(etage);
-        for(int i = 0; i < Procedure.getRandomInt(3,0); i++){
+        int rand = Procedure.getRandomInt(3, 0);
+        for(int i = 0; i < rand; i++) {
             etage.addMonster(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.BEE));
         }
     }

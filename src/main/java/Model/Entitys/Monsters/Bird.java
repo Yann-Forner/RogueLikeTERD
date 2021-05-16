@@ -1,9 +1,11 @@
 package Model.Entitys.Monsters;
 
 import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Items.Misc.StackOfMoney;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Position;
+import Model.Utils.Procedure;
 import Model.Utils.Tools;
 
 /**
@@ -37,6 +39,14 @@ public class Bird extends AbstractMonster {
         }
         totop=true;
         return haut;
+    }
+
+    @Override
+    protected void dropOnDeath() {
+        int rand = Procedure.getRandomInt(4, 0);
+        if(rand == 1) {
+            getInventory().dropItem(this, new StackOfMoney(getEtage(), getPosition(), Procedure.getRandomInt(50, 1)));
+        }
     }
 
     @Override

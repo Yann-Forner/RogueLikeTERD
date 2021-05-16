@@ -101,8 +101,8 @@ public abstract class AbstractMonster extends AbstractAlive {
             }
         }
 
-        rand = Procedure.getRandomInt(3, 0);
-        if(rand == 3) {
+        rand = Procedure.getRandomInt(10, 0);
+        if(rand == 10) {
             int randPotion = Procedure.getRandomInt(1, 0);
             if(randPotion == 0)
                 getInventory().dropItem(this, PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.HEAL_POTION));
