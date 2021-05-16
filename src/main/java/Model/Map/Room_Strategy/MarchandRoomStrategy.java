@@ -1,5 +1,6 @@
 package Model.Map.Room_Strategy;
 
+import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Items.Foods.FoodFactory;
 import Model.Entitys.Items.Potions.PotionFactory;
 import Model.Entitys.Items.Weapons.WeaponFactory;
@@ -28,6 +29,16 @@ public class MarchandRoomStrategy extends RoomStrategy{
 
     @Override
     protected void setStyleCell(Room r) {
+        //TODO à déplacer dans items
+        Cell.Style car = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83D\uDE97", "D");
+        Cell.Style trophy = new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREEN,	"\uD83C\uDFC6", "D");
+
+        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
+            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, car);
+        }
+        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
+            r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, trophy);
+        }
     }
 
 
@@ -41,29 +52,8 @@ public class MarchandRoomStrategy extends RoomStrategy{
 
     @Override
     public void setItems(Room r) {
-        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
-            switch(i) {
-                case 0 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.HEAL_POTION));
-                case 1 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.STRENGTH_POTION));
-                case 2 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.INVUL_POTION));
-                case 3 -> r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.ENDURENCE_POTION));
-            }
-        }
-        for (int i = 0; i < Procedure.getRandomInt(3,0); i++) {
-            switch(i) {
-                case 0 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.SWORD));
-                case 1 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.BOW));
-                case 2 -> r.addItem(WeaponFactory.getNewWeapon(r, WeaponFactory.WeaponType.WAND));
-            }
-        }
-        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
-            switch(i) {
-                case 0 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.APPLE));
-                case 1 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BURGER));
-                case 2 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.BANANA));
-                case 3 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.CARROT));
-                case 4 -> r.addItem(FoodFactory.getNewFood(r, FoodFactory.FoodType.ORANGE));
-            }
+        for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
+            r.addItem(PotionFactory.getNewPotion(r, PotionFactory.PotionType.ENDURENCE_POTION));
         }
     }
 

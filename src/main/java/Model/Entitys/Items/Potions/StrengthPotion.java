@@ -40,18 +40,14 @@ public class StrengthPotion extends AbstractPotion {
      */
     @Override
     public void useItem(Player player) {
-        super.useItem(player);
+        if(player.isBuffed()) {
+            TourManager.addMessage("Une potion de force est déjà en train d'être consommée !");
+        }
+        else {
+            super.useItem(player);
+            player.buffStrength(buffMultiplicator, seconds);
+        }
 
-        int originalForce = player.getForce();
-        int forceConverted = (int) (((double)originalForce) * (1.0 + buffMultiplicator / 100.0));
-        player.setForce(player.getForce() + forceConverted);
-        TourManager.addMessage("Pendant " + seconds + "s, la force sera augmentée de " + buffMultiplicator + "%. (" + originalForce + " -> " + forceConverted + ")");
-
-        TourManager.getExecutor().schedule(() -> {
-            int previousForce = player.getForce() - forceConverted;
-            player.setForce(previousForce);
-            TourManager.addMessage("Retour de la force à sa valeur de base. (" + previousForce + ")");
-        }, seconds, TimeUnit.SECONDS);
     }
 
     @Override

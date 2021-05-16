@@ -34,7 +34,7 @@ public abstract class RoomStrategy implements Serializable {
         for (int i = 0; i < Procedure.getRandomInt(4,0); i++) {
             r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(true, palmier);
         }
-        for (int i = 0; i < Procedure.getRandomInt(2,0); i++) {
+        for (int i = 0; i < Procedure.getRandomInt(1,0); i++) {
             r.get(Procedure.getAccesibleRandomPosition(false, r)).updateCell(false, barierre);
         }
     }

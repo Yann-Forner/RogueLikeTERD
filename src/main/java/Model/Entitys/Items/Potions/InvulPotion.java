@@ -35,12 +35,17 @@ public class InvulPotion extends AbstractPotion {
      */
     @Override
     public void useItem(Player player) {
-        super.useItem(player);
-        int originalHp = player.getPv();
-        TourManager.addMessage("Pendant " + seconds + "s, votre vie sera infinie.");
-        //TODO fait pas ça je t'en supplie
-        player.setPv(player.getMAX_PV() * 1000);
-        TourManager.getExecutor().schedule(() -> player.setPv(originalHp), 5, TimeUnit.SECONDS);
+
+        if(player.isImmortal()) {
+            TourManager.addMessage("Vous êtes déjà immortel !");
+        }
+        else {
+            TourManager.addMessage("Vous êtes immortel pendant " + seconds + " secondes. Profitez-en !");
+            player.setImmortal(true);
+            super.useItem(player);
+            TourManager.getExecutor().schedule(() -> { player.setImmortal(false); TourManager.addMessage("Vous n'êtes plus immortel."); }, 5, TimeUnit.SECONDS);
+        }
+
     }
 
     @Override
