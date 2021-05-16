@@ -41,16 +41,17 @@ Le joueur est doté de <b>différents attributs</b> lui permettant d'évoluer da
 
 La vie est la donnée la plus importante du jeu. Si celle-ci <b>tombe à 0, le joueur a perdu.</b> <br>
 Le joueur peut perdre de la vie par les dégats que peuvent lui infliger les monstres et en regagner grâce à la nourriture ou aux potions de vie  <br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
+
 <h2>L'endurance</h2>
 L'endurance permet au joueur <b>d'attaquer</b> les monstres du jeu.</br>
 A chaque attaque, celui-ci <b>perd de l'endurance.</b> </br>
 Il sera possible de regagner de l'endurance grâce aux <b>potions d'endurance ou au burger</b>.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
+<img src="https://user-images.githubusercontent.com/74865653/118410035-c794e500-b68d-11eb-9491-808a5f945331.png"/></br>
+
 <h2>L'argent</h2>
 L'argent permet au joueur <b>d'acheter des objets au marchand.</b> </br></br>
 Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou directement en trouvant des <b>stacks d'argent</b> au sein du labyrinthe. </br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
+<img src="https://user-images.githubusercontent.com/74865653/118410100-0fb40780-b68e-11eb-91f6-56773c260183.png"/></br>
 
 <h1>Composants du jeu</h1>
 
