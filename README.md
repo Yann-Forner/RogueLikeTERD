@@ -293,14 +293,11 @@ Pêche :</br>
 Linux: 🍑</br>
 Windows: <b>"g"</b></br></br>
 
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
 
 <h4>2.4.3.2 Le Burger</h4>
 Linux: 🍔</br>
 Windows: <b>"b"</b></br>
 Le burger permet de <b>rendre de la vie et de l'endurance</b> au joueur. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-
 
 
 <h2>2.4.4 Les stacks d'argents</h2>
