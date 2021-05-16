@@ -60,16 +60,17 @@ Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou dire
 <b>La carte se compose en plusieurs types d'etages:</b>
 <h4>1.1.1. Etage cercle</h4>
 Toutes les pieces de cet etage sont des cercles.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411884-2e6acc00-b697-11eb-9d69-1a9f1c6f384a.png"/>
 <h4>1.1.2. Etage normal</h4>
 Toutes les pieces de cet etage sont des <b>rectangles</b>.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114860563-75417980-9dec-11eb-81eb-381586e9517f.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411899-46425000-b697-11eb-9f59-f04a0beeab31.png"
+/>
 <h4>1.1.3. Etage dongeon</h4>
 Les pieces de cet etage sont un <b>mélange</b> de tout les types commun de pieces.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114860765-b6398e00-9dec-11eb-9a1e-1cccf06809d1.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411905-53f7d580-b697-11eb-8ad6-1ade5c98e75f.png"/>
 <h4>1.1.4. Etage piege</h4>
 C'est un etage piege qui apparait lorsque l'on marche sur une <b>case piegée</b>.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114860960-eda83a80-9dec-11eb-8935-82dfc54d8d7d.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411961-97eada80-b697-11eb-86da-c2259e8d6676.png"/>
 <h3>1.2. Types salles</h3>
 <h4>1.2.1. Salle normale</h4>
 C'est la salle de base, elle est <b>rectangulaire</b>.</br></br>
