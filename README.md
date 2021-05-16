@@ -300,7 +300,9 @@ Windows: <b>"b"</b></br>
 Le burger permet de <b>rendre de la vie et de l'endurance</b> au joueur. </br></br>
 
 
-<h2>2.4.4 Les stacks d'argents</h2>
+<h2>2.4.4 Les items spéciaux</h2
+  
+<h3>2.4.4.1 Les stacks d'argents</h3>
 Les stacks d'argent sont des <b>objets trouvables</b> par le joueur dans le labyrinthe.</br>
 <b>Une fois ramassés</b> et comme la nourriture, les stacks d'argent <b>disparaissent</b> et <b>créditent le joueur du montant</b> de celui-ci.</br>
 L'affichage va varier en fonction du montant du stack d'argent.</br>
@@ -351,4 +353,11 @@ Il affiche tout ceci dans une interface visible sur la droite de l'écran. </br>
 <img src="https://user-images.githubusercontent.com/74865920/118412636-5fe59680-b69b-11eb-95e2-fd7d81c02104.png"/>
 
 <h2>5. Sauvegarde</h2>
-La sauvegarde permet au jouer de sauvegarder la partie pour la reprendre dans le futur. 
+La sauvegarde permet au jouer de sauvegarder la partie pour la reprendre dans le futur. </br></br>  
+Exemple quand aucune partie n'est sauvegardée : </br>  </br> 
+<img src="https://user-images.githubusercontent.com/74865920/118412972-33cb1500-b69d-11eb-9bdf-7695a60f3b42.png"/></br> </br> 
+Exemple de sauvegarde de partie: </br>  </br> 
+<img src="https://user-images.githubusercontent.com/74865920/118412916-e9499880-b69c-11eb-9510-4d5d00eaa095.png"/></br> </br> 
+Exemple de chargement d'une partie sauvegardée : </br> </br> 
+<img src="https://user-images.githubusercontent.com/74865920/118412930-febec280-b69c-11eb-9092-f8695850bbc6.png"/></br> </br> 
+
