@@ -56,7 +56,9 @@ public class Affichage {
         if(System.currentTimeMillis()-lastRefresh >= TourManager.getRefreshRate() || playerRefresh) {
             Start.setConsoleMode(false);
             System.out.print(System.console() == null ?
-                    Affichage.BRIGTH_RED
+                            "\n"
+                            + Affichage.RESET
+                            + Affichage.BRIGTH_RED
                             + "---------------------------------------------------------------------------------------------------------"
                             + "---------------------------------------------------------------------------------------------------------"
                             + "\n"
@@ -379,7 +381,7 @@ public class Affichage {
                 + "│                                                                                          │\n│"
                 + timerTxt
                 + BRIGTH_GREEN
-                + addSpace(TourManager.getTimer(),timerTxt.length(),width)
+                + addSpace(Start.getTourManager().getTimer(),timerTxt.length(),width)
                 + YELLOW
                 + "│\n│"
                 + nbrKillTxt

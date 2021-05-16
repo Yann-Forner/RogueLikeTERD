@@ -54,9 +54,9 @@ public class Menu {
             Inventory inv = player.getInventory();
 
             //SEED & TIMER
-            setStringOnSide(2,Affichage.PURPLE+"SEED : "+Procedure.getSeed()+couleur,Side.GAUCHE,true);
+            setStringOnSide(2,Affichage.PURPLE+"SEED : "+ Start.getTourManager().getSeed() + couleur,Side.GAUCHE,true);
             setStringOnSide(1, new String[]{"║","║","║"},Side.MILIEU,true);
-            setStringOnSide(2,Affichage.PURPLE+"TIMER : "+TourManager.getTimer()+couleur,Side.DROITE,true);
+            setStringOnSide(2,Affichage.PURPLE+"TIMER : "+Start.getTourManager().getTimer()+couleur,Side.DROITE,true);
 
             //JOUEUR
             setFullLine(4);

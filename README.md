@@ -60,16 +60,21 @@ Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou dire
 <b>La carte se compose en plusieurs types d'etages:</b>
 <h4>1.1.1. Etage cercle</h4>
 Toutes les pieces de cet etage sont des cercles.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411884-2e6acc00-b697-11eb-9d69-1a9f1c6f384a.png"/>
 <h4>1.1.2. Etage normal</h4>
 Toutes les pieces de cet etage sont des <b>rectangles</b>.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114860563-75417980-9dec-11eb-81eb-381586e9517f.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411899-46425000-b697-11eb-9f59-f04a0beeab31.png"
+/>
 <h4>1.1.3. Etage dongeon</h4>
 Les pieces de cet etage sont un <b>mélange</b> de tout les types commun de pieces.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114860765-b6398e00-9dec-11eb-9a1e-1cccf06809d1.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411905-53f7d580-b697-11eb-8ad6-1ade5c98e75f.png"/>
 <h4>1.1.4. Etage piege</h4>
 C'est un etage piege qui apparait lorsque l'on marche sur une <b>case piegée</b>.</br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114860960-eda83a80-9dec-11eb-8935-82dfc54d8d7d.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118411961-97eada80-b697-11eb-86da-c2259e8d6676.png"/>
+<h4>1.1.5. Etage boss</h4>
+C'est un étage où un <b>boss</b> apparaît .</br></br>
+<img src="https://user-images.githubusercontent.com/74865920/118412126-94a41e80-b698-11eb-8806-96f54fef143b.png"/>
+
 <h3>1.2. Types salles</h3>
 <h4>1.2.1. Salle normale</h4>
 C'est la salle de base, elle est <b>rectangulaire</b>.</br></br>
@@ -80,17 +85,12 @@ C'est un <b>triangle</b>, c'est aussi une des salles de base.</br></br>
 <h4>1.2.3. Salle cercle</h4>
 C'est un cercle, c'est une <b>plus petite version</b> de salle de boss.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114865403-7a092c00-9df2-11eb-86db-aae4d6977e0e.png"/>
-<h4>1.2.4. Salle boss</h4>
-C'est la salle ou apparaissent les <b>boss</b>, elle est beaucoup plus grande que les autres.<br></br>
-<img src="https://user-images.githubusercontent.com/74865653/114865593-c3f21200-9df2-11eb-97d7-e517fa26ea42.png"/>
-<h4>1.2.5. Salle marchand</h4>
+<h4>1.2.4. Salle marchand</h4>
+Salle dans lequel le marchand apparaît<b></b></i>
+<img src="https://user-images.githubusercontent.com/74865920/118412097-6d4d5180-b698-11eb-8d81-a79a82e30674.png"/>
+<h4>1.2.5. Salle tresor</h4>
 <b><i>Non implementé</b></i>
-<h4>1.2.6. Salle repos</h4>
-<b><i>Non implementé</b></i>
-<h4>1.2.7. Salle tresor</h4>
-<b><i>Non implementé</b></i>
-<h4>1.2.8. Salle piege</h4>
-<b><i>Non implementé</b></i>
+
   
 <h2>2. Entités</h2>
 <h3>2.1. Joueur</h3>
@@ -143,12 +143,13 @@ Il se déplace tres <b>lentement</b> et a <b>beaucoup de points de vie</b>.
 Le marchand, même si considéré comme un monstre dans notre implémentation, est <b>bien différent des autres entités</b> du labyrinthe</br>
 Il apparaît dans le labyrinthe de manière <b>aléatoire</b>.</br>
 Pour engager la conversation avec celui-ci, il suffit de le <b>colisionner</b>. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412196-eba9f380-b698-11eb-9f83-f51e67435626.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412230-21e77300-b699-11eb-9fa4-2f5bfcfd48af.png"/>
 
 <h4>2.2.1. L'achat</h4>
 Le joueur peut acheter auprès du marchand des <b>armes et des potions</b>. </br>
 Le prix est fixé en fonction de l'équilibrage du jeu.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412206-fd8b9680-b698-11eb-9e34-5696458d2842.png"/>
 
 <h4>2.2.2. La vente</h4>
 
@@ -184,22 +185,60 @@ Les armes, peuvent être trouvées tout le long du labyrinthe : </br>
 Elles permettent au joueur <b>d'attaquer les différents monstres</b> qu'il va rencontrer durant son aventure. </br>
 Le type d'attaque va changer en fonction de l'arme portée par le joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.1 Epée</h4>
-Linux: </br>
-Windows: <b</b></br>
-L'épée est la seule arme <b>corps à corps</b> du jeu. Elle inflige des <b>dégats conséquent</b> à courte portée. </br></br>
+<h4>2.4.1.1 Mélée</h4>
+Clé à molette :</br>
+Linux: 🔧 </br>
+Windows: <b>"m"</b></br></br>
+Epée :</br>
+Linux: 🔪</br>
+Windows: <b>"m"</b></br></br>
+Hache :</br>
+Linux: 🪓</br>
+Windows: <b>"m"</b></br></br>
+Châine :</br>
+Linux: 🔗</br>
+Windows: <b>"m"</b></br></br>
+Les armes mélées sont les armes <b>corps à corps</b> du jeu. Elles infligent des <b>dégats conséquent</b> à courte portée. </br>
+Il existe des clés à molette, des épées, des haches et des chaînes. </br>
+Les différentes armes influent sur la portée d'attaque du joueur. </br>
+</br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.2 Arc</h4>
-Linux: </br>
-Windows: <b</b></br>
-L'arc est une <b>arme à distance</b>. Il permet d'attaquer un monstre qui est à partir du moment où il est à portée. </br>
-Si aucun monstre n'est à portée du joueur, ce dernier ne peut utiliser son arc.</br></br>
+<h4>2.4.1.2 Armes à distance</h4>
+Canne à pêche</br>
+Linux: 🎣</br>
+Windows: <b>"b"</b></br></br>
+Arc</br>
+Linux: 🏹</br>
+Windows: <b> "b"</b></br></br>
+Tridant</br>
+Linux: 🔱</br>
+Windows: <b> "b"</b></br></br>
+Revolver</br>
+Linux: 🔫</br>
+Windows: <b> "b"</b></br></br>
+Il existe dans le jeu des <b>arme à distance</b>. Elles permettent d'attaquer un monstre à partir du moment où il est à portée de l'arme </br>
+Si aucun monstre n'est à portée du joueur, ce dernier ne peut pas attaquer.</br>
+Il existe des Cannes à pêche, des arcs, des tridents et des revolvers </br>
+Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.3 Baguette</h4>
-Linux: </br>
-Windows: <b</b></br>
-La baguette est la seconde <b>arme à distance</b> du jeu. Le joueur, en l'utilisant, attaquera en <b>ligne droite</b> devant lui. </br>
-Contrairement à l'arc, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut dquand même utiliser son arme.</br></br>
+
+<h4>2.4.1.3 Les armes magiques</h4>
+Balais</br>
+Linux: 🧹</br>
+Windows: <b>"w"</b></br></br>
+Balais </br>
+Linux: 🦴</br>
+Windows: <b>"w"</b></br></br>
+Balais</br>
+Linux: 🥢</br>
+Windows: <b>"w"</b></br></br>
+Balais</br>
+Linux: 🦯</br>
+Windows: <b>"w"</b></br></br>
+Les armes magiques sont les <b>armes à distance</b> du jeu. Le joueur, en les utilisant, attaquera en <b>ligne droite</b> devant lui. </br>
+Contrairement aux armes à distance classiques, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut quand même utiliser son arme.</br>
+Il existe des balais, des os, des baguettes et des cannes </br>
+Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>2.4.2 Les potions</h2>

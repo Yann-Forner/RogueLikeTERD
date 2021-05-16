@@ -20,15 +20,16 @@ import java.util.concurrent.TimeUnit;
  * @author Quentin
  */
 public class TourManager implements Serializable {
+    private long seed;
+    private Map map;
+    private int Tour = 0;
+    private final long Timer;
+    private final Player player;
     private static boolean running = System.getProperty("os.name").equals("Linux") && System.console()!=null;
     private static boolean inDialogue = false;
     private static final ArrayDeque<String> messages = new ArrayDeque<>();
     private static final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     private static final int refreshRate = 300;
-    private static int Tour = 0;
-    private static long Timer;
-    private final Player player;
-    private Map map;
     private static int nbrKill = 0;
     private static int nbrKillBoss = 0;
     private static int nbrObjetsTotal = 0;
@@ -44,12 +45,17 @@ public class TourManager implements Serializable {
         Sound.playAudio(Sound.Sons.MUSIQUE,1);
     }
 
+    public TourManager(Player player, long seed){
+        this(player);
+        this.seed = seed;
+    }
+
     /**
      * Initialise la Map.
      * @author Quentin
      */
     public void setMap(){
-        map = new Map(player);
+        map = map == null ? new Map(player) : map;
     }
 
     /**
@@ -288,7 +294,7 @@ public class TourManager implements Serializable {
      * @return Temps.
      * @author Quentin
      */
-    public static String getTimer(){
+    public String getTimer(){
         long durationInMillis = System.currentTimeMillis() - Timer;
         long second = (durationInMillis / 1000) % 60;
         long minute = (durationInMillis / (1000 * 60)) % 60;
@@ -312,6 +318,14 @@ public class TourManager implements Serializable {
      */
     public static int getRefreshRate(){
         return refreshRate;
+    }
+
+    /**
+     * Renvoit la Seed de la Map.
+     * @author Quentin
+     */
+    public long getSeed(){
+        return seed;
     }
 
     /**

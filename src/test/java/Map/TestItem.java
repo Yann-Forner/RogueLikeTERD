@@ -9,6 +9,7 @@ import Model.Entitys.Player.Classes.ClassFactory;
 import Model.Map.Etage;
 import Model.Map.Map;
 import Model.Utils.Position;
+import Model.Utils.Procedure;
 import Model.Utils.Start;
 import Model.Utils.TourManager;
 import junit.framework.TestCase;
