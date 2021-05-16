@@ -306,18 +306,18 @@ Le burger permet de <b>rendre de la vie et de l'endurance</b> au joueur. </br></
 Les stacks d'argent sont des <b>objets trouvables</b> par le joueur dans le labyrinthe.</br>
 <b>Une fois ramassés</b> et comme la nourriture, les stacks d'argent <b>disparaissent</b> et <b>créditent le joueur du montant</b> de celui-ci.</br>
 L'affichage va varier en fonction du montant du stack d'argent.</br>
-Entre ... et ... : 
-Linux: </br>
-Windows: <b</b></br></br>
-Entre ... et ... : 
-Linux: </br>
-Windows: <b</b></br></br>
-Entre ... et ... : 
-Linux: </br>
-Windows: <b</b></br></br>
-Entre ... et ... : 
-Linux: </br>
-Windows: <b</b></br></br>
+Entre 0 et 25 or : </br>
+Linux: 💵 </br>
+Windows: <b"$"></b></br></br>
+Entre 25 et 50 or : </br>
+Linux: 💸</br>
+Windows: <b"$"></b></br></br>
+Entre 50 et 75 : </br>
+Linux: 💴</br>
+Windows: <b"$"></b></br></br>
+Entre 75 et 100 : </br>
+Linux: 💰</br>
+Windows: <b"$"></b></br></br>
 
 
 <h2>3. Cases</h2>
