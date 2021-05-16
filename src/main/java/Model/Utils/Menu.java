@@ -60,16 +60,17 @@ public class Menu {
 
             //JOUEUR
             setFullLine(4);
-            setStringOnSide(5,Affichage.RED+"Joueur  :  "+ player.getNom() + couleur+" ",Side.GAUCHE,false);
+            setStringOnSide(5,Affichage.GREEN+"Joueur  :  " + Affichage.BRIGTH_GREEN + player.getNom() + couleur+" ",Side.GAUCHE,false);
             String lvl = " Niveau " + player.getLvl() + " [" + player.getCURRENT_EXP() + "/" + player.getMAX_EXP() + "] ";
-            setStringOnSide(6,Affichage.RED+"Classe  :  "+ player.getClasse().getNom(),Side.GAUCHE,false);
-            setStringOnSide(7,Affichage.RED+"Force  :  "+ player.getForce(),Side.GAUCHE,false);
+            setStringOnSide(6,Affichage.GREEN+"Classe  :  " + Affichage.BRIGTH_GREEN + player.getClasse().getNom(),Side.GAUCHE,false);
+            setStringOnSide(7,Affichage.YELLOW+"Argent  :  " + Affichage.BRIGTH_YELLOW + player.getInventory().getMoney()+" $",Side.GAUCHE,false);
+            setStringOnSide(8,Affichage.RED+"Force   :  "+ Affichage.BRIGTH_RED + player.getForce(),Side.GAUCHE,false);
             setStringOnSide(5, new String[]{
                     Affichage.RED+"╔"+"═".repeat(lvl.length())+"╗   ",
                     Affichage.RED+"║"+lvl+"║   ",
                     Affichage.RED+"╚"+"═".repeat(lvl.length())+"╝   "
             },Side.DROITE,true);
-            setStringOnSide(8,Affichage.RED+"Portée  :  "+ (inv.getWeapons().size()==0 ? 1 :  inv.getWeapons().get(0).getRange()),Side.GAUCHE,false);
+            setStringOnSide(9,Affichage.RED+"Portée  :  "+ Affichage.BRIGTH_RED + (inv.getWeapons().size()==0 ? 1 :  inv.getWeapons().get(0).getRange()),Side.GAUCHE,false);
             setStringOnSide(8,Affichage.RED+"Etage n°"+(Objects.requireNonNull(Start.getMap()).getIndexCurrent()+1)+"",Side.DROITE,true);
 
             //INVENTAIRE

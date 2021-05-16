@@ -33,7 +33,7 @@ public class Chest extends AbstractItem {
                 case 7,8,9,10 -> PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.ENDURENCE_POTION);
                 case 11,12 -> PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.INVUL_POTION);
                 case 13,14 -> PotionFactory.getNewPotion(getEtage(), PotionFactory.PotionType.STRENGTH_POTION);
-                default -> WeaponFactory.getNewWeapon(getEtage(), WeaponFactory.WeaponType.BOW); //TODO REMPLACER PAR ARGENT
+                default -> new StackOfMoney(getEtage(),Procedure.getAccesibleRandomPosition(true,getEtage()),Procedure.getRandomInt(100,1));
             });
         }
         for (AbstractItem i : items){

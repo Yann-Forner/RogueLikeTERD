@@ -22,7 +22,10 @@ public class Sound {
         MANGER("manger.wav"),
         DEGATSJOUEUR("DegatsJoueur1.wav","DegatsJoueur2.wav","DegatsJoueur3.wav"),
         MORT("mort.wav"),
-        LEVELUP("levelup.wav");
+        LEVELUP("levelup.wav"),
+        EPEEDAMAGE("Attaque epee 1.wav","Attaque epee 2.wav","Attaque epee 3.wav"),
+        BOWDAMAGE("arc1.wav","arc2_1.wav","arc3_1.wav"),
+        WANDDAMAGE("wand1.wav","wand2.wav","wand3.wav");
 
         private final String[] paths;
 

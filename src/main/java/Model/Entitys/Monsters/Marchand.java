@@ -111,10 +111,10 @@ public class Marchand extends AbstractMonster {
             sb.append("\nCela fait maintenant près de 10 ans que je suis bloqué dans ce labyrinthe.");
             sb.append("Je suis donc l'homme le plus riiiiche que tu puisses trouver ici");
             sb.append("\nTu te doutes bien que toute cette fortune n'est pas sortie de nulle part !");
-            sb.append("\nJe vends, j'achète, je vo... enfin bref, je mène mon buisness quoi !\n\n");
+            sb.append("\nJe vends, j'achète, je vo... enfin bref, je mène mon buisness quoi !\n");
             state = STATE.NORMAL;
         }
-        sb.append(couleurText).append("Tu es ici pour acheter un de mes merveilleux objets ou pour me vendre un des tiens ?\n\n");
+        sb.append(couleurText).append("\nTu es ici pour acheter un de mes merveilleux objets ou pour me vendre un des tiens ?\n\n");
         sb.append("Acheter - ").append(couleurTouches).append("1\n");
         sb.append(couleurText).append("Vendre - ").append(couleurTouches).append("2\n");
         sb.append(couleurText).append("Voler - ").append(couleurTouches).append("3\n");
@@ -211,7 +211,7 @@ public class Marchand extends AbstractMonster {
             sb.append("Je n'ai plus rien en stock.\n");
         }
         else{
-            sb.append("J'ai de amrmes et des potions a vendre, que voulez vous ?");
+            sb.append("J'ai de armes et des potions a vendre, que voulez vous ?\n");
             if(getInventory().getWeapons().size()>0){
                 sb.append(couleurText).append("Voici d'abord mes armes\n");
             }

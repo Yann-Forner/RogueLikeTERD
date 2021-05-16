@@ -58,16 +58,6 @@ public abstract class AbstractItem extends Entity {
         return prix;
     }
 
-    /**
-     * Defini le prix de l'item.
-     * @param prix Prix de l'item
-     * @author Quentin
-     */
-    public void setPrix(int prix){
-        this.prix = prix;
-    }
-
-
      /** 
      * Defini le comportement de l'item lorsque le joueur l'utilise.
      * @param player Joueur

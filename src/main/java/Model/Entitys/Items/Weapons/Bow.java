@@ -8,6 +8,7 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 import Model.Utils.Tools;
 
 import java.util.ArrayList;
@@ -21,9 +22,16 @@ public class Bow extends AbstractWeapon {
      * @param type Type de l'arme
      * @param strength Puissance de l'arme
      * @param range Portée de l'arme
+     * @param prix Prix de l'arme
+     * @author Quentin
      */
-    public Bow(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range) {
-        super(etage, position,null, type,strength, range);
+    public Bow(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range, int prix) {
+        super(etage, position,"Arc", type,strength, range, prix);
+    }
+
+    @Override
+    public void useItemMessage() {
+        Sound.playAudio(Sound.Sons.BOWDAMAGE,0);
     }
 
     @Override
@@ -40,7 +48,7 @@ public class Bow extends AbstractWeapon {
                     if (position.Distance(pos) <= range) {
                         Entity entity = getEtage().get(pos).getEntity();
                         if (entity instanceof AbstractAlive && entity!=player) {
-                            if (entity instanceof Marchand && ((Marchand) entity).getState() != Marchand.STATE.AGGRESSIVE){
+                            if (entity instanceof Marchand && Marchand.getState() != Marchand.STATE.AGGRESSIVE){
                                 continue;
                             }
                             if (pos.Distance(position) < distanceCible) {
@@ -65,6 +73,7 @@ public class Bow extends AbstractWeapon {
             super.useItem(player);
             cible.onContact(player);
             Affichage.Projectile(getEtage(), zone,new Cell.Style(Cell.Style.CellType.PROJECTILE,Affichage.BRIGTH_BLUE,"📍","x"));
+            useItemMessage();
         }
     }
 

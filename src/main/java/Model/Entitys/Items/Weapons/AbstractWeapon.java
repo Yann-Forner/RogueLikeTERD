@@ -10,13 +10,22 @@ import Model.Utils.TourManager;
 
 /**
  * Objet représentant les armes, contenant leurs caractéristiques (puissance, portée, type...)
- * @author JP, Quentin
+ * @author JP, Quentin, Gillian
  */
 public abstract class AbstractWeapon extends AbstractItem {
     private final int strength;
     private final int range;
     private final int coutEndurence;
     private final WeaponFactory.WeaponType type;
+
+
+    /**
+     * Permet de sonoriser les armes lors de l'utilisation
+     *
+     * @author Gillian
+     */
+    public abstract void useItemMessage();
+
 
     /**
      * Constructeur de l'arme
@@ -25,10 +34,11 @@ public abstract class AbstractWeapon extends AbstractItem {
      * @param nom Nom de l'arme
      * @param strength Puissance de l'arme
      * @param range Portée de l'arme
+     * @param prix Prix de l'arme
      * @author JP
      */
-    public AbstractWeapon(Etage etage, Position position, String nom, WeaponFactory.WeaponType type, int strength, int range) {
-        super(etage, position, nom);
+    public AbstractWeapon(Etage etage, Position position, String nom, WeaponFactory.WeaponType type, int strength, int range, int prix) {
+        super(etage, position, nom, prix);
         this.type = type;
         this.strength = strength;
         this.range = range;
@@ -92,6 +102,7 @@ public abstract class AbstractWeapon extends AbstractItem {
     public int getCoutEndurence(){
         return coutEndurence;
     }
+
 
     @Override
     public String toString() {

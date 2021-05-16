@@ -8,6 +8,7 @@ import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Utils.Affichage;
 import Model.Utils.Position;
+import Model.Utils.Sound;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,12 +23,18 @@ public class Wand extends AbstractWeapon {
      * Constructeur de la baguette
      * @param etage      Etage où se situe l'arme
      * @param position   Position de l'arme
-     * @param type     Type de l'arme
+     * @param type       Type de l'arme
      * @param strength   Puissance de l'arme
      * @param range      Portée de l'arme
+     * @param prix       Prix de l'arme
      */
-    public Wand(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range) {
-        super(etage, position, null, type, strength, range);
+    public Wand(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range, int prix) {
+        super(etage, position, "Baguette", type, strength, range, prix);
+    }
+
+    @Override
+    public void useItemMessage() {
+        Sound.playAudio(Sound.Sons.WANDDAMAGE,0);
     }
 
     @Override
@@ -44,13 +51,14 @@ public class Wand extends AbstractWeapon {
         for(Position p : zone){
             Entity entity = player.getEtage().get(p).getEntity();
             if(entity instanceof AbstractAlive){
-                if (entity instanceof Marchand && ((Marchand) entity).getState() != Marchand.STATE.AGGRESSIVE){
+                if (entity instanceof Marchand && Marchand.getState() != Marchand.STATE.AGGRESSIVE){
                     continue;
                 }
                 entity.onContact(player);
             }
         }
         Affichage.Projectile(player.getEtage(),zone,getMagicStyle());
+        useItemMessage();
     }
 
     /**
