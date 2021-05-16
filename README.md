@@ -237,7 +237,7 @@ A la différence des potions et des armes, le joueur <b>ne peut pas stocker de n
 Une fois ramassée, la nourriture est <b>instantanément consomée</b> et <b>rend de la vie et/ou de l'endurance</b> au joueur.
 
 <h4>2.4.3.1 Les fruits</h4>
-Les fruits permettent de rendre de la vie au joueur. </br>
+Les fruits permettent de <b>rendre de la vie</b> au joueur. </br>
 Ils sont identifiable dans le jeu par les symboles suivant : </br>
  Linux: </br>
 Windows: <b</b></br>
@@ -250,14 +250,14 @@ Windows: <b</b></br></br>
 <h4>2.4.3.2 Le Burger</h4>
 Linux: </br>
 Windows: <b</b></br>
-Le burger permet de rendre de la vie et de l'endurance au joueur. </br></br>
+Le burger permet de <b>rendre de la vie et de l'endurance</b> au joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 
 
 <h2>2.4.4 Les stacks d'argents</h2>
-Les stacks d'argent sont des objets trouvables par le joueur dans le labyrinthe.</br>
-Une fois ramassé et comme la nourriture, les stacks d'argent disparaissent et créditent le joueur du montant de celui-ci.</br>
+Les stacks d'argent sont des <b>objets trouvables</b> par le joueur dans le labyrinthe.</br>
+<b>Une fois ramassés</b> et comme la nourriture, les stacks d'argent <b>disparaissent</b> et <b>créditent le joueur du montant</b> de celui-ci.</br>
 L'affichage va varier en fonction du montant du stack d'argent.</br>
 Entre ... et ... : 
 Linux: </br>
@@ -274,28 +274,28 @@ Windows: <b</b></br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>3. Cases</h2>
-Les cases du jeu se divisent en deux categories, les fonctionelles et les cosmetiques: les premieres ont une fonction que se soit dans le jeu ou la programmation alors que les deuxiemes ne sont qu'un changement d'affichage des premieres.
+Les cases du jeu se divisent en <b>deux categories</b>, les <b>fonctionnelles</b> et les <b>cosmétiques</b>: les premières ont une <b>utilité</b> que cela soit dans le jeu ou la programmation alors que les deuxièmes n'apporteront qu'un <b>intérêt esthétique</b>. 
 <h3>3.1. Fonctionelles</h3>
 <h4>3.1.1. Cellules Normales</h4>
-C'est les cellules de base.</br>
+Ce sont les cellules <b>de base</b>.</br>
 <img src="https://user-images.githubusercontent.com/74865653/114877044-3832b280-9dff-11eb-99d6-fc169290f972.png"/></br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114878669-c5c2d200-9e00-11eb-9ec1-3fae828f3b9c.png"/>
 <h4>3.1.2. Cellules Bordure</h4>
-Ce sont les bordures de l'etage, aucune entité ne peut les traverser (sauf exceptions).</br></br>
+Ce sont les <b>bordures de l'étage</b>, aucune entité <b>ne peut les traverser</b> (sauf exceptions).</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114880411-551cb500-9e02-11eb-954f-7a3ce2ac38cd.png"/>
 <h4>3.1.3. Cellules Vide</h4>
-Ce sont des cellules vide.</br></br>
+Ce sont des cellules <b>vides</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/>
 <h4>3.1.4. Cellules Monter</h4>
-Elle permet de remonter a l'etage precedent.</br>
+Elle permet de remonter à <b>l'étage precedent</b>.</br>
 Linux: 👍</br>
 Windows: <b>^</b></br>
 <h4>3.1.5. Cellules Descendre</h4>
-Elle permet de descendre a l'etage precedent.</br>
+Elle permet de descendre à <b>l'etage precedent</b>.</br>
 Linux: 👎</br>
 Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
-Ce sont des cellules invisible qui teleporte le joueur dans un etage piégé.
+Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé<b>.
 <h4>3.1.7. Cellules Chest</h4>
 <b><i>Non implementé</b></i>
 <h3>3.2. Cosmetiques</h3>
