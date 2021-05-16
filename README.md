@@ -382,3 +382,9 @@ Exemple de sauvegarde de partie: </br>  </br>
 Exemple de chargement d'une partie sauvegardée : </br> </br> 
 <img src="https://user-images.githubusercontent.com/74865920/118412930-febec280-b69c-11eb-9092-f8695850bbc6.png"/></br> </br> 
 
+<h2>6. Sons</h2>
+Nous avons un système audio implémenté dans notre jeu, qui nous a permis d'intégrer une musique de fond et divers bruitages (level up, manger...).
+Nous avons également du implémenter une gestion des exception pour vérifier que l'accès aux drivers audios se fait correctement. En effet, nous étions confrontés au problème du jeu qui crash à chaque lancement sur le sous-système linux de windows, dû à un problème de driver.
+Le jeu éteint totalement le système de son a la moindre détection de soucis.
+
+
