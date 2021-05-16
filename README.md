@@ -61,19 +61,19 @@ Le joueur se verra doté d'une <b> vitesse d'attaque</b>  et d'une <b> vitesse d
 
 <h2>1. Génération de la carte</h2>
 <h3>1.1. Types d'etages</h3>
-<b>La carte se compose en plusieurs types d'etages:</b>
+<b>La carte se compose en plusieurs types d'étages:</b>
 <h4>1.1.1. Etage cercle</h4>
-Toutes les pieces de cet etage sont des cercles.</br></br>
+Toutes les pièces de cet etage sont des cercles.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118411884-2e6acc00-b697-11eb-9d69-1a9f1c6f384a.png"/>
 <h4>1.1.2. Etage normal</h4>
-Toutes les pieces de cet etage sont des <b>rectangles</b>.</br></br>
+Toutes les pièces de cet étage sont des <b>rectangles</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118411899-46425000-b697-11eb-9f59-f04a0beeab31.png"
 />
 <h4>1.1.3. Etage dongeon</h4>
-Les pieces de cet etage sont un <b>mélange</b> de tout les types commun de pieces.</br></br>
+Les pièces de cet étage sont un <b>mélange</b> de tout les types commun de pièces.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118411905-53f7d580-b697-11eb-8ad6-1ade5c98e75f.png"/>
 <h4>1.1.4. Etage piege</h4>
-C'est un etage piege qui apparait lorsque l'on marche sur une <b>case piegée</b>.</br></br>
+C'est un étage piège qui apparait lorsque l'on marche sur une <b>case piegée</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118411961-97eada80-b697-11eb-86da-c2259e8d6676.png"/>
 <h4>1.1.5. Etage boss</h4>
 C'est un étage où un <b>boss</b> apparaît .</br></br>
@@ -103,7 +103,7 @@ Salle où le joueur peut trouver un <b>coffre</b> et de <b>l'argent</b>. Il peut
   
 <h2>2. Entités</h2>
 <h3>2.1. Joueur</h3>
-Le joueur peut choisir sa classe au <b>debut du jeu</b> ce qui lui permet d'influencer sur ses statistiques au debut de la partie.</br>
+Le joueur peut choisir sa classe au <b>début du jeu</b> ce qui lui permet d'influencer sur ses statistiques au debut de la partie.</br>
 Ses statistiques sont:</br>
 -Points de vie (PV)</br>
 -Puissance d'Attaque (PA)</br>
@@ -120,11 +120,11 @@ Windows: <b>"@"</b></br>
 
 
 <h3>2.2. Monstres</h3>
-Les monstres ont les <b>mêmes statistiques</b> que le joueur mais avec une <b>vitesse</b> et un <b>champ de vision</b> en plus ce qui leurs permet de le detecter s'il s'approche trop et de <b>s'arreter</b> s'il s'eloigne trop loin.
+Les monstres ont les <b>mêmes statistiques</b> que le joueur mais avec une <b>vitesse</b> et un <b>champ de vision</b> en plus ce qui leurs permet de le détecter s'il s'approche trop et de <b>s'arréter</b> s'il s'éloigne trop.
 <h4>2.2.1. Alien</h4>
 Linux: 👽</br>
 Windows: <b>&</b></br>
-Il se deplace <b>vite</b> et<b> detecte le joueur de très loin</b> de plus des qu'il reçoit un coup il se <b>teleporte</b> a l'autre bout de l'etage.
+Il se déplace <b>vite</b> et<b> détecte le joueur de très loin</b> de plus des qu'il reçoit un coup il se <b>téléporte</b> à l'autre bout de l'étage.
 <h4>2.2.2. Abeille</h4>
 Linux: 🐝</br>
 Windows: <b>B</b></br>
@@ -132,7 +132,7 @@ L'abeille n'est pas si dangereuse en revanche des qu'elle meurt <b>deux nouvelle
 <h4>2.2.3. Oiseau</h4>
 Linux: 🐦</br>
 Windows: <b>ù</b></br>
-Il suit un <b>chemin periodique</b> en diagonale et n'attaque pas le joueur a moins que celui lui bloque le passage.
+Il suit un <b>chemin pèriodique</b> en diagonale et n'attaque pas le joueur à moins que celui lui bloque le passage.
 <h4>2.2.4. Fantome</h4>
 Linux: 👻</br>
 Windows: <b>H</b></br>
@@ -140,23 +140,23 @@ Il peut <b>traverser les murs</b> pour venir attaquer le joueur.
 <h4>2.2.5. Rat</h4>
 Linux: 🐀</br>
 Windows: <b>M</b></br>
-Il est <b>rapide</b> et se deplace en <b>diagonale</b> mais a tres peu de point de vie.
+Il est <b>rapide</b> et se déplace en <b>diagonale</b> mais a très peu de points de vie.
 <h4>2.2.6. Squelette</h4>
 Linux: 	💀</br>
 Windows: <b>S</b></br>
-Il peut attaquer le joueur a distance et recule des qu'il s'approche de lui pour garder une certaine distance de securité.
+Il peut attaquer le joueur à distance et recule dès qu'il s'approche de lui pour garder une certaine distance de securité.
 <h4>2.2.7. Esacargot</h4>
 Linux: 🐌</br>
 Windows: <b>G</b>
-Il se deplace en <b>ligne droite</b> et des qu'il est façe a un obstacle fait demi tour. 
+Il se déplace en <b>ligne droite</b> et dès qu'il est façe a un obstacle fait demi tour. 
 <h4>2.2.8. Volcan</h4>
 Linux: 🌋</br>
 Windows: <b>V</b></br>
-Il cause des <b>dégats a toutes les entités</b> s'approchant dans son <b>champs d'activation</b>.
+Il cause des <b>dégats à toutes les entités</b> s'approchant dans son <b>champs d'activation</b>.
 <h4>2.2.9. Zombie</h4>
 Linux: 🧟</br>
 Windows: <b>Z</b></br>
-Il se déplace tres <b>lentement</b> et a <b>beaucoup de points de vie</b>.
+Il se déplace très <b>lentement</b> et a <b>beaucoup de points de vie</b>.
 
 <h3>2.2. Le marchand</h3>
 
