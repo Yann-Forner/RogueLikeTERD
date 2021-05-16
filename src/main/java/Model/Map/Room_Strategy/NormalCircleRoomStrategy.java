@@ -1,8 +1,5 @@
 package Model.Map.Room_Strategy;
 
-import Model.Entitys.Items.Foods.FoodFactory;
-import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
@@ -13,7 +10,7 @@ import Model.Utils.Procedure;
 
 /**
  * Défini une salle ronde normale
- * @auhtor Yann,Quentin
+ * @author Yann,Quentin
  */
 public class NormalCircleRoomStrategy extends CircleRoomStrategy {
     @Override

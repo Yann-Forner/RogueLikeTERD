@@ -1,11 +1,7 @@
 package Model.Map.Room_Strategy;
 
-import Model.Entitys.Items.Foods.FoodFactory;
 import Model.Entitys.Items.Misc.Chest;
-import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Monsters.MonsterFactory;
-import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Position;
@@ -13,7 +9,7 @@ import Model.Utils.Procedure;
 
 /**
  * Défini une salle de trésor
- * @auhtor Quentin,Yann
+ * @author Quentin,Yann
  */
 public class TresorRoomStrategy extends RoomStrategy{
     @Override

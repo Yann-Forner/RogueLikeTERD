@@ -33,7 +33,6 @@ public class StrengthPotion extends AbstractPotion {
 
     /**
      * Utilise la potion
-     *
      * @param player Joueur utilisant la potion
      * @author JP
      */
@@ -46,7 +45,6 @@ public class StrengthPotion extends AbstractPotion {
             super.useItem(player);
             player.buffStrength(buffMultiplicator, seconds);
         }
-
     }
 
     @Override

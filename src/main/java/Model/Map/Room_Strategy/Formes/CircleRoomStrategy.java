@@ -7,7 +7,7 @@ import Model.Utils.Affichage;
 
 /**
  * Créer une room ronde
- * @auhtor Yann
+ * @author Yann
  */
 public abstract class CircleRoomStrategy extends RoomStrategy {
 
@@ -57,7 +57,7 @@ public abstract class CircleRoomStrategy extends RoomStrategy {
     /**
      * Cette fonction a pour but de remplir l'intérieur du cercle une fois que le tour a été fait
      * @param r la salle
-     * @auhtor Yann
+     * @author Yann
      */
     protected void fillInteriorCircle(Room r){
         for (int y = 1; y < r.getHeigth()-1; y++) {

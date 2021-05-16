@@ -21,18 +21,6 @@ public class Melee extends AbstractWeapon{
      * @param type     Type de l'arme
      * @param strength Puissance de l'arme
      * @param range    Portée de l'arme
-     */
-    public Melee(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range) {
-        this(etage, position, type, strength, range, 0);
-    }
-
-    /**
-     * Constructeur de l'arme au corps a corps.
-     * @param etage    Etage où se situe l'arme
-     * @param position Position de l'arme
-     * @param type     Type de l'arme
-     * @param strength Puissance de l'arme
-     * @param range    Portée de l'arme
      * @param prix     Prix de l'arme
      */
     public Melee(Etage etage, Position position, WeaponFactory.WeaponType type, int strength, int range, int prix) {

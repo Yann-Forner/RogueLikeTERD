@@ -1,7 +1,5 @@
 package Model.Map.Etage_Strategy;
 
-import Model.Entitys.Items.AbstractItem;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Entitys.Player.Player;
 import Model.Map.Cell;
 import Model.Map.Etage;

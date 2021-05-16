@@ -2,7 +2,6 @@ package Model.Map.Etage_Strategy;
 
 import Model.Entitys.Items.Foods.FoodFactory;
 import Model.Entitys.Items.Potions.PotionFactory;
-import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.RoomFactory;
@@ -10,7 +9,6 @@ import Model.Utils.Affichage;
 import Model.Utils.Procedure;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Classe de la strategie principale du jeu, cet etage peut etre rempli de plusieurs rooms qui seront différentes les unes des autres.
