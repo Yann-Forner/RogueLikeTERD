@@ -355,7 +355,7 @@ Il affiche tout ceci dans une interface visible sur la droite de l'écran. </br>
 <h2>5. Sauvegarde</h2>
 La sauvegarde permet au jouer de sauvegarder la partie pour la reprendre dans le futur. </br></br>  
 Exemple quand aucune partie n'est sauvegardée : </br>  </br> 
-<img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/></br> </br> 
+<img src="https://user-images.githubusercontent.com/74865920/118412972-33cb1500-b69d-11eb-9bdf-7695a60f3b42.png"/></br> </br> 
 Exemple de sauvegarde de partie: </br>  </br> 
 <img src="https://user-images.githubusercontent.com/74865920/118412916-e9499880-b69c-11eb-9510-4d5d00eaa095.png"/></br> </br> 
 Exemple de chargement d'une partie sauvegardée : </br> </br> 
