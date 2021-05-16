@@ -154,13 +154,13 @@ Le prix est fixé en fonction de l'équilibrage du jeu.</br></br>
 <h4>2.2.2. La vente</h4>
 
 Le joueur peut de même <b>vendre ses objets</b> auprès du marchand.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412583-1c8b2800-b69b-11eb-93a6-dd0055e1dba1.png"/>
 
 <h4>2.2.3. Le vol</h4>
 
 Il est possible de <b>rompre la pacificité</b> du marchand en essayant de le voler.</br>
 Le marchand <b>devient</b> alors une <b>entité aggressive</b>.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412595-27de5380-b69b-11eb-8664-b4dd40f89797.png"/>
 
 
 <h2>2.3. Boss</h2>
@@ -342,12 +342,13 @@ Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
 Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé<b>.
 <h4>3.1.7. Cellules Chest</h4>
-<b><i>Non implementé</b></i>
-<h3>3.2. Cosmetiques</h3>
-<b><i>Non implementé</b></i>
+Un coffre est placé dans cette cellule.
+
 
 <h2>4. Inventaire</h2>
-<b><i>Non implementé</b></i>
+L'inventaire du joueur permet de <b>stocker les objets</b> et la <b>monnaie</b> du joueur.</br>
+Il affiche tout ceci dans une interface visible sur la droite de l'écran. </br></br>
+<img src="https://user-images.githubusercontent.com/74865920/118412636-5fe59680-b69b-11eb-95e2-fd7d81c02104.png"/>
 
 <h2>5. Sauvegarde</h2>
-<b><i>Non implementé</b></i>
+La sauvegarde permet au jouer de sauvegarder la partie pour la reprendre dans le futur. 
