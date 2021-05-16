@@ -16,7 +16,7 @@ Le but du jeu est d'avancer <b>le plus loin possible</b> dans un labyrinthe comp
 
 Le jeu est jouable est sur Linux et sur Windows. <br>
 
-Attention toutefois à son utilisation sur <b>Windows</b> :<br>
+Attention toutefois à son utilisation sur <b>Windows</b> :</br>
   - Les smileys seront remplacés par des lettres. <br>
   - Le jeu sera lancé de base en tour par tour, il faudra appuyer sur T pour changer ce mode si désiré.<br>
 Ces spécifications seront de même valables sur un IDE.<br>
@@ -50,7 +50,7 @@ Il sera possible de regagner de l'endurance avec le temps, ou grâce aux <b>poti
 
 <h2>L'argent</h2>
 L'argent permet au joueur <b>d'acheter des objets au marchand.</b> </br></br>
-Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou directement en trouvant des <b>stacks d'argent</b> au sein du labyrinthe. </br>
+Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou directement en trouvant des <b>stacks d'argent</b> au sein du labyrinthe. </br></br
 <img src="https://user-images.githubusercontent.com/74865653/118410100-0fb40780-b68e-11eb-91f6-56773c260183.png"/></br>
 
 <h2>Vitesse d'action</h2>
