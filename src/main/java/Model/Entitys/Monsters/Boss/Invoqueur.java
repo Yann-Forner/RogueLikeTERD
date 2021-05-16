@@ -2,7 +2,6 @@ package Model.Entitys.Monsters.Boss;
 
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Entity;
-import Model.Entitys.Monsters.AbstractMonster;
 import Model.Entitys.Monsters.MonsterFactory;
 import Model.Entitys.Player.Player;
 import Model.Map.Cell;
@@ -13,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * Boss qui tire des lasers et invoque des rat des qu'il prend des degats.
+ * AbsractBoss qui tire des lasers et invoque des rat des qu'il prend des degats.
  * @author Quentin
  */
-public class Invoqueur extends Boss {
+public class Invoqueur extends AbsractBoss {
     private final double portee_min;
     private double portee;
     private int direction = 0;

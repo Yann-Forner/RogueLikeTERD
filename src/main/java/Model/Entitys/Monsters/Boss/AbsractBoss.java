@@ -8,7 +8,7 @@ import Model.Utils.Procedure;
 import Model.Utils.Tools;
 import Model.Utils.TourManager;
 
-public abstract class Boss extends AbstractMonster {
+public abstract class AbsractBoss extends AbstractMonster {
 
     /**
      * Intitialise un monstre avec des stats de bases.
@@ -25,7 +25,7 @@ public abstract class Boss extends AbstractMonster {
      * @param lvl            Son niveau
      * @author Quentin
      */
-    protected Boss(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl) {
+    protected AbsractBoss(Etage m, Position pos, String nom, int pv, int force, double vision_radius, int agro, int update_rate_ms, Tools.PathType path_type, int lvl) {
         super(m, pos, nom, pv, force, vision_radius, agro, update_rate_ms, path_type, lvl);
     }
 

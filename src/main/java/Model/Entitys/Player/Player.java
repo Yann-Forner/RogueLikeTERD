@@ -2,16 +2,12 @@ package Model.Entitys.Player;
 
 import Model.Entitys.AbstractAlive;
 import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Items.Potions.AbstractPotion;
 import Model.Entitys.Items.Weapons.AbstractWeapon;
 import Model.Entitys.Player.Classes.AbstractClass;
 import Model.Map.Etage;
-import Model.Utils.Affichage;
-import Model.Utils.Position;
-import Model.Utils.Sound;
+import Model.Utils.*;
 import Model.Utils.Position.Direction;
-import Model.Utils.TourManager;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Classe de base du joueur
@@ -21,15 +17,16 @@ public class Player extends AbstractAlive {
     private int MAX_EXP = 10;
     private int CURRENT_EXP = 0;
     private int MAX_PV;
+    private final int MAX_FORCE;
     private long MovementCoolDown = System.currentTimeMillis();
     private final AbstractClass classe;
     private Direction direction = Direction.HAUT;
     private int endurence = 100;
     private final AbstractItem[] poche = {null,null};
     private boolean inPoche = false;
-    private boolean isBuffed;
-    private boolean isImmortal;
-    private boolean isStimulated;
+    private boolean buffForce = false;
+    private boolean buffInvincible = false;
+    private boolean buffEnergie = false;
 
     /**
      * Crée un joueur.
@@ -41,9 +38,7 @@ public class Player extends AbstractAlive {
         super(null, null, classe.getVisionRadius(), nom.length() == 0 ? classe.getNom() : nom, classe.getBasePV(), classe.getBaseForce(), 1);
         this.classe = classe;
         MAX_PV = classe.getBasePV();
-        isBuffed = false;
-        isImmortal = false;
-        isStimulated = false;
+        MAX_FORCE = classe.getBaseForce();
     }
 
     /**
@@ -55,6 +50,7 @@ public class Player extends AbstractAlive {
     public void updateEtage(Etage etage, Position position) {
         getEtage().get(getPosition()).setEntity(null);
         setEtage(etage);
+        position = position == null ? Procedure.getAccesibleRandomPosition(true,etage) : position;
         setPosition(position);
         etage.get(position).setEntity(this);
     }
@@ -152,34 +148,12 @@ public class Player extends AbstractAlive {
      * @author Quentin
      */
     public void updateEndurence(int endurence){
-        this.endurence = (endurence < 0 && isStimulated()) ? this.endurence : Math.min(getMAX_ENDURENCE(), this.endurence + endurence);
+        this.endurence = (endurence < 0 && getBuff(AbstractPotion.Buffs.ENERGIE)) ? this.endurence : Math.min(getMAX_ENDURENCE(), this.endurence + endurence);
     }
 
     @Override
     public boolean updatePV(int pv, boolean limited) {
-        return isImmortal() ? super.updatePV(Math.max(0, pv), limited) : super.updatePV(pv, limited);
-    }
-
-    /**
-     * Buff la force du joueur selon le multiplicateur.
-     * @param buffMultiplicator Coeff de multiplication
-     * @param seconds La durée du buff
-     * @author Quentin
-     */
-    public void buffStrength(double buffMultiplicator, int seconds) {
-        if(!isBuffed()) {
-            setBuffed(true);
-            int originalForce = getForce();
-            int forceConverted = (int) (((double) originalForce) * (1.0 + buffMultiplicator / 100.0));
-            setForce(getForce() + forceConverted);
-            TourManager.addMessage("Pendant " + seconds + "s, la force sera augmentée de " + buffMultiplicator + "%. (" + originalForce + " -> " + forceConverted + ")");
-            TourManager.getExecutor().schedule(() -> {
-                int previousForce = getForce() - forceConverted;
-                setForce(previousForce);
-                setBuffed(false);
-                TourManager.addMessage("Retour de la force à sa valeur de base. (" + previousForce + ")");
-            }, seconds, TimeUnit.SECONDS);
-        }
+        return getBuff(AbstractPotion.Buffs.INVINCIBLE) ? super.updatePV(Math.max(0, pv), limited) : super.updatePV(pv, limited);
     }
 
     /**
@@ -218,6 +192,10 @@ public class Player extends AbstractAlive {
     public int getForce() {
         AbstractWeapon currentWeapon = getInventory().getCurrentWeapon();
         return super.getForce() * lvl + (currentWeapon==null || !classe.canUse(currentWeapon) ? 0 : currentWeapon.getStrength());
+    }
+
+    public int getMAX_FORCE(){
+        return MAX_FORCE;
     }
 
     /**
@@ -279,58 +257,20 @@ public class Player extends AbstractAlive {
         inPoche = true;
     }
 
-    /**
-     * Retourne si une potion de force est en cours d'utilisation
-     * @return Si une joueur a une potion de force en cours d'utilisation
-     * @author JP
-     */
-    public boolean isBuffed() {
-        return isBuffed;
+    public boolean getBuff(AbstractPotion.Buffs buff){
+        return switch (buff){
+            case FORCE -> buffForce;
+            case ENERGIE -> buffEnergie;
+            case INVINCIBLE -> buffInvincible;
+        };
     }
 
-    /**
-     * Définit si une potion de force est en cours d'utilisation.
-     * @param buffed Defini si le joueur a une potion de force en cours d'utilisation
-     * @author JP
-     */
-    public void setBuffed(boolean buffed) {
-        isBuffed = buffed;
-    }
-
-    /**
-     * Retourne si une potion d'invulnérabilité est en cours d'utilisation.
-     * @return Si le joueur est invincible
-     * @author JP
-     */
-    public boolean isImmortal() {
-        return isImmortal;
-    }
-
-    /**
-     * Définit si une potion d'invulnérabilité est en cours d'utilisation.
-     * @param immortal Defini si le joueur est immortel
-     * @author JP
-     */
-    public void setImmortal(boolean immortal) {
-        isImmortal = immortal;
-    }
-
-    /**
-     * Retourne si une potion d'endurance est en cours d'utilisation.
-     * @return Si je joueur a une endurence infini.
-     * @author JP
-     */
-    public boolean isStimulated() {
-        return isStimulated;
-    }
-
-    /**
-     * Définit si une potion d'endurance est en cours d'utilisation.
-     * @param stimulated Defini si je joueur a une endurence infini.
-     * @author JP
-     */
-    public void setStimulated(boolean stimulated) {
-        isStimulated = stimulated;
+    public void setBuff(AbstractPotion.Buffs buff, boolean buffed){
+        switch (buff){
+            case FORCE -> buffForce = buffed;
+            case ENERGIE -> buffEnergie = buffed;
+            case INVINCIBLE -> buffInvincible = buffed;
+        }
     }
 
     @Override

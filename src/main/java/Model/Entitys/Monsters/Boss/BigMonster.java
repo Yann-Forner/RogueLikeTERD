@@ -4,15 +4,14 @@ import Model.Entitys.Monsters.AbstractMonster;
 import Model.Map.Etage;
 import Model.Utils.Position;
 import Model.Utils.Tools;
-import Model.Utils.TourManager;
 
 import java.util.Objects;
 
 /**
- * Boss en 3 parties qui devient plus puussant des qu'il perd en bras.
+ * AbsractBoss en 3 parties qui devient plus puussant des qu'il perd en bras.
  * @author Yann, Quentin
  */
-public class BigMonster  extends Boss {
+public class BigMonster  extends AbsractBoss {
     private final Arm leftArm;
     private final Arm rightArm;
 

@@ -1,7 +1,9 @@
 package Map;
 
 import Model.Entitys.Items.AbstractItem;
+import Model.Entitys.Items.Potions.HealPotion;
 import Model.Entitys.Items.Potions.PotionFactory;
+import Model.Entitys.Monsters.Zombie;
 import Model.Entitys.Player.Classes.ClassFactory;
 import Model.Entitys.Player.Player;
 import Model.Map.Etage;
@@ -90,7 +92,37 @@ public class TestGameplay extends TestCase {
         assertNotSame(player.getPoche(),healPotion);
     }
 
+    public void testPocheIfCollideWithMonter(){
+        Position pos = Procedure.getAccesibleRandomPosition(false,etage,etage.getRooms().get(0));
+        while (!etage.get(pos.getX()-1,pos.getY()).isAccesible() && !etage.get(pos.getX()+1,pos.getY()).isAccesible() )pos = Procedure.getAccesibleRandomPosition(false,etage,etage.getRooms().get(0));
+        while (!player.getInventory().isPotionsFull()){
+            player.getInventory().addPotion(PotionFactory.getNewPotion(etage, PotionFactory.PotionType.HEAL_POTION));
+        }
+        Zombie zombie = new Zombie(etage,new Position(pos.getX()+1,pos.getY()),"test",10,5,10,1,1, Tools.PathType.CROSS,1);
+        HealPotion healPotion  = new HealPotion(etage,pos,"yes",10,10);
+        etage.addItem(healPotion);
+        etage.addMonster(zombie);
+        System.out.println(etage);
+        /* Déplacement du joueur à coté de l'item */
+        assertSame(etage.get(pos).getEntity(),healPotion);
+        player.move(new Position(pos.getX()-1,pos.getY()));
+        assertSame(player,etage.get(new Position(pos.getX()-1,pos.getY())).getEntity());
+        System.out.println(etage);
+        /* Déplacement du joueur sur l'item */
+        player.moveDirection(Position.Direction.DROITE);
+        System.out.println(etage);
+        assertSame(player.getPoche(),healPotion);//FAIL
+        assertSame(player,etage.get(pos).getEntity());
 
+        /* Essai de déplacement sur le mur */
+        player.moveDirection(Position.Direction.DROITE);
+        assertSame(player.getPoche(),healPotion);
+        assertSame(player,etage.get(pos).getEntity());
+        /* Joueur revenant à la position initale */
+        player.moveDirection(Position.Direction.GAUCHE);
+        assertSame(etage.get(pos).getEntity(),healPotion);
+        assertNotSame(player.getPoche(),healPotion);
+    }
     public Pair<Position, Position.Direction> getAccessiblePosition(Position pos){
         if(etage.get(pos.getX()-1,pos.getY() ).isAccesible() )return new Pair<>(new Position(pos.getX()-1,pos.getY()), Position.Direction.DROITE);
         else if(etage.get(pos.getX()+1,pos.getY() ).isAccesible() )return new Pair<>(new Position(pos.getX()+1,pos.getY()), Position.Direction.GAUCHE);

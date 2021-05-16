@@ -2,6 +2,7 @@ package Model.Entitys.Items.Potions;
 
 import Model.Entitys.Player.Player;
 import Model.Map.Etage;
+import Model.Utils.Affichage;
 import Model.Utils.Position;
 import Model.Utils.TourManager;
 
@@ -13,20 +14,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class InvulPotion extends AbstractPotion {
 
-    private final int seconds;
-
     /**
      * Constructeur de la potion d'invincibilité
      * @param e Etage où se situe la potion
      * @param pos Position de la potion
      * @param nom Nom de la potion
      * @param prix Prix de la potion
-     * @param seconds Durée d'effet de la potion
      * @author JP
      */
-    public InvulPotion(Etage e, Position pos, String nom, int prix, int seconds) {
+    public InvulPotion(Etage e, Position pos, String nom, int prix) {
         super(e, pos, nom, prix);
-        this.seconds = seconds;
     }
 
     /**
@@ -36,15 +33,17 @@ public class InvulPotion extends AbstractPotion {
      */
     @Override
     public void useItem(Player player) {
-
-        if(player.isImmortal()) {
+        if(player.getBuff(Buffs.INVINCIBLE)) {
             TourManager.addMessage("Vous êtes déjà immortel !");
         }
         else {
-            TourManager.addMessage("Vous êtes immortel pendant " + seconds + " secondes. Profitez-en !");
-            player.setImmortal(true);
+            TourManager.addMessage(Affichage.BRIGTH_BLUE +  "Debut invulnerabilité");
+            player.setBuff(Buffs.INVINCIBLE,true);
             super.useItem(player);
-            TourManager.getExecutor().schedule(() -> { player.setImmortal(false); TourManager.addMessage("Vous n'êtes plus immortel."); }, 5, TimeUnit.SECONDS);
+            TourManager.getExecutor().schedule(() -> {
+                player.setBuff(Buffs.INVINCIBLE,true);
+                TourManager.addMessage(Affichage.BRIGTH_BLUE + "Fin invulnerabilité");
+                }, 5, TimeUnit.SECONDS);
         }
 
     }
