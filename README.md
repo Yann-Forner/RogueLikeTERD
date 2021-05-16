@@ -154,13 +154,13 @@ Le prix est fixé en fonction de l'équilibrage du jeu.</br></br>
 <h4>2.2.2. La vente</h4>
 
 Le joueur peut de même <b>vendre ses objets</b> auprès du marchand.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412583-1c8b2800-b69b-11eb-93a6-dd0055e1dba1.png"/>
 
 <h4>2.2.3. Le vol</h4>
 
 Il est possible de <b>rompre la pacificité</b> du marchand en essayant de le voler.</br>
 Le marchand <b>devient</b> alors une <b>entité aggressive</b>.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412595-27de5380-b69b-11eb-8664-b4dd40f89797.png"/>
 
 
 <h2>2.3. Boss</h2>
@@ -184,7 +184,7 @@ Les armes, peuvent être trouvées tout le long du labyrinthe : </br>
   - En les <b>achetant</b> au marchand</br>
 Elles permettent au joueur <b>d'attaquer les différents monstres</b> qu'il va rencontrer durant son aventure. </br>
 Le type d'attaque va changer en fonction de l'arme portée par le joueur. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
 <h4>2.4.1.1 Mélée</h4>
 Clé à molette :</br>
 Linux: 🔧 </br>
@@ -248,20 +248,20 @@ Les potions, tout comme les armes, peuvent être trouvées tout le long du labyr
 Une fois ramassées, les potions se disposent dans <b>l'inventaire</b> du joueur et peuvent être utilisées à tout moment.</br>
 Celles-ci ont des <b>effets qui diffèrent</b> en fonction du type de la potion.</br>
 <h4>2.4.1.1 La potion de vie</h4>
-Linux: </br>
-Windows: <b</b></br>
+Linux: 🍼 </br>
+Windows: <b> "h"</b></br>
 La potion de vie est une potion tout de ce qu'il y a de plus classique : elle <b>restaure de la vie</b> au joueur à l'utilisation. </br></br>
 <h4>2.4.1.2 La potion de force</h4>
-Linux: </br>
-Windows: <b</b></br>
+Linux: 🍺 </br>
+Windows: <b>"s"</b></br>
 Une fois utilisée, la potion de force rend le joueur plus fort en <b>augmentant ses dégats d'attaque</b>. </br></br>
 <h4>2.4.1.3 La potion d'invincibilité</h4>
-Linux: </br>
-Windows: <b</b></br>
+Linux: 💉</br>
+Windows: <b>"i"</b></br>
 Après avoir consommé cette potion, le joueur devient <b>invulnérable</b> pendant un <b>court instant</b></br></br>
 <h4>2.4.1.4 La potion d'endurance</h4>
-Linux: </br>
-Windows: <b</b></br>
+Linux: 🥃 </br>
+Windows: <b> "e" </b></br>
 L'utilisation de cette potion octroie au joueur une <b>endurance illimitée</b> pendant une <b>courte durée</b>, permettant au joueur d'utiliser ses attaques sans coût.</br>
 
 
@@ -272,20 +272,32 @@ Une fois ramassée, la nourriture est <b>instantanément consomée</b> et <b>ren
 <h4>2.4.3.1 Les fruits</h4>
 Les fruits permettent de <b>rendre de la vie</b> au joueur. </br>
 Ils sont identifiable dans le jeu par les symboles suivant : </br>
- Linux: </br>
-Windows: <b</b></br>
-Linux: </br>
-Windows: <b</b></br>
-Linux: </br>
-Windows: <b</b></br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/></br>
+
+Pomme :</br>
+Linux: 🍎</br>
+Windows: <b> "p" </b></br></br>
+
+Banane :</br>
+Linux: 🍌</br>
+Windows: <b>"b"</b></br></br>
+
+Carrote :</br>
+Linux: 🥕</br>
+Windows: <b>"c"</b></br></br>
+
+Orange :</br>
+Linux: 🍊</br>
+Windows: <b>"o"</b></br></br>
+
+Pêche :</br>
+Linux: 🍑</br>
+Windows: <b>"g"</b></br></br>
+
 
 <h4>2.4.3.2 Le Burger</h4>
-Linux: </br>
-Windows: <b</b></br>
+Linux: 🍔</br>
+Windows: <b>"b"</b></br>
 Le burger permet de <b>rendre de la vie et de l'endurance</b> au joueur. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-
 
 
 <h2>2.4.4 Les stacks d'argents</h2>
@@ -304,7 +316,7 @@ Windows: <b</b></br></br>
 Entre ... et ... : 
 Linux: </br>
 Windows: <b</b></br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+
 
 <h2>3. Cases</h2>
 Les cases du jeu se divisent en <b>deux categories</b>, les <b>fonctionnelles</b> et les <b>cosmétiques</b>: les premières ont une <b>utilité</b> que cela soit dans le jeu ou la programmation alors que les deuxièmes n'apporteront qu'un <b>intérêt esthétique</b>. 
@@ -330,12 +342,13 @@ Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
 Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé<b>.
 <h4>3.1.7. Cellules Chest</h4>
-<b><i>Non implementé</b></i>
-<h3>3.2. Cosmetiques</h3>
-<b><i>Non implementé</b></i>
+Un coffre est placé dans cette cellule.
+
 
 <h2>4. Inventaire</h2>
-<b><i>Non implementé</b></i>
+L'inventaire du joueur permet de <b>stocker les objets</b> et la <b>monnaie</b> du joueur.</br>
+Il affiche tout ceci dans une interface visible sur la droite de l'écran. </br></br>
+<img src="https://user-images.githubusercontent.com/74865920/118412636-5fe59680-b69b-11eb-95e2-fd7d81c02104.png"/>
 
 <h2>5. Sauvegarde</h2>
-<b><i>Non implementé</b></i>
+La sauvegarde permet au jouer de sauvegarder la partie pour la reprendre dans le futur. 
