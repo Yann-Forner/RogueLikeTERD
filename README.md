@@ -143,12 +143,13 @@ Il se déplace tres <b>lentement</b> et a <b>beaucoup de points de vie</b>.
 Le marchand, même si considéré comme un monstre dans notre implémentation, est <b>bien différent des autres entités</b> du labyrinthe</br>
 Il apparaît dans le labyrinthe de manière <b>aléatoire</b>.</br>
 Pour engager la conversation avec celui-ci, il suffit de le <b>colisionner</b>. </br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412196-eba9f380-b698-11eb-9f83-f51e67435626.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412230-21e77300-b699-11eb-9fa4-2f5bfcfd48af.png"/>
 
 <h4>2.2.1. L'achat</h4>
 Le joueur peut acheter auprès du marchand des <b>armes et des potions</b>. </br>
 Le prix est fixé en fonction de l'équilibrage du jeu.</br></br>
-<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
+<img src="https://user-images.githubusercontent.com/74865920/118412206-fd8b9680-b698-11eb-9e34-5696458d2842.png"/>
 
 <h4>2.2.2. La vente</h4>
 
