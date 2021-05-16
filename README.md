@@ -89,10 +89,12 @@ C'est un <b>triangle</b>, c'est aussi une des salles de base.</br></br>
 C'est un cercle, c'est une <b>plus petite version</b> de salle de boss.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114865403-7a092c00-9df2-11eb-86db-aae4d6977e0e.png"/>
 <h4>1.2.4. Salle marchand</h4>
-Salle dans lequel le marchand apparaît<b></b></i>
+Salle dans lequel le <b>marchand</b> apparaît</i>
 <img src="https://user-images.githubusercontent.com/74865920/118412097-6d4d5180-b698-11eb-8d81-a79a82e30674.png"/>
 <h4>1.2.5. Salle tresor</h4>
-<b><i>Non implementé</b></i>
+Salle où le joueur peut trouver un <b>coffre</b> et de <b>l'argent</b>. Il peut parfois y trouver une <b>potion d'endurance</b>.
+<img src="https://user-images.githubusercontent.com/74865920/118413234-835e1080-b69e-11eb-872b-323686ef7277.png"/>
+
 
   
 <h2>2. Entités</h2>
