@@ -34,6 +34,14 @@ Lâcher potion : <b>M</b></br>
 Sauvegarder : <b>W</b></br>
 Quitter : <b>ESC</b></br>
 
+<h1>Attributs du joueur</h1>
+Le joueur est doté de différents attributs lui permettant d'évoluer dans le jeu.<br>
+
+<h2>La vie</h2>
+
+<h2>L'endurance</h2>
+
+<h2>L'argent</h2>
 
 
 <h1>Composants du jeu</h1>
