@@ -115,26 +115,26 @@ Il se deplace tres lentement et a beaucoup de points de vie.
 <b><i>Non implementé</b></i>
 <h4>2.3.1. Big Monster</h4>
 Le boss "Big Monster" est un monstre puissant doté de deux bras. Sa particularité est qu'il double sa puissance à chaque perte de bras.
-<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.3.2. Snaker</h4>
 Le boss "Snake" est doté d'une longue queue qu'il faudra détruire avant de pouvoir le tuer. 
-<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.3.3. Invoqueur</h4>
 Le boss "Invoqueur" tire de puissant rayons lazer. Il invoque de même des rats lorsque celui-ci se voit infligé des dégats.
-<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>2.4. Items</h2>
 <h2>2.4.1 Armes</h2>
 Les armes permettent au joueur d'attaquer les différents monstres qu'il va rencontrer durant son aventure. 
 Le type d'attaque va changer en fonction de l'arme portée par le joueur. 
-<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.1 Epée</h4>
 L'épée est la seule arme corps à corps du jeu. Elle inflige des dégats conséquent à courte portée. 
-<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.2 Arc</h4>
 L'arc est une arme à distance. Il permet d'attaquer un monstre qui est à partir du moment où il est porté. 
 Si aucun monstre n'est à portée du joueur, ce dernier ne peut utiliser son arc.
-<img src="![image](https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png)"/>
+<img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.3 Baguette</h4>
 La baguette est également une arme à distance. Elle permet d'attaquer en ligne droite, dans la direction du joueur. 
 Le joueur peut utiliser la baguette même si aucun monstre n'est dans sa direction.
