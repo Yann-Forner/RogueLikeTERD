@@ -1,9 +1,10 @@
 package Model.Entitys.Items.Potions;
 
-import Model.Entitys.Items.Weapons.AbstractWeapon;
-import Model.Entitys.Items.Weapons.WeaponFactory;
 import Model.Map.Etage;
 import Model.Utils.Procedure;
+import Model.Utils.Start;
+
+import java.util.Objects;
 
 /**
  * Factory permettant de générer les potions, ramassables par le joueur
@@ -24,17 +25,20 @@ public class PotionFactory {
      */
     public static AbstractPotion getNewPotion(Etage etage, PotionType i) {
         return switch(i) {
-            case HEAL_POTION -> new HealPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de heal", 25);
-            case INVUL_POTION -> new InvulPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'invulnérabilité", 5);
-            case STRENGTH_POTION -> new StrengthPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de force", 50.0, 5);
-            case ENDURENCE_POTION -> new StaminaPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'endurance", 10);
+            case HEAL_POTION -> new HealPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de heal", getRandomPrix(), 25);
+            case INVUL_POTION -> new InvulPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'invulnérabilité", getRandomPrix(), 5);
+            case STRENGTH_POTION -> new StrengthPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion de force", getRandomPrix(), 50.0, 5);
+            case ENDURENCE_POTION -> new StaminaPotion(etage, Procedure.getAccesibleRandomPosition(true, etage), "Potion d'endurance", getRandomPrix(), 10);
         };
     }
 
-    public static AbstractPotion getNewWeapon(Etage etage, PotionType type, int prix){
-        //TODO faire avec le constructteur ou le supprimer
-        AbstractPotion potion = getNewPotion(etage,type);
-        potion.setPrix(prix);
-        return potion;
+    /**
+     * Retourne le prix de base.
+     * @return int
+     * @author Quentin
+     */
+    private static int getRandomPrix(){
+        return Procedure.getRandomInt(30,0) * (Start.getMap()==null ? 1 : Objects.requireNonNull(Start.getMap()).getIndexCurrent()+1);
     }
+
 }

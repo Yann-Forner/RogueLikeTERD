@@ -4,6 +4,8 @@ import Model.Map.Etage;
 import Model.Utils.Procedure;
 import Model.Utils.Start;
 
+import java.util.Objects;
+
 /**
  * Factory permettant de générer les armes.
  * @author JP, Quentin
@@ -28,25 +30,27 @@ public class WeaponFactory {
      */
     public static AbstractWeapon getNewWeapon(Etage etage, WeaponType type) {
         return switch(type) {
-            case SWORD -> new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 10*getBaseLvl(), Procedure.getRandomInt(5,1));
-            case BOW -> new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), type,10*getBaseLvl(), Procedure.getRandomInt(15,2));
-            case WAND -> new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 5*getBaseLvl(), Procedure.getRandomInt(10,1));
+            case SWORD -> new Melee(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 10*getBaseLvl(), Procedure.getRandomInt(5,1), getRandomPrix());
+            case BOW -> new Bow(etage, Procedure.getAccesibleRandomPosition(true, etage), type,10*getBaseLvl(), Procedure.getRandomInt(15,2), getRandomPrix());
+            case WAND -> new Wand(etage, Procedure.getAccesibleRandomPosition(true, etage), type, 5*getBaseLvl(), Procedure.getRandomInt(10,1), getRandomPrix());
         };
     }
 
-    public static AbstractWeapon getNewWeapon(Etage etage, WeaponType type , int prix){
-        //TODO faire avec le constructteur ou le supprimer
-        AbstractWeapon weapon = getNewWeapon(etage,type);
-        weapon.setPrix(prix);
-        return weapon;
-    }
-
     /**
-     * Retourne le level de base
+     * Retourne le level de base.
      * @return int
      * @author Quentin
      */
     private static int getBaseLvl(){
-        return Start.getMap() == null ? 1 : Procedure.getRandomInt(3,0)+Start.getMap().getIndexCurrent()+1;
+        return Start.getMap() == null ? 1 : Procedure.getRandomInt(3,0) + Start.getMap().getIndexCurrent()+1;
+    }
+
+    /**
+     * Retourne le prix de base.
+     * @return int
+     * @author Quentin
+     */
+    private static int getRandomPrix(){
+        return Procedure.getRandomInt(30,0) * (Start.getMap()==null ? 1 : Objects.requireNonNull(Start.getMap()).getIndexCurrent()+1);
     }
 }

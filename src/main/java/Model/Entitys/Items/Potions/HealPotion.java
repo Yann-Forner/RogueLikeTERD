@@ -9,19 +9,19 @@ import Model.Utils.Position;
  * @author JP
  */
 public class HealPotion extends AbstractPotion {
-
     private final int healRate;
 
     /**
      * Constructeur de la potion de soin
      * @param e Etage où se situe la potion
-     * @param nom Nom de la potion
      * @param pos Position de la potion
+     * @param nom Nom de la potion
+     * @param prix Prix de la potion
      * @param healRate Quantité de soin de la potion
      * @author JP
      */
-    public HealPotion(Etage e, Position pos, String nom, int healRate) {
-        super(e, pos, nom);
+    public HealPotion(Etage e, Position pos, String nom, int prix, int healRate) {
+        super(e, pos, nom, prix);
         this.healRate = healRate;
     }
 

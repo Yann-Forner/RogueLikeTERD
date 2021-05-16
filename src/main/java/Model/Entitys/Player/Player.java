@@ -23,10 +23,8 @@ public class Player extends AbstractAlive {
     private int MAX_PV;
     private long MovementCoolDown = System.currentTimeMillis();
     private final AbstractClass classe;
-    //private int money = 0;
     private Direction direction = Direction.HAUT;
     private int endurence = 100;
-    private int MAX_ENDURENCE = 100;
     private final AbstractItem[] poche = {null,null};
     private boolean inPoche = false;
     private boolean isBuffed;
@@ -97,35 +95,6 @@ public class Player extends AbstractAlive {
             Sound.playAudio(Sound.Sons.LEVELUP,0);
         }
     }
-/*
-    /**
-     * Ajoute de l'argent au joueur.
-     * @param m Montant de la monnaie à ajouter
-     * @author Gillian
-     */
-    /*
-    public void addMoney(int m) {
-        money += m;
-    }
-
-    /**
-     * Enlève de l'argent au joueur
-     * @param m Montant de la monnaie à soustraire
-     * @return true si possible, false sinon
-     * @author Gillian
-     */
-    /*
-    public boolean removeMoney(int m) {
-        if (money - m < 0) {
-            return false;
-        } else {
-            money -= m;
-            return true;
-        }
-
-    }
-    */
-
 
     @Override
     public void death() {
@@ -211,7 +180,7 @@ public class Player extends AbstractAlive {
     }
 
     public void buffStrength(double buffMultiplicator, int seconds) {
-        if(isBuffed() == false) {
+        if(!isBuffed()) {
             setBuffed(true);
             int originalForce = getForce();
             int forceConverted = (int) (((double) originalForce) * (1.0 + buffMultiplicator / 100.0));
@@ -264,27 +233,8 @@ public class Player extends AbstractAlive {
      * @author JP
      */
     public int getMAX_ENDURENCE() {
-        return MAX_ENDURENCE;
+        return 100;
     }
-
-    /**
-     * Met à jour l'endurance maximale
-     * @param MAX_ENDURENCE Maximum
-     * @author JP
-     */
-    public void setMAX_ENDURENCE(int MAX_ENDURENCE) {
-        this.MAX_ENDURENCE = MAX_ENDURENCE;
-    }
-
-    /**
-     * Retourne le montant de l'argent du joueur
-     * @return money
-     * @author Gillian
-     */
-    /*public int getMoney() {
-        return money;
-    }
-        */
 
     @Override
     public int getForce() {
@@ -353,7 +303,7 @@ public class Player extends AbstractAlive {
 
     /**
      * Retourne si une potion de force est en cours d'utilisation
-     * @return
+     * @return Si une joueur a une potion de force en cours d'utilisation
      * @author JP
      */
     public boolean isBuffed() {
@@ -362,7 +312,7 @@ public class Player extends AbstractAlive {
 
     /**
      * Définit si une potion de force est en cours d'utilisation
-     * @param buffed
+     * @param buffed Defini si le joueur a une potion de force en cours d'utilisation
      * @author JP
      */
     public void setBuffed(boolean buffed) {
