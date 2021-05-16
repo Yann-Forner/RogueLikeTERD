@@ -1,9 +1,13 @@
 package Model.Map.Room_Strategy;
 
+import Model.Entitys.Monsters.MonsterFactory;
 import Model.Map.Cell;
 import Model.Map.Etage;
 import Model.Map.Room;
 import Model.Utils.Affichage;
+import Model.Utils.Procedure;
+
+import java.util.Objects;
 
 /**
  * Défini une salle piégée

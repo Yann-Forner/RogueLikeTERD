@@ -27,6 +27,7 @@ public class TrapEtageStrategy extends EtageStrategy{
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.BRIGTH_PURPLE));
         Procedure.setRandomUP(etage);
         setItems(etage);
+        setMonsters(etage);
     }
 
     @Override
@@ -49,11 +50,8 @@ public class TrapEtageStrategy extends EtageStrategy{
 
     @Override
     public void setMonsters(Etage etage) {
-        super.setMonsters(etage);
-        int rand = Procedure.getRandomInt(1, 0);
-        if(rand == 0)
-            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST)));
-        rand = Procedure.getRandomInt(10, 1);
+        int rand;
+        rand = Procedure.getRandomInt(7, 1);
         for(int i = 0; i < rand; i++) {
             etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.RAT)));
         }
@@ -62,9 +60,13 @@ public class TrapEtageStrategy extends EtageStrategy{
             etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.ALIEN)));
         }
 
-        for (int i = 0; i < Procedure.getRandomInt(5,0); i++) {
-            etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST)));
+        rand = Procedure.getRandomInt(1, 0);
+        if(rand == 0) {
+            for (int i = 0; i < Procedure.getRandomInt(5, 0); i++) {
+                etage.addMonster(Objects.requireNonNull(MonsterFactory.getNewMonster(etage, MonsterFactory.MonsterType.GHOST)));
+            }
         }
+        super.setMonsters(etage);
     }
 
     @Override

@@ -16,7 +16,7 @@ Le but du jeu est d'avancer <b>le plus loin possible</b> dans un labyrinthe comp
 
 Le jeu est jouable est sur Linux et sur Windows. <br>
 
-Attention toutefois à son utilisation sur Windows :<br>
+Attention toutefois à son utilisation sur <b>Windows</b> :<br>
   - Les smileys seront remplacés par des lettres. <br>
   - Le jeu sera lancé de base en tour par tour, il faudra appuyer sur T pour changer ce mode si désiré.<br>
 Ces spécifications seront de même valables sur l'IDE.<br>
@@ -128,116 +128,154 @@ Il peut attaquer le joueur a distance et recule des qu'il s'approche de lui pour
 <h4>2.2.7. Esacargot</h4>
 Linux: 🐌</br>
 Windows: <b>G</b>
-Il se deplace en ligne droite et des qu'il est façe a un obstacle fait demi tour. 
+Il se deplace en <b>ligne droite</b> et des qu'il est façe a un obstacle fait demi tour. 
 <h4>2.2.8. Volcan</h4>
 Linux: 🌋</br>
 Windows: <b>V</b></br>
-Il cause des degats a toutes les entités s'approchant dans son champs d'activation.
+Il cause des <b>dégats a toutes les entités</b> s'approchant dans son <b>champs d'activation</b>.
 <h4>2.2.9. Zombie</h4>
 Linux: 🧟</br>
 Windows: <b>Z</b></br>
-Il se deplace tres lentement et a beaucoup de points de vie.
+Il se déplace tres <b>lentement</b> et a <b>beaucoup de points de vie</b>.
 
 <h3>2.2. Le marchand</h3>
 
-Le marchand, même si considéré comme un monstre dans notre implémentation, est bien différent des autres entités du labyrinthe</br>
-Il apparaît dans le labyrinthe de manière aléatoire.</br>
-Pour engager la conversation avec celui-ci, il suffit de le colisionner. </br></br>
+Le marchand, même si considéré comme un monstre dans notre implémentation, est <b>bien différent des autres entités</b> du labyrinthe</br>
+Il apparaît dans le labyrinthe de manière <b>aléatoire</b>.</br>
+Pour engager la conversation avec celui-ci, il suffit de le <b>colisionner</b>. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h4>2.2.1. L'achat</h4>
-Le joueur peut acheter auprès du marchand des armes et des potions. </br>
+Le joueur peut acheter auprès du marchand des <b>armes et des potions</b>. </br>
 Le prix est fixé en fonction de l'équilibrage du jeu.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h4>2.2.2. La vente</h4>
 
-Le joueur peut de même vendre ses objets auprès du marchand.</br></br>
+Le joueur peut de même <b>vendre ses objets</b> auprès du marchand.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h4>2.2.3. Le vol</h4>
 
-Il est possible de rompre la pacificité du marchand en essayant de le voler.</br>
-Le marchand devient alors une entité aggressive.</br></br>
+Il est possible de <b>rompre la pacificité</b> du marchand en essayant de le voler.</br>
+Le marchand <b>devient</b> alors une <b>entité aggressive</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 
 <h2>2.3. Boss</h2>
 Les boss sont présents dans le labyrinthe dans les salles prévues à cet effet. </br>
-Ce sont des monstres bien plus fort que les précédents, dotés de capacités uniques et prenant plusieurs cases d'affichage.</br>
+Ce sont des monstres bien <b>plus fort</b> que les précédents, dotés de <b>capacités uniques</b> et prenant plusieurs cases d'affichage.</br>
 <h4>2.3.1. Big Monster</h4>
-Le boss "Big Monster" est un monstre puissant doté de deux bras. Sa particularité est qu'il double sa puissance à chaque perte de bras.</br></br>
+Le boss "Big Monster" est un monstre <b>puissant</b> doté de <b>deux bras</b>. Sa particularité est qu'il <b>double sa puissance</b> à chaque perte de bras.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.3.2. Snaker</h4>
-Le boss "Snake" est doté d'une longue queue qu'il faudra détruire avant de pouvoir le tuer. </br></br>
+Le boss "Snake" est doté d'une <b>longue queue</b> qu'il faudra détruire avant de pouvoir le tuer. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.3.3. Invoqueur</h4>
-Le boss "Invoqueur" tire de puissant rayons lazer. Il invoque de même des rats lorsque celui-ci se voit infligé des dégats.</br></br>
+Le boss "Invoqueur" tire de puissant <b>rayons lazer</b>. Il <b>invoque</b> de même des <b>rats</b> lorsque celui-ci se voit infligé des dégats.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>2.4. Items</h2>
 <h2>2.4.1 Armes</h2>
 Les armes, peuvent être trouvées tout le long du labyrinthe : </br>
-  - En les ramassant directement dans le labyrinthe</br>
-  - En les récupérant sur un monstre tué</br>
-  - En les achetant au marchand</br>
-Elles permettent au joueur d'attaquer les différents monstres qu'il va rencontrer durant son aventure. </br>
+  - En les <b>ramassant</b> directement dans le labyrinthe</br>
+  - En les récupérant sur un <b>monstre tué</b></br>
+  - En les <b>achetant</b> au marchand</br>
+Elles permettent au joueur <b>d'attaquer les différents monstres</b> qu'il va rencontrer durant son aventure. </br>
 Le type d'attaque va changer en fonction de l'arme portée par le joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.1 Epée</h4>
-Linux: </br>
-Windows: <b</b></br>
-L'épée est la seule arme corps à corps du jeu. Elle inflige des dégats conséquent à courte portée. </br></br>
+<h4>2.4.1.1 Mélée</h4>
+Clé à molette :</br>
+Linux: 🔧 </br>
+Windows: <b"m"</b></br></br>
+Epée :</br>
+Linux: 🔪</br>
+Windows: <b"m"</b></br></br>
+Hache :</br>
+Linux: 🪓</br>
+Windows: <b"m"</b></br></br>
+Châine :</br>
+Linux: 🔗</br>
+Windows: <b"m"</b></br></br>
+Les armes mélées sont les armes <b>corps à corps</b> du jeu. Elles infligent des <b>dégats conséquent</b> à courte portée. </br>
+Il existe des clés à molette, des épées, des haches et des chaînes. </br>
+Les différentes armes influent sur la portée d'attaque du joueur. </br>
+</br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.2 Arc</h4>
-Linux: </br>
-Windows: <b</b></br>
-L'arc est une arme à distance. Il permet d'attaquer un monstre qui est à partir du moment où il est porté. </br>
-Si aucun monstre n'est à portée du joueur, ce dernier ne peut utiliser son arc.</br></br>
+<h4>2.4.1.2 Armes à distance</h4>
+Canne à pêche</br>
+Linux: 🎣</br>
+Windows: <b"b"</b></br></br>
+Arc</br>
+Linux: 🏹</br>
+Windows: <b "b"</b></br></br>
+Tridant</br>
+Linux: 🔱</br>
+Windows: <b "b"</b></br></br>
+Revolver</br>
+Linux: 🔫</br>
+Windows: <b "b"</b></br></br>
+Il existe dans le jeu des <b>arme à distance</b>. Elles permettent d'attaquer un monstre à partir du moment où il est à portée de l'arme </br>
+Si aucun monstre n'est à portée du joueur, ce dernier ne peut pas attaquer.</br>
+Il existe des Cannes à pêche, des arcs, des tridents et des revolvers </br>
+Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
-<h4>2.4.1.3 Baguette</h4>
-Linux: </br>
-Windows: <b</b></br>
-La baguette est la seconde arme à distance du jeu. Le joueur, en l'utilisant, attaquera en ligne droite devant lui. </br>
-Contrairement à l'arc, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut dquand même utiliser son arme.</br></br>
+
+<h4>2.4.1.3 Les armes magiques</h4>
+Balais</br>
+Linux: 🧹</br>
+Windows: <b"w"</b></br></br>
+Balais </br>
+Linux: 🦴</br>
+Windows: <b"w"</b></br></br>
+Balais</br>
+Linux: 🥢</br>
+Windows: <b"w"</b></br></br>
+Balais</br>
+Linux: 🦯</br>
+Windows: <b"w"</b></br></br>
+Les armes magiques sont les <b>armes à distance</b> du jeu. Le joueur, en les utilisant, attaquera en <b>ligne droite</b> devant lui. </br>
+Contrairement aux armes à distance classiques, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut quand même utiliser son arme.</br>
+Il existe des balais, des os, des baguettes et des cannes </br>
+Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>2.4.2 Les potions</h2>
 Les potions, tout comme les armes, peuvent être trouvées tout le long du labyrinthe : </br>
-  - En les ramassant directement dans le labyrinthe</br>
-  - En les récupérant sur un monstre tué</br>
-  - En les achetant au marchand</br>
-Une fois ramassées, les potions se disposent dans l'inventaire du joueur et peuvent être utilisées à tout moment.</br>
-Celles-ci ont des effets qui diffèrent en fonction du type de la potion.</br>
+  - En les <b>ramassant</b> directement dans le labyrinthe</br>
+  - En les <b>récupérant sur un monstre</b> tué</br>
+  - En les <b>achetant</b> au marchand</br>
+Une fois ramassées, les potions se disposent dans <b>l'inventaire</b> du joueur et peuvent être utilisées à tout moment.</br>
+Celles-ci ont des <b>effets qui diffèrent</b> en fonction du type de la potion.</br>
 <h4>2.4.1.1 La potion de vie</h4>
 Linux: </br>
 Windows: <b</b></br>
-La potion de vie est une potion tout de ce qu'il y a de plus classique : elle restaure de la vie au joueur à l'utilisation. </br></br>
+La potion de vie est une potion tout de ce qu'il y a de plus classique : elle <b>restaure de la vie</b> au joueur à l'utilisation. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.2 La potion de force</h4>
 Linux: </br>
 Windows: <b</b></br>
-Une fois utilisée, la potion de force rend le joueur plus fort en augmentant ses dégats d'attaque. </br></br>
+Une fois utilisée, la potion de force rend le joueur plus fort en <b>augmentant ses dégats d'attaque</b>. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.3 La potion d'invincibilité</h4>
 Linux: </br>
 Windows: <b</b></br>
-Après avoir consommé cette potion, le joueur devient invulnérable pendant un court instant</br></br>
+Après avoir consommé cette potion, le joueur devient <b>invulnérable</b> pendant un <b>court instant</b></br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 <h4>2.4.1.4 La potion d'endurance</h4>
 Linux: </br>
 Windows: <b</b></br>
-L'utilisation de cette potion octroie au joueur une endurance illimitée, permettant au joueur d'utiliser ses attaques sans coût.</br></br>
+L'utilisation de cette potion octroie au joueur une <b>endurance illimitée</b> pendant une <b>courte durée</b>, permettant au joueur d'utiliser ses attaques sans coût.</br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 
 
 <h2>2.4.3 La nourriture </h2>
-A la différence des potions et des armes, le joueur ne peut pas stocker de nourriture dans son inventaire.</br>
-Une fois ramassée, la nourriture est instantanément consomée et rend de la vie et/ou de l'endurance au joueur.
+A la différence des potions et des armes, le joueur <b>ne peut pas stocker de nourriture dans son inventaire</b>.</br>
+Une fois ramassée, la nourriture est <b>instantanément consomée</b> et <b>rend de la vie et/ou de l'endurance</b> au joueur.
 
 <h4>2.4.3.1 Les fruits</h4>
-Les fruits permettent de rendre de la vie au joueur. </br>
+Les fruits permettent de <b>rendre de la vie</b> au joueur. </br>
 Ils sont identifiable dans le jeu par les symboles suivant : </br>
  Linux: </br>
 Windows: <b</b></br>
@@ -250,14 +288,14 @@ Windows: <b</b></br></br>
 <h4>2.4.3.2 Le Burger</h4>
 Linux: </br>
 Windows: <b</b></br>
-Le burger permet de rendre de la vie et de l'endurance au joueur. </br></br>
+Le burger permet de <b>rendre de la vie et de l'endurance</b> au joueur. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 
 
 <h2>2.4.4 Les stacks d'argents</h2>
-Les stacks d'argent sont des objets trouvables par le joueur dans le labyrinthe.</br>
-Une fois ramassé et comme la nourriture, les stacks d'argent disparaissent et créditent le joueur du montant de celui-ci.</br>
+Les stacks d'argent sont des <b>objets trouvables</b> par le joueur dans le labyrinthe.</br>
+<b>Une fois ramassés</b> et comme la nourriture, les stacks d'argent <b>disparaissent</b> et <b>créditent le joueur du montant</b> de celui-ci.</br>
 L'affichage va varier en fonction du montant du stack d'argent.</br>
 Entre ... et ... : 
 Linux: </br>
@@ -274,28 +312,28 @@ Windows: <b</b></br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118405570-e63cb100-b678-11eb-85a8-9c028b322a0c.png"/>
 
 <h2>3. Cases</h2>
-Les cases du jeu se divisent en deux categories, les fonctionelles et les cosmetiques: les premieres ont une fonction que se soit dans le jeu ou la programmation alors que les deuxiemes ne sont qu'un changement d'affichage des premieres.
+Les cases du jeu se divisent en <b>deux categories</b>, les <b>fonctionnelles</b> et les <b>cosmétiques</b>: les premières ont une <b>utilité</b> que cela soit dans le jeu ou la programmation alors que les deuxièmes n'apporteront qu'un <b>intérêt esthétique</b>. 
 <h3>3.1. Fonctionelles</h3>
 <h4>3.1.1. Cellules Normales</h4>
-C'est les cellules de base.</br>
+Ce sont les cellules <b>de base</b>.</br>
 <img src="https://user-images.githubusercontent.com/74865653/114877044-3832b280-9dff-11eb-99d6-fc169290f972.png"/></br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114878669-c5c2d200-9e00-11eb-9ec1-3fae828f3b9c.png"/>
 <h4>3.1.2. Cellules Bordure</h4>
-Ce sont les bordures de l'etage, aucune entité ne peut les traverser (sauf exceptions).</br></br>
+Ce sont les <b>bordures de l'étage</b>, aucune entité <b>ne peut les traverser</b> (sauf exceptions).</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114880411-551cb500-9e02-11eb-954f-7a3ce2ac38cd.png"/>
 <h4>3.1.3. Cellules Vide</h4>
-Ce sont des cellules vide.</br></br>
+Ce sont des cellules <b>vides</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114881537-66b28c80-9e03-11eb-97ed-f5db9a69c03f.png"/>
 <h4>3.1.4. Cellules Monter</h4>
-Elle permet de remonter a l'etage precedent.</br>
+Elle permet de remonter à <b>l'étage precedent</b>.</br>
 Linux: 👍</br>
 Windows: <b>^</b></br>
 <h4>3.1.5. Cellules Descendre</h4>
-Elle permet de descendre a l'etage precedent.</br>
+Elle permet de descendre à <b>l'etage precedent</b>.</br>
 Linux: 👎</br>
 Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
-Ce sont des cellules invisible qui teleporte le joueur dans un etage piégé.
+Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé<b>.
 <h4>3.1.7. Cellules Chest</h4>
 <b><i>Non implementé</b></i>
 <h3>3.2. Cosmetiques</h3>
