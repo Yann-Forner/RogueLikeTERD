@@ -118,7 +118,10 @@ public abstract class EtageStrategy {
         else{
             Procedure.setRandomUPnDOWN(etage);
         }
-        etage.setTrapCell();
+        if (Procedure.getRandomInt(9, 0) == 0) {
+            Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, etage);
+            etage.get(accesibleRandomPosition).updateCell(true, new Cell.Style(Cell.Style.CellType.TRAP_ROOM));
+        }
     }
 
     /**

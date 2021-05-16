@@ -127,15 +127,6 @@ public class Etage implements Serializable {
     }
 
     /**
-     * Ajoute une cellule piegé a l'etage.
-     * @author Quentin
-     */
-    public void setTrapCell() {
-        Position accesibleRandomPosition = Procedure.getAccesibleRandomPosition(false, this);
-        get(accesibleRandomPosition).updateCell(true, new Cell.Style(Cell.Style.CellType.TRAP_ROOM));
-    }
-
-    /**
      * Renvoit La cellule aux coordonées x y.
      * @param x int
      * @param y int

@@ -47,6 +47,7 @@ public class TourManager implements Serializable {
 
     public TourManager(Player player, long seed){
         this(player);
+        Procedure.getRand().setSeed(seed);
         this.seed = seed;
     }
 

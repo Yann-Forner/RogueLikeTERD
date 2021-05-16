@@ -19,7 +19,7 @@ public class ReposEtageStrategy extends EtageStrategy{
     public void composeEtage(Etage etage, boolean etageDepart) {
         Procedure.setRandomRooms(etage, this, RoomFactory.roomType.REPOS);
         EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY,";"));
-        setSpecialCell(etage,false);
+        setSpecialCell(etage,etageDepart);
         setItems(etage);
         TourManager.getExecutor().scheduleAtFixedRate(() -> {
             Player player = Start.getPlayer();

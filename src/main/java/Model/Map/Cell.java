@@ -21,7 +21,7 @@ public class Cell implements Serializable {
             VOID(Affichage.BLACK,"."),
             UP(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4D","^"),
             DOWN(Affichage.BLUE+Affichage.BOLD,"\uD83D\uDC4E","v"),
-            TRAP_ROOM(Affichage.BLUE,"X"),
+            TRAP_ROOM(Affichage.GREEN,"."),
             PROJECTILE(Affichage.RED+Affichage.BOLD,"\uD83D\uDD25","+");
 
             private final String base_color;

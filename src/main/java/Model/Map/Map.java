@@ -1,6 +1,5 @@
 package Model.Map;
 
-import Model.Entitys.Items.Misc.StackOfMoney;
 import Model.Entitys.Player.Player;
 import Model.Map.Etage_Strategy.*;
 import Model.Utils.Affichage;
@@ -30,16 +29,7 @@ public class Map implements Serializable {
      * @author Quentin
      */
     public Map(Player player){
-        Etage etage = new Etage(MapWidth, MapHeigth, new BossEtageStategy(){
-            @Override
-            public void composeEtage(Etage etage, boolean etageDepart) {
-                Procedure.setRandomRooms(etage, this, RoomFactory.roomType.MARCHAND);
-                EtageFusion(etage,new Cell.Style(Cell.Style.CellType.NORMAL, Affichage.GREY));
-                etage.addItem(new StackOfMoney(etage,Procedure.getAccesibleRandomPosition(true,etage),1000));
-                setMonsters(etage);
-                setItems(etage);
-            }
-        },true);
+        Etage etage = new Etage(MapWidth, MapHeigth, EtageStrategy.getRandomStrategy(),true);
         etages.add(etage);
         Position pos = Procedure.getAccesibleRandomPosition(true,etage);
         etage.get(pos).setEntity(player);
