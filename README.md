@@ -61,26 +61,26 @@ Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou dire
 Toutes les pieces de cet etage sont des cercles.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114859019-78d40100-9dea-11eb-9866-5ae69eae19a8.png"/>
 <h4>1.1.2. Etage normal</h4>
-Toutes les pieces de cet etage sont des rectangles.</br></br>
+Toutes les pieces de cet etage sont des <b>rectangles</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114860563-75417980-9dec-11eb-81eb-381586e9517f.png"/>
 <h4>1.1.3. Etage dongeon</h4>
-Les pieces de cet etage sont un mix de tout les types commun de pieces.</br></br>
+Les pieces de cet etage sont un <b>mélange</b> de tout les types commun de pieces.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114860765-b6398e00-9dec-11eb-9a1e-1cccf06809d1.png"/>
 <h4>1.1.4. Etage piege</h4>
-C'est un etage piege qui apparait lorsque l'on marche sur une case piegée.</br></br>
+C'est un etage piege qui apparait lorsque l'on marche sur une <b>case piegée</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114860960-eda83a80-9dec-11eb-8935-82dfc54d8d7d.png"/>
 <h3>1.2. Types salles</h3>
 <h4>1.2.1. Salle normale</h4>
-C'est la salle de base, elle est rectangulaire.</br></br>
+C'est la salle de base, elle est <b>rectangulaire</b>.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114864633-85a82300-9df1-11eb-96db-ebb69ec51d9c.png"/>
 <h4>1.2.2. Salle triangle</h4>
-C'est un triangle, c'est aussi une des salles de base.</br></br>
+C'est un <b>triangle</b>, c'est aussi une des salles de base.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114866200-922d7b00-9df3-11eb-9c9e-35d1c7f6dfb4.png"/>
 <h4>1.2.3. Salle cercle</h4>
-C'est un cercle, c'est une plus petite version de salle de boss.</br></br>
+C'est un cercle, c'est une <b>plus petite version</b> de salle de boss.</br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114865403-7a092c00-9df2-11eb-86db-aae4d6977e0e.png"/>
 <h4>1.2.4. Salle boss</h4>
-C'est la salle ou apparaissent les boss, elle est beaucoup plus grande que les autres.<br></br>
+C'est la salle ou apparaissent les <b>boss</b>, elle est beaucoup plus grande que les autres.<br></br>
 <img src="https://user-images.githubusercontent.com/74865653/114865593-c3f21200-9df2-11eb-97d7-e517fa26ea42.png"/>
 <h4>1.2.5. Salle marchand</h4>
 <b><i>Non implementé</b></i>
@@ -93,13 +93,13 @@ C'est la salle ou apparaissent les boss, elle est beaucoup plus grande que les a
   
 <h2>2. Entités</h2>
 <h3>2.1. Joueur</h3>
-Le joueur peut choisir sa classe au debut du jeu ce qui lui permet d'influencer sur ses statistiques au debut de la partie.</br>
+Le joueur peut choisir sa classe au <b>debut du jeu</b> ce qui lui permet d'influencer sur ses statistiques au debut de la partie.</br>
 Ses statistiques sont:</br>
 -Points de vie (PV)</br>
 -Puissance d'Attaque (PA)</br>
 Le joueur est representé par cet emoji 🤓 sur Linux et <b>@</b> sur Windows.
 <h3>2.2. Monstres</h3>
-Les monstres ont les mêmes stats que le joueur mais avec une vitesse et un champ de vision en plus ce qui leurs permet de le detecter s'il s'approche trop et d'arreter s'il s'eloigne trop loin.
+Les monstres ont les <b>mêmes statistiques</b> que le joueur mais avec une vitesse et un champ de vision en plus ce qui leurs permet de le detecter s'il s'approche trop et d'arreter s'il s'eloigne trop loin.
 <h4>2.2.1. Alien</h4>
 Linux: 👽</br>
 Windows: <b>&</b></br>
