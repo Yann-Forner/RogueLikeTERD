@@ -53,6 +53,9 @@ L'argent permet au joueur <b>d'acheter des objets au marchand.</b> </br></br>
 Le joueur peut <b>en gagner</b> en <b>vendant des objets</b> au marchand ou directement en trouvant des <b>stacks d'argent</b> au sein du labyrinthe. </br>
 <img src="https://user-images.githubusercontent.com/74865653/118410100-0fb40780-b68e-11eb-91f6-56773c260183.png"/></br>
 
+<h2>Vitesse d'action</h2>
+Le joueur se verra doté d'une <b> vitesse d'attaque</b>  et d'une <b> vitesse de déplacement</b>  différente en fonction de sa classe. 
+
 <h1>Composants du jeu</h1>
 
 <h2>1. Génération de la carte</h2>
@@ -103,7 +106,18 @@ Le joueur peut choisir sa classe au <b>debut du jeu</b> ce qui lui permet d'infl
 Ses statistiques sont:</br>
 -Points de vie (PV)</br>
 -Puissance d'Attaque (PA)</br>
-Le joueur est representé par cet emoji 🤓 sur Linux et <b>@</b> sur Windows.
+Le joueur est de même représenté en fonction de sa classe : 
+Guerrier :
+Linux: 🌋</br>
+Windows: <b>"@"</b></br>
+Archer : 
+Linux: 🧝</br>
+Windows: <b>"@"</b></br>
+Magicien :
+Linux: 🧙</br>
+Windows: <b>"@"</b></br>
+
+
 <h3>2.2. Monstres</h3>
 Les monstres ont les <b>mêmes statistiques</b> que le joueur mais avec une <b>vitesse</b> et un <b>champ de vision</b> en plus ce qui leurs permet de le detecter s'il s'approche trop et de <b>s'arreter</b> s'il s'eloigne trop loin.
 <h4>2.2.1. Alien</h4>
