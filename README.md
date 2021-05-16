@@ -111,15 +111,15 @@ L'abeille n'est pas si dangereuse en revanche des qu'elle meurt <b>deux nouvelle
 <h4>2.2.3. Oiseau</h4>
 Linux: 🐦</br>
 Windows: <b>ù</b></br>
-Il suit un chemin periodique en diagonale et n'attaque pas le joueur a moins que celui lui bloque le passage.
+Il suit un <b>chemin periodique</b> en diagonale et n'attaque pas le joueur a moins que celui lui bloque le passage.
 <h4>2.2.4. Fantome</h4>
 Linux: 👻</br>
 Windows: <b>H</b></br>
-Il peut traverser les murs pour venir attaquer le joueur.
+Il peut <b>traverser les murs</b> pour venir attaquer le joueur.
 <h4>2.2.5. Rat</h4>
 Linux: 🐀</br>
 Windows: <b>M</b></br>
-Il est rapide et se deplace en diagonale mais a tres peu de point de vie.
+Il est <b>rapide</b> et se deplace en <b>diagonale</b> mais a tres peu de point de vie.
 <h4>2.2.6. Squelette</h4>
 Linux: 	💀</br>
 Windows: <b>S</b></br>
