@@ -56,6 +56,15 @@ public class Marchand extends AbstractMonster {
         generateStock(nbrWeaponsMax,nbrPotionsMax);
     }
 
+    /**
+     * Permet de déclancher l'intéraction avec le marchand
+     * @param pv Quantité de pv a ajouté
+     * @param limited Defini si les pv ajoutés peuvent depassé le seuil maximal
+     * @return boolean
+     *
+     * @author Gillian, Quentin
+     */
+
     @Override
     public boolean updatePV(int pv, boolean limited) {
         if(state == STATE.AGGRESSIVE){
@@ -68,6 +77,11 @@ public class Marchand extends AbstractMonster {
         }
     }
 
+    /**
+     * Si le marchand est aggressif, alors il va attaquer le joueur
+     *
+     * @author Gillian, Quentin
+     */
     @Override
     public void updateMonster() {
         if(state == STATE.AGGRESSIVE){
@@ -87,7 +101,7 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Dialogue du marchand de base.
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private void dialogue(){
         StringBuilder sb = new StringBuilder();
@@ -117,7 +131,7 @@ public class Marchand extends AbstractMonster {
      * Defini le comportement selon la touche et l'etat du marchand.
      * @return Si la confiramtion est vrai ou fausse
      * @throws IOException Exception
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private boolean processInput() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -186,8 +200,8 @@ public class Marchand extends AbstractMonster {
     }
 
     /**
-     * Demarre la phase d'achat d'objet du marchand.
-     * @author Quentin
+     * Démarre la phase d'achat d'objet du marchand.
+     * @author Quentin, Gillian
      */
     private void startAchat(){
         state = STATE.ACHAT;
@@ -228,7 +242,7 @@ public class Marchand extends AbstractMonster {
     /**
      * Procedure d'achat de l'item a l'index passé en parametre.
      * @param index Index de l'item dans l'ArrayList du marchand
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private void startAchatSelection(int index){
         state = STATE.CONFIRMATION;
@@ -236,7 +250,7 @@ public class Marchand extends AbstractMonster {
         System.out.println(getConfirmationItem(abstractItem,false));
         try {
             if(processInput()){
-                if(Objects.requireNonNull(Start.getPlayer()).getMoney()>=abstractItem.getPrix()){
+                if(Objects.requireNonNull(Start.getPlayer()).getInventory().getMoney()>=abstractItem.getPrix()){
                     Inventory inventory = Start.getPlayer().getInventory();
                     if(index>=getInventory().getWeapons().size()){
                         if(inventory.isPotionsFull()){
@@ -266,7 +280,7 @@ public class Marchand extends AbstractMonster {
                             inventory.addPotion((AbstractPotion) abstractItem);
                         }
                     }
-                    Start.getPlayer().removeMoney(abstractItem.getPrix());
+                    Start.getPlayer().getInventory().removeMoney(abstractItem.getPrix());
                     System.out.println(couleurText +  "Félicitation pour cet achat!!!");
                 }
                 else{
@@ -281,8 +295,8 @@ public class Marchand extends AbstractMonster {
     }
 
     /**
-     * Demare la phase de vente du marchand.
-     * @author Quentin
+     * Démarre la phase de vente du marchand.
+     * @author Quentin, Gillian
      */
     private void startVente(){
         state = STATE.VENTE;
@@ -309,7 +323,7 @@ public class Marchand extends AbstractMonster {
     /**
      * Confirmation de la vente de l'objet courant du joueur, son arme si venteArme est vrai et sa potion si venteArme est faux.
      * @param venteArme Defini si je joueur vent son arme ou sa potion courrante
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private void startVenteSelection(boolean venteArme){
         state = STATE.CONFIRMATION;
@@ -332,7 +346,7 @@ public class Marchand extends AbstractMonster {
                     else{
                         player.getInventory().getPotions().remove(abstractItem);
                     }
-                    player.addMoney(abstractItem.getPrix());
+                    player.getInventory().addMoney(abstractItem.getPrix());
                     System.out.println(couleurText + "Merci pour cette vente.");
                 }
             }
@@ -345,10 +359,10 @@ public class Marchand extends AbstractMonster {
     }
 
     /**
-     * Genere le stock du marchand.
+     * Génère le stock du marchand.
      * @param nbrWeaponsMax Le nombre d'arme du marchand
      * @param nbrPotionsMax le nombre de potions du marchand
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private void generateStock(int nbrWeaponsMax, int nbrPotionsMax){
         for (int i = 0; i < Procedure.getRandomInt(nbrWeaponsMax,0); i++) {
@@ -372,7 +386,7 @@ public class Marchand extends AbstractMonster {
 
     /**
      * Commmence la phase d'attaque du marchand, il va devenir un vrai mob et attaquer le joueur.
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private void startAttaque(){
         state = STATE.AGGRESSIVE;
@@ -389,7 +403,7 @@ public class Marchand extends AbstractMonster {
      * Renvoit un String contenant la liste des items passé en parametre avec leurs prix et leurs nom.
      * @param items Liste des items
      * @return String
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private String getListeItem(ArrayList<AbstractItem> items){
         StringBuilder sb = new StringBuilder();
@@ -412,7 +426,7 @@ public class Marchand extends AbstractMonster {
      * @param item Item acheté/vendu
      * @param isVente True si vente False si achat
      * @return String
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     private String getConfirmationItem(AbstractItem item,boolean isVente){
         return couleurText + "Etes vous sur de vouloir " + (isVente ? "me vendre: " : "acheter: ") +
@@ -438,7 +452,7 @@ public class Marchand extends AbstractMonster {
     /**
      * Renvoit l'etat du marchand.
      * @return Son etat
-     * @author Quentin
+     * @author Quentin, Gillian
      */
     public static STATE getState() {
         return state;

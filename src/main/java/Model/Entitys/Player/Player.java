@@ -23,7 +23,7 @@ public class Player extends AbstractAlive {
     private int MAX_PV;
     private long MovementCoolDown = System.currentTimeMillis();
     private final AbstractClass classe;
-    private int money = 0;
+    //private int money = 0;
     private Direction direction = Direction.HAUT;
     private int endurence = 100;
     private int MAX_ENDURENCE = 100;
@@ -95,12 +95,13 @@ public class Player extends AbstractAlive {
             Sound.playAudio(Sound.Sons.LEVELUP,0);
         }
     }
-
+/*
     /**
      * Ajoute de l'argent au joueur.
      * @param m Montant de la monnaie à ajouter
      * @author Gillian
      */
+    /*
     public void addMoney(int m) {
         money += m;
     }
@@ -111,6 +112,7 @@ public class Player extends AbstractAlive {
      * @return true si possible, false sinon
      * @author Gillian
      */
+    /*
     public boolean removeMoney(int m) {
         if (money - m < 0) {
             return false;
@@ -120,6 +122,7 @@ public class Player extends AbstractAlive {
         }
 
     }
+    */
 
 
     @Override
@@ -276,9 +279,10 @@ public class Player extends AbstractAlive {
      * @return money
      * @author Gillian
      */
-    public int getMoney() {
+    /*public int getMoney() {
         return money;
     }
+        */
 
     @Override
     public int getForce() {

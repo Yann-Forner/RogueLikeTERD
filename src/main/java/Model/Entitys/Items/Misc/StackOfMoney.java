@@ -52,7 +52,7 @@ public class StackOfMoney extends AbstractItem {
                     + Affichage.BRIGTH_BLUE + getNom()
                     + Affichage.BLUE + "d'une valeur de "
                     + Affichage.GREEN + getMontant() + "$");
-            player.addMoney(montant);
+            player.getInventory().addMoney(montant);
             player.getEtage().removeItem(this);
         }
 

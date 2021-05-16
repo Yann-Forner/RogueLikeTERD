@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class Inventory implements Serializable {
     private final int WEAPONS_LIMIT;
     private final int POTIONS_LIMIT;
+    private int money = 0;
     private final ArrayList<AbstractWeapon> weapons = new ArrayList<>();
     private final ArrayList<AbstractPotion> potions = new ArrayList<>();
 
@@ -214,7 +215,7 @@ public class Inventory implements Serializable {
     {
         if(potions.size() > 0) {
             AbstractPotion first = potions.remove(0);
-            Start.getPlayer().addMoney(first.getPrix());
+            Start.getPlayer().getInventory().addMoney(first.getPrix());
         }
 
     }
@@ -226,7 +227,7 @@ public class Inventory implements Serializable {
     {
         if(weapons.size() > 0) {
             AbstractWeapon first = weapons.remove(0);
-            Start.getPlayer().addMoney(first.getPrix());
+            Start.getPlayer().getInventory().addMoney(first.getPrix());
         }
     }
 
@@ -247,6 +248,42 @@ public class Inventory implements Serializable {
      */
     public boolean isPotionsFull() {
         return potions.size()>=POTIONS_LIMIT;
+    }
+
+    /**
+     * Renvoie la monnaie du joueur
+     *
+     * @return monnaie
+     *
+     * @author Gillian
+     */
+    public int getMoney() {
+        return money;
+    }
+
+    /**
+     * Ajoute de l'argent au joueur.
+     * @param m Montant de la monnaie à ajouter
+     * @author Gillian
+     */
+    public void addMoney(int m) {
+        money += m;
+    }
+
+    /**
+     * Enlève de l'argent au joueur
+     * @param m Montant de la monnaie à soustraire
+     * @return true si possible, false sinon
+     * @author Gillian
+     */
+    public boolean removeMoney(int m) {
+        if (money - m < 0) {
+            return false;
+        } else {
+            money -= m;
+            return true;
+        }
+
     }
 
 }
