@@ -90,8 +90,7 @@ Salle dans lequel le marchand apparaît<b></b></i>
 <img src="https://user-images.githubusercontent.com/74865920/118412097-6d4d5180-b698-11eb-8d81-a79a82e30674.png"/>
 <h4>1.2.5. Salle tresor</h4>
 <b><i>Non implementé</b></i>
-<h4>1.26. Salle piege</h4>
-<b><i>Non implementé</b></i>
+
   
 <h2>2. Entités</h2>
 <h3>2.1. Joueur</h3>
