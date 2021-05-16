@@ -24,7 +24,7 @@ public class TestMap extends TestCase {
         tm.setMap();
         Start.setTourManager(tm);
         Map map = tm.getMap();
-        Etage etage = map.getCurrent();
+        Etage etage = player.getEtage();
 
 
         try {
@@ -42,9 +42,9 @@ public class TestMap extends TestCase {
         tm.setMap();
         Start.setTourManager(tm);
         Map map = tm.getMap();
-        Etage etage = map.getCurrent();
+        Etage etage = player.getEtage();
 
-
+        assertTrue(etage.get(Procedure.getAccesibleRandomPosition(true, etage)).isAccesible());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class TestMap extends TestCase {
         tm.setMap();
         Start.setTourManager(tm);
         Map map = tm.getMap();
-        Etage etage = map.getCurrent();
+        Etage etage = player.getEtage();
 
 
         Position pf = Procedure.getAccesibleRandomPosition(false, etage);
@@ -70,7 +70,7 @@ public class TestMap extends TestCase {
         tm.setMap();
         Start.setTourManager(tm);
         Map map = tm.getMap();
-        Etage etage = map.getCurrent();
+        Etage etage = player.getEtage();
 
 
 
