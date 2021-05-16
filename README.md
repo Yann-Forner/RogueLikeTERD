@@ -344,6 +344,8 @@ Windows: <b>v</b></br>
 <h4>3.1.6. Cellules Piege</h4>
 Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé<b>.
 <h4>3.1.7. Cellules Chest</h4>
+ Linux: 📦</br>
+Windows: <b>"€"</b></br>
 Un coffre est placé dans cette cellule.
 
 
