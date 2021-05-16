@@ -1,7 +1,7 @@
 # RogueLikeTERD
 
 <b>BEAUCHET Quentin</b> (Quentin Beauchet) <br>
-<b>CARLENS Jean-Philippe</b>  (Coruscant11) <b>("BuildTools" et "jipey" également pour beaucoup de commits)</b> <br>
+<b>CARLENS Jean-Philippe</b>  (Coruscant11) <b>("BuildTools" également pour la plupart des commits)</b> <br>
 <b>FORNER Yann</b>  (Yann-Forner) <b>("Yann" également pour les commits du début du projet)</b>  <br>
 <b>MASSE Gillian</b>  (GillianMASSE)
 
@@ -161,6 +161,7 @@ Il se déplace tres <b>lentement</b> et a <b>beaucoup de points de vie</b>.
 
 Le marchand, même si considéré comme un monstre dans notre implémentation, est <b>bien différent des autres entités</b> du labyrinthe</br>
 Il apparaît dans le labyrinthe de manière <b>aléatoire</b>.</br>
+Lorsque le <b>marchand meurt</b>, il <b>droppe son stock</b> et ne réapparait plus.</br>
 Pour engager la conversation avec celui-ci, il suffit de le <b>colisionner</b>. </br></br>
 <img src="https://user-images.githubusercontent.com/74865920/118412196-eba9f380-b698-11eb-9f83-f51e67435626.png"/>
 <img src="https://user-images.githubusercontent.com/74865920/118412230-21e77300-b699-11eb-9fa4-2f5bfcfd48af.png"/>
@@ -202,7 +203,7 @@ Les armes, peuvent être trouvées tout le long du labyrinthe : </br>
   - En les récupérant sur un <b>monstre tué</b></br>
   - En les <b>achetant</b> au marchand</br>
 Elles permettent au joueur <b>d'attaquer les différents monstres</b> qu'il va rencontrer durant son aventure. </br>
-Le type d'attaque va changer en fonction de l'arme portée par le joueur. </br></br>
+Le type et la portée d'attaque vont changer en fonction de l'arme portée par le joueur. </br></br>
 
 <h4>2.4.1.1 Mélée</h4>
 Clé à molette :</br>
@@ -218,9 +219,7 @@ Châine :</br>
 Linux: 🔗</br>
 Windows: <b>"m"</b></br></br>
 Les armes mélées sont les armes <b>corps à corps</b> du jeu. Elles infligent des <b>dégats conséquent</b> à courte portée. </br>
-Il existe des clés à molette, des épées, des haches et des chaînes. </br>
-Les différentes armes influent sur la portée d'attaque du joueur. </br>
-</br>
+Il existe des clés à molette, des épées, des haches et des chaînes. </br></br>
 
 <h4>2.4.1.2 Armes à distance</h4>
 Canne à pêche</br>
@@ -237,8 +236,7 @@ Linux: 🔫</br>
 Windows: <b> "b"</b></br></br>
 Il existe dans le jeu des <b>arme à distance</b>. Elles permettent d'attaquer un monstre à partir du moment où il est à portée de l'arme </br>
 Si aucun monstre n'est à portée du joueur, ce dernier ne peut pas attaquer.</br>
-Il existe des Cannes à pêche, des arcs, des tridents et des revolvers </br>
-Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
+Il existe des Cannes à pêche, des arcs, des tridents et des revolvers </br></br>
 
 <h4>2.4.1.3 Les armes magiques</h4>
 Balais</br>
@@ -253,10 +251,10 @@ Windows: <b>"w"</b></br></br>
 Balais</br>
 Linux: 🦯</br>
 Windows: <b>"w"</b></br></br>
-Les armes magiques sont les <b>armes à distance</b> du jeu. Le joueur, en les utilisant, attaquera en <b>ligne droite</b> devant lui. </br>
+Les armes magiques sont de même des <b>armes à distance</b> du jeu. Le joueur, en les utilisant, attaquera en <b>ligne droite</b> devant lui. </br>
+Ces <b> dégats</b>  seront infligés <b> sur la ligne entière</b> . Ils peuvent être apparantés à des <b> dégats de "zone"</b> .
 Contrairement aux armes à distance classiques, peu importe qu'il y ait des monstres sur sa trajectoire, le joueur peut quand même utiliser son arme.</br>
-Il existe des balais, des os, des baguettes et des cannes </br>
-Les différentes armes influent également sur la portée d'attaque du joueur. </br></br>
+Il existe des balais, des os, des baguettes et des cannes </br></br>
 
 
 <h2>2.4.2 Les potions</h2>
@@ -273,7 +271,7 @@ La potion de vie est une potion tout de ce qu'il y a de plus classique : elle <b
 <h4>2.4.1.2 La potion de force</h4>
 Linux: 🍺 </br>
 Windows: <b>"s"</b></br>
-Une fois utilisée, la potion de force rend le joueur plus fort en <b>augmentant ses dégats d'attaque</b>. </br></br>
+Une fois utilisée, la potion de force rend le joueur plus fort en <b>augmentant ses dégats d'attaque</b> de manière temporaire. </br></br>
 <h4>2.4.1.3 La potion d'invincibilité</h4>
 Linux: 💉</br>
 Windows: <b>"i"</b></br>
@@ -338,6 +336,11 @@ Entre 75 et 100 : </br>
 Linux: 💰</br>
 Windows: <b"$"></b></br></br>
 
+<h4> 2.4.4.1. Chest</h4>
+Linux: 📦</br>
+Windows: <b>"€"</b></br>
+Un coffre est un item contenant <b>un à trois objets du jeu</b></br>.
+Le joueur doit tout simplement aller sur le coffre pour l'ouvrir. </br>
 
 <h2>3. Cases</h2>
 Les cases du jeu se divisent en <b>deux categories</b>, les <b>fonctionnelles</b> et les <b>cosmétiques</b>: les premières ont une <b>utilité</b> que cela soit dans le jeu ou la programmation alors que les deuxièmes n'apporteront qu'un <b>intérêt esthétique</b>. 
@@ -355,17 +358,19 @@ Ce sont des cellules <b>vides</b>.</br></br>
 <h4>3.1.4. Cellules Monter</h4>
 Elle permet de remonter à <b>l'étage precedent</b>.</br>
 Linux: 👍</br>
-Windows: <b>^</b></br>
+Windows: <b>"^"</b></br>
 <h4>3.1.5. Cellules Descendre</h4>
 Elle permet de descendre à <b>l'etage precedent</b>.</br>
 Linux: 👎</br>
-Windows: <b>v</b></br>
+Windows: <b>"v"</b></br>
 <h4>3.1.6. Cellules Piege</h4>
 Ce sont des cellules invisibles qui teleportent le joueur dans un <b>etage piégé</b>.
-<h4>3.1.7. Cellules Chest</h4>
- Linux: 📦</br>
-Windows: <b>"€"</b></br>
-Un coffre est placé dans cette cellule.
+Ces dernières étant des cellules piégées, sont <b>invisibles</b> et ressemblent à des cellules "classiques".
+<h4>3.1.7. Cellules Projectiles</h4>
+Linux: 🔥</br>
+Windows: <b>"+"</b></br>
+Ces cellules sont présentes lorsque le joueur <b>tire avec une arme à distance</b>. Elles représentent la <b>trajectoire du projectile</b>.
+
 
 
 <h2>4. Inventaire</h2>
@@ -381,10 +386,4 @@ Exemple de sauvegarde de partie: </br>  </br>
 <img src="https://user-images.githubusercontent.com/74865920/118412916-e9499880-b69c-11eb-9510-4d5d00eaa095.png"/></br> </br> 
 Exemple de chargement d'une partie sauvegardée : </br> </br> 
 <img src="https://user-images.githubusercontent.com/74865920/118412930-febec280-b69c-11eb-9092-f8695850bbc6.png"/></br> </br> 
-
-<h2>6. Sons</h2>
-Nous avons un système audio implémenté dans notre jeu, qui nous a permis d'intégrer une musique de fond et divers bruitages (level up, manger...).
-Nous avons également du implémenter une gestion des exception pour vérifier que l'accès aux drivers audios se fait correctement. En effet, nous étions confrontés au problème du jeu qui crash à chaque lancement sur le sous-système linux de windows, dû à un problème de driver.
-Le jeu éteint totalement le système de son a la moindre détection de soucis.
-
 
